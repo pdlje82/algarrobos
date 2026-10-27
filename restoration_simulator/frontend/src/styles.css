@@ -682,11 +682,13 @@ textarea:focus-visible {
   outline-offset: 4px;
 }
 .land-workspace {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
 }
 .land-workspace .preview-panel {
   position: static;
+  min-width: 0;
 }
+.land-editor, .land-detail-grid > div { min-width: 0; }
 .land-workspace .actions {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
@@ -758,6 +760,9 @@ textarea:focus-visible {
 }
 .comparison-scroll {
   overflow: auto;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   margin: 16px 0;
 }
 .land-comparison {

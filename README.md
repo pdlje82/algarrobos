@@ -53,46 +53,50 @@ npm.cmd run dev
 
 Open **[http://127.0.0.1:5173](http://127.0.0.1:5173)**. The frontend calls relative `/api` URLs through Vite's [development proxy](https://vite.dev/config/server-options#server-proxy). Both services bind to loopback; no broad CORS is configured. Stop each with **Ctrl+C**. Restart with the same commands to restore your project. Run only one backend process, with one worker, against the save file.
 
-## First playthrough
+## First playthrough: seven land-access routes
 
-1. Create a project. Preview and commit either **Use an existing personal parcel** or **Buy a demonstrator parcel**.
-2. Establish the demonstrator on Parcel 1.
-3. Apply for the grant, receive the award decision, then receive payment. These are separate decisions; only payment adds grant cash.
-4. Expand on Parcel 1, obtain additional land through purchase or permission, then restore another parcel.
-5. Optionally create a company and/or foundation. Both can coexist; neither is compulsory. Land remains with its stated owner.
-6. Select **Advance time**, choose year 30, and commit. Review the final summary, land records and action history.
-7. Export the run, undo the last action, refresh, and import the export. Starting a new project or importing over the active run asks for replacement confirmation. Preserve other runs as separate exports.
+1. Create a project and choose **Establish land access**. Browse seven cards or switch to **Compare seven routes**. **I already own this land** records an existing asset separately from new acquisition.
+2. Select a new candidate or an existing parcel. Name the owner, rights holder and operator; review covered area, costs, access duration, maintenance commitment and permissions. An existing nonprofit partner is available without creating an organisation.
+3. Keep **Assume concluded / approved (fictional)** for playable access, or record a **Proposal only**. Blank amounts mean Unknown. Proposals provide no access, ownership transfer, deposit or rent. Use **Finalise a land proposal** to review and complete terms later.
+4. Inspect the Python preview and separate access/maintenance timeline, then commit. Comparing and editing drafts never saves or advances time.
+5. Establish the demonstrator, apply for the grant, receive the award, then receive payment. Expand only where permissions, covered area and remaining access duration support the whole action.
+6. **Renew temporary access** explicitly if needed. **End land access** immediately ends an arrangement before its 0.1-year administrative delay and returns held deposits; ownership and independent maintenance commitments remain. A different arrangement can then use the same parcel.
+7. Optionally form a company/foundation, obtain more land and advance to year 30. Review current access, ownership, historical work and remaining commitments. Export the run to keep it.
 
-Selecting an action or changing fields only requests a Python preview; it does not advance time or spend cash. The UI updates the project after the backend confirms persistence. Inspect unavailable actions for their reason. Past history is read-only. At phone widths, scroll the timeline outline horizontally to keep labels readable.
+**Available now** is expanded. **Future decisions** is collapsed with prerequisite/resource reasons. **No longer available** explains exclusions. Completed one-off actions remain in history; repeatable actions can become available again. On a phone the comparison table scrolls within its container.
 
-Decisions are grouped into **Available now** (expanded), **Future decisions** (collapsed, with prerequisite/resource reasons), and **No longer available** (collapsed, for excluded land routes or actions that cannot fit before year 30). Completed one-off decisions remain in history; repeatable actions can become available again. Python determines the groups after each commit, load or undo. Restart the Python API after updating backend code so it can supply the current categories.
+## Fictional fixture and contract assumptions
 
-## Fictional fixture
+All definitions live in `restoration_simulator/scenarios/default.json`. New runs use scenario/save version 2, start with **€60,000**, and retain the **30-year playable horizon**. No real legal validity, title, tax, grant eligibility, land valuation or ecological growth is calculated. The seven routes are educational entry points; an underlying agreement may combine concepts from several routes.
 
-All values are together in `restoration_simulator/scenarios/default.json`. Starting cash: **€60,000**. Horizon: **30 years**. Time is an offset with up to four decimal places; currency changes are rounded to cents. Outline years suggest a journey rather than enforce deadlines or automatically execute actions.
+| Route | Setup years | One-off expenditure | Annual access fee | Access duration | Deposit |
+| --- | ---: | ---: | ---: | --- | ---: |
+| Stewardship agreement | 0.5 | €500 | €0 | 4 years | €0 |
+| Free use | 0.5 | €200 | €0 | 8 years | €0 |
+| Long-term lease | 0.5 | €500 | €600 | 10 years | €600 |
+| Usufruct | 0.5 | €1,000 | €0 | 20 years | €0 |
+| Public-land management | 0.5 | €500 | €100 | 5 years | €0 |
+| Donation | 0.5 | €500 formalisation | €0 | No configured expiry | €0 |
+| Purchase | 0.5 | €18,000 | €0 | No configured expiry | €0 |
+| Existing ownership | 0.1 | €0 acquisition | €0 | No configured expiry | €0 |
 
-| Action | Years | Expenditure | Configured result |
-| --- | ---: | ---: | --- |
-| Existing personal parcel | 0.1 | €0 | 2 ha personally owned; existing asset with unassessed market value |
-| Buy demonstrator parcel (alternative) | 0.5 | €18,000 | 2 ha purchased by the individual |
-| Establish demonstrator | 1.5 | €12,000 | 1 ha restored |
-| Apply for grant | 0.25 | €500 | Pending application; no income |
-| Receive grant decision | 0.75 | €0 | €40,000 award pending payment |
-| Receive payment | 0.25 | €0 | €40,000 cash received once |
-| Expand restoration (repeatable) | 2 | €10,000 | Another 1 ha restored on the chosen parcel |
-| Create company (optional) | 0.5 | €2,000 | Company added; no land transfer |
-| Buy additional land (repeatable) | 1 | €15,000 | 3 ha purchased by the individual |
-| Agree land access (repeatable) | 0.5 | €1,500 | Restoration permission on 3 ha owned by a third party |
-| Establish foundation (optional) | 1 | €3,000 | Foundation added; any company continues |
-| Advance time | Chosen target | €0 | Move forward, at most to year 30 |
+Templates default to **2 ha** covered and **€150/year maintenance for 5 years**, editable in configuration. Maintenance duration is independent of access. Zero expenditure is not zero market value. Purchase/donation transfer ownership only on conclusion to the named recipient. Creating an organisation never transfers land. The existing-ownership record must match the owner and has no acquisition expenditure. The free-use fixture has no rent; its lease alternative requires positive rent. The stewardship fixture uses a nonprofit rights holder, and the public-land fixture requires a public owner plus explicit assumed approval. These fixture requirements do not certify real eligibility.
 
-Restoration cannot exceed the selected parcel's area. Permission is assumed to last for the fictional horizon. There are no recurring costs, growth calculations, investment returns, land valuations, eligibility rules or automatic grant settlement. Advancing time leaves pending grant stages pending. Unchosen outline milestones are proposals, not completed assets. There is no universal success score.
+There is **at most one active arrangement per parcel**, with any number of proposals/historical arrangements. Covered area may be smaller than the parcel. It is one assumed footprint; no GIS polygons are checked. Historical restoration conservatively reduces remaining area on that parcel. Renewal/reuse does not create another parcel or double the accessible area.
+
+Rent/access fees are paid **annually in advance**, first on activation, then on anniversaries strictly before access expiry. Maintenance is paid **annually in arrears**, prorating a final fractional period; it continues until its independent commitment ends. A renewal after a lapsed maintenance period creates a separate period. Deposits return in full on expiry or explicit ending. Renewal costs **€100**, defined in the scenario action. An active renewal extends the current end; a renewal after expiry starts a new period and preserves the gap. No renewal is automatic.
+
+Every action processes scheduled events, including time advanced through restoration, grant and organisation actions. There is no monthly loop or compound growth. An unaffordable payment rejects the entire action without partial effects; preview an earlier target and arrange funds or reduce future access commitments before the due date. Ending access does not cancel an existing maintenance commitment.
+
+Expiry removes current access and blocks further work requiring it; ownership and completed restoration remain historical facts. Unknown permissions, unresolved site restrictions, insufficient covered area or access ending before work finishes block that restoration action. They do not turn unknown evidence into a verified legal prohibition.
+
+Contract/instrument and exit text are **descriptive notes**, not executable clauses. The prototype does not calculate disputes, penalties, taxes or notice periods. The timeline/final summary disclose maintenance and rent continuing beyond year 30. Sources link to the existing poster and COASTRUST material via a fixed API whitelist; no documents are duplicated or ingested. There is no success score.
 
 ## Saving, import and undo
 
 Python atomically saves `restoration_simulator/data/active-project.json` after each successful mutation. It includes the exact scenario snapshot, history, one-level undo snapshot, monotonic revision and request receipts. Saves live on the **computer running Python**, not in browser storage or the cloud. Runtime data, environments, dependencies and build output are Git-ignored.
 
-JSON export contains the project and undo snapshot in a versioned envelope. Import validates schema, field types, ranges, supported scenario ID/version and the complete deterministic history before replacing anything. Invalid/unsupported imports preserve the current project. Save/export schema and scenario versions are currently 1. Scenario imports are data, not executable scripts.
+JSON export contains the project and undo snapshot in a versioned envelope. Import validates schema, field types, ranges, supported scenario ID/version and the complete deterministic history before replacing anything. Invalid/unsupported imports preserve the current project. New saves/exports and the default scenario use version 2. Version-1 saves/exports are validated with the preserved legacy engine and explicitly upgraded. Historic cash, time, history and undo remain; old access is labelled as a legacy assumption with no retroactive rent, with temporary access through year 30. The original snapshot remains embedded for replay. Before migrating a local autosave, Python creates a byte-for-byte `active-project.schema-v1-<checksum>.json` backup and atomically replaces the active file; failed migration preserves the original. Importing an old export upgrades the active save without rewriting the source export. Scenario imports are data, not executable scripts.
 
 Undo restores the last action's cash, time and state and survives restart/export/import. It is one level, with no redo. Revisions continue increasing after undo. New-project replacement clears undo; import restores the imported undo.
 
@@ -115,7 +119,7 @@ $env:RESTORATION_SAVE_PATH = 'C:\Users\JanEngelke\restoration-saves\active-proje
 | `frontend/src/` | React presentation and UI state; no duplicated simulation rules |
 | `tests/test_simulator.py` | Focused engine/API acceptance checks |
 
-Edit the scenario JSON for new projects. Existing saves retain their exact embedded definitions. Keep supported effect shapes and handler kinds; add new behavior through the explicit Python handlers. Incompatible handler/schema changes need version handling instead of silently reinterpreting saves. There is no scripting language, workflow editor or plugin framework.
+Edit the scenario JSON for new projects. `backend/legacy.py` and `scenarios/legacy-v1.json` are retained for exact version-1 replay. Existing saves retain their exact embedded definitions. Keep supported effect shapes and handler kinds; add new behavior through the explicit Python handlers. Incompatible handler/schema changes need version handling instead of silently reinterpreting saves. There is no scripting language, workflow editor or plugin framework.
 
 The engine works directly in Python without installing FastAPI or running the website. From the `restoration_simulator` directory, start Python and use:
 
@@ -123,13 +127,17 @@ The engine works directly in Python without installing FastAPI or running the we
 from backend.engine import new_project, list_actions, transition
 
 state = new_project('Python playtest')
-state, result = transition(state, 'use_own_land')
+from backend.engine import land_form
+form = land_form(state, 'lease')
+inputs = {f['name']: f['default'] for f in form['fields']}
+inputs.update(route_id='lease', parcel_id='new')
+state, result = transition(state, 'establish_access', inputs)
 state, result = transition(state, 'demonstrator', {'parcel_id': 'parcel-1'})
 print(state['time'], state['cash'], result)
-# 1.6 48000 ...
+# 2.0 45550 ... (includes scheduled rent and maintenance)
 ```
 
-`transition` returns a new state and explanation with no mutation or I/O. `list_actions(state)` supplies input fields, choices and unavailability reasons. The API provides `GET /api/project`, `GET /api/actions`, `POST /api/project/new`, `POST /api/preview`, `POST /api/commit`, `POST /api/undo`, `GET /api/export` and `POST /api/import`. Request schemas are at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) while Python runs.
+`transition` returns a new state and explanation with no mutation or I/O. `list_actions(state)` supplies input fields, choices and unavailability reasons. The API provides `GET /api/project`, `GET /api/actions`, `POST /api/project/new`, `POST /api/preview`, `POST /api/commit`, `POST /api/undo`, `GET /api/export` and `POST /api/import`, read-only `POST /api/land/form` and whitelisted `GET /api/sources/{id}`. Request schemas are at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) while Python runs.
 
 ## Checks and playtest stop point
 
@@ -142,7 +150,7 @@ npm.cmd run build
 npm.cmd audit
 ```
 
-The focused tests exercise both starting routes with and without organizations, grant stages/payment once, invalid-action immutability, frozen scenarios, horizon limits, decision grouping and prerequisite/resource changes, previews, restart with undo, duplicate/stale requests, export/import (including browser JSON number normalization), malformed imports, corrupt autosaves and atomic-write failure. Production bundling checks the React frontend; playtesting uses the two local development servers above. No deployment infrastructure is included.
+The focused tests now cover all seven land routes, proposal/finalisation, scheduled costs, expiry and renewal, overlap prevention, ownership separation, commitments beyond year 30, migration/backups, and also exercise both starting routes with and without organizations, grant stages/payment once, invalid-action immutability, frozen scenarios, horizon limits, decision grouping and prerequisite/resource changes, previews, restart with undo, duplicate/stale requests, export/import (including browser JSON number normalization), malformed imports, corrupt autosaves and atomic-write failure. Production bundling checks the React frontend; playtesting uses the two local development servers above. No deployment infrastructure is included.
 
 Verified on Windows on 26 October 2026 with Conda Python 3.12, Node 22.23.4, FastAPI 0.162.0, Uvicorn 0.54.0 and HTTPX 0.28.1: all 10 tests passed, the production frontend built, and npm audit reported zero vulnerabilities. A browser playthrough completed the own-land route, all grant stages, expansion, purchased and permission-only additional land, both organizations and year 30, leaving **€46,000, 8 ha of land owned/accessed, and 3 ha restored**. Browser export/import, refresh, keyboard history/undo, a rejected year-31 preview and desktop/390-pixel phone layouts were checked. Python was restarted and restored the test autosave; undo survived the browser export/import. Browser checks used an isolated save under ignored `test-artifacts/`.
 

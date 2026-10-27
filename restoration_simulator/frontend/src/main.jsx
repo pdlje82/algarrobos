@@ -65,9 +65,10 @@ function ActionChoices({ actions, busy, selected, onChoose }) {
             {a.optional ? "Optional · " : ""}
             {a.repeatable ? "Repeatable · " : ""}
             {a.terms_label || money(a.cost)}
-            {!a.terms_label && (a.kind !== "advance"
-              ? ` · ${year(a.duration)} years`
-              : " · choose year")}
+            {!a.terms_label &&
+              (a.kind !== "advance"
+                ? ` · ${year(a.duration)} years`
+                : " · choose year")}
           </span>
           {a.reason && <span className="reason">{a.reason}</span>}
         </button>
@@ -238,7 +239,10 @@ function App() {
     if (window.matchMedia("(max-width: 650px)").matches) {
       requestAnimationFrame(() =>
         previewPanel.current?.scrollIntoView({
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+            .matches
+            ? "auto"
+            : "smooth",
           block: "start",
         }),
       );
@@ -523,8 +527,8 @@ function App() {
             <p className="eyebrow">Your first chapter</p>
             <h2>Start a restoration initiative</h2>
             <p>
-              You’ll begin with a personal parcel or purchase a small
-              demonstrator site.
+              Compare seven ways to access a demonstrator site, or record land
+              you already own.
             </p>
             <form onSubmit={startNew}>
               <label htmlFor="project-name">Project name</label>

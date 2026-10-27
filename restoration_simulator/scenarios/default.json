@@ -128,7 +128,7 @@
     {
       "id": "award_grant",
       "title": "Receive the grant decision",
-      "description": "Resolve the application with a configured Ã¢â€šÂ¬40,000 award. Payment remains a separate step.",
+      "description": "Resolve the application with a configured ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬40,000 award. Payment remains a separate step.",
       "kind": "grant_award",
       "requires": [
         "apply_grant"
@@ -138,7 +138,7 @@
       "effects": {
         "award": 40000
       },
-      "outcome": "Fictional Ã¢â€šÂ¬40,000 grant awarded. The award is pending payment and is not available cash.",
+      "outcome": "Fictional ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬40,000 grant awarded. The award is pending payment and is not available cash.",
       "optional": false,
       "repeatable": false
     },
@@ -245,7 +245,7 @@
     {
       "id": "free_use",
       "title": "Free use",
-      "spanish": "Cesion gratuita de uso",
+      "spanish": "Cesión gratuita de uso",
       "description": "Use land without rent under an explicit, limited agreement.",
       "ownership": false,
       "duration": 0.5,
@@ -302,7 +302,7 @@
     {
       "id": "public_management",
       "title": "Public-land management",
-      "spanish": "Gestion de terreno publico",
+      "spanish": "Gestión de terreno público",
       "description": "Manage specified public land under an assumed authorisation or agreement.",
       "ownership": false,
       "duration": 0.5,
@@ -321,7 +321,7 @@
     {
       "id": "donation",
       "title": "Land donation",
-      "spanish": "Donacion del terreno",
+      "spanish": "Donación del terreno",
       "description": "Transfer ownership to the named recipient after assumed acceptance and completion.",
       "ownership": true,
       "duration": 0.5,

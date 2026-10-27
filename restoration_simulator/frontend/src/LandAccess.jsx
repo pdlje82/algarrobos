@@ -4,68 +4,70 @@ import { money, year } from "./format.js";
 export function Fields({ fields, inputs, onChange, disabled }) {
   return (
     <div className="field-grid">
-      {fields.map((f) => (
-        <div className="field" key={f.name}>
-          <label htmlFor={`field-${f.name}`}>{f.label}</label>
-          {f.type === "select" ? (
-            <select
-              id={`field-${f.name}`}
-              value={inputs[f.name] ?? ""}
-              disabled={disabled}
-              onChange={(e) =>
-                onChange({ ...inputs, [f.name]: e.target.value })
-              }
-            >
-              {f.options.map((o) => (
-                <option key={o.value} value={o.value}>
-                  {o.label}
-                  {o.remaining_area !== undefined
-                    ? ` · ${o.remaining_area} ha remaining`
-                    : ""}
-                </option>
-              ))}
-            </select>
-          ) : f.type === "textarea" ? (
-            <textarea
-              id={`field-${f.name}`}
-              maxLength={f.maxLength}
-              value={inputs[f.name] ?? ""}
-              disabled={disabled}
-              onChange={(e) =>
-                onChange({ ...inputs, [f.name]: e.target.value })
-              }
-            />
-          ) : (
-            <input
-              id={`field-${f.name}`}
-              type={f.type}
-              value={inputs[f.name] ?? ""}
-              disabled={disabled}
-              min={f.min}
-              max={f.max}
-              step={f.step ?? "any"}
-              maxLength={f.maxLength}
-              onChange={(e) =>
-                onChange({
-                  ...inputs,
-                  [f.name]:
-                    f.type === "number"
-                      ? e.target.value === ""
-                        ? null
-                        : Number(e.target.value)
-                      : e.target.value,
-                })
-              }
-            />
-          )}
-          {f.unknown_allowed && (
-            <small className="muted">
-              Leave blank for Unknown; proposals can retain unresolved terms.
-            </small>
-          )}
-          {f.help && <small className="muted">{f.help}</small>}
-        </div>
-      ))}
+      {fields
+        .filter((f) => !f.hidden)
+        .map((f) => (
+          <div className="field" key={f.name}>
+            <label htmlFor={`field-${f.name}`}>{f.label}</label>
+            {f.type === "select" ? (
+              <select
+                id={`field-${f.name}`}
+                value={inputs[f.name] ?? ""}
+                disabled={disabled}
+                onChange={(e) =>
+                  onChange({ ...inputs, [f.name]: e.target.value })
+                }
+              >
+                {f.options.map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                    {o.remaining_area !== undefined
+                      ? ` · ${o.remaining_area} ha remaining`
+                      : ""}
+                  </option>
+                ))}
+              </select>
+            ) : f.type === "textarea" ? (
+              <textarea
+                id={`field-${f.name}`}
+                maxLength={f.maxLength}
+                value={inputs[f.name] ?? ""}
+                disabled={disabled}
+                onChange={(e) =>
+                  onChange({ ...inputs, [f.name]: e.target.value })
+                }
+              />
+            ) : (
+              <input
+                id={`field-${f.name}`}
+                type={f.type}
+                value={inputs[f.name] ?? ""}
+                disabled={disabled}
+                min={f.min}
+                max={f.max}
+                step={f.step ?? "any"}
+                maxLength={f.maxLength}
+                onChange={(e) =>
+                  onChange({
+                    ...inputs,
+                    [f.name]:
+                      f.type === "number"
+                        ? e.target.value === ""
+                          ? null
+                          : Number(e.target.value)
+                        : e.target.value,
+                  })
+                }
+              />
+            )}
+            {f.unknown_allowed && (
+              <small className="muted">
+                Leave blank for Unknown; proposals can retain unresolved terms.
+              </small>
+            )}
+            {f.help && <small className="muted">{f.help}</small>}
+          </div>
+        ))}
     </div>
   );
 }
@@ -230,6 +232,7 @@ export function LandEditor({
                     <span className="route-label">
                       <input
                         type="radio"
+                        aria-label={r.title}
                         name="land-route"
                         value={r.id}
                         checked={routeId === r.id}
@@ -244,8 +247,7 @@ export function LandEditor({
                         <p>{r.description}</p>
                         <span>{r.ownership_label}</span>
                         <small>
-                          Default one-off {money(r.upfront)} · annual access{" "}
-                          {money(r.annual_payment)}
+                          Default one-off {money(r.upfront)} · {r.annual_label}
                         </small>
                         <small>{r.term_label}</small>
                       </>
@@ -284,8 +286,7 @@ export function LandEditor({
                         <td>{r.ownership_label}</td>
                         <td>{r.term_label}</td>
                         <td>
-                          {money(r.upfront)} / {money(r.annual_payment)} per
-                          year
+                          {money(r.upfront)} / {r.annual_label}
                         </td>
                         <td>
                           {r.caveat}
@@ -483,7 +484,13 @@ export function LandRecords({ project, summary }) {
         commitment (including beyond year 30):{" "}
         {money(summary.remaining_maintenance_commitment)}.
       </p>
-      {summary.future_rent_after_horizon > 0 && <p className="reason">Access payments after year 30: {money(summary.future_rent_after_horizon)} under the currently recorded terms.</p>}
+      {summary.future_rent_after_horizon > 0 && (
+        <p className="reason">
+          Access payments after year 30:{" "}
+          {money(summary.future_rent_after_horizon)} under the currently
+          recorded terms.
+        </p>
+      )}
       {project.parcels.map((p) => (
         <article className="parcel" key={p.id}>
           <h3>
@@ -627,6 +634,12 @@ export function Outcome({ preview, previewBusy, previewError, busy, ready }) {
                     {money(preview.summary.remaining_maintenance_commitment)}
                   </dd>
                 </div>
+                {preview.summary.future_rent_after_horizon > 0 && (
+                  <div>
+                    <dt>Access fees after year 30</dt>
+                    <dd>{money(preview.summary.future_rent_after_horizon)}</dd>
+                  </div>
+                )}
               </>
             )}
           </dl>
