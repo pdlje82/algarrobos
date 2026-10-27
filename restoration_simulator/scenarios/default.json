@@ -1,6 +1,6 @@
 {
   "id": "dryland-demonstrator",
-  "version": 2,
+  "version": 3,
   "title": "A foothold for restoration",
   "notice": "Fictional land-access playtest: all prices, terms, approvals and results are scenario assumptions, not legal, ecological or funding predictions.",
   "horizon": 30,
@@ -98,15 +98,15 @@
     {
       "id": "demonstrator",
       "title": "Establish the demonstrator",
-      "description": "Carry out a small configured restoration trial on the starting parcel.",
+      "description": "Choose an available parcel and the restoration work area in m². The displayed action cost is fixed and does not scale with area.",
       "kind": "restore_start",
       "requires": [],
       "duration": 1.5,
       "cost": 12000,
       "effects": {
-        "area": 1
+        "area": 10000
       },
-      "outcome": "Demonstrator completed: a fictional 1 ha restoration trial, ready to support a funding application.",
+      "outcome": "Configured restoration work completed.",
       "optional": false,
       "repeatable": false
     },
@@ -160,7 +160,7 @@
     {
       "id": "expand",
       "title": "Expand restoration",
-      "description": "Complete another 1 ha of restoration on a parcel with space remaining.",
+      "description": "Choose an available parcel and the restoration work area in m². The displayed action cost is fixed and does not scale with area.",
       "kind": "restore",
       "requires": [
         "demonstrator"
@@ -168,9 +168,9 @@
       "duration": 2,
       "cost": 10000,
       "effects": {
-        "area": 1
+        "area": 10000
       },
-      "outcome": "An additional 1 ha restoration activity is completed on the selected parcel.",
+      "outcome": "Configured restoration work completed.",
       "optional": false,
       "repeatable": true
     },
@@ -360,20 +360,21 @@
       "id": "existing",
       "title": "Record existing ownership",
       "spanish": "Existing asset",
-      "description": "Record a parcel already owned by the named holder, without acquisition expenditure.",
+      "description": "Record land you already own at the current project year, with no acquisition, transfer or automatic maintenance commitment.",
       "ownership": true,
-      "duration": 0.1,
+      "duration": 0,
       "upfront": 0,
       "annual_payment": 0,
       "term_years": null,
       "deposit": 0,
-      "annual_maintenance": 150,
-      "commitment_years": 5,
+      "annual_maintenance": 0,
+      "commitment_years": 0,
       "holder_id": "individual",
       "owner_id": "individual",
-      "caveat": "Zero acquisition expenditure does not imply zero market value.",
+      "caveat": "Ownership is reported by you, not verified by the simulator. Recording it takes no simulation time.",
       "source": "Legacy MVP starting-land assumption",
       "source_id": "land-poster"
     }
-  ]
+  ],
+  "area_unit": "m2"
 }

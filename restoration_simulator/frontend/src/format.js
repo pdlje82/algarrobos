@@ -10,3 +10,7 @@ export const year = (value) =>
   value === null || value === undefined
     ? "Unknown"
     : Number(value).toLocaleString("en", { maximumFractionDigits: 4 });
+export const area = (value) =>
+  value === null || value === undefined
+    ? "Unknown"
+    : `${Number(value).toLocaleString("en", { maximumFractionDigits: 6 })} m²`;

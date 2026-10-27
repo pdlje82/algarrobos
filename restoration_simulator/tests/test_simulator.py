@@ -194,6 +194,8 @@ class ApiTests(unittest.TestCase):
                 "existing" if action == "use_own_land" else "purchase"
             )
             action = "establish_access"
+        if action in ("demonstrator", "expand"):
+            inputs = {"restoration_area": 10000, **(inputs or {})}
         return self.post("commit", action_id=action, inputs=inputs or {})
 
     def test_api_groups_refresh_after_commit_and_undo(self):

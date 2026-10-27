@@ -78,7 +78,7 @@ def view(data, explanation=None):
 
 
 def create_app(save_path=None):
-    app = FastAPI(title="Restoration Simulator", version="0.2.0")
+    app = FastAPI(title="Restoration Simulator", version="0.3.0")
     resolved_save_path = (
         save_path
         or os.getenv("RESTORATION_SAVE_PATH")
@@ -170,6 +170,9 @@ def create_app(save_path=None):
             "land-poster": "LEARN-003 - Land Restoration - Seven Land Access Options - Infographic.png",
             "coast-tender": "COAST-001 - COASTRUST Nijar - Gunter Kunkel Park Stewardship Activities Tender Specification.pdf",
             "nature-finance": "FUND-003 - Nature Finance - Funding Instruments for Land Stewardship - 2025-11.pdf",
+            "vega-assessment": "VEGA-003 - Vega del Andarax - Strategic Environmental Assessment.pdf",
+            "vega-baseline": "VEGA-001 - Vega del Andarax - Baseline and Territorial Diagnosis.pdf",
+            "forest-habitats": "FOREST-001 - Ferreira Granada - Silvicultural Habitat Improvement Project - 2025-02.pdf",
         }
         if source_id not in filenames:
             return JSONResponse({"detail": "Unknown source."}, status_code=404)

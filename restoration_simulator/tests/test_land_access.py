@@ -38,7 +38,10 @@ class LandEngineTests(unittest.TestCase):
                 )
                 self.assertEqual(state["parcels"][0]["owner_id"], expected_owner)
                 for action, values in [
-                    ("demonstrator", {"parcel_id": "parcel-1"}),
+                    (
+                        "demonstrator",
+                        {"parcel_id": "parcel-1", "restoration_area": 10000},
+                    ),
                     ("apply_grant", {}),
                     ("award_grant", {}),
                     ("receive_payment", {}),
@@ -54,10 +57,14 @@ class LandEngineTests(unittest.TestCase):
                             commitment_years=5,
                         ),
                     )
-                state, _ = engine.transition(state, "expand", {"parcel_id": "parcel-1"})
+                state, _ = engine.transition(
+                    state,
+                    "expand",
+                    {"parcel_id": "parcel-1", "restoration_area": 10000},
+                )
                 state, _ = engine.transition(state, "advance", {"target_year": 30})
-                self.assertEqual(engine.summary(state)["restored_area"], 2)
-                self.assertEqual(engine.summary(state)["active_area"], 2)
+                self.assertEqual(engine.summary(state)["restored_area"], 20000)
+                self.assertEqual(engine.summary(state)["active_area"], 20000)
                 self.assertEqual(state["organizations"], [])
                 self.assertEqual(engine.validate_state(state), state)
 
@@ -76,14 +83,16 @@ class LandEngineTests(unittest.TestCase):
             ),
         )
         self.assertEqual(s["cash"], 59400)
-        s, _ = engine.transition(s, "demonstrator", {"parcel_id": "parcel-1"})
+        s, _ = engine.transition(
+            s, "demonstrator", {"parcel_id": "parcel-1", "restoration_area": 10000}
+        )
         # A different action crosses the first annual rent and maintenance date.
         self.assertEqual(s["cash"], 47250)
         s, _ = engine.transition(s, "advance", {"target_year": 3})
         self.assertEqual(s["agreements"][0]["status"], "expired")
         self.assertEqual(s["agreements"][0]["deposit_held"], 0)
         self.assertEqual(engine.summary(s)["active_area"], 0)
-        self.assertEqual(engine.summary(s)["restored_area"], 1)
+        self.assertEqual(engine.summary(s)["restored_area"], 10000)
         self.assertEqual(s["cash"], 47500)
         s, _ = engine.transition(s, "advance", {"target_year": 30})
         self.assertEqual(s["cash"], 47400)
@@ -115,7 +124,7 @@ class LandEngineTests(unittest.TestCase):
         self.assertEqual(s["cash"], cash)
         self.assertIsNone(s["agreements"][1]["upfront"])
         self.assertEqual(s["parcels"][0]["physical_access"], "yes")
-        self.assertEqual(engine.summary(s)["active_area"], 2)
+        self.assertEqual(engine.summary(s)["active_area"], 20000)
         with self.assertRaises(engine.Invalid):
             engine.transition(
                 s, "activate_access", inputs(s, "lease", "parcel-1", "agreement-2")
@@ -146,7 +155,7 @@ class LandEngineTests(unittest.TestCase):
 
     def test_cover_duration_permissions_and_parcel_area_are_enforced(self):
         for changes in [
-            dict(covered_area=3),
+            dict(covered_area=30000),
             dict(annual_payment=True),
             dict(upfront="500"),
             dict(upfront=1.001),
@@ -165,7 +174,11 @@ class LandEngineTests(unittest.TestCase):
             s = engine.new_project("Access")
             s, _ = engine.transition(s, "establish_access", inputs(s, **changes))
             with self.assertRaises(engine.Invalid):
-                engine.transition(s, "demonstrator", {"parcel_id": "parcel-1"})
+                engine.transition(
+                    s,
+                    "demonstrator",
+                    {"parcel_id": "parcel-1", "restoration_area": 10000},
+                )
 
     def test_unfunded_time_jump_leaves_original_unchanged(self):
         scenario = engine.load_scenario()
@@ -198,7 +211,7 @@ class LandEngineTests(unittest.TestCase):
             dict(agreement_id="agreement-1", term_years=1, commitment_years=0),
         )
         self.assertEqual(s["agreements"][0]["end"], 3.5)
-        self.assertEqual(engine.summary(s)["active_area"], 2)
+        self.assertEqual(engine.summary(s)["active_area"], 20000)
         s, _ = engine.transition(s, "advance", {"target_year": 4})
         self.assertEqual(engine.summary(s)["active_area"], 0)
         s, _ = engine.transition(
@@ -210,7 +223,7 @@ class LandEngineTests(unittest.TestCase):
             s["agreements"][0]["periods"],
             [dict(start=0.5, end=3.5), dict(start=4.1, end=7.1)],
         )
-        self.assertEqual(engine.summary(s)["active_area"], 2)
+        self.assertEqual(engine.summary(s)["active_area"], 20000)
         self.assertEqual(len(s["parcels"]), 1)
 
     def test_old_expired_right_cannot_overlap_a_new_active_arrangement(self):
@@ -269,7 +282,9 @@ class LandEngineTests(unittest.TestCase):
     def test_organisations_do_not_receive_land_automatically(self):
         s = engine.new_project("Owners")
         s, _ = engine.transition(s, "establish_access", inputs(s, "existing"))
-        s, _ = engine.transition(s, "demonstrator", {"parcel_id": "parcel-1"})
+        s, _ = engine.transition(
+            s, "demonstrator", {"parcel_id": "parcel-1", "restoration_area": 10000}
+        )
         s, _ = engine.transition(s, "company", {})
         s, _ = engine.transition(s, "foundation", {})
         self.assertEqual(s["parcels"][0]["owner_id"], "individual")
@@ -312,14 +327,14 @@ class MigrationTests(unittest.TestCase):
             path.write_bytes(raw)
             store = Store(path)
             current = store.snapshot()
-            self.assertEqual(current["project"]["schema_version"], 2)
+            self.assertEqual(current["project"]["schema_version"], 3)
             self.assertEqual(current["project"]["cash"], old["cash"])
             self.assertEqual(current["project"]["history"], old["history"])
             self.assertEqual(current["receipts"], envelope["receipts"])
             self.assertEqual(
                 next(Path(folder).glob("*.schema-v1-*.json")).read_bytes(), raw
             )
-            self.assertEqual(json.loads(path.read_text())["format_version"], 2)
+            self.assertEqual(json.loads(path.read_text())["format_version"], 3)
             self.assertEqual(
                 engine.validate_state(current["project"]), current["project"]
             )
@@ -327,7 +342,7 @@ class MigrationTests(unittest.TestCase):
             result, _ = store.mutate("undo", old["revision"], str(uuid4()), {})
             self.assertEqual(result["project"]["activities"], [])
             self.assertEqual(result["project"]["cash"], before["cash"])
-            self.assertEqual(validate_export(store.export())["format_version"], 2)
+            self.assertEqual(validate_export(store.export())["format_version"], 3)
 
     def test_failed_migration_preserves_original_file(self):
         old = legacy.new_project("Original")

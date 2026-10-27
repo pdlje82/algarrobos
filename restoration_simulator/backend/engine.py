@@ -1,10 +1,11 @@
-"""Deterministic schema-2 simulator; contracts are explicit fictional assumptions."""
+"""Deterministic schema-3 simulator with square-metre areas and reported ownership."""
 
 from copy import deepcopy
+from decimal import Decimal
 import json
 from pathlib import Path
 from uuid import uuid4
-from . import legacy
+from . import legacy, engine_v2
 
 Invalid = legacy.Invalid
 require, number, text, same_json = (
@@ -38,12 +39,19 @@ def validate_scenario(scenario):
         require(
             isinstance(scenario, dict)
             and type(scenario.get("version")) is int
-            and scenario["version"] == 2,
+            and scenario["version"] == 3
+            and scenario.get("area_unit") == "m2",
             "Unsupported scenario version.",
         )
         surrogate = deepcopy(scenario)
         surrogate["version"] = 1
         for a in surrogate.get("actions", []):
+            if "area" in a.get("effects", {}):
+                require(
+                    number(a["effects"]["area"], 0.01, 100000000),
+                    "Invalid restoration area (m²).",
+                )
+                a["effects"]["area"] = 1
             if a.get("kind") in LAND_KINDS:
                 require(a["effects"] == {}, "Land effects belong in route definitions.")
                 a["kind"] = "advance"
@@ -75,7 +83,14 @@ def validate_scenario(scenario):
                 and r["ownership"] == (r["id"] in {"purchase", "donation", "existing"}),
                 "Invalid ownership effect.",
             )
-            require(number(r.get("duration"), 0.1, 5), "Invalid setup duration.")
+            require(
+                number(r.get("duration"), 0 if r["id"] == "existing" else 0.1, 5),
+                "Invalid setup duration.",
+            )
+            if r["id"] == "existing":
+                require(
+                    r["duration"] == 0, "Recording ownership must not advance time."
+                )
             for k in ("upfront", "annual_payment", "deposit", "annual_maintenance"):
                 require(number(r.get(k), 0, 1000000), f"Invalid route parameter: {k}.")
             require(
@@ -107,7 +122,8 @@ def new_project(name, scenario=None, project_id=None):
     require(text(name, 80), "Enter a project name of 1–80 characters.")
     scenario = validate_scenario(scenario if scenario is not None else load_scenario())
     return dict(
-        schema_version=2,
+        schema_version=3,
+        area_unit="m2",
         id=project_id or str(uuid4()),
         name=name.strip(),
         scenario=scenario,
@@ -122,87 +138,61 @@ def new_project(name, scenario=None, project_id=None):
         obligations=[],
         payments=[],
         legacy_origin=None,
+        previous_origin=None,
         grant=dict(status="not_applied", amount=0),
         history=[],
     )
 
 
-def migrate_legacy(old, scenario=None):
-    old = legacy.validate_state(old)
-    configured = deepcopy(scenario) if scenario is not None else load_scenario()
-    if scenario is None:
-        configured["initial_cash"] = old["scenario"]["initial_cash"]
-        old_actions = {a["id"]: a for a in old["scenario"]["actions"]}
-        for i, a in enumerate(configured["actions"]):
-            if a["id"] in old_actions:
-                configured["actions"][i] = deepcopy(old_actions[a["id"]])
+def migrate_previous(old, scenario=None):
+    """Validate with the frozen engine, then convert only live area quantities.
+
+    The original history/snapshot stays in hectares for exact replay. No earlier
+    price, payment, ownership date or maintenance commitment is reinterpreted.
+    """
+    old = engine_v2.validate_state(old)
+    configured = deepcopy(old["scenario"])
+    configured.update(version=3, area_unit="m2")
+    for action in configured["actions"]:
+        if "area" in action["effects"]:
+            action["effects"]["area"] = square_metres(action["effects"]["area"])
+    for r in configured["land_routes"]:
+        if r["id"] == "existing":
+            r.update(duration=0, annual_maintenance=0, commitment_years=0)
+    if scenario is not None:
+        require(
+            same_json(configured, scenario),
+            "Migrated scenario does not match its original snapshot.",
+        )
     new = new_project(old["name"], configured, old["id"])
-    for k in (
+    for key in (
         "revision",
         "time",
         "cash",
+        "parcels",
         "activities",
         "organizations",
+        "parties",
+        "agreements",
+        "obligations",
+        "payments",
         "grant",
         "history",
     ):
-        new[k] = deepcopy(old[k])
-    new["legacy_origin"] = old
-    for org in old["organizations"]:
-        new["parties"].append(
-            dict(
-                id=org.lower(),
-                name=org,
-                kind="nonprofit" if org == "Foundation" else "company",
-            )
-        )
-    for p in old["parcels"]:
-        owned, start = p["owner"] == "Individual", p["year"]
-        parcel = dict(
-            **deepcopy(p),
-            owner_id="individual" if owned else "third-party",
-            location="Unspecified legacy parcel",
-            cadastral_reference="",
-            current_use="Unspecified",
-            restrictions="Legacy access assumption.",
-            physical_access="yes",
-        )
-        new["parcels"].append(parcel)
-        end = None if owned else 30
-        new["agreements"].append(
-            dict(
-                id=f"agreement-{len(new['agreements']) + 1}",
-                parcel_id=p["id"],
-                route_id="existing" if owned else "free_use",
-                status="active" if owned or old["time"] < 30 else "expired",
-                owner_id=parcel["owner_id"],
-                holder_id="individual",
-                operator_id="individual",
-                covered_area=p["area"],
-                start=start,
-                end=end,
-                periods=[dict(start=start, end=end)],
-                upfront=p["acquisition_cost"],
-                annual_payment=0,
-                deposit=0,
-                deposit_held=0,
-                annual_maintenance=0,
-                commitment_years=0,
-                term_years=None if owned else round(30 - start, 4),
-                next_rent_due=round(start + 1, 4),
-                allow_restoration="yes",
-                allow_monitoring="yes",
-                allow_public="unknown",
-                physical_access="yes",
-                permits="assumed_clear",
-                evidence="legacy_assumption",
-                instrument="Original MVP assumption",
-                exit_terms="No retroactive charges. Temporary legacy access ends at year 30.",
-                source="Schema-1 snapshot",
-                renewals=0,
-            )
-        )
+        new[key] = deepcopy(old[key])
+    for p in new["parcels"]:
+        p["area"] = square_metres(p["area"])
+        p.update(current_cover="Unknown", site_condition="Unspecified legacy condition")
+    for a in new["activities"]:
+        a["area"] = square_metres(a["area"])
+    for a in new["agreements"]:
+        a["covered_area"] = square_metres(a["covered_area"])
+    new["previous_origin"] = old
     return new
+
+
+def square_metres(hectares):
+    return float(Decimal(str(hectares)) * 10000)
 
 
 def party_name(state, identity):
@@ -223,6 +213,66 @@ def options(rows):
     return [dict(value=a, label=b) for a, b in rows]
 
 
+LAND_USES = [
+    "Agriculture — traditional open-air",
+    "Agriculture — transformed open-air",
+    "Agriculture — greenhouse",
+    "Forestry",
+    "Conservation / habitat management",
+    "Grazing",
+    "Recreation / garden",
+    "Residential",
+    "Industrial / mining",
+    "No active use",
+    "Mixed uses",
+    "Unknown",
+]
+LAND_COVERS = [
+    "Open-air crops",
+    "Orchard / woody crops",
+    "Greenhouse crops",
+    "Oak woodland",
+    "Pine woodland / plantation",
+    "Mixed woodland",
+    "Mediterranean scrub",
+    "Grassland",
+    "Riverbank vegetation",
+    "Bare / disturbed ground",
+    "Built surfaces",
+    "Mixed cover",
+    "Unknown",
+]
+CATEGORY_SOURCES = [
+    dict(
+        id="vega-assessment",
+        label="Vega assessment: agriculture and crops (PDF pp. 98–100)",
+    ),
+    dict(
+        id="vega-baseline",
+        label="Vega diagnosis: abandonment and converted land (PDF pp. 66, 83, 85)",
+    ),
+    dict(
+        id="forest-habitats",
+        label="Ferreira project: vegetation formations (PDF pp. 12–15)",
+    ),
+]
+
+
+def category_field(state, name, label, values):
+    custom = sorted({p.get(name, "Unknown") for p in state["parcels"]} - set(values))
+    return field(
+        name,
+        label,
+        "category",
+        "Unknown",
+        maxLength=200,
+        options=options(
+            [(v, v) for v in values] + [(v, v + " (project category)") for v in custom]
+        ),
+        help="Choose a description or add a category. New categories become reusable in this project when you commit the parcel; they do not establish permissions or funding eligibility.",
+    )
+
+
 def land_catalog(state):
     rows = deepcopy(state["scenario"]["land_routes"])
     for r in rows:
@@ -240,7 +290,11 @@ def land_catalog(state):
             if r["ownership"]
             else f"{r['term_years']} years (editable assumption)"
         )
-        r["annual_label"] = "Not applicable (ownership)" if r["ownership"] else f"€{r['annual_payment']:,.2f} / year"
+        r["annual_label"] = (
+            "Not applicable (ownership)"
+            if r["ownership"]
+            else f"€{r['annual_payment']:,.2f} / year"
+        )
     return dict(
         routes=rows,
         targets=options(
@@ -278,7 +332,14 @@ def land_form(state, route_id, parcel_id="new", agreement_id=None):
                 maxLength=80,
             ),
             field(
-                "parcel_area", "Total parcel area (ha)", "number", 2, min=0.1, max=10000
+                "parcel_area",
+                "Total parcel area (m²)",
+                "number",
+                20000,
+                min=0.01,
+                max=100000000,
+                help="The entire parcel record, for example your 2,000 m² finca. This is separate from the smaller area included in the initiative.",
+                detail="If your finca has several separately recorded parcels, enter the area of this parcel only. Recording total area does not mean that restoration covers all of it. Boundaries are not checked against a map.",
             ),
             field(
                 "location",
@@ -291,11 +352,17 @@ def land_form(state, route_id, parcel_id="new", agreement_id=None):
                 "Cadastral reference (optional; unverified)",
                 maxLength=100,
             ),
+            category_field(state, "current_use", "Current land use", LAND_USES),
+            category_field(
+                state, "current_cover", "Existing vegetation / cover", LAND_COVERS
+            ),
             field(
-                "current_use",
-                "Current land use",
-                default="Dryland / scrub mosaic",
-                maxLength=200,
+                "site_condition",
+                "Condition / disturbance (optional)",
+                "textarea",
+                "",
+                maxLength=1000,
+                help="Describe abandonment, erosion or disturbance separately from use and vegetation. A scrub-covered site is not automatically degraded.",
             ),
             field(
                 "restrictions",
@@ -344,11 +411,15 @@ def land_form(state, route_id, parcel_id="new", agreement_id=None):
         ),
         field(
             "covered_area",
-            "Area covered by this arrangement (ha)",
+            "Area included in this restoration initiative (m²)"
+            if route_id == "existing"
+            else "Area covered by this arrangement (m²)",
             "number",
-            p["area"] if p else 2,
-            min=0.1,
-            max=p["area"] if p else 10000,
+            p["area"] if p else 20000,
+            min=0.01,
+            max=p["area"] if p else 100000000,
+            help="The part made available to this initiative; it may be smaller than the total parcel. Including it does not mean it has already been restored.",
+            detail="Example: you own a 2,000 m² finca, include 200 m² in this initiative and restore 100 m² in the first action. Ownership remains 2,000 m²; included area is 200 m²; completed restoration is 100 m². On someone else's land, the included area must be covered by the arrangement.",
         ),
         field(
             "stage",
@@ -456,13 +527,24 @@ def land_form(state, route_id, parcel_id="new", agreement_id=None):
             "evidence",
             "Basis of this record (not legal verification)",
             "select",
-            "assumed",
+            "reported" if route_id == "existing" else "assumed",
             options=options(
-                [
-                    ("assumed", "Fictional scenario assumption"),
-                    ("user_supplied", "User-supplied information — unverified"),
-                    ("unverified", "Unresolved / not verified"),
-                ]
+                (
+                    [
+                        ("reported", "Reported by you"),
+                        (
+                            "reference_supplied",
+                            "Supporting reference supplied — unverified",
+                        ),
+                        ("unverified", "Uncertain"),
+                    ]
+                    if route_id == "existing"
+                    else [
+                        ("assumed", "Fictional scenario assumption"),
+                        ("user_supplied", "User-supplied information — unverified"),
+                        ("unverified", "Unresolved / not verified"),
+                    ]
+                )
             ),
         ),
         field(
@@ -481,7 +563,67 @@ def land_form(state, route_id, parcel_id="new", agreement_id=None):
         ),
     ]
     for f in fields:
-        f['hidden'] = (f['name'] == 'annual_payment' and (r['ownership'] or route_id == 'free_use')) or (f['name'] == 'deposit' and r['ownership']) or (f['name'] == 'upfront' and route_id == 'existing')
+        f["hidden"] = (
+            (
+                f["name"] == "annual_payment"
+                and (r["ownership"] or route_id == "free_use")
+            )
+            or (f["name"] == "deposit" and r["ownership"])
+            or (f["name"] == "upfront" and route_id == "existing")
+        )
+        if route_id == "existing":
+            if f["name"] == "stage":
+                f.update(
+                    hidden=True,
+                    options=options([("active", "Existing ownership recorded")]),
+                )
+            if f["name"] in {"annual_maintenance", "commitment_years"}:
+                f["default"] = 0
+                f["unknown_allowed"] = False
+                f["help"] = (
+                    "Optional new commitment: leave both maintenance amount and duration at zero to record ownership only."
+                )
+            if f["name"] == "owner_id":
+                f["label"] = "Owner"
+                f["options"] = options(
+                    [
+                        (x["id"], x["name"])
+                        for x in state["parties"]
+                        if x["id"] not in {"third-party", "municipality"}
+                    ]
+                )
+            if f["name"] == "holder_id":
+                f["label"] = "Recorded owner (must match owner above)"
+                f["hidden"] = True
+                f["default"] = p["owner_id"] if p else r["owner_id"]
+            if f["name"] == "evidence":
+                f["label"] = "Ownership information"
+            if f["name"] == "instrument":
+                f.update(
+                    label="Ownership document / reference notes (optional)", default=""
+                )
+            if f["name"] == "exit_terms":
+                f.update(
+                    hidden=True,
+                    default="Existing ownership; no acquisition, transfer or expiry recorded.",
+                )
+            if f["name"] == "permits":
+                f["options"][0]["label"] = (
+                    "Sufficient for planned works — reported by you"
+                )
+            if f["name"] in {
+                "allow_restoration",
+                "allow_monitoring",
+                "allow_public",
+                "physical_access",
+            }:
+                f["options"] = options(
+                    [
+                        ("yes", "Yes — reported by you"),
+                        ("no", "No"),
+                        ("unknown", "Unknown / needs confirmation"),
+                    ]
+                )
     if a:
         for f in fields:
             if f["name"] in a:
@@ -498,6 +640,9 @@ def land_form(state, route_id, parcel_id="new", agreement_id=None):
         source=r["source"],
         source_url="/api/sources/" + r["source_id"],
         caveat=r["caveat"],
+        existing_ownership=route_id == "existing",
+        parcel_area=p["area"] if p else None,
+        category_sources=CATEGORY_SOURCES,
         notes=[
             "Terms are editable fictional assumptions, not market prices or legal conclusions.",
             "Blank amounts mean Unknown. Proposals may retain unknowns; active access requires calculable terms.",
@@ -545,7 +690,12 @@ def validate_fields(fields, inputs, extra=()):
                 isinstance(v, str) and len(v) <= f.get("maxLength", 1000),
                 "Invalid text for " + f["label"] + ".",
             )
-            if f["name"] not in {"cadastral_reference", "restrictions"}:
+            if f["name"] not in {
+                "cadastral_reference",
+                "restrictions",
+                "site_condition",
+                "instrument",
+            }:
                 require(bool(v.strip()), f["label"] + " is required.")
 
 
@@ -596,7 +746,12 @@ def availability(state, a, checking=()):
         )
     if len(state["history"]) >= 500:
         return "unavailable", "The MVP supports at most 500 decisions."
-    if round(state["time"] + a["duration"], 4) > 30:
+    duration = (
+        min(r["duration"] for r in state["scenario"]["land_routes"])
+        if a["kind"] == "land_access"
+        else a["duration"]
+    )
+    if round(state["time"] + duration, 4) > 30:
         return "unavailable", "This action would finish beyond year 30."
     missing = [x for x in a["requires"] if x not in completed]
     definitions = {x["id"]: x for x in state["scenario"]["actions"]}
@@ -618,7 +773,7 @@ def availability(state, a, checking=()):
         ) + "."
     kind = a["kind"]
     if kind in {"restore", "restore_start"} and not parcel_options(
-        state, a["effects"]["area"], a["duration"]
+        state, 0.01, a["duration"]
     ):
         return (
             "future",
@@ -681,7 +836,9 @@ def list_actions(state):
                 )
             ]
         elif kind in {"restore", "restore_start"}:
-            opts = parcel_options(state, a["effects"]["area"], a["duration"])
+            opts = parcel_options(state, 0.01, a["duration"])
+            for opt in opts:
+                opt["default_area"] = min(a["effects"]["area"], opt["remaining_area"])
             a["fields"] = [
                 field(
                     "parcel_id",
@@ -689,7 +846,17 @@ def list_actions(state):
                     "select",
                     opts[0]["value"] if opts else "",
                     options=opts,
-                )
+                ),
+                field(
+                    "restoration_area",
+                    "Restoration work area (m²)",
+                    "number",
+                    opts[0]["default_area"] if opts else a["effects"]["area"],
+                    min=0.01,
+                    max=100000000,
+                    help=f"Completed work must fit inside the remaining included area. This action costs a fixed €{a['cost']:,.2f}; its price and duration do not scale with area. Funding remains a fictional scenario outcome.",
+                    detail="Total parcel area, included area and completed restoration are different quantities. A 200 m² pilot is allowed when sufficient area and permissions are available; choosing it does not establish real grant eligibility.",
+                ),
             ]
         elif kind in {"activate_access", "renew_access", "end_access"}:
             eligible = [
@@ -861,6 +1028,11 @@ def activate(state, a, at):
             a["upfront"] == 0,
             "Recording existing ownership has no acquisition expenditure in this fixture.",
         )
+        require(
+            (a["annual_maintenance"] == 0 and a["commitment_years"] == 0)
+            or (a["annual_maintenance"] > 0 and a["commitment_years"] > 0),
+            "For optional maintenance, provide both a positive annual budget and duration, or leave both at zero.",
+        )
     if a["route_id"] == "free_use":
         require(
             a["annual_payment"] == 0,
@@ -915,7 +1087,7 @@ def activate(state, a, at):
 
 def transition(state, action_id, inputs=None):
     require(
-        state.get("schema_version") == 2, "Upgrade the legacy save before new actions."
+        state.get("schema_version") == 3, "Upgrade the legacy save before new actions."
     )
     adef = next((a for a in state["scenario"]["actions"] if a["id"] == action_id), None)
     require(adef is not None, "Unknown action.")
@@ -970,7 +1142,7 @@ def transition(state, action_id, inputs=None):
             inputs["parcel_id"]
             in [
                 p["value"]
-                for p in parcel_options(state, adef["effects"]["area"], duration)
+                for p in parcel_options(state, inputs["restoration_area"], duration)
             ],
             "Access/permission must cover the full work duration and enough unrestored area.",
         )
@@ -1007,6 +1179,8 @@ def transition(state, action_id, inputs=None):
                             "location",
                             "cadastral_reference",
                             "current_use",
+                            "current_cover",
+                            "site_condition",
                             "restrictions",
                             "physical_access",
                         )
@@ -1056,9 +1230,11 @@ def transition(state, action_id, inputs=None):
         a["term_years"] = inputs.get("term_years")
         if inputs["stage"] == "active":
             activate(new, a, target)
-            explanation = f"{r['title']} active on {p['name']}: {a['covered_area']} ha. Owner: {p['owner']}; holder: {party_name(new, a['holder_id'])}; operator: {party_name(new, a['operator_id'])}. "
+            explanation = f"{r['title']} active on {p['name']}: {a['covered_area']:,.2f} m² included. Owner: {p['owner']}; holder: {party_name(new, a['holder_id'])}; operator: {party_name(new, a['operator_id'])}. "
+            if r["id"] == "existing":
+                explanation = f"Existing ownership of {p['name']} reported by you and recorded at project year {target}. Total parcel: {p['area']:,.2f} m²; included in this initiative: {a['covered_area']:,.2f} m². No acquisition or ownership transfer; recording takes no simulation time. "
             explanation += (
-                "No configured access expiry."
+                "No expiry recorded."
                 if a["end"] is None
                 else f"Access ends in year {a['end']}; renewal is not automatic."
             )
@@ -1118,11 +1294,12 @@ def transition(state, action_id, inputs=None):
                 id=f"activity-{len(new['activities']) + 1}",
                 title=adef["title"],
                 parcel_id=inputs["parcel_id"],
-                area=effects["area"],
+                area=inputs["restoration_area"],
                 year=target,
                 action_id=action_id,
             )
         )
+        explanation = f"{adef['title']} completed: {inputs['restoration_area']:,.2f} m² restored. Fixed action cost €{adef['cost']:,.2f}; price and duration do not scale with area. This illustrative result does not verify funding eligibility."
     elif kind == "organization":
         org = effects["organization"]
         new["organizations"].append(org)
@@ -1149,6 +1326,7 @@ def transition(state, action_id, inputs=None):
             action_id=action_id,
             title=adef["title"],
             inputs=deepcopy(inputs),
+            area_unit="m2",
             start=state["time"],
             end=target,
             cost=round(
@@ -1164,13 +1342,14 @@ def transition(state, action_id, inputs=None):
 
 
 def validate_state(state):
-    if isinstance(state, dict) and state.get("schema_version") == 1:
-        return migrate_legacy(state)
+    if isinstance(state, dict) and state.get("schema_version") in (1, 2):
+        return migrate_previous(state)
     try:
         require(
             isinstance(state, dict)
             and type(state.get("schema_version")) is int
-            and state["schema_version"] == 2,
+            and state["schema_version"] == 3
+            and state.get("area_unit") == "m2",
             "Unsupported save schema.",
         )
         require(
@@ -1191,8 +1370,8 @@ def validate_state(state):
         )
         scenario = validate_scenario(state.get("scenario"))
         replay = (
-            migrate_legacy(state["legacy_origin"], scenario)
-            if state.get("legacy_origin") is not None
+            migrate_previous(state["previous_origin"], scenario)
+            if state.get("previous_origin") is not None
             else new_project(state["name"], scenario, state["id"])
         )
         baseline = len(replay["history"])
@@ -1272,8 +1451,9 @@ def summary(state):
         future_rent_after_horizon=round(rent_after_horizon, 2),
         remaining_maintenance_commitment=round(maintenance, 2),
         beyond_horizon=[o for o in state["obligations"] if o["end"] > 30],
-        migration_notice="Upgraded from schema 1: historic results retained; old access is a legacy assumption with no retroactive rent."
-        if state["legacy_origin"]
+        area_unit="m2",
+        migration_notice="Upgraded to m²: live areas converted from hectares. Historic results, cash and existing commitments retained; earlier history keeps its original units. New ownership records take no time and create no automatic maintenance commitment."
+        if state["previous_origin"]
         else None,
     )
 
@@ -1288,10 +1468,13 @@ def preview(state, action_id, inputs):
         cash_change=h["cash_change"],
         duration=round(h["end"] - h["start"], 4),
         end_year=new["time"],
+        area_unit="m2",
+        recorded_ownership=inputs.get("route_id") == "existing",
         cash_after=new["cash"],
         payments=h["payments"],
         events=h["events"],
         agreements=[a for a in new["agreements"] if a not in state["agreements"]],
+        timeline_agreements=new["agreements"],
         obligations=new["obligations"],
         summary=summary(new),
         parties=new["parties"],

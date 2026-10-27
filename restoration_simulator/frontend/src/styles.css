@@ -688,7 +688,10 @@ textarea:focus-visible {
   position: static;
   min-width: 0;
 }
-.land-editor, .land-detail-grid > div { min-width: 0; }
+.land-editor,
+.land-detail-grid > div {
+  min-width: 0;
+}
 .land-workspace .actions {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
@@ -887,13 +890,13 @@ textarea:focus-visible {
   background: var(--progress-track);
   overflow: hidden;
 }
-.rights-track span {
+.rights-track .period-bar {
   position: absolute;
   top: 0;
   bottom: 0;
   background: var(--milestone);
 }
-.maintenance-row .rights-track span {
+.maintenance-row .rights-track .period-bar {
   background: var(--sun);
 }
 .rights-period small {
@@ -1344,4 +1347,147 @@ footer p {
   .welcome h2 {
     font-size: 28px;
   }
+}
+
+/* Help remains available to mouse, keyboard and touch users. */
+.field-label {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.field-label label {
+  flex: 1;
+}
+.field-help {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+}
+.help-trigger {
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+}
+.help-content {
+  position: absolute;
+  z-index: 12;
+  top: 100%;
+  right: 0;
+  width: min(320px, 72vw);
+  padding: 14px;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--selected-border);
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.6;
+  box-shadow: 0 5px 20px #0003;
+}
+.inline-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin: 8px 0;
+}
+.inline-check input {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  accent-color: var(--milestone);
+}
+.timeline-controls,
+.parcel-checks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 22px;
+}
+.parcel-filter {
+  padding: 10px 0;
+}
+.parcel-filter summary {
+  cursor: pointer;
+  font-size: 13px;
+}
+.parcel-filter button {
+  margin: 10px 8px 0 0;
+  padding: 5px 10px;
+}
+.rights-track {
+  height: 22px;
+  overflow: visible;
+  border-radius: 3px;
+  background-image: linear-gradient(
+    to right,
+    transparent calc(100% - 1px),
+    var(--border) 1px
+  );
+  background-size: 16.6667% 100%;
+}
+.rights-track .period-bar {
+  min-width: 3px;
+  height: 100%;
+  padding: 0;
+  border: 1px solid var(--selected-border);
+  border-radius: 3px;
+  cursor: pointer;
+  color: var(--panel);
+}
+.period-bar span {
+  float: right;
+  padding-right: 3px;
+}
+.rights-track .period-preview {
+  border: 2px dashed var(--text);
+  opacity: 0.7;
+}
+.rights-track .rights-now {
+  position: absolute;
+  top: -5px;
+  height: 32px;
+  width: 2px;
+  background: var(--text);
+  pointer-events: none;
+  z-index: 2;
+}
+.period-details {
+  font-size: 12px;
+  padding: 8px;
+  background: var(--result-bg);
+  border-left: 3px solid var(--result-accent);
+}
+.category-sources {
+  margin-top: 12px;
+}
+@media (max-width: 650px) {
+  .help-content {
+    right: 0;
+  }
+  .access-timeline .timeline-controls {
+    align-items: flex-start;
+  }
+  .timeline-controls .field-help {
+    margin: 8px 0;
+  }
+}
+
+.rights-axis {
+  position: relative;
+  height: 20px;
+  display: block;
+}
+.rights-axis > span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+.rights-axis > span:first-child {
+  transform: none;
+}
+.rights-axis > span:last-child {
+  transform: translateX(-100%);
 }

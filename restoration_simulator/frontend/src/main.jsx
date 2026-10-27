@@ -8,7 +8,7 @@ import {
   LandRecords,
   Outcome,
 } from "./LandAccess.jsx";
-import { money, year } from "./format.js";
+import { area, money, year } from "./format.js";
 import "./styles.css";
 
 async function api(path, body) {
@@ -120,6 +120,15 @@ function Timeline({ project, historyIndex, setHistoryIndex }) {
           ))}
         </div>
       </div>
+      {project.agreements && (
+        <AccessTimeline
+          agreements={project.agreements}
+          obligations={project.obligations}
+          parcels={project.parcels}
+          parties={project.parties}
+          currentYear={project.time}
+        />
+      )}
       <div
         className="timeline-events"
         aria-label="Recorded actions on the timeline"
@@ -545,6 +554,14 @@ function App() {
               </button>
             </form>
           </section>
+        ) : project.area_unit !== "m2" ? (
+          <section className="panel">
+            <h2>Restart the Python backend</h2>
+            <p>
+              This frontend uses m². Restart Python, then reload the saved
+              project to upgrade its areas safely.
+            </p>
+          </section>
         ) : (
           <>
             {data.summary.migration_notice && (
@@ -561,12 +578,6 @@ function App() {
               historyIndex={historyIndex}
               setHistoryIndex={setHistoryIndex}
             />
-            {project.agreements && (
-              <AccessTimeline
-                agreements={project.agreements}
-                obligations={project.obligations}
-              />
-            )}
             <div className="stats" aria-label="Current project state">
               <div>
                 <span>Available cash</span>
@@ -576,20 +587,17 @@ function App() {
               <div>
                 <span>Currently accessible land</span>
                 <strong>
-                  {data.summary.active_area ?? data.summary.area}{" "}
-                  <small>ha</small>
+                  {area(data.summary.active_area ?? data.summary.area)}
                 </strong>
                 <small>
                   {project.parcels.length} parcel records ·{" "}
-                  {data.summary.owned_area ?? "?"} ha owned by you / your
+                  {area(data.summary.owned_area)} owned by you / your
                   organisations
                 </small>
               </div>
               <div>
                 <span>Historical restoration</span>
-                <strong>
-                  {data.summary.restored_area} <small>ha</small>
-                </strong>
+                <strong>{area(data.summary.restored_area)}</strong>
                 <small>
                   {data.summary.completed_activities} completed activities;
                   retained after access ends
@@ -615,11 +623,11 @@ function App() {
                 </h2>
                 <p>
                   {data.summary.completed_activities} restoration activities
-                  across {data.summary.restored_area} ha;{" "}
+                  across {area(data.summary.restored_area)};{" "}
                   {project.parcels.length} parcel records;{" "}
-                  {data.summary.active_area ?? data.summary.area} ha currently
-                  accessible and {data.summary.owned_area ?? "?"} ha owned by
-                  you / your organisations. Cash remaining:{" "}
+                  {area(data.summary.active_area ?? data.summary.area)}{" "}
+                  currently accessible and {area(data.summary.owned_area)} owned
+                  by you / your organisations. Cash remaining:{" "}
                   {money(project.cash)}.
                 </p>
                 <p>
@@ -850,6 +858,13 @@ function App() {
                   <article className="history-detail">
                     <h3>{history.title}</h3>
                     <p>{history.explanation}</p>
+                    {!history.area_unit && (
+                      <p className="muted">
+                        Original historical record: area inputs and descriptions
+                        retain their hectare units. Current parcel and
+                        restoration totals are shown in m².
+                      </p>
+                    )}
                     <p>
                       Year {year(history.start)} → {year(history.end)} · Cash
                       change {money(history.cash_change)} · Cost{" "}

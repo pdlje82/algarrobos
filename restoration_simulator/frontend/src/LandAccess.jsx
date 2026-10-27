@@ -1,5 +1,86 @@
-import React, { useEffect, useRef, useState } from "react";
-import { money, year } from "./format.js";
+import React, { useEffect, useId, useRef, useState } from "react";
+import { area, money, year } from "./format.js";
+
+export function FieldHelp({ label, children }) {
+  const id = useId();
+  const [open, setOpen] = useState(false);
+  return (
+    <span
+      className="field-help"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={(e) => {
+        if (!e.currentTarget.contains(document.activeElement)) setOpen(false);
+      }}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") {
+          setOpen(false);
+          e.stopPropagation();
+        }
+      }}
+    >
+      <button
+        type="button"
+        className="help-trigger"
+        aria-label={`Help: ${label}`}
+        aria-expanded={open}
+        aria-describedby={open ? id : undefined}
+        onFocus={() => setOpen(true)}
+        onClick={() => setOpen(true)}
+      >
+        i
+      </button>
+      {open && (
+        <span role="tooltip" id={id} className="help-content">
+          {children}
+        </span>
+      )}
+    </span>
+  );
+}
+
+function CategoryInput({ field: f, value, onChange, disabled }) {
+  const [adding, setAdding] = useState(false);
+  const custom =
+    adding || (Boolean(value) && !f.options.some((o) => o.value === value));
+  return (
+    <>
+      <select
+        id={`field-${f.name}`}
+        disabled={disabled}
+        value={custom ? "__custom__" : (value ?? "")}
+        aria-describedby={`help-${f.name}`}
+        onChange={(e) => {
+          const add = e.target.value === "__custom__";
+          setAdding(add);
+          onChange(add ? "" : e.target.value);
+        }}
+      >
+        {f.options.map((o) => (
+          <option key={o.value} value={o.value}>
+            {o.label}
+          </option>
+        ))}
+        <option value="__custom__">Add category…</option>
+      </select>
+      {custom && (
+        <>
+          <label htmlFor={`custom-${f.name}`}>New category name</label>
+          <input
+            id={`custom-${f.name}`}
+            aria-label={`${f.label}: new category name`}
+            maxLength={f.maxLength}
+            disabled={disabled}
+            value={value ?? ""}
+            onChange={(e) => onChange(e.target.value)}
+          />
+        </>
+      )}
+    </>
+  );
+}
 
 export function Fields({ fields, inputs, onChange, disabled }) {
   return (
@@ -8,21 +89,43 @@ export function Fields({ fields, inputs, onChange, disabled }) {
         .filter((f) => !f.hidden)
         .map((f) => (
           <div className="field" key={f.name}>
-            <label htmlFor={`field-${f.name}`}>{f.label}</label>
-            {f.type === "select" ? (
+            <div className="field-label">
+              <label htmlFor={`field-${f.name}`}>{f.label}</label>
+              {f.detail && <FieldHelp label={f.label}>{f.detail}</FieldHelp>}
+            </div>
+            {f.type === "category" ? (
+              <CategoryInput
+                field={f}
+                value={inputs[f.name]}
+                disabled={disabled}
+                onChange={(value) => onChange({ ...inputs, [f.name]: value })}
+              />
+            ) : f.type === "select" ? (
               <select
                 id={`field-${f.name}`}
                 value={inputs[f.name] ?? ""}
                 disabled={disabled}
                 onChange={(e) =>
-                  onChange({ ...inputs, [f.name]: e.target.value })
+                  onChange({
+                    ...inputs,
+                    [f.name]: e.target.value,
+                    ...(f.name === "parcel_id" &&
+                    f.options.find((o) => o.value === e.target.value)
+                      ?.default_area !== undefined
+                      ? {
+                          restoration_area: f.options.find(
+                            (o) => o.value === e.target.value,
+                          ).default_area,
+                        }
+                      : {}),
+                  })
                 }
               >
                 {f.options.map((o) => (
                   <option key={o.value} value={o.value}>
                     {o.label}
                     {o.remaining_area !== undefined
-                      ? ` · ${o.remaining_area} ha remaining`
+                      ? ` · ${area(o.remaining_area)} remaining`
                       : ""}
                   </option>
                 ))}
@@ -31,6 +134,7 @@ export function Fields({ fields, inputs, onChange, disabled }) {
               <textarea
                 id={`field-${f.name}`}
                 maxLength={f.maxLength}
+                aria-describedby={f.help ? `help-${f.name}` : undefined}
                 value={inputs[f.name] ?? ""}
                 disabled={disabled}
                 onChange={(e) =>
@@ -41,6 +145,7 @@ export function Fields({ fields, inputs, onChange, disabled }) {
               <input
                 id={`field-${f.name}`}
                 type={f.type}
+                aria-describedby={f.help ? `help-${f.name}` : undefined}
                 value={inputs[f.name] ?? ""}
                 disabled={disabled}
                 min={f.min}
@@ -65,7 +170,11 @@ export function Fields({ fields, inputs, onChange, disabled }) {
                 Leave blank for Unknown; proposals can retain unresolved terms.
               </small>
             )}
-            {f.help && <small className="muted">{f.help}</small>}
+            {f.help && (
+              <small id={`help-${f.name}`} className="muted">
+                {f.help}
+              </small>
+            )}
           </div>
         ))}
     </div>
@@ -90,6 +199,7 @@ export function LandEditor({
   const [routeId, setRouteId] = useState("");
   const [parcelId, setParcelId] = useState("new");
   const [compare, setCompare] = useState(false);
+  const [wholeParcel, setWholeParcel] = useState(false);
   const [form, setForm] = useState(null);
   const [error, setError] = useState("");
   const drafts = useRef({});
@@ -102,6 +212,7 @@ export function LandEditor({
     onReady(false);
     setError("");
     setForm(null);
+    setWholeParcel(false);
     onChange({});
     if (!selectedRoute || !selectedParcel) return;
     let ignore = false;
@@ -141,6 +252,12 @@ export function LandEditor({
     onReady,
   ]);
   function edit(next) {
+    if (selectedRoute === "existing" && next.owner_id)
+      next = { ...next, holder_id: next.owner_id };
+    if (wholeParcel && next.parcel_area !== inputs.parcel_area)
+      next = { ...next, covered_area: next.parcel_area };
+    else if (next.covered_area !== (next.parcel_area ?? form.parcel_area))
+      setWholeParcel(false);
     drafts.current[key] = next;
     onChange(next);
   }
@@ -148,6 +265,8 @@ export function LandEditor({
     "location",
     "cadastral_reference",
     "current_use",
+    "current_cover",
+    "site_condition",
     "restrictions",
   ]);
   const termNames = new Set([
@@ -168,6 +287,10 @@ export function LandEditor({
     "instrument",
     "exit_terms",
   ]);
+  if (selectedRoute === "existing") {
+    permissionNames.delete("evidence");
+    permissionNames.delete("instrument");
+  }
   return (
     <div className="land-editor">
       {finalising ? (
@@ -311,6 +434,13 @@ export function LandEditor({
         <div className="selected-route">
           <h3>Selected: {chosen.title}</h3>
           <p>{chosen.caveat}</p>
+          {selectedRoute === "existing" && (
+            <p>
+              Already owned; no acquisition or ownership transfer. Recorded at
+              the current project year without advancing time. No maintenance
+              commitment is added unless you enter one.
+            </p>
+          )}
         </div>
       )}
       {selectedRoute && !form && !error && (
@@ -320,7 +450,11 @@ export function LandEditor({
         <div>
           {form && (
             <>
-              <h3>Parcel, parties and status</h3>
+              <h3>
+                {form.existing_ownership
+                  ? "Parcel and ownership record"
+                  : "Parcel, parties and status"}
+              </h3>
               <Fields
                 fields={form.fields.filter(
                   (f) =>
@@ -332,14 +466,53 @@ export function LandEditor({
                 onChange={edit}
                 disabled={busy}
               />
+              <label className="inline-check">
+                <input
+                  type="checkbox"
+                  disabled={busy}
+                  checked={wholeParcel}
+                  onChange={(e) => {
+                    setWholeParcel(e.target.checked);
+                    if (e.target.checked)
+                      edit({
+                        ...inputs,
+                        covered_area: inputs.parcel_area ?? form.parcel_area,
+                      });
+                  }}
+                />
+                Use the entire parcel (
+                {area(inputs.parcel_area ?? form.parcel_area)})
+              </label>
               <details className="land-section">
                 <summary>Site details and unresolved restrictions</summary>
+                <p>
+                  Use and vegetation describe the site; condition and legal
+                  restrictions are separate. Categories combine document-based
+                  descriptions with general choices. Custom entries are
+                  user-defined.
+                </p>
                 <Fields
                   fields={form.fields.filter((f) => siteNames.has(f.name))}
                   inputs={inputs}
                   onChange={edit}
                   disabled={busy}
                 />
+                <details className="category-sources">
+                  <summary>Category sources</summary>
+                  <ul>
+                    {form.category_sources.map((s) => (
+                      <li key={s.id}>
+                        <a
+                          href={`/api/sources/${s.id}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {s.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
                 {!form.fields.some((f) => siteNames.has(f.name)) && (
                   <p>
                     Existing parcel metadata is retained. Ownership changes only
@@ -348,7 +521,11 @@ export function LandEditor({
                 )}
               </details>
               <details className="land-section" open>
-                <summary>Costs, duration and continuing maintenance</summary>
+                <summary>
+                  {form.existing_ownership
+                    ? "Optional maintenance commitment"
+                    : "Costs, duration and continuing maintenance"}
+                </summary>
                 <Fields
                   fields={form.fields.filter((f) => termNames.has(f.name))}
                   inputs={inputs}
@@ -390,19 +567,46 @@ export function LandEditor({
   );
 }
 
-function PeriodBar({ start, end, label }) {
+function PeriodBar({ start, end, label, currentYear, preview }) {
+  const [show, setShow] = useState(false);
   const left = Math.max(0, Math.min(100, (start / 30) * 100));
   const right = Math.max(left, Math.min(100, ((end ?? 30) / 30) * 100));
+  const description = `${label}. ${end === null ? "No expiry recorded; continues beyond this view." : `Ends year ${year(end)}${end > 30 ? "; continues beyond the playable horizon" : ""}.`}`;
   return (
     <div className="rights-period">
       <div className="rights-track">
-        <span style={{ left: `${left}%`, width: `${right - left}%` }} />
+        <button
+          type="button"
+          className={`period-bar ${preview ? "period-preview" : ""}`}
+          style={{ left: `${left}%`, width: `${right - left}%` }}
+          aria-label={description}
+          aria-expanded={show}
+          onMouseEnter={() => setShow(true)}
+          onMouseLeave={() => setShow(false)}
+          onFocus={() => setShow(true)}
+          onBlur={() => setShow(false)}
+          onKeyDown={(e) => {
+            if (e.key === "Escape") setShow(false);
+          }}
+          onClick={() => setShow(true)}
+        >
+          {end === null && <span aria-hidden="true">→</span>}
+        </button>
+        {currentYear !== undefined && (
+          <span
+            className="rights-now"
+            aria-hidden="true"
+            style={{ left: `${(currentYear / 30) * 100}%` }}
+          />
+        )}
       </div>
       <small>
-        {label}: year {year(start)} →{" "}
-        {end === null ? "no configured expiry" : year(end)}
-        {end > 30 ? " (continues beyond horizon)" : ""}
+        {label}
+        {end === null
+          ? " · no expiry recorded →"
+          : ` → year ${year(end)}${end > 30 ? " (beyond horizon)" : ""}`}
       </small>
+      {show && <p className="period-details">{description}</p>}
     </div>
   );
 }
@@ -410,10 +614,38 @@ function PeriodBar({ start, end, label }) {
 export function AccessTimeline({
   agreements,
   obligations = [],
-  title = "Access and commitments",
+  parcels = [],
+  parties = [],
+  currentYear = 0,
+  title = "Land access and commitments",
   preview = false,
 }) {
+  const [showAccess, setShowAccess] = useState(true);
+  const [showMaintenance, setShowMaintenance] = useState(false);
+  const [selection, setSelection] = useState(null);
   if (!agreements.length && !obligations.length) return null;
+  const parcelName = (id) => parcels.find((p) => p.id === id)?.name || id;
+  const partyName = (id) => parties.find((p) => p.id === id)?.name || id;
+  const ids = [
+    ...new Set([
+      ...agreements.map((a) => a.parcel_id),
+      ...obligations
+        .map((o) => agreements.find((a) => a.id === o.agreement_id)?.parcel_id)
+        .filter(Boolean),
+    ]),
+  ];
+  const visible = (id) => selection === null || selection.includes(id);
+  const toggle = (id) =>
+    setSelection((prev) => {
+      const prior = prev ?? ids;
+      return prior.includes(id)
+        ? prior.filter((x) => x !== id)
+        : [...prior, id];
+    });
+  const maintenance = obligations.filter((o) => {
+    const a = agreements.find((a) => a.id === o.agreement_id);
+    return a && visible(a.parcel_id);
+  });
   return (
     <section
       className={`access-timeline ${preview ? "draft-timeline" : ""}`}
@@ -423,41 +655,136 @@ export function AccessTimeline({
         {title}
         {preview ? " · hypothetical preview" : ""}
       </h3>
-      <div className="rights-axis">
-        <span>Year 0</span>
-        <span>Year 15</span>
-        <span>Year 30</span>
-      </div>
-      {agreements.map((a) => (
-        <div className="rights-row" key={a.id}>
-          <strong>
-            {a.id} · {a.route_id.replaceAll("_", " ")}
-          </strong>
-          <span className="agreement-status">{a.status}</span>
-          {a.status === "pending" ? (
-            <p className="muted">Proposal only — no effective access period.</p>
-          ) : (
-            a.periods.map((p, i) => (
-              <PeriodBar
-                key={i}
-                start={p.start}
-                end={p.end}
-                label={a.parcel_id}
-              />
-            ))
-          )}
-        </div>
-      ))}
-      {obligations.map((o) => (
-        <div className="rights-row maintenance-row" key={o.id}>
-          <strong>{o.agreement_id} · maintenance commitment</strong>
-          <PeriodBar
-            start={o.start}
-            end={o.end}
-            label={money(o.annual_amount) + " / year"}
+      <div className="timeline-controls">
+        <label className="inline-check">
+          <input
+            type="checkbox"
+            checked={showAccess}
+            onChange={(e) => setShowAccess(e.target.checked)}
           />
+          Show land access
+        </label>
+        <label className="inline-check">
+          <input
+            type="checkbox"
+            checked={showMaintenance}
+            onChange={(e) => setShowMaintenance(e.target.checked)}
+          />
+          Show maintenance commitments ({obligations.length})
+        </label>
+        <FieldHelp label="Timeline controls">
+          These controls only change the display. Hiding a row never changes
+          access or cancels a payment or maintenance obligation. Ownership rows
+          show when the record was added to this project, not when ownership
+          began.
+        </FieldHelp>
+      </div>
+      <details className="parcel-filter">
+        <summary>
+          Parcels ·{" "}
+          {selection === null
+            ? "All parcels"
+            : `${selection.filter((id) => ids.includes(id)).length} selected`}
+        </summary>
+        <button type="button" onClick={() => setSelection(null)}>
+          All parcels
+        </button>
+        <button type="button" onClick={() => setSelection([])}>
+          Clear selection
+        </button>
+        <div className="parcel-checks">
+          {ids.map((id) => (
+            <label key={id} className="inline-check">
+              <input
+                type="checkbox"
+                checked={visible(id)}
+                onChange={() => toggle(id)}
+              />
+              {parcelName(id)}
+            </label>
+          ))}
         </div>
-      ))}
+      </details>
+      <p className="muted">
+        Current year: {year(currentYear)} · green: access · gold: maintenance ·
+        dashed: preview.
+      </p>
+      {(showAccess || showMaintenance) && (
+        <div
+          className="rights-axis"
+          aria-label="Proportional project-time axis, year 0 to year 30"
+        >
+          {[0, 5, 10, 15, 20, 25, 30].map((y) => (
+            <span key={y} style={{ left: `${(y / 30) * 100}%` }}>
+              {y === 0 ? "Year " : ""}
+              {y}
+            </span>
+          ))}
+        </div>
+      )}
+      {showAccess &&
+        agreements
+          .filter((a) => visible(a.parcel_id))
+          .map((a) => (
+            <div className="rights-row" key={a.id}>
+              <strong>
+                {parcelName(a.parcel_id)} ·{" "}
+                {a.route_id === "existing"
+                  ? "Existing ownership record"
+                  : a.route_id.replaceAll("_", " ")}
+              </strong>
+              <span className="agreement-status">
+                {a.status === "active" && a.route_id === "existing"
+                  ? "Recorded"
+                  : a.status}
+              </span>
+              {a.status === "pending" ? (
+                <p className="muted">
+                  Proposal only — no effective access period.
+                </p>
+              ) : (
+                a.periods.map((p, i) => (
+                  <PeriodBar
+                    key={i}
+                    start={p.start}
+                    end={p.end}
+                    currentYear={currentYear}
+                    preview={preview}
+                    label={`${parcelName(a.parcel_id)} · ${area(a.covered_area)} included · holder: ${partyName(a.holder_id)} · operator: ${partyName(a.operator_id)} · ${a.route_id === "existing" ? "recorded" : "access from"} year ${year(p.start)}`}
+                  />
+                ))
+              )}
+            </div>
+          ))}
+      {showMaintenance &&
+        maintenance.map((o) => {
+          const a = agreements.find((a) => a.id === o.agreement_id);
+          return (
+            <div className="rights-row maintenance-row" key={o.id}>
+              <strong>
+                {parcelName(a.parcel_id)} · maintenance commitment
+              </strong>
+              <PeriodBar
+                start={o.start}
+                end={o.end}
+                currentYear={currentYear}
+                preview={preview}
+                label={`${money(o.annual_amount)} / year · from year ${year(o.start)}`}
+              />
+            </div>
+          );
+        })}
+      {selection !== null && !ids.some(visible) && (
+        <p className="muted">
+          No parcels selected. Choose a parcel or All parcels to show its
+          periods.
+        </p>
+      )}
+      {!showAccess && !showMaintenance && (
+        <p className="muted">
+          Timeline rows hidden. Project rights and commitments are unchanged.
+        </p>
+      )}
     </section>
   );
 }
@@ -468,14 +795,14 @@ export function LandRecords({ project, summary }) {
     <>
       <div className="land-totals">
         <p>
-          <strong>{summary.owned_area} ha</strong> owned by you / your
+          <strong>{area(summary.owned_area)}</strong> owned by you / your
           organisations
         </p>
         <p>
-          <strong>{summary.active_area} ha</strong> currently accessible
+          <strong>{area(summary.active_area)}</strong> currently accessible
         </p>
         <p>
-          <strong>{summary.restored_area} ha</strong> historical restoration
+          <strong>{area(summary.restored_area)}</strong> historical restoration
         </p>
       </div>
       <p>
@@ -495,7 +822,7 @@ export function LandRecords({ project, summary }) {
         <article className="parcel" key={p.id}>
           <h3>
             {p.name}
-            <span>{p.area} ha total</span>
+            <span>{area(p.area)} total</span>
           </h3>
           <p>
             Owner: {party(p.owner_id)} · {p.location}
@@ -507,9 +834,11 @@ export function LandRecords({ project, summary }) {
           <details>
             <summary>Site record</summary>
             <p>
-              Use: {p.current_use} · Physical access: {p.physical_access}
+              Use: {p.current_use} · Cover: {p.current_cover} · Physical access:{" "}
+              {p.physical_access}
             </p>
             <p>Cadastral reference: {p.cadastral_reference || "Unknown"}</p>
+            <p>Condition: {p.site_condition || "Not specified"}</p>
             <p>{p.restrictions}</p>
           </details>
           {project.agreements
@@ -517,24 +846,35 @@ export function LandRecords({ project, summary }) {
             .map((a) => (
               <div className="agreement-record" key={a.id}>
                 <h4>
-                  {a.id} · {a.route_id.replaceAll("_", " ")}{" "}
-                  <span className="agreement-status">{a.status}</span>
+                  {a.id} ·{" "}
+                  {a.route_id === "existing"
+                    ? "Existing ownership record"
+                    : a.route_id.replaceAll("_", " ")}{" "}
+                  <span className="agreement-status">
+                    {a.route_id === "existing" && a.status === "active"
+                      ? "Recorded"
+                      : a.status}
+                  </span>
                 </h4>
                 <p>
-                  {a.covered_area} ha covered · Holder: {party(a.holder_id)} ·
-                  Operator: {party(a.operator_id)}
+                  {area(a.covered_area)} included · Holder: {party(a.holder_id)}{" "}
+                  · Operator: {party(a.operator_id)}
                 </p>
                 <p>
                   {a.start === null
                     ? "Not effective"
-                    : `Starts year ${year(a.start)}`}{" "}
+                    : `${a.route_id === "existing" ? "Recorded at" : "Starts"} year ${year(a.start)}`}{" "}
                   ·{" "}
                   {a.end === null
-                    ? "No effective expiry date"
+                    ? "No expiry recorded"
                     : `Ends year ${year(a.end)}`}
                 </p>
                 <details>
-                  <summary>Contract terms, permissions and evidence</summary>
+                  <summary>
+                    {a.route_id === "existing"
+                      ? "Ownership information and permissions"
+                      : "Contract terms, permissions and evidence"}
+                  </summary>
                   <p>{a.instrument}</p>
                   <p>
                     Upfront: {money(a.upfront)} · Annual access:{" "}
@@ -560,7 +900,7 @@ export function LandRecords({ project, summary }) {
               .filter((a) => a.parcel_id === p.id)
               .map((a) => (
                 <li key={a.id}>
-                  {a.title} · {a.area} ha · completed year {year(a.year)}{" "}
+                  {a.title} · {area(a.area)} · completed year {year(a.year)}{" "}
                   (historical record)
                 </li>
               ))}
@@ -604,10 +944,18 @@ export function Outcome({ preview, previewBusy, previewError, busy, ready }) {
           <dl>
             <div>
               <dt>Time taken</dt>
-              <dd>{year(preview.duration)} years</dd>
+              <dd>
+                {preview.recorded_ownership
+                  ? "No simulation time"
+                  : `${year(preview.duration)} years`}
+              </dd>
             </div>
             <div>
-              <dt>Finish at</dt>
+              <dt>
+                {preview.recorded_ownership
+                  ? "Recorded at"
+                  : "Action completes at"}
+              </dt>
               <dd>Year {year(preview.end_year)}</dd>
             </div>
             <div>
@@ -622,7 +970,7 @@ export function Outcome({ preview, previewBusy, previewError, busy, ready }) {
               <>
                 <div>
                   <dt>Active access after</dt>
-                  <dd>{preview.summary.active_area} ha</dd>
+                  <dd>{area(preview.summary.active_area)}</dd>
                 </div>
                 <div>
                   <dt>Future rent to year 30</dt>
@@ -645,7 +993,10 @@ export function Outcome({ preview, previewBusy, previewError, busy, ready }) {
           </dl>
           {preview.agreements && (
             <AccessTimeline
-              agreements={preview.agreements}
+              agreements={preview.timeline_agreements ?? preview.agreements}
+              parcels={preview.parcels}
+              parties={preview.parties}
+              currentYear={preview.end_year}
               obligations={preview.obligations}
               preview
               title="Proposed access and commitments"

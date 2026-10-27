@@ -22,7 +22,8 @@ def validate_export(payload):
         "Invalid export envelope.",
     )
     require(
-        type(payload["format_version"]) is int and payload["format_version"] in (1, 2),
+        type(payload["format_version"]) is int
+        and payload["format_version"] in (1, 2, 3),
         "Unsupported export version.",
     )
     require(
@@ -45,7 +46,7 @@ def validate_export(payload):
             "Invalid undo history.",
         )
         require(undo["revision"] < project["revision"], "Invalid undo revision.")
-    return {"format_version": 2, "project": project, "undo": undo}
+    return {"format_version": 3, "project": project, "undo": undo}
 
 
 class Store:
@@ -54,7 +55,7 @@ class Store:
         self.lock = RLock()
         self.error = None
         self.data = {
-            "format_version": 2,
+            "format_version": 3,
             "project": None,
             "undo": None,
             "receipts": {},
@@ -82,10 +83,13 @@ class Store:
                     "Invalid request receipts.",
                 )
                 candidate = {**raw, **validated}
-                if raw["format_version"] == 1:
+                if raw["format_version"] in (1, 2):
                     checksum = hashlib.sha256(original).hexdigest()[:12]
                     backup = self.path.with_name(
-                        self.path.stem + ".schema-v1-" + checksum + ".json"
+                        self.path.stem
+                        + f".schema-v{raw['format_version']}-"
+                        + checksum
+                        + ".json"
                     )
                     if not backup.exists():
                         with backup.open("xb") as out:
