@@ -23,7 +23,7 @@ def validate_export(payload):
     )
     require(
         type(payload["format_version"]) is int
-        and payload["format_version"] in (1, 2, 3),
+        and payload["format_version"] in (1, 2, 3, 4),
         "Unsupported export version.",
     )
     require(
@@ -34,7 +34,13 @@ def validate_export(payload):
     project = validate_state(payload["project"])
     undo = payload["undo"]
     if undo is not None:
-        undo = validate_state(undo)
+        require(isinstance(undo, dict), "Invalid undo snapshot.")
+        if undo.get("schema_version") in (1, 2, 3):
+            from .engine import migrate_previous
+
+            undo = migrate_previous(undo, project["scenario"])
+        else:
+            undo = validate_state(undo)
         require(
             undo["id"] == project["id"]
             and undo["name"] == project["name"]
@@ -46,7 +52,7 @@ def validate_export(payload):
             "Invalid undo history.",
         )
         require(undo["revision"] < project["revision"], "Invalid undo revision.")
-    return {"format_version": 3, "project": project, "undo": undo}
+    return {"format_version": 4, "project": project, "undo": undo}
 
 
 class Store:
@@ -55,7 +61,7 @@ class Store:
         self.lock = RLock()
         self.error = None
         self.data = {
-            "format_version": 3,
+            "format_version": 4,
             "project": None,
             "undo": None,
             "receipts": {},
@@ -83,7 +89,7 @@ class Store:
                     "Invalid request receipts.",
                 )
                 candidate = {**raw, **validated}
-                if raw["format_version"] in (1, 2):
+                if raw["format_version"] in (1, 2, 3):
                     checksum = hashlib.sha256(original).hexdigest()[:12]
                     backup = self.path.with_name(
                         self.path.stem

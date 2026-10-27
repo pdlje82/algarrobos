@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { useTheme } from "./theme.js";
+import { DemonstratorEditor, DemonstratorRecord } from "./Demonstrator.jsx";
 import {
   AccessTimeline,
   Fields,
@@ -176,6 +177,7 @@ function App() {
   const action = data?.actions.find((a) => a.id === selected);
   const isLand =
     action?.kind === "land_access" || action?.kind === "activate_access";
+  const isDemo = action?.kind?.startsWith("demo_");
   const updateInputs = useCallback((next) => {
     setPreview(null);
     setInputs(next);
@@ -554,12 +556,12 @@ function App() {
               </button>
             </form>
           </section>
-        ) : project.area_unit !== "m2" ? (
+        ) : project.area_unit !== "m2" || project.schema_version !== 4 ? (
           <section className="panel">
             <h2>Restart the Python backend</h2>
             <p>
-              This frontend uses m². Restart Python, then reload the saved
-              project to upgrade its areas safely.
+              Restart Python, then reload the saved project to load the guided
+              demonstrator and upgrade its saved data safely.
             </p>
           </section>
         ) : (
@@ -596,11 +598,12 @@ function App() {
                 </small>
               </div>
               <div>
-                <span>Historical restoration</span>
+                <span>Completed work area</span>
                 <strong>{area(data.summary.restored_area)}</strong>
                 <small>
                   {data.summary.completed_activities} completed activities;
-                  retained after access ends
+                  retained after access ends; ecological recovery assessed
+                  separately
                 </small>
               </div>
               <div>
@@ -615,6 +618,7 @@ function App() {
               <span className="eyebrow">Latest result</span>
               <p>{data.explanation}</p>
             </section>
+            <DemonstratorRecord value={data.summary.demonstrator} />
             {data.summary.complete && (
               <section className="final panel" aria-labelledby="final-title">
                 <p className="eyebrow">Year 30 · your accumulated work</p>
@@ -644,7 +648,11 @@ function App() {
                 </p>
               </section>
             )}
-            <div className={isLand ? "workspace land-workspace" : "workspace"}>
+            <div
+              className={
+                isLand || isDemo ? "workspace land-workspace" : "workspace"
+              }
+            >
               <section
                 className="panel actions-panel"
                 aria-labelledby="actions-heading"
@@ -782,6 +790,24 @@ function App() {
                               ready={configReady}
                             />
                           </LandEditor>
+                        ) : isDemo ? (
+                          <DemonstratorEditor
+                            key={selected}
+                            action={action}
+                            inputs={inputs}
+                            onChange={updateInputs}
+                            busy={busy}
+                            preview={preview}
+                            sources={data.summary.demonstrator?.sources}
+                          >
+                            <Outcome
+                              preview={preview}
+                              previewBusy={previewBusy}
+                              previewError={previewError}
+                              busy={busy}
+                              ready={configReady}
+                            />
+                          </DemonstratorEditor>
                         ) : (
                           <>
                             <Fields

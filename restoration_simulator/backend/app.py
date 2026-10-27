@@ -78,7 +78,7 @@ def view(data, explanation=None):
 
 
 def create_app(save_path=None):
-    app = FastAPI(title="Restoration Simulator", version="0.3.0")
+    app = FastAPI(title="Restoration Simulator", version="0.4.0")
     resolved_save_path = (
         save_path
         or os.getenv("RESTORATION_SAVE_PATH")
@@ -172,6 +172,10 @@ def create_app(save_path=None):
             "nature-finance": "FUND-003 - Nature Finance - Funding Instruments for Land Stewardship - 2025-11.pdf",
             "vega-assessment": "VEGA-003 - Vega del Andarax - Strategic Environmental Assessment.pdf",
             "vega-baseline": "VEGA-001 - Vega del Andarax - Baseline and Territorial Diagnosis.pdf",
+            "dryland-systems": "4033da1d50147790d978b646b319874c1f83950c7c4db915d51131eabc57e6a6.png",
+            "plant-supply": "NIJAR-003 - Campo de Nijar - Native Plant Supply Technical Specification - TSA0078436.pdf",
+            "pilot-primer": "LEARN-001 - Almeria Restoration - Illustrated Strategy Primer for a Pilot and Organisation - 2026-10-18.pdf",
+            "al20-categories": "FUND-005 - Alpujarra Sierra Nevada Almeriense - LEADER AL20 Eligible Activities and Budgets - 2026.pdf",
             "forest-habitats": "FOREST-001 - Ferreira Granada - Silvicultural Habitat Improvement Project - 2025-02.pdf",
         }
         if source_id not in filenames:

@@ -63,14 +63,16 @@ function CategoryInput({ field: f, value, onChange, disabled }) {
             {o.label}
           </option>
         ))}
-        <option value="__custom__">Add category…</option>
+        <option value="__custom__">{f.custom_label || "Add category…"}</option>
       </select>
       {custom && (
         <>
-          <label htmlFor={`custom-${f.name}`}>New category name</label>
+          <label htmlFor={`custom-${f.name}`}>
+            {f.custom_label ? "Custom details" : "New category name"}
+          </label>
           <input
             id={`custom-${f.name}`}
-            aria-label={`${f.label}: new category name`}
+            aria-label={`${f.label}: ${f.custom_label ? "custom details" : "new category name"}`}
             maxLength={f.maxLength}
             disabled={disabled}
             value={value ?? ""}
@@ -167,7 +169,8 @@ export function Fields({ fields, inputs, onChange, disabled }) {
             )}
             {f.unknown_allowed && (
               <small className="muted">
-                Leave blank for Unknown; proposals can retain unresolved terms.
+                {f.unknown_help ||
+                  "Leave blank for Unknown; proposals can retain unresolved terms."}
               </small>
             )}
             {f.help && (
@@ -802,7 +805,7 @@ export function LandRecords({ project, summary }) {
           <strong>{area(summary.active_area)}</strong> currently accessible
         </p>
         <p>
-          <strong>{area(summary.restored_area)}</strong> historical restoration
+          <strong>{area(summary.restored_area)}</strong> completed work area
         </p>
       </div>
       <p>

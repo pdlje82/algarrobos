@@ -194,7 +194,34 @@ class ApiTests(unittest.TestCase):
                 "existing" if action == "use_own_land" else "purchase"
             )
             action = "establish_access"
-        if action in ("demonstrator", "expand"):
+        if action == "demonstrator":
+            plan = next(
+                a for a in self.current()["actions"] if a["id"] == "demonstrator"
+            )
+            values = {f["name"]: f["default"] for f in plan["fields"]}
+            values.update(
+                funding_route="self",
+                vegetation_system="woodland",
+                plant_mix="woodland",
+                water_plan="temporary",
+            )
+            self.post("commit", action_id="demonstrator", inputs=values)
+            baseline = next(
+                a
+                for a in self.current()["actions"]
+                if a["id"] == "baseline_demonstrator"
+            )
+            values = {f["name"]: f["default"] for f in baseline["fields"]}
+            values.update(
+                site_ready="ready", basis="illustrative", photo_points="recorded"
+            )
+            self.post("commit", action_id="baseline_demonstrator", inputs=values)
+            return self.post(
+                "commit",
+                action_id="install_demonstrator",
+                inputs={"confirmation": "confirmed"},
+            )
+        if action == "expand":
             inputs = {"restoration_area": 10000, **(inputs or {})}
         return self.post("commit", action_id=action, inputs=inputs or {})
 

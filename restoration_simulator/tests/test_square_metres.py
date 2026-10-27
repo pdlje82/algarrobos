@@ -8,7 +8,7 @@ import unittest
 from unittest.mock import patch
 from uuid import uuid4
 
-from backend import engine, engine_v2
+from backend import engine_v3 as engine, engine_v2, engine as current_engine
 from backend.storage import Store, validate_export
 
 
@@ -176,7 +176,7 @@ class SquareMetreTests(unittest.TestCase):
             store = Store(path)
             upgraded = store.snapshot()
             project = upgraded["project"]
-            self.assertEqual(upgraded["format_version"], 3)
+            self.assertEqual(upgraded["format_version"], 4)
             self.assertEqual(project["parcels"][0]["area"], 20000)
             self.assertEqual(project["agreements"][0]["covered_area"], 20000)
             self.assertEqual(project["activities"][0]["area"], 10000)
@@ -187,7 +187,7 @@ class SquareMetreTests(unittest.TestCase):
             self.assertEqual(
                 next(Path(folder).glob("*.schema-v2-*.json")).read_bytes(), raw
             )
-            self.assertEqual(engine.validate_state(project), project)
+            self.assertEqual(current_engine.validate_state(project), project)
             self.assertEqual(Store(path).snapshot(), upgraded)
             state, _ = store.mutate(
                 "commit",

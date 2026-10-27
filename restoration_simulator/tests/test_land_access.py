@@ -6,7 +6,7 @@ import unittest
 from uuid import uuid4
 from unittest.mock import patch
 from fastapi.testclient import TestClient
-from backend import engine, legacy
+from backend import engine_v3 as engine, engine as current_engine, legacy
 from backend.app import create_app
 from backend.storage import Store, validate_export
 
@@ -327,22 +327,24 @@ class MigrationTests(unittest.TestCase):
             path.write_bytes(raw)
             store = Store(path)
             current = store.snapshot()
-            self.assertEqual(current["project"]["schema_version"], 3)
+            self.assertEqual(current["project"]["schema_version"], 4)
             self.assertEqual(current["project"]["cash"], old["cash"])
             self.assertEqual(current["project"]["history"], old["history"])
             self.assertEqual(current["receipts"], envelope["receipts"])
             self.assertEqual(
                 next(Path(folder).glob("*.schema-v1-*.json")).read_bytes(), raw
             )
-            self.assertEqual(json.loads(path.read_text())["format_version"], 3)
             self.assertEqual(
-                engine.validate_state(current["project"]), current["project"]
+                json.loads(path.read_text(encoding="utf-8"))["format_version"], 4
+            )
+            self.assertEqual(
+                current_engine.validate_state(current["project"]), current["project"]
             )
             store = Store(path)
             result, _ = store.mutate("undo", old["revision"], str(uuid4()), {})
             self.assertEqual(result["project"]["activities"], [])
             self.assertEqual(result["project"]["cash"], before["cash"])
-            self.assertEqual(validate_export(store.export())["format_version"], 3)
+            self.assertEqual(validate_export(store.export())["format_version"], 4)
 
     def test_failed_migration_preserves_original_file(self):
         old = legacy.new_project("Original")
@@ -388,6 +390,10 @@ class MigrationTests(unittest.TestCase):
             self.assertEqual(client.get("/api/project").json(), before)
             self.assertEqual(client.get("/api/sources/unknown").status_code, 404)
             self.assertEqual(client.get("/api/sources/land-poster").status_code, 200)
+            for source in ("vega-assessment", "vega-baseline", "forest-habitats"):
+                response = client.get("/api/sources/" + source)
+                self.assertEqual(response.status_code, 200)
+                self.assertEqual(response.headers["content-type"], "application/pdf")
             self.assertEqual(
                 client.post(
                     "/api/land/form", json=dict(revision=0, route_id="lease")
