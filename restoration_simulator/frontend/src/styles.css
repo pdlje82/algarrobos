@@ -122,7 +122,8 @@ body {
 }
 button,
 input,
-select {
+select,
+textarea {
   font: inherit;
 }
 button,
@@ -665,6 +666,265 @@ select {
   border-radius: 5px;
   padding: 11px;
   font-size: 14px;
+}
+textarea {
+  width: 100%;
+  min-height: 95px;
+  padding: 11px;
+  border: 1px solid var(--input-border);
+  border-radius: 5px;
+  background: var(--panel);
+  color: var(--text);
+  resize: vertical;
+}
+textarea:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+.land-workspace {
+  grid-template-columns: 1fr;
+}
+.land-workspace .preview-panel {
+  position: static;
+}
+.land-workspace .actions {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.land-view-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+.route-picker {
+  padding: 0;
+  border: 0;
+  margin: 0 0 20px;
+  min-width: 0;
+}
+.route-picker legend {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.route-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+}
+.route-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  margin: 0;
+  font-weight: 400;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+}
+.route-card.selected {
+  border-color: var(--selected-border);
+  background: var(--selected-bg);
+}
+.route-card p {
+  margin: 0;
+  font-size: 13px;
+}
+.route-card > span:not(.route-label),
+.route-card > small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.route-label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 14px;
+}
+.route-label input {
+  width: auto;
+  padding: 0;
+  margin: 0;
+  accent-color: var(--milestone);
+}
+.route-radio-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.route-radio-list .route-card {
+  padding: 9px 12px;
+}
+.comparison-scroll {
+  overflow: auto;
+  margin: 16px 0;
+}
+.land-comparison {
+  width: 100%;
+  min-width: 750px;
+  border-collapse: collapse;
+  font-size: 12px;
+  text-align: left;
+}
+.land-comparison caption {
+  text-align: left;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.land-comparison th,
+.land-comparison td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.selected-route {
+  margin: 20px 0;
+  padding: 16px;
+  background: var(--result-bg);
+  border-left: 3px solid var(--result-accent);
+}
+.selected-route p {
+  margin: 0;
+}
+.land-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0 16px;
+}
+.land-result {
+  position: sticky;
+  top: 16px;
+  min-width: 0;
+}
+.land-section {
+  margin: 18px 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.land-section summary,
+.agreement-record summary,
+.parcel > details > summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+.land-section p,
+.land-section li {
+  font-size: 12px;
+}
+.land-totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+.land-totals p {
+  padding: 12px;
+  background: var(--stats-bg);
+  border-radius: 5px;
+  font-size: 12px;
+}
+.agreement-record {
+  margin: 14px 0;
+  padding: 14px;
+  background: var(--history-bg);
+  border-radius: 6px;
+}
+.agreement-record h4 {
+  margin: 0 0 10px;
+  font-size: 13px;
+}
+.agreement-record p {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.agreement-status {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-left: 8px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 11px;
+  text-transform: capitalize;
+}
+.access-timeline {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 20px;
+  margin: 18px 0;
+}
+.rights-axis {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 11px;
+  margin: 14px 0;
+}
+.rights-row {
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+.rights-period {
+  margin-top: 10px;
+}
+.rights-track {
+  position: relative;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--progress-track);
+  overflow: hidden;
+}
+.rights-track span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--milestone);
+}
+.maintenance-row .rights-track span {
+  background: var(--sun);
+}
+.rights-period small {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+}
+.draft-timeline {
+  border-style: dashed;
+  padding: 12px;
+}
+@media (max-width: 800px) {
+  .land-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .land-result {
+    position: static;
+  }
+}
+@media (max-width: 650px) {
+  .field-grid,
+  .route-cards {
+    grid-template-columns: 1fr;
+  }
+  .land-workspace .actions {
+    grid-template-columns: 1fr;
+  }
+  .access-timeline {
+    padding: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 select {
   font-size: 12px;

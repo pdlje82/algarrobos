@@ -9,7 +9,7 @@ from uuid import uuid4
 from fastapi.testclient import TestClient
 
 from backend.app import create_app
-from backend.engine import Invalid, list_actions, new_project, summary, transition, validate_state
+from backend.legacy import Invalid, list_actions, new_project, summary, transition, validate_state
 
 
 class EngineTests(unittest.TestCase):
@@ -131,26 +131,32 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, expected, response.text)
         return response.json()
 
+    def land_inputs(self, route):
+        response = self.client.post('/api/land/form', json={'revision': self.current()['revision'], 'route_id': route})
+        self.assertEqual(response.status_code, 200, response.text)
+        return {**{f['name']: f['default'] for f in response.json()['fields']}, 'route_id': route, 'parcel_id': 'new'}
+
     def commit(self, action, inputs=None):
+        if action in ('use_own_land', 'buy_demonstrator'):
+            inputs = self.land_inputs('existing' if action == 'use_own_land' else 'purchase')
+            action = 'establish_access'
         return self.post('commit', action_id=action, inputs=inputs or {})
 
     def test_api_groups_refresh_after_commit_and_undo(self):
         result = self.commit('buy_demonstrator')
         actions = {a['id']: a for a in result['actions']}
-        self.assertEqual(actions['buy_demonstrator']['status'], 'completed')
-        self.assertEqual(actions['use_own_land']['status'], 'unavailable')
+        self.assertEqual(actions['establish_access']['status'], 'available')
         self.assertEqual(actions['demonstrator']['status'], 'available')
         self.assertEqual(actions['apply_grant']['status'], 'future')
         result = self.post('undo')
         actions = {a['id']: a for a in result['actions']}
-        self.assertEqual(actions['buy_demonstrator']['status'], 'available')
-        self.assertEqual(actions['use_own_land']['status'], 'available')
+        self.assertEqual(actions['establish_access']['status'], 'available')
         self.assertEqual(actions['demonstrator']['status'], 'future')
 
     def test_preview_and_replay_after_restart_and_undo(self):
         before = self.current()
         disk = self.path.read_bytes()
-        request = {'revision': before['revision'], 'action_id': 'use_own_land', 'inputs': {}}
+        request = {'revision': before['revision'], 'action_id': 'establish_access', 'inputs': self.land_inputs('existing')}
         self.assertEqual(self.client.post('/api/preview', json=request).status_code, 200)
         self.assertEqual(self.current(), before)
         self.assertEqual(self.path.read_bytes(), disk)
@@ -180,7 +186,7 @@ class ApiTests(unittest.TestCase):
         self.assertEqual(self.current()['project']['activities'], [])
         before = self.current()
         disk = self.path.read_bytes()
-        corruptions = [lambda x: x.update(format_version=2),
+        corruptions = [lambda x: x.update(format_version=999),
                        lambda x: x['project'].update(cash=-1),
                        lambda x: x['project'].update(time=True),
                        lambda x: x['project'].update(parcels=[]),
@@ -202,7 +208,7 @@ class ApiTests(unittest.TestCase):
         before = self.current()
         disk = self.path.read_bytes()
         with patch('backend.storage.os.replace', side_effect=OSError('Disk unavailable')):
-            failed = self.post('commit', expected=503, action_id='use_own_land', inputs={})
+            failed = self.post('commit', expected=503, action_id='establish_access', inputs=self.land_inputs('existing'))
         self.assertIn('Disk unavailable', failed['detail'])
         self.assertEqual(self.current(), before)
         self.assertEqual(self.path.read_bytes(), disk)

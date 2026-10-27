@@ -1,29 +1,379 @@
 {
-  "id": "dryland-demonstrator", "version": 1,
+  "id": "dryland-demonstrator",
+  "version": 2,
   "title": "A foothold for restoration",
-  "notice": "Fictional playtest: all amounts, areas, delays and results are configured placeholders. No ecological, financial, legal or grant forecast.",
-  "horizon": 30, "initial_cash": 60000,
+  "notice": "Fictional land-access playtest: all prices, terms, approvals and results are scenario assumptions, not legal, ecological or funding predictions.",
+  "horizon": 30,
+  "initial_cash": 60000,
   "outline": [
-    {"year": 0, "title": "Find your foothold", "description": "Use personal land or buy a demonstrator parcel."},
-    {"year": 2, "title": "Demonstrate", "description": "Complete a small restoration trial."},
-    {"year": 5, "title": "Find support", "description": "Apply, receive an award, then collect payment."},
-    {"year": 10, "title": "Grow the work", "description": "Expand restoration; optionally form a company."},
-    {"year": 18, "title": "Connect more land", "description": "Buy or obtain permission for additional parcels."},
-    {"year": 24, "title": "Build continuity", "description": "Optionally establish a foundation."},
-    {"year": 30, "title": "Take stock", "description": "Review land, cash, organizations and completed work."}
+    {
+      "year": 0,
+      "title": "Find your foothold",
+      "description": "Record existing ownership or establish access through one of seven routes."
+    },
+    {
+      "year": 2,
+      "title": "Demonstrate",
+      "description": "Complete a small restoration trial."
+    },
+    {
+      "year": 5,
+      "title": "Find support",
+      "description": "Apply, receive an award, then collect payment."
+    },
+    {
+      "year": 10,
+      "title": "Grow the work",
+      "description": "Expand restoration; optionally form a company."
+    },
+    {
+      "year": 18,
+      "title": "Connect more land",
+      "description": "Arrange more land, review permissions and renew temporary access."
+    },
+    {
+      "year": 24,
+      "title": "Build continuity",
+      "description": "Optionally establish a foundation."
+    },
+    {
+      "year": 30,
+      "title": "Take stock",
+      "description": "Review land, cash, organizations and completed work."
+    }
   ],
   "actions": [
-    {"id":"use_own_land","title":"Use an existing personal parcel","description":"Bring a 2 ha personally owned parcel into the project. No purchase expenditure; its market value is not assessed.","kind":"land_start","requires":[],"duration":0.1,"cost":0,"effects":{"area":2,"access":"Personally owned","owner":"Individual"},"outcome":"Personal parcel made available. Ownership remains with the individual; no market valuation is assigned.","optional":false,"repeatable":false},
-    {"id":"buy_demonstrator","title":"Buy a demonstrator parcel","description":"Acquire a 2 ha parcel for the individual initiating the project.","kind":"land_start","requires":[],"duration":0.5,"cost":18000,"effects":{"area":2,"access":"Purchased; personally owned","owner":"Individual"},"outcome":"Demonstrator parcel purchased by the individual. Cash expenditure is recorded separately from the land asset.","optional":false,"repeatable":false},
-    {"id":"demonstrator","title":"Establish the demonstrator","description":"Carry out a small configured restoration trial on the starting parcel.","kind":"restore_start","requires":[],"duration":1.5,"cost":12000,"effects":{"area":1},"outcome":"Demonstrator completed: a fictional 1 ha restoration trial, ready to support a funding application.","optional":false,"repeatable":false},
-    {"id":"apply_grant","title":"Apply for a restoration grant","description":"Submit a fictional application. An application adds no cash.","kind":"grant_apply","requires":["demonstrator"],"duration":0.25,"cost":500,"effects":{},"outcome":"Grant application submitted and pending. No award or payment has been received.","optional":false,"repeatable":false},
-    {"id":"award_grant","title":"Receive the grant decision","description":"Resolve the application with a configured €40,000 award. Payment remains a separate step.","kind":"grant_award","requires":["apply_grant"],"duration":0.75,"cost":0,"effects":{"award":40000},"outcome":"Fictional €40,000 grant awarded. The award is pending payment and is not available cash.","optional":false,"repeatable":false},
-    {"id":"receive_payment","title":"Receive the grant payment","description":"Collect this award once, after the separate decision.","kind":"grant_pay","requires":["award_grant"],"duration":0.25,"cost":0,"effects":{},"outcome":"Grant payment received once. The award amount is now included in available cash.","optional":false,"repeatable":false},
-    {"id":"expand","title":"Expand restoration","description":"Complete another 1 ha of restoration on a parcel with space remaining.","kind":"restore","requires":["demonstrator"],"duration":2,"cost":10000,"effects":{"area":1},"outcome":"An additional 1 ha restoration activity is completed on the selected parcel.","optional":false,"repeatable":true},
-    {"id":"company","title":"Create a company","description":"Optional organizational step. Existing land stays with its current owner.","kind":"organization","requires":["demonstrator"],"duration":0.5,"cost":2000,"effects":{"organization":"Company"},"outcome":"Company established alongside the project. No land ownership or access has been transferred.","optional":true,"repeatable":false},
-    {"id":"buy_land","title":"Buy additional land","description":"Purchase a further 3 ha parcel for the individual. Organizations do not automatically receive it.","kind":"land","requires":["demonstrator"],"duration":1,"cost":15000,"effects":{"area":3,"access":"Purchased; personally owned","owner":"Individual"},"outcome":"Additional parcel purchased by the individual and available for restoration. No organizational transfer occurs.","optional":false,"repeatable":true},
-    {"id":"access_land","title":"Agree access to more land","description":"Obtain restoration permission for a 3 ha third-party parcel; this does not convey ownership.","kind":"land","requires":["demonstrator"],"duration":0.5,"cost":1500,"effects":{"area":3,"access":"Restoration permission only","owner":"Third party"},"outcome":"Access agreement completed on third-party land for this fictional horizon. The project does not own the parcel.","optional":false,"repeatable":true},
-    {"id":"foundation","title":"Establish a foundation","description":"Optional continuity step, with or without a company. Existing land arrangements remain intact.","kind":"organization","requires":["demonstrator"],"duration":1,"cost":3000,"effects":{"organization":"Foundation"},"outcome":"Foundation established. Any company continues to exist; parcel ownership and access remain unchanged.","optional":true,"repeatable":false},
-    {"id":"advance","title":"Advance time","description":"Move directly to a later year, up to year 30. No automatic income, costs or ecological changes occur.","kind":"advance","requires":[],"duration":0,"cost":0,"effects":{},"outcome":"Time advanced. Existing assets and completed activities are retained; pending grants remain pending.","optional":true,"repeatable":true}
+    {
+      "id": "establish_access",
+      "title": "Establish land access",
+      "description": "Compare seven routes, configure a parcel and agreement, and preview costs and duration. You can also record existing ownership.",
+      "kind": "land_access",
+      "requires": [],
+      "duration": 0.1,
+      "cost": 0,
+      "effects": {},
+      "outcome": "Establish land access recorded.",
+      "optional": false,
+      "repeatable": true
+    },
+    {
+      "id": "activate_access",
+      "title": "Finalise a land proposal",
+      "description": "Review the missing terms and explicitly assume agreement/approval for this fictional scenario.",
+      "kind": "activate_access",
+      "requires": [],
+      "duration": 0.1,
+      "cost": 0,
+      "effects": {},
+      "outcome": "Finalise a land proposal recorded.",
+      "optional": false,
+      "repeatable": true
+    },
+    {
+      "id": "renew_access",
+      "title": "Renew temporary access",
+      "description": "Explicitly extend an active or expired temporary agreement. Existing maintenance commitments remain.",
+      "kind": "renew_access",
+      "requires": [],
+      "duration": 0.1,
+      "cost": 100,
+      "effects": {},
+      "outcome": "Renew temporary access recorded.",
+      "optional": false,
+      "repeatable": true
+    },
+    {
+      "id": "end_access",
+      "title": "End land access",
+      "description": "End an arrangement and receive its held deposit. Ownership and continuing maintenance obligations remain.",
+      "kind": "end_access",
+      "requires": [],
+      "duration": 0.1,
+      "cost": 0,
+      "effects": {},
+      "outcome": "End land access recorded.",
+      "optional": false,
+      "repeatable": true
+    },
+    {
+      "id": "demonstrator",
+      "title": "Establish the demonstrator",
+      "description": "Carry out a small configured restoration trial on the starting parcel.",
+      "kind": "restore_start",
+      "requires": [],
+      "duration": 1.5,
+      "cost": 12000,
+      "effects": {
+        "area": 1
+      },
+      "outcome": "Demonstrator completed: a fictional 1 ha restoration trial, ready to support a funding application.",
+      "optional": false,
+      "repeatable": false
+    },
+    {
+      "id": "apply_grant",
+      "title": "Apply for a restoration grant",
+      "description": "Submit a fictional application. An application adds no cash.",
+      "kind": "grant_apply",
+      "requires": [
+        "demonstrator"
+      ],
+      "duration": 0.25,
+      "cost": 500,
+      "effects": {},
+      "outcome": "Grant application submitted and pending. No award or payment has been received.",
+      "optional": false,
+      "repeatable": false
+    },
+    {
+      "id": "award_grant",
+      "title": "Receive the grant decision",
+      "description": "Resolve the application with a configured Ã¢â€šÂ¬40,000 award. Payment remains a separate step.",
+      "kind": "grant_award",
+      "requires": [
+        "apply_grant"
+      ],
+      "duration": 0.75,
+      "cost": 0,
+      "effects": {
+        "award": 40000
+      },
+      "outcome": "Fictional Ã¢â€šÂ¬40,000 grant awarded. The award is pending payment and is not available cash.",
+      "optional": false,
+      "repeatable": false
+    },
+    {
+      "id": "receive_payment",
+      "title": "Receive the grant payment",
+      "description": "Collect this award once, after the separate decision.",
+      "kind": "grant_pay",
+      "requires": [
+        "award_grant"
+      ],
+      "duration": 0.25,
+      "cost": 0,
+      "effects": {},
+      "outcome": "Grant payment received once. The award amount is now included in available cash.",
+      "optional": false,
+      "repeatable": false
+    },
+    {
+      "id": "expand",
+      "title": "Expand restoration",
+      "description": "Complete another 1 ha of restoration on a parcel with space remaining.",
+      "kind": "restore",
+      "requires": [
+        "demonstrator"
+      ],
+      "duration": 2,
+      "cost": 10000,
+      "effects": {
+        "area": 1
+      },
+      "outcome": "An additional 1 ha restoration activity is completed on the selected parcel.",
+      "optional": false,
+      "repeatable": true
+    },
+    {
+      "id": "company",
+      "title": "Create a company",
+      "description": "Optional organizational step. Existing land stays with its current owner.",
+      "kind": "organization",
+      "requires": [
+        "demonstrator"
+      ],
+      "duration": 0.5,
+      "cost": 2000,
+      "effects": {
+        "organization": "Company"
+      },
+      "outcome": "Company established alongside the project. No land ownership or access has been transferred.",
+      "optional": true,
+      "repeatable": false
+    },
+    {
+      "id": "foundation",
+      "title": "Establish a foundation",
+      "description": "Optional continuity step, with or without a company. Existing land arrangements remain intact.",
+      "kind": "organization",
+      "requires": [
+        "demonstrator"
+      ],
+      "duration": 1,
+      "cost": 3000,
+      "effects": {
+        "organization": "Foundation"
+      },
+      "outcome": "Foundation established. Any company continues to exist; parcel ownership and access remain unchanged.",
+      "optional": true,
+      "repeatable": false
+    },
+    {
+      "id": "advance",
+      "title": "Advance time",
+      "description": "Move to a later year, at most year 30. Scheduled land payments, deposit returns and expiries are processed at their due times.",
+      "kind": "advance",
+      "requires": [],
+      "duration": 0,
+      "cost": 0,
+      "effects": {},
+      "outcome": "Time advanced; scheduled payments and access expiries have been processed. Pending grants remain pending.",
+      "optional": true,
+      "repeatable": true
+    }
+  ],
+  "land_routes": [
+    {
+      "id": "stewardship",
+      "title": "Stewardship agreement",
+      "spanish": "Custodia del territorio",
+      "description": "Conservation cooperation with the landowner and an existing nonprofit partner.",
+      "ownership": false,
+      "duration": 0.5,
+      "upfront": 500,
+      "annual_payment": 0,
+      "term_years": 4,
+      "deposit": 0,
+      "annual_maintenance": 150,
+      "commitment_years": 5,
+      "holder_id": "partner",
+      "owner_id": "third-party",
+      "caveat": "Specify actual access and conservation responsibilities; stewardship alone is not ownership.",
+      "source": "COAST-001, PDF pp. 5-6; COAST-002, PDF pp. 9-12",
+      "source_id": "coast-tender"
+    },
+    {
+      "id": "free_use",
+      "title": "Free use",
+      "spanish": "Cesion gratuita de uso",
+      "description": "Use land without rent under an explicit, limited agreement.",
+      "ownership": false,
+      "duration": 0.5,
+      "upfront": 200,
+      "annual_payment": 0,
+      "term_years": 8,
+      "deposit": 0,
+      "annual_maintenance": 150,
+      "commitment_years": 5,
+      "holder_id": "individual",
+      "owner_id": "third-party",
+      "caveat": "No rent does not mean no maintenance costs. Check notice and return conditions.",
+      "source": "LEARN-003, seven land-access options poster",
+      "source_id": "land-poster"
+    },
+    {
+      "id": "lease",
+      "title": "Long-term lease",
+      "spanish": "Arrendamiento a largo plazo",
+      "description": "Pay scheduled rent for agreed uses; the owner retains ownership.",
+      "ownership": false,
+      "duration": 0.5,
+      "upfront": 500,
+      "annual_payment": 600,
+      "term_years": 10,
+      "deposit": 600,
+      "annual_maintenance": 150,
+      "commitment_years": 5,
+      "holder_id": "individual",
+      "owner_id": "third-party",
+      "caveat": "Rent is paid annually in advance. The applicable legal lease regime remains unverified.",
+      "source": "LEARN-003, seven land-access options poster",
+      "source_id": "land-poster"
+    },
+    {
+      "id": "usufruct",
+      "title": "Usufruct",
+      "spanish": "Usufructo",
+      "description": "Record a time-limited right to use land, separate from ownership.",
+      "ownership": false,
+      "duration": 0.5,
+      "upfront": 1000,
+      "annual_payment": 0,
+      "term_years": 20,
+      "deposit": 0,
+      "annual_maintenance": 150,
+      "commitment_years": 5,
+      "holder_id": "individual",
+      "owner_id": "third-party",
+      "caveat": "Record scope and formalisation. No statutory validity or tax treatment is determined here.",
+      "source": "LEARN-003, seven land-access options poster",
+      "source_id": "land-poster"
+    },
+    {
+      "id": "public_management",
+      "title": "Public-land management",
+      "spanish": "Gestion de terreno publico",
+      "description": "Manage specified public land under an assumed authorisation or agreement.",
+      "ownership": false,
+      "duration": 0.5,
+      "upfront": 500,
+      "annual_payment": 100,
+      "term_years": 5,
+      "deposit": 0,
+      "annual_maintenance": 150,
+      "commitment_years": 5,
+      "holder_id": "partner",
+      "owner_id": "municipality",
+      "caveat": "A proposal provides no access. The competent authority and authorising instrument must be identified.",
+      "source": "COAST-001, PDF pp. 5-6; FUND-003, PDF p. 39",
+      "source_id": "coast-tender"
+    },
+    {
+      "id": "donation",
+      "title": "Land donation",
+      "spanish": "Donacion del terreno",
+      "description": "Transfer ownership to the named recipient after assumed acceptance and completion.",
+      "ownership": true,
+      "duration": 0.5,
+      "upfront": 500,
+      "annual_payment": 0,
+      "term_years": null,
+      "deposit": 0,
+      "annual_maintenance": 150,
+      "commitment_years": 5,
+      "holder_id": "individual",
+      "owner_id": "third-party",
+      "caveat": "An offer is not a completed transfer. Formalities, charges and tax consequences remain unverified.",
+      "source": "LEARN-003, seven land-access options poster",
+      "source_id": "land-poster"
+    },
+    {
+      "id": "purchase",
+      "title": "Purchase",
+      "spanish": "Compra",
+      "description": "Purchase a parcel for the named buyer, separately from its operator.",
+      "ownership": true,
+      "duration": 0.5,
+      "upfront": 18000,
+      "annual_payment": 0,
+      "term_years": null,
+      "deposit": 0,
+      "annual_maintenance": 150,
+      "commitment_years": 5,
+      "holder_id": "individual",
+      "owner_id": "third-party",
+      "caveat": "Price is fictional; no market valuation or grant eligibility is implied.",
+      "source": "LEARN-003, seven land-access options poster",
+      "source_id": "land-poster"
+    },
+    {
+      "id": "existing",
+      "title": "Record existing ownership",
+      "spanish": "Existing asset",
+      "description": "Record a parcel already owned by the named holder, without acquisition expenditure.",
+      "ownership": true,
+      "duration": 0.1,
+      "upfront": 0,
+      "annual_payment": 0,
+      "term_years": null,
+      "deposit": 0,
+      "annual_maintenance": 150,
+      "commitment_years": 5,
+      "holder_id": "individual",
+      "owner_id": "individual",
+      "caveat": "Zero acquisition expenditure does not imply zero market value.",
+      "source": "Legacy MVP starting-land assumption",
+      "source_id": "land-poster"
+    }
   ]
 }

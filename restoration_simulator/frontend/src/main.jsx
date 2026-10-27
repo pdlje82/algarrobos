@@ -1,16 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { useTheme } from "./theme.js";
+import {
+  AccessTimeline,
+  Fields,
+  LandEditor,
+  LandRecords,
+  Outcome,
+} from "./LandAccess.jsx";
+import { money, year } from "./format.js";
 import "./styles.css";
-
-const money = (value) =>
-  new Intl.NumberFormat("en-IE", {
-    style: "currency",
-    currency: "EUR",
-    maximumFractionDigits: 2,
-  }).format(value);
-const year = (value) =>
-  Number(value).toLocaleString("en", { maximumFractionDigits: 4 });
 
 async function api(path, body) {
   let response;
@@ -65,10 +64,10 @@ function ActionChoices({ actions, busy, selected, onChoose }) {
           <span className="action-meta">
             {a.optional ? "Optional · " : ""}
             {a.repeatable ? "Repeatable · " : ""}
-            {money(a.cost)}
-            {a.kind !== "advance"
+            {a.terms_label || money(a.cost)}
+            {!a.terms_label && (a.kind !== "advance"
               ? ` · ${year(a.duration)} years`
-              : " · choose year"}
+              : " · choose year")}
           </span>
           {a.reason && <span className="reason">{a.reason}</span>}
         </button>
@@ -149,6 +148,7 @@ function App() {
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState("");
   const [inputs, setInputs] = useState({});
+  const [configReady, setConfigReady] = useState(true);
   const [preview, setPreview] = useState(null);
   const [previewBusy, setPreviewBusy] = useState(false);
   const [previewError, setPreviewError] = useState("");
@@ -164,6 +164,12 @@ function App() {
   const newProjectName = useRef();
   const project = data?.project;
   const action = data?.actions.find((a) => a.id === selected);
+  const isLand =
+    action?.kind === "land_access" || action?.kind === "activate_access";
+  const updateInputs = useCallback((next) => {
+    setPreview(null);
+    setInputs(next);
+  }, []);
   const availableActions = data?.actions.filter((a) => a.available) || [];
   const futureActions =
     data?.actions.filter((a) => a.status === "future") || [];
@@ -197,7 +203,7 @@ function App() {
   useEffect(() => {
     setPreview(null);
     setPreviewError("");
-    if (!action?.available || !project) {
+    if (!action?.available || !project || !configReady) {
       setPreviewBusy(false);
       return;
     }
@@ -221,9 +227,10 @@ function App() {
       ignore = true;
       clearTimeout(timer);
     };
-  }, [selected, inputs, data?.revision]);
+  }, [selected, inputs, data?.revision, configReady]);
 
   function choose(a) {
+    setConfigReady(a.kind !== "land_access" && a.kind !== "activate_access");
     setSelected(a.id);
     setInputs(Object.fromEntries(a.fields.map((f) => [f.name, f.default])));
     setPreview(null);
@@ -231,7 +238,7 @@ function App() {
     if (window.matchMedia("(max-width: 650px)").matches) {
       requestAnimationFrame(() =>
         previewPanel.current?.scrollIntoView({
-          behavior: "smooth",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
           block: "start",
         }),
       );
@@ -536,6 +543,9 @@ function App() {
           </section>
         ) : (
           <>
+            {data.summary.migration_notice && (
+              <p className="fictional">{data.summary.migration_notice}</p>
+            )}
             <div className="project-title">
               <h2>{project.name}</h2>
               <span>
@@ -547,6 +557,12 @@ function App() {
               historyIndex={historyIndex}
               setHistoryIndex={setHistoryIndex}
             />
+            {project.agreements && (
+              <AccessTimeline
+                agreements={project.agreements}
+                obligations={project.obligations}
+              />
+            )}
             <div className="stats" aria-label="Current project state">
               <div>
                 <span>Available cash</span>
@@ -554,21 +570,25 @@ function App() {
                 <small>Cash only; land is not valued</small>
               </div>
               <div>
-                <span>Land in the initiative</span>
+                <span>Currently accessible land</span>
                 <strong>
-                  {data.summary.area} <small>ha</small>
+                  {data.summary.active_area ?? data.summary.area}{" "}
+                  <small>ha</small>
                 </strong>
                 <small>
-                  {project.parcels.length} parcels · ownership / access below
+                  {project.parcels.length} parcel records ·{" "}
+                  {data.summary.owned_area ?? "?"} ha owned by you / your
+                  organisations
                 </small>
               </div>
               <div>
-                <span>Completed restoration</span>
+                <span>Historical restoration</span>
                 <strong>
                   {data.summary.restored_area} <small>ha</small>
                 </strong>
                 <small>
-                  {data.summary.completed_activities} completed activities
+                  {data.summary.completed_activities} completed activities;
+                  retained after access ends
                 </small>
               </div>
               <div>
@@ -592,8 +612,10 @@ function App() {
                 <p>
                   {data.summary.completed_activities} restoration activities
                   across {data.summary.restored_area} ha;{" "}
-                  {project.parcels.length} parcels with {data.summary.area} ha
-                  of land owned or accessed. Cash remaining:{" "}
+                  {project.parcels.length} parcel records;{" "}
+                  {data.summary.active_area ?? data.summary.area} ha currently
+                  accessible and {data.summary.owned_area ?? "?"} ha owned by
+                  you / your organisations. Cash remaining:{" "}
                   {money(project.cash)}.
                 </p>
                 <p>
@@ -610,7 +632,7 @@ function App() {
                 </p>
               </section>
             )}
-            <div className="workspace">
+            <div className={isLand ? "workspace land-workspace" : "workspace"}>
               <section
                 className="panel actions-panel"
                 aria-labelledby="actions-heading"
@@ -725,98 +747,46 @@ function App() {
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
-                          if (preview && !previewBusy && !busy)
+                          if (preview && !previewBusy && !busy && configReady)
                             mutate("commit", { action_id: action.id, inputs });
                         }}
                       >
-                        {action.fields.map((f) => (
-                          <div className="field" key={f.name}>
-                            <label htmlFor={f.name}>{f.label}</label>
-                            {f.type === "select" ? (
-                              <select
-                                id={f.name}
-                                value={inputs[f.name] ?? ""}
-                                disabled={busy}
-                                onChange={(e) => {
-                                  setPreview(null);
-                                  setInputs({
-                                    ...inputs,
-                                    [f.name]: e.target.value,
-                                  });
-                                }}
-                              >
-                                {f.options.map((o) => (
-                                  <option key={o.value} value={o.value}>
-                                    {o.label} · {o.remaining_area} ha remaining
-                                  </option>
-                                ))}
-                              </select>
-                            ) : (
-                              <input
-                                id={f.name}
-                                type="number"
-                                step="any"
-                                min={f.min}
-                                max={f.max}
-                                value={inputs[f.name] ?? ""}
-                                disabled={busy}
-                                onChange={(e) => {
-                                  setPreview(null);
-                                  setInputs({
-                                    ...inputs,
-                                    [f.name]:
-                                      e.target.value === ""
-                                        ? ""
-                                        : Number(e.target.value),
-                                  });
-                                }}
-                              />
-                            )}
-                          </div>
-                        ))}
-                        {previewBusy && (
-                          <p role="status">Calculating preview in Python…</p>
+                        {isLand && data.land_access ? (
+                          <LandEditor
+                            key={selected}
+                            data={data}
+                            action={action}
+                            inputs={inputs}
+                            onChange={updateInputs}
+                            onReady={setConfigReady}
+                            request={api}
+                            busy={busy}
+                          >
+                            <Outcome
+                              preview={preview}
+                              previewBusy={previewBusy}
+                              previewError={previewError}
+                              busy={busy}
+                              ready={configReady}
+                            />
+                          </LandEditor>
+                        ) : (
+                          <>
+                            <Fields
+                              fields={action.fields}
+                              inputs={inputs}
+                              onChange={updateInputs}
+                              disabled={busy}
+                            />
+                            <Outcome
+                              preview={preview}
+                              previewBusy={previewBusy}
+                              previewError={previewError}
+                              busy={busy}
+                              ready={configReady}
+                            />
+                          </>
                         )}
-                        {previewError && (
-                          <p className="error" role="alert">
-                            {previewError}
-                          </p>
-                        )}
-                        {preview && (
-                          <div className="preview" aria-live="polite">
-                            <span className="eyebrow">
-                              Configured result · preview
-                            </span>
-                            <p>{preview.explanation}</p>
-                            <dl>
-                              <div>
-                                <dt>Time taken</dt>
-                                <dd>{year(preview.duration)} years</dd>
-                              </div>
-                              <div>
-                                <dt>Finish at</dt>
-                                <dd>Year {year(preview.end_year)}</dd>
-                              </div>
-                              <div>
-                                <dt>Cash change</dt>
-                                <dd>{money(preview.cash_change)}</dd>
-                              </div>
-                              <div>
-                                <dt>Cash after</dt>
-                                <dd>{money(preview.cash_after)}</dd>
-                              </div>
-                            </dl>
-                          </div>
-                        )}
-                        <button
-                          className="primary commit"
-                          disabled={busy || previewBusy || !preview}
-                        >
-                          Commit decision →
-                        </button>
-                        <small className="muted">
-                          The result is applied and autosaved together.
-                        </small>
                       </form>
                     )}
                   </>
@@ -836,34 +806,16 @@ function App() {
             <div className="records">
               <section className="panel">
                 <p className="eyebrow">The asset base</p>
-                <h2>Land & completed work</h2>
+                <h2>Land, rights & completed work</h2>
                 <p className="muted">{data.summary.asset_explanation}</p>
-                {!project.parcels.length && <p>No land route chosen yet.</p>}
-                {project.parcels.map((p) => (
-                  <article className="parcel" key={p.id}>
-                    <h3>
-                      {p.name}
-                      <span>{p.area} ha</span>
-                    </h3>
-                    <p>
-                      {p.access} · Owner: {p.owner}
-                    </p>
-                    <small>
-                      Access established in year {year(p.year)} · Acquisition
-                      expenditure: {money(p.acquisition_cost)}
-                    </small>
-                    <ul>
-                      {project.activities
-                        .filter((a) => a.parcel_id === p.id)
-                        .map((a) => (
-                          <li key={a.id}>
-                            {a.title} · {a.area} ha · completed year{" "}
-                            {year(a.year)}
-                          </li>
-                        ))}
-                    </ul>
-                  </article>
-                ))}
+                {project.agreements ? (
+                  <LandRecords project={project} summary={data.summary} />
+                ) : (
+                  <p className="reason">
+                    Restart the Python API to upgrade this save and load the
+                    land-access module.
+                  </p>
+                )}
                 <p className="muted">
                   Pending / proposed: {data.summary.pending}
                 </p>

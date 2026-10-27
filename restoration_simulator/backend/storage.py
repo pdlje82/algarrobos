@@ -16,7 +16,8 @@ class Conflict(Invalid):
 
 def validate_export(payload):
     require(isinstance(payload, dict) and set(payload) == {'format_version', 'project', 'undo'}, 'Invalid export envelope.')
-    require(type(payload['format_version']) is int and payload['format_version'] == 1, 'Unsupported export version.')
+    require(type(payload['format_version']) is int and payload['format_version'] in (1, 2), 'Unsupported export version.')
+    require(isinstance(payload['project'], dict) and payload['project'].get('schema_version') == payload['format_version'], 'Export and project schema versions do not match.')
     project = validate_state(payload['project'])
     undo = payload['undo']
     if undo is not None:
@@ -25,7 +26,7 @@ def validate_export(payload):
                 and undo['scenario'] == project['scenario'], 'Undo belongs to a different project.')
         require(len(project['history']) > 0 and undo['history'] == project['history'][:-1], 'Invalid undo history.')
         require(undo['revision'] < project['revision'], 'Invalid undo revision.')
-    return {'format_version': 1, 'project': project, 'undo': undo}
+    return {'format_version': 2, 'project': project, 'undo': undo}
 
 
 class Store:
@@ -33,16 +34,25 @@ class Store:
         self.path = Path(path)
         self.lock = RLock()
         self.error = None
-        self.data = {'format_version': 1, 'project': None, 'undo': None, 'receipts': {}, 'revision': 0}
+        self.data = {'format_version': 2, 'project': None, 'undo': None, 'receipts': {}, 'revision': 0}
         if self.path.exists():
             try:
-                raw = json.loads(self.path.read_text(encoding='utf-8'))
+                original = self.path.read_bytes()
+                raw = json.loads(original.decode('utf-8'))
                 require(set(raw) == set(self.data), 'Invalid autosave envelope.')
                 validated = validate_export({k: raw[k] for k in ('format_version', 'project', 'undo')})
                 require(type(raw['revision']) is int and raw['revision'] == validated['project']['revision'], 'Invalid store revision.')
                 require(isinstance(raw['receipts'], dict) and all(isinstance(k, str) and isinstance(v, str)
                         for k, v in raw['receipts'].items()), 'Invalid request receipts.')
-                self.data = {**raw, **validated}
+                candidate = {**raw, **validated}
+                if raw['format_version'] == 1:
+                    checksum = hashlib.sha256(original).hexdigest()[:12]
+                    backup = self.path.with_name(self.path.stem + '.schema-v1-' + checksum + '.json')
+                    if not backup.exists():
+                        with backup.open('xb') as out:
+                            out.write(original)
+                    self.write(candidate)
+                self.data = candidate
             except (ValueError, KeyError, TypeError, OSError, RecursionError) as exc:
                 self.error = f'Cannot restore autosave at {self.path}: {exc}. Preserve or move that file before restarting.'
 
