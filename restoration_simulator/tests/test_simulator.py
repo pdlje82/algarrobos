@@ -13,6 +13,39 @@ from backend.engine import Invalid, list_actions, new_project, summary, transiti
 
 
 class EngineTests(unittest.TestCase):
+    def test_decision_groups_follow_land_choices_and_repeatable_work(self):
+        state = new_project('Groups')
+        original = deepcopy(state)
+        actions = {a['id']: a for a in list_actions(state)}
+        self.assertEqual(state, original)
+        self.assertEqual({a['id'] for a in actions.values() if a['status'] == 'available'},
+                         {'use_own_land', 'buy_demonstrator', 'advance'})
+        self.assertEqual(actions['demonstrator']['status'], 'future')
+        state, _ = transition(state, 'use_own_land')
+        actions = {a['id']: a for a in list_actions(state)}
+        self.assertEqual(actions['use_own_land']['status'], 'completed')
+        self.assertEqual(actions['buy_demonstrator']['status'], 'unavailable')
+        self.assertEqual(actions['demonstrator']['status'], 'available')
+        state, _ = transition(state, 'demonstrator', {'parcel_id': 'parcel-1'})
+        state, _ = transition(state, 'expand', {'parcel_id': 'parcel-1'})
+        actions = {a['id']: a for a in list_actions(state)}
+        self.assertEqual(actions['expand']['status'], 'future')
+        self.assertIn('unrestored area', actions['expand']['reason'])
+        self.assertEqual(actions['demonstrator']['status'], 'completed')
+        state, _ = transition(state, 'access_land')
+        self.assertEqual(next(a for a in list_actions(state) if a['id'] == 'expand')['status'], 'available')
+
+    def test_late_prerequisites_are_not_presented_as_future_opportunities(self):
+        state, _ = transition(new_project('Late start'), 'advance', {'target_year': 29})
+        actions = {a['id']: a for a in list_actions(state)}
+        self.assertEqual(actions['demonstrator']['status'], 'unavailable')
+        self.assertEqual(actions['apply_grant']['status'], 'unavailable')
+        self.assertEqual(actions['receive_payment']['status'], 'unavailable')
+        self.assertIn('Required decision', actions['apply_grant']['reason'])
+        self.assertEqual(actions['advance']['status'], 'available')
+        state, _ = transition(state, 'advance', {'target_year': 30})
+        self.assertTrue(all(a['status'] == 'unavailable' and not a['available'] for a in list_actions(state)))
+
     def test_complete_routes_with_and_without_organizations(self):
         for route in ('use_own_land', 'buy_demonstrator'):
             for organizations in (False, True):
@@ -100,6 +133,19 @@ class ApiTests(unittest.TestCase):
 
     def commit(self, action, inputs=None):
         return self.post('commit', action_id=action, inputs=inputs or {})
+
+    def test_api_groups_refresh_after_commit_and_undo(self):
+        result = self.commit('buy_demonstrator')
+        actions = {a['id']: a for a in result['actions']}
+        self.assertEqual(actions['buy_demonstrator']['status'], 'completed')
+        self.assertEqual(actions['use_own_land']['status'], 'unavailable')
+        self.assertEqual(actions['demonstrator']['status'], 'available')
+        self.assertEqual(actions['apply_grant']['status'], 'future')
+        result = self.post('undo')
+        actions = {a['id']: a for a in result['actions']}
+        self.assertEqual(actions['buy_demonstrator']['status'], 'available')
+        self.assertEqual(actions['use_own_land']['status'], 'available')
+        self.assertEqual(actions['demonstrator']['status'], 'future')
 
     def test_preview_and_replay_after_restart_and_undo(self):
         before = self.current()

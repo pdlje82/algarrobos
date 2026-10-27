@@ -37,6 +37,12 @@ conda activate restoration-simulator
 python -m uvicorn backend.app:app --host 127.0.0.1 --port 8000
 ```
 
+If your terminal is at the repository root (`algarrobos`) instead, use this alternative command. The `backend` package is inside `restoration_simulator`, so running without changing directory or specifying `--app-dir` causes `ModuleNotFoundError: No module named 'backend'`.
+
+```powershell
+python -m uvicorn backend.app:app --app-dir .\restoration_simulator --host 127.0.0.1 --port 8000
+```
+
 **Window 2 — React frontend:**
 
 ```powershell
@@ -58,6 +64,8 @@ Open **[http://127.0.0.1:5173](http://127.0.0.1:5173)**. The frontend calls rela
 7. Export the run, undo the last action, refresh, and import the export. Starting a new project or importing over the active run asks for replacement confirmation. Preserve other runs as separate exports.
 
 Selecting an action or changing fields only requests a Python preview; it does not advance time or spend cash. The UI updates the project after the backend confirms persistence. Inspect unavailable actions for their reason. Past history is read-only. At phone widths, scroll the timeline outline horizontally to keep labels readable.
+
+Decisions are grouped into **Available now** (expanded), **Future decisions** (collapsed, with prerequisite/resource reasons), and **No longer available** (collapsed, for excluded land routes or actions that cannot fit before year 30). Completed one-off decisions remain in history; repeatable actions can become available again. Python determines the groups after each commit, load or undo. Restart the Python API after updating backend code so it can supply the current categories.
 
 ## Fictional fixture
 
@@ -134,7 +142,7 @@ npm.cmd run build
 npm.cmd audit
 ```
 
-The 10 focused tests exercise both starting routes with and without organizations, grant stages/payment once, invalid-action immutability, frozen scenarios, horizon limits, previews, restart with undo, duplicate/stale requests, export/import (including browser JSON number normalization), malformed imports, corrupt autosaves and atomic-write failure. Production bundling checks the React frontend; playtesting uses the two local development servers above. No deployment infrastructure is included.
+The focused tests exercise both starting routes with and without organizations, grant stages/payment once, invalid-action immutability, frozen scenarios, horizon limits, decision grouping and prerequisite/resource changes, previews, restart with undo, duplicate/stale requests, export/import (including browser JSON number normalization), malformed imports, corrupt autosaves and atomic-write failure. Production bundling checks the React frontend; playtesting uses the two local development servers above. No deployment infrastructure is included.
 
 Verified on Windows on 26 October 2026 with Conda Python 3.12, Node 22.23.4, FastAPI 0.162.0, Uvicorn 0.54.0 and HTTPX 0.28.1: all 10 tests passed, the production frontend built, and npm audit reported zero vulnerabilities. A browser playthrough completed the own-land route, all grant stages, expansion, purchased and permission-only additional land, both organizations and year 30, leaving **€46,000, 8 ha of land owned/accessed, and 3 ha restored**. Browser export/import, refresh, keyboard history/undo, a rejected year-31 preview and desktop/390-pixel phone layouts were checked. Python was restarted and restored the test autosave; undo survived the browser export/import. Browser checks used an isolated save under ignored `test-artifacts/`.
 

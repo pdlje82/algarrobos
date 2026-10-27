@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
+import { useTheme } from "./theme.js";
 import "./styles.css";
 
 const money = (value) =>
@@ -44,6 +45,36 @@ async function api(path, body) {
     throw new Error(detail || `Request failed (${response.status}).`);
   }
   return data;
+}
+
+function ActionChoices({ actions, busy, selected, onChoose }) {
+  return (
+    <div className="actions">
+      {actions.map((a) => (
+        <button
+          key={a.id}
+          disabled={busy}
+          aria-pressed={selected === a.id}
+          className={`action ${selected === a.id ? "selected" : ""} ${!a.available ? "unavailable" : ""}`}
+          onClick={() => onChoose(a)}
+        >
+          <span className="action-title">
+            {a.title}
+            <span aria-hidden="true">{a.available ? "↗" : "ⓘ"}</span>
+          </span>
+          <span className="action-meta">
+            {a.optional ? "Optional · " : ""}
+            {a.repeatable ? "Repeatable · " : ""}
+            {money(a.cost)}
+            {a.kind !== "advance"
+              ? ` · ${year(a.duration)} years`
+              : " · choose year"}
+          </span>
+          {a.reason && <span className="reason">{a.reason}</span>}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 function Timeline({ project, historyIndex, setHistoryIndex }) {
@@ -112,6 +143,7 @@ function Timeline({ project, historyIndex, setHistoryIndex }) {
 }
 
 function App() {
+  const [theme, setTheme] = useTheme();
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -123,12 +155,21 @@ function App() {
   const [name, setName] = useState("My restoration journey");
   const [historyIndex, setHistoryIndex] = useState(null);
   const [replacement, setReplacement] = useState(null);
+  const [newProjectOpen, setNewProjectOpen] = useState(false);
   const [retry, setRetry] = useState(null);
   const pending = useRef(false);
   const fileInput = useRef();
   const previewPanel = useRef();
+  const newProjectButton = useRef();
+  const newProjectName = useRef();
   const project = data?.project;
   const action = data?.actions.find((a) => a.id === selected);
+  const availableActions = data?.actions.filter((a) => a.available) || [];
+  const futureActions =
+    data?.actions.filter((a) => a.status === "future") || [];
+  const unavailableActions =
+    data?.actions.filter((a) => a.status === "unavailable") || [];
+  const categoriesReady = data?.actions.every((a) => a.status);
 
   async function load() {
     if (pending.current) return;
@@ -148,6 +189,10 @@ function App() {
   useEffect(() => {
     load();
   }, []);
+
+  useEffect(() => {
+    if (newProjectOpen) newProjectName.current?.focus();
+  }, [newProjectOpen]);
 
   useEffect(() => {
     setPreview(null);
@@ -210,6 +255,7 @@ function App() {
       setSelected("");
       setHistoryIndex(null);
       setReplacement(null);
+      setNewProjectOpen(false);
     } catch (e) {
       setError(e.message);
       setRetry({ path, request });
@@ -221,8 +267,10 @@ function App() {
 
   function startNew(event) {
     event.preventDefault();
-    if (project) setReplacement({ kind: "new", name });
-    else mutate("project/new", { name, confirm_replace: false });
+    if (project) {
+      setReplacement({ kind: "new", name });
+      setNewProjectOpen(false);
+    } else mutate("project/new", { name, confirm_replace: false });
   }
 
   async function importFile(event) {
@@ -273,9 +321,22 @@ function App() {
             algarrobos<span className="brand-sub">RESTORATION LAB</span>
           </span>
         </a>
-        <div className="header-note">
-          <span className="status-dot" /> Local prototype{" "}
-          <span className="version">MVP / 01</span>
+        <div className="header-tools">
+          <div className="header-note">
+            <span className="status-dot" /> Local prototype{" "}
+            <span className="version">MVP / 01</span>
+          </div>
+          <label className="theme-picker">
+            Theme
+            <select
+              value={theme}
+              onChange={(event) => setTheme(event.target.value)}
+            >
+              <option value="system">System</option>
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+          </label>
         </div>
       </header>
       <main id="main">
@@ -318,6 +379,20 @@ function App() {
             <button disabled={busy} onClick={load}>
               Reload saved project
             </button>
+            <button
+              ref={newProjectButton}
+              disabled={!data || busy}
+              aria-expanded={project ? newProjectOpen : undefined}
+              aria-controls={project ? "new-project-panel" : "project-name"}
+              onClick={() => {
+                if (project) {
+                  setReplacement(null);
+                  setNewProjectOpen((open) => !open);
+                } else newProjectName.current?.focus();
+              }}
+            >
+              New project
+            </button>
             <button disabled={!project || busy} onClick={exportFile}>
               Export JSON
             </button>
@@ -344,6 +419,45 @@ function App() {
             />
           </div>
         </div>
+        {project && newProjectOpen && (
+          <section
+            className="new-project panel"
+            id="new-project-panel"
+            aria-labelledby="new-project-heading"
+          >
+            <h2 id="new-project-heading">Start a new project</h2>
+            <p>
+              Keep other runs as JSON exports. One project is active at a time.
+            </p>
+            <form onSubmit={startNew}>
+              <label htmlFor="new-name">New project name</label>
+              <input
+                ref={newProjectName}
+                id="new-name"
+                value={name}
+                maxLength="80"
+                required
+                disabled={busy}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <div className="form-actions">
+                <button className="primary" disabled={busy}>
+                  Start new project
+                </button>
+                <button
+                  type="button"
+                  disabled={busy}
+                  onClick={() => {
+                    setNewProjectOpen(false);
+                    newProjectButton.current?.focus();
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </section>
+        )}
         {error && (
           <div className="error" role="alert">
             <p>{error}</p>
@@ -408,6 +522,7 @@ function App() {
             <form onSubmit={startNew}>
               <label htmlFor="project-name">Project name</label>
               <input
+                ref={newProjectName}
                 id="project-name"
                 maxLength="80"
                 required
@@ -503,37 +618,89 @@ function App() {
                 <div className="section-heading">
                   <div>
                     <p className="eyebrow">Choose the next step</p>
-                    <h2 id="actions-heading">Decisions available to you</h2>
+                    <h2 id="actions-heading">Available now</h2>
                   </div>
                   <span className="count">
-                    {data.actions.filter((a) => a.available).length} available
+                    {availableActions.length} available
                   </span>
                 </div>
-                <div className="actions">
-                  {data.actions.map((a) => (
-                    <button
-                      key={a.id}
-                      disabled={busy}
-                      aria-pressed={selected === a.id}
-                      className={`action ${selected === a.id ? "selected" : ""} ${!a.available ? "unavailable" : ""}`}
-                      onClick={() => choose(a)}
-                    >
-                      <span className="action-title">
-                        {a.title}
-                        <span aria-hidden="true">↗</span>
-                      </span>
-                      <span className="action-meta">
-                        {a.optional ? "Optional · " : ""}
-                        {a.repeatable ? "Repeatable · " : ""}
-                        {money(a.cost)}
-                        {a.kind !== "advance"
-                          ? ` · ${year(a.duration)} years`
-                          : " · choose year"}
-                      </span>
-                      {a.reason && <span className="reason">{a.reason}</span>}
-                    </button>
-                  ))}
-                </div>
+                <p className="muted decision-intro">
+                  Choose a decision to preview its result before committing.
+                </p>
+                {availableActions.length ? (
+                  <ActionChoices
+                    actions={availableActions}
+                    busy={busy}
+                    selected={selected}
+                    onChoose={choose}
+                  />
+                ) : (
+                  <p className="muted">
+                    No decisions are available now. Review your summary or undo
+                    the last action to revisit a choice.
+                  </p>
+                )}
+                {!categoriesReady ? (
+                  <p className="reason decision-update" role="status">
+                    Restart the Python API, then reload the saved project to
+                    load the new decision groups.
+                  </p>
+                ) : (
+                  <>
+                    <details className="decision-group">
+                      <summary>
+                        Future decisions{" "}
+                        <span className="group-count">
+                          {futureActions.length}
+                        </span>
+                      </summary>
+                      <p className="muted">
+                        These need earlier decisions, more cash or additional
+                        land. Each card explains what is missing; availability
+                        depends on your choices.
+                      </p>
+                      {futureActions.length ? (
+                        <ActionChoices
+                          actions={futureActions}
+                          busy={busy}
+                          selected={selected}
+                          onChoose={choose}
+                        />
+                      ) : (
+                        <p className="muted">
+                          No decisions are waiting on prerequisites or
+                          resources.
+                        </p>
+                      )}
+                    </details>
+                    {unavailableActions.length > 0 && (
+                      <details className="decision-group">
+                        <summary>
+                          No longer available{" "}
+                          <span className="group-count">
+                            {unavailableActions.length}
+                          </span>
+                        </summary>
+                        <p className="muted">
+                          Earlier choices or the remaining time rule these out
+                          on your current path. Undo can revisit the last
+                          choice.
+                        </p>
+                        <ActionChoices
+                          actions={unavailableActions}
+                          busy={busy}
+                          selected={selected}
+                          onChoose={choose}
+                        />
+                      </details>
+                    )}
+                  </>
+                )}
+                <p className="muted completed-note">
+                  Completed decisions are recorded in Action history below.
+                  Repeatable decisions remain here when you can choose them
+                  again.
+                </p>
               </section>
               <aside
                 ref={previewPanel}
@@ -742,24 +909,6 @@ function App() {
                 )}
               </section>
             </div>
-            <details className="new-project panel">
-              <summary>Start another project</summary>
-              <p>
-                Keep other runs as JSON exports. One project is active at a
-                time.
-              </p>
-              <form onSubmit={startNew}>
-                <label htmlFor="new-name">New project name</label>
-                <input
-                  id="new-name"
-                  value={name}
-                  maxLength="80"
-                  required
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <button disabled={busy}>Start new project</button>
-              </form>
-            </details>
           </>
         )}
         <footer>

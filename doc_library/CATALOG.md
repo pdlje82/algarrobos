@@ -1,6 +1,6 @@
 # Restoration and Environment Document Library
 
-Catalog updated: 26 October 2026. Inventory: 22 documents (21 PDFs and one research overview).
+Catalog updated: 27 October 2026. Inventory: 24 documents (21 PDFs, one research overview and two PNG infographics).
 
 Built for the Climate + Environment Career Transition context: understand real restoration work, develop an Almeria pilot, explore land stewardship and funding, and identify useful engineering, software and monitoring skills.
 
@@ -26,7 +26,7 @@ IDs are permanent references. Number within each group; allocate the next unused
 
 ## Verified inventory
 
-All entries below are stored locally. ANDARAX-002 contains a download link, not the underlying data package. Descriptions classify the supplied documents and do not establish current funding availability. Titles and opening pages were inspected; the two AL20 tables were also visually inspected.
+All entries below are stored locally. ANDARAX-002 contains a download link, not the underlying data package. Descriptions classify the supplied documents and do not establish current funding availability. Titles and opening pages were inspected; the two AL20 tables and both PNG infographics were also visually inspected. The infographics are reference illustrations; their source, author and publication date are unverified.
 
 ### ALJIBE
 
@@ -94,6 +94,8 @@ All entries below are stored locally. ANDARAX-002 contains a download link, not 
 |---|---|---|---|---|
 | [LEARN-001 - Almeria Restoration - Illustrated Strategy Primer for a Pilot and Organisation - 2026-10-18](LEARN-001%20-%20Almeria%20Restoration%20-%20Illustrated%20Strategy%20Primer%20for%20a%20Pilot%20and%20Organisation%20-%202026-10-18.pdf) | Learning synthesis on a measured dryland pilot, nonprofit partnerships and organisational development | ECO SOIL HYD VEG MON ECON PM | BASE PLAN-L EXEC MON-L FIN | 11 |
 | [LEARN-002 - Restoration Projects - Career Learning Overview and Research Gaps](LEARN-002%20-%20Restoration%20Projects%20-%20Career%20Learning%20Overview%20and%20Research%20Gaps.md) | Existing detailed research index, technical taxonomy, learning priorities and coverage gaps | PM | PLAN-L |  |
+| [LEARN-003 - Land Restoration - Seven Land Access Options - Infographic](LEARN-003%20-%20Land%20Restoration%20-%20Seven%20Land%20Access%20Options%20-%20Infographic.png) | Spanish comparison of stewardship, free use, long-term lease, usufruct, public-land management, donation and purchase, including suitability for different entity types; source, author and date unverified | PLAN SOC ECON | PLAN-L REG | Image |
+| [LEARN-004 - Almeria Restoration - Illustrative 15-Year Financing and Land Roadmap - Infographic](LEARN-004%20-%20Almeria%20Restoration%20-%20Illustrative%2015-Year%20Financing%20and%20Land%20Roadmap%20-%20Infographic.png) | Illustrative 2027-2042+ pathway from a demonstrator to optional expansion, with funding stages, land stewardship and an optional business arm; source, author and publication date unverified | PLAN ECON PM | PLAN-L FIN | Image |
 
 ## Tags and learning routes
 
@@ -102,6 +104,7 @@ Technical tags: HYD hydrology/hydraulics; GW groundwater; GEO geology/terrain; E
 Lifecycle tags: BASE baseline/diagnosis; PLAN-L strategic planning; DES design; PROC-L tendering; EXEC implementation; SUP supervision; MON-L monitoring; FIN financing; REG approval/compliance. Tags describe coverage, not a claim that every subject is treated comprehensively.
 
 - Start with LEARN-001 for the pilot and organisation strategy, then LEARN-002 for the broader learning framework.
+- Use LEARN-003 to compare land access arrangements and LEARN-004 for an illustrative financing and expansion pathway.
 - Follow engineering delivery: VEGA-001 baseline, ALJIBE-001 design requirements, ANDARAX-003 bidding, NIJAR-002 implementation, NIJAR-001 supervision and monitoring.
 - Explore land stewardship: COAST-002 strategy, COAST-001 contracted activities, FUND-003 finance.
 - Explore degraded-land and habitat interventions: LAUJAR-001 and FOREST-001.
@@ -121,4 +124,4 @@ The older research overview lists some material that is not actually stored here
 
 ## Rename audit and recovery
 
-RENAME_LOG.csv records every old/new filename, original SHA-256 checksum and descriptive metadata. All 21 PDFs were checked after renaming for byte-for-byte integrity. The research overview was intentionally updated to use the new names; its original bytes are retained in catalog_history/Original research overview.md. The CSV checksum for that overview refers to its original version. To reverse naming, use the CSV mapping in reverse after checking for filename collisions. Do not overwrite a newer overview with the historical copy without reviewing edits.
+RENAME_LOG.csv records every old/new filename, original SHA-256 checksum and descriptive metadata. All 21 PDFs and both PNG infographics were checked after renaming for byte-for-byte integrity. The research overview was intentionally updated to use the new names; its original bytes are retained in catalog_history/Original research overview.md. The CSV checksum for that overview refers to its original version. To reverse naming, use the CSV mapping in reverse after checking for filename collisions. Do not overwrite a newer overview with the historical copy without reviewing edits.

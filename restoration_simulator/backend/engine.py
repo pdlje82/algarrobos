@@ -115,43 +115,63 @@ def parcel_options(state, area):
             if p['area'] - sum(x['area'] for x in state['activities'] if x['parcel_id'] == p['id']) >= area]
 
 
-def unavailable(state, a):
-    if state['time'] >= state['scenario']['horizon']:
-        return 'The 30-year horizon is complete. Undo to revisit the last decision.'
+def availability(state, a, checking=()):
+    """Return the UI group and reason using the same checks that guard commits.
+
+    'future' means conditional on prerequisites/resources, not a promised outcome.
+    'unavailable' means blocked on the current forward path (undo can revisit it).
+    """
     completed = {h['action_id'] for h in state['history']}
     if not a['repeatable'] and a['id'] in completed:
-        return 'Already completed.'
-    missing = [x for x in a['requires'] if x not in completed]
-    if missing:
-        titles = {x['id']: x['title'] for x in state['scenario']['actions']}
-        return 'First complete: ' + ', '.join(titles[x] for x in missing) + '.'
+        return 'completed', 'Already completed.'
+    if state['time'] >= state['scenario']['horizon']:
+        return 'unavailable', 'The 30-year horizon is complete. Undo to revisit the last decision.'
+    if len(state['history']) >= 500:
+        return 'unavailable', 'The MVP supports at most 500 decisions per project.'
+    if round(state['time'] + a['duration'], 4) > state['scenario']['horizon']:
+        return 'unavailable', 'This action would finish beyond year 30.'
     kind = a['kind']
     if kind == 'land_start' and state['parcels']:
-        return 'A starting land route has already been selected.'
-    if kind == 'restore_start' and not state['parcels']:
-        return 'First establish access to a starting parcel.'
+        return 'unavailable', 'A starting land route has already been selected.'
     if kind == 'restore_start' and state['activities']:
-        return 'The demonstrator is already complete.'
-    if kind in ('restore', 'restore_start') and not parcel_options(state, a['effects']['area']):
-        return 'No parcel has enough unrestored area. Acquire more land or access.'
+        return 'unavailable', 'The demonstrator is already complete.'
     if kind == 'organization' and a['effects']['organization'] in state['organizations']:
-        return 'This organization already exists.'
+        return 'unavailable', 'This organization already exists.'
+    grant_stage = {'not_applied': 0, 'applied': 1, 'awarded': 2, 'paid': 3}
     expected = {'grant_apply': 'not_applied', 'grant_award': 'applied', 'grant_pay': 'awarded'}
+    if kind in expected and grant_stage[state['grant']['status']] > grant_stage[expected[kind]]:
+        return 'unavailable', 'This grant stage has already passed; each award can be paid only once.'
+    missing = [x for x in a['requires'] if x not in completed]
+    if missing:
+        definitions = {x['id']: x for x in state['scenario']['actions']}
+        for action_id in missing:
+            # Check only existing prerequisites; do not simulate future choices.
+            if action_id not in (*checking, a['id']):
+                status, _ = availability(state, definitions[action_id], (*checking, a['id']))
+                if status == 'unavailable':
+                    return 'unavailable', 'Required decision is no longer available: ' + definitions[action_id]['title'] + '.'
+        return 'future', 'First complete: ' + ', '.join(definitions[x]['title'] for x in missing) + '.'
+    if kind == 'restore_start' and not state['parcels']:
+        return 'future', 'First establish access to a starting parcel.'
+    if kind in ('restore', 'restore_start') and not parcel_options(state, a['effects']['area']):
+        return 'future', 'No parcel has enough unrestored area. Acquire more land or access.'
     if kind in expected and state['grant']['status'] != expected[kind]:
-        return 'Grant stage unavailable; each award can be paid only once.'
+        return 'future', 'First complete the preceding grant stage.'
     if state['cash'] < a['cost']:
-        return 'Insufficient available cash.'
-    if round(state['time'] + a['duration'], 4) > state['scenario']['horizon']:
-        return 'This action would finish beyond year 30.'
-    return None
+        return 'future', 'Insufficient available cash.'
+    return 'available', None
+
+
+def unavailable(state, a):
+    return availability(state, a)[1]
 
 
 def list_actions(state):
     result = []
     for action in state['scenario']['actions']:
         a = deepcopy(action)
-        a['reason'] = unavailable(state, a)
-        a['available'] = a['reason'] is None
+        a['status'], a['reason'] = availability(state, a)
+        a['available'] = a['status'] == 'available'
         a['fields'] = []
         if a['kind'] == 'advance':
             a['fields'] = [{'name': 'target_year', 'label': 'Advance to year', 'type': 'number',

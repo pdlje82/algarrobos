@@ -4,6 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#174a39" />
+    <script>
+      // Apply appearance before first paint, even before React finishes loading.
+      (() => {
+        let preference = "system";
+        try {
+          const saved = localStorage.getItem("algarrobos-theme");
+          if (["system", "light", "dark"].includes(saved)) preference = saved;
+        } catch {
+          // Appearance still works when browser storage is unavailable.
+        }
+        const dark =
+          preference === "dark" ||
+          (preference === "system" &&
+            matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.themePreference = preference;
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+        document.querySelector('meta[name="theme-color"]').content = dark
+          ? "#101b15"
+          : "#f7f6ef";
+      })();
+    </script>
     <title>Algarrobos · Restoration simulator</title>
   </head>
   <body>
