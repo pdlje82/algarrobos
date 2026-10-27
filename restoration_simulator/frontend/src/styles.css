@@ -1493,6 +1493,110 @@ footer p {
 }
 
 /* Guided demonstrator configuration and progress. */
+.plant-mixes,
+.plant-group {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  margin: 16px 0;
+  min-width: 0;
+}
+.plant-mixes button {
+  margin: 4px;
+  font-size: 12px;
+  text-align: left;
+}
+.plant-row {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 100px;
+  gap: 8px;
+}
+.plant-row:last-child {
+  border-bottom: 0;
+}
+.plant-selected {
+  background: var(--selected-bg);
+}
+.plant-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.plant-checkbox input {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+}
+.plant-checkbox small {
+  display: block;
+  color: var(--muted);
+}
+.plant-quantity {
+  font-size: 11px;
+}
+.plant-quantity input {
+  margin-top: 4px;
+  width: 100%;
+  min-width: 0;
+}
+.plant-info {
+  grid-column: 1 / -1;
+  font-size: 12px;
+}
+.plant-info p {
+  margin: 8px 0;
+}
+.plant-info summary,
+.plant-custom summary {
+  cursor: pointer;
+}
+.plant-custom {
+  margin: 20px 0;
+}
+.plant-custom .field-grid {
+  margin: 16px 0;
+}
+.plant-custom label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  min-width: 0;
+}
+.plant-custom input,
+.plant-custom select {
+  width: 100%;
+  min-width: 0;
+}
+.plant-message {
+  min-height: 1.5em;
+  font-size: 12px;
+}
+.planting-list {
+  overflow-wrap: anywhere;
+}
+.plant-review {
+  font-size: 12px;
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid var(--border);
+}
+.plant-review ul {
+  padding-left: 18px;
+}
+@media (max-width: 400px) {
+  .plant-row {
+    grid-template-columns: minmax(0, 1fr) 80px;
+    padding: 10px 6px;
+  }
+  .plant-checkbox {
+    font-size: 13px;
+  }
+}
 .demo-editor,
 .demo-fields {
   min-width: 0;

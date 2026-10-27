@@ -2,6 +2,7 @@
 
 from copy import deepcopy
 from . import engine_v3 as core
+from . import planting
 
 KINDS = {
     "demo_plan",
@@ -67,7 +68,7 @@ def label(state, key, value):
     return next((text for code, text in rows if code == value), value)
 
 
-def fields(state, kind):
+def fields(state, kind, legacy=False):
     d = state["demonstrator"]
     if kind == "demo_plan":
         opts = core.parcel_options(state, 0.01)
@@ -253,6 +254,30 @@ def fields(state, kind):
             for v in f:
                 if v["name"] in d["plan"]:
                     v["default"] = d["plan"][v["name"]]
+        if not legacy:
+            f = [v for v in f if v["name"] not in {"plant_mix", "trees", "shrubs"}]
+            previous = d["plan"] if d and not d.get("legacy") else None
+            selection = (
+                previous.get("plant_selection", {"version": 1, "entries": []})
+                if previous
+                else planting.default_selection()
+            )
+            f.insert(
+                3,
+                core.field(
+                    "plant_selection",
+                    "Choose the plants",
+                    "plant_selection",
+                    deepcopy(selection),
+                    section="Plant checklist",
+                    catalogue=planting.catalogue(),
+                    legacy_notice=(
+                        f"This saved plan records {previous['trees']:g} trees and {previous['shrubs']:g} shrubs / grasses as a general mix. No species quantities were recorded. Choose plants explicitly to revise it."
+                        if previous and "plant_selection" not in previous
+                        else ""
+                    ),
+                ),
+            )
         return f
     basis = [
         ("unknown", "Choose a basis"),
@@ -1064,9 +1089,12 @@ def view(state):
                     p[f["name"]],
                 ),
             )
-            for f in fields(state, "demo_plan")
-            if f["name"] != "notes"
+            for f in fields(state, "demo_plan", legacy="plant_selection" not in p)
+            if f["name"] != "notes" and f["type"] != "plant_selection"
         ],
+        "planting": planting.review(p["plant_selection"], p["vegetation_system"])
+        if "plant_selection" in p
+        else None,
         "sources": cfg(state)["sources"],
         "planned_future_spending": round(d["budget"]["total"] - d["spent"], 2),
         "funding_stage": state["grant"]["status"],

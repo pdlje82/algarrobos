@@ -8,13 +8,19 @@ import unittest
 from unittest.mock import patch
 from uuid import uuid4
 from fastapi.testclient import TestClient
-from backend import engine, engine_v3
+from backend import engine, engine_v3, demonstrator
 from backend.app import create_app
 from backend.storage import Store, validate_export
 
 
 def values(state, action, **changes):
     definition = next(a for a in engine.list_actions(state) if a["id"] == action)
+    # Retain acceptance coverage for aggregate v4 histories and older API clients.
+    if action == "demonstrator":
+        definition = {
+            **definition,
+            "fields": demonstrator.fields(state, "demo_plan", legacy=True),
+        }
     return {**{f["name"]: f["default"] for f in definition["fields"]}, **changes}
 
 

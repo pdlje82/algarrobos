@@ -202,7 +202,6 @@ class ApiTests(unittest.TestCase):
             values.update(
                 funding_route="self",
                 vegetation_system="woodland",
-                plant_mix="woodland",
                 water_plan="temporary",
             )
             self.post("commit", action_id="demonstrator", inputs=values)

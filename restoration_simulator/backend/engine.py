@@ -3,7 +3,7 @@
 from copy import deepcopy
 import json
 from pathlib import Path
-from . import engine_v3 as core, demonstrator as demo
+from . import engine_v3 as core, demonstrator as demo, planting
 
 Invalid = core.Invalid
 require, number, text, same_json = core.require, core.number, core.text, core.same_json
@@ -265,14 +265,34 @@ def transition(state, action_id, inputs=None):
         return new, explanation
     inputs = {} if inputs is None else inputs
     kind = definition["kind"]
-    validate_fields(demo.fields(state, kind), inputs)
+    # Old v4 histories retain their original aggregate mix and totals. New
+    # checklist inputs are validated separately, then Python derives totals.
+    checklist = (
+        kind == "demo_plan" and isinstance(inputs, dict) and "plant_selection" in inputs
+    )
+    definitions = demo.fields(state, kind, legacy=kind == "demo_plan" and not checklist)
+    if checklist:
+        values = {k: v for k, v in inputs.items() if k != "plant_selection"}
+        validate_fields(
+            [f for f in definitions if f["name"] != "plant_selection"], values
+        )
+        counts = planting.resolve(inputs["plant_selection"])
+        values.update(
+            plant_selection=deepcopy(inputs["plant_selection"]),
+            plant_mix="selected_species",
+            trees=counts["trees"],
+            shrubs=counts["shrubs"],
+        )
+    else:
+        validate_fields(definitions, inputs)
+        values = inputs
     duration, cost = demo.duration_and_cost(state, kind)
     target = round(state["time"] + duration, 4)
     require(target <= 30, "This action would exceed year 30.")
     new = deepcopy(state)
     events = advance(new, target)
     payment(new, -cost, target, definition["title"])
-    explanation = demo.apply(new, kind, inputs, target, payment)
+    explanation = demo.apply(new, kind, values, target, payment)
     if events:
         explanation += " " + " ".join(events)
     receipts = new["payments"][len(state["payments"]) :]

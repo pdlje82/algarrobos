@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Fields } from "./LandAccess.jsx";
 import { area, money, year } from "./format.js";
+import { PlantChecklist, PlantingList } from "./PlantChecklist.jsx";
 
 const phases = [
   ["planned", "Plan"],
@@ -78,10 +79,10 @@ export function DemonstratorEditor({
       {planning && (
         <>
           <p className="demo-intro">
-            Build a planting-led dryland pilot. Dropdowns show common project
-            components and a potential AL20 3.4 route. Choose{" "}
-            <strong>Custom option…</strong> for your own method or description.
-            No option is automatically funded.
+            Build a planting-led dryland pilot. Choose plants with checkboxes,
+            combine typical mixes and configure a potential AL20 3.4 route.
+            Choose <strong>Custom option…</strong> for your own method or
+            description. No option is automatically funded.
           </p>
           <nav
             className="demo-section-nav"
@@ -121,7 +122,11 @@ export function DemonstratorEditor({
             )}
             <Fields
               fields={action.fields
-                .filter((f) => (f.section || "Record") === selected)
+                .filter(
+                  (f) =>
+                    (f.section || "Record") === selected &&
+                    f.type !== "plant_selection",
+                )
                 .map((f) =>
                   f.type === "category"
                     ? { ...f, custom_label: "Custom option…" }
@@ -131,6 +136,19 @@ export function DemonstratorEditor({
               onChange={onChange}
               disabled={busy}
             />
+            {action.fields
+              .filter(
+                (f) => f.type === "plant_selection" && f.section === selected,
+              )
+              .map((f) => (
+                <PlantChecklist
+                  key={f.name}
+                  field={f}
+                  value={inputs[f.name]}
+                  disabled={busy}
+                  onChange={(value) => onChange({ ...inputs, [f.name]: value })}
+                />
+              ))}
           </fieldset>
           {planning && (
             <div className="demo-section-nav">
@@ -193,6 +211,7 @@ function DemonstratorPreview({ value: d }) {
         {d.parcel_name} · {area(d.plan.restoration_area)} · {d.plan.trees} trees
         · {d.plan.shrubs} shrubs / grasses
       </p>
+      <PlantingList planting={d.planting} />
       <table className="demo-budget">
         <caption>Configured budget — eligibility unverified</caption>
         <tbody>
@@ -311,6 +330,7 @@ export function DemonstratorRecord({ value: d }) {
       )}
       <details>
         <summary>Planting plan and demonstration design</summary>
+        <PlantingList planting={d.planting} />
         <dl className="demo-description">
           {d.details.map((x) => (
             <div key={x.label}>

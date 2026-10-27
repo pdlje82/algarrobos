@@ -104,7 +104,9 @@ The main timeline includes named parcel rows on a proportional year 0–30 axis,
 
 ## Establishing the planting demonstrator
 
-**Plan the demonstrator** groups its dropdowns into **Site and planting**, **Demonstration design**, **Funding route**, **Budget** and **Timing**. Presets cover the new picture's four dryland systems, candidate native planting mixes, objectives, comparison methods, baseline/monitoring approaches, public participation and results-sharing. **Custom option…** reveals text input without discarding other selections. Planting presets are documented examples, not site prescriptions or pre-approved fundable operations. Sources link to the existing picture, Níjar plant specification, pilot primer, AL20 table and official rules.
+**Plan the demonstrator** groups its inputs into **Site and planting**, **Plant checklist**, **Demonstration design**, **Funding route**, **Budget** and **Timing**. Presets cover the new picture's four dryland systems, candidate native planting mixes, objectives, comparison methods, baseline/monitoring approaches, public participation and results-sharing. **Custom option…** reveals text input without discarding other selections. Planting presets are documented examples, not site prescriptions or pre-approved fundable operations. Sources link to the existing picture, Níjar plant specification, pilot primer, AL20 table and official rules.
+
+The **Plant checklist** section replaces the general planting-mix dropdown and aggregate count inputs with individual plant checkboxes and quantities. **Add** a typical mix to select its plants; adding another mix preserves existing selections and quantities without duplicates. All plants remain editable, and **Add another plant** supports a custom name, growth form and quantity. Python derives the tree and shrub/grass totals and updates the budget. Grasses and shrubs share the current non-tree rate. The preview and saved record show the selected planting list and questions about combined habitats or custom plants. The library picture supplies example names and habitat groupings; suggested quantities and growth forms are planning assumptions. No ecological compatibility or grant eligibility is inferred. Existing version-4 aggregate plans replay unchanged; their editing form explains that species counts were not recorded and requires an explicit checklist before revising them. Catalogue version 1 remains stable for deterministic replay.
 
 The default 200 m² example has 10 trees and 30 shrubs/grasses. Its editable assumed budget is **€645 planting + €100 monitoring + €100 evaluation/dissemination = €845**, excluding any land rent/maintenance. Planting takes 0.25 years, followed by observations after 1 year; these are configurable playtest assumptions, not local quotes or ecological predictions. Planning and recording a baseline take no simulation time and install no work. Planting pays the installation subtotal and records its work area; monitoring and evaluation pay their respective budgets separately. No observation or ecological success appears automatically when time advances.
 
@@ -136,6 +138,7 @@ $env:RESTORATION_SAVE_PATH = 'C:\Users\JanEngelke\restoration-saves\active-proje
 | --- | --- |
 | `backend/engine.py` | Standard-library-only rules, validation, prerequisites and deterministic transitions |
 | `backend/demonstrator.py` | Planting plans, stages, budget and preliminary AL20 3.4 checks |
+| `backend/planting.py` | Versioned plant catalogue, checklist validation and derived counts |
 | `backend/storage.py` | Atomic persistence, import, saved undo and retry receipts |
 | `backend/app.py` | FastAPI routes and validated requests |
 | `scenarios/default.json` | New-project action table and embedded demonstrator catalogue |
@@ -144,6 +147,7 @@ $env:RESTORATION_SAVE_PATH = 'C:\Users\JanEngelke\restoration-saves\active-proje
 | `tests/test_land_access.py` | Seven-route lifecycle, payment, permission and migration checks |
 | `tests/test_square_metres.py` | Earlier small-plot journeys, category persistence and conversion |
 | `tests/test_demonstrator.py` | Guided pilot, cash/evidence separation, AL20 gates and version-3 migration |
+| `tests/test_planting.py` | Species quantities, custom plants, derived budgets, legacy replay and persistence |
 
 Edit the scenario JSON for new projects. `backend/legacy.py`, `backend/engine_v2.py`, `backend/engine_v3.py` and `scenarios/legacy-v1.json` through `legacy-v3.json` are retained for exact replay of older saves. Existing saves retain their exact embedded definitions. Keep supported effect shapes and handler kinds; add new behavior through the explicit Python handlers. Incompatible handler/schema changes need version handling instead of silently reinterpreting saves. There is no scripting language, workflow editor or plugin framework.
 
@@ -159,7 +163,7 @@ inputs.update(route_id='existing', parcel_id='new', parcel_area=400, covered_are
 state, _ = transition(state, 'establish_access', inputs)
 action = next(a for a in list_actions(state) if a['id'] == 'demonstrator')
 inputs = {f['name']: f['default'] for f in action['fields']}
-inputs.update(funding_route='self', vegetation_system='woodland', plant_mix='woodland', water_plan='temporary')
+inputs.update(funding_route='self', vegetation_system='woodland', water_plan='temporary')
 state, result = transition(state, 'demonstrator', inputs)
 print(state['demonstrator']['budget']['total'])  # 845.0; planned, not yet spent
 ```
@@ -179,7 +183,7 @@ npm.cmd audit
 
 The focused tests now cover all seven land routes, proposal/finalisation, scheduled costs, expiry and renewal, overlap prevention, ownership separation, commitments beyond year 30, migration/backups, and also exercise both starting routes with and without organizations, grant stages/payment once, invalid-action immutability, frozen scenarios, horizon limits, decision grouping and prerequisite/resource changes, previews, restart with undo, duplicate/stale requests, export/import (including browser JSON number normalization), malformed imports, corrupt autosaves and atomic-write failure. Production bundling checks the React frontend; playtesting uses the two local development servers above. No deployment infrastructure is included.
 
-Verified on Windows on 27 October 2026 with Conda Python 3.12 and Node 22.23.4: all **56 tests passed** and the production frontend built. The version-4 browser playthrough planned a 200 m² dryland demonstrator with a custom objective, completed baseline recording, simulated AL20 3.4 feedback/application/award, planted, waited for follow-up, entered illustrative survival observations, evaluated the pilot and recorded reimbursement. Dropdown choices and custom details survived section changes. Desktop and 390-pixel phone layouts, export/import, refresh, an actual test-backend restart and persisted undo passed. Tests also cover funding caps, uncertain eligibility, evidence and access gates, cash constraints, observation bounds, legacy migrations and preservation of earlier workflows. Browser checks used an isolated save under ignored `test-artifacts/`; no runtime dependencies were added.
+Verified on Windows on 27 October 2026 with Conda Python 3.12 and Node 22.23.4: all **62 tests passed** and the production frontend built. The version-4 browser playthrough planned a 200 m² dryland demonstrator with a custom objective, completed baseline recording, simulated AL20 3.4 feedback/application/award, planted, waited for follow-up, entered illustrative survival observations, evaluated the pilot and recorded reimbursement. The checklist browser check combined two mixes, preserved an edited quantity when re-adding a mix, deselected a plant with the keyboard, added a custom plant and restored the exact selections after saving, refreshing and reopening the editor. Desktop and 390-pixel phone layouts passed. Export/import, an actual test-backend restart and persisted undo passed in the earlier demonstrator playtest; automated tests also cover these with the species checklist. Tests additionally cover funding caps, uncertain eligibility, evidence and access gates, cash constraints, observation bounds, legacy migrations and preservation of earlier workflows. Browser checks used isolated saves under ignored `test-artifacts/`; no runtime dependencies were added.
 
 Manual acceptance: complete the journey at desktop and phone-sized widths, use Tab/Enter to reach controls, inspect the final summary and past results, refresh, then restart Python to verify restoration of state and undo. Stop for a playtest before adding GIS, document ingestion, real grants, forecasting or further infrastructure.
 
