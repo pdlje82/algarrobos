@@ -3,6 +3,7 @@
 from copy import deepcopy
 from . import engine_v3 as core
 from . import planting
+from .parcel_removal import plant_options
 
 KINDS = {
     "demo_plan",
@@ -71,7 +72,7 @@ def label(state, key, value):
 def fields(state, kind, legacy=False):
     d = state["demonstrator"]
     if kind == "demo_plan":
-        opts = core.parcel_options(state, 0.01)
+        opts = plant_options(state, 0.01)
         for o in opts:
             o["default_area"] = min(200, o["remaining_area"])
         f = [
@@ -675,7 +676,7 @@ def availability(state, kind):
                 "future",
                 "The submitted plan is locked. Only the last decision can be undone; application amendments are not modelled.",
             )
-        if not core.parcel_options(state, 0.01):
+        if not plant_options(state, 0.01):
             return (
                 "future",
                 "First establish suitable land access and planting permissions.",
@@ -688,6 +689,17 @@ def availability(state, kind):
         )
     if not d:
         return "future", "First configure a new demonstrator plan."
+    parcel = next(p for p in state["parcels"] if p["id"] == d["plan"]["parcel_id"])
+    if parcel.get("scenario_status") and kind in {
+        "demo_baseline",
+        "demo_funding",
+        "demo_apply",
+        "demo_install",
+    }:
+        return (
+            "future",
+            "This parcel is excluded from new work. Undo the exclusion or plan on another parcel.",
+        )
     stage = d["status"]
     if kind in {"demo_baseline", "demo_funding"}:
         if stage not in {"planned", "baselined"}:
@@ -870,7 +882,7 @@ def apply(state, kind, values, at, pay):
         core.require(
             any(
                 x["value"] == values["parcel_id"]
-                for x in core.parcel_options(state, values["restoration_area"])
+                for x in plant_options(state, values["restoration_area"])
             ),
             "The pilot must fit within available included land.",
         )

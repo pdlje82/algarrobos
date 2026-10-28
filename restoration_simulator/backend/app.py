@@ -19,6 +19,7 @@ from .engine import (
     summary,
 )
 from .storage import Conflict, Store
+from .parcel_removal import plan as removal_plan
 
 
 class StrictModel(BaseModel):
@@ -57,12 +58,23 @@ class LandFormRequest(StrictModel):
     agreement_id: StrictStr | None = None
 
 
+class RemovalPreviewRequest(StrictModel):
+    revision: Annotated[StrictInt, Field(ge=0)]
+    parcel_id: Annotated[StrictStr, Field(min_length=1, max_length=80)]
+
+
+class DeleteParcelRequest(Mutation):
+    parcel_id: Annotated[StrictStr, Field(min_length=1, max_length=80)]
+    confirm: StrictBool
+
+
 def view(data, explanation=None):
     project = data["project"]
     return {
         "project": project,
         "revision": data["revision"],
         "can_undo": data["undo"] is not None,
+        "undo_kind": "delete" if data.get("undo_edit") else "action",
         "actions": list_actions(project) if project else [],
         "summary": summary(project) if project else None,
         "land_access": land_catalog(project) if project else None,
@@ -163,6 +175,22 @@ def create_app(save_path=None):
         if data["project"] is None:
             raise Invalid("Create a project first.")
         return land_form(data["project"], req.route_id, req.parcel_id, req.agreement_id)
+
+    @app.post("/api/parcels/removal-preview")
+    def parcel_removal_preview(req: RemovalPreviewRequest):
+        data = get_store().snapshot()
+        if req.revision != data["revision"]:
+            raise Conflict("This view is out of date. Reload the saved project.")
+        if data["project"] is None:
+            raise Invalid("Create a project first.")
+        return {
+            "revision": data["revision"],
+            **removal_plan(data["project"], req.parcel_id),
+        }
+
+    @app.post("/api/parcels/delete")
+    def delete_parcel(req: DeleteParcelRequest):
+        return mutate("delete_parcel", req)
 
     @app.get("/api/sources/{source_id}")
     def source(source_id: str):

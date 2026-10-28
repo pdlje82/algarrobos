@@ -8,7 +8,8 @@ from pathlib import Path
 import tempfile
 from threading import RLock
 
-from .engine import Invalid, new_project, require, transition, validate_state
+from .engine import Invalid, new_project, require, transition, validate_state, same_json
+from . import parcel_removal
 
 
 class Conflict(Invalid):
@@ -18,7 +19,8 @@ class Conflict(Invalid):
 def validate_export(payload):
     require(
         isinstance(payload, dict)
-        and set(payload) == {"format_version", "project", "undo"},
+        and {"format_version", "project", "undo"} <= set(payload)
+        and set(payload) <= {"format_version", "project", "undo", "undo_edit"},
         "Invalid export envelope.",
     )
     require(
@@ -33,6 +35,18 @@ def validate_export(payload):
     )
     project = validate_state(payload["project"])
     undo = payload["undo"]
+    edit = payload.get("undo_edit")
+    require(
+        edit is None
+        or (
+            isinstance(edit, dict)
+            and set(edit) == {"kind", "parcel_ids"}
+            and edit["kind"] == "delete_parcels"
+            and isinstance(edit["parcel_ids"], list)
+            and undo is not None
+        ),
+        "Invalid exploration undo metadata.",
+    )
     if undo is not None:
         require(isinstance(undo, dict), "Invalid undo snapshot.")
         if undo.get("schema_version") in (1, 2, 3):
@@ -47,12 +61,36 @@ def validate_export(payload):
             and undo["scenario"] == project["scenario"],
             "Undo belongs to a different project.",
         )
-        require(
-            len(project["history"]) > 0 and undo["history"] == project["history"][:-1],
-            "Invalid undo history.",
-        )
+        if edit is not None:
+            rebuilt = parcel_removal.delete(undo, edit["parcel_ids"])
+            rebuilt["revision"] = project["revision"]
+            require(
+                same_json(rebuilt, project),
+                "Deletion undo does not rebuild this project.",
+            )
+        else:
+            require(
+                len(project["history"]) > 0
+                and undo["history"] == project["history"][:-1],
+                "Invalid undo history.",
+            )
         require(undo["revision"] < project["revision"], "Invalid undo revision.")
-    return {"format_version": 4, "project": project, "undo": undo}
+    result = {"format_version": 4, "project": project, "undo": undo}
+    if "undo_edit" in payload:
+        result["undo_edit"] = edit
+    return result
+
+
+def clean_removed(data):
+    """Upgrade earlier soft deletions without retaining them in project history."""
+    cleaned, ids = parcel_removal.cleanup(data["project"])
+    if ids:
+        data["undo"] = deepcopy(data["project"])
+        data["undo_edit"] = dict(kind="delete_parcels", parcel_ids=ids)
+        data["revision"] += 1
+        cleaned["revision"] = data["revision"]
+        data["project"] = cleaned
+    return bool(ids)
 
 
 class Store:
@@ -64,6 +102,7 @@ class Store:
             "format_version": 4,
             "project": None,
             "undo": None,
+            "undo_edit": None,
             "receipts": {},
             "revision": 0,
         }
@@ -71,9 +110,16 @@ class Store:
             try:
                 original = self.path.read_bytes()
                 raw = json.loads(original.decode("utf-8"))
-                require(set(raw) == set(self.data), "Invalid autosave envelope.")
+                require(
+                    set(raw) in (set(self.data), set(self.data) - {"undo_edit"}),
+                    "Invalid autosave envelope.",
+                )
                 validated = validate_export(
-                    {k: raw[k] for k in ("format_version", "project", "undo")}
+                    {
+                        k: raw[k]
+                        for k in ("format_version", "project", "undo", "undo_edit")
+                        if k in raw
+                    }
                 )
                 require(
                     type(raw["revision"]) is int
@@ -88,7 +134,8 @@ class Store:
                     ),
                     "Invalid request receipts.",
                 )
-                candidate = {**raw, **validated}
+                candidate = {**self.data, **raw, **validated}
+                cleaned = clean_removed(candidate)
                 if raw["format_version"] in (1, 2, 3):
                     checksum = hashlib.sha256(original).hexdigest()[:12]
                     backup = self.path.with_name(
@@ -100,6 +147,8 @@ class Store:
                     if not backup.exists():
                         with backup.open("xb") as out:
                             out.write(original)
+                    self.write(candidate)
+                elif cleaned:
                     self.write(candidate)
                 self.data = candidate
             except (ValueError, KeyError, TypeError, OSError, RecursionError) as exc:
@@ -163,6 +212,7 @@ class Store:
                     "This view is out of date. Reload the saved project before trying again."
                 )
             candidate = deepcopy(self.data)
+            candidate["undo_edit"] = None
             current = candidate["project"]
             if operation == "new":
                 require(
@@ -179,18 +229,41 @@ class Store:
                 )
                 imported = validate_export(body["save"])
                 candidate.update(imported)
+                clean_removed(candidate)
                 explanation = "Project and undo snapshot imported. Its embedded scenario is preserved."
             elif operation == "commit":
                 require(current is not None, "Create a project first.")
+                require(
+                    body["action_id"] != parcel_removal.ACTION,
+                    "Delete parcels with the exploration editing control, not a simulation action.",
+                )
                 candidate["project"], explanation = transition(
                     current, body["action_id"], body["inputs"]
                 )
                 candidate["undo"] = deepcopy(current)
+            elif operation == "delete_parcel":
+                require(current is not None, "Create a project first.")
+                require(
+                    body.get("confirm") is True,
+                    "Review and confirm the deletion first.",
+                )
+                candidate["project"] = parcel_removal.delete(
+                    current, [body["parcel_id"]]
+                )
+                candidate["undo"] = deepcopy(current)
+                candidate["undo_edit"] = dict(
+                    kind="delete_parcels", parcel_ids=[body["parcel_id"]]
+                )
+                explanation = "Parcel and dependent choices deleted. Cash and time were recalculated from the remaining choices."
             elif operation == "undo":
                 require(candidate["undo"] is not None, "No saved action to undo.")
                 candidate["project"] = deepcopy(candidate["undo"])
                 candidate["undo"] = None
-                explanation = "Last action undone. Its time, cash and state changes were restored."
+                explanation = (
+                    "Deletion undone. The previous project was restored."
+                    if self.data.get("undo_edit")
+                    else "Last action undone. Its time, cash and state changes were restored."
+                )
             else:
                 raise Invalid("Unknown operation.")
             candidate["revision"] += 1
@@ -205,4 +278,7 @@ class Store:
     def export(self):
         data = self.snapshot()
         require(data["project"] is not None, "Create a project first.")
-        return {k: data[k] for k in ("format_version", "project", "undo")}
+        exported = {k: data[k] for k in ("format_version", "project", "undo")}
+        if data.get("undo_edit"):
+            exported["undo"] = None
+        return exported

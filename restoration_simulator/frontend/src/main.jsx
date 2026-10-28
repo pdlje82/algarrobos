@@ -172,6 +172,7 @@ function App() {
   const fileInput = useRef();
   const previewPanel = useRef();
   const newProjectButton = useRef();
+  const undoButton = useRef();
   const newProjectName = useRef();
   const project = data?.project;
   const action = data?.actions.find((a) => a.id === selected);
@@ -278,6 +279,9 @@ function App() {
       setHistoryIndex(null);
       setReplacement(null);
       setNewProjectOpen(false);
+      if (path === "parcels/delete") {
+        requestAnimationFrame(() => undoButton.current?.focus());
+      }
     } catch (e) {
       setError(e.message);
       setRetry({ path, request });
@@ -426,9 +430,12 @@ function App() {
             </button>
             <button
               disabled={!data?.can_undo || busy}
+              ref={undoButton}
               onClick={() => mutate("undo", {})}
             >
-              Undo last action
+              {data?.undo_kind === "delete"
+                ? "Undo deletion"
+                : "Undo last action"}
             </button>
             <input
               className="sr-only"
@@ -592,8 +599,8 @@ function App() {
                   {area(data.summary.active_area ?? data.summary.area)}
                 </strong>
                 <small>
-                  {project.parcels.length} parcel records ·{" "}
-                  {area(data.summary.owned_area)} owned by you / your
+                  {data.summary.parcel_records ?? project.parcels.length} parcel
+                  records · {area(data.summary.owned_area)} owned by you / your
                   organisations
                 </small>
               </div>
@@ -628,8 +635,8 @@ function App() {
                 <p>
                   {data.summary.completed_activities} restoration activities
                   across {area(data.summary.restored_area)};{" "}
-                  {project.parcels.length} parcel records;{" "}
-                  {area(data.summary.active_area ?? data.summary.area)}{" "}
+                  {data.summary.parcel_records ?? project.parcels.length} parcel
+                  records; {area(data.summary.active_area ?? data.summary.area)}{" "}
                   currently accessible and {area(data.summary.owned_area)} owned
                   by you / your organisations. Cash remaining:{" "}
                   {money(project.cash)}.
@@ -847,7 +854,30 @@ function App() {
                 <h2>Land, rights & completed work</h2>
                 <p className="muted">{data.summary.asset_explanation}</p>
                 {project.agreements ? (
-                  <LandRecords project={project} summary={data.summary} />
+                  <LandRecords
+                    project={project}
+                    summary={data.summary}
+                    revision={data.revision}
+                    busy={busy}
+                    onRemovalPreview={(parcel_id) =>
+                      api("parcels/removal-preview", {
+                        revision: data.revision,
+                        parcel_id,
+                      })
+                    }
+                    onRemovalConfirm={(impact) =>
+                      mutate(
+                        "parcels/delete",
+                        {},
+                        {
+                          revision: impact.revision,
+                          request_id: crypto.randomUUID(),
+                          parcel_id: impact.parcel_id,
+                          confirm: true,
+                        },
+                      )
+                    }
+                  />
                 ) : (
                   <p className="reason">
                     Restart the Python API to upgrade this save and load the

@@ -58,6 +58,12 @@
   --primary: #174a39;
   --primary-text: #fff;
   --primary-hover: #285e43;
+  --danger-bg: #fff1f2;
+  --danger-text: #9f2432;
+  --danger-border: #dba4aa;
+  --danger-hover: #ffe1e4;
+  --danger-hover-border: #b74754;
+  --danger-focus: #a62e3d;
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
@@ -112,6 +118,12 @@
   --primary: #adcfa3;
   --primary-text: #102018;
   --primary-hover: #c1dfb9;
+  --danger-bg: #40232a;
+  --danger-text: #ffc0c5;
+  --danger-border: #a85b66;
+  --danger-hover: #542b33;
+  --danger-hover-border: #d4848f;
+  --danger-focus: #f2a3ad;
 }
 
 * {
@@ -1493,6 +1505,64 @@ footer p {
 }
 
 /* Guided demonstrator configuration and progress. */
+.parcel-removal {
+  margin: 16px 0;
+}
+.remove-parcel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--danger-text);
+  background: var(--danger-bg);
+  border-color: var(--danger-border);
+  border-radius: 8px;
+}
+.remove-parcel:hover:not(:disabled) {
+  background: var(--danger-hover);
+  border-color: var(--danger-hover-border);
+}
+.remove-parcel:focus-visible {
+  outline-color: var(--danger-focus);
+}
+.parcel-removal-preview {
+  padding: 16px;
+  margin: 12px 0;
+  border: 1px solid var(--selected-border);
+  border-radius: 6px;
+  background: var(--history-bg);
+  overflow-wrap: anywhere;
+}
+.parcel-removal-preview h4 {
+  margin-top: 0;
+}
+.parcel-removal-preview p,
+.parcel-removal-preview li,
+.removal-costs {
+  font-size: 13px;
+}
+.removal-costs > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+}
+.removal-costs dd {
+  margin: 0;
+  white-space: nowrap;
+}
+.parcel-status {
+  border-left: 3px solid var(--selected-border);
+  padding: 8px 12px;
+  font-size: 13px;
+}
+.removed-parcels {
+  margin: 20px 0;
+  font-size: 13px;
+}
+.removed-parcels summary {
+  cursor: pointer;
+  font-weight: 600;
+}
 .plant-mixes,
 .plant-group {
   border: 1px solid var(--border);

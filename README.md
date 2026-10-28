@@ -102,6 +102,14 @@ Site details separate **current use**, **vegetation/cover**, **condition** and *
 
 The main timeline includes named parcel rows on a proportional year 0–30 axis, access start/end periods, preserved renewal gaps, indefinite-ownership arrows and a current-year marker. **Show land access**, **Show maintenance commitments** and parcel checkboxes let users display all, one or several parcels. These controls only affect presentation; hiding a row never cancels access, payments or commitments. Maintenance may outlast access. Preview bars are dashed and hypothetical; a pending proposal has no effective period. An existing-ownership row shows when its record was added, not an inferred acquisition date. The milestone cards retain their explicitly schematic spacing.
 
+## Deleting a parcel while exploring
+
+Each parcel card under **Land, rights & completed work** has a red **Delete parcel…** button. Deletion is an exploration edit outside the simulation workflow. The preview lists the parcel and dependent choices to delete, any other parcels affected through dependencies, and recalculated cash and project year. **Cancel** changes nothing. **Confirm deletion** rebuilds the project from its retained choices, removing the parcel's access arrangements, costs, planting, funding and timeline/history entries. It adds no deletion event, archive row or tombstone.
+
+Python remaps surviving parcel/agreement references and replays their original inputs and rules, including earlier save versions. Choices that cannot remain valid without the deleted parcel are explicitly listed in the preview. Explicit unrelated choices, such as advancing to a given year, remain. Cash and time are recomputed rather than recording sale proceeds or a simulated refund. **End land access** remains a separate simulation decision with history.
+
+**Undo deletion** restores the previous project until another change is saved, including after restarting Python. The previous project exists only in the local one-level undo buffer; **JSON exports omit that deletion buffer**, so exported files contain no hidden copy of the deleted parcel. The next saved change replaces the buffer. Older saves containing soft-removed/excluded parcels are cleaned on load or import, including their nested migration snapshots. Frozen legacy handlers validate those older saves before rebuilding them. Preview uses `POST /api/parcels/removal-preview`; confirmation uses the separate revision-checked, idempotent `POST /api/parcels/delete`. Deletion cannot be committed as a simulation action. Failed writes preserve the last saved project.
+
 ## Establishing the planting demonstrator
 
 **Plan the demonstrator** groups its inputs into **Site and planting**, **Plant checklist**, **Demonstration design**, **Funding route**, **Budget** and **Timing**. Presets cover the new picture's four dryland systems, candidate native planting mixes, objectives, comparison methods, baseline/monitoring approaches, public participation and results-sharing. **Custom option…** reveals text input without discarding other selections. Planting presets are documented examples, not site prescriptions or pre-approved fundable operations. Sources link to the existing picture, Níjar plant specification, pilot primer, AL20 table and official rules.
@@ -139,6 +147,8 @@ $env:RESTORATION_SAVE_PATH = 'C:\Users\JanEngelke\restoration-saves\active-proje
 | `backend/engine.py` | Standard-library-only rules, validation, prerequisites and deterministic transitions |
 | `backend/demonstrator.py` | Planting plans, stages, budget and preliminary AL20 3.4 checks |
 | `backend/planting.py` | Versioned plant catalogue, checklist validation and derived counts |
+| `backend/parcel_removal.py` | Exploration deletion, dependency replay and reference remapping |
+| `backend/parcel_removal_legacy.py` | Frozen validation of earlier soft-removal history |
 | `backend/storage.py` | Atomic persistence, import, saved undo and retry receipts |
 | `backend/app.py` | FastAPI routes and validated requests |
 | `scenarios/default.json` | New-project action table and embedded demonstrator catalogue |
@@ -148,6 +158,7 @@ $env:RESTORATION_SAVE_PATH = 'C:\Users\JanEngelke\restoration-saves\active-proje
 | `tests/test_square_metres.py` | Earlier small-plot journeys, category persistence and conversion |
 | `tests/test_demonstrator.py` | Guided pilot, cash/evidence separation, AL20 gates and version-3 migration |
 | `tests/test_planting.py` | Species quantities, custom plants, derived budgets, legacy replay and persistence |
+| `tests/test_parcel_removal.py` | Deletion replay, clean exports, legacy cleanup, atomic persistence and saved undo |
 
 Edit the scenario JSON for new projects. `backend/legacy.py`, `backend/engine_v2.py`, `backend/engine_v3.py` and `scenarios/legacy-v1.json` through `legacy-v3.json` are retained for exact replay of older saves. Existing saves retain their exact embedded definitions. Keep supported effect shapes and handler kinds; add new behavior through the explicit Python handlers. Incompatible handler/schema changes need version handling instead of silently reinterpreting saves. There is no scripting language, workflow editor or plugin framework.
 
@@ -186,6 +197,8 @@ The focused tests now cover all seven land routes, proposal/finalisation, schedu
 Verified on Windows on 27 October 2026 with Conda Python 3.12 and Node 22.23.4: all **62 tests passed** and the production frontend built. The version-4 browser playthrough planned a 200 m² dryland demonstrator with a custom objective, completed baseline recording, simulated AL20 3.4 feedback/application/award, planted, waited for follow-up, entered illustrative survival observations, evaluated the pilot and recorded reimbursement. The checklist browser check combined two mixes, preserved an edited quantity when re-adding a mix, deselected a plant with the keyboard, added a custom plant and restored the exact selections after saving, refreshing and reopening the editor. Desktop and 390-pixel phone layouts passed. Export/import, an actual test-backend restart and persisted undo passed in the earlier demonstrator playtest; automated tests also cover these with the species checklist. Tests additionally cover funding caps, uncertain eligibility, evidence and access gates, cash constraints, observation bounds, legacy migrations and preservation of earlier workflows. Browser checks used isolated saves under ignored `test-artifacts/`; no runtime dependencies were added.
 
 Manual acceptance: complete the journey at desktop and phone-sized widths, use Tab/Enter to reach controls, inspect the final summary and past results, refresh, then restart Python to verify restoration of state and undo. Stop for a playtest before adding GIS, document ingestion, real grants, forecasting or further infrastructure.
+
+Exploration deletion verified on 28 October 2026: **76 tests passed** and the production frontend built. An isolated two-parcel browser playtest deleted a purchased parcel and its installed planting, removed its four timeline/history entries, and restored cash from €41,355 to €60,000 and project time from year 0.75 to 0 while preserving the other finca. The exported JSON contained neither the deleted name nor a hidden undo copy. Undo restored the original project after refresh. Cancel and the 390-pixel phone layout also passed. Automated tests cover nested legacy snapshots, surviving references, funding and transitive dependencies, clean-up of earlier soft deletions, saved undo, invalid/stale requests and atomic-write failures.
 
 If Conda reports a corrupt shared package cache, use a separate project cache (ignored by Git) and retry:
 

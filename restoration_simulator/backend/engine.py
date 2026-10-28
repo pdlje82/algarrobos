@@ -3,15 +3,34 @@
 from copy import deepcopy
 import json
 from pathlib import Path
-from . import engine_v3 as core, demonstrator as demo, planting
+from . import (
+    engine_v3 as core,
+    demonstrator as demo,
+    planting,
+    parcel_removal,
+    parcel_removal_legacy,
+)
 
 Invalid = core.Invalid
 require, number, text, same_json = core.require, core.number, core.text, core.same_json
 ROUTES, LAND_KINDS = core.ROUTES, core.LAND_KINDS
-land_form, land_catalog = core.land_form, core.land_catalog
 route, field, options = core.route, core.field, core.options
-parcel_options, payment, advance = core.parcel_options, core.payment, core.advance
+parcel_options, payment, advance = (
+    parcel_removal.plant_options,
+    core.payment,
+    core.advance,
+)
 SCENARIO_PATH = Path(__file__).resolve().parents[1] / "scenarios" / "default.json"
+
+
+def land_catalog(state):
+    return core.land_catalog(parcel_removal.working_state(state))
+
+
+def land_form(state, route_id, parcel_id="new", agreement_id=None):
+    if parcel_id != "new":
+        parcel_removal.require_included(state, parcel_id)
+    return core.land_form(state, route_id, parcel_id, agreement_id)
 
 
 def validate_scenario(scenario):
@@ -165,7 +184,11 @@ def availability(state, a, checking=()):
     if state.get("schema_version") == 3:
         return core.availability(state, a, checking)
     if a["kind"] not in demo.KINDS:
-        return core.availability(state, a, checking)
+        return core.availability(
+            state if a["kind"] == "end_access" else parcel_removal.working_state(state),
+            a,
+            checking,
+        )
     if len(state["history"]) >= 500:
         return "unavailable", "The MVP supports at most 500 decisions."
     kind = a["kind"]
@@ -191,7 +214,13 @@ def unavailable(state, a):
 def list_actions(state):
     if state.get("schema_version") == 3:
         return core.list_actions(state)
-    generic = {a["id"]: a for a in core.list_actions(state)}
+    generic = {
+        a["id"]: a for a in core.list_actions(parcel_removal.working_state(state))
+    }
+    # Ending an existing arrangement remains possible on excluded parcels.
+    for a in core.list_actions(state):
+        if a["kind"] == "end_access":
+            generic[a["id"]] = a
     result = []
     for definition in state["scenario"]["actions"]:
         a = deepcopy(generic[definition["id"]])
@@ -249,6 +278,10 @@ def transition(state, action_id, inputs=None):
         state.get("schema_version") == 4,
         "Upgrade the saved project before taking new actions.",
     )
+    if action_id == parcel_removal.ACTION:
+        raise Invalid(
+            "Parcel deletion is an exploration edit, not a simulation action."
+        )
     definition = next(
         (a for a in state["scenario"]["actions"] if a["id"] == action_id), None
     )
@@ -256,6 +289,20 @@ def transition(state, action_id, inputs=None):
     status, reason = availability(state, definition)
     require(status == "available", reason)
     if definition["kind"] not in demo.KINDS:
+        if isinstance(inputs, dict):
+            if inputs.get("parcel_id") not in (None, "new"):
+                parcel_removal.require_included(state, inputs["parcel_id"])
+            if inputs.get("agreement_id") and definition["kind"] != "end_access":
+                agreement = next(
+                    (
+                        a
+                        for a in state["agreements"]
+                        if a["id"] == inputs["agreement_id"]
+                    ),
+                    None,
+                )
+                if agreement:
+                    parcel_removal.require_included(state, agreement["parcel_id"])
         # The frozen transition only uses this discriminator as an entry guard.
         # All version-4-only actions are handled below, never by the old engine.
         temporary = deepcopy(state)
@@ -356,7 +403,11 @@ def validate_state(state):
             "Original history was changed.",
         )
         for h in state["history"][baseline:]:
-            replay, _ = transition(replay, h["action_id"], h["inputs"])
+            replay, _ = (
+                parcel_removal_legacy.transition(replay, h["inputs"])
+                if h["action_id"] == parcel_removal.ACTION
+                else transition(replay, h["action_id"], h["inputs"])
+            )
             require(
                 same_json(replay["history"][-1], h),
                 "History does not match configured results.",
@@ -376,6 +427,9 @@ def summary(state):
         return core.summary(state)
     prepared = {
         **state,
+        "parcels": [
+            p for p in state["parcels"] if p.get("scenario_status") != "removed"
+        ],
         "grant": {
             **state["grant"],
             "status": "not_applied"
@@ -384,6 +438,11 @@ def summary(state):
         },
     }
     result = core.summary(prepared)
+    result["parcel_records"] = len(prepared["parcels"])
+    if any(p.get("scenario_status") == "excluded" for p in state["parcels"]):
+        result["asset_explanation"] += (
+            " Excluded parcels retain ownership, access and existing costs, but cannot be selected for new planting or land arrangements."
+        )
     if state["grant"]["status"] == "declined":
         result["grant_explanation"] = (
             "Application declined. No funding received; revise the uninstalled plan to choose other financing."

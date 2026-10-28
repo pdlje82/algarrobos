@@ -1,5 +1,6 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { area, money, year } from "./format.js";
+import { ParcelRemoval } from "./ParcelRemoval.jsx";
 
 export function FieldHelp({ label, children }) {
   const id = useId();
@@ -626,8 +627,19 @@ export function AccessTimeline({
   const [showAccess, setShowAccess] = useState(true);
   const [showMaintenance, setShowMaintenance] = useState(false);
   const [selection, setSelection] = useState(null);
+  const removed = new Set(
+    parcels.filter((p) => p.scenario_status === "removed").map((p) => p.id),
+  );
+  agreements = agreements.filter((a) => !removed.has(a.parcel_id));
+  const agreementIds = new Set(agreements.map((a) => a.id));
+  obligations = obligations.filter((o) => agreementIds.has(o.agreement_id));
   if (!agreements.length && !obligations.length) return null;
-  const parcelName = (id) => parcels.find((p) => p.id === id)?.name || id;
+  const parcelName = (id) => {
+    const p = parcels.find((p) => p.id === id);
+    return p
+      ? `${p.name}${p.scenario_status === "excluded" ? " · excluded from new work" : ""}`
+      : id;
+  };
   const partyName = (id) => parties.find((p) => p.id === id)?.name || id;
   const ids = [
     ...new Set([
@@ -792,7 +804,14 @@ export function AccessTimeline({
   );
 }
 
-export function LandRecords({ project, summary }) {
+export function LandRecords({
+  project,
+  summary,
+  revision,
+  busy,
+  onRemovalPreview,
+  onRemovalConfirm,
+}) {
   const party = (id) => project.parties.find((p) => p.id === id)?.name || id;
   return (
     <>
@@ -821,95 +840,106 @@ export function LandRecords({ project, summary }) {
           recorded terms.
         </p>
       )}
-      {project.parcels.map((p) => (
-        <article className="parcel" key={p.id}>
-          <h3>
-            {p.name}
-            <span>{area(p.area)} total</span>
-          </h3>
-          <p>
-            Owner: {party(p.owner_id)} · {p.location}
-          </p>
-          <small>
-            Ownership acquisition expenditure: {money(p.acquisition_cost)}; no
-            market valuation.
-          </small>
-          <details>
-            <summary>Site record</summary>
+      {project.parcels
+        .filter((p) => p.scenario_status !== "removed")
+        .map((p) => (
+          <article className="parcel" key={p.id}>
+            <h3>
+              {p.name}
+              <span>{area(p.area)} total</span>
+            </h3>
             <p>
-              Use: {p.current_use} · Cover: {p.current_cover} · Physical access:{" "}
-              {p.physical_access}
+              Owner: {party(p.owner_id)} · {p.location}
             </p>
-            <p>Cadastral reference: {p.cadastral_reference || "Unknown"}</p>
-            <p>Condition: {p.site_condition || "Not specified"}</p>
-            <p>{p.restrictions}</p>
-          </details>
-          {project.agreements
-            .filter((a) => a.parcel_id === p.id)
-            .map((a) => (
-              <div className="agreement-record" key={a.id}>
-                <h4>
-                  {a.id} ·{" "}
-                  {a.route_id === "existing"
-                    ? "Existing ownership record"
-                    : a.route_id.replaceAll("_", " ")}{" "}
-                  <span className="agreement-status">
-                    {a.route_id === "existing" && a.status === "active"
-                      ? "Recorded"
-                      : a.status}
-                  </span>
-                </h4>
-                <p>
-                  {area(a.covered_area)} included · Holder: {party(a.holder_id)}{" "}
-                  · Operator: {party(a.operator_id)}
-                </p>
-                <p>
-                  {a.start === null
-                    ? "Not effective"
-                    : `${a.route_id === "existing" ? "Recorded at" : "Starts"} year ${year(a.start)}`}{" "}
-                  ·{" "}
-                  {a.end === null
-                    ? "No expiry recorded"
-                    : `Ends year ${year(a.end)}`}
-                </p>
-                <details>
-                  <summary>
-                    {a.route_id === "existing"
-                      ? "Ownership information and permissions"
-                      : "Contract terms, permissions and evidence"}
-                  </summary>
-                  <p>{a.instrument}</p>
-                  <p>
-                    Upfront: {money(a.upfront)} · Annual access:{" "}
-                    {money(a.annual_payment)} · Deposit held:{" "}
-                    {money(a.deposit_held)}
-                  </p>
-                  <p>
-                    Restoration: {a.allow_restoration} · Monitoring:{" "}
-                    {a.allow_monitoring} · Public visits: {a.allow_public} ·
-                    Permits: {a.permits.replaceAll("_", " ")}
-                  </p>
-                  <p>
-                    Evidence: {a.evidence.replaceAll("_", " ")} — not legal
-                    verification.
-                  </p>
-                  <p>{a.exit_terms}</p>
-                  <p>Source: {a.source}</p>
-                </details>
-              </div>
-            ))}
-          <ul>
-            {project.activities
+            <small>
+              Ownership acquisition expenditure: {money(p.acquisition_cost)}; no
+              market valuation.
+            </small>
+            {project.schema_version === 4 && onRemovalPreview && (
+              <ParcelRemoval
+                parcel={p}
+                revision={revision}
+                busy={busy}
+                onPreview={onRemovalPreview}
+                onConfirm={onRemovalConfirm}
+              />
+            )}
+            <details>
+              <summary>Site record</summary>
+              <p>
+                Use: {p.current_use} · Cover: {p.current_cover} · Physical
+                access: {p.physical_access}
+              </p>
+              <p>Cadastral reference: {p.cadastral_reference || "Unknown"}</p>
+              <p>Condition: {p.site_condition || "Not specified"}</p>
+              <p>{p.restrictions}</p>
+            </details>
+            {project.agreements
               .filter((a) => a.parcel_id === p.id)
               .map((a) => (
-                <li key={a.id}>
-                  {a.title} · {area(a.area)} · completed year {year(a.year)}{" "}
-                  (historical record)
-                </li>
+                <div className="agreement-record" key={a.id}>
+                  <h4>
+                    {a.id} ·{" "}
+                    {a.route_id === "existing"
+                      ? "Existing ownership record"
+                      : a.route_id.replaceAll("_", " ")}{" "}
+                    <span className="agreement-status">
+                      {a.route_id === "existing" && a.status === "active"
+                        ? "Recorded"
+                        : a.status}
+                    </span>
+                  </h4>
+                  <p>
+                    {area(a.covered_area)} included · Holder:{" "}
+                    {party(a.holder_id)} · Operator: {party(a.operator_id)}
+                  </p>
+                  <p>
+                    {a.start === null
+                      ? "Not effective"
+                      : `${a.route_id === "existing" ? "Recorded at" : "Starts"} year ${year(a.start)}`}{" "}
+                    ·{" "}
+                    {a.end === null
+                      ? "No expiry recorded"
+                      : `Ends year ${year(a.end)}`}
+                  </p>
+                  <details>
+                    <summary>
+                      {a.route_id === "existing"
+                        ? "Ownership information and permissions"
+                        : "Contract terms, permissions and evidence"}
+                    </summary>
+                    <p>{a.instrument}</p>
+                    <p>
+                      Upfront: {money(a.upfront)} · Annual access:{" "}
+                      {money(a.annual_payment)} · Deposit held:{" "}
+                      {money(a.deposit_held)}
+                    </p>
+                    <p>
+                      Restoration: {a.allow_restoration} · Monitoring:{" "}
+                      {a.allow_monitoring} · Public visits: {a.allow_public} ·
+                      Permits: {a.permits.replaceAll("_", " ")}
+                    </p>
+                    <p>
+                      Evidence: {a.evidence.replaceAll("_", " ")} — not legal
+                      verification.
+                    </p>
+                    <p>{a.exit_terms}</p>
+                    <p>Source: {a.source}</p>
+                  </details>
+                </div>
               ))}
-          </ul>
-        </article>
-      ))}
+            <ul>
+              {project.activities
+                .filter((a) => a.parcel_id === p.id)
+                .map((a) => (
+                  <li key={a.id}>
+                    {a.title} · {area(a.area)} · completed year {year(a.year)}{" "}
+                    (historical record)
+                  </li>
+                ))}
+            </ul>
+          </article>
+        ))}
       {summary.beyond_horizon.length > 0 && (
         <p className="reason">
           {summary.beyond_horizon.length} maintenance commitment(s) continue
