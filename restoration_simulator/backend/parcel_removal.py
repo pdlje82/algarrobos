@@ -7,9 +7,9 @@ rebuilt project. The store alone owns the explicit, single-level undo buffer.
 from copy import deepcopy
 from . import engine_v3 as core, engine_v2, legacy
 from .parcel_removal_legacy import (
-    working_state,
-    plant_options,
-    require_included,
+    working_state as working_state,
+    plant_options as plant_options,
+    require_included as require_included,
     transition as old_removal,
 )
 
@@ -33,13 +33,17 @@ def rebuild(state, parcel_ids):
 
     def sync(original, kept):
         # Migrations synthesize agreements; match through the surviving parcel.
-        for old in original.get("agreements", []):
+        old_agreements = (
+            [] if original["schema_version"] == 1 else original["agreements"]
+        )
+        new_agreements = [] if kept["schema_version"] == 1 else kept["agreements"]
+        for old in old_agreements:
             if old["id"] in maps["agreement_id"]:
                 continue
             parcel = maps["parcel_id"].get(old["parcel_id"])
             candidates = [
                 a
-                for a in kept.get("agreements", [])
+                for a in new_agreements
                 if a["parcel_id"] == parcel
                 and a["route_id"] == old["route_id"]
                 and a["id"] not in maps["agreement_id"].values()
@@ -56,7 +60,7 @@ def rebuild(state, parcel_ids):
             3: "previous_origin",
             4: "demonstrator_origin",
         }[version]
-        origin = stage.get(origin_key) if origin_key else None
+        origin = stage[origin_key] if origin_key is not None else None
         if origin is not None:
             kept_origin = walk(origin)
             migrate = module.migrate_legacy if version == 2 else module.migrate_previous
@@ -79,14 +83,15 @@ def rebuild(state, parcel_ids):
                 for p in original["parcels"]
                 if p["id"] not in {p["id"] for p in before["parcels"]}
             ]
-            kind = next(
-                (
-                    a["kind"]
-                    for a in before["scenario"]["actions"]
-                    if a["id"] == h["action_id"]
-                ),
-                "",
-            )
+            if h["action_id"] == ACTION:
+                kind = "legacy_exploration_edit"
+            else:
+                definitions = {a["id"]: a for a in before["scenario"]["actions"]}
+                core.require(
+                    h["action_id"] in definitions,
+                    "Unknown action during deletion replay: " + h["action_id"],
+                )
+                kind = definitions[h["action_id"]]["kind"]
             values = deepcopy(h["inputs"])
             affected = {p["id"] for p in created}
             if values.get("parcel_id") not in (None, "new"):
@@ -94,7 +99,7 @@ def rebuild(state, parcel_ids):
             if values.get("agreement_id"):
                 affected.update(
                     a["parcel_id"]
-                    for a in before.get("agreements", [])
+                    for a in before["agreements"]
                     if a["id"] == values["agreement_id"]
                 )
             if (kind.startswith("demo_") and kind != "demo_plan") or kind.startswith(

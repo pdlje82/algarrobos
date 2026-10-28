@@ -1,8 +1,8 @@
 """Schema-4 planting demonstrator, with frozen replay of prior projects."""
 
 from copy import deepcopy
-import json
 from pathlib import Path
+from .configuration import load_defaults, forms_for, read_json
 from . import (
     engine_v3 as core,
     demonstrator as demo,
@@ -31,20 +31,18 @@ def land_form(state, route_id, parcel_id="new", agreement_id=None):
     if parcel_id != "new":
         parcel_removal.require_included(state, parcel_id)
     form = core.land_form(state, route_id, parcel_id, agreement_id)
-    if (
-        state.get("schema_version") == 4
-        and route_id == "existing"
-        and parcel_id == "new"
-        and agreement_id is None
-    ):
-        settings = route(state, route_id)
-        defaults = {
-            "parcel_area": settings.get("default_parcel_area", 4500),
-            "covered_area": settings.get("default_covered_area", 200),
-        }
+    if state["schema_version"] == 4 and agreement_id is None:
+        defaults = forms_for(state["scenario"])["land"][route_id]
         for f in form["fields"]:
-            if f["name"] in defaults:
+            # Existing parcels supply their entered area; proposals supply all
+            # their recorded values. JSON prefills apply only to new inputs.
+            if f["name"] in defaults and (
+                parcel_id == "new" or f["name"] not in {"parcel_area", "covered_area"}
+            ):
                 f["default"] = defaults[f["name"]]
+    core.validate_fields(
+        form["fields"], {f["name"]: f["default"] for f in form["fields"]}
+    )
     return form
 
 
@@ -67,12 +65,11 @@ def validate_scenario(scenario):
                 )
                 a.update(kind="advance", effects={})
         core.validate_scenario(surrogate)
-        existing = next(r for r in scenario["land_routes"] if r["id"] == "existing")
-        total = existing.get("default_parcel_area", 4500)
-        included = existing.get("default_covered_area", 200)
+        input_defaults = forms_for(scenario)
         require(
-            number(total, 0.01, 100000000) and number(included, 0.01, total),
-            "Existing-ownership default areas must be positive, with included area no larger than the parcel.",
+            input_defaults["demonstrator"]["plan"]["applicant_id"]
+            in {p["id"] for p in core.PARTIES},
+            "Default applicant must be a configured starting party.",
         )
         c = scenario["demonstrator_config"]
         require(
@@ -134,7 +131,21 @@ def validate_scenario(scenario):
 
 
 def load_scenario():
-    return validate_scenario(json.loads(SCENARIO_PATH.read_text(encoding="utf-8")))
+    scenario = read_json(SCENARIO_PATH)
+    require(
+        isinstance(scenario, dict)
+        and "form_schema_version" in scenario
+        and "defaults_file" in scenario,
+        "Default scenario requires form_schema_version and defaults_file.",
+    )
+    require(
+        scenario["form_schema_version"] == 2
+        and scenario["defaults_file"] == "defaults.json",
+        "Unsupported default scenario configuration reference.",
+    )
+    scenario.pop("defaults_file")
+    scenario["input_defaults"] = load_defaults()["forms"]
+    return validate_scenario(scenario)
 
 
 def new_project(name, scenario=None, project_id=None):
@@ -165,9 +176,7 @@ def migrate_previous(old, scenario=None):
         any(h["action_id"] == "demonstrator" for h in old["history"])
         or old["grant"]["status"] != "not_applied"
     )
-    legacy_workflow = (
-        scenario.get("legacy_workflow", False) if scenario is not None else historic
-    )
+    legacy_workflow = scenario["legacy_workflow"] if scenario is not None else historic
     require(
         type(legacy_workflow) is bool and (legacy_workflow or not historic),
         "Completed original demonstrators must retain their original workflow.",
@@ -244,10 +253,19 @@ def list_actions(state):
         if a["kind"] == "end_access":
             generic[a["id"]] = a
     result = []
+    form_defaults = forms_for(state["scenario"])
     for definition in state["scenario"]["actions"]:
         a = deepcopy(generic[definition["id"]])
+        if "terms_label" not in a:
+            a["terms_label"] = None  # Fixed-cost actions display cost/duration.
         a["status"], a["reason"] = availability(state, a)
         a["available"] = a["status"] == "available"
+        if a["kind"] == "renew_access":
+            for f in a["fields"]:
+                if f["name"] != "agreement_id":
+                    f["default"] = form_defaults["actions"]["renew_access"][f["name"]]
+        elif a["kind"] == "advance":
+            a["fields"][0]["default"] = state["scenario"]["horizon"]
         if a["kind"] in demo.KINDS:
             a["fields"] = (
                 demo.fields(state, a["kind"])
@@ -339,13 +357,18 @@ def transition(state, action_id, inputs=None):
     checklist = (
         kind == "demo_plan" and isinstance(inputs, dict) and "plant_selection" in inputs
     )
-    definitions = demo.fields(state, kind, legacy=kind == "demo_plan" and not checklist)
+    counts = planting.resolve(inputs["plant_selection"]) if checklist else None
+    definitions = demo.fields(
+        state,
+        kind,
+        legacy=kind == "demo_plan" and not checklist,
+        priced=checklist and inputs["plant_selection"]["version"] == 2,
+    )
     if checklist:
         values = {k: v for k, v in inputs.items() if k != "plant_selection"}
         validate_fields(
             [f for f in definitions if f["name"] != "plant_selection"], values
         )
-        counts = planting.resolve(inputs["plant_selection"])
         values.update(
             plant_selection=deepcopy(inputs["plant_selection"]),
             plant_mix="selected_species",

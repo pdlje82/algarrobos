@@ -13,10 +13,13 @@ from test_demonstrator import site, planned, baseline, step
 
 
 def inputs(state, **changes):
+    priced = not (
+        "plant_selection" in changes and changes["plant_selection"]["version"] == 1
+    )
     return {
         **{
             f["name"]: deepcopy(f["default"])
-            for f in demonstrator.fields(state, "demo_plan")
+            for f in demonstrator.fields(state, "demo_plan", priced=priced)
         },
         "funding_route": "self",
         "vegetation_system": "woodland",
@@ -66,9 +69,9 @@ class PlantChecklistTests(unittest.TestCase):
         self.assertEqual(new["demonstrator"]["budget"]["total"], 845)
         self.assertEqual(inputs(new)["plant_selection"], v["plant_selection"])
         self.assertEqual(new["demonstrator"]["plan"]["shrubs"], 30)
-        self.assertEqual(
-            engine.summary(new)["demonstrator"]["planting"]["questions"], []
-        )
+        questions = engine.summary(new)["demonstrator"]["planting"]["questions"]
+        self.assertEqual(len(questions), 1)
+        self.assertIn("unconfirmed estimates", questions[0])
 
     def test_invalid_entries_and_aggregate_injection_are_atomic(self):
         state = site()
@@ -160,7 +163,9 @@ class PlantChecklistTests(unittest.TestCase):
             )
             saved = store.snapshot()
             self.assertEqual(Store(path).snapshot(), saved)
-            self.assertEqual(validate_export(store.export())["project"], saved["project"])
+            self.assertEqual(
+                validate_export(store.export())["project"], saved["project"]
+            )
             undone, _ = Store(path).mutate("undo", saved["revision"], str(uuid4()), {})
             self.assertEqual(
                 undone["project"]["demonstrator"]["plan"]["plant_selection"],

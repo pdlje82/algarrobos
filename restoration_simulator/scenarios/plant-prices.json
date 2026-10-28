@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "currency": "EUR",
+  "unit_costs": {
+    "carob": 6,
+    "wild_olive": 6,
+    "lentisk": 2.5,
+    "buckthorn": 2.5,
+    "palmetto": 2.5,
+    "retama": 2.5,
+    "esparto": 2.5,
+    "thyme": 2.5,
+    "ziziphus": 2.5,
+    "lycium": 2.5,
+    "salsola": 2.5,
+    "oleander": 2.5,
+    "tamarix": 6
+  },
+  "custom_unit_costs": {
+    "tree": 6,
+    "shrub": 2.5,
+    "grass": 2.5
+  }
+}

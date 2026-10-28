@@ -1,6 +1,7 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { area, money, year } from "./format.js";
 import { ParcelRemoval } from "./ParcelRemoval.jsx";
+import { required, inputValue, record } from "./contracts.js";
 
 export function FieldHelp({ label, children }) {
   const id = useId();
@@ -43,6 +44,7 @@ export function FieldHelp({ label, children }) {
 }
 
 function CategoryInput({ field: f, value, onChange, disabled }) {
+  required(typeof value === "string", `Invalid category input ${f.name}.`);
   const [adding, setAdding] = useState(false);
   const custom =
     adding || (Boolean(value) && !f.options.some((o) => o.value === value));
@@ -51,7 +53,7 @@ function CategoryInput({ field: f, value, onChange, disabled }) {
       <select
         id={`field-${f.name}`}
         disabled={disabled}
-        value={custom ? "__custom__" : (value ?? "")}
+        value={custom ? "__custom__" : value}
         aria-describedby={`help-${f.name}`}
         onChange={(e) => {
           const add = e.target.value === "__custom__";
@@ -64,7 +66,9 @@ function CategoryInput({ field: f, value, onChange, disabled }) {
             {o.label}
           </option>
         ))}
-        <option value="__custom__">{f.custom_label || "Add category…"}</option>
+        <option value="__custom__">
+          {Object.hasOwn(f, "custom_label") ? f.custom_label : "Add category…"}
+        </option>
       </select>
       {custom && (
         <>
@@ -76,7 +80,7 @@ function CategoryInput({ field: f, value, onChange, disabled }) {
             aria-label={`${f.label}: ${f.custom_label ? "custom details" : "new category name"}`}
             maxLength={f.maxLength}
             disabled={disabled}
-            value={value ?? ""}
+            value={value}
             onChange={(e) => onChange(e.target.value)}
           />
         </>
@@ -99,14 +103,14 @@ export function Fields({ fields, inputs, onChange, disabled }) {
             {f.type === "category" ? (
               <CategoryInput
                 field={f}
-                value={inputs[f.name]}
+                value={inputValue(inputs, f.name)}
                 disabled={disabled}
                 onChange={(value) => onChange({ ...inputs, [f.name]: value })}
               />
             ) : f.type === "select" ? (
               <select
                 id={`field-${f.name}`}
-                value={inputs[f.name] ?? ""}
+                value={inputValue(inputs, f.name)}
                 disabled={disabled}
                 onChange={(e) =>
                   onChange({
@@ -138,7 +142,7 @@ export function Fields({ fields, inputs, onChange, disabled }) {
                 id={`field-${f.name}`}
                 maxLength={f.maxLength}
                 aria-describedby={f.help ? `help-${f.name}` : undefined}
-                value={inputs[f.name] ?? ""}
+                value={inputValue(inputs, f.name)}
                 disabled={disabled}
                 onChange={(e) =>
                   onChange({ ...inputs, [f.name]: e.target.value })
@@ -149,11 +153,11 @@ export function Fields({ fields, inputs, onChange, disabled }) {
                 id={`field-${f.name}`}
                 type={f.type}
                 aria-describedby={f.help ? `help-${f.name}` : undefined}
-                value={inputs[f.name] ?? ""}
+                value={inputValue(inputs, f.name)}
                 disabled={disabled}
                 min={f.min}
                 max={f.max}
-                step={f.step ?? "any"}
+                step={Object.hasOwn(f, "step") ? f.step : "any"}
                 maxLength={f.maxLength}
                 onChange={(e) =>
                   onChange({
@@ -170,8 +174,9 @@ export function Fields({ fields, inputs, onChange, disabled }) {
             )}
             {f.unknown_allowed && (
               <small className="muted">
-                {f.unknown_help ||
-                  "Leave blank for Unknown; proposals can retain unresolved terms."}
+                {Object.hasOwn(f, "unknown_help")
+                  ? f.unknown_help
+                  : "Leave blank for Unknown; proposals can retain unresolved terms."}
               </small>
             )}
             {f.help && (
@@ -197,7 +202,9 @@ export function LandEditor({
 }) {
   const finalising = action.kind === "activate_access";
   const [agreementId, setAgreementId] = useState(
-    action.fields[0]?.default || "",
+    finalising
+      ? action.fields.find((f) => f.name === "agreement_id").default
+      : "",
   );
   const proposal = data.project.agreements.find((a) => a.id === agreementId);
   const [routeId, setRouteId] = useState("");
@@ -206,18 +213,19 @@ export function LandEditor({
   const [wholeParcel, setWholeParcel] = useState(false);
   const [form, setForm] = useState(null);
   const [error, setError] = useState("");
+  const [formAttempt, setFormAttempt] = useState(0);
   const drafts = useRef({});
   const selectedRoute = finalising ? proposal?.route_id : routeId;
   const selectedParcel = finalising ? proposal?.parcel_id : parcelId;
   const key = `${selectedRoute}/${selectedParcel}/${finalising ? agreementId : "new"}`;
-  const routes = data.land_access?.routes || [];
+  const routes = data.land_access.routes;
   const chosen = routes.find((r) => r.id === selectedRoute);
   useEffect(() => {
     onReady(false);
     setError("");
     setForm(null);
     setWholeParcel(false);
-    onChange({});
+    onChange(Object.hasOwn(drafts.current, key) ? drafts.current[key] : {});
     if (!selectedRoute || !selectedParcel) return;
     let ignore = false;
     request("land/form", {
@@ -235,7 +243,9 @@ export function LandEditor({
         };
         if (finalising) initial.agreement_id = agreementId;
         setForm(result);
-        onChange(drafts.current[key] || initial);
+        onChange(
+          Object.hasOwn(drafts.current, key) ? drafts.current[key] : initial,
+        );
         onReady(true);
       })
       .catch((e) => {
@@ -254,13 +264,17 @@ export function LandEditor({
     request,
     onChange,
     onReady,
+    formAttempt,
   ]);
   function edit(next) {
     if (selectedRoute === "existing" && next.owner_id)
       next = { ...next, holder_id: next.owner_id };
     if (wholeParcel && next.parcel_area !== inputs.parcel_area)
       next = { ...next, covered_area: next.parcel_area };
-    else if (next.covered_area !== (next.parcel_area ?? form.parcel_area))
+    else if (
+      next.covered_area !==
+      (selectedParcel === "new" ? next.parcel_area : form.parcel_area)
+    )
       setWholeParcel(false);
     drafts.current[key] = next;
     onChange(next);
@@ -430,9 +444,16 @@ export function LandEditor({
         </>
       )}
       {error && (
-        <p className="error" role="alert">
-          {error}
-        </p>
+        <div className="error" role="alert">
+          <p>{error}</p>
+          <button
+            type="button"
+            disabled={busy}
+            onClick={() => setFormAttempt((value) => value + 1)}
+          >
+            Retry configuration
+          </button>
+        </div>
       )}
       {chosen && (
         <div className="selected-route">
@@ -480,12 +501,20 @@ export function LandEditor({
                     if (e.target.checked)
                       edit({
                         ...inputs,
-                        covered_area: inputs.parcel_area ?? form.parcel_area,
+                        covered_area:
+                          selectedParcel === "new"
+                            ? inputs.parcel_area
+                            : form.parcel_area,
                       });
                   }}
                 />
                 Use the entire parcel (
-                {area(inputs.parcel_area ?? form.parcel_area)})
+                {area(
+                  selectedParcel === "new"
+                    ? inputs.parcel_area
+                    : form.parcel_area,
+                )}
+                )
               </label>
               <details className="land-section">
                 <summary>Site details and unresolved restrictions</summary>
@@ -574,7 +603,10 @@ export function LandEditor({
 function PeriodBar({ start, end, label, currentYear, preview }) {
   const [show, setShow] = useState(false);
   const left = Math.max(0, Math.min(100, (start / 30) * 100));
-  const right = Math.max(left, Math.min(100, ((end ?? 30) / 30) * 100));
+  const right = Math.max(
+    left,
+    Math.min(100, ((end === null ? 30 : end) / 30) * 100),
+  );
   const description = `${label}. ${end === null ? "No expiry recorded; continues beyond this view." : `Ends year ${year(end)}${end > 30 ? "; continues beyond the playable horizon" : ""}.`}`;
   return (
     <div className="rights-period">
@@ -617,10 +649,10 @@ function PeriodBar({ start, end, label, currentYear, preview }) {
 
 export function AccessTimeline({
   agreements,
-  obligations = [],
-  parcels = [],
-  parties = [],
-  currentYear = 0,
+  obligations,
+  parcels,
+  parties,
+  currentYear,
   title = "Land access and commitments",
   preview = false,
 }) {
@@ -630,17 +662,17 @@ export function AccessTimeline({
   const removed = new Set(
     parcels.filter((p) => p.scenario_status === "removed").map((p) => p.id),
   );
+  for (const obligation of obligations)
+    record(agreements, obligation.agreement_id, "agreement");
   agreements = agreements.filter((a) => !removed.has(a.parcel_id));
   const agreementIds = new Set(agreements.map((a) => a.id));
   obligations = obligations.filter((o) => agreementIds.has(o.agreement_id));
   if (!agreements.length && !obligations.length) return null;
   const parcelName = (id) => {
-    const p = parcels.find((p) => p.id === id);
-    return p
-      ? `${p.name}${p.scenario_status === "excluded" ? " · excluded from new work" : ""}`
-      : id;
+    const p = record(parcels, id, "parcel");
+    return `${p.name}${p.scenario_status === "excluded" ? " · excluded from new work" : ""}`;
   };
-  const partyName = (id) => parties.find((p) => p.id === id)?.name || id;
+  const partyName = (id) => record(parties, id, "party").name;
   const ids = [
     ...new Set([
       ...agreements.map((a) => a.parcel_id),
@@ -652,15 +684,14 @@ export function AccessTimeline({
   const visible = (id) => selection === null || selection.includes(id);
   const toggle = (id) =>
     setSelection((prev) => {
-      const prior = prev ?? ids;
+      const prior = prev === null ? ids : prev; // Null explicitly means all parcels.
       return prior.includes(id)
         ? prior.filter((x) => x !== id)
         : [...prior, id];
     });
-  const maintenance = obligations.filter((o) => {
-    const a = agreements.find((a) => a.id === o.agreement_id);
-    return a && visible(a.parcel_id);
-  });
+  const maintenance = obligations.filter((o) =>
+    visible(record(agreements, o.agreement_id, "agreement").parcel_id),
+  );
   return (
     <section
       className={`access-timeline ${preview ? "draft-timeline" : ""}`}
@@ -812,7 +843,7 @@ export function LandRecords({
   onRemovalPreview,
   onRemovalConfirm,
 }) {
-  const party = (id) => project.parties.find((p) => p.id === id)?.name || id;
+  const party = (id) => record(project.parties, id, "party").name;
   return (
     <>
       <div className="land-totals">
@@ -870,8 +901,16 @@ export function LandRecords({
                 Use: {p.current_use} · Cover: {p.current_cover} · Physical
                 access: {p.physical_access}
               </p>
-              <p>Cadastral reference: {p.cadastral_reference || "Unknown"}</p>
-              <p>Condition: {p.site_condition || "Not specified"}</p>
+              <p>
+                Cadastral reference:{" "}
+                {p.cadastral_reference === ""
+                  ? "Unknown"
+                  : p.cadastral_reference}
+              </p>
+              <p>
+                Condition:{" "}
+                {p.site_condition === "" ? "Not specified" : p.site_condition}
+              </p>
               <p>{p.restrictions}</p>
             </details>
             {project.agreements
@@ -952,7 +991,7 @@ export function LandRecords({
           {project.payments.map((p) => (
             <li key={p.id}>
               Year {year(p.year)} · {p.kind} · {money(p.cash_change)}{" "}
-              {p.agreement_id || ""}
+              {p.agreement_id === null ? "" : p.agreement_id}
             </li>
           ))}
         </ul>
@@ -961,17 +1000,38 @@ export function LandRecords({
   );
 }
 
-export function Outcome({ preview, previewBusy, previewError, busy, ready }) {
+export function PreviewStatus({ preview, previewBusy, previewError }) {
+  return (
+    <p className="preview-status muted" role="status" aria-live="polite">
+      {previewBusy
+        ? preview
+          ? "Updating preview · previous calculation remains visible."
+          : "Preparing the first preview…"
+        : previewError
+          ? preview
+            ? "Draft needs attention · previous calculation is not current."
+            : "Draft needs attention before a preview is available."
+          : preview
+            ? "Preview up to date."
+            : "Complete the configuration to preview."}
+    </p>
+  );
+}
+
+export function Outcome({ preview, previewBusy, previewError, onRetry, busy, ready, showStatus = true }) {
   return (
     <>
-      {previewBusy && <p role="status">Calculating preview in Python…</p>}
+      {showStatus && <PreviewStatus preview={preview} previewBusy={previewBusy} previewError={previewError} />}
       {previewError && (
-        <p className="error" role="alert">
-          {previewError}
-        </p>
+        <div className="error" role="alert">
+          <p>{previewError}</p>
+          <button type="button" disabled={busy || previewBusy} onClick={onRetry}>
+            Retry preview
+          </button>
+        </div>
       )}
       {preview && (
-        <div className="preview" aria-live="polite">
+        <div className="preview" aria-busy={previewBusy}>
           <span className="eyebrow">Configured result · preview</span>
           <p>{preview.explanation}</p>
           <dl>
@@ -1026,7 +1086,7 @@ export function Outcome({ preview, previewBusy, previewError, busy, ready }) {
           </dl>
           {preview.agreements && (
             <AccessTimeline
-              agreements={preview.timeline_agreements ?? preview.agreements}
+              agreements={preview.timeline_agreements}
               parcels={preview.parcels}
               parties={preview.parties}
               currentYear={preview.end_year}

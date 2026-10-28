@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "tree",
+      "label": "Trees"
+    },
+    {
+      "id": "shrub",
+      "label": "Shrubs"
+    },
+    {
+      "id": "grass",
+      "label": "Grasses / herbaceous plants"
+    }
+  ],
+  "plants": [
+    {
+      "id": "carob",
+      "label": "Carob",
+      "group": "tree",
+      "system": "woodland",
+      "suggested_quantity": 5,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Woodland–shrub mosaic · system 3. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "wild_olive",
+      "label": "Wild olive",
+      "group": "tree",
+      "system": "woodland",
+      "suggested_quantity": 5,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Woodland–shrub mosaic · system 3. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "lentisk",
+      "label": "Lentisk",
+      "group": "shrub",
+      "system": "woodland",
+      "suggested_quantity": 10,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Woodland–shrub mosaic · system 3. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "buckthorn",
+      "label": "Buckthorn",
+      "group": "shrub",
+      "system": "woodland",
+      "suggested_quantity": 10,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Woodland–shrub mosaic · system 3. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "palmetto",
+      "label": "Palmetto",
+      "group": "shrub",
+      "system": "woodland",
+      "suggested_quantity": 10,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Woodland–shrub mosaic · system 3. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "retama",
+      "label": "Retama",
+      "group": "shrub",
+      "system": "scrub",
+      "suggested_quantity": 10,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Semi-arid shrubland / grassland · system 4. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "esparto",
+      "label": "Esparto",
+      "group": "grass",
+      "system": "scrub",
+      "suggested_quantity": 20,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Semi-arid shrubland / grassland · system 4. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "thyme",
+      "label": "Thyme",
+      "group": "shrub",
+      "system": "scrub",
+      "suggested_quantity": 10,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Semi-arid shrubland / grassland · system 4. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "ziziphus",
+      "label": "Ziziphus",
+      "group": "shrub",
+      "system": "arid",
+      "suggested_quantity": 10,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Very arid scrub · system 5. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "lycium",
+      "label": "Lycium",
+      "group": "shrub",
+      "system": "arid",
+      "suggested_quantity": 10,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Very arid scrub · system 5. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "salsola",
+      "label": "Salsola",
+      "group": "shrub",
+      "system": "arid",
+      "suggested_quantity": 10,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Very arid scrub · system 5. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "oleander",
+      "label": "Oleander",
+      "group": "shrub",
+      "system": "watercourse",
+      "suggested_quantity": 10,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Seasonal watercourse · system 2. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "tamarix",
+      "label": "Tamarix (tree form)",
+      "group": "tree",
+      "system": "watercourse",
+      "suggested_quantity": 5,
+      "source": "/api/sources/dryland-systems",
+      "detail": "Library example for Seasonal watercourse · system 2. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    }
+  ],
+  "mixes": [
+    {
+      "id": "woodland",
+      "label": "Woodland–shrub mosaic · system 3",
+      "plant_ids": [
+        "carob",
+        "wild_olive",
+        "lentisk",
+        "buckthorn",
+        "palmetto"
+      ]
+    },
+    {
+      "id": "scrub",
+      "label": "Semi-arid shrubland / grassland · system 4",
+      "plant_ids": [
+        "retama",
+        "esparto",
+        "thyme"
+      ]
+    },
+    {
+      "id": "arid",
+      "label": "Very arid scrub · system 5",
+      "plant_ids": [
+        "ziziphus",
+        "lycium",
+        "salsola"
+      ]
+    },
+    {
+      "id": "watercourse",
+      "label": "Seasonal watercourse · system 2",
+      "plant_ids": [
+        "oleander",
+        "tamarix"
+      ]
+    }
+  ]
+}

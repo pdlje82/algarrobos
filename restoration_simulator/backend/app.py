@@ -20,6 +20,8 @@ from .engine import (
 )
 from .storage import Conflict, Store
 from .parcel_removal import plan as removal_plan
+from .configuration import load_defaults
+from . import plant_prices
 
 
 class StrictModel(BaseModel):
@@ -68,18 +70,33 @@ class DeleteParcelRequest(Mutation):
     confirm: StrictBool
 
 
+class PlantPriceRequest(StrictModel):
+    expected_revision: Annotated[StrictStr, Field(min_length=64, max_length=64)]
+    unit_costs: dict[str, Any]
+
+
 def view(data, explanation=None):
     project = data["project"]
     return {
+        "client_contract_version": 1,
+        "configuration_mode": "none"
+        if project is None
+        else "json-snapshot-v2"
+        if "form_schema_version" in project["scenario"]
+        else "legacy-v4-form-adapter",
+        "configuration_notice": "This earlier save uses the explicit v1 form-defaults adapter. Its saved values are preserved; new projects snapshot defaults.json."
+        if project is not None and "form_schema_version" not in project["scenario"]
+        else None,
         "project": project,
         "revision": data["revision"],
         "can_undo": data["undo"] is not None,
-        "undo_kind": "delete" if data.get("undo_edit") else "action",
+        "undo_kind": "delete" if data["undo_edit"] is not None else "action",
         "actions": list_actions(project) if project else [],
         "summary": summary(project) if project else None,
         "land_access": land_catalog(project) if project else None,
         "explanation": explanation
-        or (
+        if explanation is not None
+        else (
             project["history"][-1]["explanation"]
             if project and project["history"]
             else "Choose a starting land route."
@@ -90,12 +107,24 @@ def view(data, explanation=None):
 
 
 def create_app(save_path=None):
+    defaults = load_defaults()
+    plant_prices.snapshot()  # Required editable configuration; never invent missing prices.
     app = FastAPI(title="Restoration Simulator", version="0.4.0")
-    resolved_save_path = (
-        save_path
-        or os.getenv("RESTORATION_SAVE_PATH")
-        or Path(__file__).resolve().parents[1] / "data" / "active-project.json"
-    )
+    if save_path is not None:
+        resolved_save_path = save_path
+    elif "RESTORATION_SAVE_PATH" in os.environ:
+        resolved_save_path = os.environ["RESTORATION_SAVE_PATH"]
+    else:
+        configured = Path(defaults["runtime"]["save_path"])
+        resolved_save_path = (
+            configured
+            if configured.is_absolute()
+            else Path(__file__).resolve().parents[1] / configured
+        )
+    if not str(resolved_save_path).strip():
+        raise Invalid(
+            "The configured save path is empty. Set a valid path or unset RESTORATION_SAVE_PATH to use defaults.json."
+        )
     # Importing the API for tests or Python inspection must not migrate the
     # user's active save. The serving app opens it on its first request.
     app.state.store = Store(save_path) if save_path is not None else None
@@ -127,7 +156,10 @@ def create_app(save_path=None):
     @app.exception_handler(Invalid)
     async def invalid_handler(request, exc):
         return JSONResponse(
-            {"detail": str(exc)}, status_code=409 if isinstance(exc, Conflict) else 422
+            {"detail": str(exc)},
+            status_code=409
+            if isinstance(exc, (Conflict, plant_prices.PriceConflict))
+            else 422,
         )
 
     @app.exception_handler(OSError)
@@ -146,6 +178,14 @@ def create_app(save_path=None):
     @app.get("/api/actions")
     def actions():
         return view(get_store().snapshot())["actions"]
+
+    @app.get("/api/plant-prices")
+    def default_plant_prices():
+        return plant_prices.snapshot()
+
+    @app.post("/api/plant-prices")
+    def save_plant_prices(req: PlantPriceRequest):
+        return plant_prices.update(req.unit_costs, req.expected_revision)
 
     def mutate(operation, req):
         body = req.model_dump(exclude={"revision", "request_id"})

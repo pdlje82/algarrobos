@@ -1,0 +1,282 @@
+{
+  "version": 1,
+  "forms": {
+    "land": {
+      "stewardship": {
+        "parcel_area": 20000,
+        "location": "Fictional dryland site",
+        "cadastral_reference": "",
+        "current_use": "Unknown",
+        "current_cover": "Unknown",
+        "site_condition": "",
+        "restrictions": "Protected status and site-specific permits not independently verified.",
+        "covered_area": 20000,
+        "stage": "active",
+        "allow_restoration": "yes",
+        "allow_monitoring": "yes",
+        "allow_public": "unknown",
+        "physical_access": "yes",
+        "permits": "assumed_clear",
+        "evidence": "assumed",
+        "instrument": "Stewardship agreement — illustrative terms",
+        "exit_terms": "No automatic renewal. Explicit renewal/end action; held deposit returned in full. No assumed tax benefit or grant entitlement."
+      },
+      "free_use": {
+        "parcel_area": 20000,
+        "location": "Fictional dryland site",
+        "cadastral_reference": "",
+        "current_use": "Unknown",
+        "current_cover": "Unknown",
+        "site_condition": "",
+        "restrictions": "Protected status and site-specific permits not independently verified.",
+        "covered_area": 20000,
+        "stage": "active",
+        "allow_restoration": "yes",
+        "allow_monitoring": "yes",
+        "allow_public": "unknown",
+        "physical_access": "yes",
+        "permits": "assumed_clear",
+        "evidence": "assumed",
+        "instrument": "Free use — illustrative terms",
+        "exit_terms": "No automatic renewal. Explicit renewal/end action; held deposit returned in full. No assumed tax benefit or grant entitlement."
+      },
+      "lease": {
+        "parcel_area": 20000,
+        "location": "Fictional dryland site",
+        "cadastral_reference": "",
+        "current_use": "Unknown",
+        "current_cover": "Unknown",
+        "site_condition": "",
+        "restrictions": "Protected status and site-specific permits not independently verified.",
+        "covered_area": 20000,
+        "stage": "active",
+        "allow_restoration": "yes",
+        "allow_monitoring": "yes",
+        "allow_public": "unknown",
+        "physical_access": "yes",
+        "permits": "assumed_clear",
+        "evidence": "assumed",
+        "instrument": "Long-term lease — illustrative terms",
+        "exit_terms": "No automatic renewal. Explicit renewal/end action; held deposit returned in full. No assumed tax benefit or grant entitlement."
+      },
+      "usufruct": {
+        "parcel_area": 20000,
+        "location": "Fictional dryland site",
+        "cadastral_reference": "",
+        "current_use": "Unknown",
+        "current_cover": "Unknown",
+        "site_condition": "",
+        "restrictions": "Protected status and site-specific permits not independently verified.",
+        "covered_area": 20000,
+        "stage": "active",
+        "allow_restoration": "yes",
+        "allow_monitoring": "yes",
+        "allow_public": "unknown",
+        "physical_access": "yes",
+        "permits": "assumed_clear",
+        "evidence": "assumed",
+        "instrument": "Usufruct — illustrative terms",
+        "exit_terms": "No automatic renewal. Explicit renewal/end action; held deposit returned in full. No assumed tax benefit or grant entitlement."
+      },
+      "public_management": {
+        "parcel_area": 20000,
+        "location": "Fictional dryland site",
+        "cadastral_reference": "",
+        "current_use": "Unknown",
+        "current_cover": "Unknown",
+        "site_condition": "",
+        "restrictions": "Protected status and site-specific permits not independently verified.",
+        "covered_area": 20000,
+        "stage": "active",
+        "allow_restoration": "yes",
+        "allow_monitoring": "yes",
+        "allow_public": "unknown",
+        "physical_access": "yes",
+        "permits": "assumed_clear",
+        "evidence": "assumed",
+        "instrument": "Public-land management — illustrative terms",
+        "exit_terms": "No automatic renewal. Explicit renewal/end action; held deposit returned in full. No assumed tax benefit or grant entitlement."
+      },
+      "donation": {
+        "parcel_area": 20000,
+        "location": "Fictional dryland site",
+        "cadastral_reference": "",
+        "current_use": "Unknown",
+        "current_cover": "Unknown",
+        "site_condition": "",
+        "restrictions": "Protected status and site-specific permits not independently verified.",
+        "covered_area": 20000,
+        "stage": "active",
+        "allow_restoration": "yes",
+        "allow_monitoring": "yes",
+        "allow_public": "unknown",
+        "physical_access": "yes",
+        "permits": "assumed_clear",
+        "evidence": "assumed",
+        "instrument": "Land donation — illustrative terms",
+        "exit_terms": "No automatic renewal. Explicit renewal/end action; held deposit returned in full. No assumed tax benefit or grant entitlement."
+      },
+      "purchase": {
+        "parcel_area": 20000,
+        "location": "Fictional dryland site",
+        "cadastral_reference": "",
+        "current_use": "Unknown",
+        "current_cover": "Unknown",
+        "site_condition": "",
+        "restrictions": "Protected status and site-specific permits not independently verified.",
+        "covered_area": 20000,
+        "stage": "active",
+        "allow_restoration": "yes",
+        "allow_monitoring": "yes",
+        "allow_public": "unknown",
+        "physical_access": "yes",
+        "permits": "assumed_clear",
+        "evidence": "assumed",
+        "instrument": "Purchase — illustrative terms",
+        "exit_terms": "No automatic renewal. Explicit renewal/end action; held deposit returned in full. No assumed tax benefit or grant entitlement."
+      },
+      "existing": {
+        "parcel_area": 4500,
+        "location": "Fictional dryland site",
+        "cadastral_reference": "",
+        "current_use": "Unknown",
+        "current_cover": "Unknown",
+        "site_condition": "",
+        "restrictions": "Protected status and site-specific permits not independently verified.",
+        "covered_area": 200,
+        "stage": "active",
+        "allow_restoration": "yes",
+        "allow_monitoring": "yes",
+        "allow_public": "unknown",
+        "physical_access": "yes",
+        "permits": "assumed_clear",
+        "evidence": "reported",
+        "instrument": "",
+        "exit_terms": "Existing ownership; no acquisition, transfer or expiry recorded."
+      }
+    },
+    "demonstrator": {
+      "plan": {
+        "restoration_area": 200,
+        "vegetation_system": "unknown",
+        "plant_mix": "unknown",
+        "objective": "native_habitat",
+        "water_plan": "unknown",
+        "trees": 10,
+        "shrubs": 30,
+        "planting_method": "mulch",
+        "design": "comparison",
+        "novelty": "unknown",
+        "baseline_method": "photo_cover",
+        "public_participation": "unknown",
+        "dissemination": "web_report",
+        "publication_period": "three_years",
+        "funding_route": "al20_34",
+        "applicant_id": "individual",
+        "municipality": "unknown",
+        "purpose": "conservation",
+        "tree_unit_cost": 6,
+        "shrub_unit_cost": 2.5,
+        "protection_unit_cost": 1.5,
+        "labour_days": 2,
+        "labour_day_rate": 120,
+        "site_preparation": 150,
+        "establishment_water": 60,
+        "monitoring_budget": 100,
+        "reporting_budget": 100,
+        "installation_years": 0.25,
+        "followup_years": 1,
+        "notes": "",
+        "plant_selection": {
+          "version": 1,
+          "entries": [
+            {
+              "id": "carob",
+              "quantity": 5
+            },
+            {
+              "id": "wild_olive",
+              "quantity": 5
+            },
+            {
+              "id": "lentisk",
+              "quantity": 10
+            },
+            {
+              "id": "buckthorn",
+              "quantity": 10
+            },
+            {
+              "id": "palmetto",
+              "quantity": 10
+            }
+          ]
+        }
+      },
+      "records": {
+        "demo_apply": {
+          "not_started": "unknown",
+          "basis": "unknown"
+        },
+        "demo_award": {
+          "decision": "pending",
+          "award_amount": 0,
+          "basis": "unknown",
+          "reference": ""
+        },
+        "demo_baseline": {
+          "site_ready": "pending",
+          "basis": "unknown",
+          "photo_points": "planned",
+          "cover_percent": null,
+          "erosion": "unknown",
+          "reference": ""
+        },
+        "demo_evaluate": {
+          "conclusion": "inconclusive",
+          "next_step": "maintain",
+          "shared": "pending",
+          "basis": "unknown",
+          "reference": ""
+        },
+        "demo_funding": {
+          "feedback": "pending",
+          "basis": "unknown",
+          "reference": ""
+        },
+        "demo_install": {
+          "confirmation": "pending"
+        },
+        "demo_monitor": {
+          "basis": "unknown",
+          "cover_percent": null,
+          "erosion": "unknown",
+          "reference": ""
+        },
+        "demo_pay": {
+          "eligibility_confirmed": "pending",
+          "basis": "unknown"
+        }
+      }
+    },
+    "planting": {
+      "custom_group": "shrub",
+      "custom_quantity": 1
+    },
+    "actions": {
+      "renew_access": {
+        "term_years": 5,
+        "commitment_years": 0
+      }
+    }
+  },
+  "client": {
+    "project_name": "My restoration journey",
+    "theme": "system",
+    "theme_storage_key": "algarrobos-theme",
+    "notice_without_project": "Illustrative amounts, delays and outcomes for playtesting. No ecological, financial, legal or funding predictions."
+  },
+  "runtime": {
+    "save_path": "data/active-project.json"
+  }
+}

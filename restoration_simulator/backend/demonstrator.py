@@ -1,8 +1,10 @@
 """Planting pilot workflow. All choices and consequences are supplied by Python."""
 
 from copy import deepcopy
+from decimal import Decimal
 from . import engine_v3 as core
 from . import planting
+from .configuration import forms_for
 from .parcel_removal import plant_options
 
 KINDS = {
@@ -50,7 +52,7 @@ def select(name, label, rows, default, section="Record", **extra):
     )
 
 
-def numeric(name, label, default=0, section="Budget", **extra):
+def numeric(name, label, default, section="Budget", **extra):
     return core.field(
         name,
         label,
@@ -65,16 +67,41 @@ def numeric(name, label, default=0, section="Budget", **extra):
 
 
 def label(state, key, value):
-    rows = cfg(state)["choices"].get(key, [])
-    return next((text for code, text in rows if code == value), value)
+    if key == "municipality":
+        return value  # Municipality categories also permit user-defined names.
+    core.require(key in cfg(state)["choices"], "Missing choice catalogue: " + key)
+    for code, title in cfg(state)["choices"][key]:
+        if code == value:
+            return title
+    return value  # A validated category may explicitly contain custom text.
 
 
-def fields(state, kind, legacy=False):
+def detail_value(state, definition, value):
+    if definition["type"] == "category":
+        return label(state, definition["name"], value)
+    if definition["type"] == "select":
+        if definition["name"] == "parcel_id":
+            return next(p["name"] for p in state["parcels"] if p["id"] == value)
+        for option in definition["options"]:
+            if option["value"] == value:
+                return option["label"]
+        raise core.Invalid("Saved selection has no label: " + definition["name"])
+    return value
+
+
+def fields(state, kind, legacy=False, priced=True):
+    core.require(kind in KINDS, "Unknown demonstrator form kind.")
+    settings = forms_for(state["scenario"])
+    defaults = (
+        settings["demonstrator"]["plan"]
+        if kind == "demo_plan"
+        else settings["demonstrator"]["records"][kind]
+    )
     d = state["demonstrator"]
     if kind == "demo_plan":
         opts = plant_options(state, 0.01)
         for o in opts:
-            o["default_area"] = min(200, o["remaining_area"])
+            o["default_area"] = min(defaults["restoration_area"], o["remaining_area"])
         f = [
             core.field(
                 "parcel_id",
@@ -87,7 +114,7 @@ def fields(state, kind, legacy=False):
             numeric(
                 "restoration_area",
                 "Pilot work area (m²)",
-                opts[0]["default_area"] if opts else 200,
+                opts[0]["default_area"] if opts else None,
                 section="Site and planting",
                 help="The pilot must fit inside the remaining included area. Planning does not reserve area or carry out work.",
             ),
@@ -95,7 +122,7 @@ def fields(state, kind, legacy=False):
                 state,
                 "vegetation_system",
                 "Target vegetation system",
-                "unknown",
+                defaults["vegetation_system"],
                 "Site and planting",
                 "The picture supplies illustrative systems, not site prescriptions. Suitability is reviewed before planting.",
             ),
@@ -103,7 +130,7 @@ def fields(state, kind, legacy=False):
                 state,
                 "plant_mix",
                 "Candidate planting mix",
-                "unknown",
+                defaults["plant_mix"],
                 "Site and planting",
                 "Examples include species in the picture and Níjar procurement. Check soils, water, native provenance and permissions for this specific site.",
             ),
@@ -111,39 +138,49 @@ def fields(state, kind, legacy=False):
                 state,
                 "objective",
                 "Restoration objective",
-                "native_habitat",
+                defaults["objective"],
                 "Site and planting",
             ),
             choice(
                 state,
                 "water_plan",
                 "Establishment water plan",
-                "unknown",
+                defaults["water_plan"],
                 "Site and planting",
             ),
-            numeric("trees", "Trees to plant", 10, "Site and planting", step=1),
             numeric(
-                "shrubs", "Shrubs / grasses to plant", 30, "Site and planting", step=1
+                "trees",
+                "Trees to plant",
+                defaults["trees"],
+                "Site and planting",
+                step=1,
+            ),
+            numeric(
+                "shrubs",
+                "Shrubs / grasses to plant",
+                defaults["shrubs"],
+                "Site and planting",
+                step=1,
             ),
             choice(
                 state,
                 "planting_method",
                 "Method to demonstrate",
-                "mulch",
+                defaults["planting_method"],
                 "Demonstration design",
             ),
             choice(
                 state,
                 "design",
                 "Comparison design",
-                "comparison",
+                defaults["design"],
                 "Demonstration design",
             ),
             choice(
                 state,
                 "novelty",
                 "Local novelty of the method",
-                "unknown",
+                defaults["novelty"],
                 "Demonstration design",
                 "AL20 3.4 concerns testing an approach new or unfamiliar in the area. A preset or ordinary planting does not establish eligibility.",
             ),
@@ -151,28 +188,28 @@ def fields(state, kind, legacy=False):
                 state,
                 "baseline_method",
                 "Baseline and follow-up method",
-                "photo_cover",
+                defaults["baseline_method"],
                 "Demonstration design",
             ),
             choice(
                 state,
                 "public_participation",
                 "Participation / demonstration access",
-                "unknown",
+                defaults["public_participation"],
                 "Demonstration design",
             ),
             choice(
                 state,
                 "dissemination",
                 "Results-sharing plan",
-                "web_report",
+                defaults["dissemination"],
                 "Demonstration design",
             ),
             choice(
                 state,
                 "publication_period",
                 "Online publication commitment",
-                "three_years",
+                defaults["publication_period"],
                 "Demonstration design",
                 "Category 3.4 requires online activity/results information to remain available for at least 3 years after final payment. This app does not publish it.",
             ),
@@ -180,14 +217,14 @@ def fields(state, kind, legacy=False):
                 state,
                 "funding_route",
                 "Planned funding route",
-                "al20_34",
+                defaults["funding_route"],
                 "Funding route",
             ),
             core.field(
                 "applicant_id",
                 "Applicant / project fund administrator",
                 "select",
-                "individual",
+                defaults["applicant_id"],
                 section="Funding route",
                 options=core.options([(p["id"], p["name"]) for p in state["parties"]]),
                 help="AL20 3.4 lists public/nonprofit legal entities and certain publicly participated companies. A private individual or ordinary company is not an eligible applicant for this category. An existing nonprofit partner is available; ownership stays unchanged.",
@@ -196,7 +233,7 @@ def fields(state, kind, legacy=False):
                 "municipality",
                 "Pilot municipality",
                 "category",
-                "unknown",
+                defaults["municipality"],
                 section="Funding route",
                 maxLength=200,
                 options=core.options(
@@ -212,32 +249,67 @@ def fields(state, kind, legacy=False):
                 state,
                 "purpose",
                 "Economic character of the project",
-                "conservation",
+                defaults["purpose"],
                 "Funding route",
             ),
-            numeric("tree_unit_cost", "Assumed price per tree (€)", 6),
-            numeric("shrub_unit_cost", "Assumed price per shrub / grass (€)", 2.5),
             numeric(
-                "protection_unit_cost", "Protection / mulch per planted unit (€)", 1.5
+                "tree_unit_cost",
+                "Assumed price per tree (€)",
+                defaults["tree_unit_cost"],
             ),
-            numeric("labour_days", "Planting labour (days)", 2),
-            numeric("labour_day_rate", "Assumed labour day rate (€)", 120),
-            numeric("site_preparation", "Site preparation budget (€)", 150),
-            numeric("establishment_water", "Establishment watering budget (€)", 60),
-            numeric("monitoring_budget", "Follow-up monitoring budget (€)", 100),
-            numeric("reporting_budget", "Evaluation / dissemination budget (€)", 100),
-            numeric("installation_years", "Planting duration (years)", 0.25, "Timing"),
+            numeric(
+                "shrub_unit_cost",
+                "Assumed price per shrub / grass (€)",
+                defaults["shrub_unit_cost"],
+            ),
+            numeric(
+                "protection_unit_cost",
+                "Protection / mulch per planted unit (€)",
+                defaults["protection_unit_cost"],
+            ),
+            numeric("labour_days", "Planting labour (days)", defaults["labour_days"]),
+            numeric(
+                "labour_day_rate",
+                "Assumed labour day rate (€)",
+                defaults["labour_day_rate"],
+            ),
+            numeric(
+                "site_preparation",
+                "Site preparation budget (€)",
+                defaults["site_preparation"],
+            ),
+            numeric(
+                "establishment_water",
+                "Establishment watering budget (€)",
+                defaults["establishment_water"],
+            ),
+            numeric(
+                "monitoring_budget",
+                "Follow-up monitoring budget (€)",
+                defaults["monitoring_budget"],
+            ),
+            numeric(
+                "reporting_budget",
+                "Evaluation / dissemination budget (€)",
+                defaults["reporting_budget"],
+            ),
+            numeric(
+                "installation_years",
+                "Planting duration (years)",
+                defaults["installation_years"],
+                "Timing",
+            ),
             numeric(
                 "followup_years",
                 "Follow-up after planting finishes (years)",
-                1,
+                defaults["followup_years"],
                 "Timing",
             ),
             core.field(
                 "notes",
                 "Additional site / custom-method notes (optional)",
                 "textarea",
-                "",
+                defaults["notes"],
                 section="Timing",
                 maxLength=1000,
             ),
@@ -251,18 +323,57 @@ def fields(state, kind, legacy=False):
                 v["help"] = (
                     "Editable playtest assumption, not a quote or an approved eligible expense. Installation, monitoring and reporting are paid in separate stages. Existing land rent/maintenance remains separate."
                 )
-        if d and not d.get("legacy"):
+        if priced and not legacy:
+            f = [v for v in f if v["name"] not in {"tree_unit_cost", "shrub_unit_cost"}]
+        if d and not d["legacy"]:
             for v in f:
-                if v["name"] in d["plan"]:
-                    v["default"] = d["plan"][v["name"]]
+                core.require(
+                    v["name"] in d["plan"],
+                    "Saved demonstrator plan is missing " + v["name"] + ".",
+                )
+                v["default"] = d["plan"][v["name"]]
         if not legacy:
             f = [v for v in f if v["name"] not in {"plant_mix", "trees", "shrubs"}]
-            previous = d["plan"] if d and not d.get("legacy") else None
-            selection = (
-                previous.get("plant_selection", {"version": 1, "entries": []})
-                if previous
-                else planting.default_selection()
+            previous = d["plan"] if d and not d["legacy"] else None
+            if previous is None:
+                selection = deepcopy(defaults["plant_selection"])
+            elif "plant_selection" in previous:
+                selection = previous["plant_selection"]
+            else:
+                # Explicit adapter for the older aggregate-only plan format.
+                # The visible notice requires the user to choose species.
+                selection = {"version": planting.catalogue()["version"], "entries": []}
+            catalogue = {
+                **planting.catalogue(),
+                "custom_defaults": settings["planting"],
+            }
+            notice = (
+                f"This saved plan records {previous['trees']:g} trees and {previous['shrubs']:g} shrubs / grasses as a general mix. No species quantities were recorded. Choose plants explicitly to revise it."
+                if previous and "plant_selection" not in previous
+                else ""
             )
+            if priced:
+                from .plant_prices import snapshot
+
+                prices = snapshot()
+                if selection["entries"]:
+                    if previous is not None and selection["version"] == 1:
+                        notice = "This earlier checklist uses shared tree/shrub rates. Its editing draft converts those recorded rates to individual plant prices; history is unchanged until you commit."
+                    selection = planting.priced_selection(selection, prices, previous)
+                else:
+                    selection = {"version": 2, "entries": []}
+                catalogue.update(
+                    selection_version=2,
+                    price_defaults=prices,
+                    plants=[
+                        {**p, "default_unit_cost": prices["unit_costs"][p["id"]]}
+                        for p in catalogue["plants"]
+                    ],
+                    custom_defaults={
+                        **settings["planting"],
+                        "unit_costs": prices["custom_unit_costs"],
+                    },
+                )
             f.insert(
                 3,
                 core.field(
@@ -271,12 +382,8 @@ def fields(state, kind, legacy=False):
                     "plant_selection",
                     deepcopy(selection),
                     section="Plant checklist",
-                    catalogue=planting.catalogue(),
-                    legacy_notice=(
-                        f"This saved plan records {previous['trees']:g} trees and {previous['shrubs']:g} shrubs / grasses as a general mix. No species quantities were recorded. Choose plants explicitly to revise it."
-                        if previous and "plant_selection" not in previous
-                        else ""
-                    ),
+                    catalogue=catalogue,
+                    legacy_notice=notice,
                 ),
             )
         return f
@@ -295,9 +402,9 @@ def fields(state, kind, legacy=False):
                     ("ready", "Ready for this planting plan — reported / assumed"),
                     ("unsuitable", "Not suitable for the current plan"),
                 ],
-                "pending",
+                defaults["site_ready"],
             ),
-            select("basis", "Basis of baseline record", basis, "unknown"),
+            select("basis", "Basis of baseline record", basis, defaults["basis"]),
             select(
                 "photo_points",
                 "Repeatable photo points",
@@ -306,12 +413,12 @@ def fields(state, kind, legacy=False):
                     ("recorded", "Locations and starting photos recorded"),
                     ("not_used", "Not used"),
                 ],
-                "planned",
+                defaults["photo_points"],
             ),
             numeric(
                 "cover_percent",
                 "Starting vegetation cover (%)",
-                None,
+                defaults["cover_percent"],
                 "Record",
                 unknown_allowed=True,
             ),
@@ -325,12 +432,12 @@ def fields(state, kind, legacy=False):
                     ("moderate", "Moderate"),
                     ("high", "High"),
                 ],
-                "unknown",
+                defaults["erosion"],
             ),
             core.field(
                 "reference",
                 "Baseline / photo reference (optional)",
-                default="",
+                default=defaults["reference"],
                 section="Record",
                 maxLength=500,
             ),
@@ -348,13 +455,13 @@ def fields(state, kind, legacy=False):
                     ),
                     ("negative", "Not eligible / negative feedback"),
                 ],
-                "pending",
+                defaults["feedback"],
             ),
-            select("basis", "Basis of funding feedback", basis, "unknown"),
+            select("basis", "Basis of funding feedback", basis, defaults["basis"]),
             core.field(
                 "reference",
                 "Feedback reference / explanation",
-                default="",
+                default=defaults["reference"],
                 section="Record",
                 maxLength=500,
                 help="A reported positive response needs a reference. An illustrative assumption is labelled separately and is not real approval.",
@@ -373,15 +480,15 @@ def fields(state, kind, legacy=False):
                     ),
                     ("started", "Works already begun"),
                 ],
-                "unknown",
+                defaults["not_started"],
             ),
             numeric(
                 "requested_amount",
                 "Requested reimbursement (€)",
-                min(28000, d["budget"]["total"]),
+                min(cfg(state)["funding_cap"], d["budget"]["total"]),
                 "Record",
             ),
-            select("basis", "Application basis", basis, "unknown"),
+            select("basis", "Application basis", basis, defaults["basis"]),
         ]
     if kind == "demo_award":
         return [
@@ -393,14 +500,19 @@ def fields(state, kind, legacy=False):
                     ("awarded", "Award recorded"),
                     ("declined", "Application declined"),
                 ],
-                "pending",
+                defaults["decision"],
             ),
-            numeric("award_amount", "Reported / illustrative award (€)", 0, "Record"),
-            select("basis", "Decision basis", basis, "unknown"),
+            numeric(
+                "award_amount",
+                "Reported / illustrative award (€)",
+                defaults["award_amount"],
+                "Record",
+            ),
+            select("basis", "Decision basis", basis, defaults["basis"]),
             core.field(
                 "reference",
                 "Decision reference (optional for an illustrative decision)",
-                default="",
+                default=defaults["reference"],
                 section="Record",
                 maxLength=500,
             ),
@@ -414,12 +526,12 @@ def fields(state, kind, legacy=False):
                     ("pending", "Review plan first"),
                     ("confirmed", "Proceed with the recorded plan and budget"),
                 ],
-                "pending",
+                defaults["confirmation"],
             )
         ]
     if kind == "demo_monitor":
         return [
-            select("basis", "Observation basis", basis, "unknown"),
+            select("basis", "Observation basis", basis, defaults["basis"]),
             numeric(
                 "surviving_trees",
                 "Surviving trees",
@@ -437,7 +549,7 @@ def fields(state, kind, legacy=False):
             numeric(
                 "cover_percent",
                 "Follow-up vegetation cover (%)",
-                None,
+                defaults["cover_percent"],
                 "Record",
                 unknown_allowed=True,
             ),
@@ -451,12 +563,12 @@ def fields(state, kind, legacy=False):
                     ("moderate", "Moderate"),
                     ("high", "High"),
                 ],
-                "unknown",
+                defaults["erosion"],
             ),
             core.field(
                 "reference",
                 "Follow-up observations / photo reference (optional)",
-                default="",
+                default=defaults["reference"],
                 section="Record",
                 maxLength=500,
             ),
@@ -472,7 +584,7 @@ def fields(state, kind, legacy=False):
                     ("mixed", "Mixed results"),
                     ("poor", "Poor establishment / adapt the method"),
                 ],
-                "inconclusive",
+                defaults["conclusion"],
             ),
             select(
                 "next_step",
@@ -482,7 +594,7 @@ def fields(state, kind, legacy=False):
                     ("adapt", "Adapt the planting / establishment method"),
                     ("expand", "Consider a separate expansion"),
                 ],
-                "maintain",
+                defaults["next_step"],
             ),
             select(
                 "shared",
@@ -494,13 +606,15 @@ def fields(state, kind, legacy=False):
                         "Activity and results published / shared — reported or assumed",
                     ),
                 ],
-                "pending",
+                defaults["shared"],
             ),
-            select("basis", "Evaluation and dissemination basis", basis, "unknown"),
+            select(
+                "basis", "Evaluation and dissemination basis", basis, defaults["basis"]
+            ),
             core.field(
                 "reference",
                 "Results report / publication reference",
-                default="",
+                default=defaults["reference"],
                 section="Record",
                 maxLength=500,
             ),
@@ -523,19 +637,45 @@ def fields(state, kind, legacy=False):
                         "Eligible expenditure justified and payment received — reported / assumed",
                     ),
                 ],
-                "pending",
+                defaults["eligibility_confirmed"],
             ),
-            select("basis", "Reimbursement basis", basis, "unknown"),
+            select("basis", "Reimbursement basis", basis, defaults["basis"]),
         ]
-    return []
+    raise core.Invalid("No form implementation for demonstrator kind: " + kind)
 
 
 def budget(plan):
+    if "plant_selection" in plan and plan["plant_selection"]["version"] == 2:
+        entries = planting.resolve(plan["plant_selection"])["entries"]
+        tree_cost = float(
+            sum(
+                (
+                    Decimal(str(p["unit_cost"])) * int(p["quantity"])
+                    for p in entries
+                    if p["group"] == "tree"
+                ),
+                Decimal(0),
+            )
+        )
+        shrub_cost = float(
+            sum(
+                (
+                    Decimal(str(p["unit_cost"])) * int(p["quantity"])
+                    for p in entries
+                    if p["group"] != "tree"
+                ),
+                Decimal(0),
+            )
+        )
+    else:
+        # Frozen aggregate/v1 checklist pricing for deterministic history replay.
+        tree_cost = round(plan["trees"] * plan["tree_unit_cost"], 2)
+        shrub_cost = round(plan["shrubs"] * plan["shrub_unit_cost"], 2)
     rows = [
-        dict(label="Trees", amount=round(plan["trees"] * plan["tree_unit_cost"], 2)),
+        dict(label="Trees", amount=tree_cost),
         dict(
             label="Shrubs / grasses",
-            amount=round(plan["shrubs"] * plan["shrub_unit_cost"], 2),
+            amount=shrub_cost,
         ),
         dict(
             label="Protection / mulch",
@@ -661,7 +801,7 @@ def funding_fit(state, plan):
 def availability(state, kind):
     d = state["demonstrator"]
     if kind == "demo_plan":
-        if d and d.get("legacy"):
+        if d and d["legacy"]:
             return (
                 "completed",
                 "An earlier demonstrator is retained as a legacy record; it is not relabelled as AL20 3.4.",
@@ -682,7 +822,7 @@ def availability(state, kind):
                 "First establish suitable land access and planting permissions.",
             )
         return "available", None
-    if d and d.get("legacy"):
+    if d and d["legacy"]:
         return (
             "completed",
             "This earlier project retains its original workflow. Start a new project for the guided planting demonstrator.",
@@ -939,7 +1079,9 @@ def apply(state, kind, values, at, pay):
             "Confirm start-date conditions and the application basis before recording an application.",
         )
         core.require(
-            0 < values["requested_amount"] <= min(28000, d["budget"]["total"]),
+            0
+            < values["requested_amount"]
+            <= min(cfg(state)["funding_cap"], d["budget"]["total"]),
             "Requested funding must be positive and within the planned budget and €28,000 category ceiling; eligible costs still need confirmation.",
         )
         state["grant"] = {
@@ -1072,7 +1214,7 @@ def view(state):
     d = state["demonstrator"]
     if not d:
         return dict(status="Not planned", sources=cfg(state)["sources"])
-    if d.get("legacy"):
+    if d["legacy"]:
         return dict(
             status="Earlier project workflow retained",
             legacy=True,
@@ -1090,28 +1232,26 @@ def view(state):
         "details": [
             dict(
                 label=f["label"],
-                value=label(state, f["name"], p[f["name"]])
-                if f["type"] == "category"
-                else next(
-                    (
-                        o["label"]
-                        for o in f.get("options", [])
-                        if o["value"] == p[f["name"]]
-                    ),
-                    p[f["name"]],
-                ),
+                value=detail_value(state, f, p[f["name"]]),
             )
-            for f in fields(state, "demo_plan", legacy="plant_selection" not in p)
+            for f in fields(
+                state,
+                "demo_plan",
+                legacy="plant_selection" not in p,
+                priced="plant_selection" in p and p["plant_selection"]["version"] == 2,
+            )
             if f["name"] != "notes" and f["type"] != "plant_selection"
         ],
-        "planting": planting.review(p["plant_selection"], p["vegetation_system"])
+        "planting": planting.review(
+            p["plant_selection"], p["vegetation_system"], legacy_plan=p
+        )
         if "plant_selection" in p
         else None,
         "sources": cfg(state)["sources"],
         "planned_future_spending": round(d["budget"]["total"] - d["spent"], 2),
         "funding_stage": state["grant"]["status"],
         "funding_record": deepcopy(state["grant"]),
-        "reimbursement_ceiling": min(28000, d["budget"]["total"])
+        "reimbursement_ceiling": min(cfg(state)["funding_cap"], d["budget"]["total"])
         if p["funding_route"] == "al20_34"
         else None,
     }

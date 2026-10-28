@@ -1,47 +1,116 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { properties, required, inputValue, record, unitCost, validUnitCost } from "./contracts.js";
+import { checklistSystems, preselectPlants, changeUnitCost, cataloguePricePatch } from "./plantSelection.js";
+import { PlantPortrait, plantIllustration } from "./PlantPortrait.jsx";
+import { money } from "./format.js";
 
-export function PlantChecklist({ field, value, onChange, disabled }) {
+export function PlantChecklist({ field, value, onChange, disabled, request }) {
   const catalog = field.catalogue;
-  const entries = value?.entries || [];
+  properties(value, ["version", "entries"], "plant selection");
+  required(
+    Array.isArray(value.entries),
+    "Plant selection entries must be a list.",
+  );
+  const entries = value.entries;
+  required(value.version === 2 && catalog.selection_version === 2, "This checklist requires per-plant prices. Restart Python and reload.");
+  for (const entry of entries) {
+    properties(entry, ["unit_cost", "price_confirmed"], "priced plant entry");
+    required(typeof entry.price_confirmed === "boolean", "Missing plant price confirmation value.");
+  }
+  const systems = checklistSystems(catalog);
   const [customName, setCustomName] = useState("");
-  const [customGroup, setCustomGroup] = useState("shrub");
-  const [customQuantity, setCustomQuantity] = useState(1);
+  const [customGroup, setCustomGroup] = useState(
+    catalog.custom_defaults.custom_group,
+  );
+  const [customQuantity, setCustomQuantity] = useState(
+    catalog.custom_defaults.custom_quantity,
+  );
   const [message, setMessage] = useState("");
+  const [priceDefaults, setPriceDefaults] = useState(null);
+  const [priceLoading, setPriceLoading] = useState(true);
+  const [priceSaving, setPriceSaving] = useState(false);
+  const [loadError, setLoadError] = useState("");
+  const [priceError, setPriceError] = useState("");
+  const [priceMessage, setPriceMessage] = useState("");
+  const [reloadPrices, setReloadPrices] = useState(0);
+  const [customPrice, setCustomPrice] = useState(catalog.custom_defaults.unit_costs[catalog.custom_defaults.custom_group]);
+  const [customPriceEdited, setCustomPriceEdited] = useState(false);
+  const defaultsReady = priceDefaults !== null && !priceLoading && loadError === "";
+  useEffect(() => {
+    let cancelled = false;
+    setPriceLoading(true);
+    setLoadError("");
+    request("plant-prices").then((data) => {
+      for (const plant of catalog.plants)
+        required(Object.hasOwn(data.unit_costs, plant.id), `Missing default price for ${plant.label}.`);
+      if (!cancelled) {
+        setPriceDefaults(data);
+        setPriceError("");
+      }
+    }).catch((error) => {
+      if (!cancelled) setLoadError(error.message);
+    }).finally(() => {
+      if (!cancelled) setPriceLoading(false);
+    });
+    return () => { cancelled = true; };
+  }, [request, reloadPrices]);
+  useEffect(() => {
+    if (priceDefaults !== null && !customPriceEdited)
+      setCustomPrice(priceDefaults.custom_unit_costs[customGroup]);
+  }, [priceDefaults, customGroup, customPriceEdited]);
   const selected = (id) => entries.find((p) => p.id === id);
   function change(next) {
-    onChange({ version: catalog.version, entries: next });
+    onChange({ version: catalog.selection_version, entries: next });
   }
   function toggle(plant, checked) {
     change(
       checked
-        ? [...entries, { id: plant.id, quantity: plant.suggested_quantity }]
+        ? [...entries, { id: plant.id, quantity: plant.suggested_quantity, unit_cost: priceDefaults.unit_costs[plant.id], price_confirmed: false }]
         : entries.filter((p) => p.id !== plant.id),
     );
   }
   function quantity(id, next) {
     change(entries.map((p) => (p.id === id ? { ...p, quantity: next } : p)));
   }
-  function addMix(mix) {
-    const additions = catalog.plants.filter(
-      (p) => mix.plant_ids.includes(p.id) && !selected(p.id),
-    );
-    change([
-      ...entries,
-      ...additions.map((p) => ({ id: p.id, quantity: p.suggested_quantity })),
-    ]);
+  function selectSystem(system) {
+    required(defaultsReady, "Reload default prices before selecting a system.");
+    const next = preselectPlants({ ...catalog, plants: catalog.plants.map((plant) => ({ ...plant, default_unit_cost: priceDefaults.unit_costs[plant.id] })) }, entries, system.id);
+    change(next);
     setMessage(
-      `Added ${additions.length} plants from ${mix.label}. Existing quantities kept.`,
+      `${next.length - entries.length} additional plant checkboxes selected for ${system.label}. Edit quantities or uncheck any plant below. Existing quantities kept.`,
     );
+  }
+  function price(id, next) {
+    change(changeUnitCost(entries, id, next));
+    setPriceMessage("");
+  }
+  async function savePrices() {
+    setPriceError("");
+    setPriceMessage("");
+    setPriceSaving(true);
+    try {
+      required(defaultsReady, "Reload default prices before saving.");
+      const patch = cataloguePricePatch(catalog, entries);
+      const updated = await request("plant-prices", { expected_revision: priceDefaults.revision, unit_costs: patch });
+      setPriceDefaults(updated);
+      setPriceMessage(`Default prices saved for ${Object.keys(patch).length} catalogue plants. Existing plans keep their recorded prices. New selections start unconfirmed.`);
+    } catch (error) {
+      setPriceError(error.message);
+    } finally {
+      setPriceSaving(false);
+    }
   }
   function addCustom() {
     const label = customName.trim();
-    const names = entries.map(
-      (p) => p.label || catalog.plants.find((x) => x.id === p.id)?.label,
+    const names = entries.map((p) =>
+      Object.hasOwn(p, "label")
+        ? p.label
+        : record(catalog.plants, p.id, "plant").label,
     );
     if (
       !label ||
       names.some(
-        (name) => name?.toLocaleLowerCase() === label.toLocaleLowerCase(),
+        (name) => name.toLocaleLowerCase() === label.toLocaleLowerCase(),
       )
     ) {
       setMessage(
@@ -55,6 +124,7 @@ export function PlantChecklist({ field, value, onChange, disabled }) {
       );
       return;
     }
+    try { unitCost(customPrice); } catch (error) { setMessage(error.message); return; }
     change([
       ...entries,
       {
@@ -62,6 +132,8 @@ export function PlantChecklist({ field, value, onChange, disabled }) {
         label,
         group: customGroup,
         quantity: customQuantity,
+        unit_cost: customPrice,
+        price_confirmed: false,
       },
     ]);
     setCustomName("");
@@ -78,45 +150,96 @@ export function PlantChecklist({ field, value, onChange, disabled }) {
         min="1"
         max="1000000"
         step="1"
-        value={p.quantity ?? ""}
-        disabled={disabled}
+        value={p === undefined ? "" : inputValue(p, "quantity")}
+        disabled={disabled || priceSaving || p === undefined}
         onChange={(e) =>
           quantity(p.id, e.target.value === "" ? null : Number(e.target.value))
         }
       />
     </label>
   );
+  const priceControls = (entry, plant) => (
+    <div className="plant-controls">
+      {quantityInput(entry, plant.label)}
+      <label className="plant-quantity">
+        <span>€/plant</span>
+        <input
+          type="number" min="0" max="1000000" step="0.01"
+          aria-label={`Unit price for ${plant.label}`}
+          value={entry === undefined ? (priceDefaults === null ? "" : priceDefaults.unit_costs[plant.id]) : inputValue(entry, "unit_cost")}
+          disabled={disabled || priceSaving || entry === undefined}
+          onChange={(event) => price(entry.id, event.target.value === "" ? null : Number(event.target.value))}
+        />
+        <small className="plant-default-price">
+          {priceDefaults === null ? "Loading default…" : Object.hasOwn(priceDefaults.unit_costs, plant.id) ? `Default ${money(priceDefaults.unit_costs[plant.id])}` : "Project price"}
+        </small>
+      </label>
+      <label className="plant-price-confirm">
+        <input type="checkbox" aria-label={`Price confirmed for ${plant.label}`} aria-describedby="price-confirm-help"
+          checked={entry === undefined ? false : entry.price_confirmed}
+          disabled={disabled || priceSaving || entry === undefined || !validUnitCost(entry.unit_cost)}
+          onChange={(event) => change(entries.map((row) => row.id === entry.id ? { ...row, price_confirmed: event.target.checked } : row))}
+        />
+        Price confirmed
+      </label>
+    </div>
+  );
   return (
     <div className="plant-checklist">
       {field.legacy_notice && <p className="reason">{field.legacy_notice}</p>}
       <p>
-        Choose each plant below, or add a typical mix as a starting point.
-        Combine mixes freely and change any quantity. Adding a mix keeps
-        existing quantities and avoids duplicates.
+        Use a system preset to check its plants, then adjust the checklist and
+        quantities. Combine systems freely. Each plant appears once in your
+        quantity cart; presets preserve quantities you have already entered.
       </p>
-      <fieldset className="plant-mixes" disabled={disabled}>
-        <legend>Typical mix starting points</legend>
-        {catalog.mixes.map((mix) => (
-          <button key={mix.id} type="button" onClick={() => addMix(mix)}>
-            Add {mix.label}
+      <fieldset className="plant-mixes" disabled={disabled || priceSaving || !defaultsReady}>
+        <legend>Preselect plants by vegetation system</legend>
+        {systems.map((system) => (
+          <button
+            key={system.id}
+            type="button"
+            className={system.plant_ids.every((id) => selected(id)) ? "preset-checked" : ""}
+            onClick={() => selectSystem(system)}
+            aria-label={`Select plants for ${system.label}`}
+          >
+            <strong>{system.label}</strong>
+            <span>{system.plant_ids.every((id) => selected(id)) ? "All plants checked" : "Select plant checkboxes"}</span>
           </button>
         ))}
       </fieldset>
       <p className="muted">
-        Plant names and habitat groups follow the library picture. Starting
-        quantities and growth forms are illustrative planning assumptions. Exact
-        species, site conditions, water needs and provenance need review.
+        Plants are grouped by the poster’s systems. Illustrations show botanical
+        features at different scales; open plant details for identification
+        references. Quantities and growth forms are planning assumptions.
       </p>
       <p role="status" className="plant-message">
         {message}
       </p>
-      {catalog.groups.map((group) => (
-        <fieldset className="plant-group" key={group.id} disabled={disabled}>
-          <legend>{group.label}</legend>
-          {catalog.plants
-            .filter((p) => p.group === group.id)
-            .map((plant) => {
+      <div className="plant-price-defaults">
+        <p id="price-confirm-help">Edit €/plant for this draft. Check <strong>Price confirmed</strong> only after checking the amount, for example with a supplier. Changing a price clears its confirmation. Unconfirmed prices remain estimates.</p>
+        <p>Save selected catalogue prices as defaults for later selections. Existing plans keep their prices; custom plants stay in this project.</p>
+        <div className="plant-default-actions">
+          <button type="button" disabled={disabled || priceSaving || !defaultsReady} onClick={savePrices}>
+            {priceSaving ? "Saving default prices…" : "Save selected prices as defaults"}
+          </button>
+          <button type="button" disabled={disabled || priceSaving || priceLoading} onClick={() => setReloadPrices((attempt) => attempt + 1)}>Reload default prices</button>
+        </div>
+        {priceLoading && <p role="status">Loading current default prices…</p>}
+        {loadError && <p className="error" role="alert">{loadError} Your selected plants and prices are retained. Reload default prices to retry.</p>}
+        {priceError && <p className="error" role="alert">{priceError}</p>}
+        {priceMessage && <p role="status">{priceMessage}</p>}
+      </div>
+      {systems.map((system) => (
+        <fieldset className="plant-group plant-system" key={system.id} disabled={disabled || priceSaving}>
+          <legend>{system.label}</legend>
+          <p className="plant-system-count muted">
+            {system.plants.filter((plant) => selected(plant.id)).length} of {system.plants.length} plants checked
+          </p>
+          {system.plants.map((plant) => {
               const entry = selected(plant.id);
+              const illustration = plantIllustration(plant.id);
+              const group = catalog.groups.find((g) => g.id === plant.group);
+              required(group !== undefined, `Missing growth form for ${plant.label}.`);
               return (
                 <div
                   className={`plant-row ${entry ? "plant-selected" : ""}`}
@@ -125,41 +248,67 @@ export function PlantChecklist({ field, value, onChange, disabled }) {
                   <label className="plant-checkbox">
                     <input
                       type="checkbox"
+                      aria-label={`Select ${plant.label}`}
                       checked={!!entry}
+                      disabled={!entry && !defaultsReady}
                       onChange={(e) => toggle(plant, e.target.checked)}
                     />
-                    <span>{plant.label}</span>
+                    <PlantPortrait id={plant.id} />
+                    <span>
+                      {plant.label}
+                      <small className="plant-spanish" lang="es"><span className="sr-only">Español: </span>{illustration.spanish_name}</small>
+                      <small><i>{illustration.scientific_name}</i></small>
+                      <small>{group.label}</small>
+                    </span>
                   </label>
-                  {entry && quantityInput(entry, plant.label)}
+                  {priceControls(entry, plant)}
                   <details className="plant-info">
                     <summary>Details for {plant.label}</summary>
                     <p>
-                      {plant.detail}{" "}
+                      {illustration.features}
+                    </p>
+                    <p>{plant.detail}{" "}
                       <a href={plant.source} target="_blank" rel="noreferrer">
-                        Reference picture
+                        Vegetation systems poster
                       </a>
                     </p>
+                    <ul>
+                      {illustration.references.map((reference) => (
+                        <li key={reference.url}>
+                          <a href={reference.url} target="_blank" rel="noreferrer">{reference.label}</a>
+                        </li>
+                      ))}
+                    </ul>
+                    <small>AI-generated botanical illustration, checked against the features above. Not to scale.</small>
+                    <p><a href={illustration.image} target="_blank" rel="noreferrer">View larger illustration</a></p>
                   </details>
                 </div>
               );
             })}
+        </fieldset>
+      ))}
+      {entries.some((p) => Object.hasOwn(p, "label")) && (
+        <fieldset className="plant-group" disabled={disabled}>
+          <legend>Your custom plants</legend>
           {entries
-            .filter((p) => p.label && p.group === group.id)
+            .filter((p) => Object.hasOwn(p, "label"))
             .map((p) => (
               <div className="plant-row plant-selected" key={p.id}>
                 <label className="plant-checkbox">
                   <input
                     type="checkbox"
+                    aria-label={`Select ${p.label}`}
                     checked
                     onChange={() =>
                       change(entries.filter((x) => x.id !== p.id))
                     }
                   />
+                  <span className="plant-custom-portrait" aria-label="No illustration: plant identity not verified">?</span>
                   <span>
                     {p.label} <small>Custom plant</small>
                   </span>
                 </label>
-                {quantityInput(p, p.label)}
+                {priceControls(p, p)}
                 <small className="plant-info muted">
                   User-defined; identity, water needs and suitability
                   unverified. Uncheck to remove.
@@ -167,7 +316,7 @@ export function PlantChecklist({ field, value, onChange, disabled }) {
               </div>
             ))}
         </fieldset>
-      ))}
+      )}
       <details className="plant-custom">
         <summary>Add another plant</summary>
         <div className="field-grid">
@@ -184,8 +333,12 @@ export function PlantChecklist({ field, value, onChange, disabled }) {
             Growth form
             <select
               value={customGroup}
-              disabled={disabled}
-              onChange={(e) => setCustomGroup(e.target.value)}
+              disabled={disabled || priceSaving || !defaultsReady}
+              onChange={(e) => {
+                setCustomGroup(e.target.value);
+                setCustomPrice(priceDefaults.custom_unit_costs[e.target.value]);
+                setCustomPriceEdited(false);
+              }}
             >
               {catalog.groups.map((g) => (
                 <option key={g.id} value={g.id}>
@@ -193,6 +346,17 @@ export function PlantChecklist({ field, value, onChange, disabled }) {
                 </option>
               ))}
             </select>
+          </label>
+          <label>
+            Custom plant unit price (€)
+            <input type="number" min="0" max="1000000" step="0.01"
+              value={customPrice === null ? "" : customPrice}
+              disabled={disabled || priceSaving || !defaultsReady}
+              onChange={(event) => {
+                setCustomPrice(event.target.value === "" ? null : Number(event.target.value));
+                setCustomPriceEdited(true);
+              }}
+            />
           </label>
           <label>
             Custom plant quantity
@@ -211,14 +375,13 @@ export function PlantChecklist({ field, value, onChange, disabled }) {
             />
           </label>
         </div>
-        <button type="button" disabled={disabled} onClick={addCustom}>
+        <button type="button" disabled={disabled || priceSaving || !defaultsReady} onClick={addCustom}>
           Add custom plant
         </button>
       </details>
       <p>
         {entries.length} plant entries selected. Totals and budget are
-        calculated by Python in the preview. Shrubs and grasses share the
-        current non-tree unit rate.
+        calculated by Python in the preview using each plant’s unit price.
       </p>
     </div>
   );
@@ -234,18 +397,31 @@ export function PlantingList({ planting }) {
           <tr>
             <th scope="col">Plant</th>
             <th scope="col">Quantity</th>
+            <th scope="col">€/plant</th>
+            <th scope="col">Total</th>
           </tr>
         </thead>
         <tbody>
-          {planting.entries.map((p) => (
+          {planting.entries.map((p) => {
+            const identity = p.custom ? null : plantIllustration(p.id);
+            return (
             <tr key={p.id}>
               <th scope="row">
                 {p.label}
                 {p.custom ? " · custom" : ""}
+                {identity !== null && (
+                  <span className="plant-list-names">
+                    <span lang="es">{identity.spanish_name}</span>
+                    <i>{identity.scientific_name}</i>
+                  </span>
+                )}
               </th>
               <td>{p.quantity}</td>
+              <td>{money(p.unit_cost)}<small className="price-confirmation-status">{p.price_confirmed === null ? "Not recorded" : p.price_confirmed ? "User-confirmed" : "Estimate"}</small></td>
+              <td>{money(p.line_total)}</td>
             </tr>
-          ))}
+            );
+          })}
         </tbody>
       </table>
       {planting.questions.length > 0 && (

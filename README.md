@@ -4,6 +4,8 @@ A local, playable 30-year restoration journey implementing [the MVP brief](Resto
 
 The application lives in `restoration_simulator/`. Existing documents remain separately in `doc_library/`; this MVP does not ingest them.
 
+Development follows the mandatory [repository coding rules](AGENTS.md). Silent fallbacks are prohibited: required configuration and data must be validated, failures must be visible, and compatibility changes must use explicit migrations. The [fallback audit](restoration_simulator/FALLBACK_AUDIT.md) records the changes and intentional optional/legacy cases.
+
 ## Install with Conda (Windows PowerShell)
 
 You need an installed Conda distribution (Miniforge, Miniconda or Anaconda), PowerShell, internet for initial installation, and a modern browser. Conda installs **Python 3.12, Node.js 22, FastAPI (0.120–0.x), Uvicorn (0.38–0.x) and HTTPX (0.28.x)** from conda-forge. No separate Python/Node installer, pip command, Docker, API key or account is required. npm installs React and Vite from the committed frontend lockfile.
@@ -94,7 +96,7 @@ Contract/instrument and exit text are **descriptive notes**, not executable clau
 
 ## Parcel sizes, site descriptions and timeline controls
 
-For a new **I already own this land** record, the default total parcel area is **4,500 m²**, with **200 m² included for restoration**. Both remain editable. Configure these values in the `existing` land route's `default_parcel_area` and `default_covered_area` in `scenarios/default.json`. Existing projects without these settings use the same defaults for new ownership records; saved parcels and proposals keep their entered areas.
+For a new **I already own this land** record, the default total parcel area is **4,500 m²**, with **200 m² included for restoration**. Both remain editable. Configure `forms.land.existing.parcel_area` and `forms.land.existing.covered_area` in `restoration_simulator/scenarios/defaults.json`. Saved parcels and proposals keep their entered areas.
 
 Area inputs and live summaries use **m²**, including plots as small as 200 m². Total parcel area describes the whole recorded parcel; the included/covered area describes the part made available to the initiative; restoration work area describes actual completed work. For example, a 2,000 m² finca may include 200 m², with 100 m² restored initially. The **Use the entire parcel** checkbox links included area to total area until unchecked or manually changed. Field explanations are always visible, with longer help available by hover, keyboard focus or tap; Escape closes help.
 
@@ -116,7 +118,15 @@ Python remaps surviving parcel/agreement references and replays their original i
 
 **Plan the demonstrator** groups its inputs into **Site and planting**, **Plant checklist**, **Demonstration design**, **Funding route**, **Budget** and **Timing**. Presets cover the new picture's four dryland systems, candidate native planting mixes, objectives, comparison methods, baseline/monitoring approaches, public participation and results-sharing. **Custom option…** reveals text input without discarding other selections. Planting presets are documented examples, not site prescriptions or pre-approved fundable operations. Sources link to the existing picture, Níjar plant specification, pilot primer, AL20 table and official rules.
 
-The **Plant checklist** section replaces the general planting-mix dropdown and aggregate count inputs with individual plant checkboxes and quantities. **Add** a typical mix to select its plants; adding another mix preserves existing selections and quantities without duplicates. All plants remain editable, and **Add another plant** supports a custom name, growth form and quantity. Python derives the tree and shrub/grass totals and updates the budget. Grasses and shrubs share the current non-tree rate. The preview and saved record show the selected planting list and questions about combined habitats or custom plants. The library picture supplies example names and habitat groupings; suggested quantities and growth forms are planning assumptions. No ecological compatibility or grant eligibility is inferred. Existing version-4 aggregate plans replay unchanged; their editing form explains that species counts were not recorded and requires an explicit checklist before revising them. Catalogue version 1 remains stable for deterministic replay.
+The **Plant checklist** section replaces the general planting-mix dropdown and aggregate count inputs with individual plant checkboxes and quantities. System preset buttons check individual plants in the checklist; there is no separate system to add. Plants are visually grouped into the four vegetation systems, with editable quantities in the same checklist/cart. Combining presets preserves existing selections and quantities without duplicates. All plants remain editable, and **Add another plant** supports a custom name, growth form and quantity. Python derives the tree and shrub/grass totals and calculates the budget from the individual unit prices. The preview and saved record show the selected planting list and questions about combined habitats or custom plants. The library picture supplies example names and habitat groupings; suggested quantities and growth forms are planning assumptions. No ecological compatibility or grant eligibility is inferred. Existing version-4 aggregate plans replay unchanged; their editing form explains that species counts were not recorded and requires an explicit checklist before revising them. Catalogue version 1 remains stable for deterministic replay. Each of the 13 catalogue entries includes a botanical illustration and English, Spanish and Latin names, also shown in the planting summary. Plant details include identifying features, primary references and a larger drawing. See [illustration provenance and prompts](restoration_simulator/frontend/public/plants/README.md). Tamarix stays genus-level; custom plants are explicitly unidentified.
+
+Each selected plant has an editable **€/plant** field and a **Price confirmed** checkbox. Confirmation means the user checked that amount, for example with a supplier; it is not a certified quote or funding approval. Changing the amount clears confirmation. Unconfirmed prices can still be used for exploratory planning and are labelled **Estimate**. Quantity, unit price, line total and confirmation appear in the preview and saved record.
+
+**Save selected prices as defaults** writes catalogue amounts to `restoration_simulator/scenarios/plant-prices.json` immediately, separately from committing the plan. It preserves other catalogue prices, existing project prices and all confirmation statuses. Later selections/new plans use the new amounts and start unconfirmed. Custom plant prices remain project-specific. **Reload default prices** refreshes the preset amounts and resolves concurrent-edit conflicts without overwriting the checklist. Missing or invalid prices, conflicts and failed atomic writes produce explicit errors. `RESTORATION_PLANT_PRICES_PATH` can select a separate required JSON file for an isolated playtest.
+
+New checklist submissions use selection version 2 with explicit unit prices and confirmation flags. Older aggregate/v1 checklists replay with their recorded shared tree/shrub rates. Their editing adapter displays a notice, copies those recorded amounts into per-plant fields and marks confirmation as unrecorded/false; the original history is preserved. Catalogue v1 remains immutable.
+
+The last valid Python preview stays visible while a draft is recalculated. A fixed-height status marks updating or invalid drafts, and Commit is disabled until the current draft has a successful preview. Errors remain explicit with a Retry preview button; older responses cannot replace a newer draft or another project/decision.
 
 The default 200 m² example has 10 trees and 30 shrubs/grasses. Its editable assumed budget is **€645 planting + €100 monitoring + €100 evaluation/dissemination = €845**, excluding any land rent/maintenance. Planting takes 0.25 years, followed by observations after 1 year; these are configurable playtest assumptions, not local quotes or ecological predictions. Planning and recording a baseline take no simulation time and install no work. Planting pays the installation subtotal and records its work area; monitoring and evaluation pay their respective budgets separately. No observation or ecological success appears automatically when time advances.
 
@@ -144,16 +154,26 @@ $env:RESTORATION_SAVE_PATH = 'C:\Users\JanEngelke\restoration-saves\active-proje
 
 ## Change the simulation in Python
 
+**Edit `restoration_simulator/scenarios/defaults.json` for normal defaults.** It contains land form prefills, pilot area, historical shared tree/shrub rates, labour and monitoring budgets, timing, evidence-form initial values, custom-plant initial values, renewal terms, initial project name/theme and the default save path. `scenarios/default.json` still defines the action table, land-route costs/terms, funding catalogue and rules. The versioned plant examples and mix quantities live in `scenarios/planting-catalog-v1.json`. Current per-plant price prefills live in `scenarios/plant-prices.json` and can be saved from the checklist. These mutable catalogue prices are separate from form snapshots: each saved version-2 plan records its own amounts and confirmation flags.
+
+New projects use form schema 2 and embed a validated `input_defaults` snapshot in their scenario. Later edits to the JSON affect new projects, not the assumptions already saved in an existing project. Missing/invalid keys, unsupported versions, duplicate JSON keys and invalid quantities raise errors; Python does not substitute constants. Older v4 projects without form snapshots use the explicit, immutable `legacy-form-defaults-v1.json` adapter, identified in the UI. Do not edit either a legacy form definition or an existing plant-catalogue version in place; introduce a new supported version for incompatible changes. **Restart Python and reload the browser after changing code/configuration.** An incompatible running API is reported rather than silently accepted.
+
 | File inside `restoration_simulator/` | Responsibility |
 | --- | --- |
 | `backend/engine.py` | Standard-library-only rules, validation, prerequisites and deterministic transitions |
 | `backend/demonstrator.py` | Planting plans, stages, budget and preliminary AL20 3.4 checks |
-| `backend/planting.py` | Versioned plant catalogue, checklist validation and derived counts |
+| `backend/configuration.py` | Strict JSON loading, form-schema validation and explicit legacy adapter |
+| `backend/planting.py` | Versioned plant catalogue, checklist quantities/prices/confirmation and derived counts |
+| `backend/plant_prices.py` | Validated editable default prices, conflict detection and atomic persistence |
 | `backend/parcel_removal.py` | Exploration deletion, dependency replay and reference remapping |
 | `backend/parcel_removal_legacy.py` | Frozen validation of earlier soft-removal history |
 | `backend/storage.py` | Atomic persistence, import, saved undo and retry receipts |
 | `backend/app.py` | FastAPI routes and validated requests |
 | `scenarios/default.json` | New-project action table and embedded demonstrator catalogue |
+| `scenarios/defaults.json` | Authoritative form, client and runtime defaults for new projects |
+| `scenarios/plant-prices.json` | Current catalogue unit-price prefills and custom growth-form price prefills |
+| `scenarios/planting-catalog-v1.json` | Versioned plant/mix reference data and suggested quantities |
+| `scenarios/legacy-form-defaults-v1.json` | Immutable compatibility form definition for earlier v4 saves |
 | `frontend/src/` | React presentation and UI state; no duplicated simulation rules |
 | `tests/test_simulator.py` | Focused engine/API acceptance checks |
 | `tests/test_land_access.py` | Seven-route lifecycle, payment, permission and migration checks |
@@ -161,6 +181,9 @@ $env:RESTORATION_SAVE_PATH = 'C:\Users\JanEngelke\restoration-saves\active-proje
 | `tests/test_demonstrator.py` | Guided pilot, cash/evidence separation, AL20 gates and version-3 migration |
 | `tests/test_planting.py` | Species quantities, custom plants, derived budgets, legacy replay and persistence |
 | `tests/test_parcel_removal.py` | Deletion replay, clean exports, legacy cleanup, atomic persistence and saved undo |
+| `tests/test_configuration.py` | Missing/invalid config, snapshot stability, zero values and atomic import rejection |
+| `tests/test_plant_prices.py` | Per-plant prices, confirmations, legacy replay, default updates, conflicts and failed writes |
+| `frontend/tests/contracts.test.mjs` | Missing API data, numeric formatting, form contracts and broken references |
 
 Edit the scenario JSON for new projects. `backend/legacy.py`, `backend/engine_v2.py`, `backend/engine_v3.py` and `scenarios/legacy-v1.json` through `legacy-v3.json` are retained for exact replay of older saves. Existing saves retain their exact embedded definitions. Keep supported effect shapes and handler kinds; add new behavior through the explicit Python handlers. Incompatible handler/schema changes need version handling instead of silently reinterpreting saves. There is no scripting language, workflow editor or plugin framework.
 
@@ -190,6 +213,7 @@ Set-Location 'C:\Users\JanEngelke\git_private\algarrobos\restoration_simulator'
 conda activate restoration-simulator
 python -m unittest discover -s tests -v
 Set-Location .\frontend
+npm.cmd test
 npm.cmd run build
 npm.cmd audit
 ```
@@ -201,6 +225,12 @@ Verified on Windows on 27 October 2026 with Conda Python 3.12 and Node 22.23.4: 
 Manual acceptance: complete the journey at desktop and phone-sized widths, use Tab/Enter to reach controls, inspect the final summary and past results, refresh, then restart Python to verify restoration of state and undo. Stop for a playtest before adding GIS, document ingestion, real grants, forecasting or further infrastructure.
 
 Exploration deletion verified on 28 October 2026: **76 tests passed** and the production frontend built. An isolated two-parcel browser playtest deleted a purchased parcel and its installed planting, removed its four timeline/history entries, and restored cash from €41,355 to €60,000 and project time from year 0.75 to 0 while preserving the other finca. The exported JSON contained neither the deleted name nor a hidden undo copy. Undo restored the original project after refresh. Cancel and the 390-pixel phone layout also passed. Automated tests cover nested legacy snapshots, surviving references, funding and transitive dependencies, clean-up of earlier soft deletions, saved undo, invalid/stale requests and atomic-write failures.
+
+The 28 October fallback audit passed **84 Python tests, 11 frontend tests and the production build**. Browser checks covered the explicit legacy adapter, JSON defaults, preservation of an entered zero price, baseline/planting, reload/undo, a visible controlled server failure followed by explicit retry, and the 390-pixel layout. See [the audit report](restoration_simulator/FALLBACK_AUDIT.md) for retained optional and historical cases.
+
+The 28 October demonstrator-planning update passed **84 Python tests, 17 frontend tests and the production build**. An isolated browser playtest verified combined system presets, preservation of edited quantities, keyboard unchecking, continuously visible previews while updating, invalid-quantity errors and explicit retry, and saved selections after reload. All 13 botanical images loaded, with Spanish and Latin labels in the checklist and summary. Dark/light desktop and 390-pixel phone layouts passed with no horizontal page overflow. The user’s active save was not changed. No dependencies were added.
+
+The 28 October per-plant pricing update passed **91 Python tests, 19 frontend tests and the production build**. Checks cover individual and zero prices, whole-cent validation, confirmation flags, v1 history replay, atomic default updates, concurrent edits and failed writes. The isolated browser playtest edited and confirmed prices, verified confirmation reset on a price change, saved catalogue defaults, checked new selections start unconfirmed, rejected empty prices without substituting a default, and restored prices/confirmation after an actual Python-server restart. Dark desktop and 390-pixel phone layouts passed. Playtesting used separate project and price files; the active user save and actual configured defaults were not changed.
 
 If Conda reports a corrupt shared package cache, use a separate project cache (ignored by Git) and retry:
 

@@ -12,6 +12,9 @@
   --border: #dce1d5;
   --muted: #647467;
   --control: #fff;
+  --plant-portrait-bg: #f8f6ee;
+  --plant-portrait-text: #3a4935;
+  --plant-portrait-error: #6e2828;
   --panel: #fffef9;
   --hover: #eef2e7;
   --hover-border: #7e977b;
@@ -65,6 +68,11 @@
   --danger-hover-border: #b74754;
   --danger-focus: #a62e3d;
 }
+.theme-warning {
+  max-width: 300px;
+  color: var(--reason);
+  font-size: 12px;
+}
 :root[data-theme="dark"] {
   color-scheme: dark;
   --text: #e3eadf;
@@ -73,6 +81,9 @@
   --border: #405342;
   --muted: #adbcab;
   --control: #1d2e23;
+  --plant-portrait-bg: #000;
+  --plant-portrait-text: #adbcab;
+  --plant-portrait-error: #ffc8aa;
   --panel: #18271e;
   --hover: #2c4030;
   --hover-border: #809e7c;
@@ -1572,15 +1583,42 @@ footer p {
   min-width: 0;
 }
 .plant-mixes button {
-  margin: 4px;
+  margin: 0;
   font-size: 12px;
   text-align: left;
+}
+.plant-mixes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+  gap: 8px;
+}
+.plant-mixes button strong,
+.plant-mixes button span {
+  display: block;
+}
+.plant-mixes button span {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.plant-mixes .preset-checked {
+  border-color: var(--selected-border);
+  background: var(--selected-bg);
+}
+.plant-system legend {
+  font-size: 14px;
+  font-weight: 600;
+  max-width: 100%;
+}
+.plant-system-count {
+  font-size: 12px;
+  margin: 0 0 8px;
 }
 .plant-row {
   padding: 12px;
   border-bottom: 1px solid var(--border);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 100px;
+  grid-template-columns: minmax(0, 1fr) 176px;
   gap: 8px;
 }
 .plant-row:last-child {
@@ -1590,7 +1628,8 @@ footer p {
   background: var(--selected-bg);
 }
 .plant-checkbox {
-  display: flex;
+  display: grid;
+  grid-template-columns: 18px 88px minmax(0, 1fr);
   align-items: center;
   gap: 10px;
   font-size: 14px;
@@ -1605,6 +1644,50 @@ footer p {
   display: block;
   color: var(--muted);
 }
+.plant-checkbox .plant-spanish {
+  color: var(--text);
+  margin-top: 3px;
+}
+.plant-list-names {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+}
+.plant-list-names > * {
+  display: block;
+}
+.plant-portrait,
+.plant-custom-portrait {
+  width: 88px;
+  height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--plant-portrait-bg);
+  color: var(--plant-portrait-text);
+  overflow: hidden;
+}
+.plant-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.plant-portrait img[hidden] {
+  display: none;
+}
+.plant-portrait small {
+  font-size: 10px;
+  padding: 5px;
+  color: var(--plant-portrait-error);
+}
+.plant-custom-portrait {
+  font-size: 30px;
+}
+.plant-checkbox > span:last-child {
+  overflow-wrap: anywhere;
+}
 .plant-quantity {
   font-size: 11px;
 }
@@ -1613,12 +1696,61 @@ footer p {
   width: 100%;
   min-width: 0;
 }
+.plant-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+  align-content: center;
+  min-width: 0;
+}
+.plant-price-confirm {
+  grid-column: 2;
+  display: flex;
+  align-items: start;
+  gap: 5px;
+  font-size: 11px;
+}
+.plant-price-confirm input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  margin: 1px 0 0;
+}
+.plant-price-defaults {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 12px;
+}
+.plant-default-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.plant-default-actions button {
+  font-size: 12px;
+}
+.price-confirmation-status {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+}
+.plant-default-price {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  margin-top: 3px;
+}
 .plant-info {
   grid-column: 1 / -1;
   font-size: 12px;
 }
 .plant-info p {
   margin: 8px 0;
+}
+.plant-info ul {
+  margin: 8px 0;
+  padding-left: 18px;
 }
 .plant-info summary,
 .plant-custom summary {
@@ -1648,6 +1780,16 @@ footer p {
 }
 .planting-list {
   overflow-wrap: anywhere;
+  overflow-x: auto;
+}
+.preview-status {
+  min-height: 2.8em;
+  margin: 12px 0;
+  font-size: 12px;
+}
+.preview dd,
+.demo-budget td {
+  font-variant-numeric: tabular-nums;
 }
 .plant-review {
   font-size: 12px;
@@ -1658,13 +1800,24 @@ footer p {
 .plant-review ul {
   padding-left: 18px;
 }
-@media (max-width: 400px) {
+@media (max-width: 650px) {
   .plant-row {
-    grid-template-columns: minmax(0, 1fr) 80px;
+    grid-template-columns: minmax(0, 1fr);
     padding: 10px 6px;
   }
   .plant-checkbox {
     font-size: 13px;
+    grid-template-columns: 18px 56px minmax(0, 1fr);
+    gap: 6px;
+  }
+  .plant-portrait,
+  .plant-custom-portrait {
+    width: 56px;
+    height: 70px;
+  }
+  .plant-controls {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    padding-left: 24px;
   }
 }
 .demo-editor,

@@ -6,68 +6,120 @@ species prescriptions, nursery quotations or a grant eligibility assessment.
 """
 
 from copy import deepcopy
+from decimal import Decimal
+from pathlib import Path
 from . import engine_v3 as core
 
-SOURCE = "/api/sources/dryland-systems"
-GROUPS = [
-    {"id": "tree", "label": "Trees"},
-    {"id": "shrub", "label": "Shrubs"},
-    {"id": "grass", "label": "Grasses / herbaceous plants"},
-]
-# Names remain at the identification level supplied by the reference picture.
-_PLANTS_V1 = [
-    ("carob", "Carob", "tree", "woodland", 5),
-    ("wild_olive", "Wild olive", "tree", "woodland", 5),
-    ("lentisk", "Lentisk", "shrub", "woodland", 10),
-    ("buckthorn", "Buckthorn", "shrub", "woodland", 10),
-    ("palmetto", "Palmetto", "shrub", "woodland", 10),
-    ("retama", "Retama", "shrub", "scrub", 10),
-    ("esparto", "Esparto", "grass", "scrub", 20),
-    ("thyme", "Thyme", "shrub", "scrub", 10),
-    ("ziziphus", "Ziziphus", "shrub", "arid", 10),
-    ("lycium", "Lycium", "shrub", "arid", 10),
-    ("salsola", "Salsola", "shrub", "arid", 10),
-    ("oleander", "Oleander", "shrub", "watercourse", 10),
-    ("tamarix", "Tamarix (tree form)", "tree", "watercourse", 5),
-]
-_MIXES_V1 = [
-    ("woodland", "Woodland–shrub mosaic · system 3"),
-    ("scrub", "Semi-arid shrubland / grassland · system 4"),
-    ("arid", "Very arid scrub · system 5"),
-    ("watercourse", "Seasonal watercourse · system 2"),
-]
+CATALOG_PATH = (
+    Path(__file__).resolve().parents[1] / "scenarios" / "planting-catalog-v1.json"
+)
 
 
 def catalogue():
-    return dict(
-        version=1,
-        groups=deepcopy(GROUPS),
-        plants=[
-            dict(
-                id=id,
-                label=name,
-                group=group,
-                system=system,
-                suggested_quantity=quantity,
-                source=SOURCE,
-                detail=f"Library example for {dict(_MIXES_V1)[system]}. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form.",
-            )
-            for id, name, group, system, quantity in _PLANTS_V1
-        ],
-        mixes=[
-            dict(id=id, label=name, plant_ids=[p[0] for p in _PLANTS_V1 if p[3] == id])
-            for id, name in _MIXES_V1
-        ],
+    from .configuration import read_json, keys
+
+    data = read_json(CATALOG_PATH)
+    keys(data, {"version", "groups", "plants", "mixes"}, str(CATALOG_PATH))
+    core.require(
+        type(data["version"]) is int and data["version"] == 1,
+        "Unsupported plant catalogue version.",
     )
+    core.require(isinstance(data["groups"], list), "Invalid plant groups.")
+    for group in data["groups"]:
+        keys(group, {"id", "label"}, "catalogue.group")
+        core.require(
+            core.text(group["id"]) and core.text(group["label"]),
+            "Invalid plant group wording.",
+        )
+    core.require(
+        len(data["groups"]) == 3
+        and {g["id"] for g in data["groups"]} == {"tree", "shrub", "grass"},
+        "Invalid plant groups.",
+    )
+    core.require(
+        isinstance(data["plants"], list) and 1 <= len(data["plants"]) <= 100,
+        "Invalid plant catalogue.",
+    )
+    ids = set()
+    for plant in data["plants"]:
+        keys(
+            plant,
+            {
+                "id",
+                "label",
+                "group",
+                "system",
+                "suggested_quantity",
+                "source",
+                "detail",
+            },
+            "catalogue.plant",
+        )
+        core.require(
+            all(
+                core.text(plant[k], 1000)
+                for k in ("id", "label", "system", "source", "detail")
+            ),
+            "Invalid catalogue plant wording.",
+        )
+        core.require(
+            plant["id"] not in ids
+            and core.text(plant["group"])
+            and plant["group"] in {"tree", "shrub", "grass"},
+            "Invalid or duplicate catalogue plant.",
+        )
+        ids.add(plant["id"])
+        core.require(
+            core.number(plant["suggested_quantity"], 1, 1000000)
+            and float(plant["suggested_quantity"]).is_integer(),
+            "Invalid suggested plant quantity.",
+        )
+    core.require(
+        isinstance(data["mixes"], list) and len(data["mixes"]) > 0,
+        "Missing plant mixes.",
+    )
+    for mix in data["mixes"]:
+        keys(mix, {"id", "label", "plant_ids"}, "catalogue.mix")
+        core.require(
+            core.text(mix["id"])
+            and core.text(mix["label"])
+            and isinstance(mix["plant_ids"], list)
+            and all(core.text(id) for id in mix["plant_ids"])
+            and set(mix["plant_ids"]) <= ids,
+            "Invalid plant mix references.",
+        )
+    return deepcopy(data)
 
 
 def default_selection():
-    return dict(
-        version=1,
-        entries=[
-            dict(id=p[0], quantity=p[4]) for p in _PLANTS_V1 if p[3] == "woodland"
-        ],
+    from .configuration import load_defaults
+    from .plant_prices import snapshot
+
+    return priced_selection(
+        load_defaults()["forms"]["demonstrator"]["plan"]["plant_selection"], snapshot()
     )
+
+
+def priced_selection(selection, prices, previous_plan=None):
+    """Explicit v1 form adapter. Never infer a missing v2 unit cost."""
+    resolved = resolve(selection)
+    if selection["version"] == 2:
+        return deepcopy(selection)
+    entries = []
+    for plant in resolved["entries"]:
+        if previous_plan is not None:
+            rate = previous_plan[
+                "tree_unit_cost" if plant["group"] == "tree" else "shrub_unit_cost"
+            ]
+        elif plant["custom"]:
+            rate = prices["custom_unit_costs"][plant["group"]]
+        else:
+            rate = prices["unit_costs"][plant["id"]]
+        original = next(row for row in selection["entries"] if row["id"] == plant["id"])
+        entries.append(
+            {**deepcopy(original), "unit_cost": rate, "price_confirmed": False}
+        )
+    return {"version": 2, "entries": entries}
 
 
 def resolve(selection):
@@ -76,7 +128,7 @@ def resolve(selection):
         isinstance(selection, dict)
         and set(selection) == {"version", "entries"}
         and type(selection["version"]) is int
-        and selection["version"] == 1
+        and selection["version"] in {1, 2}
         and isinstance(selection["entries"], list)
         and 1 <= len(selection["entries"]) <= 100,
         "Select at least one plant from the checklist (up to 100 entries).",
@@ -89,6 +141,20 @@ def resolve(selection):
             "Invalid plant entry.",
         )
         id = row["id"]
+        cost_keys = (
+            {"unit_cost", "price_confirmed"} if selection["version"] == 2 else set()
+        )
+        if selection["version"] == 2:
+            from .plant_prices import price
+
+            core.require(
+                "unit_cost" in row, "Each selected plant needs an explicit unit price."
+            )
+            price(row["unit_cost"])
+            core.require(
+                "price_confirmed" in row and type(row["price_confirmed"]) is bool,
+                "Each plant needs an explicit Price confirmed checkbox value.",
+            )
         core.require(
             id not in ids, "Each plant may appear only once; edit its quantity instead."
         )
@@ -100,7 +166,7 @@ def resolve(selection):
         )
         if id in plants:
             core.require(
-                set(row) == {"id", "quantity"},
+                set(row) == {"id", "quantity"} | cost_keys,
                 "Catalogue plant names and groups are supplied by Python.",
             )
             plant = deepcopy(plants[id])
@@ -109,11 +175,11 @@ def resolve(selection):
             core.require(
                 id.startswith("custom-")
                 and core.text(id, 80)
-                and set(row) == {"id", "quantity", "label", "group"}
+                and set(row) == {"id", "quantity", "label", "group"} | cost_keys
                 and core.text(row["label"], 120)
                 and row["label"] == row["label"].strip()
                 and isinstance(row["group"], str)
-                and row["group"] in {g["id"] for g in GROUPS},
+                and row["group"] in {g["id"] for g in catalogue()["groups"]},
                 "Custom plants need a name, a valid growth form and a custom ID.",
             )
             plant = dict(
@@ -125,6 +191,12 @@ def resolve(selection):
             "Duplicate plant name; edit the existing quantity instead.",
         )
         names.add(name)
+        if selection["version"] == 2:
+            plant["unit_cost"] = row["unit_cost"]
+            plant["price_confirmed"] = row["price_confirmed"]
+            plant["line_total"] = float(
+                Decimal(str(row["unit_cost"])) * int(row["quantity"])
+            )
         entries.append({**plant, "quantity": row["quantity"]})
     trees = sum(p["quantity"] for p in entries if p["group"] == "tree")
     shrubs = sum(p["quantity"] for p in entries if p["group"] != "tree")
@@ -135,8 +207,15 @@ def resolve(selection):
     return dict(entries=entries, trees=trees, shrubs=shrubs)
 
 
-def review(selection, target):
+def review(selection, target, legacy_plan=None):
     result = resolve(selection)
+    if selection["version"] == 1 and legacy_plan is not None:
+        for p in result["entries"]:
+            p["unit_cost"] = legacy_plan[
+                "tree_unit_cost" if p["group"] == "tree" else "shrub_unit_cost"
+            ]
+            p["line_total"] = float(Decimal(str(p["unit_cost"])) * int(p["quantity"]))
+            p["price_confirmed"] = None  # The older format did not record confirmation.
     systems = {p["system"] for p in result["entries"] if p["system"]}
     questions = []
     if len(systems) > 1:
@@ -150,5 +229,11 @@ def review(selection, target):
     if any(p["custom"] for p in result["entries"]):
         questions.append(
             "Custom plants need identification, provenance and site-suitability review; their inclusion does not establish funding eligibility."
+        )
+    if selection["version"] == 2 and any(
+        not p["price_confirmed"] for p in result["entries"]
+    ):
+        questions.append(
+            "Some plant prices are unconfirmed estimates. Mark Price confirmed only after checking the entered amount, for example with a supplier. Confirmation is user-reported, not a funding approval."
         )
     return {**result, "questions": questions}

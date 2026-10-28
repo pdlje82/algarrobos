@@ -11,6 +11,8 @@ import {
 } from "./LandAccess.jsx";
 import { area, money, year } from "./format.js";
 import "./styles.css";
+import { clientDefaults, validateResponse } from "./contracts.js";
+import { usePreview } from "./usePreview.js";
 
 async function api(path, body) {
   let response;
@@ -44,7 +46,7 @@ async function api(path, body) {
       : data.detail;
     throw new Error(detail || `Request failed (${response.status}).`);
   }
-  return data;
+  return validateResponse(path, data);
 }
 
 function ActionChoices({ actions, busy, selected, onChoose }) {
@@ -65,8 +67,8 @@ function ActionChoices({ actions, busy, selected, onChoose }) {
           <span className="action-meta">
             {a.optional ? "Optional · " : ""}
             {a.repeatable ? "Repeatable · " : ""}
-            {a.terms_label || money(a.cost)}
-            {!a.terms_label &&
+            {a.terms_label === null ? money(a.cost) : a.terms_label}
+            {a.terms_label === null &&
               (a.kind !== "advance"
                 ? ` · ${year(a.duration)} years`
                 : " · choose year")}
@@ -153,41 +155,59 @@ function Timeline({ project, historyIndex, setHistoryIndex }) {
 }
 
 function App() {
-  const [theme, setTheme] = useTheme();
+  const [theme, setTheme, themeWarning] = useTheme();
+  const configured = clientDefaults();
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState("");
   const [inputs, setInputs] = useState({});
   const [configReady, setConfigReady] = useState(true);
-  const [preview, setPreview] = useState(null);
-  const [previewBusy, setPreviewBusy] = useState(false);
-  const [previewError, setPreviewError] = useState("");
-  const [name, setName] = useState("My restoration journey");
+  const [name, setName] = useState(configured.project_name);
   const [historyIndex, setHistoryIndex] = useState(null);
   const [replacement, setReplacement] = useState(null);
   const [newProjectOpen, setNewProjectOpen] = useState(false);
   const [retry, setRetry] = useState(null);
   const pending = useRef(false);
+  const priceRequest = useCallback(async (path, body) => {
+    if (body === undefined) return api(path);
+    if (pending.current) throw new Error("Another save is in progress. Wait for it to finish, then retry saving prices.");
+    pending.current = true;
+    setBusy(true);
+    try {
+      return await api(path, body);
+    } finally {
+      pending.current = false;
+      setBusy(false);
+    }
+  }, []);
   const fileInput = useRef();
   const previewPanel = useRef();
   const newProjectButton = useRef();
   const undoButton = useRef();
   const newProjectName = useRef();
-  const project = data?.project;
+  const project = data === null ? null : data.project;
   const action = data?.actions.find((a) => a.id === selected);
   const isLand =
     action?.kind === "land_access" || action?.kind === "activate_access";
   const isDemo = action?.kind?.startsWith("demo_");
   const updateInputs = useCallback((next) => {
-    setPreview(null);
     setInputs(next);
   }, []);
-  const availableActions = data?.actions.filter((a) => a.available) || [];
+  const previewEligible = action?.available && project !== null && configReady;
+  const { preview, previewBusy, previewError, previewCurrent, retryPreview } = usePreview(
+    previewEligible
+      ? { revision: data.revision, action_id: action.id, inputs }
+      : null,
+    previewEligible ? `${project.id}:${data.revision}:${action.id}` : null,
+    api,
+  );
+  const availableActions =
+    data === null ? [] : data.actions.filter((a) => a.available);
   const futureActions =
-    data?.actions.filter((a) => a.status === "future") || [];
+    data === null ? [] : data.actions.filter((a) => a.status === "future");
   const unavailableActions =
-    data?.actions.filter((a) => a.status === "unavailable") || [];
+    data === null ? [] : data.actions.filter((a) => a.status === "unavailable");
   const categoriesReady = data?.actions.every((a) => a.status);
 
   async function load() {
@@ -213,41 +233,10 @@ function App() {
     if (newProjectOpen) newProjectName.current?.focus();
   }, [newProjectOpen]);
 
-  useEffect(() => {
-    setPreview(null);
-    setPreviewError("");
-    if (!action?.available || !project || !configReady) {
-      setPreviewBusy(false);
-      return;
-    }
-    let ignore = false;
-    setPreviewBusy(true);
-    const timer = setTimeout(async () => {
-      try {
-        const result = await api("preview", {
-          revision: data.revision,
-          action_id: action.id,
-          inputs,
-        });
-        if (!ignore) setPreview(result);
-      } catch (e) {
-        if (!ignore) setPreviewError(e.message);
-      } finally {
-        if (!ignore) setPreviewBusy(false);
-      }
-    }, 180);
-    return () => {
-      ignore = true;
-      clearTimeout(timer);
-    };
-  }, [selected, inputs, data?.revision, configReady]);
-
   function choose(a) {
     setConfigReady(a.kind !== "land_access" && a.kind !== "activate_access");
     setSelected(a.id);
     setInputs(Object.fromEntries(a.fields.map((f) => [f.name, f.default])));
-    setPreview(null);
-    setPreviewError("");
     if (window.matchMedia("(max-width: 650px)").matches) {
       requestAnimationFrame(() =>
         previewPanel.current?.scrollIntoView({
@@ -263,18 +252,26 @@ function App() {
 
   async function mutate(path, body, existingRequest) {
     if (pending.current) return;
-    const request = existingRequest || {
-      ...body,
-      revision: data.revision,
-      request_id: crypto.randomUUID(),
-    };
+    try {
+      validateResponse("project", data);
+    } catch (e) {
+      setError(e.message);
+      return;
+    }
+    const request =
+      existingRequest !== undefined
+        ? existingRequest
+        : {
+            ...body,
+            revision: data.revision,
+            request_id: crypto.randomUUID(),
+          };
     pending.current = true;
     setBusy(true);
     setError("");
     setRetry(null);
     try {
       setData(await api(path, request));
-      setPreview(null);
       setSelected("");
       setHistoryIndex(null);
       setReplacement(null);
@@ -363,6 +360,11 @@ function App() {
               <option value="dark">Dark</option>
             </select>
           </label>
+          {themeWarning !== "" && (
+            <span className="theme-warning" role="status">
+              {themeWarning}
+            </span>
+          )}
         </div>
       </header>
       <main id="main">
@@ -389,8 +391,9 @@ function App() {
         <p className="fictional">
           FICTIONAL SCENARIO{" "}
           <span>
-            {project?.scenario.notice ||
-              "Illustrative amounts, delays and outcomes for playtesting. No ecological, financial, legal or funding predictions."}
+            {project === null
+              ? configured.notice_without_project
+              : project.scenario.notice}
           </span>
         </p>
         <div className="toolbar">
@@ -576,6 +579,9 @@ function App() {
             {data.summary.migration_notice && (
               <p className="fictional">{data.summary.migration_notice}</p>
             )}
+            {data.configuration_notice !== null && (
+              <p className="fictional">{data.configuration_notice}</p>
+            )}
             <div className="project-title">
               <h2>{project.name}</h2>
               <span>
@@ -595,12 +601,10 @@ function App() {
               </div>
               <div>
                 <span>Currently accessible land</span>
-                <strong>
-                  {area(data.summary.active_area ?? data.summary.area)}
-                </strong>
+                <strong>{area(data.summary.active_area)}</strong>
                 <small>
-                  {data.summary.parcel_records ?? project.parcels.length} parcel
-                  records · {area(data.summary.owned_area)} owned by you / your
+                  {data.summary.parcel_records} parcel records ·{" "}
+                  {area(data.summary.owned_area)} owned by you / your
                   organisations
                 </small>
               </div>
@@ -616,7 +620,9 @@ function App() {
               <div>
                 <span>Organizations</span>
                 <strong className="org-value">
-                  {project.organizations.join(" + ") || "Individual initiative"}
+                  {project.organizations.length === 0
+                    ? "Individual initiative"
+                    : project.organizations.join(" + ")}
                 </strong>
                 <small>Company and foundation are optional</small>
               </div>
@@ -635,16 +641,16 @@ function App() {
                 <p>
                   {data.summary.completed_activities} restoration activities
                   across {area(data.summary.restored_area)};{" "}
-                  {data.summary.parcel_records ?? project.parcels.length} parcel
-                  records; {area(data.summary.active_area ?? data.summary.area)}{" "}
-                  currently accessible and {area(data.summary.owned_area)} owned
-                  by you / your organisations. Cash remaining:{" "}
-                  {money(project.cash)}.
+                  {data.summary.parcel_records} parcel records;{" "}
+                  {area(data.summary.active_area)} currently accessible and{" "}
+                  {area(data.summary.owned_area)} owned by you / your
+                  organisations. Cash remaining: {money(project.cash)}.
                 </p>
                 <p>
                   Organizations:{" "}
-                  {project.organizations.join(" and ") ||
-                    "Individual initiative; no company or foundation created"}
+                  {project.organizations.length === 0
+                    ? "Individual initiative; no company or foundation created"
+                    : project.organizations.join(" and ")}
                   .
                 </p>
                 <p>{data.summary.pending}</p>
@@ -774,7 +780,7 @@ function App() {
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
-                          if (preview && !previewBusy && !busy && configReady)
+                          if (previewCurrent && !busy && configReady)
                             mutate("commit", { action_id: action.id, inputs });
                         }}
                       >
@@ -793,8 +799,9 @@ function App() {
                               preview={preview}
                               previewBusy={previewBusy}
                               previewError={previewError}
+                              onRetry={retryPreview}
                               busy={busy}
-                              ready={configReady}
+                              ready={configReady && previewCurrent}
                             />
                           </LandEditor>
                         ) : isDemo ? (
@@ -805,14 +812,19 @@ function App() {
                             onChange={updateInputs}
                             busy={busy}
                             preview={preview}
+                            previewBusy={previewBusy}
+                            previewError={previewError}
                             sources={data.summary.demonstrator?.sources}
+                            request={priceRequest}
                           >
                             <Outcome
+                              showStatus={action.kind !== "demo_plan"}
                               preview={preview}
                               previewBusy={previewBusy}
                               previewError={previewError}
+                              onRetry={retryPreview}
                               busy={busy}
-                              ready={configReady}
+                              ready={configReady && previewCurrent}
                             />
                           </DemonstratorEditor>
                         ) : (
@@ -827,8 +839,9 @@ function App() {
                               preview={preview}
                               previewBusy={previewBusy}
                               previewError={previewError}
+                              onRetry={retryPreview}
                               busy={busy}
-                              ready={configReady}
+                              ready={configReady && previewCurrent}
                             />
                           </>
                         )}
@@ -950,4 +963,31 @@ function App() {
   );
 }
 
-createRoot(document.getElementById("root")).render(<App />);
+class AppBoundary extends React.Component {
+  state = { error: null };
+  static getDerivedStateFromError(error) {
+    return { error };
+  }
+  render() {
+    if (this.state.error !== null)
+      return (
+        <main className="panel error" role="alert">
+          <h1>Unable to display this project</h1>
+          <p>{this.state.error.message}</p>
+          <p>
+            Check the configuration and Python server, then reload. The saved
+            project has not been replaced.
+          </p>
+          <button onClick={() => window.location.reload()}>
+            Reload application
+          </button>
+        </main>
+      );
+    return this.props.children;
+  }
+}
+createRoot(document.getElementById("root")).render(
+  <AppBoundary>
+    <App />
+  </AppBoundary>,
+);

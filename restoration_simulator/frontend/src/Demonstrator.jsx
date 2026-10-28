@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Fields } from "./LandAccess.jsx";
+import { Fields, PreviewStatus } from "./LandAccess.jsx";
 import { area, money, year } from "./format.js";
 import { PlantChecklist, PlantingList } from "./PlantChecklist.jsx";
+import { required } from "./contracts.js";
 
 const phases = [
   ["planned", "Plan"],
@@ -11,7 +12,7 @@ const phases = [
   ["evaluated", "Evaluate"],
 ];
 
-function Sources({ sources = [] }) {
+function Sources({ sources }) {
   return (
     <details className="demo-sources">
       <summary>Source documents and funding conditions</summary>
@@ -33,7 +34,10 @@ function Sources({ sources = [] }) {
 }
 
 function FundingFit({ fit }) {
-  if (!fit) return null;
+  required(
+    fit !== null && typeof fit === "object",
+    "Missing funding assessment from Python.",
+  );
   return (
     <div className="demo-funding-fit">
       <strong>{fit.status}</strong>
@@ -65,22 +69,31 @@ export function DemonstratorEditor({
   onChange,
   busy,
   preview,
+  previewBusy,
+  previewError,
   sources,
+  request,
   children,
 }) {
-  const sections = [
-    ...new Set(action.fields.map((f) => f.section || "Record")),
-  ];
-  const [section, setSection] = useState(sections[0] || "Record");
+  const sections = [...new Set(action.fields.map((f) => f.section))];
+  required(
+    sections.length > 0 && sections.every((s) => typeof s === "string"),
+    "Missing demonstrator form sections.",
+  );
+  const [section, setSection] = useState(sections[0]);
   const planning = action.kind === "demo_plan";
-  const selected = sections.includes(section) ? section : sections[0];
+  required(
+    sections.includes(section),
+    "The selected form section is no longer available. Reopen the decision.",
+  );
+  const selected = section;
   return (
     <div className="demo-editor">
       {planning && (
         <>
           <p className="demo-intro">
             Build a planting-led dryland pilot. Choose plants with checkboxes,
-            combine typical mixes and configure a potential AL20 3.4 route.
+            use system presets to check plants and configure a potential AL20 3.4 route.
             Choose <strong>Custom option…</strong> for your own method or
             description. No option is automatically funded.
           </p>
@@ -109,7 +122,7 @@ export function DemonstratorEditor({
               <p>
                 Editable playtest rates. Planting, monitoring and reporting are
                 paid in separate stages. Land rent and maintenance are
-                additional.
+                additional. Edit individual plant prices in the Plant checklist.
               </p>
             )}
             {selected === "Funding route" && (
@@ -123,9 +136,7 @@ export function DemonstratorEditor({
             <Fields
               fields={action.fields
                 .filter(
-                  (f) =>
-                    (f.section || "Record") === selected &&
-                    f.type !== "plant_selection",
+                  (f) => f.section === selected && f.type !== "plant_selection",
                 )
                 .map((f) =>
                   f.type === "category"
@@ -137,17 +148,17 @@ export function DemonstratorEditor({
               disabled={busy}
             />
             {action.fields
-              .filter(
-                (f) => f.type === "plant_selection" && f.section === selected,
-              )
+                .filter((f) => f.type === "plant_selection")
               .map((f) => (
+                  <div key={f.name} hidden={f.section !== selected}>
                 <PlantChecklist
-                  key={f.name}
                   field={f}
                   value={inputs[f.name]}
                   disabled={busy}
+                  request={request}
                   onChange={(value) => onChange({ ...inputs, [f.name]: value })}
                 />
+                  </div>
               ))}
           </fieldset>
           {planning && (
@@ -193,8 +204,9 @@ export function DemonstratorEditor({
           <Sources sources={sources} />
         </div>
         <div className="land-result">
+          {planning && <PreviewStatus preview={preview} previewBusy={previewBusy} previewError={previewError} />}
           {planning && preview?.demonstrator?.budget && (
-            <DemonstratorPreview value={preview.demonstrator} />
+            <DemonstratorPreview value={preview.demonstrator} updating={previewBusy} />
           )}
           {children}
         </div>
@@ -203,9 +215,9 @@ export function DemonstratorEditor({
   );
 }
 
-function DemonstratorPreview({ value: d }) {
+function DemonstratorPreview({ value: d, updating }) {
   return (
-    <div className="demo-budget-preview">
+    <div className="demo-budget-preview" aria-busy={updating}>
       <h3>Planting plan · hypothetical preview</h3>
       <p>
         {d.parcel_name} · {area(d.plan.restoration_area)} · {d.plan.trees} trees
@@ -258,7 +270,11 @@ function DemonstratorPreview({ value: d }) {
 }
 
 export function DemonstratorRecord({ value: d }) {
-  if (!d || d.status === "Not planned") return null;
+  required(
+    d !== null && typeof d === "object",
+    "Missing demonstrator record from Python.",
+  );
+  if (d.status === "Not planned") return null;
   if (d.legacy)
     return (
       <section className="panel demo-record">
@@ -267,12 +283,17 @@ export function DemonstratorRecord({ value: d }) {
       </section>
     );
   const reached = phases.findIndex(([key]) => key === d.status);
+  required(reached >= 0, `Unsupported demonstrator stage: ${d.status}.`);
   const basis = (code) =>
     code === "observed"
       ? "User-reported / unverified"
       : code === "illustrative"
         ? "Illustrative scenario assumption"
-        : "Not specified";
+        : code === "unknown"
+          ? "Not specified"
+          : (() => {
+              throw new Error(`Unsupported evidence basis: ${code}.`);
+            })();
   return (
     <section className="panel demo-record" aria-labelledby="demo-record-title">
       <p className="eyebrow">The demonstrator</p>
@@ -339,7 +360,7 @@ export function DemonstratorRecord({ value: d }) {
             </div>
           ))}
         </dl>
-        <p>Notes: {d.plan.notes || "None supplied"}</p>
+        <p>Notes: {d.plan.notes === "" ? "None supplied" : d.plan.notes}</p>
       </details>
       <details>
         <summary>Baseline, observations and evaluation</summary>
@@ -387,7 +408,9 @@ export function DemonstratorRecord({ value: d }) {
           <p>
             Feedback: {d.funding_review.feedback} ·{" "}
             {basis(d.funding_review.basis)} ·{" "}
-            {d.funding_review.reference || "No reference supplied"}
+            {d.funding_review.reference === ""
+              ? "No reference supplied"
+              : d.funding_review.reference}
           </p>
         )}
         <p>
