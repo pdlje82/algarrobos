@@ -1,0 +1,316 @@
+{
+  "version": 1,
+  "created": "2026-10-28",
+  "tool": "Built-in image_gen",
+  "transparent_background": true,
+  "plants": [
+    {
+      "id": "carob",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Ceratonia siliqua (carob, algarrobo). A mature medium-sized broad-crowned evergreen Mediterranean tree. Short thick grey-brown slightly twisted trunk branching low into stout spreading limbs; a broad rounded dense dark-green crown wider than tall. Leaf texture consists of even-pinnate leaves with small opposite pairs of broad rounded leathery leaflets, no terminal leaflet. A few modest long flattened dark-brown carob pods hang naturally near outer branches. Do not make a pine, olive, oak or bare branching diagram.",
+      "habit": "Broad rounded evergreen crown on a short sturdy trunk with spreading limbs.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-ce6a75d2-8ac6-410e-a5cd-7b2a9ef10256.png",
+      "image": "carob.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "00780f18cfb27e356fd7cc3b4d9c6f4ad2e7f269b30b3644db97a2964bcf18be",
+      "references": [
+        {
+          "label": "University of Almería · carob morphology",
+          "url": "https://www.ual.es/vida-universitaria/patrimonio-cultural/ciencias-naturales/obra/22483/ceratonia-siliqua-l"
+        }
+      ]
+    },
+    {
+      "id": "wild_olive",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Olea europaea var. sylvestris (wild olive, acebuche). Show one mature wild olive small tree, irregular dense rounded grey-green crown, short gnarled grey trunk branching low; some lower twiggy growth is natural. Small narrow opposite simple leathery olive leaves, dark grey-green above and silvery undersides catching light. Optional very few tiny dark olive drupes, not oversized cultivated olives. Wild shrubby small-tree habit, not an orchard standard, topiary sphere or giant ancient hollow-trunk monument.",
+      "habit": "Irregular evergreen crown; wild olive can form a large shrub or a small tree.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-9cc68697-cb7d-4e3a-b402-f96ee7a86235.png",
+      "image": "wild_olive.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "226fd878e3eb37c5dd7e73b196fdfbd9519f95f6ba62f89a7a33bd226c0ad3b0",
+      "references": [
+        {
+          "label": "University of Porto · wild olive morphology",
+          "url": "https://mhnc.up.pt/pt/colecoes/colecao-botanica-viva/zambujeiro/"
+        },
+        {
+          "label": "Jardins de València · wild and cultivated olive",
+          "url": "https://jardins.valencia.es/es/especie/olea-europea"
+        }
+      ]
+    },
+    {
+      "id": "lentisk",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Pistacia lentiscus (lentisk, lentisco). A mature dense rounded evergreen Mediterranean SHRUB, branching from several low woody stems near the base. Broad bushy dark-green foliage mass almost down to the base, no tall exposed single tree trunk, no topiary pruning. Foliage consists of small even-pinnate leathery leaves with PAIRED oval leaflets and winged rachis, NO terminal leaflet. Only a few subtle red/dark fruit clusters, no giant berries. Natural interlacing branches partly visible low in the shrub.",
+      "habit": "Dense evergreen shrub with low branching; larger specimens can become small trees.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-88acea3f-fe26-40c1-b0ef-01a78ea8ab43.png",
+      "image": "lentisk.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "2b73d79236fc701e53d0883427d53f9f9809bf9d08eab93e008915f5286d2f04",
+      "references": [
+        {
+          "label": "University of Almería · paired leaflets and winged rachis",
+          "url": "https://nevada.ual.es/biocon/pistacia-lentiscus.html"
+        },
+        {
+          "label": "University of Málaga Botanic Garden · lentisk",
+          "url": "https://jardinbotanico.uma.es/jb-43-01/"
+        }
+      ]
+    },
+    {
+      "id": "buckthorn",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Rhamnus alaternus (aladierno). Mature evergreen Mediterranean SHRUB, fairly upright rounded irregular crown, several woody stems arising low, dense branching and glossy dark green simple ALTERNATE oval-to-lanceolate leaves with finely toothed edges. No large spines, no compound leaves. A few tiny dark drupes optional. Whole natural bush with lower woody structure visible, not a lollipop tree, not narrow-leaved thorny Rhamnus lycioides.",
+      "habit": "Upright to rounded evergreen shrub; can also grow as a small tree.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-1001c156-2b10-4876-8804-6f82718ef9f7.png",
+      "image": "buckthorn.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "4ddc5e13a9ed3e9668e52373dfe17fbc7abea6988c021671d67fa052134d2da6",
+      "references": [
+        {
+          "label": "University of València Botanic Garden · Rhamnus alaternus",
+          "url": "https://www.jardibotanic.org/index.php?apid=cataleg_virtual_despecies-220&pid=2337"
+        }
+      ]
+    },
+    {
+      "id": "palmetto",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Chamaerops humilis (Mediterranean dwarf fan palm, palmito). Show a mature LOW CLUMPING PALM with several short stout fibrous brown stems/suckers and many rigid PALMATE FAN leaves at different heights. Fan blades divided into stiff narrow folded radiating segments. Petioles visibly spiny. Low broad mound with multiple crowns, taller central fans and smaller basal fans. Not a tall tropical coconut palm, not feather-pinnate fronds, not a cycad, no single slender tall trunk. No flowers needed.",
+      "habit": "Low clumping palm with several short fibrous stems and fan-shaped leaves.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-58c3566a-c032-4a9e-9817-d77ced196520.png",
+      "image": "palmetto.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "555f2d10261abefb63ba0991cc0f38256351308f04d5df63148598eba7e5fac3",
+      "references": [
+        {
+          "label": "Autonomous University of Madrid · dwarf fan palm herbarium sheet",
+          "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Chamaerops_humilis.pdf"
+        },
+        {
+          "label": "CREAF / Autonomous University of Barcelona · dwarf fan palm",
+          "url": "https://www.creaf.uab.es/guiagarrafpol/esp/chamaerops_humilis.html"
+        }
+      ]
+    },
+    {
+      "id": "retama",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Retama sphaerocarpa (yellow retama). Show the whole mature open rounded VASE-SHAPED SHRUB: woody grey branching base, many long slender flexible green-grey shoots rising then gracefully arching outward. Very nearly LEAFLESS, photosynthetic rush-like stems, airy canopy with visible transparent gaps. MANY TINY yellow pea flowers in separate SHORT AXILLARY RACEMES along shoots, with exposed green shoot lengths and bare tips. Flowers small at whole-plant scale, not huge blossoms or dense tall continuous yellow columns. No broad leaves or white flowers. Not a weeping tree with one trunk.",
+      "habit": "Airy shrub with arching, nearly leafless green shoots and small yellow flower clusters.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-aef244d2-cfa9-4f70-bd62-82ec6530d4e7.png",
+      "image": "retama.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "fe6141dbda274701dca073605318c85d12b95203ea4c29a574d76a5f56d111c9",
+      "references": [
+        {
+          "label": "University of Almería · Retama sphaerocarpa morphology",
+          "url": "https://nevada.ual.es/biocon/retama-sphaerocarpa.html"
+        },
+        {
+          "label": "Autonomous University of Madrid · Retama herbarium sheet",
+          "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Retama_sphaerocarpa.pdf"
+        }
+      ]
+    },
+    {
+      "id": "esparto",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Macrochloa tenacissima, synonym Stipa tenacissima (esparto, atocha). Show one COMPLETE dense mature BASAL GRASS TUSSOCK: a rounded spreading mound of numerous long very narrow tough rolled grey-green leaves curving upward then arching outward from one substantial straw-coloured base of retained dry leaf sheaths. No woody trunk. FOLIAGE-ONLY non-flowering state, no flowering culms or seed heads and absolutely NO fluffy pampas plumes. Make each grass leaf slim and wiry, not broad sword leaves, agave, yucca or a palm. Whole tussock including its base and all arching leaf tips.",
+      "habit": "Dense basal tussock of rolled leaves with retained straw-coloured leaf bases; shown without flowers.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-a8d32b7d-d4c1-42d0-9e5c-4ab5fffa39d6.png",
+      "image": "esparto.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "5f55d71660bd155cab430b346ec3f0186053516b90f340e71f87c4544eca7423",
+      "references": [
+        {
+          "label": "University of Almería · esparto morphology",
+          "url": "https://nevada.ual.es/biocon/macrochloa-tenacissima.html"
+        }
+      ]
+    },
+    {
+      "id": "thyme",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Thymus hyemalis (winter thyme, tomillo de invierno). A WHOLE mature LOW WOODY SUBSHRUB, compact irregular cushion/mound with many fine twiggy woody branches near base and small upright leafy flowering shoots. Tiny opposite narrow grey-green leaves with rolled margins. Sparse small compact TERMINAL HEADS of pale pink two-lipped flowers and reddish calyces, believable tiny scale. No long lavender flower spikes, no broad mint leaves, not a large tree or round manicured herb pot. Show the low rounded plant as a whole.",
+      "habit": "Low woody subshrub forming a compact twiggy mound with small pink flower heads.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-abcc21c4-f505-4b09-9fc0-49a43d7f870f.png",
+      "image": "thyme.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "0d9e28c0a503157f9934f925ebaebf22d5c79eccbc1d970f6864401ec5eacb27",
+      "references": [
+        {
+          "label": "University of Almería · winter thyme",
+          "url": "https://nevada.ual.es/biocon/thymus-hyemalis-subsp.-hyemalis.html"
+        }
+      ]
+    },
+    {
+      "id": "rosemary",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Salvia rosmarinus, synonym Rosmarinus officinalis (rosemary, romero). One WHOLE mature upright evergreen woody shrub, dense irregular rounded-bushy form, several branching woody stems rising from the base, fine ascending leafy twigs. Small opposite narrow linear leaves with rolled edges, dark green upper surfaces and occasional pale undersides. A restrained scattering of tiny pale blue-lavender TWO-LIPPED flowers in short axillary groups beside stems. Not long lavender flower spikes, no grey broad sage leaves, no pot, no topiary pruning.",
+      "habit": "Upright branching evergreen shrub with narrow leaves; shown in an unpruned form.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-7ce527cb-ec5a-4f47-9f8a-b95d9de3d3b9.png",
+      "image": "rosemary.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "ebe237b14323f746075fb5b8c10cbbb0bd0c10ed8aaafbb895301b6bad2e86b0",
+      "references": [
+        {
+          "label": "Autonomous University of Madrid · rosemary herbarium sheet and synonym",
+          "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Rosmarinus_officinalis.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rhamnus_lycioides",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Rhamnus lycioides (espino negro). A WHOLE mature dense tangled rounded THORNY SHRUB. Many interlacing grey-brown woody stems branching from low down, visible spine-tipped twigs around the irregular crown perimeter. Small narrow linear-to-oblanceolate leathery entire green leaves, alternately placed or in short-shoot clusters. Very few tiny dark drupes optional. Dense compact irregular thorny bush, not a single-trunk tree. Avoid broad serrated oval leaves of Rhamnus alaternus.",
+      "habit": "Dense tangled shrub with thorn-tipped branches and small narrow leaves.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-97758696-1842-4d9e-98d7-b15fb493fd98.png",
+      "image": "rhamnus_lycioides.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "a93451ec8ff41a6c23bb75fd2b2e0d8afae52bbbc387bccfab7f059392c7b2ee",
+      "references": [
+        {
+          "label": "University of Málaga Botanic Garden · Rhamnus lycioides",
+          "url": "https://jardinbotanico.uma.es/jb-psa1-03/"
+        }
+      ]
+    },
+    {
+      "id": "ephedra_fragilis",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Ephedra fragilis (hierba de las coyunturas). A WHOLE mature densely branched Mediterranean SHRUB, broad irregular rounded mound with multiple grey woody branches low at the base and numerous long slender jointed green cylindrical shoots rising and arching outward. Essentially LEAFLESS; only tiny brownish scale sheaths at nodes. Whole airy bush, older woody inner branching visible through some gaps. A few VERY SMALL red fleshy seed-cone bracts may appear on this female plant, not ordinary flowers or big berries; no male cones on the same specimen. Not a pine, broad-leaved shrub, horsetail or needle-leaf conifer. Keep the green shoots visibly jointed.",
+      "habit": "Much-branched shrub with jointed green shoots, tiny scales and older woody stems; female form shown.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-eb72831c-3cf2-46f8-afe5-82ab872b3208.png",
+      "image": "ephedra_fragilis.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "8a82b9cfb9f0914efdcc4d6d8c06f203f69cece41a05e5dac94e1414ed7f9fb3",
+      "references": [
+        {
+          "label": "University of Almería · Ephedra fragilis morphology",
+          "url": "https://nevada.ual.es/biocon/ephedra-fragilis-desf.-subsp.-fragilis.html"
+        }
+      ]
+    },
+    {
+      "id": "ziziphus",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Ziziphus lotus (wild jujube, azufaifo/arto). One WHOLE mature broad densely intertwined THORNY SHRUB of natural hemispherical spreading habit, several grey woody basal branches and arching zigzag thorny twigs, foliage to low down and no exposed tall tree trunk. Small alternate ovate leaves with three visible principal veins where individual leaves can be resolved. A few tiny rounded ochre-brown drupes optional, not large red elongated cultivated jujubes. Natural sprawling shrub, not orchard Ziziphus jujuba.",
+      "habit": "Broad densely intertwined thorny shrub with a rounded, spreading crown.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-0113c31c-c46d-43e3-97d0-8738e677dc5c.png",
+      "image": "ziziphus.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "6088f2e359928420330fbaf2af6a0886a01107d50f42981e10f9a1b4fe5fc525",
+      "references": [
+        {
+          "label": "Autonomous University of Madrid · Ziziphus lotus herbarium sheet",
+          "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Ziziphus_lotus.pdf"
+        },
+        {
+          "label": "University of Málaga Botanic Garden · Ziziphus lotus",
+          "url": "https://jardinbotanico.uma.es/jb-alm-01/"
+        }
+      ]
+    },
+    {
+      "id": "lycium",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Lycium intricatum (cambrón/cambronera). One WHOLE mature low broad irregular thorny shrub with extremely tortuous grey woody branching and interlacing short spine-tipped twigs. Small fleshy oblanceolate grey-green leaves clustered on short shoots, some twiggy transparent gaps. A restrained scattering of small violet-purple flowers with clearly tubular trumpet-shaped corollas, tiny at whole-shrub scale. Optional a few tiny ROUND orange-red berries, not elongated goji berries. No tall single trunk or large leaves.",
+      "habit": "Low irregular shrub with tortuous thorny branches and small fleshy leaves.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-1007e427-a466-4f9e-bbe6-3f2615a0220f.png",
+      "image": "lycium.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "a139edb84ca5402e9c5a56fd60ee2f8a2dfe0850da65dea516f4b59e8c9c9762",
+      "references": [
+        {
+          "label": "University of the Balearic Islands · Lycium intricatum",
+          "url": "https://herbarivirtual.uib.es/es/general/505/especie/arc-intricat"
+        }
+      ]
+    },
+    {
+      "id": "salsola",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Salsola webbii (mata conejera). One WHOLE mature upright to rounded dryland woody SHRUB, many pale grey-white woody stems branching from low down into an open finely twiggy crown. Fine grey-green glaucous foliage of slender mostly CURVED CYLINDRICAL succulent leaves, approximately 20–40 times longer than wide, alternately placed with some axillary tufts. NO broad flat blades or conspicuous leaf veins. Foliage-only non-flowering state; no cones, fruit clusters or showy flowers. Pale whitish branches remain visible, whole rounded bush. Not a dense grass tussock or a conifer.",
+      "habit": "Rounded to upright shrub with pale woody branches and very slender curved leaves; foliage state.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-54c86740-7593-4d64-ad67-fe08578c012e.png",
+      "image": "salsola.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "3f6fd683b8844fa0a571593b0f7a718cf8f3c471c381008d06d7909443da1361",
+      "references": [
+        {
+          "label": "Flora de Almería · Salsola webbii diagnosis, p. 108",
+          "url": "https://www.dipalme.org/Servicios/Anexos/anexosiea.nsf/VAnexos/IEA-FA-f-c9/%24File/FA-f-c9.pdf"
+        }
+      ]
+    },
+    {
+      "id": "oleander",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Nerium oleander (adelfa). One WHOLE mature naturally growing rounded UPRIGHT MULTISTEM SHRUB, several woody basal stems rising and branching, a fairly dense dark-green leafy crown with some lower branch structure visible. Long narrow leathery lanceolate leaves opposite or in whorls of three. Scattered terminal clusters of SIMPLE pink flowers, each with five broad lobes and a small central fringed corona, blossoms modest at whole-plant scale. Not double rose-like garden flowers, not a standard single-trunk ornamental tree or clipped hedge.",
+      "habit": "Upright multistem shrub with narrow evergreen leaves and terminal flower clusters.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-1eae9e33-3206-4b02-bedb-39d15365d4d7.png",
+      "image": "oleander.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "797bf0670f8bf213d165e17eeba7958bb966e0aeeae61381e9c04e400facdf0b",
+      "references": [
+        {
+          "label": "University of Barcelona · oleander morphology",
+          "url": "https://museuvirtual.ub.edu/objecte/cpvfs00041/"
+        }
+      ]
+    },
+    {
+      "id": "tamarix",
+      "prompt": "Use case: scientific-educational botanical whole-plant portrait for an existing dryland-restoration checklist. Create ONE naturalistic fine watercolor and pencil illustration, not a photograph, on a genuinely transparent alpha background. High-resolution SQUARE canvas. Show the ENTIRE representative MATURE plant from stem base to top and every crown edge, centered, with 8 percent transparent margin so no tips are cropped. Natural unpruned habit, realistic branch structure, clear silhouette, finely rendered foliage at appropriate whole-plant scale. No close-up inset, detached sprig, labels, text, frame, human, scale bar, pot, exposed roots, landscape, white rectangle, paper texture or cast shadow. Subject stands at its natural stem base but no ground slab. Muted natural Mediterranean greens, same quiet field-guide watercolor style as botanical detail art. Tamarix spp. (tamarisk, taray/taraje), GENUS-LEVEL representative in TREE FORM. Show one whole mature small tree with a short somewhat crooked grey-brown woody trunk branching low into a loose airy irregular crown and fine slender arching/wispy branchlets. Minute grey-green SCALE LEAVES hugging twigs, not pine needles or broad blades. Some fine slender racemes of tiny pale pink flowers among the feathery foliage, restrained and small. No exact Tamarix species is assigned; this is a representative tree habit, not proof all tamarisks have identical form. Not a single clipped topiary ball or pink cherry tree.",
+      "habit": "Representative tree form with a loose crown and fine branchlets; Tamarix species can also be shrubby.",
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-2734419e-150f-4e6f-b22f-25c8dc40561c.png",
+      "image": "tamarix.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "1d55e840a8596f4394215f20ecbf57685ad54cc6220a00fd063f50b84aad9f26",
+      "references": [
+        {
+          "label": "University of València Botanic Garden · Tamarix example",
+          "url": "https://www.jardibotanic.org/?apid=cataleg_virtual_despecies-220&pid=2663"
+        }
+      ]
+    }
+  ]
+}

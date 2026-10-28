@@ -9,19 +9,27 @@ import { unitCost } from "../src/contracts.js";
 import { initialPreview, previewReducer, previewView } from "../src/previewState.js";
 const catalogue = { ...baseCatalogue, plants: baseCatalogue.plants.map((plant) => ({ ...plant, default_unit_cost: priceDefaults.unit_costs[plant.id] })) };
 
-test("all catalogue plants have Spanish and Latin names, references, and a shipped transparent illustration", async () => {
+test("all catalogue plants have names, references, and distinct transparent whole-plant and detail images", async () => {
+  assert.equal(illustrations.version, 2);
   assert.deepEqual(illustrations.plants.map((plant) => plant.id).sort(), catalogue.plants.map((plant) => plant.id).sort());
   for (const plant of illustrations.plants) {
     assert.ok(plant.spanish_name.trim().length > 0);
     assert.ok(plant.scientific_name.trim().length > 0);
+    assert.ok(plant.habit.trim().length > 0);
     assert.ok(plant.references.length > 0);
     for (const reference of plant.references) assert.equal(new URL(reference.url).protocol, "https:");
     assert.equal(plant.image, `/plants/${plant.id}.png`);
-    const png = await readFile(new URL(`../public${plant.image}`, import.meta.url));
-    assert.equal(png.subarray(1, 4).toString(), "PNG");
-    assert.equal(png.readUInt32BE(16), 1254, "every plant ships at the shared original resolution");
-    assert.equal(png.readUInt32BE(20), 1254);
-    assert.equal(png[25], 6, "RGBA images preserve transparent backgrounds");
+    assert.equal(plant.whole_image, `/plants/whole/${plant.id}.png`);
+    const images = [];
+    for (const source of [plant.image, plant.whole_image]) {
+      const png = await readFile(new URL(`../public${source}`, import.meta.url));
+      assert.equal(png.subarray(1, 4).toString(), "PNG");
+      assert.equal(png.readUInt32BE(16), 1254, "every view ships at the shared original resolution");
+      assert.equal(png.readUInt32BE(20), 1254);
+      assert.equal(png[25], 6, "RGBA images preserve transparent backgrounds");
+      images.push(png);
+    }
+    assert.equal(images[0].equals(images[1]), false, `${plant.id} needs two distinct views`);
   }
 });
 

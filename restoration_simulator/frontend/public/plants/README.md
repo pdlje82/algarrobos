@@ -1,18 +1,23 @@
 # Botanical checklist illustrations
 
-Sixteen transparent PNG illustrations generated with the built-in `image_gen`
-tool on 28 October 2026. The first 13 generation/correction prompts are in
+Thirty-two transparent PNG illustrations generated with the built-in `image_gen`
+tool on 28 October 2026: a whole-plant portrait and a retained botanical detail
+for each of the 16 catalogue plants. The whole-plant collection, growth-form
+notes and exact prompts are documented in [whole/README.md](whole/README.md) and
+[whole/manifest.json](whole/manifest.json). The first 13 detail generation/correction prompts are in
 [generation-prompts.json](generation-prompts.json); the three poster additions
 and their exact prompts are in [generation-prompts-v2.json](generation-prompts-v2.json).
-All 16 shipped images are now **1254 × 1254 pixels**, retaining transparent alpha.
+All 32 shipped images are **1254 × 1254 pixels**, retaining transparent alpha.
 The first 13 were originally shipped as 384 × 384 thumbnails. Eleven now use
 their reviewed full-resolution originals; retama and Salsola were corrected
 during this review. The three more recent additions retain their existing originals.
 See the [botanical review](botanical-review-2026-10-28.md) and
 [full-resolution provenance and correction prompts](high-resolution-manifest.json).
-The checklist loads small depictions lazily;
-clicking one opens the shipped image at its natural size, with scrolling on
-smaller screens.
+The checklist loads whole-plant thumbnails lazily. Clicking one opens the
+representative mature form and botanical detail side by side on desktop and
+stacked on phones. Each image starts fitted to its panel; its **Original size**
+button switches independently to natural-size scrolling, and **Fit view** returns
+to the comparison. Keyboard, Close, Escape and backdrop dismissal are supported.
 
 Names, identifying features and primary botanical reference links are maintained
 in [plant-illustrations.json](../../src/plant-illustrations.json). Each catalogue
@@ -53,6 +58,13 @@ suitability still need site-specific confirmation.
 No runtime imaging service or additional package is required. Each PNG is shipped
 with the frontend. A failed image displays an explicit message; identification
 references remain accessible in Details.
+
+Whole-plant portraits show representative mature forms, not the size of the
+plants being purchased or an equal biological scale. Notes describe variation
+with age, site and management. Trees/shrubs with variable habit are labelled
+accordingly, and Tamarix remains a representative genus-level tree form.
+Image load failures are reported per view; a failed whole-plant image does not
+silently substitute the detail drawing or prevent inspection of that detail.
 
 For the resolution update, all 13 older originals were visually reviewed against
 the linked botanical descriptions. The prior lentisk and esparto corrections were

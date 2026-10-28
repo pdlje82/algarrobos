@@ -209,8 +209,9 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
         ))}
       </fieldset>
       <p className="muted">
-        Plants are grouped by the poster’s systems. Illustrations show botanical
-        features at different scales; click a depiction to view its original size. Open plant details for identification
+        Plants are grouped by the poster’s systems. Click a whole-plant depiction
+        to compare its representative mature form with botanical detail. Each view
+        has an original-size option. Open plant details for identification
         references. Quantities and growth forms are planning assumptions.
       </p>
       <p role="status" className="plant-message">
@@ -281,8 +282,9 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
                         </li>
                       ))}
                     </ul>
-                    <small>AI-generated botanical illustration, checked against the features above. Not to scale.</small>
-                    <p><a href={illustration.image} target="_blank" rel="noreferrer">View larger illustration</a></p>
+                    <p>{illustration.habit} Form varies with age, site and management.</p>
+                    <small>AI-generated botanical illustrations, checked against the features above. Not to scale.</small>
+                    <p><a href={illustration.whole_image} target="_blank" rel="noreferrer">Open whole plant at original size</a>{" · "}<a href={illustration.image} target="_blank" rel="noreferrer">Open botanical detail at original size</a></p>
                   </details>
                 </div>
               );

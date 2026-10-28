@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "plants": [
     {
       "id": "carob",
@@ -12,7 +12,9 @@
           "label": "University of Almería · carob morphology",
           "url": "https://www.ual.es/vida-universitaria/patrimonio-cultural/ciencias-naturales/obra/22483/ceratonia-siliqua-l"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/carob.png",
+      "habit": "Broad rounded evergreen crown on a short sturdy trunk with spreading limbs."
     },
     {
       "id": "wild_olive",
@@ -29,7 +31,9 @@
           "label": "Jardins de València · wild and cultivated olive",
           "url": "https://jardins.valencia.es/es/especie/olea-europea"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/wild_olive.png",
+      "habit": "Irregular evergreen crown; wild olive can form a large shrub or a small tree."
     },
     {
       "id": "lentisk",
@@ -46,7 +50,9 @@
           "label": "University of Málaga Botanic Garden · lentisk",
           "url": "https://jardinbotanico.uma.es/jb-43-01/"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/lentisk.png",
+      "habit": "Dense evergreen shrub with low branching; larger specimens can become small trees."
     },
     {
       "id": "buckthorn",
@@ -59,7 +65,9 @@
           "label": "University of València Botanic Garden · Rhamnus alaternus",
           "url": "https://www.jardibotanic.org/index.php?apid=cataleg_virtual_despecies-220&pid=2337"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/buckthorn.png",
+      "habit": "Upright to rounded evergreen shrub; can also grow as a small tree."
     },
     {
       "id": "palmetto",
@@ -76,7 +84,9 @@
           "label": "CREAF / Autonomous University of Barcelona · dwarf fan palm",
           "url": "https://www.creaf.uab.es/guiagarrafpol/esp/chamaerops_humilis.html"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/palmetto.png",
+      "habit": "Low clumping palm with several short fibrous stems and fan-shaped leaves."
     },
     {
       "id": "retama",
@@ -93,7 +103,9 @@
           "label": "Autonomous University of Madrid · Retama herbarium sheet",
           "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Retama_sphaerocarpa.pdf"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/retama.png",
+      "habit": "Airy shrub with arching, nearly leafless green shoots and small yellow flower clusters."
     },
     {
       "id": "esparto",
@@ -106,7 +118,9 @@
           "label": "University of Almería · esparto morphology",
           "url": "https://nevada.ual.es/biocon/macrochloa-tenacissima.html"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/esparto.png",
+      "habit": "Dense basal tussock of rolled leaves with retained straw-coloured leaf bases; shown without flowers."
     },
     {
       "id": "thyme",
@@ -119,7 +133,9 @@
           "label": "University of Almería · winter thyme",
           "url": "https://nevada.ual.es/biocon/thymus-hyemalis-subsp.-hyemalis.html"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/thyme.png",
+      "habit": "Low woody subshrub forming a compact twiggy mound with small pink flower heads."
     },
     {
       "id": "rosemary",
@@ -132,7 +148,9 @@
           "label": "Autonomous University of Madrid · rosemary herbarium sheet and synonym",
           "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Rosmarinus_officinalis.pdf"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/rosemary.png",
+      "habit": "Upright branching evergreen shrub with narrow leaves; shown in an unpruned form."
     },
     {
       "id": "rhamnus_lycioides",
@@ -145,7 +163,9 @@
           "label": "University of Málaga Botanic Garden · Rhamnus lycioides",
           "url": "https://jardinbotanico.uma.es/jb-psa1-03/"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/rhamnus_lycioides.png",
+      "habit": "Dense tangled shrub with thorn-tipped branches and small narrow leaves."
     },
     {
       "id": "ephedra_fragilis",
@@ -158,7 +178,9 @@
           "label": "University of Almería · Ephedra fragilis morphology",
           "url": "https://nevada.ual.es/biocon/ephedra-fragilis-desf.-subsp.-fragilis.html"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/ephedra_fragilis.png",
+      "habit": "Much-branched shrub with jointed green shoots, tiny scales and older woody stems; female form shown."
     },
     {
       "id": "ziziphus",
@@ -175,7 +197,9 @@
           "label": "University of Málaga Botanic Garden · Ziziphus lotus",
           "url": "https://jardinbotanico.uma.es/jb-alm-01/"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/ziziphus.png",
+      "habit": "Broad densely intertwined thorny shrub with a rounded, spreading crown."
     },
     {
       "id": "lycium",
@@ -188,7 +212,9 @@
           "label": "University of the Balearic Islands · Lycium intricatum",
           "url": "https://herbarivirtual.uib.es/es/general/505/especie/arc-intricat"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/lycium.png",
+      "habit": "Low irregular shrub with tortuous thorny branches and small fleshy leaves."
     },
     {
       "id": "salsola",
@@ -201,7 +227,9 @@
           "label": "Flora de Almería · Salsola webbii diagnosis, p. 108",
           "url": "https://www.dipalme.org/Servicios/Anexos/anexosiea.nsf/VAnexos/IEA-FA-f-c9/%24File/FA-f-c9.pdf"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/salsola.png",
+      "habit": "Rounded to upright shrub with pale woody branches and very slender curved leaves; foliage state."
     },
     {
       "id": "oleander",
@@ -214,7 +242,9 @@
           "label": "University of Barcelona · oleander morphology",
           "url": "https://museuvirtual.ub.edu/objecte/cpvfs00041/"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/oleander.png",
+      "habit": "Upright multistem shrub with narrow evergreen leaves and terminal flower clusters."
     },
     {
       "id": "tamarix",
@@ -227,7 +257,9 @@
           "label": "University of València Botanic Garden · Tamarix example",
           "url": "https://www.jardibotanic.org/?apid=cataleg_virtual_despecies-220&pid=2663"
         }
-      ]
+      ],
+      "whole_image": "/plants/whole/tamarix.png",
+      "habit": "Representative tree form with a loose crown and fine branchlets; Tamarix species can also be shrubby."
     }
   ]
 }
