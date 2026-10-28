@@ -30,7 +30,22 @@ def land_catalog(state):
 def land_form(state, route_id, parcel_id="new", agreement_id=None):
     if parcel_id != "new":
         parcel_removal.require_included(state, parcel_id)
-    return core.land_form(state, route_id, parcel_id, agreement_id)
+    form = core.land_form(state, route_id, parcel_id, agreement_id)
+    if (
+        state.get("schema_version") == 4
+        and route_id == "existing"
+        and parcel_id == "new"
+        and agreement_id is None
+    ):
+        settings = route(state, route_id)
+        defaults = {
+            "parcel_area": settings.get("default_parcel_area", 4500),
+            "covered_area": settings.get("default_covered_area", 200),
+        }
+        for f in form["fields"]:
+            if f["name"] in defaults:
+                f["default"] = defaults[f["name"]]
+    return form
 
 
 def validate_scenario(scenario):
@@ -52,6 +67,13 @@ def validate_scenario(scenario):
                 )
                 a.update(kind="advance", effects={})
         core.validate_scenario(surrogate)
+        existing = next(r for r in scenario["land_routes"] if r["id"] == "existing")
+        total = existing.get("default_parcel_area", 4500)
+        included = existing.get("default_covered_area", 200)
+        require(
+            number(total, 0.01, 100000000) and number(included, 0.01, total),
+            "Existing-ownership default areas must be positive, with included area no larger than the parcel.",
+        )
         c = scenario["demonstrator_config"]
         require(
             type(c["version"]) is int

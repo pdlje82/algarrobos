@@ -429,6 +429,8 @@
     },
     {
       "id": "existing",
+      "default_parcel_area": 4500,
+      "default_covered_area": 200,
       "title": "Record existing ownership",
       "spanish": "Existing asset",
       "description": "Record land you already own at the current project year, with no acquisition, transfer or automatic maintenance commitment.",

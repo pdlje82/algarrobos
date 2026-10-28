@@ -94,6 +94,8 @@ Contract/instrument and exit text are **descriptive notes**, not executable clau
 
 ## Parcel sizes, site descriptions and timeline controls
 
+For a new **I already own this land** record, the default total parcel area is **4,500 m²**, with **200 m² included for restoration**. Both remain editable. Configure these values in the `existing` land route's `default_parcel_area` and `default_covered_area` in `scenarios/default.json`. Existing projects without these settings use the same defaults for new ownership records; saved parcels and proposals keep their entered areas.
+
 Area inputs and live summaries use **m²**, including plots as small as 200 m². Total parcel area describes the whole recorded parcel; the included/covered area describes the part made available to the initiative; restoration work area describes actual completed work. For example, a 2,000 m² finca may include 200 m², with 100 m² restored initially. The **Use the entire parcel** checkbox links included area to total area until unchecked or manually changed. Field explanations are always visible, with longer help available by hover, keyboard focus or tap; Escape closes help.
 
 The guided demonstrator accepts a configurable work area and an **itemised, editable planting budget**. Costs follow entered plant counts and assumed unit prices, labour, preparation and water; monitoring and reporting are separate stages. The separate expansion action retains its fixed scenario cost and duration. No real quotes, eligible-cost rulings or ecological outcomes are inferred. Earlier saved journeys keep their original €12,000/1.5-year demonstrator results and assumptions.
