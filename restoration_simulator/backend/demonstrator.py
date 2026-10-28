@@ -334,6 +334,7 @@ def fields(state, kind, legacy=False, priced=True):
                 v["default"] = d["plan"][v["name"]]
         if not legacy:
             f = [v for v in f if v["name"] not in {"plant_mix", "trees", "shrubs"}]
+            reference_catalogue = planting.catalogue(2 if priced else 1)
             previous = d["plan"] if d and not d["legacy"] else None
             if previous is None:
                 selection = deepcopy(defaults["plant_selection"])
@@ -342,9 +343,9 @@ def fields(state, kind, legacy=False, priced=True):
             else:
                 # Explicit adapter for the older aggregate-only plan format.
                 # The visible notice requires the user to choose species.
-                selection = {"version": planting.catalogue()["version"], "entries": []}
+                selection = {"version": 2 if priced else 1, "entries": []}
             catalogue = {
-                **planting.catalogue(),
+                **reference_catalogue,
                 "custom_defaults": settings["planting"],
             }
             notice = (

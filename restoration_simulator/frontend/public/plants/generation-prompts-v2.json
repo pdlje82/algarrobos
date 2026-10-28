@@ -1,0 +1,23 @@
+{
+  "tool": "Built-in image_gen",
+  "date": "2026-10-28",
+  "transparent_background": true,
+  "asset_size": "1254 × 1254 RGBA PNG, original generated dimensions retained",
+  "plants": [
+    {
+      "id": "rosemary",
+      "prompt": "Create ONE botanically careful, naturalistic botanical watercolor and fine pencil cutout of rosemary, Salvia rosmarinus (synonym Rosmarinus officinalis), for an existing plant checklist illustration set. Square canvas, subject centered and fully inside canvas with modest clear margins, no labels/text/border/pot/ground/shadow. A small woody branching sprig with many narrow linear opposite leaves, clearly rolled-under leaf margins, deep green uppersides and some pale whitish undersides visible. A few small pale blue-lavender two-lipped axillary flowers with violet markings close to the stems, not long lavender spikes, no thyme-like round flower heads. Two projecting stamens may be delicately suggested. Visually accurate rosemary, not lavender, not broad-leaf sage. Detailed scientific field-guide watercolor realism with subdued natural greens and fine brown wood texture. Genuinely transparent alpha background, no white rectangle or paper texture; readable against black or cream. No text.",
+      "original_source": "C:/Users/JanEngelke/.codex/generated_images/01a179f5-fd50-7fe2-91e6-7f15bb5d2db1/exec-e005a1cb-8dea-468f-a022-3a672f386dac.png"
+    },
+    {
+      "id": "rhamnus_lycioides",
+      "prompt": "Create ONE botanically careful, naturalistic botanical watercolor and fine pencil cutout of Rhamnus lycioides (espino negro), for a plant checklist. Square canvas. Center a complete small woody branched sprig, all tips inside canvas with modest transparent margin; NO text, labels, border, pot, soil, shadow, paper background. Numerous grey-brown woody twigs end in conspicuous sharp thorns. Small narrow linear-to-obovate lanceolate green leathery leaves, entire margins, mostly alternate and in small clusters on short shoots, little visible lateral venation. A few SMALL black globose ripe drupes on short axillary stalks, proportionate to the small narrow leaves, not large berries or grapes. No flowers needed. Distinguish the very narrow entire leaves and thorn-tipped branches of Rhamnus lycioides from broad serrated oval-leaved Rhamnus alaternus. Naturalistic scientific field-guide watercolor detail, muted Mediterranean green, fine wood texture. Truly transparent alpha background, no white rectangle, no ground. Readable on cream and black backgrounds.",
+      "original_source": "C:/Users/JanEngelke/.codex/generated_images/01a179f5-fd50-7fe2-91e6-7f15bb5d2db1/exec-34e06271-3d91-4405-a4f9-877292283b5f.png"
+    },
+    {
+      "id": "ephedra_fragilis",
+      "prompt": "Create ONE botanically careful, naturalistic botanical watercolor and fine pencil cutout of Ephedra fragilis (hierba de las coyunturas), a Mediterranean gymnosperm shrub, for a plant checklist. Square canvas, center an entire small woody branching spray with clear margins. Grey-brown older woody branch at bottom, dense slender erect green cylindrical jointed twiglets above, clear nodes and internodes, tiny reduced scale-like leaf sheaths at joints; essentially leafless, not pine needles, no flat leaves. Depict a FEMALE sprig with only a few small red fleshy seed-cone bract structures at nodes on short stalks: elongated oval red cone envelopes, anatomically attached to the segmented shoots, no large dangling cherries, no ordinary flowers, no male cones on this female sprig. Red bracts are small compared with branch length. Scientific field-guide naturalistic watercolor with fine pencil structure and subdued greens, matching botanical checklist illustrations. No text/labels/pot/soil/border/cast shadow. Genuinely transparent alpha background, no white rectangle or paper texture, crisp silhouette suitable for dark black and light cream UI backgrounds.",
+      "original_source": "C:/Users/JanEngelke/.codex/generated_images/01a179f5-fd50-7fe2-91e6-7f15bb5d2db1/exec-ea224dbc-ef8d-497e-ad24-66ec6d9e51cf.png"
+    }
+  ]
+}

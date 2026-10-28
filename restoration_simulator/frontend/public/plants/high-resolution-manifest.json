@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "updated": "2026-10-28",
+  "tool": "Built-in image_gen for original generation and targeted corrections",
+  "method": "11 original-resolution restorations, 2 botanical corrections, 3 existing high-resolution assets retained; no interpolation or upscaling",
+  "review": "botanical-review-2026-10-28.md",
+  "plants": [
+    {
+      "id": "carob",
+      "image": "carob.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-f535af50-52d4-41ff-a1c9-f0a078c172ae.png",
+      "sha256": "8f19d835de0c9aed08ccce7c058917d313c637327ce3fce4f967a33c577d4ece",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Create a single small botanical illustration asset for a plant checklist: Ceratonia siliqua (carob). Accurate isolated leafy twig with one or two hanging mature flattened curved dark-brown carob pods, pinnate leaves with 3 or 4 OPPOSITE PAIRS of broad oval leathery glossy deep green leaflets, NO terminal leaflet (paripinnate). Keep paired leaflet arrangement very clear. Fine botanical pen contours and restrained natural watercolor, readable thumbnail silhouette, specimen centered, generous transparent margins, square canvas. Accurate scientific morphology, not decorative fantasy. No flowers necessary. No text, labels, pots, landscape, borders, shadows or background. Actual transparent background. Asset file should depict this species only."
+    },
+    {
+      "id": "wild_olive",
+      "image": "wild_olive.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-c482a71f-ba28-4856-b1ce-60291c80ac5f.png",
+      "sha256": "10e8fba88553cb10789dd7cf10c579af4d77d7fc9be1dd78ae657d30a68bde1c",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Olea europaea var. sylvestris (wild olive). Morphological requirements: A short woody twig with clearly opposite pairs of small simple narrowly elliptic-lanceolate leathery leaves: dull dark grey-green upper surfaces, some turned to show silvery white undersides. Three small oval black ripe wild olives, smaller than cultivated olives. Entire rolled leaf edges, no serrations or compound leaves. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration."
+    },
+    {
+      "id": "lentisk",
+      "image": "lentisk.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-1e5470f1-4465-4542-8abe-a2a9a8b6e62f.png",
+      "sha256": "0b3f5ea9da6d4bec327166867fd415e5381099420ab91e54e278c722240e925b",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Pistacia lentiscus (lentisk). Morphological requirements: One branch with alternate pinnate leaves, each made of 3 or 4 opposite PAIRS of small narrow oval leathery green leaflets, conspicuously winged rachis, NO terminal leaflet. A modest axillary cluster of small round drupes, some red unripe and some shiny black ripe. No showy flowers. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration.",
+      "earlier_correction_prompt": "Correct this Pistacia lentiscus botanical illustration. CRITICAL BOTANICAL ERROR: all compound leaves must be EVEN-PINNATE (paripinnate), with NO terminal leaflet. On EACH of the four compound leaves, remove the unpaired final leaflet at the very tip. Show only 3 or 4 clearly opposed PAIRS of matching small oval leaflets per compound leaf, on a visibly green winged rachis; the rachis ends in a tiny bare stub BETWEEN the final opposite pair. Every leaflet has an opposite partner at the same node. NO lone leaf at the end, no odd number of leaflets. Keep woody central twig, small red and black round drupes, natural green colors, fine watercolor/pen style, and transparent background. Improve the correct even-pinnate morphology visibly; no text or extra objects."
+    },
+    {
+      "id": "buckthorn",
+      "image": "buckthorn.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-09de9290-fa01-4b01-a61e-2aae1c627368.png",
+      "sha256": "865c6977f7aadf3ac4f1eae6a9ce19ee0c8dcf5eefc01ba45341cb59b1bd84a2",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Rhamnus alaternus (Mediterranean buckthorn). Morphological requirements: One branching twig with ALTERNATE simple oval pointed glossy evergreen leaves, fine small teeth on edges, slightly paler undersides; small round black ripe drupes in axillary clusters. No compound leaves; no large thorns. Clear leaf arrangement. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration."
+    },
+    {
+      "id": "palmetto",
+      "image": "palmetto.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-35b69ba2-d8d3-4bfe-856d-ae14ed75309b.png",
+      "sha256": "cdebee5c6f14eda3925c0f6db7b02c01d1b9c8b00ba793c6db851853164b4c9c",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Chamaerops humilis (Mediterranean dwarf fan palm). Morphological requirements: A low compact clumping palm with two short fibrous stems and three or four PALMATE FAN leaves, each leaf radiating from a single petiole endpoint into many stiff narrow folded pointed segments, not pinnate coconut fronds. The long rigid petioles bear clear marginal spines. Keep individual fan segments clean and readable. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration."
+    },
+    {
+      "id": "retama",
+      "image": "retama.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-e3fee5bf-53b6-4792-af36-68559d726580.png",
+      "sha256": "3aae84e6aad5d51416d0ef9035640b2ee6a1bbe8499d5d7dbe4f463797fe6b90",
+      "action": "botanical correction",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Retama sphaerocarpa (yellow broom). Morphological requirements: A branching spray of slender flexible nearly leafless grey-green rush-like stems with small bright YELLOW pea-shaped flowers in compact short lateral racemes along the upper shoots. Few or no leaves; no broad trifoliate leaves. Some slender stems arch. Flowers small relative to twig, not giant blossoms; NOT white flowers. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration.",
+      "resolution_update_prompt": "Edit target: the supplied botanical illustration of Retama sphaerocarpa. Make a targeted botanical correction, retaining the fine naturalistic watercolor/pencil style, centered square cutout, slender branching grey-green almost leafless shoots and transparent background. Replace the long continuous terminal flower columns with SEPARATE VERY SHORT AXILLARY RACEMES emerging laterally along the shoots. Each short raceme has about 8–12 TINY yellow papilionaceous pea flowers, 4–6 mm long in life; they are much smaller than in the current image, only about 3–4 times the slender stem diameter. Keep clear exposed green shoot lengths BETWEEN flower clusters, with bare green growing tips extending beyond them. Small flower shape: one small upright standard, two small lateral wings and a tiny keel. The flowering branch remains airy, not a dense yellow spike or a large-flowered Spartium broom, no white flowers. Preserve near absence of leaves and thin flexible shoots. No text, labels, pots, soil, drop shadows, background or paper. Genuinely transparent alpha. Retain full high-resolution square output, do not provide a small thumbnail."
+    },
+    {
+      "id": "esparto",
+      "image": "esparto.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-96a5d46a-7819-4e2c-aa4c-fc0a833931c9.png",
+      "sha256": "e59a8d1d78c2f4198f6290d1660536eb295599fa3623d0cfd122c840fe3d1891",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Macrochloa tenacissima, synonym Stipa tenacissima (esparto grass). Morphological requirements: One dense basal tussock of many long narrow tough tightly rolled wiry grey-green grass leaves, with pale straw old leaf bases. A few taller upright slender flowering culms with narrow lax tan panicles and long fine awns on sparse spikelets. NO broad blades, no pampas plumes, no woody branch. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration.",
+      "earlier_correction_prompt": "Correct the Macrochloa tenacissima (esparto) illustration for botanical accuracy. Remove ALL of the large fluffy feathery flower plumes and their tall stems completely. They resemble pampas grass and must not be present. Depict esparto in its NON-FLOWERING VEGETATIVE STATE ONLY: a single dense basal tussock of many long, very narrow, tough, stiff, rolled wiry grey-green leaves, gently arching, with pale straw old leaf bases. Keep the existing grass clump structure and natural colors, no broad leaves, no woody branches. Botanical pen/watercolor style, entirely transparent background, centered isolated specimen with margins. No flowers, no plumes, no seed heads, no text. Accurate foliage-only esparto depiction."
+    },
+    {
+      "id": "thyme",
+      "image": "thyme.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-daf79899-8d7d-4623-8b9d-b3c71fc33cf2.png",
+      "sha256": "fa30a471dba9ea06c934ec66336a735c006804f8826f1d7f37fb765c57c48197",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Thymus hyemalis (winter thyme). Morphological requirements: A small woody branching sprig with opposite pairs of very small linear to narrowly lanceolate rolled-margin grey-green leaves, compact terminal heads of small PALE PINK two-lipped tubular thyme flowers and reddish calyces. Leaves tiny and narrow, no big round mint leaves, no lavender-like long flower spikes. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration."
+    },
+    {
+      "id": "ziziphus",
+      "image": "ziziphus.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-e7ba8890-27dd-4fef-bfc1-29fd33c91b98.png",
+      "sha256": "1804a6f0dcb4ecbf5c4a5c1ec1f0bac9e96f3b392812460739f57bf3881b025d",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Ziziphus lotus (wild jujube). Morphological requirements: One zigzag thorny twig with alternate small oval green leaves, each leaf with THREE clearly visible strong veins arising near base and a finely crenate edge. Paired stipular thorns at nodes, one straight and one curved. A few small rounded yellow to ochre-brown ripe drupes in axils, NOT red elongated cultivated dates or orange berries. Clear three-veined leaves. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration."
+    },
+    {
+      "id": "lycium",
+      "image": "lycium.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-5e866f17-56df-44ef-9a24-35bf514ee9ac.png",
+      "sha256": "3e98719e85e41595bb485cd8c51dc63849ed21175d1d8f73340492b44ebe4318",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Lycium intricatum (Mediterranean boxthorn). Morphological requirements: A tortuous branching thorny twig, sparse fascicles of small fleshy oblanceolate grey-green leaves, with a few small violet-purple flowers on fine axillary stalks. Flower corolla is a distinctly LONG NARROW TUBE flaring into FIVE small lobes, not a flat purple star only. Include two small ROUND red berries with persistent calyx, not elongated goji fruits. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration."
+    },
+    {
+      "id": "salsola",
+      "image": "salsola.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-f80a50ed-c286-44fb-abd1-f6a2d163643b.png",
+      "sha256": "9ef7592d24448c71477ad7d30609788c4f67356ecb26545727566716fb4124fc",
+      "action": "botanical correction",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Salsola webbii (Webb's saltwort). Morphological requirements: A spray of pale whitish erect-spreading woody branches with narrow grey-green fleshy subcylindrical ALTERNATE leaves, most leaves markedly curved, almost needle-like but succulent, slightly pointed. Pale glaucous foliage, no broad leaves, no showy petals, no berries. Small inconspicuous papery beige mature winged perianths in upper branched inflorescences. Accurate dryland shrub twig. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration.",
+      "resolution_update_prompt": "Create a new botanically precise scientific watercolor/pencil illustration of Salsola webbii, a Mediterranean dryland shrub. One isolated PALE WHITISH WOODY BRANCHING SPRIG, shown in NON-FLOWERING FOLIAGE STATE ONLY, on a truly transparent alpha background. Square full-resolution canvas. Many slender grey-white branches, with small glaucous grey-green leaves alternating along the thin shoots and some small axillary leaf tufts. CRITICAL LEAVES: near-threadlike, VERY THIN CYLINDRICAL succulent filaments, only 0.5–0.75 millimetres wide and 10–25 mm long in life, therefore around 25–40 times longer than wide. Think thin round wires or curved thin spaghetti, NOT a flattened grass blade, NOT a fleshy broad succulent leaf. Most leaves conspicuously curved or hook-like, with tiny pointed ends. The round leaf cylinders should have a gentle rounded light highlight, NO flat leaf surface, NO visible midrib, NO lateral leaf veins. Clearly show thin free-standing leaf silhouettes against transparent gaps. A relatively airy, open branching specimen with many thin leaves; retain calm realistic muted color and fine wood texture. Center the complete specimen with generous clear margins; no cropped tips. No flowers, no seedheads, no beige cones, no papery fruits, no berries, no leafy flat blades, no large spines, no soil, no pot, no text, no labels, no background rectangle, no shadow, no paper texture. This must be accurate cylindrical-leaved Salsola webbii foliage, not Salsola kali, and not generic broad-leaved saltbush. Match classic naturalistic botanical checklist watercolor art. High-resolution square asset, not a small thumbnail."
+    },
+    {
+      "id": "oleander",
+      "image": "oleander.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-a2ecd503-418d-4161-9c4b-662a14f1dcce.png",
+      "sha256": "55dc35c6c9c4a6f9477c07bdeaa4ac2a6861dedd6837c17644e8f26492fb8993",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Nerium oleander (wild oleander). Morphological requirements: A single twig bearing long narrow leathery lanceolate leaves in clear WHORLS OF THREE with strong central veins and entire edges. A terminal cluster of three simple pale pink flowers, each with exactly FIVE broad corolla lobes and small central fringed corona. No double garden flowers; no rose blossom. Leaf veins fine and parallel along sides of midrib. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration."
+    },
+    {
+      "id": "tamarix",
+      "image": "tamarix.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "source": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-f5feaec2-a026-43c6-b503-f34f61a81a83.png",
+      "sha256": "2b856afcd3add6283f0dbb29d366eb0f0a70403eb6b0aaf5b2764c155bc41d8d",
+      "action": "restore reviewed original",
+      "original_prompt": "Use case: scientific-educational. Asset: one small botanical illustration for a plant checklist. Subject: Tamarix spp. (tamarisk), intentionally genus level, no exact species identification. Morphological requirements: A delicate branching spray with tiny overlapping grey-green SCALE LEAVES hugging the slender twigs, and several slender elongated racemes densely covered in minute pale pink flowers. Feathery twig architecture, not pine needles or large leaves; tiny flowers relative to racemes. Genus-level representative illustration, do not imply one exact species. Style: precise fine botanical pen contours with restrained natural watercolor, credible botanical specimen, clean readable thumbnail silhouette. Isolated centered specimen on truly transparent background, square canvas, generous margins, plant occupies 80 percent of canvas. Same quiet classic botanical field-guide style across collection. NO text, labels, pots, landscapes, borders, drop shadows or background. Depict only this named taxon. Prioritize diagnostic morphology over decoration."
+    },
+    {
+      "id": "rosemary",
+      "image": "rosemary.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "b778b7770d943ecd663d185a751ac802a17d82fb9388636e9604144a59297450",
+      "action": "unchanged high-resolution addition",
+      "prompt_manifest": "generation-prompts-v2.json"
+    },
+    {
+      "id": "rhamnus_lycioides",
+      "image": "rhamnus_lycioides.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "97aec494ffa52fa5bf853efdffc75d9e9d6a6809bce396ff5676e6245c86c59f",
+      "action": "unchanged high-resolution addition",
+      "prompt_manifest": "generation-prompts-v2.json"
+    },
+    {
+      "id": "ephedra_fragilis",
+      "image": "ephedra_fragilis.png",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "fcf477eb30b8aba79e9232701e20501cfaa4b6b08ac71a7b85811761a3336d97",
+      "action": "unchanged high-resolution addition",
+      "prompt_manifest": "generation-prompts-v2.json"
+    }
+  ]
+}

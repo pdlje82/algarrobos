@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import baseCatalogue from "../../scenarios/planting-catalog-v1.json" with { type: "json" };
+import baseCatalogue from "../../scenarios/planting-catalog-v2.json" with { type: "json" };
 import priceDefaults from "../../scenarios/plant-prices.json" with { type: "json" };
 import illustrations from "../src/plant-illustrations.json" with { type: "json" };
 import { checklistSystems, preselectPlants, changeUnitCost, cataloguePricePatch } from "../src/plantSelection.js";
@@ -19,8 +19,8 @@ test("all catalogue plants have Spanish and Latin names, references, and a shipp
     assert.equal(plant.image, `/plants/${plant.id}.png`);
     const png = await readFile(new URL(`../public${plant.image}`, import.meta.url));
     assert.equal(png.subarray(1, 4).toString(), "PNG");
-    assert.equal(png.readUInt32BE(16), 384);
-    assert.equal(png.readUInt32BE(20), 384);
+    assert.equal(png.readUInt32BE(16), 1254, "every plant ships at the shared original resolution");
+    assert.equal(png.readUInt32BE(20), 1254);
     assert.equal(png[25], 6, "RGBA images preserve transparent backgrounds");
   }
 });
@@ -44,6 +44,18 @@ test("system presets combine individual plants without resetting quantities or c
   assert.equal(new Set(repeated.map((entry) => entry.id)).size, repeated.length);
   assert.ok(repeated.some((entry) => entry.id === "esparto"));
   assert.ok(repeated.every((entry) => !Object.hasOwn(entry, "system")));
+});
+
+test("the six-plant semi-arid preset selects the missing poster plants with unconfirmed editable prices", () => {
+  const original = [{ id: "rosemary", quantity: 3, unit_cost: 4.2, price_confirmed: true }];
+  const selected = preselectPlants(catalogue, original, "scrub");
+  assert.equal(selected.length, 6);
+  assert.deepEqual(selected.find(p => p.id === "rosemary"), original[0]);
+  for (const id of ["rhamnus_lycioides", "ephedra_fragilis"]) {
+    const plant = selected.find(p => p.id === id);
+    assert.equal(plant.unit_cost, priceDefaults.unit_costs[id]);
+    assert.equal(plant.price_confirmed, false);
+  }
 });
 
 test("changing a price clears confirmation, while the same amount and presets preserve it", () => {

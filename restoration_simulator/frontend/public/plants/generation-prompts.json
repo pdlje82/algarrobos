@@ -1,7 +1,7 @@
 {
   "tool": "Built-in image_gen",
   "transparent_background": true,
-  "asset_size": "384 × 384 RGBA PNG, downsampled from generated originals for checklist use",
+  "asset_size": "Initially shipped as 384 × 384 RGBA thumbnails; current 1254 × 1254 originals and corrections are recorded in high-resolution-manifest.json",
   "plants": [
     {
       "id": "carob",

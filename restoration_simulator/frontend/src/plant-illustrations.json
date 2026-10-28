@@ -7,7 +7,12 @@
       "scientific_name": "Ceratonia siliqua",
       "image": "/plants/carob.png",
       "features": "Broad, leathery oval leaflets in pairs without a terminal leaflet; long flattened brown pods.",
-      "references": [{"label": "University of Almería · carob morphology", "url": "https://www.ual.es/vida-universitaria/patrimonio-cultural/ciencias-naturales/obra/22483/ceratonia-siliqua-l"}]
+      "references": [
+        {
+          "label": "University of Almería · carob morphology",
+          "url": "https://www.ual.es/vida-universitaria/patrimonio-cultural/ciencias-naturales/obra/22483/ceratonia-siliqua-l"
+        }
+      ]
     },
     {
       "id": "wild_olive",
@@ -15,7 +20,16 @@
       "scientific_name": "Olea europaea var. sylvestris",
       "image": "/plants/wild_olive.png",
       "features": "Opposite, simple narrow leaves with a pale silvery underside; small olive drupes, dark when ripe.",
-      "references": [{"label": "Jardins de València · wild and cultivated olive", "url": "https://jardins.valencia.es/es/especie/olea-europea"}]
+      "references": [
+        {
+          "label": "University of Porto · wild olive morphology",
+          "url": "https://mhnc.up.pt/pt/colecoes/colecao-botanica-viva/zambujeiro/"
+        },
+        {
+          "label": "Jardins de València · wild and cultivated olive",
+          "url": "https://jardins.valencia.es/es/especie/olea-europea"
+        }
+      ]
     },
     {
       "id": "lentisk",
@@ -23,7 +37,16 @@
       "scientific_name": "Pistacia lentiscus",
       "image": "/plants/lentisk.png",
       "features": "Pinnate leaves with paired leathery leaflets, a winged central stalk and no terminal leaflet; small red drupes turn dark at maturity.",
-      "references": [{"label": "University of Málaga Botanic Garden · lentisk", "url": "https://jardinbotanico.uma.es/jb-43-01/"}]
+      "references": [
+        {
+          "label": "University of Almería · paired leaflets and winged rachis",
+          "url": "https://nevada.ual.es/biocon/pistacia-lentiscus.html"
+        },
+        {
+          "label": "University of Málaga Botanic Garden · lentisk",
+          "url": "https://jardinbotanico.uma.es/jb-43-01/"
+        }
+      ]
     },
     {
       "id": "buckthorn",
@@ -31,7 +54,12 @@
       "scientific_name": "Rhamnus alaternus",
       "image": "/plants/buckthorn.png",
       "features": "Alternate, simple leathery oval leaves with small marginal teeth; small round drupes darken at maturity. This entry represents the poster’s R. alaternus, not R. lycioides.",
-      "references": [{"label": "University of València Botanic Garden · Rhamnus alaternus", "url": "https://www.jardibotanic.org/index.php?apid=cataleg_virtual_despecies-220&pid=2337"}]
+      "references": [
+        {
+          "label": "University of València Botanic Garden · Rhamnus alaternus",
+          "url": "https://www.jardibotanic.org/index.php?apid=cataleg_virtual_despecies-220&pid=2337"
+        }
+      ]
     },
     {
       "id": "palmetto",
@@ -39,7 +67,16 @@
       "scientific_name": "Chamaerops humilis",
       "image": "/plants/palmetto.png",
       "features": "Low, clumping palm with folded fan-shaped leaves divided into narrow segments; stiff spines along the leaf stalks.",
-      "references": [{"label": "CREAF / Autonomous University of Barcelona · dwarf fan palm", "url": "https://www.creaf.uab.es/guiagarrafpol/esp/chamaerops_humilis.html"}]
+      "references": [
+        {
+          "label": "Autonomous University of Madrid · dwarf fan palm herbarium sheet",
+          "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Chamaerops_humilis.pdf"
+        },
+        {
+          "label": "CREAF / Autonomous University of Barcelona · dwarf fan palm",
+          "url": "https://www.creaf.uab.es/guiagarrafpol/esp/chamaerops_humilis.html"
+        }
+      ]
     },
     {
       "id": "retama",
@@ -47,7 +84,16 @@
       "scientific_name": "Retama sphaerocarpa",
       "image": "/plants/retama.png",
       "features": "Slender, flexible grey-green shoots, losing their small leaves early; small yellow pea flowers in short lateral clusters. Yellow-flowered R. sphaerocarpa, rather than white-flowered R. monosperma.",
-      "references": [{"label": "Autonomous University of Madrid · Retama herbarium sheet", "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Retama_sphaerocarpa.pdf"}]
+      "references": [
+        {
+          "label": "University of Almería · Retama sphaerocarpa morphology",
+          "url": "https://nevada.ual.es/biocon/retama-sphaerocarpa.html"
+        },
+        {
+          "label": "Autonomous University of Madrid · Retama herbarium sheet",
+          "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Retama_sphaerocarpa.pdf"
+        }
+      ]
     },
     {
       "id": "esparto",
@@ -55,7 +101,12 @@
       "scientific_name": "Macrochloa tenacissima",
       "image": "/plants/esparto.png",
       "features": "Also known as Stipa tenacissima. Dense basal tussock of long, tough rolled leaves. Shown without flowers; flowering plants have slender stems with narrow panicles and awned spikelets.",
-      "references": [{"label": "University of Almería · esparto morphology", "url": "https://nevada.ual.es/biocon/macrochloa-tenacissima.html"}]
+      "references": [
+        {
+          "label": "University of Almería · esparto morphology",
+          "url": "https://nevada.ual.es/biocon/macrochloa-tenacissima.html"
+        }
+      ]
     },
     {
       "id": "thyme",
@@ -63,7 +114,51 @@
       "scientific_name": "Thymus hyemalis",
       "image": "/plants/thyme.png",
       "features": "Small woody stems with tiny opposite, narrow rolled-margin leaves; compact terminal heads of pink, two-lipped flowers. The poster specifies winter thyme.",
-      "references": [{"label": "University of Almería · winter thyme", "url": "https://nevada.ual.es/biocon/thymus-hyemalis-subsp.-hyemalis.html"}]
+      "references": [
+        {
+          "label": "University of Almería · winter thyme",
+          "url": "https://nevada.ual.es/biocon/thymus-hyemalis-subsp.-hyemalis.html"
+        }
+      ]
+    },
+    {
+      "id": "rosemary",
+      "spanish_name": "Romero",
+      "scientific_name": "Salvia rosmarinus",
+      "image": "/plants/rosemary.png",
+      "features": "Also called Rosmarinus officinalis. Opposite narrow leaves have rolled-under edges, dark green upper surfaces and whitish undersides. Small pale blue-lavender, two-lipped flowers sit near the stems; this is rosemary, not lavender.",
+      "references": [
+        {
+          "label": "Autonomous University of Madrid · rosemary herbarium sheet and synonym",
+          "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Rosmarinus_officinalis.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rhamnus_lycioides",
+      "spanish_name": "Espino negro / espino prieto",
+      "scientific_name": "Rhamnus lycioides",
+      "image": "/plants/rhamnus_lycioides.png",
+      "features": "Grey-brown woody branches end in thorns. Small narrow leathery leaves have entire margins, with little visible lateral venation; small globose drupes turn black. This is the poster’s R. lycioides, distinct from the broader-leaved R. alaternus (Aladierno) already listed.",
+      "references": [
+        {
+          "label": "University of Málaga Botanic Garden · Rhamnus lycioides",
+          "url": "https://jardinbotanico.uma.es/jb-psa1-03/"
+        }
+      ]
+    },
+    {
+      "id": "ephedra_fragilis",
+      "spanish_name": "Hierba de las coyunturas",
+      "scientific_name": "Ephedra fragilis",
+      "image": "/plants/ephedra_fragilis.png",
+      "features": "Dense, slender green jointed stems with tiny scale-like leaves at the nodes and older grey woody branches. The depicted female sprig bears small red fleshy seed-cone bracts; these are not ordinary fruits or flowers. Male and female structures occur on separate plants.",
+      "references": [
+        {
+          "label": "University of Almería · Ephedra fragilis morphology",
+          "url": "https://nevada.ual.es/biocon/ephedra-fragilis-desf.-subsp.-fragilis.html"
+        }
+      ]
     },
     {
       "id": "ziziphus",
@@ -71,7 +166,16 @@
       "scientific_name": "Ziziphus lotus",
       "image": "/plants/ziziphus.png",
       "features": "Zigzag thorny shoots; alternate small oval leaves with three strong veins from the base and a finely scalloped margin; small drupes. This is wild Z. lotus, not cultivated Z. jujuba.",
-      "references": [{"label": "University of Málaga Botanic Garden · Ziziphus lotus", "url": "https://jardinbotanico.uma.es/jb-alm-01/"}]
+      "references": [
+        {
+          "label": "Autonomous University of Madrid · Ziziphus lotus herbarium sheet",
+          "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Ziziphus_lotus.pdf"
+        },
+        {
+          "label": "University of Málaga Botanic Garden · Ziziphus lotus",
+          "url": "https://jardinbotanico.uma.es/jb-alm-01/"
+        }
+      ]
     },
     {
       "id": "lycium",
@@ -79,15 +183,25 @@
       "scientific_name": "Lycium intricatum",
       "image": "/plants/lycium.png",
       "features": "Tortuous thorny branches, small fleshy grey-green leaves and violet tubular flowers with a flared mouth. The illustration represents the poster’s Mediterranean boxthorn.",
-      "references": [{"label": "University of the Balearic Islands · Lycium intricatum", "url": "https://herbarivirtual.uib.es/es/general/505/especie/arc-intricat"}]
+      "references": [
+        {
+          "label": "University of the Balearic Islands · Lycium intricatum",
+          "url": "https://herbarivirtual.uib.es/es/general/505/especie/arc-intricat"
+        }
+      ]
     },
     {
       "id": "salsola",
       "spanish_name": "Mata conejera",
       "scientific_name": "Salsola webbii",
       "image": "/plants/salsola.png",
-      "features": "Pale spreading branches with narrow, curved, almost cylindrical alternate leaves; inconspicuous flowers and papery winged fruiting structures. The poster uses the name Salsola webbii.",
-      "references": [{"label": "Flora de Almería · Salsola webbii diagnosis, p. 108", "url": "https://www.dipalme.org/Servicios/Anexos/anexosiea.nsf/VAnexos/IEA-FA-f-c9/%24File/FA-f-c9.pdf"}]
+      "features": "Pale woody branches with very slender, curved, cylindrical grey-green leaves, alternate or in small axillary tufts. Shown in non-flowering foliage state, without broad flat blades. The poster uses the name Salsola webbii.",
+      "references": [
+        {
+          "label": "Flora de Almería · Salsola webbii diagnosis, p. 108",
+          "url": "https://www.dipalme.org/Servicios/Anexos/anexosiea.nsf/VAnexos/IEA-FA-f-c9/%24File/FA-f-c9.pdf"
+        }
+      ]
     },
     {
       "id": "oleander",
@@ -95,7 +209,12 @@
       "scientific_name": "Nerium oleander",
       "image": "/plants/oleander.png",
       "features": "Long leathery lanceolate leaves, opposite or in whorls, with a strong midrib; terminal clusters of simple five-lobed pink flowers.",
-      "references": [{"label": "University of Barcelona · oleander morphology", "url": "https://museuvirtual.ub.edu/objecte/cpvfs00041/"}]
+      "references": [
+        {
+          "label": "University of Barcelona · oleander morphology",
+          "url": "https://museuvirtual.ub.edu/objecte/cpvfs00041/"
+        }
+      ]
     },
     {
       "id": "tamarix",
@@ -103,7 +222,12 @@
       "scientific_name": "Tamarix spp.",
       "image": "/plants/tamarix.png",
       "features": "Fine branching twigs with tiny overlapping scale leaves and slender racemes of minute pink flowers. Genus-level representation: the poster does not identify a Tamarix species. The linked T. gallica describes an example, not the confirmed planting identity.",
-      "references": [{"label": "University of València Botanic Garden · Tamarix example", "url": "https://www.jardibotanic.org/?apid=cataleg_virtual_despecies-220&pid=2663"}]
+      "references": [
+        {
+          "label": "University of València Botanic Garden · Tamarix example",
+          "url": "https://www.jardibotanic.org/?apid=cataleg_virtual_despecies-220&pid=2663"
+        }
+      ]
     }
   ]
 }

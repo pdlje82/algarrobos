@@ -1682,6 +1682,77 @@ footer p {
   padding: 5px;
   color: var(--plant-portrait-error);
 }
+.plant-portrait-open {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: var(--plant-portrait-bg);
+  cursor: zoom-in;
+}
+.plant-portrait-open:hover:not(:disabled) {
+  background: var(--plant-portrait-bg);
+  box-shadow: inset 0 0 0 2px var(--hover-border);
+}
+.plant-portrait-open:focus-visible {
+  outline-offset: -3px;
+}
+.plant-checkbox .plant-names {
+  margin: 0;
+  font-size: inherit;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.plant-image-viewer {
+  padding: 0;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  max-height: calc(100dvh - 24px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
+}
+.plant-image-viewer[open] {
+  display: flex;
+  flex-direction: column;
+}
+.plant-image-viewer::backdrop {
+  background: rgb(0 0 0 / 75%);
+}
+.plant-image-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px;
+  flex-shrink: 0;
+}
+.plant-image-heading strong,
+.plant-image-heading i,
+.plant-image-heading small {
+  display: block;
+}
+.plant-image-heading small {
+  color: var(--muted);
+}
+.plant-image-scroll {
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--plant-portrait-bg);
+}
+.plant-image-scroll img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
+}
+.plant-image-scroll [role="alert"] {
+  padding: 16px;
+  color: var(--plant-portrait-error);
+}
 .plant-custom-portrait {
   font-size: 30px;
 }

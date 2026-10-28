@@ -29,6 +29,46 @@ def inputs(state, **changes):
 
 
 class PlantChecklistTests(unittest.TestCase):
+    def test_expanded_catalogue_preserves_original_entries_and_legacy_resolution(self):
+        original = planting.catalogue(1)
+        current = planting.catalogue(2)
+        original_ids = {plant["id"] for plant in original["plants"]}
+        self.assertEqual(len(original_ids), 13)
+        self.assertEqual(
+            [plant for plant in current["plants"] if plant["id"] in original_ids],
+            original["plants"],
+        )
+        additions = {"rosemary", "rhamnus_lycioides", "ephedra_fragilis"}
+        self.assertEqual({p["id"] for p in current["plants"]} - original_ids, additions)
+        scrub = next(m for m in current["mixes"] if m["id"] == "scrub")
+        self.assertEqual(len(scrub["plant_ids"]), 6)
+        self.assertTrue(additions <= set(scrub["plant_ids"]))
+        for version in [0, 3, True, None]:
+            with self.subTest(version=version), self.assertRaises(engine.Invalid):
+                planting.catalogue(version)
+        with self.assertRaises(engine.Invalid):
+            planting.resolve({"version": 1, "entries": [{"id": "rosemary", "quantity": 1}]})
+
+    def test_added_species_keep_prices_quantities_and_confirmation_through_replay(self):
+        state = site()
+        selection = {
+            "version": 2,
+            "entries": [
+                {"id": "rosemary", "quantity": 2, "unit_cost": 1.25, "price_confirmed": True},
+                {"id": "rhamnus_lycioides", "quantity": 3, "unit_cost": 0, "price_confirmed": False},
+                {"id": "ephedra_fragilis", "quantity": 4, "unit_cost": 3.75, "price_confirmed": True},
+            ],
+        }
+        values = inputs(state, vegetation_system="scrub", plant_selection=selection)
+        preview = engine.preview(state, "demonstrator", values)["demonstrator"]
+        self.assertEqual((preview["plan"]["trees"], preview["plan"]["shrubs"]), (0, 9))
+        self.assertEqual(sum(p["line_total"] for p in preview["planting"]["entries"]), 17.5)
+        committed = engine.transition(state, "demonstrator", values)[0]
+        self.assertEqual(engine.validate_state(committed), committed)
+        self.assertEqual(inputs(committed)["plant_selection"], selection)
+        self.assertEqual(state["cash"], committed["cash"])
+        self.assertEqual(committed["history"][-1]["inputs"]["plant_selection"], selection)
+
     def test_species_counts_drive_budget_and_preview_is_read_only(self):
         state = site()
         before = deepcopy(state)
@@ -197,7 +237,8 @@ class PlantChecklistTests(unittest.TestCase):
                     f for f in action["fields"] if f["type"] == "plant_selection"
                 )
                 self.assertEqual(len(field["catalogue"]["mixes"]), 4)
-                self.assertEqual(len(field["catalogue"]["plants"]), 13)
+                self.assertEqual(field["catalogue"]["version"], 2)
+                self.assertEqual(len(field["catalogue"]["plants"]), 16)
                 raw = path.read_bytes()
                 v = inputs(state)
                 preview = client.post(

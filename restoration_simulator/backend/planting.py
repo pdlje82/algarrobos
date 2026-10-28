@@ -11,17 +11,22 @@ from pathlib import Path
 from . import engine_v3 as core
 
 CATALOG_PATH = (
+    Path(__file__).resolve().parents[1] / "scenarios" / "planting-catalog-v2.json"
+)
+LEGACY_CATALOG_PATH = (
     Path(__file__).resolve().parents[1] / "scenarios" / "planting-catalog-v1.json"
 )
 
 
-def catalogue():
+def catalogue(version=2):
     from .configuration import read_json, keys
 
-    data = read_json(CATALOG_PATH)
-    keys(data, {"version", "groups", "plants", "mixes"}, str(CATALOG_PATH))
+    core.require(type(version) is int and version in {1, 2}, "Unsupported plant catalogue version.")
+    source = LEGACY_CATALOG_PATH if version == 1 else CATALOG_PATH
+    data = read_json(source)
+    keys(data, {"version", "groups", "plants", "mixes"}, str(source))
     core.require(
-        type(data["version"]) is int and data["version"] == 1,
+        type(data["version"]) is int and data["version"] == version,
         "Unsupported plant catalogue version.",
     )
     core.require(isinstance(data["groups"], list), "Invalid plant groups.")
@@ -133,7 +138,10 @@ def resolve(selection):
         and 1 <= len(selection["entries"]) <= 100,
         "Select at least one plant from the checklist (up to 100 entries).",
     )
-    plants = {p["id"]: p for p in catalogue()["plants"]}
+    # Unpriced v1 histories retain their frozen catalogue. Priced v2 lists use
+    # the expanded catalogue, whose original entries are preserved unchanged.
+    catalog = catalogue(selection["version"])
+    plants = {p["id"]: p for p in catalog["plants"]}
     entries, ids, names = [], set(), set()
     for row in selection["entries"]:
         core.require(
@@ -179,7 +187,7 @@ def resolve(selection):
                 and core.text(row["label"], 120)
                 and row["label"] == row["label"].strip()
                 and isinstance(row["group"], str)
-                and row["group"] in {g["id"] for g in catalogue()["groups"]},
+                and row["group"] in {g["id"] for g in catalog["groups"]},
                 "Custom plants need a name, a valid growth form and a custom ID.",
             )
             plant = dict(

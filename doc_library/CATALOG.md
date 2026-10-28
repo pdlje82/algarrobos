@@ -1,6 +1,6 @@
 # Restoration and Environment Document Library
 
-Catalog updated: 27 October 2026. Inventory: 24 documents (21 PDFs, one research overview and two PNG infographics).
+Catalog updated: 28 October 2026. Inventory: 26 documents (21 PDFs, two research/synthesis Markdown documents and three PNG infographics). The catalog, rename log and archived overview are additional metadata/history files.
 
 Built for the Climate + Environment Career Transition context: understand real restoration work, develop an Almeria pilot, explore land stewardship and funding, and identify useful engineering, software and monitoring skills.
 
@@ -26,7 +26,7 @@ IDs are permanent references. Number within each group; allocate the next unused
 
 ## Verified inventory
 
-All entries below are stored locally. ANDARAX-002 contains a download link, not the underlying data package. Descriptions classify the supplied documents and do not establish current funding availability. Titles and opening pages were inspected; the two AL20 tables and both PNG infographics were also visually inspected. The infographics are reference illustrations; their source, author and publication date are unverified.
+All entries below are stored locally. ANDARAX-002 contains a download link, not the underlying data package. Descriptions classify the supplied documents and do not establish current funding availability. Titles and opening pages were inspected; the two AL20 tables and all three PNG infographics were also visually inspected. LEARN-005 records a subsequent library-wide planting-technique screening, focused passage review and plant-checklist comparison. The infographics are reference illustrations; their source, author and publication date are unverified.
 
 ### ALJIBE
 
@@ -96,6 +96,9 @@ All entries below are stored locally. ANDARAX-002 contains a download link, not 
 | [LEARN-002 - Restoration Projects - Career Learning Overview and Research Gaps](LEARN-002%20-%20Restoration%20Projects%20-%20Career%20Learning%20Overview%20and%20Research%20Gaps.md) | Existing detailed research index, technical taxonomy, learning priorities and coverage gaps | PM | PLAN-L |  |
 | [LEARN-003 - Land Restoration - Seven Land Access Options - Infographic](LEARN-003%20-%20Land%20Restoration%20-%20Seven%20Land%20Access%20Options%20-%20Infographic.png) | Spanish comparison of stewardship, free use, long-term lease, usufruct, public-land management, donation and purchase, including suitability for different entity types; source, author and date unverified | PLAN SOC ECON | PLAN-L REG | Image |
 | [LEARN-004 - Almeria Restoration - Illustrative 15-Year Financing and Land Roadmap - Infographic](LEARN-004%20-%20Almeria%20Restoration%20-%20Illustrative%2015-Year%20Financing%20and%20Land%20Roadmap%20-%20Infographic.png) | Illustrative 2027-2042+ pathway from a demonstrator to optional expansion, with funding stages, land stewardship and an optional business arm; source, author and publication date unverified | PLAN ECON PM | PLAN-L FIN | Image |
+| [LEARN-005 - Dryland Restoration - Planting Techniques and Checklist Coverage](LEARN-005%20-%20Dryland%20Restoration%20-%20Planting%20Techniques%20and%20Checklist%20Coverage.md) | Library-wide planting-technique review, evidence for all 13 current checklist entries, three poster omissions, source conflicts and unresolved field protocols; dated 28 October 2026 | VEG GEN ECO SOIL HYD ERO MON | BASE DES EXEC MON-L | |
+
+Additional local illustration: [Vegetation systems for dryland restoration — Almeria systems 2–5](4033da1d50147790d978b646b319874c1f83950c7c4db915d51131eabc57e6a6.png). Hash-named source retained; no permanent library ID assigned yet. Shows 16 named plant entries across four indicative systems. Author, publication date and original source are unverified.
 
 ## Tags and learning routes
 
@@ -105,6 +108,7 @@ Lifecycle tags: BASE baseline/diagnosis; PLAN-L strategic planning; DES design; 
 
 - Start with LEARN-001 for the pilot and organisation strategy, then LEARN-002 for the broader learning framework.
 - Use LEARN-003 to compare land access arrangements and LEARN-004 for an illustrative financing and expansion pathway.
+- Use LEARN-005 for documented planting techniques, current checklist coverage, source-page references and protocol gaps; its numerical case values are not field or simulator defaults.
 - Follow engineering delivery: VEGA-001 baseline, ALJIBE-001 design requirements, ANDARAX-003 bidding, NIJAR-002 implementation, NIJAR-001 supervision and monitoring.
 - Explore land stewardship: COAST-002 strategy, COAST-001 contracted activities, FUND-003 finance.
 - Explore degraded-land and habitat interventions: LAUJAR-001 and FOREST-001.

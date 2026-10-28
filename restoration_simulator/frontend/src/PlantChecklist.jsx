@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { properties, required, inputValue, record, unitCost, validUnitCost } from "./contracts.js";
 import { checklistSystems, preselectPlants, changeUnitCost, cataloguePricePatch } from "./plantSelection.js";
 import { PlantPortrait, plantIllustration } from "./PlantPortrait.jsx";
 import { money } from "./format.js";
 
 export function PlantChecklist({ field, value, onChange, disabled, request }) {
+  const checklistId = useId();
   const catalog = field.catalogue;
   properties(value, ["version", "entries"], "plant selection");
   required(
@@ -209,7 +210,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
       </fieldset>
       <p className="muted">
         Plants are grouped by the poster’s systems. Illustrations show botanical
-        features at different scales; open plant details for identification
+        features at different scales; click a depiction to view its original size. Open plant details for identification
         references. Quantities and growth forms are planning assumptions.
       </p>
       <p role="status" className="plant-message">
@@ -245,8 +246,9 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
                   className={`plant-row ${entry ? "plant-selected" : ""}`}
                   key={plant.id}
                 >
-                  <label className="plant-checkbox">
+                  <div className="plant-checkbox">
                     <input
+                      id={`${checklistId}-${plant.id}`}
                       type="checkbox"
                       aria-label={`Select ${plant.label}`}
                       checked={!!entry}
@@ -254,13 +256,13 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
                       onChange={(e) => toggle(plant, e.target.checked)}
                     />
                     <PlantPortrait id={plant.id} />
-                    <span>
+                    <label className="plant-names" htmlFor={`${checklistId}-${plant.id}`}>
                       {plant.label}
                       <small className="plant-spanish" lang="es"><span className="sr-only">Español: </span>{illustration.spanish_name}</small>
                       <small><i>{illustration.scientific_name}</i></small>
                       <small>{group.label}</small>
-                    </span>
-                  </label>
+                    </label>
+                  </div>
                   {priceControls(entry, plant)}
                   <details className="plant-info">
                     <summary>Details for {plant.label}</summary>

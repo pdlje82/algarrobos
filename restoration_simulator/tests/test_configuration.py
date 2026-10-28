@@ -109,10 +109,15 @@ class ConfigurationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             missing = Path(folder) / "missing.json"
             with (
-                patch.object(planting, "CATALOG_PATH", missing),
+                patch.object(planting, "LEGACY_CATALOG_PATH", missing),
                 self.assertRaises(engine.Invalid),
             ):
                 configuration.load_defaults()
+            with (
+                patch.object(planting, "CATALOG_PATH", missing),
+                self.assertRaises(engine.Invalid),
+            ):
+                planting.catalogue()
             old = engine.load_scenario()
             del old["form_schema_version"]
             del old["input_defaults"]

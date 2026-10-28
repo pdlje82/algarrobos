@@ -14,7 +14,10 @@
     "lycium": 2.5,
     "salsola": 2.5,
     "oleander": 2.5,
-    "tamarix": 6
+    "tamarix": 6,
+    "rosemary": 2.5,
+    "rhamnus_lycioides": 2.5,
+    "ephedra_fragilis": 2.5
   },
   "custom_unit_costs": {
     "tree": 6,
