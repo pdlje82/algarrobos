@@ -2,6 +2,7 @@ import React, { useEffect, useId, useState } from "react";
 import { properties, required, inputValue, record, unitCost, validUnitCost } from "./contracts.js";
 import { checklistSystems, preselectPlants, changeUnitCost, cataloguePricePatch } from "./plantSelection.js";
 import { PlantPortrait, plantIllustration } from "./PlantPortrait.jsx";
+import { PlantingExplorer } from "./PlantingExplorer.jsx";
 import { money } from "./format.js";
 
 export function PlantChecklist({ field, value, onChange, disabled, request }) {
@@ -247,22 +248,25 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
                   className={`plant-row ${entry ? "plant-selected" : ""}`}
                   key={plant.id}
                 >
-                  <div className="plant-checkbox">
-                    <input
-                      id={`${checklistId}-${plant.id}`}
-                      type="checkbox"
-                      aria-label={`Select ${plant.label}`}
-                      checked={!!entry}
-                      disabled={!entry && !defaultsReady}
-                      onChange={(e) => toggle(plant, e.target.checked)}
-                    />
-                    <PlantPortrait id={plant.id} />
-                    <label className="plant-names" htmlFor={`${checklistId}-${plant.id}`}>
-                      {plant.label}
-                      <small className="plant-spanish" lang="es"><span className="sr-only">Español: </span>{illustration.spanish_name}</small>
-                      <small><i>{illustration.scientific_name}</i></small>
-                      <small>{group.label}</small>
-                    </label>
+                  <div className="plant-identity">
+                    <div className="plant-checkbox">
+                      <input
+                        id={`${checklistId}-${plant.id}`}
+                        type="checkbox"
+                        aria-label={`Select ${plant.label}`}
+                        checked={!!entry}
+                        disabled={!entry && !defaultsReady}
+                        onChange={(e) => toggle(plant, e.target.checked)}
+                      />
+                      <PlantPortrait id={plant.id} />
+                      <label className="plant-names" htmlFor={`${checklistId}-${plant.id}`}>
+                        {plant.label}
+                        <small className="plant-spanish" lang="es"><span className="sr-only">Español: </span>{illustration.spanish_name}</small>
+                        <small><i>{illustration.scientific_name}</i></small>
+                        <small>{group.label}</small>
+                      </label>
+                    </div>
+                    {plant.id === "carob" && <PlantingExplorer />}
                   </div>
                   {priceControls(entry, plant)}
                   <details className="plant-info">

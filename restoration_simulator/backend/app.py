@@ -109,7 +109,7 @@ def view(data, explanation=None):
 def create_app(save_path=None):
     defaults = load_defaults()
     plant_prices.snapshot()  # Required editable configuration; never invent missing prices.
-    app = FastAPI(title="Restoration Simulator", version="0.4.0")
+    app = FastAPI(title="Algarroba — Restoration planning", version="0.4.0")
     if save_path is not None:
         resolved_save_path = save_path
     elif "RESTORATION_SAVE_PATH" in os.environ:

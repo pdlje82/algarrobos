@@ -1,6 +1,6 @@
 # Restoration and Environment Document Library
 
-Catalog updated: 28 October 2026. Inventory: 26 documents (21 PDFs, two research/synthesis Markdown documents and three PNG infographics). The catalog, rename log and archived overview are additional metadata/history files.
+Catalog updated: 28 October 2026. Inventory: 30 library entries (22 PDFs, four overview/research Markdown documents, three supplied PNG infographics and one generated planting-poster collection). Companion images and asset metadata are counted within their parent research entries. The catalog, rename log and archived overview are additional metadata/history files.
 
 Built for the Climate + Environment Career Transition context: understand real restoration work, develop an Almeria pilot, explore land stewardship and funding, and identify useful engineering, software and monitoring skills.
 
@@ -76,6 +76,7 @@ All entries below are stored locally. ANDARAX-002 contains a download link, not 
 | Document | Contents and learning value | Technical tags | Lifecycle tags | Pages |
 |---|---|---|---|---|
 | [FOREST-001 - Ferreira Granada - Silvicultural Habitat Improvement Project - 2025-02](FOREST-001%20-%20Ferreira%20Granada%20-%20Silvicultural%20Habitat%20Improvement%20Project%20-%202025-02.pdf) | Forestry treatments for threatened-species habitats in Monte del Pueblo de Ferreira | VEG ECO PLAN | BASE DES EXEC | 33 |
+| [FOREST-002 - Andalusia - Carob Cultivation and Restoration Handbook - 2026](FOREST-002%20-%20Andalusia%20-%20Carob%20Cultivation%20and%20Restoration%20Handbook%20-%202026.pdf) | UCOPress / Universidad de Cordoba handbook, edited by Rafael M. Navarro Cerrillo and Guillermo Palacios Rodriguez: carob biology, nursery stock, planting models, soil preparation, dryland restoration and productive cultivation. Published 2026; eISBN 9788499279497. [Publisher/source DOI](https://doi.org/10.21071/000069) | VEG GEN ECO SOIL HYD ECON | BASE DES EXEC MON-L | 168 |
 
 ### FUND
 
@@ -97,8 +98,11 @@ All entries below are stored locally. ANDARAX-002 contains a download link, not 
 | [LEARN-003 - Land Restoration - Seven Land Access Options - Infographic](LEARN-003%20-%20Land%20Restoration%20-%20Seven%20Land%20Access%20Options%20-%20Infographic.png) | Spanish comparison of stewardship, free use, long-term lease, usufruct, public-land management, donation and purchase, including suitability for different entity types; source, author and date unverified | PLAN SOC ECON | PLAN-L REG | Image |
 | [LEARN-004 - Almeria Restoration - Illustrative 15-Year Financing and Land Roadmap - Infographic](LEARN-004%20-%20Almeria%20Restoration%20-%20Illustrative%2015-Year%20Financing%20and%20Land%20Roadmap%20-%20Infographic.png) | Illustrative 2027-2042+ pathway from a demonstrator to optional expansion, with funding stages, land stewardship and an optional business arm; source, author and publication date unverified | PLAN ECON PM | PLAN-L FIN | Image |
 | [LEARN-005 - Dryland Restoration - Planting Techniques and Checklist Coverage](LEARN-005%20-%20Dryland%20Restoration%20-%20Planting%20Techniques%20and%20Checklist%20Coverage.md) | Library-wide planting-technique review, evidence for all 13 current checklist entries, three poster omissions, source conflicts and unresolved field protocols; dated 28 October 2026 | VEG GEN ECO SOIL HYD ERO MON | BASE DES EXEC MON-L | |
+| [LEARN-006 - Planting Explorer - Three Poster Examples and Watering Research](planting-explorer-examples/README.md) | Generated algarrobo, palmito and esparto poster prototypes, geometric teaching diagrams, sourced establishment-water findings and explicit protocol gaps; created 28 October 2026, not integrated into the app | VEG SOIL HYD MON | DES EXEC MON-L | 3 images + notes |
+| [LEARN-007 - Carob Establishment - Soil Preparation and Growth with Limited Water](LEARN-007%20-%20Carob%20Establishment%20-%20Soil%20Preparation%20and%20Growth%20with%20Limited%20Water.md) | Carob orchard/restoration research on effective soil depth, deeper preparation, backfill, runoff capture and growth within a water budget; four original geometric schemes, evidence limits and a proposed comparison trial; 28 October 2026 | VEG SOIL HYD ERO MON | BASE DES EXEC MON-L | Markdown + 4 schemes |
+| [LEARN-008 - Carob Restoration - Nursery Buying Guide and Mixed Planting Models](LEARN-008%20-%20Carob%20Restoration%20-%20Nursery%20Buying%20Guide%20and%20Mixed%20Planting%20Models.md) | Structured review of FOREST-002 chapters 4 and 5: seed-grown stock, containers/substrates, preparation dimensions, nursery versus field fertilizer, mycorrhization, Almeria finca comparisons, mixed oak/shrub restoration, establishment care, qualified funding interpretation and source conflicts; 28 October 2026 | VEG GEN ECO SOIL HYD MON ECON | BASE DES EXEC MON-L FIN | Markdown + 5 extracted photos + 2 original schemes |
 
-Additional local illustration: [Vegetation systems for dryland restoration — Almeria systems 2–5](4033da1d50147790d978b646b319874c1f83950c7c4db915d51131eabc57e6a6.png). Hash-named source retained; no permanent library ID assigned yet. Shows 16 named plant entries across four indicative systems. Author, publication date and original source are unverified.
+Additional local illustration: [Vegetation systems for dryland restoration — Almeria systems 2–5](4033da1d50147790d978b646b319874c1f83950c7c4db915d51131eabc57e6a6.png). Hash-named source retained; no permanent library ID assigned yet. Shows 16 named plant entries across four indicative systems. Author, publication date and original source are unverified. LEARN-006 is a separately attributed generated prototype set, not one of these externally supplied infographics.
 
 ## Tags and learning routes
 
@@ -109,6 +113,10 @@ Lifecycle tags: BASE baseline/diagnosis; PLAN-L strategic planning; DES design; 
 - Start with LEARN-001 for the pilot and organisation strategy, then LEARN-002 for the broader learning framework.
 - Use LEARN-003 to compare land access arrangements and LEARN-004 for an illustrative financing and expansion pathway.
 - Use LEARN-005 for documented planting techniques, current checklist coverage, source-page references and protocol gaps; its numerical case values are not field or simulator defaults.
+- Use LEARN-006 to discuss the future Planting Explorer: three visual examples, companion watering evidence and the distinction between schematic geometry and a site planting protocol.
+- Use LEARN-007 for carob-specific soil preparation and low-water establishment research, source-qualified dimensions, material comparisons and the proposed field trial.
+- Use LEARN-008 to turn the carob handbook into a nursery buying checklist and compare mixed restoration models with Albox, Mojacar and Nijar examples; source conflicts and photograph reuse terms remain explicit.
+- Read FOREST-002 for the original Andalusian carob cultivation/restoration handbook cited in LEARN-007.
 - Follow engineering delivery: VEGA-001 baseline, ALJIBE-001 design requirements, ANDARAX-003 bidding, NIJAR-002 implementation, NIJAR-001 supervision and monitoring.
 - Explore land stewardship: COAST-002 strategy, COAST-001 contracted activities, FUND-003 finance.
 - Explore degraded-land and habitat interventions: LAUJAR-001 and FOREST-001.

@@ -1,0 +1,182 @@
+.plant-identity { min-width: 0; }
+.plant-guide-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 7px 11px;
+  max-width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green);
+  border-color: var(--hover-border);
+  white-space: normal;
+  text-align: left;
+}
+.planting-explorer {
+  --explorer-soil: #eadac0;
+  --explorer-prepared: #d8c6a6;
+  --explorer-root-ball: #b0c6a4;
+  --explorer-line: #344e36;
+  --explorer-wood: #765530;
+  --explorer-badge: #fffdf6;
+  --explorer-badge-text: #263c2e;
+  width: min(1220px, calc(100vw - 24px));
+  max-width: calc(100vw - 24px);
+  height: min(860px, calc(100dvh - 24px));
+  max-height: calc(100dvh - 24px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: 0 20px 70px rgb(0 0 0 / 25%);
+}
+:root[data-theme="dark"] .planting-explorer {
+  --explorer-soil: #453c2c;
+  --explorer-prepared: #5c5039;
+  --explorer-root-ball: #4b6a46;
+  --explorer-line: #d3e2c4;
+  --explorer-wood: #e0b783;
+  --explorer-badge: #192a20;
+  --explorer-badge-text: #e3eadf;
+}
+.planting-explorer[open] { display: flex; flex-direction: column; }
+.planting-explorer::backdrop { background: rgb(0 0 0 / 72%); }
+.explorer-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 16px;
+  padding: 20px 24px 16px;
+  flex-shrink: 0;
+}
+.explorer-identity { display: flex; align-items: center; gap: 16px; min-width: 0; }
+.explorer-identity > div { min-width: 0; }
+.explorer-portrait {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+  overflow: hidden;
+  background: var(--plant-portrait-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.explorer-portrait img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.explorer-heading .explorer-image-error { margin-top: 6px; font-size: 12px; color: var(--error-text); }
+.explorer-heading h2 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.3;
+  margin: 2px 0 5px;
+  overflow-wrap: anywhere;
+}
+.explorer-heading p { margin: 0; font-size: 12px; color: var(--muted); }
+.explorer-heading .explorer-eyebrow { text-transform: uppercase; letter-spacing: .12em; color: var(--carob); font-size: 10px; font-weight: 700; }
+.explorer-heading > button { flex-shrink: 0; }
+.explorer-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  padding: 0 24px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.explorer-tabs button { font-size: 13px; min-height: 44px; padding: 9px; }
+.explorer-tabs [aria-selected="true"] { background: var(--selected-bg); color: var(--green); border-color: var(--selected-border); box-shadow: inset 0 -3px 0 var(--selected-border); font-weight: 650; }
+.explorer-body { min-height: 0; overflow: auto; overscroll-behavior: contain; padding: 0 24px 24px; }
+.explorer-readonly { color: var(--muted); font-size: 12px; margin: 14px 0 20px; }
+.explorer-view[hidden] { display: none; }
+.explorer-view > h3 { font-family: var(--font-display); font-size: 24px; margin: 22px 0 8px; }
+.explorer-view > h3:first-child { margin-top: 0; }
+.explorer-view p { font-size: 14px; }
+.explorer-planting-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.explorer-diagram { margin: 0; min-width: 0; }
+.explorer-section { display: block; width: 100%; height: auto; background: var(--page); border: 1px solid var(--border); border-radius: 10px; }
+.explorer-diagram figcaption { color: var(--muted); font-size: 11px; margin: 8px 0 12px; }
+.explorer-soil { fill: var(--explorer-soil); }
+.explorer-prepared { fill: var(--explorer-prepared); stroke: var(--explorer-wood); stroke-width: 1.5; stroke-dasharray: 7 5; }
+.explorer-stem { stroke: var(--explorer-wood); stroke-width: 6; fill: none; }
+.explorer-surface { stroke: var(--explorer-line); stroke-width: 3; fill: none; }
+.explorer-ball { fill: var(--explorer-root-ball); stroke: var(--explorer-line); stroke-width: 2; }
+.explorer-support { stroke: var(--explorer-wood); stroke-width: 10; fill: none; }
+.explorer-measure, .explorer-depth { stroke: var(--explorer-line); stroke-width: 2; fill: none; }
+.selected-collar .explorer-stem,
+.selected-surface .explorer-surface,
+.selected-dimensions .explorer-measure,
+.selected-preparation .explorer-depth { stroke: var(--focus); stroke-width: 6; }
+.selected-support .explorer-support { stroke: var(--focus); stroke-width: 14; }
+.selected-ball .explorer-ball, .selected-preparation .explorer-prepared { stroke: var(--focus); stroke-width: 5; }
+.explorer-diagram-control { cursor: pointer; outline: none; }
+.explorer-diagram-control circle { fill: var(--explorer-badge); stroke: var(--explorer-line); stroke-width: 2; }
+.explorer-diagram-control text { fill: var(--explorer-badge-text); font-size: 29px; font-weight: 650; pointer-events: none; }
+.explorer-diagram-control.is-selected circle { stroke: var(--focus); stroke-width: 6; }
+.explorer-diagram-control:focus-visible circle { stroke: var(--focus); stroke-width: 6; stroke-dasharray: 4 3; }
+.explorer-feature-buttons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+.explorer-feature-buttons button { display: flex; align-items: center; gap: 7px; text-align: left; font-size: 12px; min-height: 44px; padding: 8px; }
+.explorer-feature-buttons button > span { display: grid; place-content: center; flex: 0 0 22px; height: 22px; border: 1px solid var(--border); border-radius: 50%; font-weight: 650; }
+.explorer-feature-buttons [aria-pressed="true"] { background: var(--selected-bg); border-color: var(--selected-border); font-weight: 650; }
+.explorer-feature-detail { border-left: 3px solid var(--selected-border); background: var(--selected-bg); padding: 20px; border-radius: 0 10px 10px 0; min-height: 300px; }
+.explorer-feature-detail h4 { font-size: 20px; line-height: 1.35; margin: 12px 0; }
+.explorer-feature-detail .explorer-basis { color: var(--muted); font-size: 12px; }
+.explorer-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 16px 0; }
+.explorer-card { border: 1px solid var(--border); background: var(--page); border-radius: 10px; padding: 18px; min-width: 0; }
+.explorer-card h3, .explorer-card h4 { font-size: 17px; line-height: 1.4; margin: 10px 0; }
+.explorer-card p { margin: 10px 0; }
+.explorer-evidence { display: inline-block; border: 1px solid var(--border); border-radius: 5px; font-size: 10px; font-weight: 650; letter-spacing: .015em; padding: 3px 7px; color: var(--green); background: var(--panel); }
+.explorer-evidence-observation { color: var(--carob); }
+.explorer-evidence-unresolved { color: var(--notice-text); background: var(--notice-bg); border-color: var(--notice-border); }
+.explorer-references { display: block; color: var(--muted); font-size: 12px; }
+.explorer-caution { border-left: 3px solid var(--notice-accent); background: var(--notice-bg); color: var(--notice-text); padding: 14px 16px; border-radius: 0 8px 8px 0; }
+.explorer-buying-list { padding-left: 26px; margin: 16px 0 24px; }
+.explorer-buying-list li { margin: 16px 0; padding-left: 6px; }
+.explorer-buying-list li::marker { color: var(--carob); font-weight: 650; }
+.explorer-buying-list h4 { margin: 0; font-size: 16px; }
+.explorer-buying-list p { margin: 5px 0 8px; }
+.explorer-container-grid, .explorer-example-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 16px 0; }
+.explorer-card .explorer-size { font-family: var(--font-display); font-size: 30px; margin: 12px 0 4px; }
+.explorer-card > strong { font-size: 13px; }
+.explorer-treatment { margin: 12px 0; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+.explorer-treatment summary, .explorer-limitations summary, .explorer-source summary { cursor: pointer; font-size: 14px; }
+.explorer-treatment[open] summary { margin-bottom: 12px; }
+.explorer-example-grid dl { font-size: 13px; }
+.explorer-example-grid dt { font-weight: 650; margin-top: 12px; color: var(--carob); }
+.explorer-example-grid dd { margin: 2px 0 0; }
+.explorer-example-grid a { overflow-wrap: anywhere; }
+.explorer-photo { margin: 16px 0 0; max-width: 654px; }
+.explorer-photo-frame { width: 100%; background: var(--page); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.explorer-photo-frame > a { display: block; width: 100%; height: 100%; cursor: zoom-in; }
+.explorer-photo-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.explorer-photo figcaption { margin-top: 9px; font-size: 12px; }
+.explorer-photo figcaption > span { display: block; margin-top: 5px; font-size: 10px; color: var(--muted); }
+.explorer-photo-error { padding: 12px; font-size: 12px; color: var(--error-text); }
+.explorer-photo-error p { margin: 0 0 10px; }
+.explorer-photo-error button { font-size: 12px; }
+.explorer-limitations { border-top: 1px solid var(--border); margin-top: 24px; padding-top: 16px; }
+.explorer-limitations ul { padding-left: 20px; font-size: 13px; }
+.explorer-limitations li { margin: 8px 0; }
+.explorer-source { border-top: 1px solid var(--border); margin-top: 20px; padding-top: 16px; color: var(--muted); font-size: 12px; }
+.explorer-source p { margin: 5px 0 10px; }
+.explorer-source summary { font-size: 12px; }
+@media (max-width: 760px) {
+  .explorer-planting-layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .explorer-container-grid, .explorer-example-grid { grid-template-columns: minmax(0, 1fr); }
+  .explorer-feature-detail { min-height: 0; }
+}
+@media (max-width: 540px) {
+  .explorer-heading { padding: 14px 12px; gap: 8px; }
+  .explorer-identity { gap: 9px; align-items: start; }
+  .explorer-portrait { width: 46px; height: 46px; flex-basis: 46px; border-radius: 7px; }
+  .explorer-heading h2 { font-size: 18px; }
+  .explorer-heading h2 i { display: block; }
+  .explorer-heading > button { padding: 7px 9px; font-size: 12px; }
+  .explorer-heading p { font-size: 10px; }
+  .explorer-tabs { padding: 0 12px 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .explorer-tabs button { font-size: 12px; }
+  .explorer-body { padding: 0 12px 16px; }
+  .explorer-card-grid { grid-template-columns: minmax(0, 1fr); }
+  .explorer-card, .explorer-feature-detail { padding: 14px; }
+  .explorer-feature-buttons button { font-size: 11px; gap: 5px; padding: 7px 5px; }
+  .explorer-view > h3 { font-size: 22px; }
+}

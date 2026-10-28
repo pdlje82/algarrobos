@@ -1,0 +1,13 @@
+{
+  "source_pdf": "doc_library/FOREST-002 - Andalusia - Carob Cultivation and Restoration Handbook - 2026.pdf",
+  "source_pdf_sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+  "page": 141,
+  "figure": "5.56",
+  "credit": "QUERAT (2024)",
+  "license": "CC BY-NC-SA 4.0",
+  "asset": "rozas-altas.png",
+  "width": 631,
+  "height": 468,
+  "sha256": "fcb8ce60b86077f48251fccbf5a181a6cda5161b0b3ec2690715e16fe39a143d",
+  "transformation": "Embedded JPEG 2000 decoded to PNG at native resolution; no cropping, retouching or upscaling."
+}

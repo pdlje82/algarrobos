@@ -1,0 +1,409 @@
+{
+  "version": 1,
+  "plant_id": "carob",
+  "reviewed": "28 October 2026",
+  "presentation": {
+    "initial_view": "planting",
+    "initial_feature": "collar"
+  },
+  "source": {
+    "title": "Andalusian carob handbook · UCOPress, 2026",
+    "authors": "Rafael M. Navarro Cerrillo and Guillermo Palacios Rodríguez (editors)",
+    "url": "https://www.uco.es/servicios/ucopress/omp/index.php/ucopress/catalog/download/69/83/1938?inline=1",
+    "publication_url": "https://www.uco.es/servicios/ucopress/omp/index.php/ucopress/catalog/book/69",
+    "research": "LEARN-008: Carob Restoration — Nursery Buying Guide and Mixed Planting Models; LEARN-007: Soil Preparation and Growth with Limited Water."
+  },
+  "views": [
+    {
+      "id": "planting",
+      "label": "Planting"
+    },
+    {
+      "id": "buying",
+      "label": "Buying plants"
+    },
+    {
+      "id": "care",
+      "label": "Establishment care"
+    },
+    {
+      "id": "evidence",
+      "label": "Examples and evidence"
+    }
+  ],
+  "features": [
+    {
+      "id": "collar",
+      "label": "Root collar",
+      "number": 1,
+      "kind": "suggestion",
+      "text": "The transition between stem and roots belongs at the intended final soil surface. A deeper prepared area does not mean burying the collar deeper. Allow for settlement and avoid collecting water directly against the stem.",
+      "basis": "Installation synthesis in LEARN-007; the handbook’s deep-preparation guidance concerns the soil around the plant.",
+      "pages": [
+        95,
+        134
+      ]
+    },
+    {
+      "id": "ball",
+      "label": "Root ball",
+      "number": 2,
+      "kind": "guidance",
+      "text": "Remove the container and preserve the coherent root ball. Carob’s lateral roots are fragile. Inspect representative plants for healthy branching roots and reject coiled, damaged or decaying root systems.",
+      "basis": "Nursery container and stock-quality guidance.",
+      "pages": [
+        75,
+        80,
+        84
+      ]
+    },
+    {
+      "id": "surface",
+      "label": "Final soil surface",
+      "number": 3,
+      "kind": "suggestion",
+      "text": "Use the final, settled local soil level as the reference for positioning the plant. A rainfall-capture basin is a separate design decision: check infiltration, overflow and drainage before changing the surface.",
+      "basis": "Planting-position synthesis in LEARN-007 combined with the MR2 microcatchment discussion.",
+      "pages": [
+        131,
+        134
+      ]
+    },
+    {
+      "id": "support",
+      "label": "Stable support",
+      "number": 4,
+      "kind": "suggestion",
+      "text": "Support the root ball so it will retain its intended level after watering and settlement. Deep preparation needs stable soil beneath the ball; a loose organic bed can settle. The drawing is not a prescription for a concrete pad or an impermeable layer.",
+      "basis": "Soil preparation and settlement synthesis in LEARN-007; not a measured finca section.",
+      "pages": [
+        95,
+        134
+      ]
+    },
+    {
+      "id": "preparation",
+      "label": "Preparation depth",
+      "number": 5,
+      "kind": "guidance",
+      "text": "Preparation can extend below and beside the root ball to provide connected, usable soil. Choose it from the actual soil profile, restrictions and drainage. MR2 describes 60 × 60 × 60 cm holes; that is a model recommendation, not a universal optimum or a root-collar burial depth.",
+      "basis": "General preparation guidance and the oasification model.",
+      "pages": [
+        95,
+        134
+      ]
+    },
+    {
+      "id": "dimensions",
+      "label": "Root-ball dimensions",
+      "number": 6,
+      "kind": "unresolved",
+      "text": "Measure the actual root-ball width and height. Nominal litres do not determine its shape, and the handbook provides no validated litres-to-hole-size conversion. A 1 L container does not automatically imply a 40 cm or 60 cm hole.",
+      "basis": "Comparison of container formats and reported preparation examples; no formula is established.",
+      "pages": [
+        75,
+        127,
+        134
+      ]
+    }
+  ],
+  "preparations": [
+    {
+      "title": "40 × 40 × 40 cm · Las Labores, Albox",
+      "kind": "observation",
+      "text": "Manual holes for nursery plants about 1 m tall, in former almond/olive land. Container dimensions are not given. The site received summer drip water and later grafting; it is a partial match to an ungrafted mixed restoration project.",
+      "pages": [
+        126,
+        127,
+        128
+      ]
+    },
+    {
+      "title": "60 × 60 × 60 cm · MR2 oasification",
+      "kind": "guidance",
+      "text": "A preparation recommendation for low-density restoration using rainfall capture, microcatchments and stone mulch. Support watering remains part of the model. It is not a controlled trial comparing hole sizes.",
+      "pages": [
+        132,
+        133,
+        134
+      ]
+    }
+  ],
+  "buying_checks": [
+    {
+      "title": "Seed-grown and ungrafted",
+      "text": "Ask for planta de semilla sin injertar. A seed-grown rootstock with a graft is still a grafted plant. Micropropagation is laboratory tissue multiplication, generally used for clones; it is not needed for this seed-based approach.",
+      "pages": [
+        67,
+        71,
+        83
+      ]
+    },
+    {
+      "title": "Known provenance and diversity",
+      "text": "Request seed collection origin and batch traceability; ask whether material came from multiple parent trees. The nursery’s address alone does not establish the seed’s origin.",
+      "pages": [
+        70,
+        71,
+        125,
+        133
+      ]
+    },
+    {
+      "title": "Healthy, branching roots",
+      "text": "Inspect representative plants out of their pots. Look for fine lateral roots and reject spiralling, hooked, severely damaged or decaying roots. A larger pot cannot correct malformed roots.",
+      "pages": [
+        75,
+        80,
+        84
+      ]
+    },
+    {
+      "title": "An intact, balanced plant",
+      "text": "The plug should hold together without being pot-bound. Consider collar diameter and shoot balance, not height alone. Check healthy foliage and the absence of drying, mould and disease.",
+      "pages": [
+        67,
+        75,
+        84,
+        85
+      ]
+    },
+    {
+      "title": "Hardened and ready for the site",
+      "text": "Ask about outdoor acclimation, irrigation conditioning, nutrition and time in the current container. Coordinate delivery with a favourable planting window.",
+      "pages": [
+        70,
+        72,
+        77,
+        79,
+        95
+      ]
+    }
+  ],
+  "containers": [
+    {
+      "size": "0.2–0.3 L",
+      "label": "Conventional forestry format",
+      "kind": "guidance",
+      "text": "Reported for short-cycle seed-grown restoration stock and in the MR1/MR2 tables. Quality and establishment conditions still matter.",
+      "pages": [
+        75,
+        126,
+        134
+      ]
+    },
+    {
+      "size": "1 L",
+      "label": "Candidate for the pilot",
+      "kind": "suggestion",
+      "text": "Listed in the short-cycle nursery programme; also used by the local Níjar supply specification reviewed in LEARN-008. A practical candidate to discuss with the nursery, not a proven growth or water-use optimum.",
+      "pages": [
+        72
+      ]
+    },
+    {
+      "size": "1–2 L",
+      "label": "Larger-stock alternative",
+      "kind": "guidance",
+      "text": "Discussed for higher functional quality and rootstock production. MR2’s narrative favours stock above 1 L, while its table lists smaller stock. Inspect roots, cost and care needs before choosing.",
+      "pages": [
+        75,
+        80,
+        133,
+        134
+      ]
+    }
+  ],
+  "substrate": {
+    "title": "Choose properties, not one universal recipe",
+    "kind": "guidance",
+    "text": "Ask for an aerated, structurally stable nursery medium that retains available water and supports healthy fine roots and a coherent plug. The book lists peat/coir/bark bases with mineral components such as perlite or vermiculite, but its recipes differ by context. Ask for the actual mix and nutrient history. Nursery medium is not a field-pit backfill recipe.",
+    "pages": [
+      76,
+      77,
+      80
+    ]
+  },
+  "care": [
+    {
+      "title": "Plant in a favourable moisture window",
+      "kind": "guidance",
+      "text": "Favour autumn or early winter with suitable soil moisture, while checking the actual frost risk. The book describes 3–5 years of establishment care; planting is the beginning of that period.",
+      "pages": [
+        95,
+        96,
+        133,
+        134
+      ]
+    },
+    {
+      "title": "Protect and inspect",
+      "kind": "guidance",
+      "text": "Assess browsing, sun exposure, protector ventilation and competing vegetation around young plants. Retain valuable native vegetation elsewhere; restoration does not imply clearing the whole parcel.",
+      "pages": [
+        95,
+        96,
+        125,
+        134
+      ]
+    },
+    {
+      "title": "Minimum and optimum water remain unresolved",
+      "kind": "unresolved",
+      "text": "There is no verified universal litres-per-week schedule, minimum volume or stopping date for our seedlings. Use site observations, a measured external-water budget and a defined rescue rule. Established drought-tolerant trees do not establish a zero-water protocol for new stock.",
+      "pages": [
+        95,
+        96,
+        126,
+        134
+      ]
+    },
+    {
+      "title": "400 L/tree over May–September · Albox example",
+      "kind": "observation",
+      "text": "Las Labores reports this total summer-period drip volume per tree. Event volumes, frequency and the end of irrigation are not fully specified. It is a finca observation, not a recommendation or a minimum for this project.",
+      "pages": [
+        127,
+        128
+      ]
+    }
+  ],
+  "treatments": [
+    {
+      "title": "Nursery nutrition",
+      "kind": "guidance",
+      "text": "Buy appropriately nourished stock. The nursery chapter reports controlled-release alternatives of 16-8-9 at 3.5 g product/L substrate, or 9-13-18 at 5 g product/L substrate. These are separate nursery examples, not combined doses, elemental-nutrient amounts or field irrigation concentrations. Product release time, water quality and medium matter; these examples do not form a complete feeding programme.",
+      "pages": [
+        77,
+        79
+      ]
+    },
+    {
+      "title": "Optional field fertilizer",
+      "kind": "suggestion",
+      "text": "MR1 and MR2 generally omit routine field fertilizer. If testing nutrition for growth, first identify a limitation, obtain a justified local product/dose recommendation, and compare with untreated plants under the same water rules. No validated field dose is established for this parcel; do not multiply a nursery rate through a large field pit.",
+      "pages": [
+        125,
+        126,
+        134
+      ]
+    },
+    {
+      "title": "Mycorrhization · roots and beneficial fungi",
+      "kind": "guidance",
+      "text": "Micorrización establishes a root–fungus association that can improve nutrient access and drought response. It is different from fertilizer and nitrogen-fixing nodules. Carob research includes arbuscular mycorrhizal fungi (AMF); greenhouse benefits do not guarantee field results. Ask the nursery which fungi were used and whether colonization was checked. The book’s mixed AMF/truffle discussion is not a generic inoculum recipe.",
+      "pages": [
+        78
+      ]
+    }
+  ],
+  "examples": [
+    {
+      "id": "albox",
+      "title": "Las Labores · Albox",
+      "rainfall": "200–400 mm/year",
+      "vegetation": "Declining almond/olive land converted toward carob on shallow, rocky calcareous soil.",
+      "water": "400 L/tree over the reported May–September period; an ongoing seasonal drip example, not a zero-water trial.",
+      "management": "Manual 40 cm cube holes, protectors, occasional tillage, pruning and later grafting.",
+      "lesson": "Useful management comparison, but only a partial match to mixed, ungrafted restoration. Low mortality is described without a numeric survival estimate or a control.",
+      "pages": [
+        126,
+        127,
+        128
+      ],
+      "photo_page": 128,
+      "photo": {
+        "src": "/planting-explorer/carob/las-labores-albox.png",
+        "alt": "Original photograph of the carob planting at Las Labores, Albox, with trees on open cultivated ground.",
+        "width": 625,
+        "height": 468,
+        "credit": "QUERAT (2024)",
+        "figure": "Figure 5.37, left photograph",
+        "license": "CC BY-NC-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+      }
+    },
+    {
+      "id": "mojacar",
+      "title": "La Alcantarilla · Mojácar",
+      "rainfall": "200–300 mm/year",
+      "vegetation": "Seminatural carob around houses and a stream, with lentisk and wild olive establishing beneath and around it.",
+      "water": "Original establishment water is not documented; favourable runoff locations do not prove zero irrigation.",
+      "management": "Limited later care beyond fruit collection; spread along roads, channels and streams.",
+      "lesson": "Strong reference for carob with shrubs and redistributed rainfall. No original container, hole-size or seedling survival protocol is given.",
+      "pages": [
+        134,
+        135,
+        136
+      ],
+      "photo_page": 135,
+      "photo": {
+        "src": "/planting-explorer/carob/la-alcantarilla-mojacar.png",
+        "alt": "Original photograph of carob-associated vegetation around buildings at La Alcantarilla, Mojácar.",
+        "width": 631,
+        "height": 468,
+        "credit": "QUERAT (2024)",
+        "figure": "Figure 5.49",
+        "license": "CC BY-NC-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+      }
+    },
+    {
+      "id": "nijar",
+      "title": "La Tórtola · Níjar",
+      "rainfall": "200–300 mm/year",
+      "vegetation": "Naturalized carob, lentisk and wild olive following former agricultural and grazing uses.",
+      "water": "No quantified establishment-water history; no cultural treatments reported for the described naturalized population.",
+      "management": "Irregular trees of different sizes, with very variable and generally negligible fruit production.",
+      "lesson": "A local vegetation reference, not a controlled planting trial or a growth forecast for newly purchased seedlings.",
+      "pages": [
+        136,
+        137
+      ],
+      "photo_page": 137,
+      "photo": {
+        "src": "/planting-explorer/carob/la-tortola-nijar.png",
+        "alt": "Original photograph of naturalized carob and shrub vegetation at La Tórtola, Níjar.",
+        "width": 631,
+        "height": 468,
+        "credit": "QUERAT (2024)",
+        "figure": "Figure 5.52",
+        "license": "CC BY-NC-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+      }
+    }
+  ],
+  "oak": {
+    "title": "Carob, oak and shrubs together",
+    "kind": "suggestion",
+    "text": "Mixed oak–carob dehesas and MR1 support this landscape idea. Their wetter examples do not prove oak suitability across a dry Almería parcel. Assess oak taxon, provenance, soil depth, exposure and water separately; consider only suitable pockets and retain valuable shrub/open habitat.",
+    "pages": [
+      98,
+      99,
+      100,
+      123,
+      124,
+      125
+    ],
+    "photo_page": 100,
+    "photo": {
+      "src": "/planting-explorer/carob/mixed-oak-carob-dehesa.png",
+      "alt": "Original photograph of a mixed holm-oak dehesa with carob trees.",
+      "width": 654,
+      "height": 468,
+      "credit": "QUERAT (2024)",
+      "figure": "Figure 5.6",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+    }
+  },
+  "limitations": [
+    "Container volumes and seedling heights differ between the nursery narrative and restoration tables. No universally optimal stock class is established.",
+    "Substrate formulations vary by context; some long-cycle recommendations conflict. No universal nursery or field-backfill mix is adopted.",
+    "The general MR1 table says no irrigation; MR2 allows support water; Albox reports seasonal drip. These situations cannot be combined into one watering schedule.",
+    "Albox’s grafting dates, post-graft production account and fruit-sample year are inconsistent. Do not infer a time-to-fruiting forecast.",
+    "Low whole-parcel densities and closer spacing within planting groups use different area bases. No plant count or spacing is calculated here.",
+    "The book reports mostly 2023–2024 finca observations. Its 2026 publication date does not mean these sites were revisited in 2026.",
+    "The diagram is a conceptual teaching section, not measured roots, a mature rooting-depth estimate or a site execution specification."
+  ]
+}

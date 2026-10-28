@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-28",
+  "source_design": "../Logo.png",
+  "mode": "built-in imagegen for transparent PNG assets; SVG code for compact icon",
+  "alpha_note": "Symbol has one corner at alpha 1/255; remaining corners fully transparent. Native pixels retained.",
+  "assets": [
+    {
+      "file": "algarroba-symbol.png",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA",
+      "sha256": "6754de72f4f7fde05f08e4930bd889bcfa9330b4a6b5c323a8bae3db53b9f4aa",
+      "corner_alpha": [
+        0,
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "file": "algarroba-wordmark.png",
+      "width": 2172,
+      "height": 724,
+      "mode": "RGBA",
+      "sha256": "49fa3453bc354aceb7fad4e3b93dc8a2225957530ce91cc340252a50f228b591",
+      "corner_alpha": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "file": "algarroba-icon.svg",
+      "sha256": "3493dc2d1adc8082dd98910e8b103af1c2fafb08fb6ea77181b7c4f498905e69",
+      "construction": "Self-contained SVG: embedded symbol, rounded ivory tile; reversed on forest green for dark OS preference."
+    }
+  ]
+}

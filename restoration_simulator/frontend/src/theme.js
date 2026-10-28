@@ -32,7 +32,11 @@ export function useTheme() {
       document.documentElement.dataset.themePreference = appearance.preference;
       const meta = document.querySelector('meta[name="theme-color"]');
       required(meta !== null, "Missing theme-color metadata.");
-      meta.content = dark ? "#101b15" : "#f7f6ef";
+      const colour = getComputedStyle(document.documentElement)
+        .getPropertyValue("--page")
+        .trim();
+      required(colour !== "", "Missing --page theme colour.");
+      meta.content = colour;
     }
     apply();
     system.addEventListener("change", apply);

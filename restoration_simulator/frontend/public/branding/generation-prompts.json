@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-28",
+  "mode": "built-in image_gen.imagegen",
+  "source_design": "../Logo.png",
+  "assets": [
+    {
+      "id": "symbol",
+      "file": "algarroba-symbol.png",
+      "source_path": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-7c358e2b-3a68-4102-a4a0-09252fd825c9.png",
+      "prompt": "Use case: background-extraction. Input image 1 is a logo design sheet, the source artwork, not a style inspiration. Extract ONLY the large central tree/woman/root/carob-pod symbol into one clean transparent-background PNG. Preserve its exact original drawing, proportions, silhouette, leaf arrangement, profile, roots and brown pod, with forest-green tree and carob-brown pod. Remove the ivory paper fully, including ivory enclosed negative spaces. Do not redraw or reinterpret the brand. No wordmark, no title \"03\", no text, no bottom example tiles, no shadow, no cream square behind symbol. Tight square canvas with about 5% clear transparent safe margin, complete symbol visible unclipped. This is the production brand symbol for Algarroba. Transparent background is mandatory."
+    },
+    {
+      "id": "wordmark",
+      "file": "algarroba-wordmark.png",
+      "source_path": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-1186fc24-1cde-410d-9dcb-e09649a4e4b5.png",
+      "prompt": "Use case: background-extraction. Input image 1 is a logo design sheet, the source artwork. Extract ONLY the exact large word \"Algarroba\" in its existing elegant serif lettering from the lower-middle part of the sheet, into a single clean transparent-background PNG. Preserve the supplied wordmark shape and character: capital A followed by lowercase lgarroba, including the elegant g, r, b and a. Do not add or omit letters. Forest-green lettering as in source. Remove all ivory paper completely, including enclosed spaces in letters, no white rectangle. Wide tight horizontal crop with 5% transparent breathing space so ascenders and g descender are not clipped. No woman/tree symbol, pod, upper heading or example tiles. Not a new logo: preserve existing wordmark. Transparent background mandatory."
+    }
+  ]
+}

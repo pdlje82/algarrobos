@@ -3,6 +3,7 @@ import { Fields, PreviewStatus } from "./LandAccess.jsx";
 import { area, money, year } from "./format.js";
 import { PlantChecklist, PlantingList } from "./PlantChecklist.jsx";
 import { required } from "./contracts.js";
+import { RestorationModelExplorer } from "./RestorationModelExplorer.jsx";
 
 const phases = [
   ["planned", "Plan"],
@@ -118,6 +119,10 @@ export function DemonstratorEditor({
         <div>
           <fieldset className="demo-fields">
             <legend>{planning ? selected : action.title}</legend>
+            {planning && selected === "Site and planting" && <div className="demo-model-explorer">
+              <RestorationModelExplorer />
+              <p className="muted">Read parcel-level restoration approaches alongside your site and planting choices. Exploring keeps this draft unchanged.</p>
+            </div>}
             {selected === "Budget" && (
               <p>
                 Editable playtest rates. Planting, monitoring and reporting are

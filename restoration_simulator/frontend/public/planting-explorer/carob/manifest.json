@@ -1,0 +1,70 @@
+{
+  "source_pdf": "doc_library/FOREST-002 - Andalusia - Carob Cultivation and Restoration Handbook - 2026.pdf",
+  "source_pdf_sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+  "photographs": [
+    {
+      "file": "las-labores-albox.png",
+      "kind": "handbook photograph",
+      "page": 128,
+      "figure": "Figure 5.37, left photograph",
+      "description": "Carob planting at Las Labores, Albox, Almeria.",
+      "credit": "QUERAT, 2024, as credited in FOREST-002",
+      "source_image": "Im0.jp2",
+      "source_image_index": 0,
+      "width": 625,
+      "height": 468,
+      "transformation": "Embedded image decoded from JPEG 2000 to PNG at original pixel dimensions; no retouching or rescaling.",
+      "license": "CC BY-NC-SA 4.0, as stated on handbook page 6; retain original credits.",
+      "sha256": "c9a5a63213bfb8620006c83e65ec1fba107d7903b7cf3d50e5004c72cffe812a",
+      "library_asset": "doc_library/carob-restoration-guide/03-las-labores-albox.png"
+    },
+    {
+      "file": "la-alcantarilla-mojacar.png",
+      "kind": "handbook photograph",
+      "page": 135,
+      "figure": "Figure 5.49",
+      "description": "Oasification with carob at La Alcantarilla, Mojacar, Almeria.",
+      "credit": "QUERAT, 2024, as credited in FOREST-002",
+      "source_image": "Im1.jp2",
+      "source_image_index": 1,
+      "width": 631,
+      "height": 468,
+      "transformation": "Embedded image decoded from JPEG 2000 to PNG at original pixel dimensions; no retouching or rescaling.",
+      "license": "CC BY-NC-SA 4.0, as stated on handbook page 6; retain original credits.",
+      "sha256": "73e9c873a228c3d7277776e7f2dea8d3c53158ff47828fa9c4166c6f34deeab4",
+      "library_asset": "doc_library/carob-restoration-guide/04-la-alcantarilla-mojacar.png"
+    },
+    {
+      "file": "la-tortola-nijar.png",
+      "kind": "handbook photograph",
+      "page": 137,
+      "figure": "Figure 5.52",
+      "description": "Naturalized carob vegetation at La Tortola, Nijar, Almeria.",
+      "credit": "QUERAT, 2024, as credited in FOREST-002",
+      "source_image": "Im0.jp2",
+      "source_image_index": 0,
+      "width": 631,
+      "height": 468,
+      "transformation": "Embedded image decoded from JPEG 2000 to PNG at original pixel dimensions; no retouching or rescaling.",
+      "license": "CC BY-NC-SA 4.0, as stated on handbook page 6; retain original credits.",
+      "sha256": "18df74ad71d5f365e35e5b1556b3f2c235208088bc5e704bca24eeccaaf407be",
+      "library_asset": "doc_library/carob-restoration-guide/05-la-tortola-nijar.png"
+    },
+    {
+      "file": "mixed-oak-carob-dehesa.png",
+      "kind": "handbook photograph",
+      "page": 100,
+      "figure": "Figure 5.6",
+      "description": "Mixed holm-oak dehesa with carob.",
+      "credit": "QUERAT, 2024, as credited in FOREST-002",
+      "source_image": "Im0.jp2",
+      "source_image_index": 0,
+      "width": 654,
+      "height": 468,
+      "transformation": "Embedded image decoded from JPEG 2000 to PNG at original pixel dimensions; no retouching or rescaling.",
+      "license": "CC BY-NC-SA 4.0, as stated on handbook page 6; retain original credits.",
+      "sha256": "9e8ce80245f09e56966d262814791753cb1eef01b9e0411569dcff8ea7351473",
+      "library_asset": "doc_library/carob-restoration-guide/02-mixed-oak-carob-dehesa.png"
+    }
+  ]
+}

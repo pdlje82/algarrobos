@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "reviewed": "28 October 2026",
+  "presentation": { "initial_model": "mr1", "initial_view": "models" },
+  "views": [ { "id": "models", "label": "Explore models" }, { "id": "compare", "label": "Compare models" } ],
+  "combination": {
+    "kind": "suggestion",
+    "text": "MR1’s mixed restoration objective can use MR2’s rainfall-capture approach where the soil and catchment support it. These models can overlap; viewing one here does not select an exclusive project strategy or establish site suitability.",
+    "pages": [97, 123, 131, 132]
+  },
+  "models": [
+    {
+      "id": "mr1", "code": "MR1", "title": "Recover degraded land",
+      "summary": "Restore protective, diverse vegetation in favourable soil and moisture pockets.",
+      "diagram_description": "Conceptual parcel with irregular carob and shrub groups, retained vegetation and open ground around a drainage feature. Symbol counts and sizes are not planting densities or measured crowns.",
+      "diagram_note": "Locate suitable pockets; retain valuable existing vegetation and open habitat. The line represents a drainage feature, not a proposed channel excavation.",
+      "topics": [
+        { "id": "purpose", "title": "Purpose", "kind": "guidance", "text": "Restore Mediterranean forest ecosystems, protect soil, reduce erosion and create more diverse habitat. Carob is one component alongside suitable native trees and shrubs.", "pages": [123, 124, 125] },
+        { "id": "land", "title": "Starting landscape", "kind": "guidance", "text": "Degraded ground, former agricultural land or protective vegetation needing recovery. Diagnose the causes of degradation and the value of existing habitat before deciding where to plant.", "pages": [123, 124, 125, 126] },
+        { "id": "arrangement", "title": "Vegetation arrangement", "kind": "guidance", "text": "Use genetically diverse, seed-grown carob of known origin in favourable microsites, with locally suitable companions such as wild olive and lentisk. Grouping in deeper or moister pockets can create a varied matrix; the whole parcel need not be covered with trees.", "pages": [123, 124, 125] },
+        { "id": "climate", "title": "Reported climate context", "kind": "guidance", "text": "The model concerns Mediterranean conditions and avoids severe frost. The narrative discusses annual rainfall around 250–300 mm and up to 400–450 mm. These are broad book contexts, not an eligibility threshold or a guarantee for every site. Albox is reported at 200–400 mm/year.", "pages": [124, 126, 127] },
+        { "id": "preparation", "title": "Soil preparation", "kind": "guidance", "text": "Target rootable pockets with useful depth and moisture. The summary mentions excavator preparation; manual planting is also discussed. Albox used manual 40 × 40 × 40 cm holes for plants about 1 m tall, without reporting their container dimensions.", "pages": [125, 126, 127] },
+        { "id": "water", "title": "Water", "kind": "unresolved", "text": "The general MR1 table says no irrigation, while Las Labores reports summer drip totalling 400 L/tree over May–September. Keep that case distinct from a universal restoration prescription. A minimum or optimum for new seedlings is not established.", "pages": [126, 127] },
+        { "id": "maintenance", "title": "Management and care", "kind": "guidance", "text": "Protect young plants and review failures. Protective-planting guidance generally omits routine fertilizer and formation pruning. The Albox example instead includes occasional tillage, pruning and later grafting, making it a partial match to ungrafted mixed restoration.", "pages": [125, 126, 127, 128] },
+        { "id": "density", "title": "Density and its area basis", "kind": "unresolved", "text": "The introduction, narrative and summary give different densities: below 350, below 100 and below 200 stems/ha in different passages. They do not establish one default for this project. Distinguish carob density, total tree density and the area actually planted.", "pages": [123, 124, 126] }
+      ],
+      "example_ids": ["albox"],
+      "questions": ["Which soil pockets are genuinely rootable?", "What existing vegetation should remain?", "What establishment and rescue water can be supplied?"],
+      "pages": [123, 124, 125, 126, 127, 128]
+    },
+    {
+      "id": "mr2", "code": "MR2", "title": "Oasification / rainfall capture",
+      "summary": "Collect suitable local runoff around scattered planting islands in dry landscapes.",
+      "diagram_description": "Conceptual parcel with an upslope donor area, runoff arrows to three planting islands, and a separate overflow arrow. Retention arcs are conceptual earthworks, not engineered dimensions or watercourse permissions.",
+      "diagram_note": "Donor area supplies run-on; planted area receives it. Assess infiltration, sediment, erosion and safe overflow away from the stem. This sketch specifies no catchment or earthwork dimensions.",
+      "topics": [
+        { "id": "purpose", "title": "Purpose", "kind": "guidance", "text": "Restore arid and semi-arid areas by concentrating suitable rainfall runoff and retained sediment at favourable planting locations. The aim includes vegetation recovery, soil protection and improved infiltration.", "pages": [130, 131, 132] },
+        { "id": "land", "title": "Starting landscape", "kind": "guidance", "text": "Dry landscapes with usable run-on and suitable receiving soil. The book focuses particularly on Almería, with some Granada and Málaga settings. An active torrential channel requires a different level of assessment from a small hillslope basin.", "pages": [131, 132] },
+        { "id": "arrangement", "title": "Vegetation arrangement", "kind": "guidance", "text": "Use scattered small tree groups in favourable locations, within a retained xerophytic shrub/open matrix. Carob occurs with wild olive, palmito and lentisk. Leave unsuitable ground unplanted; do not force a uniform grid through every terrain unit.", "pages": [131, 132, 133] },
+        { "id": "climate", "title": "Reported climate context", "kind": "guidance", "text": "The model addresses annual rainfall below 300 mm, with mild thermal conditions. Mojácar and Níjar examples are reported at 200–300 mm/year. Annual totals alone do not determine usable runoff, drought exposure or seedling survival.", "pages": [131, 132, 134, 135, 136, 137] },
+        { "id": "preparation", "title": "Soil preparation", "kind": "guidance", "text": "MR2 recommends 60 × 60 × 60 cm prepared holes, a microcatchment and stone mulch. Preparation depth differs from root-collar planting depth. Diagnose restrictions and drainage; stone structures or channel works are not automatically required for a small demonstrator.", "pages": [131, 132, 134] },
+        { "id": "water", "title": "Water", "kind": "unresolved", "text": "Rainfall capture supplements access to water; the book still allows establishment/support irrigation. Original establishment volumes are not documented for the Mojácar and Níjar reference populations. Neither provides a verified zero-water seedling protocol.", "pages": [132, 134, 135, 136, 137] },
+        { "id": "maintenance", "title": "Management and care", "kind": "guidance", "text": "Inspect protection, establishment success and the functioning of retention/overflow features. The model uses stone mulch and generally omits routine field fertilizer and formation pruning. Keep donor and receiving areas functioning without causing erosion elsewhere.", "pages": [131, 132, 134] },
+        { "id": "density", "title": "Density and its area basis", "kind": "guidance", "text": "The book discusses low overall tree densities below 100/ha, sometimes around 50/ha, alongside closer spacing inside small groups. A 6 × 6 m grid over a full hectare is about 278 trees, so that spacing cannot simultaneously mean fewer than 100 trees/ha across the same area. Donor catchment and planted patch are different areas.", "pages": [132, 134] }
+      ],
+      "example_ids": ["mojacar", "nijar"],
+      "questions": ["Where does runoff originate and where will overflow go?", "Will the receiving soil infiltrate and store the water?", "Can the features be maintained safely without transferring erosion downstream?"],
+      "pages": [130, 131, 132, 133, 134, 135, 136, 137]
+    },
+    {
+      "id": "mr3", "code": "MR3", "title": "Diversify agricultural landscapes",
+      "summary": "Add vegetation mosaics to existing agricultural land while retaining selected uses.",
+      "diagram_description": "Conceptual parcel with existing tree rows retained, new carob and shrub groups at an edge and a gap, and open agricultural strips. Existing trees use outline rings; new carob uses solid circles. No planting spacing is prescribed.",
+      "diagram_note": "Retain the agricultural matrix where appropriate and add diversity in suitable gaps and margins. A mosaic can include productive uses; ecological function and management objectives still need to be stated.",
+      "topics": [
+        { "id": "purpose", "title": "Purpose", "kind": "guidance", "text": "Diversify agricultural landscapes, improve soil protection and biodiversity, and potentially retain informal carob production. The book places this in its restoration chapter while acknowledging productive purposes.", "pages": [137, 138, 139, 140] },
+        { "id": "land", "title": "Starting landscape", "kind": "guidance", "text": "Existing olive or almond land, marginal agricultural patches and gaps in a farmed landscape. Retaining an agricultural use is a different starting point from restoring a largely degraded, uncultivated parcel.", "pages": [137, 138, 140] },
+        { "id": "arrangement", "title": "Vegetation arrangement", "kind": "guidance", "text": "Introduce carob in irregular small groups, gaps or alongside existing crops, with suitable native vegetation. The outcome is an agricultural–forest mosaic rather than a universal species mix. Match added plants to the soil, reference habitat and ongoing farm management.", "pages": [138, 139] },
+        { "id": "climate", "title": "Reported climate context", "kind": "unresolved", "text": "The narrative’s rainfall inequality on p. 138 conflicts with its much wetter finca example. Rozas Altas reports annual rainfall of 800–1,200 mm, substantially wetter than the 200–300 mm Almería examples. Do not use that sentence as a suitability cutoff or silently reverse its inequality.", "pages": [138, 140, 141] },
+        { "id": "preparation", "title": "Soil preparation", "kind": "guidance", "text": "The model discusses subsoiling alongside farm operations. Rozas Altas describes manual autumn installation with about 20 cm effective planting depth, without giving a universal excavation envelope. Preparation and plant positioning are distinct measurements.", "pages": [139, 140, 141] },
+        { "id": "water", "title": "Water", "kind": "unresolved", "text": "The summary allows establishment water. Rozas Altas reports no support irrigation during establishment, in its wetter climate. This does not establish the water requirement for a dry Almería parcel.", "pages": [140, 141] },
+        { "id": "maintenance", "title": "Management and care", "kind": "guidance", "text": "Coordinate added vegetation with protection, existing crop management and the stated ecological/production aims. Rozas Altas used guards, tillage, pruning, subsequent grafting and some manure. It is a mosaic example, not a completely unmanaged ungrafted restoration protocol.", "pages": [139, 140, 141, 142] },
+        { "id": "density", "title": "Density and its area basis", "kind": "unresolved", "text": "The text discusses around 100 carob/ha and locally closer grouping, while leaving productive areas to existing crops. The total number of existing plus new trees is a separate quantity. No density or spacing is assigned to the demonstrator here.", "pages": [138, 140] }
+      ],
+      "example_ids": ["rozas_altas"],
+      "questions": ["Which agricultural uses will remain?", "Where can added vegetation coexist with existing trees and operations?", "Is the intended outcome restoration, productive diversification, or a clearly described combination?"],
+      "pages": [137, 138, 139, 140, 141, 142]
+    }
+  ],
+  "comparison": [
+    { "id": "purpose", "label": "Purpose" },
+    { "id": "land", "label": "Existing land use" },
+    { "id": "arrangement", "label": "Vegetation arrangement" },
+    { "id": "water", "label": "Water" },
+    { "id": "maintenance", "label": "Management and care" }
+  ],
+  "relationships": [
+    { "title": "Restoration model", "text": "The parcel-level strategy: how vegetation, water and existing uses relate. These reference models do not select a project strategy." },
+    { "title": "Target vegetation system", "text": "The community or habitat you aim to establish, such as a woodland–shrub mosaic. One restoration strategy may support different locally appropriate communities." },
+    { "title": "Planting or demonstration method", "text": "The technique to use or investigate, such as mulch or rainfall capture. Individual plant installation and stock choices are explained in the Planting Explorer." }
+  ],
+  "related": {
+    "title": "Oak–carob dehesa enrichment · MP1",
+    "kind": "guidance",
+    "text": "Section 5.5 describes adding carob to existing oak dehesas while retaining grazing and productive uses. Huerta Los Tamayos is reported at 800–1,200 mm annual rainfall and its carob was subsequently grafted. This supports the mixed-landscape idea, but does not establish oak suitability or an ungrafted low-water protocol for Almería. Assess oak taxon, provenance, soil depth, frost and water separately.",
+    "pages": [98, 99, 100, 101, 102, 103, 104]
+  },
+  "production_context": [
+    { "code": "MP2", "title": "Improve older afforestations", "text": "Increase productive performance through tree/density management and grafting; not the same objective as a new seed-grown restoration patch.", "pages": [106, 107, 109, 113] },
+    { "code": "MP3", "title": "New extensive orchards", "text": "Low-input fruit production still uses orchard-oriented stock, spacing, establishment water and pruning.", "pages": [114, 115, 116] },
+    { "code": "MP4", "title": "Intensive orchards", "text": "Selected grafted stock, irrigation, fertilization and harvest-oriented management aim to maximize crop production.", "pages": [118, 119, 120, 121] }
+  ],
+  "examples": [
+    {
+      "id": "rozas_altas", "title": "Rozas Altas · Gaucín, Málaga", "rainfall": "800–1,200 mm/year",
+      "vegetation": "Irregular carob enrichment among olive and almond trees on steep terrain, in a wetter Mediterranean landscape.",
+      "water": "No support irrigation during establishment is reported; this observation belongs to the wetter 800–1,200 mm/year site.",
+      "management": "Seed-grown 20–30 cm stock planted in autumn; guards, tillage, pruning, later grafting and some manure are described.",
+      "lesson": "Useful for understanding agricultural mosaics, but not a dry-Almería climate analogue or a controlled seedling-growth experiment.",
+      "pages": [140, 141, 142], "photo_page": 141,
+      "photo": {
+        "src": "/restoration-models/rozas-altas.png", "alt": "Original handbook photograph of carob introduced among existing agricultural vegetation at Rozas Altas, Gaucín.",
+        "width": 631, "height": 468, "credit": "QUERAT (2024)", "figure": "Figure 5.56", "license": "CC BY-NC-SA 4.0", "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/"
+      }
+    }
+  ],
+  "limitations": [
+    "The models are technical reference approaches, not mutually exclusive classifications, suitability scores or grant categories.",
+    "Finca observations have no comparable untreated control and mostly describe 2023–2024 conditions, not a verified 2026 revisit.",
+    "Keep the general model and actual finca management distinct: Albox’s seasonal drip and grafting differ from MR1’s minimal-input summary.",
+    "MR1 density values differ between introduction, narrative and table. Whole-parcel tree density, carob density and internal group spacing need explicit area bases.",
+    "MR2’s larger-stock narrative and smaller-stock table conflict. The 60 cm preparation recommendation does not define root-collar burial depth.",
+    "The rainfall inequality in MR3’s narrative conflicts with its wetter example. This Explorer does not turn it into a threshold.",
+    "Catchment size, engineered earthworks, exact species mixes, watering doses and final plant counts require site-specific work. No default is inferred from these diagrams."
+  ]
+}

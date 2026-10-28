@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-28",
+  "method": "Original code-drawn SVG geometry; PNGs rendered in Chromium. No AI botanical illustration or copied source figure.",
+  "report": "LEARN-007 - Carob Establishment - Soil Preparation and Growth with Limited Water.md",
+  "figures": [
+    {
+      "svg": "01-soil-profiles.svg",
+      "png": "01-soil-profiles.png",
+      "width": 1400,
+      "height": 850,
+      "svg_sha256": "829f49abc701687f33613b53fa4f97a45121bc52238bc80452be6e12cea78f69",
+      "png_sha256": "cb86e932ee98df6fedbb7702d70f72e5db42c9358c691bcf824df4d67a1dbec7"
+    },
+    {
+      "svg": "02-preparation-and-planting-depth.svg",
+      "png": "02-preparation-and-planting-depth.png",
+      "width": 1400,
+      "height": 850,
+      "svg_sha256": "6961161e97470cc614c857004dec05d3856302359444b036aee63f49b7be903d",
+      "png_sha256": "5e005255cde452d4d9ddad524d0e8ca89cf6184013c3efe74f7016c6abcf8005"
+    },
+    {
+      "svg": "03-backfill-and-interfaces.svg",
+      "png": "03-backfill-and-interfaces.png",
+      "width": 1400,
+      "height": 850,
+      "svg_sha256": "33c891214df7a5fa4b6f4da35fcbe4b48f069bd61be24612a35ed685f4b89dfd",
+      "png_sha256": "2fa410a4b84ff330b513fb7e62d5f44f028538d795d6d6dbca18665af251375b"
+    },
+    {
+      "svg": "04-runoff-capture.svg",
+      "png": "04-runoff-capture.png",
+      "width": 1400,
+      "height": 850,
+      "svg_sha256": "6bbf6f59a323c4d3b125c8dbcf7b3b58e72a3cdbc54a2980601c3367c5add36e",
+      "png_sha256": "eb06d861aec8caf1099d1597b8044f2fe875551ce06567a5f3a36a4b9b811e93"
+    }
+  ]
+}

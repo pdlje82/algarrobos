@@ -1,31 +1,33 @@
 :root {
-  font-family: Inter, "Segoe UI", sans-serif;
+  font-family: var(--font-ui);
   color: var(--text);
   background: var(--page);
   color-scheme: light;
   font-synthesis: none;
   font-weight: 400;
   line-height: 1.55;
-  --text: #253d32;
-  --page: #f7f6ef;
-  --green: #174a39;
+  --font-ui: "Segoe UI", system-ui, sans-serif;
+  --font-display: Baskerville, "Palatino Linotype", Georgia, serif;
+  --text: #263c2e;
+  --page: #faf7ef;
+  --green: #20482f;
+  --carob: #85542e;
+  --carob-soft: #dbbfa2;
+  --brand-image-filter: none;
   --border: #dce1d5;
   --muted: #647467;
   --control: #fff;
   --plant-portrait-bg: #f8f6ee;
   --plant-portrait-text: #3a4935;
   --plant-portrait-error: #6e2828;
-  --panel: #fffef9;
+  --panel: #fffdf6;
   --hover: #eef2e7;
   --hover-border: #7e977b;
-  --focus: #b87d30;
-  --brand-border: #577760;
+  --focus: #85542e;
   --status: #6d8f49;
-  --hero-accent: #71815b;
-  --sun: #c8a862;
-  --sun-line: #85956c;
+  --hero-accent: #85542e;
   --notice-border: #dfdccb;
-  --notice-accent: #c2a66a;
+  --notice-accent: #85542e;
   --notice-bg: #f0eee1;
   --notice-text: #676c59;
   --pill: #eaf0df;
@@ -58,9 +60,9 @@
   --error-text: #883b27;
   --error-border: #d8ab91;
   --replacement-border: #b58943;
-  --primary: #174a39;
+  --primary: #20482f;
   --primary-text: #fff;
-  --primary-hover: #285e43;
+  --primary-hover: #315d3e;
   --danger-bg: #fff1f2;
   --danger-text: #9f2432;
   --danger-border: #dba4aa;
@@ -76,25 +78,25 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
   --text: #e3eadf;
-  --page: #101b15;
-  --green: #b0d4ad;
+  --page: #111d17;
+  --green: #c0d3b4;
+  --carob: #d4ab81;
+  --carob-soft: #795c41;
+  --brand-image-filter: brightness(0) invert(1);
   --border: #405342;
   --muted: #adbcab;
   --control: #1d2e23;
   --plant-portrait-bg: #000;
   --plant-portrait-text: #adbcab;
   --plant-portrait-error: #ffc8aa;
-  --panel: #18271e;
+  --panel: #192a20;
   --hover: #2c4030;
   --hover-border: #809e7c;
-  --focus: #e0b96a;
-  --brand-border: #8dac87;
+  --focus: #e4bb8c;
   --status: #a1c582;
-  --hero-accent: #b0c68f;
-  --sun: #d1b16d;
-  --sun-line: #91a879;
+  --hero-accent: #d4ab81;
   --notice-border: #62583b;
-  --notice-accent: #d1b16d;
+  --notice-accent: #d4ab81;
   --notice-bg: #302e20;
   --notice-text: #d4cfb5;
   --pill: #30442b;
@@ -192,7 +194,7 @@ p {
   margin-top: 0;
 }
 h2 {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
   font-size: 26px;
   font-weight: 400;
   line-height: 1.25;
@@ -226,29 +228,47 @@ main {
 }
 .brand {
   display: flex;
-  gap: 12px;
+  position: relative;
+  gap: 14px;
   align-items: center;
   text-decoration: none;
-  font:
-    30px Georgia,
-    serif;
+  flex-shrink: 0;
 }
-.brand-mark {
-  border: 1px solid var(--brand-border);
-  border-radius: 50% 50% 3px 50%;
-  width: 42px;
-  height: 46px;
-  text-align: center;
-  font-style: italic;
-  font-size: 36px;
+.brand-symbol,
+.brand-wordmark,
+.footer-symbol {
+  object-fit: contain;
+  filter: var(--brand-image-filter);
+}
+.brand-symbol {
+  display: block;
+  width: 78px;
+  height: 78px;
+}
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.brand-wordmark {
+  display: block;
+  width: 190px;
+  height: auto;
 }
 .brand-sub {
   display: block;
-  font:
-    9px "Segoe UI",
-    sans-serif;
-  letter-spacing: 2.4px;
-  margin-top: 1px;
+  font: 10px var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 1.9px;
+  color: var(--muted);
+  margin: -2px 0 0 5px;
+}
+.brand-error {
+  display: block;
+  max-width: 260px;
+  color: var(--error-text);
+  font: 11px/1.4 var(--font-ui);
+  overflow-wrap: anywhere;
 }
 .header-note {
   display: flex;
@@ -302,9 +322,7 @@ main {
   margin-bottom: 12px;
 }
 h1 {
-  font:
-    54px/1.08 Georgia,
-    serif;
+  font: 54px/1.08 var(--font-display);
   letter-spacing: -1.7px;
   margin-bottom: 20px;
 }
@@ -328,7 +346,7 @@ h1 em {
   position: relative;
 }
 .hero-note p {
-  font-family: Georgia, serif;
+  font-family: var(--font-display);
   font-size: 21px;
   margin: 16px 0 6px;
 }
@@ -337,15 +355,19 @@ h1 em {
   font-size: 12px;
   color: var(--muted);
 }
-.sun {
-  width: 72px;
-  height: 36px;
-  background: var(--sun);
-  border-radius: 80px 80px 0 0;
-  border-bottom: 1px solid var(--sun-line);
-  box-shadow:
-    0 9px 0 -8px var(--sun-line),
-    0 18px 0 -17px var(--sun-line);
+.landscape-motif {
+  display: block;
+  width: 230px;
+  max-width: 100%;
+  height: auto;
+  color: var(--green);
+}
+.motif-pod {
+  fill: var(--carob);
+  opacity: 0.8;
+}
+.motif-pod-line {
+  stroke: var(--page);
 }
 .fictional {
   display: flex;
@@ -1125,17 +1147,30 @@ footer {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--carob-soft);
   padding: 24px 0;
   margin-top: 40px;
   color: var(--muted);
 }
-footer > span {
-  font-size: 9px;
-  letter-spacing: 2px;
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+}
+.footer-symbol {
+  width: 34px;
+  height: 34px;
+}
+.footer-brand > span > span {
+  color: var(--carob);
+  padding: 0 4px;
 }
 footer p {
   font-size: 11px;
+  margin: 0;
+  max-width: 430px;
 }
 .sr-only,
 .skip {
@@ -1243,13 +1278,27 @@ footer p {
   .masthead {
     padding: 18px 16px;
   }
-  .brand {
-    font-size: 25px;
+  .header-tools {
+    gap: 12px;
+    flex-wrap: wrap;
   }
-  .brand-mark {
-    width: 35px;
-    height: 38px;
-    font-size: 30px;
+  .brand {
+    gap: 10px;
+  }
+  .brand-symbol {
+    width: 62px;
+    height: 62px;
+  }
+  .brand-wordmark {
+    width: 164px;
+  }
+  .brand-sub {
+    font-size: 9px;
+    letter-spacing: 1.3px;
+  }
+  footer {
+    flex-direction: column;
+    gap: 12px;
   }
   .header-note {
     font-size: 10px;
@@ -1312,10 +1361,11 @@ footer p {
     padding: 6px 9px;
   }
   .stats {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin: 18px 0;
   }
   .stats > div {
+    min-width: 0;
     border-bottom: 1px solid var(--border);
   }
   .stats > div:nth-child(2) {

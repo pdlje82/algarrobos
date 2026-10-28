@@ -1,7 +1,28 @@
-# Repository coding rules
+# Repository instructions
 
-These rules apply to all code changes in this repository, including Python,
-React, scenario configuration, persistence and migrations.
+These instructions apply to work in this repository, including research and
+code changes in Python, React, scenario configuration, persistence and migrations.
+
+## Internet research: provide downloadable document links
+
+When the user requests internet research and relevant downloadable documents
+are found, include their links explicitly in the final response so they can be
+downloaded and added to the repository's `doc_library/`. Include the same links
+in any research report produced for the task.
+
+- Provide clearly labelled Markdown links with the document title, issuing
+  organisation or authors, and date when verified.
+- Prefer verified direct download links, such as publisher-hosted PDFs. Where
+  useful, also provide the stable publication or repository page.
+- Do not substitute a search-results link or a DOI landing page for an available
+  direct download. If only a landing page is available, label it accordingly and
+  state any known login, payment or access limitation. Never invent a download
+  URL or describe an unverified link as a confirmed download.
+- Distinguish documents already stored in `doc_library/` from documents offered
+  for addition. Research citations and temporary download caches do not mean a
+  document has been added to the library.
+- When documents are actually added, follow the naming and cataloguing workflow
+  in `doc_library/CATALOG.md`.
 
 ## Strictly avoid silent fallbacks
 

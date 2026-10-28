@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { useTheme } from "./theme.js";
+import { BrandFooter, BrandLockup, LandscapeMotif } from "./Brand.jsx";
 import { DemonstratorEditor, DemonstratorRecord } from "./Demonstrator.jsx";
 import {
   AccessTimeline,
@@ -336,14 +337,7 @@ function App() {
         Skip to project
       </a>
       <header className="masthead">
-        <a className="brand" href="/" aria-label="Algarrobos home">
-          <span className="brand-mark" aria-hidden="true">
-            a
-          </span>
-          <span>
-            algarrobos<span className="brand-sub">RESTORATION LAB</span>
-          </span>
-        </a>
+        <BrandLockup />
         <div className="header-tools">
           <div className="header-note">
             <span className="status-dot" /> Local prototype{" "}
@@ -370,7 +364,7 @@ function App() {
       <main id="main">
         <div className="hero">
           <div>
-            <p className="eyebrow">From a small beginning</p>
+            <p className="eyebrow">Algarroba · From a small beginning</p>
             <h1>
               A place to start.
               <br />
@@ -383,7 +377,7 @@ function App() {
             </p>
           </div>
           <aside className="hero-note">
-            <span className="sun" aria-hidden="true" />
+            <LandscapeMotif />
             <p>Land. Resources. Continuity.</p>
             <span>A journey through the choices behind restoration.</span>
           </aside>
@@ -952,7 +946,7 @@ function App() {
           </>
         )}
         <footer>
-          <span>ALGARROBOS / RESTORATION LAB</span>
+          <BrandFooter />
           <p>
             A fictional exploration of real questions. Saved locally on the
             computer running Python.

@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-28",
+  "generation_mode": "built-in image_gen.imagegen",
+  "requested_aspect_ratio": "9:16",
+  "native_output_preserved": true,
+  "app_integration": false,
+  "review": "Visually inspected selected posters: names, general habits, contrasting root systems, geometry labels, legibility and before-backfill instruction. Schematic prototypes; dimensions and roots are not field measurements.",
+  "assets": [
+    {
+      "id": "carob",
+      "file": "01-algarrobo-planting-poster.png",
+      "width": 941,
+      "height": 1672,
+      "mode": "RGB",
+      "sha256": "dea94fbec3255000951d97f05eb64d5250aa7720972368ff1f73cc5b91cd1753",
+      "source_path": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-219ed067-16c4-4505-bb4c-bf00cfcee722.png"
+    },
+    {
+      "id": "palmetto",
+      "file": "02-palmito-planting-poster.png",
+      "width": 941,
+      "height": 1672,
+      "mode": "RGB",
+      "sha256": "0e1d8ab5143adfd1e7dc2217c5e743b3a7eda30cf1b491ac5bde3d7bcc913a49",
+      "source_path": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-20476b65-7aab-40b3-ba90-8570d4da27c5.png"
+    },
+    {
+      "id": "esparto",
+      "file": "03-esparto-planting-poster.png",
+      "width": 941,
+      "height": 1672,
+      "mode": "RGB",
+      "sha256": "27036d302ea63a06650b2bfaaef60be571b9b0680e52fab2ace88d7fcd1d1b58",
+      "source_path": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-af98b7c2-df0f-4e1d-8412-66da329595bc.png"
+    }
+  ]
+}
