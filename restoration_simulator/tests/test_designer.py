@@ -65,11 +65,13 @@ class DesignerRulesTests(unittest.TestCase):
         self.assertEqual(a["draft"]["bundle"]["vegetation_combinations"][3]["sources"][0]["id"],"FOREST-003")
         key=a["instances"][0]["id"]
         c=designer.evaluate(d,self.project,dict(kind="position",id=key,x=2,y=2))
-        c=designer.evaluate(c["draft"],self.project,dict(kind="rearrange"))
+        with self.assertRaisesRegex(engine.Invalid,"Unsupported designer command"):
+            designer.evaluate(c["draft"],self.project,dict(kind="rearrange"))
+        c=designer.evaluate(c["draft"],self.project)
         self.assertEqual(c["draft"]["positions"][key],dict(x=2,y=2,manual=True))
 
     def test_unknown_configuration_and_versions_fail_explicitly(self):
-        for edit in [lambda b:b["rules"][0].update(effect="predict_survival"),lambda b:b["rules"][0]["sources"][0].update(id="missing"),lambda b:b["manifest"].update(version=3),lambda b:b["vegetation_combinations"][0]["starter"].append("imaginary")]:
+        for edit in [lambda b:b["rules"][0].update(effect="predict_survival"),lambda b:b["rules"][0]["sources"][0].update(id="missing"),lambda b:b["manifest"].update(version=4),lambda b:b["vegetation_combinations"][0]["starter"].append("imaginary")]:
             b=designer.load_bundle();edit(b)
             with self.assertRaises(engine.Invalid):designer.validate_bundle(b)
         d=deepcopy(self.draft);d["hidden_default"]=False
@@ -147,6 +149,10 @@ class DesignerPersistenceTests(unittest.TestCase):
                 draft["physical"]["parcel_id"]=s.snapshot()["project"]["parcels"][0]["id"]
                 e=c.post("/api/designer/preview",json=dict(revision=w["project_revision"],draft=draft,command=dict(kind="toggle",collection="approaches",id="mr1",enabled=True)))
                 self.assertEqual(e.status_code,200,e.text)
+                e=c.post("/api/designer/preview",json=dict(revision=w["project_revision"],draft=e.json()["draft"],command=dict(kind="plant",id="lentisk",enabled=True)))
+                self.assertEqual(e.status_code,200,e.text)
+                links=e.json()["draft"]["associations"]
+                self.assertEqual(len(links),7)
                 saved=c.post("/api/designer/save",json=dict(revision=w["project_revision"],design_revision=0,request_id=str(uuid4()),draft=e.json()["draft"]))
                 self.assertEqual(saved.status_code,200,saved.text)
                 admin={f["name"]:f["default"] for f in w["fields"] if f["name"] not in designer.PHYSICAL}
@@ -154,7 +160,9 @@ class DesignerPersistenceTests(unittest.TestCase):
                 preview=c.post("/api/designer/apply-preview",json=body);self.assertEqual(preview.status_code,200,preview.text)
                 applied=c.post("/api/designer/apply",json={**body,"request_id":str(uuid4())});self.assertEqual(applied.status_code,200,applied.text)
                 data=applied.json();self.assertEqual(data["project"]["demonstrator"]["plan"]["trees"],7)
+                self.assertEqual(data["project"]["demonstrator"]["plan"]["shrubs"],7)
                 self.assertEqual(len(c.get("/api/designer/report").json()["design"]["applied"]),1)
+                self.assertEqual(c.get("/api/designer/report").json()["design"]["applied"][0]["draft"]["associations"],links)
                 self.assertEqual(c.get("/api/designer/sources/FOREST-003").status_code,200)
                 # A subsequent saved draft must survive undo of the plan application.
                 edited=c.get("/api/designer").json()["evaluation"]["draft"]
@@ -163,7 +171,7 @@ class DesignerPersistenceTests(unittest.TestCase):
                 self.assertEqual(res.status_code,200,res.text)
                 undo=c.post("/api/undo",json=dict(revision=data["revision"],request_id=str(uuid4())));self.assertEqual(undo.status_code,200,undo.text)
                 data=undo.json();self.assertIsNone(data["project"]["demonstrator"])
-                self.assertEqual(c.get("/api/designer").json()["evaluation"]["summary"]["plants"],2)
+                self.assertEqual(c.get("/api/designer").json()["evaluation"]["summary"]["plants"],9)
                 pid=data["project"]["parcels"][0]["id"]
                 removal=c.post("/api/parcels/removal-preview",json=dict(revision=data["revision"],parcel_id=pid));self.assertEqual(removal.status_code,200,removal.text)
                 self.assertTrue(any("Designer" in a["title"] for a in removal.json()["removed_actions"]))
@@ -171,6 +179,7 @@ class DesignerPersistenceTests(unittest.TestCase):
                 self.assertIsNone(c.get("/api/export").json()["designer"])
                 restored=c.post("/api/undo",json=dict(revision=deleted.json()["revision"],request_id=str(uuid4())));self.assertEqual(restored.status_code,200,restored.text)
                 self.assertTrue(c.get("/api/designer").json()["saved"])
+                self.assertEqual(c.get("/api/designer").json()["evaluation"]["draft"],edited)
 
     def test_envelope4_migrates_with_backup(self):
         with tempfile.TemporaryDirectory() as folder:

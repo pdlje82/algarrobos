@@ -51,3 +51,5 @@
 .designer-edge-left,.designer-edge-right{cursor:ew-resize}.designer-edge-top,.designer-edge-bottom{cursor:ns-resize}.designer-edge:focus rect{fill:var(--selected-bg);stroke-width:.08}
 .dimension-editor{border-top:1px solid var(--border);padding:.7rem 0}.dimension-editor p{font-size:.85rem;margin:.35rem 0}.dimension-editor fieldset{border:0;padding:0}.dimension-editor label{font-size:.8rem}
 @media(max-width:360px){.designer-controls .plant-checkbox{grid-template-columns:1rem minmax(0,1fr)}.designer-controls .plant-portrait{grid-column:2}.designer-controls .plant-checkbox .plant-names{grid-column:2}.designer-controls .plant-controls{grid-template-columns:minmax(0,1fr)}}
+.designer-association { stroke: var(--primary); stroke-width: 2; stroke-dasharray: 4 3; opacity: .85; }
+.designer-plant.is-associated .designer-plant-hit { stroke: var(--primary); stroke-width: .06; }

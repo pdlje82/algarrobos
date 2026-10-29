@@ -2,9 +2,26 @@
 
 This directory is the authoritative index for generated planting decisions. The
 Python facade is `backend/designer.py`; current editing is in
-`backend/designer_v2.py`. React renders evaluations and collects commands. The designer is a hypothetical layout, not a suitability model.
+`backend/designer_v3.py`. React renders evaluations and collects commands. The designer is a hypothetical layout, not a suitability model.
 
 ## Files and responsibilities
+
+Current diameter/placement authority: `defaults.mature_diameters` owns the 23
+numeric drawing values; `plant_dimensions.json` owns original evidence ranges,
+references, selection method and limitations. `defaults.custom_diameters` owns
+growth-form illustrations. `density_defaults` separates carob/tree/shrub/grass.
+`defaults.placement` owns categories by species, centre clearance, seed and bounded
+attempt counts. The `mature_diameters` and `shrub_placement` rules register Python
+handlers `overlay_for`, `place_new`, `reconcile_positions` and `placement_output`.
+Uniform-area annulus sampling and stable tree-ID tie breaks are geometric project
+assumptions. Shared source memberships never imply proven beneath-tree suitability.
+
+Draft v3 stores associations/offsets, placement categories, seed, seen instance IDs
+and explanations. Only unseen instances are generated; old unplaced plants require
+manual positioning. Parent translation preserves offsets, manual shrub movement
+detaches, and removal detaches without deleting children. Diameter changes only
+change the drawing. Existing vegetation is an obstacle. There is no rearrangement
+operation. All quantities and costs still use the existing integer planting list.
 
 - `manifest.json`: stable ruleset identity, schema/engine version and bundle files.
 - `rules.json`: source-qualified guidance, observations, assumptions and unresolved
@@ -93,15 +110,18 @@ For an earlier snapshot without that optional geometry, the overlay is unavailab
 with an explicit issue requesting rule review; no replacement dimensions are guessed.
 
 
-## Designer v2 editing and density rules
+## Historical designer v2 editing and density rules
 
-`designer_v1.py` preserves the historical evaluator. New drafts use engine v2;
+`designer_v1.py` and `designer_v2.py` preserve historical evaluators. New drafts use engine v3;
 old drafts are read unchanged until **Review designer upgrade** is accepted.
 Upgrading derives density from existing count and area, preserves prices and
 positions, and labels prior persistent exclusions as legacy exclusions. Envelope 5
 and the existing simulation schema remain unchanged; applied historical snapshots
 are not rewritten. An explicit versioned review supplies missing v2 metadata;
-normal execution never guesses it.
+normal execution never guesses it. The following v2 behaviour is retained only
+for pinned historical snapshots. Current v3 placement/dimension authority is
+described above; v3 uses the old evaluator for integer pricing and conceptual MR
+features, while its registered placement handlers own all new coordinates.
 
 The registered v2 handlers are density conversion, half-up integer rounding,
 per-species preferences, source-specific dismissal, persistent exclusion,
@@ -149,8 +169,10 @@ metres/area/positions on release. Escape cancels without a domain command.
 
 The `root_ball_default` rule registers `defaults.root_ball_default`: an explicit
 12 cm diameter drawing assumption, shared by catalogue and custom plants.
-Overlay precedence is user-entered dimension, documented stock dimension, then
-the shared drawing assumption. No width is inferred from container litres.
+For v3, overlay precedence is user-entered dimension, then the explicitly adopted
+shared drawing assumption. Pinned v2 snapshots retain their historical precedence
+(user-entered, documented stock dimension, shared default). No width is inferred
+from container litres.
 Older bundles without this rule/default keep their previous unspecified root-ball
 behaviour until **Review with updated rules** is accepted. The rule and default
 must appear together; a missing or invalid configured value raises an error.

@@ -1,7 +1,7 @@
 """Designer facade: current commands, immutable historical snapshots and persistence integration."""
 from copy import deepcopy
 from . import designer_v1 as legacy
-from . import designer_v2 as current
+from . import designer_v3 as current
 from . import planting, plant_prices
 from .configuration import keys
 from .engine import require, list_actions

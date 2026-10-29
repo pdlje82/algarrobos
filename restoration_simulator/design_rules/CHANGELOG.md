@@ -1,5 +1,22 @@
 # Rule changes
 
+## 2026-10-29 · algarroba-designer-2026-10-29-v4 · engine/draft v3
+
+- All 23 plants receive one positive, editable crown/plant drawing diameter.
+  Nine are rounded reference midpoints; fourteen are explicit project estimates.
+  Original evidence ranges, taxon identity and limitations remain separate.
+- Custom diameters: trees 6 m, shrubs 2 m, grasses 0.6 m. Root ball remains 0.12 m.
+- Density defaults: carob 350/ha, other trees 50/ha, shrubs 350/ha, grasses 50/ha.
+- Added registered deterministic, bounded placement of newly created instances,
+  provisional woodland companions, open-ground preferences and 1 m centre clearance.
+- Persisted tree associations/offsets, placement seed, species preferences and
+  explanations. Tree movement translates children; manual shrub movement detaches.
+  Out-of-zone children retain recoverable offsets; removed parents leave shrubs.
+- Removed rearrangement. Earlier unplaced plants are never silently retried.
+- Historical v1/v2 drafts require explicit review. Adoption preserves recorded
+  counts, prices, entered dimensions and coordinates and invents no parent links.
+  Applied snapshots retain their original rules and evaluator.
+
 ## algarroba-designer-2026-10-29-v1 — 29 October 2026
 
 Initial editable, source-linked designer bundle: MR1/MR2 conceptual arrangements,

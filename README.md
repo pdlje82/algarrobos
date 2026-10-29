@@ -305,8 +305,9 @@ incomplete custom price file is rejected rather than filled silently.
 ### Site Designer density and direct editing
 
 New designs use per-species plants/ha controls and derived purchasing counts.
-Carob starts at an illustrative 350/ha (seven plants on 200 m²); other species
-start at 50/ha. These are editable project scenarios, not handbook prescriptions.
+Carob and each shrub species start at an illustrative 350/ha (seven plants per
+species on 200 m²); other trees and grasses start at 50/ha. These are editable
+project scenarios, not handbook prescriptions.
 Arrows add/remove one actual plant. Typed densities round to whole plants, with
 requested and effective values displayed. Changing area preserves current plants
 until **Update plants to previous densities** is chosen.
@@ -317,12 +318,31 @@ north marker is a drawing convention. Numeric fields provide keyboard alternativ
 Ordinary design edits apply immediately and have session Undo/Redo. Persistent
 exclusions are separate from unchecking a plant. Save and Apply remain distinct.
 
-Root-ball and indicative mature-crown overlays carry evidence and explicit gaps.
-No dimensions are inferred from pot litres or plant height. All 23 taxa were
+Root-ball and crown/plant overlays are separate. Every catalogue plant has one
+editable drawing diameter: a rounded reference midpoint or an explicit
+plant-specific estimate, with original ranges retained in evidence details.
+The root-ball drawing default is 12 cm. Custom tree/shrub/grass diameters are
+6/2/0.6 m. No dimensions are inferred from pot litres or plant height. All 23 taxa were
 reviewed in [LEARN-009](doc_library/LEARN-009%20-%20Site%20Designer%20-%20Root%20Ball%20and%20Mature%20Crown%20Dimension%20Evidence%20-%202026-10-29.md),
 including links to downloadable references for possible library addition. An older
 designer draft opens unchanged and offers **Review designer upgrade**; adopting it
 preserves recorded counts, prices, positions and legacy exclusions.
+
+New woodland-companion shrubs are distributed among all plotted planned trees,
+inside their indicative crowns with 1 m automatic centre clearance. Other shrubs
+and grasses prefer open ground; custom plants start Independent. Change a species'
+placement preference in its checklist details or inspector. These are illustrative
+geometry preferences, not ecological suitability findings. Only new instances are
+placed automatically; unsuccessful plants remain unplaced, counted and costed.
+There is no rearrange command. Existing vegetation is an obstacle, not a parent.
+
+Select a tree or shrub to see its associations. Moving a tree carries linked
+shrubs; manually moving a shrub detaches it. Manual clearance conflicts generate
+warnings. A child moved outside the zone retains its recoverable offset; removing
+its parent detaches it without deleting it. Crown edits never redistribute plants.
+Session Undo/Redo, save/export/import and decision reports preserve these data.
+Older saved layouts stay unchanged until their explicit rules upgrade is accepted;
+historical positions acquire no invented parent relationships.
 
 Restart the Python backend after updating its source, then refresh the frontend.
 There are no new Conda or npm dependencies for these improvements.

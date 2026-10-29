@@ -1,10 +1,11 @@
 """Regression cases for density-led exploration and explicit historical upgrades."""
 from copy import deepcopy
+import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from uuid import uuid4
 import unittest
-from backend import designer, designer_v1, designer_v2, engine
+from backend import designer, designer_v1, designer_v2, designer_v3, engine
 from backend.storage import Store, validate_export
 
 
@@ -43,7 +44,7 @@ class DensityDesignerTests(unittest.TestCase):
         down = self.run_edit(up["draft"], kind="density_step", id="carob", step=-1)
         self.assertEqual(down["summary"]["plants"], 7)
         shrub = self.run_edit(self.empty, kind="plant", id="lentisk", enabled=True)
-        self.assertEqual(shrub["summary"]["shrubs"], 1)
+        self.assertEqual(shrub["summary"]["shrubs"], 7)
 
     def test_uncheck_then_new_or_reactivated_source_and_persistent_exclusion(self):
         e = self.carobs()
@@ -121,9 +122,9 @@ class DensityDesignerTests(unittest.TestCase):
         with self.assertRaises(engine.Invalid): self.run_edit(e["draft"], kind="dimension", id="carob", feature="crown", value={"diameter": 8, "basis": "", "note": ""})
 
     def test_legacy_read_and_explicit_upgrade_preserve_counts_and_exclusions(self):
-        bundle = designer_v2.v1_bundle(designer.load_bundle())
+        bundle = designer_v3.v1_bundle(designer.load_bundle())
         # Construct a historical attachment without loading current files in v1.
-        draft = {k: deepcopy(v) for k,v in self.empty.items() if k not in designer_v2.V2_FIELDS}
+        draft = {k: deepcopy(v) for k,v in self.empty.items() if k not in designer_v2.V2_FIELDS | designer_v3.V3_FIELDS}
         draft.update(version=1, bundle=bundle)
         old = designer_v1.evaluate(draft, self.project, dict(kind="toggle", collection="approaches", id="mr1", enabled=True))
         self.assertEqual(old["summary"]["plants"], 1)
@@ -183,17 +184,18 @@ class DensityDesignerTests(unittest.TestCase):
         self.assertEqual(custom["overlays"]["custom-root"]["root_ball"]["diameter_m"],[.12,.12])
 
     def test_shared_root_ball_update_is_explicit_and_preserves_entered_dimensions(self):
-        old = deepcopy(self.empty)
+        old = designer_v3.v2_draft(self.empty)
+        old["bundle"] = json.loads((Path(__file__).parent/"fixtures"/"designer-v2-bundle.json").read_text(encoding="utf8"))
         del old["bundle"]["defaults"]["root_ball_default"]
         old["bundle"]["rules"] = [r for r in old["bundle"]["rules"] if r["id"] != "root_ball_default"]
         old["bundle"]["manifest"]["ruleset_id"] = "algarroba-designer-2026-10-29-v2"
-        e = self.run_edit(old,kind="plant",id="carob",enabled=True)
+        e = designer_v2.evaluate(old,self.project,dict(kind="plant",id="carob",enabled=True))
         self.assertIsNone(e["overlays"]["carob"]["root_ball"])
         updated = self.run_edit(e["draft"],kind="upgrade_rules")
         self.assertEqual(updated["overlays"]["carob"]["root_ball"]["diameter_m"],[.12,.12])
         self.assertEqual(updated["summary"],e["summary"])
         self.assertEqual(updated["draft"]["positions"],e["draft"]["positions"])
-        measured = self.run_edit(e["draft"],kind="dimension",id="carob",feature="root_ball",value=dict(diameter=.08,basis="measured",note="Supplier width"))
+        measured = designer_v2.evaluate(e["draft"],self.project,dict(kind="dimension",id="carob",feature="root_ball",value=dict(diameter=.08,basis="measured",note="Supplier width")))
         retained = self.run_edit(measured["draft"],kind="upgrade_rules")
         self.assertEqual(retained["overlays"]["carob"]["root_ball"]["diameter_m"],[.08,.08])
         self.assertEqual(retained["overlays"]["carob"]["root_ball"]["evidence"],"measured")

@@ -1,6 +1,55 @@
 # Root-ball and mature-crown dimension evidence
 
-Reviewed 29 October 2026 · all 23 catalogue entries · Site Designer v2
+Reviewed 29 October 2026 · all 23 catalogue entries · Site Designer v3
+
+## Adopted drawing diameters — designer v3
+
+The single dashed circle now uses a representative **planning value**, not a measured diameter. The original reference table below remains the evidence record. Nine values use the midpoint of an adopted horticultural spread range, rounded to 0.1 m with halves upward; fourteen are explicitly plant-specific project estimates. These values do not predict growth under low-rainfall conditions. A user measurement or planning override takes precedence.
+
+The nursery root-ball drawing default remains **0.12 m diameter** for all plants. It is illustrative, not inferred from litres and not a planting-hole dimension. Custom plant defaults are tree 6 m, shrub 2 m and grass 0.6 m.
+
+| Catalogue plant | Drawing diameter (m) | Selection basis and limits |
+|---|---:|---|
+| carob · *Ceratonia siliqua* | 6.0 | Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately. [Reference](https://www.rhs.org.uk/plants/3403/ceratonia-siliqua/details) |
+| wild_olive · *Olea europaea var. sylvestris* | 6.0 | Project estimate for the broad crown of the wild olive taxon described by Porto's botanical collection. No numerical ordinary spread was established; this is not a cultivated-olive measurement. [Reference](https://mhnc.up.pt/pt/colecoes/colecao-botanica-viva/zambujeiro/) |
+| lentisk · *Pistacia lentiscus* | 3.3 | Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately. [Reference](https://www.rhs.org.uk/plants/25153/pistacia-lentiscus/details) |
+| buckthorn · *Rhamnus alaternus* | 3.0 | Project estimate for a broad evergreen shrub. The exact-species RHS reference did not establish a numerical width; cultivar dimensions were not substituted. [Reference](https://www.rhs.org.uk/plants/19895/rhamnus-alaternus/details) |
+| palmetto · *Chamaerops humilis* | 4.0 | Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately. [Reference](https://plants.ces.ncsu.edu/plants/chamaerops-humilis/) |
+| retama · *Retama sphaerocarpa* | 2.3 | Project drawing benchmark based on the 2.3 m mean crown diameter of established Retama shrubs sampled by Cuesta et al. (2010), Methods. A field sample, not a universal mature spread. [Reference](https://doi.org/10.1111/j.1365-2745.2010.01655.x) |
+| esparto · *Macrochloa tenacissima* | 0.8 | Project estimate for a dense perennial tussock. The reference's 0.5–1 m describes height, not width, and was not converted into a measured diameter. [Reference](https://www.mdpi.com/2072-4292/13/15/2970) |
+| thyme · *Thymus hyemalis* | 0.4 | Project estimate for a low, branched woody shrub, based on the exact-species University of Malaga description. No measured horizontal spread was established. [Reference](https://jardinbotanico.uma.es/jb-alm-19/) |
+| rosemary · *Salvia rosmarinus* | 2.0 | Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately. [Reference](https://www.rhs.org.uk/plants/384211/salvia-rosmarinus-ro/details) |
+| rhamnus_lycioides · *Rhamnus lycioides* | 2.0 | Project estimate for a dense thorny shrub described by the University of Malaga. Reported height is not treated as measured width. [Reference](https://jardinbotanico.uma.es/jb-alm-22/) |
+| ephedra_fragilis · *Ephedra fragilis* | 2.5 | Project estimate for an irregular scrambling shrub. Extent depends on support; a single circle is a simplified drawing, not a measured mature spread. [Reference](https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A77171468-1) |
+| ziziphus · *Ziziphus lotus* | 4.0 | Project estimate for a spreading, patch-forming shrub. Exceptional very large patches are excluded; this value is not a measured typical width. [Reference](https://onlinelibrary.wiley.com/doi/10.1111/mec.15950) |
+| lycium · *Lycium intricatum* | 2.0 | Project estimate for the arching, tangled shrub described by the University of Malaga. No numerical horizontal spread was established. [Reference](https://jardinbotanico.uma.es/jb-alm-18/) |
+| salsola · *Salsola webbii* | 1.5 | Project estimate for an erect branching shrub, consistent with Flora Iberica's description. Its reported height is not a measured width. [Reference](https://www.floraiberica.es/floraiberica/texto/pdfs/02_052_20_Salsola.pdf) |
+| oleander · *Nerium oleander* | 1.3 | Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately. [Reference](https://www.rhs.org.uk/plants/98456/nerium-oleander-l/details) |
+| tamarix · *Tamarix spp.* | 6.0 | Provisional genus-level tree-form drawing assumption. No species identity or species-specific mature spread is inferred for Tamarix spp. [Reference](https://herbario.ual.es/wp-content/uploads/2016/04/JARDIN-SAL-FINALIZADO.pdf) |
+| kermes_oak · *Quercus coccifera* | 6.0 | Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately. [Reference](https://www.rhs.org.uk/plants/14248/quercus-coccifera/details) |
+| holm_oak · *Quercus rotundifolia* | 10.0 | Project estimate for a broad rounded/umbrella crown, using FOREST-004 and the exact Quercus rotundifolia description from the University of Malaga. No ordinary width was established. [Reference](https://jardinbotanico.uma.es/jb-101-04/) |
+| phillyrea_angustifolia · *Phillyrea angustifolia* | 2.0 | Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately. [Reference](https://www.rhs.org.uk/plants/24488/phillyrea-angustifolia/details) |
+| phillyrea_latifolia · *Phillyrea latifolia* | 6.0 | Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately. [Reference](https://www.rhs.org.uk/plants/12668/phillyrea-latifolia/details) |
+| myrtle · *Myrtus communis* | 2.0 | Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately. [Reference](https://www.rhs.org.uk/plants/11311/myrtus-communis/details) |
+| terebinth · *Pistacia terebinthus* | 5.0 | Project estimate for a broad shrub/small tree. The exact-species RHS profile did not establish a numerical ordinary spread. [Reference](https://www.rhs.org.uk/plants/13170/pistacia-terebinthus/details) |
+| cork_oak · *Quercus suber* | 12.0 | Project estimate for a broad tree crown. RHS gives only a >8 m bound; the much larger 70–100 ft NCSU cultivated-tree context is retained as a limitation, not transferred to Almeria. [Reference](https://plants.ces.ncsu.edu/plants/quercus-suber/) |
+
+Numeric authority: `restoration_simulator/design_rules/defaults.json:mature_diameters`. Evidence, original ranges and method: `plant_dimensions.json`. Height, mature root extent, nursery container volume and horizontal spread remain distinct. Retama's 2.3 m is a sample benchmark from Cuesta et al. (2010, Methods), not a mature-size trial. Tamarix remains genus-level. Cork-oak widths in NCSU's cultivated context are not transferred to Almería.
+
+### Additional document links and library status
+
+No external documents were added to the library during this update.
+
+- **Already in the library:** FOREST-002 (carob handbook), FOREST-003 and FOREST-004 (vegetation-series/holm-oak factsheets), NIJAR-003 (local stock formats). These provide context, not a complete horizontal-diameter table.
+- **Suggested addition, verified PDF in the preceding review:** [MITECO, Semillas — fichas de especies Q–R](https://www.miteco.gob.es/content/dam/miteco/es/parques-nacionales-oapn/publicaciones/Semillas%20-%20Fichas%20de%20especies%20Q-R_tcm30-100341.pdf). Not stored in this library.
+- **Suggested addition, verified PDF in the preceding review:** [University of Almería, Jardín de la sal — design report](https://herbario.ual.es/wp-content/uploads/2016/04/JARDIN-SAL-FINALIZADO.pdf). Not stored in this library.
+- **Suggested addition, indexed PDF; direct access failed during this review:** [Flora Iberica, Salsola treatment, pp. 541–553](https://www.floraiberica.es/floraiberica/texto/pdfs/02_052_20_Salsola.pdf). Height/habit context; no width adopted. Not stored.
+- **Suggested addition, indexed accepted manuscript; direct access returned 403:** [Cruz-Alonso et al. (2020), shrub facilitation and oak recruitment](https://deepblue.lib.umich.edu/bitstream/handle/2027.42/154928/jec13309_am.pdf?isAllowed=y&sequence=1). [Publisher record](https://doi.org/10.1111/1365-2745.13309). Not stored.
+- **Research used, publication landing page (no verified open PDF):** [Cuesta et al. (2010), Retama facilitation experiment](https://doi.org/10.1111/j.1365-2745.2010.01655.x). The 2.3 m sample mean informs an explicit planning estimate. Not stored.
+
+The eight within-crown companions are a provisional drawing group, not a scientific claim of compatibility beneath every tree. One metre centre clearance is a project layout assumption, not a species spacing recommendation.
+
+
 
 ## Meaning and limits
 

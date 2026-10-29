@@ -1,6 +1,6 @@
 {
-  "version": 2,
-  "ruleset_id": "algarroba-designer-2026-10-29-v3",
+  "version": 3,
+  "ruleset_id": "algarroba-designer-2026-10-29-v4",
   "files": [
     "defaults.json",
     "sources.json",
@@ -9,5 +9,5 @@
     "treatments.json",
     "plant_dimensions.json"
   ],
-  "engine": "designer-v2"
+  "engine": "designer-v3"
 }

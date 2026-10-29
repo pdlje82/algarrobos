@@ -89,7 +89,9 @@
   },
   "density_defaults": {
     "carob": 350,
-    "other": 50
+    "tree": 50,
+    "shrub": 350,
+    "grass": 50
   },
   "density_rounding": "half_up",
   "aspect_limits": [
@@ -106,5 +108,72 @@
     "source": null,
     "section": "Shared drawing default",
     "context": "Assumed nursery root ball: 12 cm diameter. Illustration only; not a stock measurement, mature root zone or planting-hole size."
+  },
+  "mature_diameters": {
+    "carob": 6,
+    "wild_olive": 6,
+    "lentisk": 3.3,
+    "buckthorn": 3,
+    "palmetto": 4,
+    "retama": 2.3,
+    "esparto": 0.8,
+    "thyme": 0.4,
+    "rosemary": 2,
+    "rhamnus_lycioides": 2,
+    "ephedra_fragilis": 2.5,
+    "ziziphus": 4,
+    "lycium": 2,
+    "salsola": 1.5,
+    "oleander": 1.3,
+    "tamarix": 6,
+    "kermes_oak": 6,
+    "holm_oak": 10,
+    "phillyrea_angustifolia": 2,
+    "phillyrea_latifolia": 6,
+    "myrtle": 2,
+    "terebinth": 5,
+    "cork_oak": 12
+  },
+  "custom_diameters": {
+    "tree": 6,
+    "shrub": 2,
+    "grass": 0.6
+  },
+  "placement": {
+    "minimum_clearance": 1,
+    "seed": 0,
+    "attempts_per_parent": 160,
+    "attempts_open": 1000,
+    "categories": [
+      "within_crowns",
+      "open_ground",
+      "independent"
+    ],
+    "custom_category": "independent",
+    "by_species": {
+      "carob": "independent",
+      "wild_olive": "independent",
+      "lentisk": "within_crowns",
+      "buckthorn": "within_crowns",
+      "palmetto": "within_crowns",
+      "retama": "open_ground",
+      "esparto": "open_ground",
+      "thyme": "open_ground",
+      "rosemary": "open_ground",
+      "rhamnus_lycioides": "open_ground",
+      "ephedra_fragilis": "open_ground",
+      "ziziphus": "open_ground",
+      "lycium": "open_ground",
+      "salsola": "open_ground",
+      "oleander": "open_ground",
+      "tamarix": "independent",
+      "kermes_oak": "within_crowns",
+      "holm_oak": "independent",
+      "phillyrea_angustifolia": "within_crowns",
+      "phillyrea_latifolia": "within_crowns",
+      "myrtle": "within_crowns",
+      "terebinth": "within_crowns",
+      "cork_oak": "independent"
+    }
   }
 }

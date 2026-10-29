@@ -51,16 +51,37 @@ export function DesignerPlan({ evaluation, catalogue, selected, onSelect, onComm
   const pocket = moving?.type === "pocket" ? moving : position(draft.pocket);
   const boundary = { bottom: [0,h,w,h], top: [0,0,w,0], left: [0,0,0,h], right: [w,0,w,h] }[draft.zone.boundary_side];
   function activate(e, id) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(id); } }
+  const associations = draft.version===3 ? draft.associations : {};
+  function atPosition(p) {
+    if(moving?.type==="plant"&&moving.id===p.id)return moving;
+    const pocketTree=v=>moving?.type==="pocket"&&v.species===draft.bundle.defaults.pocket_species&&v.id.endsWith(":0")&&!v.manual;
+    if(pocketTree(p))return moving;
+    if(Object.hasOwn(associations,p.id)){
+      const link=associations[p.id], parent=evaluation.instances.find(v=>v.id===link.parent_id);
+      if(parent!==undefined){
+        const at=moving?.type==="plant"&&moving.id===parent.id?moving:pocketTree(parent)?moving:position(parent);
+        return {x:at.x+link.dx,y:at.y+link.dy};
+      }
+    }
+    return position(p);
+  }
+  function associationLines(){
+    return Object.entries(associations).filter(([id,link])=>id===selected||link.parent_id===selected).map(([id,link])=>{
+      const child=evaluation.instances.find(v=>v.id===id), parent=evaluation.instances.find(v=>v.id===link.parent_id);
+      if(child===undefined||parent===undefined)return null; // Unplaced relationships remain in the inspector/report.
+      const a=atPosition(parent), b=atPosition(child);
+      return <line key={id} className="designer-association" x1={a.x} y1={a.y} x2={b.x} y2={b.y} vectorEffect="non-scaling-stroke"><title>Associated shrub; moving the tree carries it. Moving the shrub detaches it.</title></line>;
+    });
+  }
   function crown(p) {
     const overlay = evaluation.overlays[p.species].crown;
     if (!showCrowns || overlay === null) return null;
-    const followsPocket=moving?.type==="pocket"&&p.species===draft.bundle.defaults.pocket_species&&p.id.endsWith(":0")&&!p.manual;
-    const [min, max] = overlay.diameter_m, v = followsPocket?moving:moving?.type === "plant" && moving.id === p.id ? moving : position(p);
+    const [min, max] = overlay.diameter_m, v = atPosition(p);
     return <g key={p.id} className="designer-crown" pointerEvents="none">
       {max > min && <circle cx={v.x} cy={v.y} r={(max+min)/4} style={{strokeWidth:(max-min)/2}} className="designer-crown-band"/>}
       <circle cx={v.x} cy={v.y} r={max/2} vectorEffect="non-scaling-stroke"/>
       {max > min && <circle cx={v.x} cy={v.y} r={min/2} vectorEffect="non-scaling-stroke"/>}
-      <title>{p.species}: indicative mature spread {min}–{max} m; {overlay.context}</title>
+      <title>{p.species}: crown / plant drawing diameter {min===max?min:`${min}–${max}`} m; {overlay.context}</title>
     </g>;
   }
   return <div className="designer-drawing">
@@ -76,6 +97,7 @@ export function DesignerPlan({ evaluation, catalogue, selected, onSelect, onComm
         <text x={w/2} y={-padding*.35} textAnchor="middle" fontSize={padding*.3}>Assumed geometry · {area} m²</text>
         {evaluation.features.catchment!==null && <g className="designer-catchment" pointerEvents="none">{(()=>{const c=evaluation.features.catchment;return <><rect x={c.donor[0]} y={c.donor[1]} width={c.donor[2]} height={c.donor[3]} rx=".1"/><text x={c.donor_label[0]} y={c.donor_label[1]} textAnchor="middle" fontSize={padding*.25}>Assumed donor catchment</text>{c.islands.map((p,i)=><g key={i}><path d={`M${p.x} ${p.flow_start}V${p.y-p.width/2}`} markerEnd="url(#designer-arrow)"/><path d={`M${p.x-p.width/2} ${p.y}q${p.width/2} ${p.depth} ${p.width} 0`}/></g>)}<path d={`M${c.overflow[0]} ${c.overflow[1]}L${c.overflow[2]} ${c.overflow[3]}`} markerEnd="url(#designer-arrow)"/><text x={c.overflow_label[0]} y={c.overflow_label[1]} fontSize={padding*.23}>Review safe overflow</text></>;})()}</g>}
         {evaluation.instances.map(crown)}
+        <g pointerEvents="none">{associationLines()}</g>
         {draft.pocket.enabled && <g className={`designer-pocket-group ${selected==="pocket"?"is-selected":""}`} role="button" tabIndex="0" aria-label="Select moisture pocket" onKeyDown={e=>activate(e,"pocket")} onPointerDown={e=>down(e,"pocket","pocket")} onClick={e=>{e.stopPropagation();onSelect("pocket");}}>
           <circle cx={pocket.x} cy={pocket.y} r={draft.pocket.radius} className="designer-pocket"/>
           <circle cx={pocket.x} cy={pocket.y} r={draft.pocket.radius} className="designer-pocket-hit" vectorEffect="non-scaling-stroke"/>
@@ -83,14 +105,12 @@ export function DesignerPlan({ evaluation, catalogue, selected, onSelect, onComm
         </g>}
         {draft.existing.map(p=>{const v=position(p);return <g key={p.id} className="designer-existing" pointerEvents="none"><circle cx={v.x} cy={v.y} r={p.radius}/><path d={`M${v.x} ${v.y-.2}l.2 .2-.2 .2-.2-.2Z`}/><title>Existing {p.species}; assumed position, retained even outside resized zone</title></g>;})}
         {evaluation.instances.map(p=>{
-          const v=moving?.type==="plant"&&moving.id===p.id?moving:position(p);
-          const autoPocket=moving?.type==="pocket"&&p.species===draft.bundle.defaults.pocket_species&&p.id.endsWith(":0")&&!p.manual;
-          const at=autoPocket?moving:v;
+          const at=atPosition(p);
           const root=showRoots?evaluation.overlays[p.species].root_ball:null;
           const label=catalogue.find(s=>s.id===p.species);
           required(label!==undefined,`Missing plant identity for ${p.species}.`);
           const name=label.label;
-          return <g key={p.id} className={`designer-plant ${selected===p.id?"is-selected":""}`} role="button" tabIndex="0" aria-label={`Select ${p.species} ${p.id.split(":")[1]}`} aria-pressed={selected===p.id} onKeyDown={e=>activate(e,p.id)} onPointerDown={e=>down(e,"plant",p.id)} onClick={e=>{e.stopPropagation();onSelect(p.id);}}>
+          return <g key={p.id} className={`designer-plant ${selected===p.id?"is-selected":""} ${Object.hasOwn(associations,p.id)&&associations[p.id].parent_id===selected?"is-associated":""}`} role="button" tabIndex="0" aria-label={`Select ${p.species} ${p.id.split(":")[1]}`} aria-pressed={selected===p.id} onKeyDown={e=>activate(e,p.id)} onPointerDown={e=>down(e,"plant",p.id)} onClick={e=>{e.stopPropagation();onSelect(p.id);}}>
             {showClearance&&<circle cx={at.x} cy={at.y} r={p.radius} className="designer-clearance"/>}
             {draft.mulch.enabled&&draft.mulch.plant_ids.includes(p.species)&&<circle cx={at.x} cy={at.y} r={(draft.mulch.radius+draft.bundle.defaults.collar_gap)/2} className="designer-mulch" style={{fill:"none",stroke:`url(#designer-${draft.bundle.treatments.find(t=>t.id===draft.mulch.type).pattern})`,strokeWidth:draft.mulch.radius-draft.bundle.defaults.collar_gap}}/>}
             {root!==null&&<circle cx={at.x} cy={at.y} r={root.diameter_m[1]/2} className="designer-root-ball" vectorEffect="non-scaling-stroke"/>}

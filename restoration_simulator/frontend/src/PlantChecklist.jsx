@@ -32,7 +32,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
   const [customQuantity, setCustomQuantity] = useState(
     catalog.custom_defaults.custom_quantity,
   );
-  const [customDensity, setCustomDensity] = useState(designerMode ? designer.defaults.other : null);
+  const [customDensity, setCustomDensity] = useState(designerMode ? designer.defaults[catalog.custom_defaults.custom_group] : null);
   const [message, setMessage] = useState("");
   const [priceDefaults, setPriceDefaults] = useState(null);
   const [priceLoading, setPriceLoading] = useState(true);
@@ -289,6 +289,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
                   {(!designerMode || entry !== undefined) && priceControls(entry, plant)}
                   <details className="plant-info">
                     <summary>Details for {plant.label}</summary>
+                    {designerMode && entry!==undefined && plant.group!=="tree" && designer.placement!==null && <label>Automatic placement for new plants<select value={designer.placement.categories[plant.id]} onChange={e=>designer.command({kind:"placement",id:plant.id,category:e.target.value})}><option value="within_crowns">Within tree crowns</option><option value="open_ground">Open ground</option><option value="independent">Independent</option></select><small>Existing positions stay unchanged. Provisional drawing preference.</small></label>}
                     {designerMode && <label className="plant-exclusion"><input type="checkbox" checked={designer.exclusions.includes(plant.id)} onChange={e=>designer.command({kind:"exclude",id:plant.id,enabled:e.target.checked})} aria-label={`Exclude ${plant.label} from automatic suggestions`}/>Exclude from automatic suggestions</label>}
                     <p>
                       {illustration.features}
@@ -362,7 +363,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
               value={customGroup}
               disabled={disabled || priceSaving || !defaultsReady}
               onChange={(e) => {
-                setCustomGroup(e.target.value);
+                setCustomGroup(e.target.value); if(designerMode)setCustomDensity(designer.defaults[e.target.value]);
                 setCustomPrice(priceDefaults.custom_unit_costs[e.target.value]);
                 setCustomPriceEdited(false);
               }}

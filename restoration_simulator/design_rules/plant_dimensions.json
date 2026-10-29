@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "units": "metres",
   "plants": [
     {
@@ -22,7 +22,12 @@
         "https://www.rhs.org.uk/plants/3403/ceratonia-siliqua/details"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "reference_midpoint",
+        "evidence": "assumption",
+        "basis": "Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately."
+      }
     },
     {
       "id": "wild_olive",
@@ -34,7 +39,12 @@
         "https://mhnc.up.pt/pt/colecoes/colecao-botanica-viva/zambujeiro/"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for the broad crown of the wild olive taxon described by Porto's botanical collection. No numerical ordinary spread was established; this is not a cultivated-olive measurement."
+      }
     },
     {
       "id": "lentisk",
@@ -56,7 +66,12 @@
         "https://www.rhs.org.uk/plants/25153/pistacia-lentiscus/details"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "reference_midpoint",
+        "evidence": "assumption",
+        "basis": "Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately."
+      }
     },
     {
       "id": "buckthorn",
@@ -68,7 +83,12 @@
         "https://www.rhs.org.uk/plants/19895/rhamnus-alaternus/details"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for a broad evergreen shrub. The exact-species RHS reference did not establish a numerical width; cultivar dimensions were not substituted."
+      }
     },
     {
       "id": "palmetto",
@@ -90,7 +110,12 @@
         "https://plants.ces.ncsu.edu/plants/chamaerops-humilis/"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "reference_midpoint",
+        "evidence": "assumption",
+        "basis": "Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately."
+      }
     },
     {
       "id": "retama",
@@ -99,10 +124,16 @@
       "root_ball": null,
       "stock": "Forestry cell at least 250 cc; NIJAR-003 p. 1.",
       "references": [
-        "https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2745.13309"
+        "https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2745.13309",
+        "https://doi.org/10.1111/j.1365-2745.2010.01655.x"
       ],
       "limitations": "A field study reports different observed crown-size distributions for shrubs with and without recruiting oaks; these are samples of mixed ages, not mature-size defaults.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project drawing benchmark based on the 2.3 m mean crown diameter of established Retama shrubs sampled by Cuesta et al. (2010), Methods. A field sample, not a universal mature spread."
+      }
     },
     {
       "id": "esparto",
@@ -114,7 +145,12 @@
         "https://www.mdpi.com/2072-4292/13/15/2970"
       ],
       "limitations": "Biomass research describes tussock height, which is not spread. No justified mature spread range adopted.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for a dense perennial tussock. The reference's 0.5–1 m describes height, not width, and was not converted into a measured diameter."
+      }
     },
     {
       "id": "thyme",
@@ -126,7 +162,12 @@
         "https://jardinbotanico.uma.es/jb-alm-19/"
       ],
       "limitations": "University of Malaga describes a small woody shrub without numerical spread. Do not substitute a different thyme species.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for a low, branched woody shrub, based on the exact-species University of Malaga description. No measured horizontal spread was established."
+      }
     },
     {
       "id": "rosemary",
@@ -148,7 +189,12 @@
         "https://www.rhs.org.uk/plants/384211/salvia-rosmarinus-ro/details"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "reference_midpoint",
+        "evidence": "assumption",
+        "basis": "Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately."
+      }
     },
     {
       "id": "rhamnus_lycioides",
@@ -157,10 +203,16 @@
       "root_ball": null,
       "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
       "references": [
-        "https://www.miteco.gob.es/content/dam/miteco/es/parques-nacionales-oapn/publicaciones/Semillas%20-%20Fichas%20de%20especies%20Q-R_tcm30-100341.pdf"
+        "https://www.miteco.gob.es/content/dam/miteco/es/parques-nacionales-oapn/publicaciones/Semillas%20-%20Fichas%20de%20especies%20Q-R_tcm30-100341.pdf",
+        "https://jardinbotanico.uma.es/jb-alm-22/"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for a dense thorny shrub described by the University of Malaga. Reported height is not treated as measured width."
+      }
     },
     {
       "id": "ephedra_fragilis",
@@ -172,7 +224,12 @@
         "https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A77171468-1"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for an irregular scrambling shrub. Extent depends on support; a single circle is a simplified drawing, not a measured mature spread."
+      }
     },
     {
       "id": "ziziphus",
@@ -184,7 +241,12 @@
         "https://onlinelibrary.wiley.com/doi/10.1111/mec.15950"
       ],
       "limitations": "A research paper mentions canopies up to 30 m across; this is an extreme size, not an average or a suitable initial design diameter.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for a spreading, patch-forming shrub. Exceptional very large patches are excluded; this value is not a measured typical width."
+      }
     },
     {
       "id": "lycium",
@@ -193,10 +255,16 @@
       "root_ball": null,
       "stock": "Forestry cell at least 250 cc; NIJAR-003 p. 1.",
       "references": [
-        "https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A816497-1/general-information"
+        "https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A816497-1/general-information",
+        "https://jardinbotanico.uma.es/jb-alm-18/"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for the arching, tangled shrub described by the University of Malaga. No numerical horizontal spread was established."
+      }
     },
     {
       "id": "salsola",
@@ -208,7 +276,12 @@
         "https://www.floraiberica.es/floraiberica/texto/pdfs/02_052_20_Salsola.pdf"
       ],
       "limitations": "Flora Iberica provides taxon morphology; plant height and leaf sizes are not crown diameter.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for an erect branching shrub, consistent with Flora Iberica's description. Its reported height is not a measured width."
+      }
     },
     {
       "id": "oleander",
@@ -230,7 +303,12 @@
         "https://www.rhs.org.uk/plants/98456/nerium-oleander-l/details"
       ],
       "limitations": "RHS gives a comparatively small cultivated spread; other growing/pruning contexts differ. Not a local watercourse prediction.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "reference_midpoint",
+        "evidence": "assumption",
+        "basis": "Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately."
+      }
     },
     {
       "id": "tamarix",
@@ -242,7 +320,12 @@
         "https://herbario.ual.es/wp-content/uploads/2016/04/JARDIN-SAL-FINALIZADO.pdf"
       ],
       "limitations": "Catalogue identity remains Tamarix spp. A species must be identified before assigning a species crown range.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Provisional genus-level tree-form drawing assumption. No species identity or species-specific mature spread is inferred for Tamarix spp."
+      }
     },
     {
       "id": "kermes_oak",
@@ -264,7 +347,12 @@
         "https://www.rhs.org.uk/plants/14248/quercus-coccifera/details"
       ],
       "limitations": "RHS garden size is much larger than the usual shrub habit described in the Andalusian factsheet; this is a reference possibility, not an Almeria expectation.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "reference_midpoint",
+        "evidence": "assumption",
+        "basis": "Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately."
+      }
     },
     {
       "id": "holm_oak",
@@ -273,10 +361,16 @@
       "root_ball": null,
       "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
       "references": [
-        "https://www.mdpi.com/1999-4907/12/11/1499"
+        "https://www.mdpi.com/1999-4907/12/11/1499",
+        "https://jardinbotanico.uma.es/jb-101-04/"
       ],
       "limitations": "The reviewed Portugal study concerns trunk wood and sampled declining trees, not a universal mature crown range. Do not substitute Quercus ilex measurements unqualified.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for a broad rounded/umbrella crown, using FOREST-004 and the exact Quercus rotundifolia description from the University of Malaga. No ordinary width was established."
+      }
     },
     {
       "id": "phillyrea_angustifolia",
@@ -298,7 +392,12 @@
         "https://www.rhs.org.uk/plants/24488/phillyrea-angustifolia/details"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "reference_midpoint",
+        "evidence": "assumption",
+        "basis": "Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately."
+      }
     },
     {
       "id": "phillyrea_latifolia",
@@ -320,7 +419,12 @@
         "https://www.rhs.org.uk/plants/12668/phillyrea-latifolia/details"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "reference_midpoint",
+        "evidence": "assumption",
+        "basis": "Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately."
+      }
     },
     {
       "id": "myrtle",
@@ -342,7 +446,12 @@
         "https://www.rhs.org.uk/plants/11311/myrtus-communis/details"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "reference_midpoint",
+        "evidence": "assumption",
+        "basis": "Midpoint of the adopted published horizontal-spread range, rounded to 0.1 m (halves upward). This is a drawing estimate; the original range, growth context and limitations are retained separately."
+      }
     },
     {
       "id": "terebinth",
@@ -354,7 +463,12 @@
         "https://www.rhs.org.uk/plants/13170/pistacia-terebinthus/details"
       ],
       "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for a broad shrub/small tree. The exact-species RHS profile did not establish a numerical ordinary spread."
+      }
     },
     {
       "id": "cork_oak",
@@ -363,10 +477,16 @@
       "root_ball": null,
       "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
       "references": [
-        "https://www.rhs.org.uk/plants/14309/quercus-suber/details"
+        "https://www.rhs.org.uk/plants/14309/quercus-suber/details",
+        "https://plants.ces.ncsu.edu/plants/quercus-suber/"
       ],
       "limitations": "RHS gives spread wider than 8 m, without an upper bound. No closed range or typical diameter is inferred.",
-      "reviewed": "2026-10-29"
+      "reviewed": "2026-10-29",
+      "planning": {
+        "method": "project_estimate",
+        "evidence": "assumption",
+        "basis": "Project estimate for a broad tree crown. RHS gives only a >8 m bound; the much larger 70–100 ft NCSU cultivated-tree context is retained as a limitation, not transferred to Almeria."
+      }
     }
   ]
 }

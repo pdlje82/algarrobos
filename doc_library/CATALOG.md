@@ -144,4 +144,4 @@ RENAME_LOG.csv records every old/new filename, original SHA-256 checksum and des
 
 | Document | Contents and learning value | Technical tags | Lifecycle tags | Pages |
 |---|---|---|---|---|
-| [LEARN-009 - Site Designer - Root Ball and Mature Crown Dimension Evidence - 2026-10-29](LEARN-009%20-%20Site%20Designer%20-%20Root%20Ball%20and%20Mature%20Crown%20Dimension%20Evidence%20-%202026-10-29.md) | All 23 catalogue taxa reviewed; sourced crown ranges, nursery-stock gaps and downloadable reference links | VEG ECO GIS | DES PROC-L MON-L | Markdown |
+| [LEARN-009 - Site Designer - Root Ball and Mature Crown Dimension Evidence - 2026-10-29](LEARN-009%20-%20Site%20Designer%20-%20Root%20Ball%20and%20Mature%20Crown%20Dimension%20Evidence%20-%202026-10-29.md) | All 23 taxa: representative drawing diameters, original spread ranges, explicit estimates, nursery-stock gaps and downloadable references | VEG ECO GIS | DES PROC-L MON-L | Markdown |

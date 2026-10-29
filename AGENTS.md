@@ -106,5 +106,8 @@ retain their rules snapshot until the user reviews and adopts an update. Scenari
 JSON owns simulation/funding assumptions; plant-prices.json owns current catalogue
 price defaults. Frozen historical replay data is not an active designer rule source.
 
-The designer-v1 evaluator is frozen for historical snapshots. New editing policy
-belongs in the registered designer-v2 handlers; do not change v1 replay semantics.
+The designer-v1 and designer-v2 evaluators are frozen for historical snapshots.
+New editing policy belongs in the registered designer-v3 handlers; do not change
+historical replay semantics. Representative diameters, growth-form density and
+tree–shrub placement policy live in the central rules library. Do not encode
+plant compatibility or substitute diameters in React.

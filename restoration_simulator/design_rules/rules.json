@@ -271,5 +271,57 @@
       }
     ],
     "limitations": "The book discusses small forestry cells and 1–2 L stock but does not establish this 12 cm value. It has no effect on costs, layout clearance, spacing or planting-hole recommendations; entered dimensions take precedence."
+  },
+  {
+    "id": "mature_diameters",
+    "title": "Representative crown / plant drawing diameters",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "designer-v3.overlay_for selects user-entered dimensions before defaults.mature_diameters or custom_diameters. plant_dimensions retains evidence, original ranges and selection methods. The diagram shows one dashed horizontal diameter; root-ball size remains separate.",
+    "evidence": "assumption",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          124,
+          135,
+          137
+        ]
+      },
+      {
+        "id": "FOREST-004",
+        "pages": [
+          1
+        ]
+      }
+    ],
+    "limitations": "Planning estimates, not measured crowns, root zones, spacing requirements or growth forecasts. External botanical references are registered per species in plant_dimensions.json. Custom plants and genus-level Tamarix use explicitly illustrative assumptions."
+  },
+  {
+    "id": "shrub_placement",
+    "title": "Simple deterministic tree–shrub layout",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "designer-v3.place_new implements defaults.placement: the eight registered woodland companions use all plotted planned tree crowns, balanced by association count and stable tree ID. Candidates are uniform by area, seed-stable and bounded, with 1 m centre clearance. Other shrubs/grasses use open ground; custom plants independent. Existing vegetation is an obstacle. New shrub density is 350/ha per species; existing quantities never reset.",
+    "evidence": "assumption",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          124,
+          125,
+          135,
+          137
+        ]
+      },
+      {
+        "id": "FOREST-003",
+        "pages": [
+          1,
+          2
+        ]
+      }
+    ],
+    "limitations": "Woodland co-occurrence does not prove beneath-crown compatibility with every tree. Clearance, grouping, seed and attempts are geometric project assumptions. Failed placements retain counts and costs. Only new instances are generated. Manual movement detaches shrubs; tree movement translates associated offsets. No sun, wind, soil or mycelial suitability model."
   }
 ]

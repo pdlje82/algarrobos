@@ -34,3 +34,18 @@ test("density contracts preserve zero counts and explicit dimension gaps",()=>{
     const broken=currentEvaluation();change(broken);assert.throws(()=>validateResponse("designer/preview",broken));
   }
 });
+
+function placementEvaluation(){
+  const e=currentEvaluation();e.draft.version=3;e.draft.bundle.manifest.version=3;
+  Object.assign(e.draft,{associations:{},placement_preferences:{},placement_seed:0,placement_seen:[],placement_notes:{}});
+  e.placement={categories:{carob:"independent"},associations:{},warnings:[],unplaced:[],minimum_clearance:1};
+  const overlay={diameter_m:[6,6],kind:"typical",evidence:"assumption",source:null,section:"Drawing",context:"Explicit illustrative diameter"};
+  e.overlays.carob.crown=overlay;return e;
+}
+
+test("v3 requires explicit representative diameters, placement categories and associations",()=>{
+  assert.equal(validateResponse("designer/preview",placementEvaluation()).draft.version,3);
+  for(const change of [e=>delete e.placement,e=>delete e.draft.placement_seed,e=>delete e.placement.categories.carob,e=>e.overlays.carob.crown=null,e=>e.overlays.carob.crown.diameter_m=[4,8]]){
+    const e=placementEvaluation();change(e);assert.throws(()=>validateResponse("designer/preview",e));
+  }
+});

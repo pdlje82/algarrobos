@@ -297,8 +297,8 @@ export function validateResponse(path, data) {
   if (["designer/preview","designer/import-plan"].includes(path)) {
     properties(data,["draft","width","height","instances","rules","issues","removed","summary","ruleset_hash","reasons","features"],"designer evaluation");
     properties(data.features,["catchment"],"designer features");
-    required([1,2].includes(data.draft.version)&&data.draft.bundle.manifest.version===data.draft.version,"Unsupported designer contract.");
-    if(data.draft.version===2){
+    required([1,2,3].includes(data.draft.version)&&data.draft.bundle.manifest.version===data.draft.version,"Unsupported designer contract.");
+    if(data.draft.version>=2){
       properties(data,["species","overlays","density_update","message"],"designer-v2 evaluation");
       properties(data.draft,["preferences","dismissed","legacy_exclusions","dimensions","displaced","area_density_update"],"designer-v2 draft");
       required(Array.isArray(data.species)&&typeof data.message==="string"&&(data.density_update===null||Array.isArray(data.density_update)),"Invalid density evaluation.");
@@ -311,6 +311,20 @@ export function validateResponse(path, data) {
         for(const feature of ["root_ball","crown"]){const overlay=data.overlays[row.id][feature];if(overlay!==null){properties(overlay,["diameter_m","kind","evidence","source","section","context"],"dimension overlay");required(Array.isArray(overlay.diameter_m)&&overlay.diameter_m.length===2&&overlay.diameter_m.every(v=>Number.isFinite(v)&&v>0),"Invalid overlay diameter.");}}
       }
       for(const key of ["shrub_density","overall_density"])required(Number.isFinite(data.summary[key]),`Invalid designer summary ${key}.`);
+    }
+    if(data.draft.version===3){
+      properties(data.draft,["associations","placement_preferences","placement_seed","placement_seen","placement_notes"],"designer-v3 draft");
+      properties(data.placement,["categories","associations","warnings","unplaced","minimum_clearance"],"designer placement");
+      required(Number.isInteger(data.draft.placement_seed)&&Array.isArray(data.draft.placement_seen)&&Array.isArray(data.placement.warnings)&&Array.isArray(data.placement.unplaced)&&data.placement.minimum_clearance>0,"Invalid placement state.");
+      for(const row of data.species){
+        required(["within_crowns","open_ground","independent"].includes(data.placement.categories[row.id]),"Missing placement category.");
+        const crown=data.overlays[row.id].crown;
+        required(crown!==null&&crown.diameter_m[0]===crown.diameter_m[1],"A representative crown / plant diameter is required.");
+      }
+      for(const instance of data.instances){
+        properties(instance,["parent_id","placement_explanation"],"associated instance");
+        required((instance.parent_id===null||typeof instance.parent_id==="string")&&typeof instance.placement_explanation==="string","Invalid association explanation.");
+      }
     }
     for(const key of ["instances","rules","issues","removed","reasons"])required(Array.isArray(data[key]),`Missing designer ${key}.`);
     for(const instance of data.instances){
