@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "description": "Presentation-only symbol colours. Cool blue/teal trees, warm amber/coral shrubs, violet grasses. Theme pairs preserve each species' family. Shapes and written names remain authoritative identification cues.",
+  "groups": {
+    "tree": {
+      "label": "Trees",
+      "family": "Blue / teal",
+      "shape": "triangle",
+      "key_colour": 0,
+      "colours": [
+        {
+          "light": "#1663B4",
+          "dark": "#7AB8FF"
+        },
+        {
+          "light": "#007D78",
+          "dark": "#55D9C1"
+        },
+        {
+          "light": "#24799F",
+          "dark": "#7FD7EE"
+        },
+        {
+          "light": "#304E8A",
+          "dark": "#A0B6FA"
+        },
+        {
+          "light": "#286958",
+          "dark": "#A3DBC4"
+        }
+      ]
+    },
+    "shrub": {
+      "label": "Shrubs",
+      "family": "Amber / coral",
+      "shape": "circle",
+      "key_colour": 0,
+      "colours": [
+        {
+          "light": "#B24D09",
+          "dark": "#F7995A"
+        },
+        {
+          "light": "#804053",
+          "dark": "#E89CB2"
+        },
+        {
+          "light": "#FF0D55",
+          "dark": "#FF709B"
+        },
+        {
+          "light": "#8C8546",
+          "dark": "#E4DB8B"
+        },
+        {
+          "light": "#FF310D",
+          "dark": "#FF674D"
+        },
+        {
+          "light": "#A62135",
+          "dark": "#E67F8F"
+        },
+        {
+          "light": "#804E2D",
+          "dark": "#E4AF8B"
+        },
+        {
+          "light": "#A67708",
+          "dark": "#F6C246"
+        },
+        {
+          "light": "#BF0A13",
+          "dark": "#F87279"
+        },
+        {
+          "light": "#CC6675",
+          "dark": "#E9A0AB"
+        },
+        {
+          "light": "#665305",
+          "dark": "#F7D85A"
+        },
+        {
+          "light": "#BF5C43",
+          "dark": "#E49D8B"
+        },
+        {
+          "light": "#D92B5F",
+          "dark": "#EB8FAA"
+        },
+        {
+          "light": "#E65050",
+          "dark": "#EF8F8F"
+        },
+        {
+          "light": "#B2783E",
+          "dark": "#E2B283"
+        },
+        {
+          "light": "#665933",
+          "dark": "#E9D6A0"
+        },
+        {
+          "light": "#D9490B",
+          "dark": "#F68655"
+        }
+      ]
+    },
+    "grass": {
+      "label": "Grasses",
+      "family": "Violet",
+      "shape": "tuft",
+      "key_colour": 0,
+      "colours": [
+        {
+          "light": "#7652B3",
+          "dark": "#CBA1FF"
+        },
+        {
+          "light": "#9A418D",
+          "dark": "#F1A4E5"
+        },
+        {
+          "light": "#8550D3",
+          "dark": "#C09AF5"
+        },
+        {
+          "light": "#7F3E71",
+          "dark": "#DB9CCB"
+        }
+      ]
+    }
+  },
+  "species": {
+    "carob": {
+      "group": "tree",
+      "colour": 0
+    },
+    "wild_olive": {
+      "group": "tree",
+      "colour": 1
+    },
+    "tamarix": {
+      "group": "tree",
+      "colour": 2
+    },
+    "holm_oak": {
+      "group": "tree",
+      "colour": 3
+    },
+    "cork_oak": {
+      "group": "tree",
+      "colour": 4
+    },
+    "lentisk": {
+      "group": "shrub",
+      "colour": 0
+    },
+    "buckthorn": {
+      "group": "shrub",
+      "colour": 1
+    },
+    "palmetto": {
+      "group": "shrub",
+      "colour": 2
+    },
+    "retama": {
+      "group": "shrub",
+      "colour": 3
+    },
+    "thyme": {
+      "group": "shrub",
+      "colour": 4
+    },
+    "rosemary": {
+      "group": "shrub",
+      "colour": 5
+    },
+    "rhamnus_lycioides": {
+      "group": "shrub",
+      "colour": 6
+    },
+    "ephedra_fragilis": {
+      "group": "shrub",
+      "colour": 7
+    },
+    "ziziphus": {
+      "group": "shrub",
+      "colour": 8
+    },
+    "lycium": {
+      "group": "shrub",
+      "colour": 9
+    },
+    "salsola": {
+      "group": "shrub",
+      "colour": 10
+    },
+    "oleander": {
+      "group": "shrub",
+      "colour": 11
+    },
+    "kermes_oak": {
+      "group": "shrub",
+      "colour": 12
+    },
+    "phillyrea_angustifolia": {
+      "group": "shrub",
+      "colour": 13
+    },
+    "phillyrea_latifolia": {
+      "group": "shrub",
+      "colour": 14
+    },
+    "myrtle": {
+      "group": "shrub",
+      "colour": 15
+    },
+    "terebinth": {
+      "group": "shrub",
+      "colour": 16
+    },
+    "esparto": {
+      "group": "grass",
+      "colour": 0
+    }
+  },
+  "custom": {
+    "assignment": "stable_id_hash",
+    "seed": 2166136261,
+    "description": "Custom plants intentionally reuse their growth-form palette, assigned deterministically from their stable ID. Names distinguish custom plants sharing a shade."
+  }
+}

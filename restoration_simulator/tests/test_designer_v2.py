@@ -150,7 +150,7 @@ class DensityDesignerTests(unittest.TestCase):
             path = Path(folder)/"save.json"; store = Store(path)
             store.mutate("import",0,str(uuid4()),dict(save=dict(format_version=4,project=p,undo=None),confirm_replace=False))
             before = store.snapshot()
-            store.save_designer(d,before["revision"],0,str(uuid4()))
+            store.save_designer(d,before["revision"],0,str(uuid4()),mode="create",design_id=None,name="Test design")
             after = Store(path).snapshot()
             self.assertEqual(after["project"],before["project"])
             self.assertEqual(after["revision"],before["revision"])

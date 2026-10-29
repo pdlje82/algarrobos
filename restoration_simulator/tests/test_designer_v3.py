@@ -191,7 +191,7 @@ class PlacementTests(unittest.TestCase):
             s=Store(Path(folder)/"save.json")
             s.mutate("import",0,str(uuid4()),dict(save=dict(format_version=4,project=self.project,undo=None),confirm_replace=False))
             before=s.snapshot()
-            s.save_designer(d,before["revision"],0,str(uuid4()))
+            s.save_designer(d,before["revision"],0,str(uuid4()),mode="create",design_id=None,name="Test design")
             self.assertEqual(Store(s.path).snapshot()["designer"]["draft"],d)
             exported=validate_export(s.export())
             target=Store(Path(folder)/"copy.json")

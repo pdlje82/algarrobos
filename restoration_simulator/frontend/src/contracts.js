@@ -287,11 +287,24 @@ export function validateResponse(path, data) {
   object(data, "API response");
   if (path === "plant-prices") return priceDefaultsContract(data);
   if (path === "designer/apply") return validateResponse("commit", data);
+  if (["designer/save","designer/library"].includes(path)) return validateResponse("designer",data);
   if (path === "designer") {
-    properties(data,["evaluation","fields","catalogue","design_revision","project_revision","available","reason","saved","can_import","rules_update_available"],"designer workspace");
+    properties(data,["evaluation","fields","catalogue","design_revision","project_revision","available","reason","saved","can_import","rules_update_available","library","active_design_id","library_defaults","suggested_name"],"designer workspace");
     fieldsContract(data.fields,true);
     validateResponse("designer/preview",data.evaluation);
     required(Number.isInteger(data.design_revision)&&Number.isInteger(data.project_revision),"Invalid designer revision.");
+    properties(data.library_defaults,["version","name_limit","migrated_name","name_prefix","unnamed_label","unlinked_label"],"designer library defaults");
+    required(data.library_defaults.version===1&&data.library_defaults.name_limit===80&&typeof data.suggested_name==="string","Unsupported library configuration.");
+    required(Array.isArray(data.library),"Missing named design library.");
+    const ids=new Set(),names=new Set();
+    for(const design of data.library){
+      properties(design,["id","name","area","plants"],"named design summary");
+      required(typeof design.id==="string"&&!ids.has(design.id)&&typeof design.name==="string"&&design.name.trim()===design.name&&design.name.length>0&&design.name.length<=data.library_defaults.name_limit&&!names.has(design.name.toLocaleLowerCase()),"Invalid or repeated design name/ID.");
+      required(Number.isFinite(design.area)&&design.area>0&&Number.isInteger(design.plants)&&design.plants>=0,"Invalid named design area/count.");
+      ids.add(design.id);names.add(design.name.toLocaleLowerCase());
+    }
+    required(data.active_design_id===null||ids.has(data.active_design_id),"Active design is absent from the library.");
+    required(data.saved===(data.active_design_id!==null),"Named design saved state disagrees with its identity.");
     return data;
   }
   if (["designer/preview","designer/import-plan"].includes(path)) {
@@ -336,9 +349,6 @@ export function validateResponse(path, data) {
     for(const key of ["plants","trees","shrubs","placed","unplaced","tree_density","carob_density","plant_cost"])required(typeof data.summary[key]==="number"&&Number.isFinite(data.summary[key]),`Invalid designer summary ${key}.`);
     required(Number.isFinite(data.width)&&Number.isFinite(data.height)&&data.width>0&&data.height>0,"Invalid designer dimensions.");
     return data;
-  }
-  if(path==="designer/save"){
-    properties(data,["saved","design_revision"],"designer save");required(data.saved===true&&Number.isInteger(data.design_revision),"Invalid designer save receipt.");return data;
   }
   if(path==="designer/apply-preview"){
     properties(data,["preview","previous","notice"],"designer apply preview");validateResponse("preview",data.preview);return data;

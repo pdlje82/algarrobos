@@ -7,6 +7,13 @@ The frozen replay modules were reviewed for compatibility boundaries and preserv
 
 ## Changes
 
+Named Site Designs (29 October 2026): envelope 6 explicitly migrates envelope-5
+attachments to a validated project-local library. Naming defaults are required
+from `scenarios/designer-library-defaults.json`. Create/update and library commands
+are explicit, revision-checked, idempotent and atomic; duplicate names, missing
+IDs, incompatible versions and failed writes are errors. There is no automatic
+overwrite or silent layout regeneration when loading a saved alternative.
+
 | Area | Result |
 | --- | --- |
 | Normal defaults | Form values, budgets, quantities, timings, renewal terms, client initial values and the default save path are in `scenarios/defaults.json`; required keys are validated. |

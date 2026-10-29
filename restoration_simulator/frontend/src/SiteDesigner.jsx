@@ -13,6 +13,9 @@ import { required } from "./contracts.js";
 import "./SiteDesigner.css";
 import { DesignerPlan } from "./DesignerPlan.jsx";
 import { DensityControl } from "./DensityControl.jsx";
+import { DesignerLibraryDialog } from "./DesignerLibraryDialog.jsx";
+import { PlantSymbol, PlantSymbolLegend } from "./PlantSymbol.jsx";
+import { symbolForPlant } from "./plantSymbols.js";
 
 export const DESIGNER_FIELDS = new Set(["parcel_id","restoration_area","vegetation_system","objective","water_plan","planting_method","plant_selection"]);
 
@@ -28,12 +31,17 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
   const [workspace,setWorkspace] = useState(null), [evaluation,setEvaluation] = useState(null);
   const [error,setError] = useState(""), [busy,setBusy] = useState(false), [message,setMessage] = useState("");
   const [dirty,setDirty] = useState(false), [tab,setTab] = useState("Zone"), [selection,setSelection] = useState(null);
+  const [failedEdit,setFailedEdit]=useState(false), [editorEpoch,setEditorEpoch]=useState(0);
   const [cartEdit,setCartEdit] = useState(null);
   const cartTimer=useRef(null);
   const [pending,setPending] = useState(null), [review,setReview] = useState(null), [reference,setReference] = useState(null);
   const [zoom,setZoom] = useState(1), [pan,setPan] = useState({x:0,y:0});
   const [showRoots,setShowRoots]=useState(true), [showCrowns,setShowCrowns]=useState(true), [showClearance,setShowClearance]=useState(false);
   const history=useRef({undo:[],redo:[]}), savedDraft=useRef(null), lastCommand=useRef(null);
+  const [libraryDialog,setLibraryDialog]=useState(null), [dialogError,setDialogError]=useState("");
+  const lastRetry=useRef(null), mutationAttempt=useRef(null);
+  const libraryError=useRef(false);
+  const libraryMenu=useRef(null);
   const [,renderHistory]=useState(0);
   const requestBusy = useRef(false), state = useRef(null), epoch = useRef(0), modelsTrigger = useRef(null);
   const projectId = data.project.id;
@@ -42,10 +50,16 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
     try { const result=await request("designer"); required(result.evaluation?.draft && Array.isArray(result.fields),"Missing designer contract. Restart Python and reload.");
       if(token!==epoch.current)return;
       setWorkspace(result);setEvaluation(result.evaluation);state.current=result.evaluation;setDirty(false);setReview(null);setPending(null);
-      savedDraft.current=JSON.stringify(result.evaluation.draft);history.current={undo:[],redo:[]};renderHistory(v=>v+1);setCartEdit(null);setSelection(null);
+      savedDraft.current=JSON.stringify(result.evaluation.draft);history.current={undo:[],redo:[]};renderHistory(v=>v+1);setCartEdit(null);setSelection(null);setFailedEdit(false);setEditorEpoch(v=>v+1);
     } catch(e){if(token===epoch.current)setError(e.message);} finally{if(token===epoch.current)setBusy(false);}
   }
   useEffect(()=>{load();return()=>{epoch.current++;clearTimeout(cartTimer.current);};},[projectId]);
+  useEffect(()=>{
+    if(!dirty&&cartEdit===null&&!failedEdit)return;
+    const warn=e=>{e.preventDefault();e.returnValue="";};
+    window.addEventListener("beforeunload",warn);
+    return ()=>window.removeEventListener("beforeunload",warn);
+  },[dirty,cartEdit,failedEdit]);
   // External project actions require an explicit reload; never replace an unsaved draft.
   const stale=workspace!==null && workspace.project_revision!==data.revision;
   function accept(next,record=true){if(record&&state.current!==null){history.current.undo.push(state.current);history.current.redo=[];}setEvaluation(next);state.current=next;setDirty(JSON.stringify(next.draft)!==savedDraft.current);setReview(null);setPending(null);setError("");setCartEdit(null);if(next.draft.version>=2)setMessage(next.message);renderHistory(v=>v+1);}
@@ -55,20 +69,81 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
     if(requestBusy.current)return false;
     requestBusy.current=true;setBusy(true);setError("");setMessage("");
     const token=epoch.current;
-    lastCommand.current=cmd;
+    lastCommand.current=cmd;lastRetry.current=()=>command(cmd);libraryError.current=false;
     try { const next=await request("designer/preview",{revision:data.revision,draft:state.current.draft,command:cmd});
       if(token!==epoch.current)return false;
-      if(cmd.kind==="upgrade_rules")setPending(next);else accept(next);
+      setFailedEdit(false);if(cmd.kind==="upgrade_rules")setPending(next);else accept(next);
+      if(cmd.kind==="clear"){setSelection(null);setReference(null);}
       return true;
-    } catch(e){if(token===epoch.current)setError(e.message);return false;} finally{requestBusy.current=false;if(token===epoch.current)setBusy(false);}
+    } catch(e){if(token===epoch.current){setError(e.message);setFailedEdit(true);}return false;} finally{requestBusy.current=false;if(token===epoch.current)setBusy(false);}
   }
-  async function save() {
-    if(requestBusy.current)return;
-    requestBusy.current=true;setBusy(true);setError("");
-    try {const result=await request("designer/save",{revision:data.revision,design_revision:workspace.design_revision,request_id:crypto.randomUUID(),draft:state.current.draft});
-      setWorkspace(w=>({...w,design_revision:result.design_revision,saved:true}));setDirty(false);onSaved({...state.current.draft.physical,plant_selection:state.current.draft.selection});setMessage("Draft saved. Simulation time, cash and history are unchanged.");
-      savedDraft.current=JSON.stringify(state.current.draft);
-    }catch(e){setError(e.message);}finally{requestBusy.current=false;setBusy(false);}
+  function mutationBody(fields,base) {
+    const content={...fields,revision:data.revision,design_revision:base.design_revision};
+    const key=JSON.stringify(content);
+    if(mutationAttempt.current!==null&&mutationAttempt.current.key===key)return mutationAttempt.current.body;
+    const body={...content,request_id:crypto.randomUUID()};
+    mutationAttempt.current={key,body};return body;
+  }
+  function acceptWorkspace(result,resetHistory) {
+    setWorkspace(result);setEvaluation(result.evaluation);state.current=result.evaluation;
+    savedDraft.current=JSON.stringify(result.evaluation.draft);setDirty(false);setError("");setDialogError("");setFailedEdit(false);libraryError.current=false;
+    setReview(null);setPending(null);setCartEdit(null);clearTimeout(cartTimer.current);
+    if(resetHistory){history.current={undo:[],redo:[]};renderHistory(v=>v+1);setEditorEpoch(v=>v+1);setSelection(null);setReference(null);setPan({x:0,y:0});setZoom(1);setTab("Zone");}
+    onSaved({...result.evaluation.draft.physical,plant_selection:result.evaluation.draft.selection});
+  }
+  async function persistSave(spec,continuation=null) {
+    if(requestBusy.current)return false;
+    requestBusy.current=true;setBusy(true);setError("");setDialogError("");
+    lastRetry.current=()=>persistSave(spec,continuation);
+    let result=null;
+    try{
+      result=await request("designer/save",mutationBody({draft:state.current.draft,...spec},workspace));
+      mutationAttempt.current=null;acceptWorkspace(result,false);setLibraryDialog(null);
+      setMessage("Design saved. Simulation time, cash and history are unchanged.");
+    }catch(e){libraryError.current=true;setError(e.message);setDialogError(e.message);}
+    finally{requestBusy.current=false;setBusy(false);}
+    if(result!==null&&continuation!==null)return performLibrary(continuation,result);
+    return result!==null;
+  }
+  function beginSave(copy=false,continuation=null) {
+    setDialogError("");
+    if(copy||workspace.active_design_id===null){
+      setLibraryDialog({kind:"name",operation:"create",copy,name:workspace.suggested_name,continuation});
+    }else{
+      persistSave({mode:"update",design_id:workspace.active_design_id,name:null},continuation);
+    }
+  }
+  async function performLibrary(action,base=workspace) {
+    if(requestBusy.current)return false;
+    if(action.operation==="reload"){setLibraryDialog(null);await load();return true;}
+    requestBusy.current=true;setBusy(true);setError("");setDialogError("");clearTimeout(cartTimer.current);
+    lastRetry.current=()=>performLibrary(action);
+    try{
+      const result=await request("designer/library",mutationBody(action,base));
+      mutationAttempt.current=null;
+      if(action.operation==="rename"){
+        // Renaming metadata must never replace local unsaved geometry or inputs.
+        setWorkspace(result);setError("");setDialogError("");
+      }else acceptWorkspace(result,true);
+      setLibraryDialog(null);setMessage(action.operation==="new"?"New empty design. Save it under a name when ready.":action.operation==="load"?"Saved design loaded.":action.operation==="rename"?"Design renamed.":"Saved design deleted.");
+      return true;
+    }catch(e){libraryError.current=true;setError(e.message);setDialogError(e.message);return false;}
+    finally{requestBusy.current=false;setBusy(false);}
+  }
+  function requestLibraryAction(action) {
+    setDialogError("");
+    if(dirty||cartEdit!==null||failedEdit){
+      const active=workspace.library.find(r=>r.id===workspace.active_design_id);
+      setLibraryDialog({kind:"unsaved",name:active===undefined?workspace.library_defaults.unnamed_label:active.name,action});
+    }else performLibrary(action);
+  }
+  function closeLibraryMenu(){const menu=libraryMenu.current;menu.open=false;menu.querySelector("summary").focus();}
+  function nameSubmit() {
+    if(libraryDialog.operation==="rename"){
+      performLibrary({operation:"rename",design_id:workspace.active_design_id,name:libraryDialog.name,confirm:false});
+    }else if(libraryDialog.kind==="delete"){
+      performLibrary({operation:"delete",design_id:workspace.active_design_id,name:null,confirm:true});
+    }else persistSave({mode:"create",design_id:null,name:libraryDialog.name},libraryDialog.continuation);
   }
   async function importPlan(){if(busy)return;setBusy(true);setError("");try{const next=await request("designer/import-plan",{revision:data.revision,action_id:"demonstrator",inputs:{}});accept(next);setMessage("Recorded plants and prices imported. Coordinates are new assumptions.");}catch(e){setError(e.message);}finally{setBusy(false);}}
   function administration(){return Object.fromEntries(workspace.fields.filter(f=>!DESIGNER_FIELDS.has(f.name)).map(f=>[f.name,planningInputs!==null&&Object.hasOwn(planningInputs,f.name)?planningInputs[f.name]:f.default]));}
@@ -77,6 +152,9 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
   if(workspace===null || evaluation===null)return <section className="panel"><h1>Site Designer</h1>{error?<><p className="error" role="alert">{error}</p><button onClick={load}>Retry loading designer</button></>:<p>Opening the planting workspace…</p>}</section>;
   const draft=evaluation.draft, bundle=draft.bundle;
   const modern=draft.version>=2, editable=draft.version===3;
+  const activeDesign=workspace.library.find(r=>r.id===workspace.active_design_id);
+  const designName=activeDesign===undefined?workspace.library_defaults.unnamed_label:activeDesign.name;
+  const libraryBlocked=busy||stale||pending!==null||review!==null;
   const patch=(section,values)=>command({kind:"patch",section,values});
   const toggle=(collection,id,enabled)=>command({kind:"toggle",collection,id,enabled});
   const field=workspace.fields.find(f=>f.name==="plant_selection");
@@ -88,18 +166,30 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
   const displaySelection=modern?{version:2,entries:evaluation.species.map(p=>p.entry)}:draft.selection;
   const planCatalogue=[...workspace.catalogue.plants,...draft.selection.entries.filter(p=>p.id.startsWith("custom-"))];
   function plantName(id){const plant=workspace.catalogue.plants.find(p=>p.id===id);if(plant!==undefined)return plant.label;if(modern&&draft.legacy_exclusions.includes(id)&&!Object.hasOwn(draft.preferences,id))return "Legacy custom plant — name not recorded";required(modern&&id.startsWith("custom-")&&Object.hasOwn(draft.preferences,id),`Missing plant identity for ${id}.`);return draft.preferences[id].entry.label;}
-  const canApply=error===""&&pending===null&&cartEdit===null&&workspace.available&&!dirty&&workspace.saved&&!stale&&evaluation.summary.plants>0&&draft.physical.parcel_id!==null;
-  const physicalFields=workspace.fields.filter(f=>DESIGNER_FIELDS.has(f.name)&&!["restoration_area","plant_selection"].includes(f.name)).map(f=>f.name==="parcel_id"?{...f,options:[{value:"",label:"Unlinked — choose a parcel"},...f.options]}:f);
+  const canApply=error===""&&pending===null&&cartEdit===null&&workspace.available&&!dirty&&!failedEdit&&workspace.saved&&!stale&&evaluation.summary.plants>0&&draft.physical.parcel_id!==null;
+  const physicalFields=workspace.fields.filter(f=>DESIGNER_FIELDS.has(f.name)&&!["restoration_area","plant_selection"].includes(f.name));
   return <section className="site-designer" aria-labelledby="designer-title">
     <header className="designer-header"><div><p className="eyebrow">An editable example · no suitability forecast</p><h1 id="designer-title">Site Designer</h1><p>Assumed geometry · planting zone only</p></div>
-      <div className="designer-actions"><button type="button" disabled={busy||stale||error!==""||cartEdit!==null||pending!==null||!dirty} onClick={save}>Save draft</button><button type="button" disabled={busy||!canApply} onClick={previewApply}>Apply to demonstrator</button>
+      <div className="designer-actions"><button type="button" disabled={busy||stale||error!==""||failedEdit||cartEdit!==null||pending!==null||(!dirty&&workspace.saved)} onClick={()=>beginSave()}>Save</button><button type="button" disabled={libraryBlocked||cartEdit!==null||failedEdit||error!==""} onClick={()=>beginSave(true)}>Save as…</button><button type="button" disabled={libraryBlocked} onClick={()=>requestLibraryAction({operation:"new",design_id:null,name:null,confirm:false})}>New design</button><button type="button" disabled={busy||!canApply} onClick={previewApply}>Apply to demonstrator</button>
         <button type="button" disabled={busy||stale||cartEdit!==null||history.current.undo.length===0} onClick={()=>travel("undo")}>Undo</button><button type="button" disabled={busy||stale||cartEdit!==null||history.current.redo.length===0} onClick={()=>travel("redo")}>Redo</button>
-        <a href="/api/designer/report" target="_blank" rel="noreferrer" aria-disabled={!workspace.saved}>Saved design report ↗</a></div></header>
-    <div className="designer-status" aria-live="polite">{busy?"Updating…":dirty?"Unsaved design changes":workspace.saved?"Saved draft":"New draft — save when ready"}{message&&<span> · {message}</span>}</div>
-    {error&&<p className="error" role="alert">{error} Your design remains visible. {lastCommand.current!==null&&<button type="button" disabled={busy} onClick={()=>command(lastCommand.current)}>Retry edit</button>}</p>}
+        {workspace.saved?<a href={`/api/designer/report?design_id=${workspace.active_design_id}`} target="_blank" rel="noreferrer">Saved design report ↗</a>:<span className="muted">Save a named design to download its report</span>}</div></header>
+    <div className="designer-library-toolbar">
+      <label>Design<select value={workspace.active_design_id===null?"":workspace.active_design_id} disabled={libraryBlocked} onChange={e=>requestLibraryAction({operation:"load",design_id:e.target.value,name:null,confirm:false})}>
+        {workspace.active_design_id===null&&<option value="" disabled>{workspace.library_defaults.unnamed_label}</option>}
+        {workspace.library.map(record=><option key={record.id} value={record.id}>{record.name} · {record.area} m² · {record.plants} plants</option>)}
+      </select></label>
+      <details ref={libraryMenu} className="designer-library-menu"><summary>Design actions</summary><div>
+        <button type="button" disabled={!editable||libraryBlocked||cartEdit!==null||failedEdit} onClick={()=>{closeLibraryMenu();command({kind:"clear"});}}>Clear planting zone</button>
+        <button type="button" disabled={libraryBlocked||!workspace.saved||cartEdit!==null||failedEdit} onClick={()=>{closeLibraryMenu();setDialogError("");setLibraryDialog({kind:"name",operation:"rename",name:designName});}}>Rename design</button>
+        <button type="button" className="remove-parcel" disabled={libraryBlocked||!workspace.saved} onClick={()=>{closeLibraryMenu();setDialogError("");setLibraryDialog({kind:"delete",name:designName,unsaved:dirty||cartEdit!==null||failedEdit});}}>Delete saved design</button>
+      </div></details>
+    </div>
+    {libraryDialog!==null&&<DesignerLibraryDialog key={libraryDialog.kind+libraryDialog.operation} dialog={libraryDialog} busy={busy} error={dialogError} limit={workspace.library_defaults.name_limit} canSave={!failedEdit&&cartEdit===null&&(error===""||libraryError.current)&&!stale} onCancel={()=>{setLibraryDialog(null);setDialogError("");if(libraryError.current){setError("");libraryError.current=false;}}} onName={name=>{setLibraryDialog(v=>({...v,name}));setDialogError("");}} onSubmit={nameSubmit} onSaveBefore={()=>beginSave(false,libraryDialog.action)} onDiscard={()=>performLibrary(libraryDialog.action)}/>}
+    <div className="designer-status" aria-live="polite">{busy?"Updating…":(dirty||failedEdit||cartEdit!==null)?"Unsaved design changes":workspace.saved?`Saved design · ${designName}`:"Unsaved design — save when ready"}{message&&<span> · {message}</span>}</div>
+    {error&&<p className="error" role="alert">{error} Your design remains visible. {lastRetry.current!==null&&<button type="button" disabled={busy} onClick={()=>lastRetry.current()}>Retry</button>}</p>}
     {!editable&&<div className="reason"><p>This saved design uses the earlier designer. Review the upgrade to enable the new diameter defaults and tree–shrub placement. Its recorded plants, prices and positions will be retained.</p><button type="button" disabled={busy||stale} onClick={()=>command({kind:"upgrade_rules"})}>Review designer upgrade</button></div>}
-    {cartEdit!==null&&<p className="reason">Plant inputs are being edited. The plan retains its last valid preview. <button type="button" onClick={()=>{clearTimeout(cartTimer.current);setCartEdit(null);setError("");}}>Discard incomplete plant edits</button></p>}
-    {stale&&<p className="reason">The project changed. Your draft is retained. <button type="button" onClick={load}>Reload saved designer</button></p>}
+    {cartEdit!==null&&<p className="reason">Plant inputs are being edited. The plan retains its last valid preview. <button type="button" onClick={()=>{clearTimeout(cartTimer.current);setCartEdit(null);setError("");setFailedEdit(false);setDirty(JSON.stringify(state.current.draft)!==savedDraft.current);}}>Discard incomplete plant edits</button></p>}
+    {stale&&<p className="reason">The project changed. Your draft is retained. <button type="button" onClick={()=>requestLibraryAction({operation:"reload"})}>Reload saved designer</button></p>}
     {pending&&<div className="designer-review" role="region" aria-label="Review design changes"><h2>Review updated rules</h2>
       <ul>{pending.removed.map(p=><li key={p.id}>{p.id}: {p.reason}</li>)}</ul><p>Current: {evaluation.summary.plants} plants · {money(evaluation.summary.plant_cost)}. Proposed: {pending.summary.plants} plants · {money(pending.summary.plant_cost)}. Manual overrides are retained.</p><details><summary>Rule changes</summary>{pending.draft.bundle.rules.filter(r=>JSON.stringify(r)!==JSON.stringify(bundle.rules.find(v=>v.id===r.id))).map(r=><p key={r.id}><strong>{r.title}</strong>: {r.description}</p>)}<p>Bundle: {bundle.manifest.ruleset_id} → {pending.draft.bundle.manifest.ruleset_id}. Geometry defaults and source register are included in the saved report.</p></details>
       <button type="button" onClick={()=>accept(pending)}>Confirm design changes</button> <button type="button" onClick={()=>{setPending(null);setCartEdit(null);}}>Keep current design</button></div>}
@@ -108,7 +198,7 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
       <button type="button" disabled={busy} onClick={apply}>Confirm apply to demonstrator</button> <button type="button" onClick={()=>setReview(null)}>Cancel</button></div>}
     <div className="designer-workspace">
       <aside className="designer-controls" aria-label="Design controls"><nav aria-label="Designer panels">{["Zone","Approaches","Plants","Establishment"].map(t=><button key={t} type="button" aria-pressed={tab===t} onClick={()=>setTab(t)}>{t}</button>)}</nav>
-        <fieldset disabled={!editable||busy||stale||pending!==null||(cartEdit!==null&&tab!=="Plants")}><legend>{tab}</legend>
+        <fieldset key={editorEpoch} disabled={!editable||busy||stale||pending!==null||(cartEdit!==null&&tab!=="Plants")}><legend>{tab}</legend>
           {tab==="Zone"&&<><p>Choose an assumed rectangle. Proportions preserve area; this is not a survey.</p>
             <NumberEdit label="Planting area (m²)" value={draft.physical.restoration_area} min="0.01" onCommit={v=>patch("physical",{restoration_area:v})}/>
             <NumberEdit label="Width / height ratio" value={draft.zone.aspect} min="0.05" max="20" onCommit={v=>patch("zone",{aspect:v})}/>
@@ -145,12 +235,14 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
       <div className="designer-plan"><div className="designer-plan-tools"><strong>Top-down planting zone</strong><button type="button" onClick={()=>setZoom(v=>v*1.25)} aria-label="Zoom in">＋</button><button type="button" onClick={()=>setZoom(v=>v/1.25)} aria-label="Zoom out">−</button><button type="button" onClick={()=>{setZoom(1);setPan({x:0,y:0});}}>Fit zone</button></div>
         {modern?<><div className="designer-overlay-controls"><label><input type="checkbox" checked={showRoots} onChange={e=>setShowRoots(e.target.checked)}/>Root balls at planting</label><label><input type="checkbox" checked={showCrowns} onChange={e=>setShowCrowns(e.target.checked)}/>Indicative mature crowns</label><details><summary>Advanced display</summary><label><input type="checkbox" checked={showClearance} onChange={e=>setShowClearance(e.target.checked)}/>Assumed layout clearance</label></details></div>
         <DesignerPlan evaluation={evaluation} catalogue={planCatalogue} selected={selection} onSelect={id=>{setSelection(id);setReference(null);}} onCommand={command} zoom={zoom} pan={pan} setPan={setPan} disabled={!editable||busy||stale||pending!==null||cartEdit!==null} showRoots={showRoots} showCrowns={showCrowns} showClearance={showClearance}/></>:<Plan evaluation={evaluation} selected={selection} onSelect={setSelection} onMove={()=>{}} zoom={zoom} pan={pan} setPan={setPan} disabled/>}
-        <p className="designer-legend"><span>▲ Tree · ● Shrub/grass</span><span>◇ Existing vegetation</span><span>◌ Moisture pocket</span><span>▧ Surface mulch</span><span>Solid: root ball · Dashed: crown / plant diameter</span></p>{evaluation.summary.unplaced>0&&<div><strong>Unplaced plants</strong>{draft.selection.entries.filter(row=>evaluation.instances.filter(p=>p.species===row.id).length<row.quantity).map(row=>{const placed=new Set(evaluation.instances.filter(p=>p.species===row.id).map(p=>p.id));let i=0;while(placed.has(`${row.id}:${i}`))i++;return <p key={row.id}>{row.id}: {row.quantity-placed.size} unplaced <button type="button" disabled={!editable||busy||i>=bundle.defaults.max_instances} onClick={()=>command({kind:"position",id:`${row.id}:${i}`,x:evaluation.width/2,y:evaluation.height/2})}>Place next in zone</button></p>;})}</div>}<p className="muted">Drag blank ground to pan, edge handles to reshape, or the pocket outline to move it. Crown / plant circles are editable drawing estimates, not growth forecasts. Only new plants are positioned automatically; drag them to adjust. Select a plant for evidence.</p>
+        {modern&&<PlantSymbolLegend plants={planCatalogue.filter(p=>draft.selection.entries.some(row=>row.id===p.id))}/>}
+        <p className="designer-legend">{!modern&&<span>▲ Tree · ● Shrub/grass</span>}<span>◇ Existing vegetation</span><span>◌ Moisture pocket</span><span>▧ Surface mulch</span><span>Solid: root ball · Dashed: crown / plant diameter</span></p>{evaluation.summary.unplaced>0&&<div><strong>Unplaced plants</strong>{draft.selection.entries.filter(row=>evaluation.instances.filter(p=>p.species===row.id).length<row.quantity).map(row=>{const placed=new Set(evaluation.instances.filter(p=>p.species===row.id).map(p=>p.id));let i=0;while(placed.has(`${row.id}:${i}`))i++;return <p key={row.id}>{row.id}: {row.quantity-placed.size} unplaced <button type="button" disabled={!editable||busy||i>=bundle.defaults.max_instances} onClick={()=>command({kind:"position",id:`${row.id}:${i}`,x:evaluation.width/2,y:evaluation.height/2})}>Place next in zone</button></p>;})}</div>}<p className="muted">Drag blank ground to pan, edge handles to reshape, or the pocket outline to move it. Crown / plant circles are editable drawing estimates, not growth forecasts. Only new plants are positioned automatically; drag them to adjust. Select a plant for evidence.</p>
         <div className="designer-summary" aria-live="polite"><span>Zone<strong>{draft.physical.restoration_area} m²</strong></span><span>New plants<strong>{evaluation.summary.plants}</strong></span><span>Trees / shrubs & grasses<strong>{evaluation.summary.trees} / {evaluation.summary.shrubs}</strong></span><span>Tree density<strong>{evaluation.summary.tree_density.toFixed(1)}/ha</strong></span><span>Carob density<strong>{evaluation.summary.carob_density.toFixed(1)}/ha</strong></span><span>Plant estimate<strong>{money(evaluation.summary.plant_cost)}</strong></span><span>Unplaced<strong>{evaluation.summary.unplaced}</strong></span></div>
         {modern&&<p className="designer-density-totals">Shrubs/grasses: <strong>{evaluation.summary.shrub_density.toFixed(1)}/ha</strong> · All new plants: <strong>{evaluation.summary.overall_density.toFixed(1)}/ha</strong><small>Densities use the whole planting zone, not spacing inside groups. Existing vegetation is counted separately.</small></p>}
         <details open={evaluation.issues.length>0}><summary>Unresolved information ({evaluation.issues.length})</summary><ul>{evaluation.issues.map(v=><li key={v}>{v}</li>)}</ul>{!workspace.available&&<p>{workspace.reason}</p>}</details>
       </div>
       <aside className="designer-inspector" aria-label="Selected element and evidence">
+        {modern&&selected!==undefined&&<p className="plant-symbol-selected"><PlantSymbol appearance={symbolForPlant(species===undefined?selectedRow:species)}/>{species===undefined?selectedRow.label:species.label} · {selected.id.split(":")[1]*1+1}</p>}
         {editable&&evaluation.placement.unplaced.length>0&&<details><summary>Why plants are unplaced</summary><ul>{[...new Set(evaluation.placement.unplaced.map(p=>`${plantName(p.id.split(":")[0])}: ${p.reason}`))].map(reason=><li key={reason}>{reason}</li>)}</ul><p>Counts and costs are retained. Use “Place next in zone” and the coordinate fields to position them manually.</p></details>}
         {reference!==null?<><button type="button" onClick={()=>setReference(null)}>Back to selection</button>{reference==="plant"?<GuideViews guide={validatePlantingGuide(guideData)} onExploreModels={()=>setReference("models")} modelsTrigger={modelsTrigger}/>:<ModelsBody guide={validateRestorationModels(modelData,guideData)}/>}</>:<><h2>{selection==="pocket"?"Assumed moisture pocket":selection==="zone"?"Planting zone":species===null?"Design evidence":species===undefined?selectedRow.label:species.label}</h2>
           {selection==="pocket"&&modern&&<fieldset disabled={busy||stale}><legend>Pocket position</legend><NumberEdit label="Selected pocket x (m)" value={draft.pocket.x} onCommit={x=>patch("pocket",{x})}/><NumberEdit label="Selected pocket y (m)" value={draft.pocket.y} onCommit={y=>patch("pocket",{y})}/><NumberEdit label="Selected pocket radius (m, assumed)" value={draft.pocket.radius} min="0.01" onCommit={radius=>patch("pocket",{radius})}/><p>Its automatic example encina follows the pocket. Manually positioned plants stay where you placed them.</p></fieldset>}

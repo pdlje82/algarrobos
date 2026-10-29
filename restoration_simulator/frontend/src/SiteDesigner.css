@@ -44,7 +44,25 @@
 .designer-plant .designer-root-ball{fill:none!important;stroke:var(--text)!important;stroke-width:1.7!important}
 .designer-plant .designer-clearance{fill:none!important;stroke:var(--muted)!important;stroke-width:.025!important;stroke-dasharray:.08 .08}
 .designer-plant .designer-plant-hit{fill:transparent!important;stroke:none!important}
-.designer-plant-symbol{fill:var(--green);stroke:var(--text);stroke-width:.025}.designer-plant.is-selected .designer-plant-symbol,.designer-plant:focus .designer-plant-symbol{stroke:var(--focus);stroke-width:.07}
+.plant-symbol-colours{--plant-symbol-colour:var(--plant-symbol-light);--plant-symbol-edge:#182a25}
+:root[data-theme="dark"] .plant-symbol-colours{--plant-symbol-colour:var(--plant-symbol-dark);--plant-symbol-edge:#101d18}
+.plant-symbol-colours .designer-plant-symbol{fill:var(--plant-symbol-colour);stroke:var(--plant-symbol-edge);stroke-width:.8;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke fill}
+.designer-symbol-halo{fill:none;stroke:var(--panel);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.designer-plant .designer-selection-ring{fill:none!important;stroke:var(--text)!important;stroke-width:2!important;stroke-dasharray:3 2;opacity:0;pointer-events:none}
+/* The global HTML outline scales in SVG user units; use the explicit SVG focus
+   rings/strokes instead so keyboard focus stays local at every zoom level. */
+.designer-svg [tabindex]:focus-visible{outline:none}
+.designer-plant.is-selected .designer-selection-ring,.designer-plant:focus .designer-selection-ring{opacity:1}
+.designer-plant .designer-plant-symbol,.designer-plant .designer-symbol-halo{pointer-events:none}
+.plant-symbol-key{display:inline-block;flex:0 0 auto;width:1.15rem;height:1.15rem;vertical-align:-.2em;margin-right:.3rem;overflow:visible}
+.plant-symbol-selected{display:flex;align-items:center;gap:.2rem;font-weight:600}
+.plant-symbol-families{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;margin-top:.6rem;font-size:.8rem}
+.plant-symbol-families>span{display:inline-grid;grid-template-columns:auto auto;align-items:center;column-gap:.15rem}
+.plant-symbol-families .plant-symbol-key{grid-row:1/3}.plant-symbol-families small{grid-column:2}
+.plant-symbol-species-key{margin-top:.5rem;border:1px solid var(--border);border-radius:8px;padding:.5rem .7rem;font-size:.8rem}
+.plant-symbol-species-key>div{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem}
+.plant-symbol-species-key h3{font-size:.85rem;margin:.4rem 0}.plant-symbol-species-key p{color:var(--muted);margin:.5rem 0}
+.plant-symbol-species-key ul{list-style:none;padding:0;margin:0}.plant-symbol-species-key li{display:flex;align-items:center;gap:.15rem;margin:.3rem 0;overflow-wrap:anywhere}
 .designer-pocket-group{cursor:grab;outline:none}.designer-pocket-hit{fill:none;stroke:transparent;stroke-width:22;pointer-events:stroke}
 .designer-pocket-group:focus .designer-pocket,.designer-pocket-group.is-selected .designer-pocket{stroke:var(--focus);stroke-width:.08}
 .designer-edge{fill:var(--panel);stroke:var(--focus);stroke-width:.04;outline:none}.designer-edge-hit{fill:transparent;stroke:none;pointer-events:all}
@@ -53,3 +71,14 @@
 @media(max-width:360px){.designer-controls .plant-checkbox{grid-template-columns:1rem minmax(0,1fr)}.designer-controls .plant-portrait{grid-column:2}.designer-controls .plant-checkbox .plant-names{grid-column:2}.designer-controls .plant-controls{grid-template-columns:minmax(0,1fr)}}
 .designer-association { stroke: var(--primary); stroke-width: 2; stroke-dasharray: 4 3; opacity: .85; }
 .designer-plant.is-associated .designer-plant-hit { stroke: var(--primary); stroke-width: .06; }
+.designer-library-toolbar{display:flex;align-items:end;gap:.75rem;flex-wrap:wrap;margin:.5rem 0}
+.designer-library-toolbar>label{flex:1 1 280px;max-width:520px;margin:0}
+.designer-library-menu{position:relative;margin-bottom:.2rem;font-size:.85rem}
+.designer-library-menu summary{cursor:pointer;padding:.5rem .7rem;border:1px solid var(--border);border-radius:7px;background:var(--panel)}
+.designer-library-menu>div{position:absolute;top:100%;right:0;z-index:5;min-width:210px;display:grid;gap:.4rem;padding:.6rem;background:var(--panel);border:1px solid var(--border);border-radius:8px;box-shadow:0 6px 20px #0002}
+.designer-library-menu .remove-parcel{margin:0}
+.designer-library-dialog{width:min(460px,calc(100vw - 2rem));box-sizing:border-box;border:1px solid var(--border);border-radius:14px;background:var(--panel);color:var(--text);padding:1.4rem}
+.designer-library-dialog::backdrop{background:#0008}.designer-library-dialog h2{margin:0 0 1rem;font-family:var(--font-display);font-size:1.6rem}
+.designer-library-dialog label{display:block}.designer-library-dialog input{width:100%;box-sizing:border-box;margin:.4rem 0 1rem}
+.designer-dialog-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem;align-items:center}.designer-dialog-actions .remove-parcel{margin:0}
+@media(max-width:700px){.designer-library-menu>div{right:auto;left:0}.designer-library-toolbar{align-items:center}}

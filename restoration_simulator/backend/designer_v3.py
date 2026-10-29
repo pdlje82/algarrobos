@@ -498,7 +498,16 @@ def placement_output(draft, result):
 def edit(draft, command, before):
     require(isinstance(command, dict) and "kind" in command, "Missing designer command.")
     kind = command["kind"]
-    if kind == "plant":
+    if kind == "clear":
+        keys(command, {"kind"}, "clear planting zone")
+        d = draft["bundle"]["defaults"]
+        draft.update(approaches=[], combinations=[], optional_members=[], manual_ids=[], exclusions=[], legacy_exclusions=[],
+            selection={"version": 2, "entries": []}, positions={}, radii={}, overrides=[], existing=[], unplaced=[],
+            preferences={}, dismissed={}, dimensions={}, displaced={}, area_density_update=None, associations={},
+            placement_preferences={}, placement_seed=d["placement"]["seed"], placement_seen=[], placement_notes={},
+            pocket={"enabled": False, "x": None, "y": None, "radius": d["pocket_radius"]},
+            mulch={"enabled": False, "type": d["mulch_type"], "radius": d["mulch_radius"], "plant_ids": []})
+    elif kind == "plant":
         keys(command, {"kind", "id", "enabled"}, "plant command")
         require(type(command["enabled"]) is bool, "Invalid plant selection.")
         if command["enabled"]: add_species(draft, command["id"])
@@ -695,7 +704,7 @@ def evaluate(original, project, command=None):
     result["overlays"] = {ident: {k: overlay_for(draft, ident, k) for k in ("root_ball", "crown")} for ident in demand}
     result["species"] = [{"id": ident, "requested_density": draft["preferences"][ident]["density"], "effective_density": draft["preferences"][ident]["quantity"] * 10000 / draft["physical"]["restoration_area"], "density_step": 10000 / draft["physical"]["restoration_area"], "quantity": draft["preferences"][ident]["quantity"], "entry": {**draft["preferences"][ident]["entry"], "quantity": draft["preferences"][ident]["quantity"]}} for ident in demand]
     labels = {p["id"]: p["label"] for p in planting.catalogue()["plants"]}
-    for ident, pref in draft["preferences"].items():
+    for ident, pref in {**original["preferences"], **draft["preferences"]}.items():
         if ident not in labels: labels[ident] = pref["entry"]["label"]
     removed = before.keys() - demand.keys(); added = demand.keys() - before.keys()
     result["removed"] = [{"id": ident, "reason": "Removed from this draft; Undo restores the previous design."} for ident in sorted(removed)]
@@ -713,6 +722,8 @@ def evaluate(original, project, command=None):
         new_quantity = draft["preferences"][ident]["quantity"]
         if old_quantity != new_quantity: changes.append(f"{labels[ident]}: {old_quantity} → {new_quantity} plants")
     result["message"] = "; ".join(changes) + (". Undo is available." if changes else "Design updated. Undo is available." if command else "")
+    if command is not None and command["kind"] == "clear":
+        result["message"] = "Planting zone cleared. Undo restores its previous contents."
     result["density_update"] = None if draft["area_density_update"] is None else [{"id": ident, "density": density, "quantity": count_for(density, draft["physical"]["restoration_area"])} for ident, density in draft["area_density_update"].items() if ident in demand]
     summary = result["summary"]; summary["placed"] = len(result["instances"]); summary["unplaced"] = summary["plants"] - summary["placed"]
     summary.update(shrub_density=summary["shrubs"] * 10000 / draft["physical"]["restoration_area"], overall_density=summary["plants"] * 10000 / draft["physical"]["restoration_area"])

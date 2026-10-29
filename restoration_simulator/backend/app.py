@@ -3,7 +3,7 @@
 import os
 from pathlib import Path
 from threading import RLock
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 from uuid import UUID
 
 from fastapi import FastAPI, Request
@@ -83,8 +83,19 @@ class DesignerPreviewRequest(StrictModel):
 
 
 class DesignerSaveRequest(Mutation):
-    design_revision: StrictInt
+    design_revision: Annotated[StrictInt, Field(ge=0)]
     draft: dict[str, Any]
+    mode: Literal["create", "update"]
+    design_id: UUID | None
+    name: StrictStr | None
+
+
+class DesignerLibraryRequest(Mutation):
+    design_revision: Annotated[StrictInt, Field(ge=0)]
+    operation: Literal["new", "load", "rename", "delete"]
+    design_id: UUID | None
+    name: StrictStr | None
+    confirm: StrictBool
 
 
 class DesignerApplyPreview(StrictModel):
@@ -113,7 +124,7 @@ def view(data, explanation=None):
         "project": project,
         "revision": data["revision"],
         "can_undo": data["undo"] is not None,
-        "designer_saved": data["designer"] is not None,
+        "designer_saved": data["designer"] is not None and data["designer"]["active_id"] is not None,
         "designer_revision": data["designer_revision"],
         "undo_kind": "delete" if data["undo_edit"] is not None else "action",
         "actions": list_actions(project) if project else [],
@@ -134,6 +145,8 @@ def view(data, explanation=None):
 def create_app(save_path=None):
     defaults = load_defaults()
     plant_prices.snapshot()  # Required editable configuration; never invent missing prices.
+    from . import designer_library
+    designer_library.defaults()
     app = FastAPI(title="Algarroba — Restoration planning", version="0.4.0")
     if save_path is not None:
         resolved_save_path = save_path
@@ -228,14 +241,21 @@ def create_app(save_path=None):
 
     @app.post("/api/designer/save")
     def designer_save(req: DesignerSaveRequest):
-        data = get_store().save_designer(req.draft,req.revision,req.design_revision,str(req.request_id))
-        return {"design_revision":data["designer_revision"],"saved":True}
+        data = get_store().save_designer(req.draft,req.revision,req.design_revision,str(req.request_id),
+            mode=req.mode, design_id=None if req.design_id is None else str(req.design_id), name=req.name)
+        return designer.workspace(data["project"],data["designer"],data["designer_revision"])
+
+    @app.post("/api/designer/library")
+    def designer_library_operation(req: DesignerLibraryRequest):
+        data = get_store().designer_library(req.operation,req.revision,req.design_revision,str(req.request_id),
+            design_id=None if req.design_id is None else str(req.design_id), name=req.name, confirm=req.confirm)
+        return designer.workspace(data["project"],data["designer"],data["designer_revision"])
 
     @app.post("/api/designer/apply-preview")
     def designer_apply_preview(req: DesignerApplyPreview):
         data = designer_state(req.revision)
         if req.design_revision != data["designer_revision"]: raise Conflict("Designer draft changed. Review again.")
-        if data["designer"] is None: raise Invalid("Save a designer draft first.")
+        if data["designer"] is None or data["designer"]["active_id"] is None: raise Invalid("Save the active design under a name first.")
         inputs = designer.apply_inputs(data["project"],data["designer"]["draft"],req.administration)
         result = engine_preview(data["project"],"demonstrator",inputs)
         return {"preview":result,"previous":data["project"]["demonstrator"],"notice":"Applying replaces the current demonstrator plan and resets its baseline/funding preparation as in the existing planning action. Review all costs and retained administration before confirming."}
@@ -245,11 +265,17 @@ def create_app(save_path=None):
         return mutate("apply_designer",req)
 
     @app.get("/api/designer/report")
-    def designer_report():
+    def designer_report(design_id: UUID | None = None):
         data = designer_state()
-        if data["designer"] is None: raise Invalid("Save a designer draft before downloading its report.")
-        evaluation = designer.evaluate(data["designer"]["draft"],data["project"])
-        return JSONResponse({"project":data["project"]["name"],"design_revision":data["designer_revision"],"design":data["designer"],"evaluation":evaluation},headers={"Content-Disposition":'attachment; filename="algarroba-design-report.json"'})
+        attachment = data["designer"]
+        if attachment is None: raise Invalid("Save a named design before downloading its report.")
+        ident = attachment["active_id"] if design_id is None else str(design_id)
+        if ident is None: raise Invalid("Save the active design under a name before downloading its report.")
+        record = designer_library.find(attachment, ident)
+        evaluation = designer.evaluate(record["draft"], data["project"])
+        report = {"id":record["id"], "name":record["name"], "draft":record["draft"], "applied":attachment["applied"]}
+        return JSONResponse({"project":data["project"]["name"],"design_revision":data["designer_revision"],"design":report,"evaluation":evaluation},
+            headers={"Content-Disposition":'attachment; filename="algarroba-design-report.json"'})
 
     @app.get("/api/designer/sources/{source_id}")
     def designer_source(source_id: str):
@@ -309,8 +335,14 @@ def create_app(save_path=None):
             before = data["project"]
             after = delete_parcels(before,[req.parcel_id])
             retained = designer.after_parcel_deletion(data["designer"],before,after,req.parcel_id)
-            if retained is None:
-                result["removed_actions"].append({"title":"Saved Site Designer and dependent applied snapshots","year":before["time"],"reason":"Linked to the deleted parcel."})
+            kept_ids = set() if retained is None else {r["id"] for r in retained["designs"]}
+            for record in data["designer"]["designs"]:
+                if record["id"] not in kept_ids:
+                    result["removed_actions"].append({"title":"Saved Site Designer: " + record["name"], "year":before["time"], "reason":"Linked to a parcel removed by this deletion."})
+            kept_applied = 0 if retained is None else len(retained["applied"])
+            removed_applied = len(data["designer"]["applied"]) - kept_applied
+            if removed_applied:
+                result["removed_actions"].append({"title":f"Applied designer snapshots ({removed_applied})", "year":before["time"], "reason":"Linked to a parcel removed by this deletion."})
         return result
 
     @app.post("/api/parcels/delete")

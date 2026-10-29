@@ -176,7 +176,7 @@ class SquareMetreTests(unittest.TestCase):
             store = Store(path)
             upgraded = store.snapshot()
             project = upgraded["project"]
-            self.assertEqual(upgraded["format_version"], 5)
+            self.assertEqual(upgraded["format_version"], 6)
             self.assertEqual(project["parcels"][0]["area"], 20000)
             self.assertEqual(project["agreements"][0]["covered_area"], 20000)
             self.assertEqual(project["activities"][0]["area"], 10000)

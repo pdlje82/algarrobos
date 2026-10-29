@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 from uuid import uuid4
 from fastapi.testclient import TestClient
-from backend import designer, engine
+from backend import designer, designer_library, engine
 from backend.storage import Store, Conflict, validate_export
 from backend.app import create_app
 
@@ -81,7 +81,7 @@ class DesignerRulesTests(unittest.TestCase):
         d=toggle(self.draft,self.project,"approaches","mr1")
         current=designer.load_bundle();current["manifest"]["ruleset_id"]="reviewed-v2";current["defaults"]["density_defaults"]["carob"]=900
         with patch.object(designer,"load_bundle",return_value=current), patch.object(designer.current,"load_bundle",return_value=current):
-            w=designer.workspace(self.project,dict(draft=d,applied=[]),1)
+            w=designer.workspace(self.project,designer_library.migrate_v5(dict(draft=d,applied=[]),self.project),1)
             self.assertTrue(w["rules_update_available"])
             self.assertEqual(w["evaluation"]["draft"]["bundle"],d["bundle"])
             updated=designer.evaluate(d,self.project,dict(kind="upgrade_rules"))
@@ -129,13 +129,13 @@ class DesignerPersistenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             path=Path(folder)/"save.json";s=self.setup_store(path);before=s.snapshot()
             draft=toggle(designer.new_draft(before["project"]),before["project"],"approaches","mr1")
-            ident=str(uuid4());s.save_designer(draft,before["revision"],0,ident)
+            ident=str(uuid4());s.save_designer(draft,before["revision"],0,ident,mode="create",design_id=None,name="Test design")
             after=s.snapshot();self.assertEqual(before["project"],after["project"]);self.assertEqual(before["undo"],after["undo"])
             self.assertEqual(after["designer_revision"],1)
-            s.save_designer(draft,before["revision"],0,ident);self.assertEqual(s.snapshot(),after)
-            with self.assertRaises(Conflict):s.save_designer(draft,before["revision"],0,str(uuid4()))
+            s.save_designer(draft,before["revision"],0,ident,mode="create",design_id=None,name="Test design");self.assertEqual(s.snapshot(),after)
+            with self.assertRaises(Conflict):s.save_designer(draft,before["revision"],0,str(uuid4()),mode="create",design_id=None,name="Another")
             with patch.object(s,"write",side_effect=OSError("disk full")):
-                with self.assertRaises(OSError):s.save_designer(draft,before["revision"],1,str(uuid4()))
+                with self.assertRaises(OSError):s.save_designer(draft,before["revision"],1,str(uuid4()),mode="update",design_id=after["designer"]["active_id"],name=None)
             self.assertEqual(s.snapshot(),after)
             self.assertEqual(Store(path).snapshot(),after)
             self.assertEqual(validate_export(s.export())["designer"],after["designer"])
@@ -153,7 +153,7 @@ class DesignerPersistenceTests(unittest.TestCase):
                 self.assertEqual(e.status_code,200,e.text)
                 links=e.json()["draft"]["associations"]
                 self.assertEqual(len(links),7)
-                saved=c.post("/api/designer/save",json=dict(revision=w["project_revision"],design_revision=0,request_id=str(uuid4()),draft=e.json()["draft"]))
+                saved=c.post("/api/designer/save",json=dict(revision=w["project_revision"],design_revision=0,request_id=str(uuid4()),draft=e.json()["draft"],mode="create",design_id=None,name="Test design"))
                 self.assertEqual(saved.status_code,200,saved.text)
                 admin={f["name"]:f["default"] for f in w["fields"] if f["name"] not in designer.PHYSICAL}
                 body=dict(revision=w["project_revision"],design_revision=1,administration=admin)
@@ -167,7 +167,7 @@ class DesignerPersistenceTests(unittest.TestCase):
                 # A subsequent saved draft must survive undo of the plan application.
                 edited=c.get("/api/designer").json()["evaluation"]["draft"]
                 edited=designer.evaluate(edited,s.snapshot()["project"],dict(kind="density",id="carob",value=100))["draft"]
-                res=c.post("/api/designer/save",json=dict(revision=data["revision"],design_revision=1,request_id=str(uuid4()),draft=edited))
+                res=c.post("/api/designer/save",json=dict(revision=data["revision"],design_revision=1,request_id=str(uuid4()),draft=edited,mode="update",design_id=saved.json()["active_design_id"],name=None))
                 self.assertEqual(res.status_code,200,res.text)
                 undo=c.post("/api/undo",json=dict(revision=data["revision"],request_id=str(uuid4())));self.assertEqual(undo.status_code,200,undo.text)
                 data=undo.json();self.assertIsNone(data["project"]["demonstrator"])
@@ -188,4 +188,4 @@ class DesignerPersistenceTests(unittest.TestCase):
             original=json.dumps(old).encode();path.write_bytes(original)
             s=Store(path);self.assertEqual(s.snapshot()["project"],p)
             self.assertEqual(next(Path(folder).glob("*.schema-v4-*.json")).read_bytes(),original)
-            self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["format_version"],5)
+            self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["format_version"], 6)

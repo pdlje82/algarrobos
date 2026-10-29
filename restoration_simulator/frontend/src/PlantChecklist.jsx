@@ -5,6 +5,8 @@ import { PlantPortrait, plantIllustration } from "./PlantPortrait.jsx";
 import { PlantingExplorer } from "./PlantingExplorer.jsx";
 import { money } from "./format.js";
 import { DensityControl } from "./DensityControl.jsx";
+import { PlantSymbol } from "./PlantSymbol.jsx";
+import { symbolForPlant } from "./plantSymbols.js";
 
 export function PlantChecklist({ field, value, onChange, disabled, request, designerMode = false, designer, onPlantInformation }) {
   const checklistId = useId();
@@ -278,6 +280,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
                       />
                       <PlantPortrait id={plant.id} />
                       <label className="plant-names" htmlFor={`${checklistId}-${plant.id}`}>
+                        {designerMode&&<PlantSymbol appearance={symbolForPlant(plant)}/>}
                         {plant.label}
                         <small className="plant-spanish" lang="es"><span className="sr-only">Español: </span>{illustration.spanish_name}</small>
                         <small><i>{illustration.scientific_name}</i></small>
@@ -333,6 +336,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
                   />
                   <span className="plant-custom-portrait" aria-label="No illustration: plant identity not verified">?</span>
                   <span>
+                    {designerMode&&<PlantSymbol appearance={symbolForPlant(p)}/>}
                     {p.label} <small>Custom plant</small>
                   </span>
                 </label>

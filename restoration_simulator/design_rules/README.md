@@ -44,6 +44,16 @@ not nursery quotes. Simulation costs, funding and form defaults remain in scenar
 JSON and `scenarios/defaults.json`. Historical catalogue v1, form adapters and replay
 modules retain their previous meaning; do not use them for new designer decisions.
 
+Presentation-only centre-symbol colours are maintained separately in
+`frontend/src/designer-symbols.json`, validated by `frontend/src/plantSymbols.js`.
+Trees use blue/teal triangles, shrubs amber/coral circles, grasses violet tufts.
+Each catalogue species has an explicit stable palette assignment with light/dark
+pairs; custom plants deterministically reuse their growth-form palette by ID.
+Names, matching checklist markers and the species colour key distinguish similar
+shades. Selection adds a ring without changing identity colour. These visual
+choices never select species, change placement or quantities, modify the saved
+design, or require rules adoption. Keep them out of ecological generation rules.
+
 ## Registered evaluator operations
 
 The generic operations are selection union, manual exclusion/retention, geometry,
@@ -78,13 +88,34 @@ pocket is removed; they can be positioned explicitly in the remaining zone.
 
 ## Persistence and compatibility
 
-Autosave/export envelope 5 contains the existing simulation-schema-4 project plus
-versioned designer attachments and a separate designer revision. Upgrading an old
+Autosave/export envelope 6 contains the existing simulation-schema-4 project plus
+a versioned project-local named-design library and a separate designer revision. Upgrading an old
 autosave makes a byte-preserving backup before writing the new envelope. Saving a
 draft leaves simulation revision, time, cash, history and project undo unchanged.
 Applying uses the existing demonstrator transition and retains an applied rules
 snapshot. Parcel deletion removes dependent designs; its explicit undo can restore
 them. Exports after deletion omit the deletion undo buffer.
+
+Library orchestration lives in `backend/designer_library.py`. The attachment has
+an active ID/draft, independent named draft snapshots and applied snapshots.
+Envelope 5 migrates its single draft to “Current design” with a stable ID;
+historical draft/rules versions and applied snapshot content are preserved.
+Name limits, suggested-name prefix and labels are required validated inputs in
+`scenarios/designer-library-defaults.json`, separate from ecological rules.
+
+The registered `designer_v3.edit` command `clear` removes all content and plant
+memory in one reversible preview operation: selections/custom entries, approaches,
+combinations, exclusions, preferences, dimensions, associations, coordinates,
+existing vegetation, pockets, mulch and previous content override records. It
+retains the pinned bundle and zone/site/physical settings. It does not adopt new
+rules or edit a named saved snapshot until Save. Only current v3 drafts support
+Clear; historical drafts retain the explicit upgrade-review requirement.
+
+New, Load, Rename, Delete and named saves use atomic storage and the designer
+revision, leaving simulation state and its Undo untouched. Applied snapshots remain
+independent of library deletion and retain their origin ID/name when newly applied.
+Ordinary project Undo preserves later library saves; parcel-deletion Undo restores
+the library snapshot captured before deletion, matching the existing semantics.
 
 ## Source cautions
 
@@ -115,8 +146,9 @@ with an explicit issue requesting rule review; no replacement dimensions are gue
 `designer_v1.py` and `designer_v2.py` preserve historical evaluators. New drafts use engine v3;
 old drafts are read unchanged until **Review designer upgrade** is accepted.
 Upgrading derives density from existing count and area, preserves prices and
-positions, and labels prior persistent exclusions as legacy exclusions. Envelope 5
-and the existing simulation schema remain unchanged; applied historical snapshots
+positions, and labels prior persistent exclusions as legacy exclusions. Historical
+v2 drafts used envelope 5; the named library upgrades the container to envelope 6
+while preserving simulation schema 4. Applied historical snapshots
 are not rewritten. An explicit versioned review supplies missing v2 metadata;
 normal execution never guesses it. The following v2 behaviour is retained only
 for pinned historical snapshots. Current v3 placement/dimension authority is

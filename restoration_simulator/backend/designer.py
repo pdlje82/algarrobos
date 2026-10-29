@@ -38,18 +38,20 @@ def apply_inputs(project, draft, administration):
 @checked
 def workspace(project, attachment, revision):
     require(project is not None, "Create a project before opening the designer.")
+    from . import designer_library as library
     current = load_bundle()
     draft = new_draft(project) if attachment is None else attachment["draft"]
     result = evaluate(draft,project)
     action = next(a for a in list_actions(project) if a["kind"]=="demo_plan")
-    return {"design_revision":revision,"project_revision":project["revision"],"saved":attachment is not None,
+    return {"design_revision":revision,"project_revision":project["revision"],"saved":attachment is not None and attachment["active_id"] is not None,
         "evaluation":result,"catalogue":planting.catalogue(),"price_defaults":plant_prices.snapshot(),
-        "fields":plan_fields(project),"available":action["available"],"reason":action["reason"],
+        "fields":workspace_fields(project), "library":library.summaries(attachment), "active_design_id":None if attachment is None else attachment["active_id"],
+        "library_defaults":library.defaults(), "suggested_name":library.available_name(attachment),"available":action["available"],"reason":action["reason"],
         "rules_update_available":digest(current)!=digest(draft["bundle"]),"can_import":project["demonstrator"] is not None and not project["demonstrator"]["legacy"]}
 
 
 @checked
-def validate_attachment(value, project):
+def validate_legacy_attachment(value, project):
     if value is None: return None  # Explicitly no saved designer draft.
     keys(value,{"draft","applied"},"designer attachment")
     validate_draft(value["draft"],project)
@@ -64,24 +66,25 @@ def validate_attachment(value, project):
     return value
 
 
+def validate_attachment(value, project):
+    from .designer_library import validate
+    return validate(value, project)
+
+
 def after_parcel_deletion(attachment, before, after, deleted):
-    if attachment is None: return None
-    if attachment["draft"]["physical"]["parcel_id"] == deleted: return None
-    from .parcel_removal import rebuild
-    removed = {p["id"] for p in before["parcels"] if p["id"] == deleted or p.get("scenario_status")}
-    _, _, missing, maps = rebuild(before,list(removed),with_mapping=True)
-    mapping = maps["parcel_id"]
-    removed = {p["id"] for p in missing}
-    result = deepcopy(attachment)
-    if result["draft"]["physical"]["parcel_id"] in removed: return None
-    result["applied"] = [v for v in result["applied"] if v["plan"]["parcel_id"] not in removed]
-    for draft in [result["draft"]]+[v["draft"] for v in result["applied"]]:
-        old = draft["physical"]["parcel_id"]
-        if old is not None:
-            require(old in mapping, "A dependent designer snapshot must be explicitly removed.")
-            draft["physical"]["parcel_id"] = mapping[old]
-    for snapshot in result["applied"]: snapshot["plan"]["parcel_id"] = mapping[snapshot["plan"]["parcel_id"]]
-    return result
+    from .designer_library import after_parcel_deletion as remove
+    return remove(attachment, before, after, deleted)
+
+
+def workspace_fields(project):
+    from .designer_library import defaults
+    fields = deepcopy(plan_fields(project))
+    # A fresh designer is deliberately unlinked, including projects without land.
+    for field in fields:
+        if field["name"] == "parcel_id":
+            field["default"] = ""
+            field["options"] = [{"value": "", "label": defaults()["unlinked_label"]}] + field["options"]
+    return fields
 
 
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { required } from "./contracts.js";
+import { symbolForPlant, symbolPath } from "./plantSymbols.js";
 
 export function DesignerPlan({ evaluation, catalogue, selected, onSelect, onCommand, zoom, pan, setPan, disabled, showRoots, showCrowns, showClearance }) {
   const svg = useRef(null), drag = useRef(null), latest = useRef(null);
@@ -110,12 +111,15 @@ export function DesignerPlan({ evaluation, catalogue, selected, onSelect, onComm
           const label=catalogue.find(s=>s.id===p.species);
           required(label!==undefined,`Missing plant identity for ${p.species}.`);
           const name=label.label;
-          return <g key={p.id} className={`designer-plant ${selected===p.id?"is-selected":""} ${Object.hasOwn(associations,p.id)&&associations[p.id].parent_id===selected?"is-associated":""}`} role="button" tabIndex="0" aria-label={`Select ${p.species} ${p.id.split(":")[1]}`} aria-pressed={selected===p.id} onKeyDown={e=>activate(e,p.id)} onPointerDown={e=>down(e,"plant",p.id)} onClick={e=>{e.stopPropagation();onSelect(p.id);}}>
+          const appearance=symbolForPlant(label), path=symbolPath(appearance.shape,at.x,at.y);
+          return <g key={p.id} className={`designer-plant plant-symbol-colours ${selected===p.id?"is-selected":""} ${Object.hasOwn(associations,p.id)&&associations[p.id].parent_id===selected?"is-associated":""}`} style={appearance.style} data-species={p.species} data-growth-form={label.group} role="button" tabIndex="0" aria-label={`Select ${p.species} ${p.id.split(":")[1]}`} aria-pressed={selected===p.id} onKeyDown={e=>activate(e,p.id)} onPointerDown={e=>down(e,"plant",p.id)} onClick={e=>{e.stopPropagation();onSelect(p.id);}}>
             {showClearance&&<circle cx={at.x} cy={at.y} r={p.radius} className="designer-clearance"/>}
             {draft.mulch.enabled&&draft.mulch.plant_ids.includes(p.species)&&<circle cx={at.x} cy={at.y} r={(draft.mulch.radius+draft.bundle.defaults.collar_gap)/2} className="designer-mulch" style={{fill:"none",stroke:`url(#designer-${draft.bundle.treatments.find(t=>t.id===draft.mulch.type).pattern})`,strokeWidth:draft.mulch.radius-draft.bundle.defaults.collar_gap}}/>}
             {root!==null&&<circle cx={at.x} cy={at.y} r={root.diameter_m[1]/2} className="designer-root-ball" vectorEffect="non-scaling-stroke"/>}
             <circle cx={at.x} cy={at.y} r=".32" className="designer-plant-hit"/>
-            <path d={label?.group==="tree"?`M${at.x} ${at.y-.23}l.2 .32h-.4ZM${at.x} ${at.y+.09}v.15`:`M${at.x-.18} ${at.y}a.18 .15 0 1 0 .36 0a.18 .15 0 1 0 -.36 0`} className="designer-plant-symbol"/>
+            <circle cx={at.x} cy={at.y} r=".37" className="designer-selection-ring" vectorEffect="non-scaling-stroke"/>
+            <path d={path} className="designer-symbol-halo" vectorEffect="non-scaling-stroke"/>
+            <path d={path} className="designer-plant-symbol" vectorEffect="non-scaling-stroke"/>
             <text x={at.x} y={at.y+.5} textAnchor="middle" fontSize=".23">{name}</text><title>{name} · {p.manual?"manual position":"generated position"}</title>
           </g>;
         })}

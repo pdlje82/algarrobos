@@ -82,9 +82,10 @@ def _validate_project_export(payload):
 
 
 def validate_export(payload):
-    """Envelope 5 adds designer attachments; the simulation remains schema 4."""
+    """Explicit envelope migrations; simulation schema/replay remains version 4."""
     require(isinstance(payload, dict), "Invalid export envelope.")
-    if payload.get("format_version") == 5:
+    require("format_version" in payload and type(payload["format_version"]) is int, "Export version must be an integer supported by this application.")
+    if payload.get("format_version") in (5, 6):
         required_keys = {"format_version", "project", "undo", "designer", "designer_revision", "designer_undo"}
         require(required_keys <= set(payload) and set(payload) <= required_keys | {"undo_edit"}, "Invalid designer export envelope.")
         require(isinstance(payload["project"],dict) and payload["project"].get("schema_version") == 4, "Designer envelope requires simulation schema 4.")
@@ -93,14 +94,20 @@ def validate_export(payload):
         if "undo_edit" in payload: base["undo_edit"] = payload["undo_edit"]
         result = _validate_project_export(base)
         from .designer import validate_attachment
+        from .designer_library import migrate_v5
         require(type(payload["designer_revision"]) is int and payload["designer_revision"] >= 0, "Invalid designer revision.")
-        result.update(designer=deepcopy(validate_attachment(payload["designer"],result["project"])), designer_revision=payload["designer_revision"], designer_undo=deepcopy(validate_attachment(payload["designer_undo"],result["undo"]) if result["undo"] is not None else None))
+        main = payload["designer"]
+        prior = payload["designer_undo"]
+        if payload["format_version"] == 5:
+            main = migrate_v5(main, result["project"])
+            if result["undo"] is not None: prior = migrate_v5(prior, result["undo"])
+        result.update(designer=deepcopy(validate_attachment(main,result["project"])), designer_revision=payload["designer_revision"], designer_undo=deepcopy(validate_attachment(prior,result["undo"]) if result["undo"] is not None else None))
         require(result["undo"] is not None or payload["designer_undo"] is None, "Designer undo requires a project undo snapshot.")
     else:
         # Explicit envelope migration. Existing simulation migration/replay stays frozen.
         result = _validate_project_export(payload)
         result.update(designer=None, designer_revision=0, designer_undo=None)
-    result["format_version"] = 5
+    result["format_version"] = 6
     return result
 
 
@@ -122,7 +129,7 @@ class Store:
         self.lock = RLock()
         self.error = None
         self.data = {
-            "format_version": 5,
+            "format_version": 6,
             "designer": None,
             "designer_revision": 0,
             "designer_undo": None,
@@ -162,7 +169,7 @@ class Store:
                 )
                 candidate = {**self.data, **raw, **validated}
                 cleaned = clean_removed(candidate)
-                if raw["format_version"] in (1, 2, 3, 4):
+                if raw["format_version"] in (1, 2, 3, 4, 5):
                     checksum = hashlib.sha256(original).hexdigest()[:12]
                     backup = self.path.with_name(
                         self.path.stem
@@ -264,13 +271,15 @@ class Store:
                 explanation = "Project and undo snapshot imported. Its embedded scenario is preserved."
             elif operation == "apply_designer":
                 from .designer import apply_inputs, evaluate, digest
-                require(current is not None and candidate["designer"] is not None, "Save a designer draft first.")
+                require(current is not None and candidate["designer"] is not None and candidate["designer"]["active_id"] is not None, "Save the active design under a name first.")
                 require(body["design_revision"] == candidate["designer_revision"], "Designer draft changed; review it again.")
                 draft = candidate["designer"]["draft"]
                 values = apply_inputs(current, draft, body["administration"])
                 candidate["project"], explanation = transition(current, "demonstrator", values)
                 candidate["undo"] = deepcopy(current)
-                candidate["designer"]["applied"].append(dict(draft=deepcopy(draft), plan=deepcopy(candidate["project"]["demonstrator"]["plan"]), ruleset_hash=digest(draft["bundle"])))
+                from .designer_library import find
+                record = find(candidate["designer"], candidate["designer"]["active_id"])
+                candidate["designer"]["applied"].append(dict(draft=deepcopy(draft), plan=deepcopy(candidate["project"]["demonstrator"]["plan"]), ruleset_hash=digest(draft["bundle"]), origin={"id":record["id"],"name":record["name"]}))
             elif operation == "commit":
                 require(current is not None, "Create a project first.")
                 require(
@@ -338,26 +347,36 @@ class Store:
         return exported
 
 
-    def save_designer(self, draft, revision, design_revision, request_id):
-        from .designer import evaluate
+    def _designer_mutation(self, operation, payload, revision, design_revision, request_id, transform):
+        from .designer_library import validate
         with self.lock:
             self.check()
             try:
-                fingerprint = hashlib.sha256(json.dumps(["designer", revision, design_revision, draft], sort_keys=True, allow_nan=False).encode()).hexdigest()
-            except (ValueError,TypeError,RecursionError) as exc:
-                raise Invalid("Designer save must contain finite, valid JSON values.") from exc
+                fingerprint = hashlib.sha256(json.dumps([operation, revision, design_revision, payload], sort_keys=True, allow_nan=False).encode()).hexdigest()
+            except (ValueError, TypeError, RecursionError) as exc:
+                raise Invalid("Designer changes must contain finite, valid JSON values.") from exc
             if request_id in self.data["receipts"]:
                 require(self.data["receipts"][request_id] == fingerprint, "Request ID was reused with different designer content.")
                 return self.snapshot()
             if revision != self.data["revision"] or design_revision != self.data["designer_revision"]:
-                raise Conflict("Project or designer changed. Reload before saving; your draft is retained.")
+                raise Conflict("Project or design library changed. Reload before saving; your working draft is retained.")
             require(self.data["project"] is not None, "Create a project first.")
-            result = evaluate(draft,self.data["project"])
             candidate = deepcopy(self.data)
-            applied = [] if candidate["designer"] is None else candidate["designer"]["applied"]
-            candidate["designer"] = dict(draft=result["draft"],applied=applied)
+            candidate["designer"] = validate(transform(candidate["designer"], candidate["project"]), candidate["project"])
             candidate["designer_revision"] += 1
             candidate["receipts"][request_id] = fingerprint
             self.write(candidate)
             self.data = candidate
             return self.snapshot()
+
+    def save_designer(self, draft, revision, design_revision, request_id, *, mode, design_id, name):
+        from .designer_library import save
+        payload = dict(draft=draft, mode=mode, design_id=design_id, name=name)
+        return self._designer_mutation("designer_save", payload, revision, design_revision, request_id,
+            lambda value, project: save(value, project, draft, mode, design_id, name))
+
+    def designer_library(self, operation, revision, design_revision, request_id, *, design_id, name, confirm):
+        from .designer_library import operate
+        payload = dict(operation=operation, design_id=design_id, name=name, confirm=confirm)
+        return self._designer_mutation("designer_library", payload, revision, design_revision, request_id,
+            lambda value, project: operate(value, project, operation, design_id, name, confirm))

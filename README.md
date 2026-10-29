@@ -154,7 +154,7 @@ Record **funding feedback → application → decision → reimbursement** expli
 
 Python atomically saves `restoration_simulator/data/active-project.json` after each successful mutation. It includes the exact scenario snapshot, history, one-level undo snapshot, monotonic revision and request receipts. Saves live on the **computer running Python**, not in browser storage or the cloud. Runtime data, environments, dependencies and build output are Git-ignored.
 
-JSON export contains the project and undo snapshot in a versioned envelope. Import validates schema, field types, ranges, supported scenario ID/version and the complete deterministic history before replacing anything. Invalid/unsupported imports preserve the current project. New saves/exports and the default scenario use **version 4 with explicit `area_unit: "m2"`**. Version-1, version-2 and version-3 saves/exports are validated with the frozen legacy engines and explicitly upgraded. Historic cash, time, history and undo remain. Version-1 access keeps its legacy assumptions with no retroactive rent and temporary access through year 30; version-2 agreements retain their recorded periods, payments and obligations. The original snapshot remains embedded for replay. Live parcel, covered and restoration areas are converted from hectares to square metres without rounding away original precision (2 ha becomes 20,000 m²). Original history retains its exact hectare-based inputs and wording, identified in the UI; old action dates, cash and maintenance commitments are not rewritten. Before migrating a local autosave, Python creates a byte-for-byte `active-project.schema-v1-<checksum>.json`, `active-project.schema-v2-<checksum>.json` or `active-project.schema-v3-<checksum>.json` backup and atomically replaces the active file; failed migration preserves the original. Projects without a previous demonstrator receive the guided workflow. Projects with an earlier demonstrator or grant stage retain their original action table, historic costs/grants and undo; they are clearly labelled as an earlier workflow, and **New project** starts a guided pilot. No old grant is relabelled as AL20 3.4. Importing an old export upgrades the active save without rewriting the source export. Scenario imports are data, not executable scripts.
+JSON export contains the project and undo snapshot in a versioned envelope. Import validates schema, field types, ranges, supported scenario ID/version and the complete deterministic history before replacing anything. Invalid/unsupported imports preserve the current project. New saves/exports use **envelope 6** around **simulation schema 4**, with explicit `area_unit: "m2"`; the default scenario also uses schema 4. Version-1, version-2 and version-3 saves/exports are validated with the frozen legacy engines and explicitly upgraded. Historic cash, time, history and undo remain. Version-1 access keeps its legacy assumptions with no retroactive rent and temporary access through year 30; version-2 agreements retain their recorded periods, payments and obligations. The original snapshot remains embedded for replay. Live parcel, covered and restoration areas are converted from hectares to square metres without rounding away original precision (2 ha becomes 20,000 m²). Original history retains its exact hectare-based inputs and wording, identified in the UI; old action dates, cash and maintenance commitments are not rewritten. Before migrating an older local autosave, Python creates a byte-for-byte `active-project.schema-v<version>-<checksum>.json` backup and atomically replaces the active file; failed migration preserves the original. Projects without a previous demonstrator receive the guided workflow. Projects with an earlier demonstrator or grant stage retain their original action table, historic costs/grants and undo; they are clearly labelled as an earlier workflow, and **New project** starts a guided pilot. No old grant is relabelled as AL20 3.4. Importing an old export upgrades the active save without rewriting the source export. Scenario imports are data, not executable scripts.
 
 Undo restores the last action's cash, time and state and survives restart/export/import. It is one level, with no redo. Revisions continue increasing after undo. New-project replacement clears undo; import restores the imported undo.
 
@@ -280,13 +280,42 @@ alternative. Existing vegetation is drawn separately and excluded from new-plant
 costs. Planning circles are not measured crowns or roots. Overflow quantities are
 explicitly unplaced and remain in totals; no plants are silently dropped.
 
-**Save draft** persists without changing simulation time, cash, history or undo.
-**Apply to demonstrator** reviews the saved draft with retained administration and
+**Save** persists a named design without changing simulation time, cash, history or undo.
+**Apply to demonstrator** reviews the saved design with retained administration and
 budget settings before committing through the existing planning action. Submitted
 or installed plans keep their existing locks. Export/import includes designer
-attachments. Autosave/export envelope 5 retains simulation schema 4; upgrading
+attachments. Autosave/export envelope 6 retains simulation schema 4; upgrading
 older autosaves creates a checksum-named backup before writing. Parcel deletion
 previews and removes linked designs; explicit undo can restore them.
+
+### Named site designs
+
+The **Design** dropdown loads alternatives saved inside this project. **Save**
+updates the current named design; **Save as…** creates an independent copy.
+Names are trimmed, unique ignoring case, and at most 80 characters. The first Save
+asks for a name. New blank projects and unnamed designs can be explored before saving.
+
+**New design** starts an empty 200 m² zone using current configured defaults,
+unlinked to a parcel. **Design actions → Clear planting zone** instead retains
+the current geometry, parcel, site/physical settings and rules snapshot while
+removing all vegetation, generating sources, pockets, mulch and remembered plant
+choices. Clear is one Undo step and changes the named snapshot only after Save.
+The same menu offers Rename and a confirmed Delete; deleting a saved alternative
+does not remove an already applied demonstrator plan.
+
+New/Load offers **Save / Discard / Cancel** when edits are unsaved. Failed saves
+leave the working design and entered name visible. Save and Save as retain session
+Undo/Redo; loading another design or starting anew resets that edit history.
+Switching between Project and Site Designer retains unfinished edits. Browser
+navigation warns when there are unsaved changes.
+
+Every named snapshot retains its plants, prices, coordinates, dimensions,
+associations, features and embedded rules. Loading never adopts newer rules or
+regenerates the saved layout. Export/import includes the entire project library.
+Earlier envelope-5 drafts migrate to **Current design**, without changing their
+historical content; older autosaves get a byte-preserving backup before migration.
+Naming/UI defaults live in
+`restoration_simulator/scenarios/designer-library-defaults.json`.
 
 The [rules library](restoration_simulator/design_rules/README.md) is the entry point
 for rule maintenance. Run `python -m backend.designer` from restoration_simulator to
@@ -343,6 +372,15 @@ its parent detaches it without deleting it. Crown edits never redistribute plant
 Session Undo/Redo, save/export/import and decision reports preserve these data.
 Older saved layouts stay unchanged until their explicit rules upgrade is accepted;
 historical positions acquire no invented parent relationships.
+
+Plant centre symbols use **blue/teal triangles for trees**, **amber/coral circles
+for shrubs**, and **violet tufts for grasses**, with stable species variations.
+The same markers appear in the checklist and selected-plant inspector; expand
+**Species colour key** below the drawing to compare selected species. Light/dark
+theme pairs retain contrast, and selection uses a ring without changing the
+species colour. The editable presentation palette is
+`restoration_simulator/frontend/src/designer-symbols.json`; it has no effect on
+the saved planting design or simulation.
 
 Restart the Python backend after updating its source, then refresh the frontend.
 There are no new Conda or npm dependencies for these improvements.

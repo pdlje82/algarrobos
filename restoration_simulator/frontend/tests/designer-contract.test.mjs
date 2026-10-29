@@ -15,10 +15,15 @@ test("designer API cannot display incomplete calculations or incompatible drafts
   }
 });
 
-test("designer save requires an explicit successful receipt and revision",()=>{
-  assert.deepEqual(validateResponse("designer/save",{saved:true,design_revision:3}),{saved:true,design_revision:3});
-  assert.throws(()=>validateResponse("designer/save",{saved:false,design_revision:3}));
-  assert.throws(()=>validateResponse("designer/save",{saved:true}));
+function workspace(){return {evaluation:evaluation(),fields:[],catalogue:{},design_revision:3,project_revision:1,available:true,reason:"",saved:false,can_import:false,rules_update_available:false,library:[],active_design_id:null,suggested_name:"Design 1",library_defaults:{version:1,name_limit:80,migrated_name:"Current design",name_prefix:"Design",unnamed_label:"Unsaved design",unlinked_label:"Unlinked"}};}
+
+test("library mutations require a complete canonical workspace and active identity",()=>{
+  assert.equal(validateResponse("designer/save",workspace()).design_revision,3);
+  assert.equal(validateResponse("designer/library",workspace()).active_design_id,null);
+  assert.throws(()=>validateResponse("designer/save",{saved:true,design_revision:3}));
+  for(const change of [w=>delete w.library,w=>w.active_design_id="missing",w=>w.saved=true,w=>delete w.suggested_name,w=>w.library=[{id:"a",name:"One",area:200,plants:-1}],w=>w.library_defaults.name_limit=0]){
+    const w=workspace();change(w);assert.throws(()=>validateResponse("designer",w));
+  }
 });
 
 function currentEvaluation(){

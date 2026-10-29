@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "name_limit": 80,
+  "migrated_name": "Current design",
+  "name_prefix": "Design",
+  "unnamed_label": "Unsaved design",
+  "unlinked_label": "Unlinked — choose a parcel"
+}
