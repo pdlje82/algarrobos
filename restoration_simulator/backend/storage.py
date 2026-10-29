@@ -40,9 +40,8 @@ def _validate_project_export(payload):
         edit is None
         or (
             isinstance(edit, dict)
-            and set(edit) == {"kind", "parcel_ids"}
-            and edit["kind"] == "delete_parcels"
-            and isinstance(edit["parcel_ids"], list)
+            and ((set(edit) == {"kind", "parcel_ids"} and edit["kind"] == "delete_parcels" and isinstance(edit["parcel_ids"], list))
+                 or (set(edit) == {"kind"} and edit["kind"] == "delete_demonstrator"))
             and undo is not None
         ),
         "Invalid exploration undo metadata.",
@@ -62,7 +61,11 @@ def _validate_project_export(payload):
             "Undo belongs to a different project.",
         )
         if edit is not None:
-            rebuilt = parcel_removal.delete(undo, edit["parcel_ids"])
+            if edit["kind"] == "delete_demonstrator":
+                from .demonstrator_removal import delete
+                rebuilt = delete(undo)
+            else:
+                rebuilt = parcel_removal.delete(undo, edit["parcel_ids"])
             rebuilt["revision"] = project["revision"]
             require(
                 same_json(rebuilt, project),
@@ -305,6 +308,18 @@ class Store:
                 if body["action_id"] == "demonstrator" and candidate["planning"]["source"] is not None:
                     require(candidate["designer"] is not None, "The planning design library is missing; preserve the draft and reload the project.")
                     candidate["designer"]["applied"].append({**deepcopy(candidate["planning"]["source"]), "plan": deepcopy(candidate["project"]["demonstrator"]["plan"])})
+            elif operation == "delete_demonstrator":
+                from .demonstrator_removal import delete
+                require(current is not None, "Create a project first.")
+                require(body["confirm"] is True, "Review and confirm demonstrator removal first.")
+                candidate["project"] = delete(current)
+                candidate["undo"] = deepcopy(current)
+                candidate["undo_edit"] = {"kind": "delete_demonstrator"}
+                if candidate["designer"] is not None:
+                    candidate["designer"]["applied"] = []
+                candidate["designer_revision"] += 1
+                candidate["planning_revision"] += 1
+                explanation = "Demonstrator and dependent simulation records removed. Parcels, saved site designs and the planning draft were kept; cash and time were rebuilt."
             elif operation == "delete_parcel":
                 require(current is not None, "Create a project first.")
                 require(
@@ -328,7 +343,7 @@ class Store:
             elif operation == "undo":
                 require(candidate["undo"] is not None, "No saved action to undo.")
                 candidate["project"] = deepcopy(candidate["undo"])
-                if self.data["undo_edit"] is not None:
+                if self.data["undo_edit"] is not None and self.data["undo_edit"]["kind"] == "delete_parcels":
                     candidate["designer"] = deepcopy(candidate["designer_undo"])
                     candidate["planning"] = deepcopy(candidate["planning_undo"])
                 elif candidate["designer"] is not None:

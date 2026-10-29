@@ -16,17 +16,19 @@ from .parcel_removal_legacy import (
 ACTION = "remove_parcel"  # Frozen historical action ID; new edits use the API.
 
 
-def rebuild(state, parcel_ids, with_mapping=False):
+def rebuild(state, parcel_ids, with_mapping=False, *, remove_demonstrator=False):
     from . import engine
 
+    core.require(type(remove_demonstrator) is bool, "Choose an explicit supported exploration removal.")
     core.require(
         isinstance(parcel_ids, list)
-        and 1 <= len(parcel_ids) <= 500
+        and (0 if remove_demonstrator else 1) <= len(parcel_ids) <= 500
         and all(core.text(v, 80) for v in parcel_ids)
         and len(set(parcel_ids)) == len(parcel_ids),
         "Choose valid parcels to delete.",
     )
     targets = set(parcel_ids)
+    core.require(not remove_demonstrator or not targets, "Remove a demonstrator separately from parcels.")
     core.require(targets <= {p["id"] for p in state["parcels"]}, "Unknown parcel.")
     maps = {"parcel_id": {}, "agreement_id": {}}
     removed, pilot = [], {"id": None}
@@ -112,7 +114,9 @@ def rebuild(state, parcel_ids, with_mapping=False):
                     else pilot["id"]
                 )
             reason = None
-            if affected & targets:
+            if remove_demonstrator and (h["action_id"] == "demonstrator" or kind.startswith("demo_") or kind.startswith("grant_")):
+                reason = "Belongs to the removed demonstrator."
+            elif affected & targets:
                 reason = "Belongs to a deleted parcel."
             elif h["action_id"] == ACTION:
                 reason = "Old exploration-removal marker."
@@ -129,7 +133,7 @@ def rebuild(state, parcel_ids, with_mapping=False):
                 try:
                     candidate = module.transition(kept, h["action_id"], values)[0]
                 except core.Invalid as exc:
-                    reason = "Cannot be retained after deletion: " + str(exc)
+                    reason = ("Depends on the removed demonstrator: " if remove_demonstrator else "Cannot be retained after deletion: ") + str(exc)
                 else:
                     kept = candidate
                     new_parcels = [

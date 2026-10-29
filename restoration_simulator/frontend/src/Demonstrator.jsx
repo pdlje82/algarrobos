@@ -5,6 +5,8 @@ import { PlantChecklist, PlantingList } from "./PlantChecklist.jsx";
 import { required } from "./contracts.js";
 import { DESIGNER_FIELDS } from "./SiteDesigner.jsx";
 import {DocumentLink} from "./DocumentLink.jsx";
+import {DemonstratorRemoval} from "./DemonstratorRemoval.jsx";
+import {PlantOrderList} from "./PlantOrderList.jsx";
 
 const phases = [
   ["planned", "Plan"],
@@ -77,14 +79,17 @@ export function DemonstratorEditor({
   request,
   children,
   onOpenDesigner,
+  demonstrator,
+  planningDraft,
 }) {
-  const sections = [...new Set(action.fields.filter(f=>action.kind!=="demo_plan" || !DESIGNER_FIELDS.has(f.name)).map((f) => f.section))];
+  const formSections = [...new Set(action.fields.filter(f=>action.kind!=="demo_plan" || !DESIGNER_FIELDS.has(f.name)).map((f) => f.section))];
   required(
-    sections.length > 0 && sections.every((s) => typeof s === "string"),
+    formSections.length > 0 && formSections.every((s) => typeof s === "string"),
     "Missing demonstrator form sections.",
   );
-  const [section, setSection] = useState(sections[0]);
+  const [section, setSection] = useState(formSections[0]);
   const planning = action.kind === "demo_plan";
+  const sections = planning ? ["Plant order list",...formSections] : formSections;
   required(
     sections.includes(section),
     "The selected form section is no longer available. Reopen the decision.",
@@ -115,7 +120,7 @@ export function DemonstratorEditor({
       )}
       <div className="land-detail-grid">
         <div>
-          <fieldset className="demo-fields">
+          {planning&&selected==="Plant order list"?<PlantOrderList demonstrator={demonstrator} planning={planningDraft}/>:<fieldset className="demo-fields">
             <legend>{planning ? selected : action.title}</legend>
             {selected === "Budget" && (
               <p>
@@ -159,7 +164,7 @@ export function DemonstratorEditor({
                 />
                   </div>
               ))}
-          </fieldset>
+          </fieldset>}
           {planning && (
             <div className="demo-section-nav">
               <button
@@ -250,7 +255,7 @@ function DemonstratorPreview({ value: d, updating }) {
   );
 }
 
-export function DemonstratorRecord({ value: d, onOpenDesigner }) {
+export function DemonstratorRecord({ value: d, onOpenDesigner, revision, busy, onRemovalPreview, onRemovalConfirm }) {
   required(
     d !== null && typeof d === "object",
     "Missing demonstrator record from Python.",
@@ -302,6 +307,7 @@ export function DemonstratorRecord({ value: d, onOpenDesigner }) {
         Installed work does not establish ecological recovery.
       </p>
       <button type="button" onClick={onOpenDesigner}>Open Site Designer</button>
+      <DemonstratorRemoval revision={revision} busy={busy} onPreview={onRemovalPreview} onConfirm={onRemovalConfirm}/>
       <div className="demo-record-totals">
         <p>
           Planned budget<strong>{money(d.budget.total)}</strong>

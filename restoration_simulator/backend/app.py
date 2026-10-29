@@ -23,7 +23,7 @@ from .parcel_removal import plan as removal_plan, delete as delete_parcels
 from .configuration import load_defaults
 from . import plant_prices
 from . import designer
-from . import documents, planning_draft
+from . import documents, planning_draft, demonstrator_removal
 
 
 class StrictModel(BaseModel):
@@ -70,6 +70,14 @@ class RemovalPreviewRequest(StrictModel):
 
 class DeleteParcelRequest(Mutation):
     parcel_id: Annotated[StrictStr, Field(min_length=1, max_length=80)]
+    confirm: StrictBool
+
+
+class DemonstratorRemovalPreview(StrictModel):
+    revision: Annotated[StrictInt, Field(ge=0)]
+
+
+class DeleteDemonstratorRequest(Mutation):
     confirm: StrictBool
 
 
@@ -387,6 +395,19 @@ def create_app(save_path=None):
     @app.post("/api/parcels/delete")
     def delete_parcel(req: DeleteParcelRequest):
         return mutate("delete_parcel", req)
+
+    @app.post("/api/demonstrator/removal-preview")
+    def demonstrator_removal_preview(req: DemonstratorRemovalPreview):
+        data = designer_state(req.revision)
+        library = data["designer"]
+        return {"revision": data["revision"], **demonstrator_removal.plan(data["project"]),
+                "preserved_designs": 0 if library is None else len(library["designs"]),
+                "removed_applied_snapshots": 0 if library is None else len(library["applied"]),
+                "planning_preserved": data["planning"] is not None}
+
+    @app.post("/api/demonstrator/delete")
+    def delete_demonstrator(req: DeleteDemonstratorRequest):
+        return mutate("delete_demonstrator", req)
 
     @app.get("/api/sources/{source_id}")
     def source(source_id: str):

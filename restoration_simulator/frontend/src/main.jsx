@@ -5,7 +5,6 @@ import { BrandFooter, BrandLockup, LandscapeMotif } from "./Brand.jsx";
 import { DemonstratorEditor, DemonstratorRecord } from "./Demonstrator.jsx";
 import { SiteDesigner } from "./SiteDesigner.jsx";
 import {DocumentProvider} from "./DocumentLink.jsx";
-import { PlantOrderList } from "./PlantOrderList.jsx";
 import { Alert } from "./Alert.jsx";
 import {
   AccessTimeline,
@@ -204,6 +203,7 @@ function App() {
   const previewPanel = useRef();
   const newProjectButton = useRef();
   const undoButton = useRef();
+  const focusUndoAfterRemoval=useRef(false);
   const newProjectName = useRef();
   const project = data === null ? null : data.project;
   const action = data?.actions.find((a) => a.id === selected);
@@ -255,6 +255,9 @@ function App() {
   useEffect(() => {
     if (newProjectOpen) newProjectName.current?.focus();
   }, [newProjectOpen]);
+  useEffect(()=>{
+    if(!busy&&data?.undo_kind==="delete"&&focusUndoAfterRemoval.current){focusUndoAfterRemoval.current=false;undoButton.current?.focus();}
+  },[busy,data?.revision,data?.undo_kind]);
 
   function choose(a) {
     setConfigReady(a.kind !== "land_access" && a.kind !== "activate_access");
@@ -274,13 +277,16 @@ function App() {
   }
 
   async function mutate(path, body, existingRequest) {
-    if (pending.current) return;
-    if(project!==null&&!(await planning.flush()))return;
+    if (pending.current) return {ok:false,error:"Another save is in progress. Wait for it to finish, then retry."};
+    if(project!==null&&!(await planning.flush())){
+      const message="Finish saving or resolve the planning draft error before changing the project.";
+      setError(message);return {ok:false,error:message};
+    }
     try {
       validateResponse("project", data);
     } catch (e) {
       setError(e.message);
-      return;
+      return {ok:false,error:e.message};
     }
     const request =
       existingRequest !== undefined
@@ -302,12 +308,14 @@ function App() {
       setHistoryIndex(null);
       setReplacement(null);
       setNewProjectOpen(false);
-      if (path === "parcels/delete") {
-        requestAnimationFrame(() => undoButton.current?.focus());
+      if (["parcels/delete","demonstrator/delete"].includes(path)) {
+        focusUndoAfterRemoval.current=true;
       }
+      return {ok:true};
     } catch (e) {
       setError(e.message);
       setRetry({ path, request });
+      return {ok:false,error:e.message};
     } finally {
       pending.current = false;
       setBusy(false);
@@ -670,8 +678,9 @@ function App() {
               <span className="eyebrow">Latest result</span>
               <p>{data.explanation}</p>
             </section>
-            <DemonstratorRecord value={data.summary.demonstrator} onOpenDesigner={openDesigner} />
-            <PlantOrderList demonstrator={data.summary.demonstrator} planning={planning.value}/>
+            <DemonstratorRecord value={data.summary.demonstrator} onOpenDesigner={openDesigner} revision={data.revision} busy={busy}
+              onRemovalPreview={()=>api("demonstrator/removal-preview",{revision:data.revision})}
+              onRemovalConfirm={impact=>mutate("demonstrator/delete",{},{revision:impact.revision,request_id:impact.request_id,confirm:true})}/>
             <button type="button" onClick={()=>openPlanning()}>Open demonstrator planning</button>
             {planReview!==null&&<DemonstratorReview review={planReview} previous={project.demonstrator} busy={busy||planning.saving} error={error} onClose={()=>setPlanReview(null)} onCommit={()=>mutate("commit",{action_id:"demonstrator",inputs:planReview.inputs,planning_revision:planReview.planning_revision},{revision:planReview.revision,request_id:planReview.request_id,action_id:"demonstrator",inputs:planReview.inputs,planning_revision:planReview.planning_revision})}/>}
             {data.summary.complete && (
@@ -859,6 +868,8 @@ function App() {
                             previewError={previewError}
                             sources={data.summary.demonstrator?.sources}
                             onOpenDesigner={openDesigner}
+                            demonstrator={data.summary.demonstrator}
+                            planningDraft={planning.value}
                             request={priceRequest}
                           >
                             {action.kind === "demo_plan" ? <>

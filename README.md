@@ -118,6 +118,23 @@ Python remaps surviving parcel/agreement references and replays their original i
 
 ## Establishing the planting demonstrator
 
+The committed demonstrator summary in **Project** has a red **Remove demonstrator…**
+button. Preview its dependent baseline, planting, funding and observation records,
+cash and time changes, then choose **Confirm removal** or **Cancel**. Removal is an
+exploration edit: it adds no timeline event and keeps parcels, saved site designs
+and an existing planning draft. Committed design snapshots are removed; an existing
+draft order list becomes **Draft**. No draft is invented if none was saved.
+**Undo deletion** restores the committed records, including after restart, while
+preserving later saved design alternatives and planning edits. JSON exports omit
+the deletion Undo buffer. If replay would also remove a dependent parcel, the
+preview explains the blocker and confirmation is disabled. Frozen earlier-workflow
+demonstrators retain their existing compatibility restrictions.
+
+The read-only preview uses `POST /api/demonstrator/removal-preview`; confirmation
+uses revision-checked, idempotent `POST /api/demonstrator/delete`. Failed requests
+retain the preview for Retry/Cancel. Refresh the app after restarting Python to
+load the new endpoints. No new Conda/npm dependencies or save migration are needed.
+
 **Project** retains demonstration protocol, funding, participation, reporting, other budget fields and timing. **Site Designer** owns physical planting choices. Open it from the workspace navigation or the demonstrator summary. There is one plant editor; the project form links to it rather than repeating area, species, prices, methods and water controls.
 
 The Site Designer **Plants** panel has the single checklist/cart, grouped under **Trees**, **Shrubs** and **Grasses / herbaceous plants**, with Spanish names first, German names second and scientific names in italics, densities, editable prices and custom plants. Each species appears once; details distinguish starter and optional approach memberships. Approaches activates source-qualified combinations; shared species are not duplicated, starter counts are explicitly illustrative, and manual exclusions persist. Python derives tree/shrub totals and plant costs. The catalogue has **23 entries**; original catalogue records remain unchanged for historical replay.
@@ -427,12 +444,14 @@ Warnings across Project and Site Designer use amber panels; errors and destructi
 confirmations use red. Success is green and routine progress is neutral. Headings
 and icons identify the message type without relying on colour alone.
 
-**Project → Plant order list** is a read-only table of plant names, recorded unit
+**Project → Plan the demonstrator → Plant order list** is a read-only table of plant names, recorded unit
 prices and purchasing quantities. It follows the transferred planning draft, marked
 **Draft** until Project commits the matching plan, then **Committed**. It includes
 custom plants and unconfirmed estimates. Exploring, saving or deleting a named
 alternative does not change this list. Older aggregate-only plans explicitly show
 that ordering records are unavailable; current prices never replace recorded prices.
+Its tab sits alongside Demonstration design, Funding route, Budget and Timing;
+the project overview does not repeat the table. Switching tabs preserves edits.
 
 ### Site design to demonstrator planning
 

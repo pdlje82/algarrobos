@@ -374,6 +374,7 @@ export function validateResponse(path, data) {
       "undo",
       "import",
       "parcels/delete",
+      "demonstrator/delete",
     ].includes(path)
   ) {
     properties(
@@ -613,6 +614,15 @@ export function validateResponse(path, data) {
       ],
       "preview.summary",
     );
+  } else if (path === "demonstrator/removal-preview") {
+    properties(data,["revision","title","name","can_remove","blocked_reason","removed_actions","remaining_actions","remaining_parcels","cash_before","cash_after","cash_change","year_before","year_after","explanation","undo_notice","preserved_designs","removed_applied_snapshots","planning_preserved"],"demonstrator removal preview; restart Python and reload");
+    required(Number.isInteger(data.revision)&&typeof data.can_remove==="boolean"&&typeof data.planning_preserved==="boolean","Invalid demonstrator removal metadata.");
+    for(const key of ["cash_before","cash_after","cash_change","year_before","year_after"])required(Number.isFinite(data[key]),`Invalid removal ${key}.`);
+    for(const key of ["remaining_actions","remaining_parcels","preserved_designs","removed_applied_snapshots"])required(Number.isInteger(data[key])&&data[key]>=0,`Invalid removal ${key}.`);
+    for(const key of ["title","name","explanation","undo_notice"])required(typeof data[key]==="string"&&data[key].trim()!=="",`Missing removal ${key}.`);
+    required(data.can_remove?data.blocked_reason===null:typeof data.blocked_reason==="string"&&data.blocked_reason!=="","Missing removal blocker.");
+    required(Array.isArray(data.removed_actions),"Missing dependent removal list.");
+    for(const row of data.removed_actions)required(typeof row.title==="string"&&typeof row.reason==="string"&&Number.isFinite(row.year),"Invalid dependent removal record.");
   } else if (path === "parcels/removal-preview") {
     properties(
       data,

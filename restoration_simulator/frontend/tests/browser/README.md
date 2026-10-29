@@ -50,3 +50,9 @@ growth-form grouping, Encina/Carrasca search, filtered drawing selection and
 checklist-only scrolling/focus preservation, handoff without simulation effects,
 restart/reload, Project validation/review/commit, ordering status and responsive
 light/dark layouts. Use the same isolated API and optional production-assets setup.
+
+Run `node tests/browser/demonstrator-removal.cjs` for removal preview/Cancel/Escape,
+dependency blocking, failed writes and lost-response retries, stable request IDs,
+preserved parcels/designs/drafts, saved Undo after reload, stale revisions and
+red confirmation controls in both themes at desktop/phone widths. It replaces
+only the isolated fixture project; run mutation browser scripts sequentially.
