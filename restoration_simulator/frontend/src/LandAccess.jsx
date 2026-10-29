@@ -130,6 +130,7 @@ export function Fields({ fields, inputs, onChange, disabled }) {
                   })
                 }
               >
+                {!f.options.some(o=>o.value===inputValue(inputs,f.name))&&<option value={inputValue(inputs,f.name)} disabled>{inputValue(inputs,f.name)===""?"Choose an option":"Saved choice unavailable — choose another option"}</option>}
                 {f.options.map((o) => (
                   <option key={o.value} value={o.value}>
                     {o.label}

@@ -100,6 +100,10 @@ class PlanningDraftTests(unittest.TestCase):
         self.assertEqual(self.client.post("/api/demonstrator/draft",json=stale).status_code,422)
         self.assertEqual(self.client.get("/api/export").json(),saved)
         del stale["administration"]["invented"]
+        for field,value in [("notes",None),("funding_route",12),("labour_days",True)]:
+            malformed=deepcopy(stale);malformed["request_id"]=str(uuid4());malformed["administration"][field]=value
+            self.assertEqual(self.client.post("/api/demonstrator/draft",json=malformed).status_code,422)
+            self.assertEqual(self.client.get("/api/export").json(),saved)
         with patch.object(Store,"write",side_effect=OSError("Disk full")):
             self.assertEqual(self.client.post("/api/demonstrator/draft",json=stale).status_code,503)
         self.assertEqual(self.client.get("/api/export").json(),saved)

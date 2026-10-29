@@ -223,6 +223,7 @@ function App() {
     previewEligible ? `${project.id}:${data.revision}:${action.id}` : null,
     api,
   );
+  const canReviewPlan=action?.kind==="demo_plan"&&action.available&&previewCurrent&&!busy&&planning.error===""&&planning.value!==null&&(planning.value.draft.source!==null||project.demonstrator!==null);
   const availableActions =
     data === null ? [] : data.actions.filter((a) => a.available);
   const futureActions =
@@ -314,11 +315,12 @@ function App() {
   }
 
   async function reviewDemonstrator(){
+    if(!canReviewPlan)return;
     const saved=await planning.flush();if(saved===false)return;
     setError("");setBusy(true);
     try{
       const result=await api("preview",{revision:data.revision,action_id:action.id,inputs:saved.draft.inputs});
-      setPlanReview({preview:result,inputs:saved.draft.inputs,planning_revision:saved.planning_revision,revision:data.revision});
+      setPlanReview({preview:result,inputs:saved.draft.inputs,planning_revision:saved.planning_revision,revision:data.revision,request_id:crypto.randomUUID()});
     }catch(e){setError(e.message);}finally{setBusy(false);}
   }
 
@@ -671,7 +673,7 @@ function App() {
             <DemonstratorRecord value={data.summary.demonstrator} onOpenDesigner={openDesigner} />
             <PlantOrderList demonstrator={data.summary.demonstrator} planning={planning.value}/>
             <button type="button" onClick={()=>openPlanning()}>Open demonstrator planning</button>
-            {planReview!==null&&<DemonstratorReview review={planReview} previous={project.demonstrator} busy={busy||planning.saving} error={error} onClose={()=>setPlanReview(null)} onCommit={()=>mutate("commit",{action_id:"demonstrator",inputs:planReview.inputs,planning_revision:planReview.planning_revision},{revision:planReview.revision,request_id:crypto.randomUUID(),action_id:"demonstrator",inputs:planReview.inputs,planning_revision:planReview.planning_revision})}/>}
+            {planReview!==null&&<DemonstratorReview review={planReview} previous={project.demonstrator} busy={busy||planning.saving} error={error} onClose={()=>setPlanReview(null)} onCommit={()=>mutate("commit",{action_id:"demonstrator",inputs:planReview.inputs,planning_revision:planReview.planning_revision},{revision:planReview.revision,request_id:planReview.request_id,action_id:"demonstrator",inputs:planReview.inputs,planning_revision:planReview.planning_revision})}/>}
             {data.summary.complete && (
               <section className="final panel" aria-labelledby="final-title">
                 <p className="eyebrow">Year 30 · your accumulated work</p>
@@ -866,7 +868,7 @@ function App() {
                               {!action.available&&<Alert variant="warning" title="Commit unavailable">{action.reason}</Alert>}
                               {typeof previewError==="string"&&previewError!==""&&<Alert variant="warning" title="Complete the plan">{previewError}</Alert>}
                               {planning.value!==null&&planning.value.draft.source===null&&project.demonstrator===null&&<p>Use a saved site design in demonstrator planning before committing.</p>}
-                              <button type="button" disabled={busy||!action.available||!previewCurrent||planning.error!==""||(planning.value!==null&&planning.value.draft.source===null&&project.demonstrator===null)} onClick={reviewDemonstrator}>Review demonstrator plan</button>
+                              <button type="button" disabled={!canReviewPlan} onClick={reviewDemonstrator}>Review demonstrator plan</button>
                             </> : <Outcome
                               showStatus={action.kind !== "demo_plan"}
                               preview={preview}

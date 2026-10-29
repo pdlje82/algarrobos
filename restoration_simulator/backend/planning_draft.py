@@ -26,10 +26,18 @@ def validate(value, project):
                 planting.resolve(entry)
         else:
             require(entry is None or type(entry) in (str, bool, int, float), f"Invalid draft field {name}.")
+            if field["type"] == "number":
+                require(entry is None or type(entry) in (str, int, float), f"Draft number {name} has an invalid type.")
+            elif field["type"] in {"select", "category", "text", "textarea"}:
+                require(isinstance(entry, str) or (name == "parcel_id" and entry is None), f"Draft field {name} must contain text.")
+            else:
+                require(False, f"Unsupported planning field type: {field['type']}.")
             if type(entry) in (int, float):
                 require(isfinite(entry), f"Draft field {name} must be finite.")
             if isinstance(entry, str):
                 require(len(entry) <= 10000, f"Draft field {name} is too long.")
+                if "maxLength" in field:
+                    require(len(entry) <= field["maxLength"], f"Draft field {name} exceeds its configured text length.")
     source = value["source"]
     if source is not None:
         keys(source, {"draft", "ruleset_hash", "origin"}, "planning design source")
