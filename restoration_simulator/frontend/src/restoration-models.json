@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "reviewed": "28 October 2026",
+  "reviewed": "29 October 2026",
   "presentation": { "initial_model": "mr1", "initial_view": "models" },
   "views": [ { "id": "models", "label": "Explore models" }, { "id": "compare", "label": "Compare models" } ],
   "combination": {
@@ -21,7 +21,7 @@
         { "id": "climate", "title": "Reported climate context", "kind": "guidance", "text": "The model concerns Mediterranean conditions and avoids severe frost. The narrative discusses annual rainfall around 250–300 mm and up to 400–450 mm. These are broad book contexts, not an eligibility threshold or a guarantee for every site. Albox is reported at 200–400 mm/year.", "pages": [124, 126, 127] },
         { "id": "preparation", "title": "Soil preparation", "kind": "guidance", "text": "Target rootable pockets with useful depth and moisture. The summary mentions excavator preparation; manual planting is also discussed. Albox used manual 40 × 40 × 40 cm holes for plants about 1 m tall, without reporting their container dimensions.", "pages": [125, 126, 127] },
         { "id": "water", "title": "Water", "kind": "unresolved", "text": "The general MR1 table says no irrigation, while Las Labores reports summer drip totalling 400 L/tree over May–September. Keep that case distinct from a universal restoration prescription. A minimum or optimum for new seedlings is not established.", "pages": [126, 127] },
-        { "id": "maintenance", "title": "Management and care", "kind": "guidance", "text": "Protect young plants and review failures. Protective-planting guidance generally omits routine fertilizer and formation pruning. The Albox example instead includes occasional tillage, pruning and later grafting, making it a partial match to ungrafted mixed restoration.", "pages": [125, 126, 127, 128] },
+        { "id": "maintenance", "title": "Management and reported survival", "kind": "guidance", "text": "Reported carob survival in Almería: 40–60%. The handbook cites Planelles et al. (2001) in its discussion of afforestation experience, without specifying the monitoring period in this passage. This is a historical reported range, not a prediction for this parcel, a result for all species or the survival rate at Las Labores, Albox. Protect young plants and review failures. Protective-planting guidance generally omits routine fertilizer and formation pruning. The Albox example instead includes occasional tillage, pruning and later grafting, making it a partial match to ungrafted mixed restoration.", "pages": [124, 125, 126, 127, 128] },
         { "id": "density", "title": "Density and its area basis", "kind": "unresolved", "text": "The introduction, narrative and summary give different densities: below 350, below 100 and below 200 stems/ha in different passages. They do not establish one default for this project. Distinguish carob density, total tree density and the area actually planted.", "pages": [123, 124, 126] }
       ],
       "example_ids": ["albox"],

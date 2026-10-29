@@ -1,7 +1,7 @@
 {
   "version": 1,
   "plant_id": "carob",
-  "reviewed": "28 October 2026",
+  "reviewed": "29 October 2026",
   "presentation": {
     "initial_view": "planting",
     "initial_feature": "collar"
@@ -256,6 +256,14 @@
         96,
         126,
         134
+      ]
+    },
+    {
+      "title": "Reported carob survival · Almería: 40–60%",
+      "kind": "guidance",
+      "text": "On p. 124, the handbook reports 40–60% survival in Almería, citing Planelles et al. (2001) in its discussion of afforestation experience. It also reports 18–30% in Guadiamar and 0–65% in Córdoba, showing substantial variation between settings. The passage does not specify the monitoring period or enough trial conditions to transfer these figures to this parcel. These are historical reported results, not a predicted survival rate, an annual survival probability or a result for all companion species. Keep them separate from the later Las Labores, Albox case, which describes low mortality without a numeric estimate. No survival default or simulation effect is applied.",
+      "pages": [
+        124
       ]
     },
     {

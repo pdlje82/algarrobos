@@ -24,6 +24,7 @@ Page references below are the handbook's printed pages; these agree with the cor
 12. [Funding interpretation](#12-funding-interpretation)
 13. [Contradictions and unresolved questions](#13-contradictions-and-unresolved-questions)
 14. [Sources, downloads and illustration rights](#14-sources-downloads-and-illustration-rights)
+15. [Pending Explorer notes: dryland oaks and vegetation series](#15-pending-explorer-notes-dryland-oaks-and-vegetation-series)
 
 ## 1. What fits this project
 
@@ -385,6 +386,36 @@ The handbook's p. 6 and publisher page state **Creative Commons Attribution-NonC
 The photographic extracts and this adapted research guide are supplied under **CC BY-NC-SA 4.0**, retaining the original authors, publisher, source DOI and figure credits. The two original code-drawn diagrams in the companion folder are also supplied under that licence. This notice applies to these research materials, **not to the repository's application code or unrelated files**. It does not give commercial-use permission for later app incorporation; assess those terms before publishing the extracts in a commercial product.
 
 The diagrams are conceptual geometry, not AI-generated botanical depictions, measurements or growth predictions. [Asset register and editable sources](carob-restoration-guide/README.md) include exact image origins, checksums and rendering details. Source PDF bytes are unchanged.
+
+## 15. Pending Explorer notes: dryland oaks and vegetation series
+
+Recorded **29 October 2026**, at the user's request. These are notes for a later app update; no application content, plant catalogue, defaults or calculations are changed by this section.
+
+### 15.1 Candidate additions and presentation
+
+- Include **coscoja / Kermes oak (*Quercus coccifera*)** as a candidate native companion. The Junta's coscoja factsheet reports natural occurrence around **200 mm annual rainfall at Cabo de Gata**, but a more favourable rainfall range of 400–800 mm. Natural occurrence is not a seedling establishment guarantee or a zero-irrigation protocol. Usually a shrub up to about 2 m; a small tree in favourable conditions, not an assured large shade tree on an arid parcel.
+- Retain **encina / carrasca (*Quercus rotundifolia*, also treated as *Q. ilex* subsp. *ballota*)** as a conditional larger-tree candidate for favourable rootable, moisture-retaining pockets. Regional presence does not establish suitability for the driest lowlands. Check local provenance, nearby reference vegetation, soil, exposure and establishment support before proposing a trial.
+- A future Explorer explanation should distinguish these two growth forms and their evidence, without automatically selecting plants or assigning survival/watering defaults.
+- Retain the earlier SVG idea: explain whole-parcel density versus spacing inside groups, open ground and moisture pockets. This is a future presentation note, not implementation of a saved restoration-model choice.
+
+### 15.2 What the quoted vegetation series mean
+
+A **vegetation series (serie de vegetacion / sigmetum, abbreviated S.)** groups the potential mature reference community and its associated replacement or successional communities under a site's ecological conditions. It is broader than one plant association. It is not a fixed planting mixture, inevitable timetable or instruction to turn all scrub into tall woodland. Interpretation must be checked against actual vegetation and site conditions.
+
+- **Thermo-mesomediterranean, warm, Murcian-Almerian, semi-arid to lower-dry:** describes a warm Mediterranean thermal context, regional distribution and moisture class. The name **Bupleuro gibraltarici-Pistacieto lentisci** identifies a Bupleurum–lentisk series. The coscoja factsheet's Spanish heading calls it a coscoja series, but the Junta's vegetation-management reference identifies the same Latin series as a **lentisk series**. Preserve this source discrepancy; do not infer coscoja dominance from that heading alone. Coscoja can occur in a broader community without being its naming or dominant species.
+- **Mesomediterranean, semi-arid Rhamno lycioidis-Querceto cocciferae:** a coscoja series associated with *Rhamnus lycioides* (espino negro), generally in cooler Mediterranean thermal conditions than the thermomediterranean belt. The long regional adjectives refer to biogeographic territories, not different oak varieties. Junta describes an Almerian/Guadix-Baza variant with *Ephedra fragilis*, reaching the Almanzora basin, and associated scrub, retama, esparto and other communities according to substrate and disturbance. They are not all mandatory planting companions.
+- **Semi-arid** and **lower-dry** are bioclimatic moisture classes; do not translate them into a universal annual-rainfall suitability cutoff. Nor are the thermal belts fixed altitude bands everywhere.
+- Before showing a parcel-specific series in the app, consult the appropriate vegetation mapping, soil and local observations. A lentisk or coscoja scrub mosaic can be a valid restoration reference; a tall oak forest is not the universal destination. No series has been assigned to this project's parcel.
+
+### 15.3 Downloadable references and library status
+
+The two oak factsheets below were downloaded, verified and added on **29 October 2026** as **FOREST-003** and **FOREST-004**. The other external documents remain suggestions for possible library addition. Publication dates are omitted where not verified. The existing carob handbook remains FOREST-002.
+
+- **Junta de Andalucia, Quercus coccifera factsheet, Procedencias de las Especies Vegetales Autoctonas de Andalucia Utilizadas en Restauracion de la Cubierta Vegetal**: [stored locally as FOREST-003](FOREST-003%20-%20Andalusia%20-%20Kermes%20Oak%20Ecology%20and%20Restoration%20Factsheet%20-%20Quercus%20coccifera.pdf); [direct source PDF](https://www.juntadeandalucia.es/medioambiente/BIO/DOC/BIO-DOC-6120-003.pdf). Source of the quoted series list, growth form and Cabo de Gata rainfall observation.
+- **Junta de Andalucia, Jardin Botanico Umbria de la Virgen, Encina (*Quercus rotundifolia*), January 2025**: [stored locally as FOREST-004](FOREST-004%20-%20Almeria%20-%20Holm%20Oak%20Botanical%20Factsheet%20-%20Quercus%20rotundifolia%20-%202025-01.pdf); [direct source PDF](https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/255221248/UMBRIA-ENE-2025.pdf/638e27d7-29a8-8718-0c4f-9ac034bbb20d?t=1745493497879). Regional distribution and increasing scarcity in southeastern lowlands.
+- **Junta de Andalucia, Datos botanicos aplicados a la Gestion del Medio Natural Andaluz III: Modelos de gestion de la vegetacion, management-model excerpt**, printed pp. 23–42: [direct PDF](https://www.juntadeandalucia.es/medioambiente/consolidado/publicacionesdigitales/40-762_ANEXO_CARTOGRAFICO_Y_SERIES_DE_VEGETACION-MODELOS_DE_RESTAURACION_FORESTAL/40-762/8_MODELOS_DE_GESTION_DE_LA_VEGETACION-03.PDF). Identifies Bupleuro–Pistacieto as a lentisk series, including on printed pp. 29 and 42.
+- **Same Junta volume, vegetation-series excerpt**, printed pp. 196–210, especially p. 200: [direct PDF](https://www.juntadeandalucia.es/medioambiente/consolidado/publicacionesdigitales/40-762_ANEXO_CARTOGRAFICO_Y_SERIES_DE_VEGETACION-MODELOS_DE_RESTAURACION_FORESTAL/40-762/26_SERIES_DE_VEGETACION_CLIMATOFILAS_Y_EDAFOXEROFILAS-09.PDF). Describes Rhamno–Querceto, its vegetation stages, soils and local variants.
+- **MITECO-hosted Mar Menor restoration document, section 3.7, Estudio y definicion de la vegetacion potencial en las zonas del proyecto**, Jose Lopez Bernal, Eugenia Belen Miras Perez and Antonio Felix Carrillo Lopez (LATIZAL): [PDF download link](https://www.miteco.gob.es/content/dam/miteco/es/biodiversidad/publicaciones/restauracion/MAP.marmenor.restauracion.pdf). Indexed section 3.7.1 supplies the series definition. Full opening exceeded the browser tool's document-size limit; the complete document was not reviewed.
 
 [B]: FOREST-002%20-%20Andalusia%20-%20Carob%20Cultivation%20and%20Restoration%20Handbook%20-%202026.pdf
 [N]: NIJAR-003%20-%20Campo%20de%20Nijar%20-%20Native%20Plant%20Supply%20Technical%20Specification%20-%20TSA0078436.pdf
