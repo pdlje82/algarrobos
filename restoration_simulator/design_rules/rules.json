@@ -253,5 +253,23 @@
       }
     ],
     "limitations": "Container volume does not establish width. Garden spread ranges do not predict dryland restoration performance."
+  },
+  {
+    "id": "root_ball_default",
+    "title": "Shared illustrative nursery root ball",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "Use the configured shared root-ball drawing diameter (12 cm initially) where no explicit user dimension or documented stock width is available. This user-selected visual assumption applies to catalogue and custom plants.",
+    "evidence": "assumption",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          75,
+          80
+        ]
+      }
+    ],
+    "limitations": "The book discusses small forestry cells and 1–2 L stock but does not establish this 12 cm value. It has no effect on costs, layout clearance, spacing or planting-hole recommendations; entered dimensions take precedence."
   }
 ]

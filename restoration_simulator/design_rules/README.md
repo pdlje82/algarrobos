@@ -143,3 +143,15 @@ replacement resets it. Undo/Redo re-evaluates the selected complete draft in Pyt
 before accepting it, and does not change simulation history or the project undo.
 Pointer motion renders a temporary gesture preview; Python validates the final
 metres/area/positions on release. Escape cancels without a domain command.
+
+
+## Shared root-ball drawing default
+
+The `root_ball_default` rule registers `defaults.root_ball_default`: an explicit
+12 cm diameter drawing assumption, shared by catalogue and custom plants.
+Overlay precedence is user-entered dimension, documented stock dimension, then
+the shared drawing assumption. No width is inferred from container litres.
+Older bundles without this rule/default keep their previous unspecified root-ball
+behaviour until **Review with updated rules** is accepted. The rule and default
+must appear together; a missing or invalid configured value raises an error.
+This overlay does not change counts, costs, placement clearance or planting holes.

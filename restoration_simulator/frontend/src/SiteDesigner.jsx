@@ -176,7 +176,7 @@ function PlantDimensions({id,draft,overlays,command,disabled}) {
   return <section className="plant-dimensions"><h3>Plant dimensions</h3>
     <p>{record===undefined?"Custom plant: no botanical dimensions have been verified.":record.stock}</p>
     {[{key:"root_ball",label:"Root-ball diameter at planting"},{key:"crown",label:"Indicative mature crown diameter"}].map(feature=><DimensionEditor key={feature.key} id={id} feature={feature} overlay={overlays[feature.key]} command={command} disabled={disabled} hasOverride={Object.hasOwn(draft.dimensions,id)&&draft.dimensions[id][feature.key]!==null}/>)}
-    {record!==undefined&&<details><summary>Stock, evidence and limitations</summary><p>{record.limitations}</p><p>Reviewed {record.reviewed}. Garden spread ranges are not dryland growth predictions. Root-ball width must be measured or supplied for the actual nursery stock.</p>{record.references.map(url=><p key={url}><a href={url} target="_blank" rel="noreferrer">Botanical/reference source ↗</a></p>)}</details>}
+    {record!==undefined&&<details><summary>Stock, evidence and limitations</summary><p>{record.limitations}</p><p>Reviewed {record.reviewed}. Garden spread ranges are not dryland growth predictions. The shared root-ball drawing default is an assumption; actual stock dimensions can replace it.</p>{record.references.map(url=><p key={url}><a href={url} target="_blank" rel="noreferrer">Botanical/reference source ↗</a></p>)}</details>}
   </section>;
 }
 

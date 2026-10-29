@@ -21,7 +21,7 @@ def v1_bundle(bundle):
     result.pop("plant_dimensions", None)
     result["manifest"].update(version=1, engine="designer-v1")
     result["manifest"]["files"] = [f for f in result["manifest"]["files"] if f != "plant_dimensions.json"]
-    for key in ("density_defaults", "density_rounding", "aspect_limits"):
+    for key in ("density_defaults", "density_rounding", "aspect_limits", "root_ball_default"):
         result["defaults"].pop(key, None)
     return result
 
@@ -39,6 +39,14 @@ def validate_bundle(bundle):
     keys(d["density_defaults"], {"carob", "other"}, "density defaults")
     require(all(number(v, 0, 1000000) for v in d["density_defaults"].values()) and d["density_rounding"] == "half_up", "Invalid density defaults/rounding.")
     require(d["aspect_limits"] == [0.05, 20], "Unsupported aspect limits.")
+    has_root_default = "root_ball_default" in d
+    has_root_rule = any(r["id"] == "root_ball_default" for r in bundle["rules"])
+    require(has_root_default == has_root_rule, "The shared root-ball drawing default and its registered rule must both be present. Restore defaults.json or review the rule update.")
+    if has_root_default:
+        value = d["root_ball_default"]
+        keys(value, {"diameter_m", "kind", "evidence", "source", "section", "context"}, "shared root-ball drawing default")
+        require(isinstance(value["diameter_m"], list) and len(value["diameter_m"]) == 2 and all(number(v, 0.001, 200) for v in value["diameter_m"]) and value["diameter_m"][0] == value["diameter_m"][1], "Enter one positive shared root-ball diameter in metres.")
+        require(value["kind"] == "typical" and value["evidence"] == "assumption" and value["source"] is None and all(isinstance(value[k], str) and value[k] for k in ("section", "context")), "The shared root-ball default must be explicitly labelled as a drawing assumption.")
     data = bundle["plant_dimensions"]
     keys(data, {"version", "units", "plants"}, "plant dimension references")
     require(data["version"] == 1 and data["units"] == "metres", "Unsupported dimension reference version/units.")
@@ -231,7 +239,13 @@ def overlay_for(draft, ident, kind):
         v = draft["dimensions"][ident][kind]
         return {"diameter_m": [v["diameter"], v["diameter"]], "kind": "typical", "evidence": v["basis"], "source": None, "section": "User input", "context": v["note"]}
     record = next((p for p in draft["bundle"]["plant_dimensions"]["plants"] if p["id"] == ident), None)
-    return None if record is None else record[kind]  # Custom plants have no botanical source entry.
+    if record is not None and record[kind] is not None:
+        return record[kind]
+    if kind == "root_ball" and "root_ball_default" in draft["bundle"]["defaults"]:
+        return deepcopy(draft["bundle"]["defaults"]["root_ball_default"])
+    # Older snapshots explicitly have no shared root-ball assumption. Custom plants
+    # have no botanical reference, but can use the declared shared drawing default.
+    return None
 
 
 def edit(draft, command, before):

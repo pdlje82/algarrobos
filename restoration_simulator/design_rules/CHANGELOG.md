@@ -23,3 +23,12 @@ No suitability score, water schedule, ecological outcome or funding assessment.
 - Kept v1 historical reads and required explicit upgrade review; existing saved
   counts/prices/coordinates and applied snapshots are preserved.
 - Replaced routine removal confirmations with readable change messages and Undo.
+
+
+## 2026-10-29 · algarroba-designer-2026-10-29-v3
+
+- Added the user-selected 0.12 m shared root-ball drawing default in defaults.json,
+  explicitly classified as an assumption, separate from verified stock dimensions.
+- User-entered dimensions and documented stock widths take precedence; clearing
+  an override restores the shared assumption. Counts, costs and positions do not change.
+- Older snapshots retain their prior overlays until an explicit rules update.

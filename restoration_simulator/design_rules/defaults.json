@@ -95,5 +95,16 @@
   "aspect_limits": [
     0.05,
     20
-  ]
+  ],
+  "root_ball_default": {
+    "diameter_m": [
+      0.12,
+      0.12
+    ],
+    "kind": "typical",
+    "evidence": "assumption",
+    "source": null,
+    "section": "Shared drawing default",
+    "context": "Assumed nursery root ball: 12 cm diameter. Illustration only; not a stock measurement, mature root zone or planting-hole size."
+  }
 }

@@ -113,7 +113,7 @@ class DensityDesignerTests(unittest.TestCase):
     def test_dimension_gaps_and_explicit_measurements_do_not_affect_cost_or_layout(self):
         e = self.carobs()
         self.assertEqual(len(e["draft"]["bundle"]["plant_dimensions"]["plants"]), 23)
-        self.assertIsNone(e["overlays"]["carob"]["root_ball"])
+        self.assertEqual(e["overlays"]["carob"]["root_ball"]["diameter_m"], [0.12, 0.12])
         changed = self.run_edit(e["draft"], kind="dimension", id="carob", feature="root_ball", value={"diameter": 0.12, "basis": "measured", "note": "Actual supplied stock"})
         self.assertEqual(changed["overlays"]["carob"]["root_ball"]["diameter_m"], [0.12, 0.12])
         self.assertEqual(changed["summary"], e["summary"])
@@ -168,6 +168,42 @@ class DensityDesignerTests(unittest.TestCase):
         e = self.carobs(); d = deepcopy(e["draft"])
         d["selection"]["entries"][0]["unit_cost"] = 0
         with self.assertRaises(engine.Invalid): designer.evaluate(d,self.project)
+
+    def test_shared_root_ball_default_covers_catalogue_and_custom_plants(self):
+        draft = deepcopy(self.empty)
+        for plant in self.empty["bundle"]["plant_dimensions"]["plants"]:
+            e = self.run_edit(draft,kind="plant",id=plant["id"],enabled=True)
+            draft = e["draft"]
+        self.assertEqual(len(e["overlays"]),23)
+        for overlays in e["overlays"].values():
+            self.assertEqual(overlays["root_ball"]["diameter_m"],[.12,.12])
+            self.assertEqual(overlays["root_ball"]["evidence"],"assumption")
+            self.assertIsNone(overlays["root_ball"]["source"])
+        custom = self.run_edit(self.empty,kind="custom",density=50,entry=dict(id="custom-root",label="Trial plant",group="shrub",quantity=1,unit_cost=2,price_confirmed=False))
+        self.assertEqual(custom["overlays"]["custom-root"]["root_ball"]["diameter_m"],[.12,.12])
+
+    def test_shared_root_ball_update_is_explicit_and_preserves_entered_dimensions(self):
+        old = deepcopy(self.empty)
+        del old["bundle"]["defaults"]["root_ball_default"]
+        old["bundle"]["rules"] = [r for r in old["bundle"]["rules"] if r["id"] != "root_ball_default"]
+        old["bundle"]["manifest"]["ruleset_id"] = "algarroba-designer-2026-10-29-v2"
+        e = self.run_edit(old,kind="plant",id="carob",enabled=True)
+        self.assertIsNone(e["overlays"]["carob"]["root_ball"])
+        updated = self.run_edit(e["draft"],kind="upgrade_rules")
+        self.assertEqual(updated["overlays"]["carob"]["root_ball"]["diameter_m"],[.12,.12])
+        self.assertEqual(updated["summary"],e["summary"])
+        self.assertEqual(updated["draft"]["positions"],e["draft"]["positions"])
+        measured = self.run_edit(e["draft"],kind="dimension",id="carob",feature="root_ball",value=dict(diameter=.08,basis="measured",note="Supplier width"))
+        retained = self.run_edit(measured["draft"],kind="upgrade_rules")
+        self.assertEqual(retained["overlays"]["carob"]["root_ball"]["diameter_m"],[.08,.08])
+        self.assertEqual(retained["overlays"]["carob"]["root_ball"]["evidence"],"measured")
+        cleared = self.run_edit(retained["draft"],kind="dimension",id="carob",feature="root_ball",value=None)
+        self.assertEqual(cleared["overlays"]["carob"]["root_ball"]["diameter_m"],[.12,.12])
+
+    def test_shared_root_ball_default_rejects_missing_or_invalid_configuration(self):
+        for change in [lambda b:b["defaults"].pop("root_ball_default"),lambda b:b["defaults"]["root_ball_default"].update(diameter_m=[0,0]),lambda b:b["defaults"]["root_ball_default"].update(evidence="guidance"),lambda b:b["rules"].pop()]:
+            bundle = designer.load_bundle(); change(bundle)
+            with self.assertRaises(engine.Invalid): designer.validate_bundle(bundle)
 
 
 if __name__ == "__main__": unittest.main()
