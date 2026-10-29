@@ -172,7 +172,9 @@ class PlacementTests(unittest.TestCase):
         old["bundle"] = json.loads((Path(__file__).parent/"fixtures"/"designer-v2-bundle.json").read_text(encoding="utf8"))
         old = designer_v2.evaluate(old,self.project,dict(kind="plant",id="carob",enabled=True))["draft"]
         old = designer_v2.evaluate(old,self.project,dict(kind="plant",id="lentisk",enabled=True))["draft"]
-        self.assertEqual(designer.evaluate(old,self.project),designer_v2.evaluate(old,self.project))
+        viewed = designer.evaluate(old,self.project)
+        self.assertIn("display", viewed)
+        self.assertEqual({k:v for k,v in viewed.items() if k != "display"},designer_v2.evaluate(old,self.project))
         with self.assertRaises(engine.Invalid): self.edit(old,kind="plant",id="thyme",enabled=True)
         updated = self.edit(old,kind="upgrade_rules")
         for field in ["selection","preferences","positions","dimensions","exclusions"]:

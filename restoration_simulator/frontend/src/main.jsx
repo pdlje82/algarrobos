@@ -4,6 +4,7 @@ import { useTheme } from "./theme.js";
 import { BrandFooter, BrandLockup, LandscapeMotif } from "./Brand.jsx";
 import { DemonstratorEditor, DemonstratorRecord } from "./Demonstrator.jsx";
 import { SiteDesigner } from "./SiteDesigner.jsx";
+import { PlantOrderList } from "./PlantOrderList.jsx";
 import {
   AccessTimeline,
   Fields,
@@ -641,6 +642,7 @@ function App() {
               <p>{data.explanation}</p>
             </section>
             <DemonstratorRecord value={data.summary.demonstrator} onOpenDesigner={openDesigner} />
+            <PlantOrderList demonstrator={data.summary.demonstrator}/>
             {data.summary.complete && (
               <section className="final panel" aria-labelledby="final-title">
                 <p className="eyebrow">Year 30 · your accumulated work</p>

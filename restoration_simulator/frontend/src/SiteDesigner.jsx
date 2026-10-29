@@ -16,6 +16,9 @@ import { DensityControl } from "./DensityControl.jsx";
 import { DesignerLibraryDialog } from "./DesignerLibraryDialog.jsx";
 import { PlantSymbol, PlantSymbolLegend } from "./PlantSymbol.jsx";
 import { symbolForPlant } from "./plantSymbols.js";
+import { DesignGuide, FeatureHelp, PocketHelp } from "./DesignerHelp.jsx";
+import { designerHelp } from "./designerHelp.js";
+import { initialCrownEditor, sameCrownEditor, validCrownEditor } from "./dimensionEditor.js";
 
 export const DESIGNER_FIELDS = new Set(["parcel_id","restoration_area","vegetation_system","objective","water_plan","planting_method","plant_selection"]);
 
@@ -33,6 +36,9 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
   const [dirty,setDirty] = useState(false), [tab,setTab] = useState("Zone"), [selection,setSelection] = useState(null);
   const [failedEdit,setFailedEdit]=useState(false), [editorEpoch,setEditorEpoch]=useState(0);
   const [cartEdit,setCartEdit] = useState(null);
+  const [crownEdits,setCrownEdits] = useState({});
+  const hasCrownEdits=Object.keys(crownEdits).length>0;
+  const crownEditsRef=useRef(crownEdits);crownEditsRef.current=crownEdits;
   const cartTimer=useRef(null);
   const [pending,setPending] = useState(null), [review,setReview] = useState(null), [reference,setReference] = useState(null);
   const [zoom,setZoom] = useState(1), [pan,setPan] = useState({x:0,y:0});
@@ -50,16 +56,16 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
     try { const result=await request("designer"); required(result.evaluation?.draft && Array.isArray(result.fields),"Missing designer contract. Restart Python and reload.");
       if(token!==epoch.current)return;
       setWorkspace(result);setEvaluation(result.evaluation);state.current=result.evaluation;setDirty(false);setReview(null);setPending(null);
-      savedDraft.current=JSON.stringify(result.evaluation.draft);history.current={undo:[],redo:[]};renderHistory(v=>v+1);setCartEdit(null);setSelection(null);setFailedEdit(false);setEditorEpoch(v=>v+1);
+      savedDraft.current=JSON.stringify(result.evaluation.draft);history.current={undo:[],redo:[]};renderHistory(v=>v+1);setCartEdit(null);setCrownEdits({});setSelection(null);setFailedEdit(false);setEditorEpoch(v=>v+1);
     } catch(e){if(token===epoch.current)setError(e.message);} finally{if(token===epoch.current)setBusy(false);}
   }
   useEffect(()=>{load();return()=>{epoch.current++;clearTimeout(cartTimer.current);};},[projectId]);
   useEffect(()=>{
-    if(!dirty&&cartEdit===null&&!failedEdit)return;
+    if(!dirty&&cartEdit===null&&!failedEdit&&!hasCrownEdits)return;
     const warn=e=>{e.preventDefault();e.returnValue="";};
     window.addEventListener("beforeunload",warn);
     return ()=>window.removeEventListener("beforeunload",warn);
-  },[dirty,cartEdit,failedEdit]);
+  },[dirty,cartEdit,failedEdit,hasCrownEdits]);
   // External project actions require an explicit reload; never replace an unsaved draft.
   const stale=workspace!==null && workspace.project_revision!==data.revision;
   function accept(next,record=true){if(record&&state.current!==null){history.current.undo.push(state.current);history.current.redo=[];}setEvaluation(next);state.current=next;setDirty(JSON.stringify(next.draft)!==savedDraft.current);setReview(null);setPending(null);setError("");setCartEdit(null);if(next.draft.version>=2)setMessage(next.message);renderHistory(v=>v+1);}
@@ -73,10 +79,22 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
     try { const next=await request("designer/preview",{revision:data.revision,draft:state.current.draft,command:cmd});
       if(token!==epoch.current)return false;
       setFailedEdit(false);if(cmd.kind==="upgrade_rules")setPending(next);else accept(next);
-      if(cmd.kind==="clear"){setSelection(null);setReference(null);}
+      if(cmd.kind==="clear"){setSelection(null);setReference(null);setCrownEdits({});}
+      if(cmd.kind==="dimension"&&cmd.feature==="crown"&&cmd.value!==null){
+        const input=crownEditsRef.current[cmd.id];
+        if(input!==undefined&&Number(input.diameter)===cmd.value.diameter&&input.basis===cmd.value.basis&&input.note===cmd.value.note)discardCrownEdit(cmd.id);
+      }
       return true;
     } catch(e){if(token===epoch.current){setError(e.message);setFailedEdit(true);}return false;} finally{requestBusy.current=false;if(token===epoch.current)setBusy(false);}
   }
+  function discardCrownEdit(id){setCrownEdits(values=>{const next={...values};delete next[id];return next;});}
+  function editCrown(id,value){
+    const baseline=initialCrownEditor(state.current.display.crown_editors[id]);
+    if(sameCrownEditor(value,baseline))discardCrownEdit(id);
+    else setCrownEdits(values=>({...values,[id]:value}));
+    setReview(null);
+  }
+  function inspectSpecies(id){setSelection(`species:${id}`);setReference(null);}
   function mutationBody(fields,base) {
     const content={...fields,revision:data.revision,design_revision:base.design_revision};
     const key=JSON.stringify(content);
@@ -88,10 +106,11 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
     setWorkspace(result);setEvaluation(result.evaluation);state.current=result.evaluation;
     savedDraft.current=JSON.stringify(result.evaluation.draft);setDirty(false);setError("");setDialogError("");setFailedEdit(false);libraryError.current=false;
     setReview(null);setPending(null);setCartEdit(null);clearTimeout(cartTimer.current);
-    if(resetHistory){history.current={undo:[],redo:[]};renderHistory(v=>v+1);setEditorEpoch(v=>v+1);setSelection(null);setReference(null);setPan({x:0,y:0});setZoom(1);setTab("Zone");}
+    if(resetHistory){setCrownEdits({});history.current={undo:[],redo:[]};renderHistory(v=>v+1);setEditorEpoch(v=>v+1);setSelection(null);setReference(null);setPan({x:0,y:0});setZoom(1);setTab("Zone");}
     onSaved({...result.evaluation.draft.physical,plant_selection:result.evaluation.draft.selection});
   }
   async function persistSave(spec,continuation=null) {
+    if(Object.keys(crownEditsRef.current).length>0){setDialogError("Use or discard pending diameter edits before saving.");setMessage("Use or discard pending diameter edits before saving.");return false;}
     if(requestBusy.current)return false;
     requestBusy.current=true;setBusy(true);setError("");setDialogError("");
     lastRetry.current=()=>persistSave(spec,continuation);
@@ -132,7 +151,7 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
   }
   function requestLibraryAction(action) {
     setDialogError("");
-    if(dirty||cartEdit!==null||failedEdit){
+    if(dirty||cartEdit!==null||failedEdit||hasCrownEdits){
       const active=workspace.library.find(r=>r.id===workspace.active_design_id);
       setLibraryDialog({kind:"unsaved",name:active===undefined?workspace.library_defaults.unnamed_label:active.name,action});
     }else performLibrary(action);
@@ -147,7 +166,7 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
   }
   async function importPlan(){if(busy)return;setBusy(true);setError("");try{const next=await request("designer/import-plan",{revision:data.revision,action_id:"demonstrator",inputs:{}});accept(next);setMessage("Recorded plants and prices imported. Coordinates are new assumptions.");}catch(e){setError(e.message);}finally{setBusy(false);}}
   function administration(){return Object.fromEntries(workspace.fields.filter(f=>!DESIGNER_FIELDS.has(f.name)).map(f=>[f.name,planningInputs!==null&&Object.hasOwn(planningInputs,f.name)?planningInputs[f.name]:f.default]));}
-  async function previewApply(){setBusy(true);setError("");try{const admin=administration();const result=await request("designer/apply-preview",{revision:data.revision,design_revision:workspace.design_revision,administration:admin});setReview({...result,administration:admin});}catch(e){setError(e.message);}finally{setBusy(false);}}
+  async function previewApply(){if(hasCrownEdits)return;setBusy(true);setError("");try{const admin=administration();const result=await request("designer/apply-preview",{revision:data.revision,design_revision:workspace.design_revision,administration:admin});setReview({...result,administration:admin});}catch(e){setError(e.message);}finally{setBusy(false);}}
   async function apply(){setBusy(true);setError("");try{const result=await request("designer/apply",{revision:data.revision,design_revision:workspace.design_revision,request_id:crypto.randomUUID(),administration:review.administration});setReview(null);onApplied(result);await load();}catch(e){setError(e.message);}finally{setBusy(false);}}
   if(workspace===null || evaluation===null)return <section className="panel"><h1>Site Designer</h1>{error?<><p className="error" role="alert">{error}</p><button onClick={load}>Retry loading designer</button></>:<p>Opening the planting workspace…</p>}</section>;
   const draft=evaluation.draft, bundle=draft.bundle;
@@ -160,17 +179,18 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
   const field=workspace.fields.find(f=>f.name==="plant_selection");
   required(field!==undefined,"Python did not provide the priced plant catalogue.");
   const selected=evaluation.instances.find(p=>p.id===selection);
-  const species=selected===undefined?null:workspace.catalogue.plants.find(p=>p.id===selected.species);
-  const selectedRow=selected===undefined?null:draft.selection.entries.find(p=>p.id===selected.species);
-  const selectedDensity=modern&&selected!==undefined?evaluation.species.find(p=>p.id===selected.species):null;
+  const selectedSpecies=selected!==undefined?selected.species:selection!==null&&selection.startsWith("species:")&&modern&&Object.hasOwn(evaluation.overlays,selection.slice(8))?selection.slice(8):null;
+  const species=selectedSpecies===null?null:workspace.catalogue.plants.find(p=>p.id===selectedSpecies);
+  const selectedRow=selectedSpecies===null?null:modern?draft.preferences[selectedSpecies].entry:draft.selection.entries.find(p=>p.id===selectedSpecies);
+  const selectedDensity=modern&&selectedSpecies!==null?evaluation.species.find(p=>p.id===selectedSpecies):null;
   const displaySelection=modern?{version:2,entries:evaluation.species.map(p=>p.entry)}:draft.selection;
   const planCatalogue=[...workspace.catalogue.plants,...draft.selection.entries.filter(p=>p.id.startsWith("custom-"))];
   function plantName(id){const plant=workspace.catalogue.plants.find(p=>p.id===id);if(plant!==undefined)return plant.label;if(modern&&draft.legacy_exclusions.includes(id)&&!Object.hasOwn(draft.preferences,id))return "Legacy custom plant — name not recorded";required(modern&&id.startsWith("custom-")&&Object.hasOwn(draft.preferences,id),`Missing plant identity for ${id}.`);return draft.preferences[id].entry.label;}
-  const canApply=error===""&&pending===null&&cartEdit===null&&workspace.available&&!dirty&&!failedEdit&&workspace.saved&&!stale&&evaluation.summary.plants>0&&draft.physical.parcel_id!==null;
+  const canApply=error===""&&pending===null&&cartEdit===null&&!hasCrownEdits&&workspace.available&&!dirty&&!failedEdit&&workspace.saved&&!stale&&evaluation.summary.plants>0&&draft.physical.parcel_id!==null;
   const physicalFields=workspace.fields.filter(f=>DESIGNER_FIELDS.has(f.name)&&!["restoration_area","plant_selection"].includes(f.name));
   return <section className="site-designer" aria-labelledby="designer-title">
     <header className="designer-header"><div><p className="eyebrow">An editable example · no suitability forecast</p><h1 id="designer-title">Site Designer</h1><p>Assumed geometry · planting zone only</p></div>
-      <div className="designer-actions"><button type="button" disabled={busy||stale||error!==""||failedEdit||cartEdit!==null||pending!==null||(!dirty&&workspace.saved)} onClick={()=>beginSave()}>Save</button><button type="button" disabled={libraryBlocked||cartEdit!==null||failedEdit||error!==""} onClick={()=>beginSave(true)}>Save as…</button><button type="button" disabled={libraryBlocked} onClick={()=>requestLibraryAction({operation:"new",design_id:null,name:null,confirm:false})}>New design</button><button type="button" disabled={busy||!canApply} onClick={previewApply}>Apply to demonstrator</button>
+      <div className="designer-actions"><button type="button" disabled={busy||stale||error!==""||failedEdit||cartEdit!==null||hasCrownEdits||pending!==null||(!dirty&&workspace.saved)} onClick={()=>beginSave()}>Save</button><button type="button" disabled={libraryBlocked||cartEdit!==null||hasCrownEdits||failedEdit||error!==""} onClick={()=>beginSave(true)}>Save as…</button><button type="button" disabled={libraryBlocked} onClick={()=>requestLibraryAction({operation:"new",design_id:null,name:null,confirm:false})}>New design</button><button type="button" disabled={busy||!canApply} onClick={previewApply}>Apply to demonstrator</button>
         <button type="button" disabled={busy||stale||cartEdit!==null||history.current.undo.length===0} onClick={()=>travel("undo")}>Undo</button><button type="button" disabled={busy||stale||cartEdit!==null||history.current.redo.length===0} onClick={()=>travel("redo")}>Redo</button>
         {workspace.saved?<a href={`/api/designer/report?design_id=${workspace.active_design_id}`} target="_blank" rel="noreferrer">Saved design report ↗</a>:<span className="muted">Save a named design to download its report</span>}</div></header>
     <div className="designer-library-toolbar">
@@ -179,13 +199,14 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
         {workspace.library.map(record=><option key={record.id} value={record.id}>{record.name} · {record.area} m² · {record.plants} plants</option>)}
       </select></label>
       <details ref={libraryMenu} className="designer-library-menu"><summary>Design actions</summary><div>
-        <button type="button" disabled={!editable||libraryBlocked||cartEdit!==null||failedEdit} onClick={()=>{closeLibraryMenu();command({kind:"clear"});}}>Clear planting zone</button>
+        <button type="button" disabled={!editable||libraryBlocked||cartEdit!==null||failedEdit||hasCrownEdits} onClick={()=>{closeLibraryMenu();command({kind:"clear"});}}>Clear planting zone</button>
         <button type="button" disabled={libraryBlocked||!workspace.saved||cartEdit!==null||failedEdit} onClick={()=>{closeLibraryMenu();setDialogError("");setLibraryDialog({kind:"name",operation:"rename",name:designName});}}>Rename design</button>
-        <button type="button" className="remove-parcel" disabled={libraryBlocked||!workspace.saved} onClick={()=>{closeLibraryMenu();setDialogError("");setLibraryDialog({kind:"delete",name:designName,unsaved:dirty||cartEdit!==null||failedEdit});}}>Delete saved design</button>
+        <button type="button" className="remove-parcel" disabled={libraryBlocked||!workspace.saved} onClick={()=>{closeLibraryMenu();setDialogError("");setLibraryDialog({kind:"delete",name:designName,unsaved:dirty||cartEdit!==null||failedEdit||hasCrownEdits});}}>Delete saved design</button>
       </div></details>
     </div>
-    {libraryDialog!==null&&<DesignerLibraryDialog key={libraryDialog.kind+libraryDialog.operation} dialog={libraryDialog} busy={busy} error={dialogError} limit={workspace.library_defaults.name_limit} canSave={!failedEdit&&cartEdit===null&&(error===""||libraryError.current)&&!stale} onCancel={()=>{setLibraryDialog(null);setDialogError("");if(libraryError.current){setError("");libraryError.current=false;}}} onName={name=>{setLibraryDialog(v=>({...v,name}));setDialogError("");}} onSubmit={nameSubmit} onSaveBefore={()=>beginSave(false,libraryDialog.action)} onDiscard={()=>performLibrary(libraryDialog.action)}/>}
-    <div className="designer-status" aria-live="polite">{busy?"Updating…":(dirty||failedEdit||cartEdit!==null)?"Unsaved design changes":workspace.saved?`Saved design · ${designName}`:"Unsaved design — save when ready"}{message&&<span> · {message}</span>}</div>
+    {libraryDialog!==null&&<DesignerLibraryDialog key={libraryDialog.kind+libraryDialog.operation} dialog={libraryDialog} busy={busy} error={dialogError} limit={workspace.library_defaults.name_limit} canSave={!hasCrownEdits&&!failedEdit&&cartEdit===null&&(error===""||libraryError.current)&&!stale} onCancel={()=>{setLibraryDialog(null);setDialogError("");if(libraryError.current){setError("");libraryError.current=false;}}} onName={name=>{setLibraryDialog(v=>({...v,name}));setDialogError("");}} onSubmit={nameSubmit} onSaveBefore={()=>beginSave(false,libraryDialog.action)} onDiscard={()=>performLibrary(libraryDialog.action)}/>}
+    <div className="designer-status" aria-live="polite">{busy?"Updating…":(dirty||failedEdit||cartEdit!==null||hasCrownEdits)?"Unsaved design changes":workspace.saved?`Saved design · ${designName}`:"Unsaved design — save when ready"}{message&&<span> · {message}</span>}</div>
+    {hasCrownEdits&&<div className="designer-pending-dimensions" role="status"><p>Use or discard pending diameter edits before Save or Apply. To keep them when switching designs, cancel the switch and use the diameter first.</p>{Object.keys(crownEdits).map(id=><p key={id}>{plantName(id)}{modern&&Object.hasOwn(evaluation.overlays,id)&&<button type="button" onClick={()=>inspectSpecies(id)}>Open diameter for {plantName(id)}</button>}<button type="button" onClick={()=>discardCrownEdit(id)}>Discard diameter edit for {plantName(id)}</button></p>)}</div>}
     {error&&<p className="error" role="alert">{error} Your design remains visible. {lastRetry.current!==null&&<button type="button" disabled={busy} onClick={()=>lastRetry.current()}>Retry</button>}</p>}
     {!editable&&<div className="reason"><p>This saved design uses the earlier designer. Review the upgrade to enable the new diameter defaults and tree–shrub placement. Its recorded plants, prices and positions will be retained.</p><button type="button" disabled={busy||stale} onClick={()=>command({kind:"upgrade_rules"})}>Review designer upgrade</button></div>}
     {cartEdit!==null&&<p className="reason">Plant inputs are being edited. The plan retains its last valid preview. <button type="button" onClick={()=>{clearTimeout(cartTimer.current);setCartEdit(null);setError("");setFailedEdit(false);setDirty(JSON.stringify(state.current.draft)!==savedDraft.current);}}>Discard incomplete plant edits</button></p>}
@@ -214,20 +235,20 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
             <button type="button" onClick={()=>command({kind:"existing",plants:[...draft.existing,{id:crypto.randomUUID(),species:bundle.defaults.pocket_species,x:evaluation.width/2,y:evaluation.height/2,radius:bundle.defaults.footprint_radius}]})}>Add existing vegetation symbol</button>
             {draft.existing.map(p=><details key={p.id}><summary>Existing {p.species}</summary><ExistingEditor plant={p} catalogue={workspace.catalogue.plants} onChange={next=>command({kind:"existing",plants:draft.existing.map(v=>v.id===p.id?next:v)})}/><button type="button" onClick={()=>command({kind:"existing",plants:draft.existing.filter(v=>v.id!==p.id)})}>Remove existing symbol</button></details>)}
           </>}
-          {tab==="Approaches"&&<><p>Approaches control the example arrangement. Combinations suggest plants; neither establishes suitability.</p>{["mr1","mr2"].map(id=>{const r=bundle.rules.find(v=>v.id===id);return <label className="designer-choice" key={id}><input type="checkbox" checked={draft.approaches.includes(id)} onChange={e=>toggle("approaches",id,e.target.checked)}/><span><strong>{r.title}</strong><small>{r.description}</small></span></label>;})}
-            {modern&&<p className="density-scenario">Carob starts at 350/ha: seven plants on 200 m². This editable project assumption equals, rather than satisfies, the book’s strict &lt;350 figure. Other passages use &lt;100 or &lt;200 in different contexts.</p>}
+          {tab==="Approaches"&&<><FeatureHelp id="approaches"/>{["mr1","mr2"].map(id=>{const r=bundle.rules.find(v=>v.id===id);return <label className="designer-choice" key={id}><input type="checkbox" checked={draft.approaches.includes(id)} onChange={e=>toggle("approaches",id,e.target.checked)}/><span><strong>{r.title}</strong><small>{designerHelp.rules[id].text}</small></span></label>;})}
+            {evaluation.display.density_defaults!==null&&<p className="density-scenario">Carob starts at {evaluation.display.density_defaults.carob}/ha in this design’s saved settings. Change its density below. See Design guide for density and spacing.</p>}
             {modern&&draft.approaches.length>0&&evaluation.species.some(p=>p.id==="carob")&&<div className="density-scenario"><strong>Carob density for this design</strong><DensityControl row={evaluation.species.find(p=>p.id==="carob")} label="Carob in approaches" disabled={busy||stale} onDensity={value=>command({kind:"density",id:"carob",value})} onStep={step=>command({kind:"density_step",id:"carob",step})}/></div>}
-            {bundle.vegetation_combinations.filter(c=>!c.id.endsWith("_mix")).map(c=><div className="designer-combination" key={c.id}><label className="designer-choice"><input type="checkbox" checked={draft.combinations.includes(c.id)} onChange={e=>toggle("combinations",c.id,e.target.checked)}/><strong>{c.title}</strong></label><small>{c.description}</small></div>)}
+            {bundle.vegetation_combinations.filter(c=>!c.id.endsWith("_mix")).map(c=><div className="designer-combination" key={c.id}><label className="designer-choice"><input type="checkbox" checked={draft.combinations.includes(c.id)} onChange={e=>toggle("combinations",c.id,e.target.checked)}/><strong>{c.title}</strong></label><small>{designerHelp.combinations[c.id]===undefined?`Help unavailable for ${c.id}.`:designerHelp.combinations[c.id]}</small></div>)}
             {bundle.vegetation_combinations.filter(c=>draft.combinations.includes(c.id)||draft.approaches.some(id=>c.id===id+"_mix")).filter(c=>c.optional.length>0).map(c=><details key={c.id} open><summary>Optional companions · {c.title}</summary>{c.optional.map(id=><label className="designer-choice" key={id}><input type="checkbox" checked={draft.optional_members.includes(id)} onChange={e=>toggle("optional_members",id,e.target.checked)}/>{plantIllustration(id).spanish_name}</label>)}</details>)}
             {draft.exclusions.length>0&&<details open><summary>Excluded from automatic suggestions ({draft.exclusions.length})</summary>{draft.exclusions.map(id=><p key={id}>{plantName(id)}{modern&&draft.legacy_exclusions.includes(id)?" · legacy persistent exclusion":""} <button type="button" onClick={()=>command({kind:"exclude",id,enabled:false})}>Allow suggestions</button></p>)}<button type="button" onClick={()=>command({kind:"reset_exclusions"})}>Clear all persistent exclusions</button></details>}<button type="button" ref={modelsTrigger} onClick={()=>setReference("models")}>Explore restoration models</button>
             <button type="button" disabled={!workspace.rules_update_available} onClick={()=>command({kind:"upgrade_rules"})}>Review with updated rules</button>
           </>}
-          {tab==="Plants"&&<PlantChecklist field={field} value={cartEdit===null?displaySelection:cartEdit} onChange={editCart} disabled={!editable||busy||stale} request={request} designerMode={modern} designer={modern?{species:evaluation.species,exclusions:draft.exclusions,defaults:editable?bundle.defaults.density_defaults:{tree:bundle.defaults.density_defaults.other,shrub:bundle.defaults.density_defaults.other,grass:bundle.defaults.density_defaults.other},placement:editable?evaluation.placement:null,command}:undefined} onPlantInformation={()=>setReference("plant")}/>}
+          {tab==="Plants"&&<PlantChecklist field={field} value={cartEdit===null?displaySelection:cartEdit} onChange={editCart} disabled={!editable||busy||stale} request={request} designerMode={modern} designer={modern?{species:evaluation.species,exclusions:draft.exclusions,defaults:editable?bundle.defaults.density_defaults:{tree:bundle.defaults.density_defaults.other,shrub:bundle.defaults.density_defaults.other,grass:bundle.defaults.density_defaults.other},placement:editable?evaluation.placement:null,command,inspectSpecies}:undefined} onPlantInformation={()=>setReference("plant")}/>}
           {tab==="Establishment"&&<><Fields fields={physicalFields.filter(f=>["water_plan","planting_method"].includes(f.name))} inputs={draft.physical} onChange={next=>patch("physical",Object.fromEntries(["water_plan","planting_method"].map(k=>[k,next[k]])))} disabled={busy}/>
-            <label className="designer-choice"><input type="checkbox" checked={draft.pocket.enabled} onChange={e=>patch("pocket",{enabled:e.target.checked})}/>Assumed moisture pocket + conditional encina example</label>
-            {draft.pocket.enabled&&<><NumberEdit label="Pocket radius (m, assumed)" value={draft.pocket.radius} min="0.01" onCommit={v=>patch("pocket",{radius:v})}/><NumberEdit label="Pocket x (m)" value={draft.pocket.x} onCommit={v=>patch("pocket",{x:v})}/><NumberEdit label="Pocket y (m)" value={draft.pocket.y} onCommit={v=>patch("pocket",{y:v})}/><p>Its size does not establish available moisture or tree survival.</p></>}
+            <label className="designer-choice"><input type="checkbox" checked={draft.pocket.enabled} onChange={e=>patch("pocket",{enabled:e.target.checked})}/>Assumed moisture pocket with example encina</label>
+            {draft.pocket.enabled&&<><NumberEdit label="Pocket radius (m, assumed)" value={draft.pocket.radius} min="0.01" onCommit={v=>patch("pocket",{radius:v})}/><NumberEdit label="Pocket x (m)" value={draft.pocket.x} onCommit={v=>patch("pocket",{x:v})}/><NumberEdit label="Pocket y (m)" value={draft.pocket.y} onCommit={v=>patch("pocket",{y:v})}/><PocketHelp facts={evaluation.display.pocket} showCrowns={showCrowns}/></>}
             <label className="designer-choice"><input type="checkbox" checked={draft.mulch.enabled} onChange={e=>patch("mulch",{enabled:e.target.checked})}/>Surface mulch treatment</label>
-            {draft.mulch.enabled&&<><label>Mulch type<select value={draft.mulch.type} onChange={e=>patch("mulch",{type:e.target.value})}>{bundle.treatments.map(t=><option key={t.id} value={t.id}>{t.label}</option>)}</select></label><NumberEdit label="Mulch radius (m, assumed)" value={draft.mulch.radius} onCommit={v=>patch("mulch",{radius:v})}/><p>Choose treated species below. Material, labour and water costs remain separately configured; none are inferred from ring size.</p>{draft.selection.entries.map(p=><label className="designer-choice" key={p.id}><input type="checkbox" checked={draft.mulch.plant_ids.includes(p.id)} onChange={e=>patch("mulch",{plant_ids:e.target.checked?[...draft.mulch.plant_ids,p.id]:draft.mulch.plant_ids.filter(v=>v!==p.id)})}/>{p.id}</label>)}</>}
+            {draft.mulch.enabled&&<><label>Mulch type<select value={draft.mulch.type} onChange={e=>patch("mulch",{type:e.target.value})}>{bundle.treatments.map(t=><option key={t.id} value={t.id}>{t.label}</option>)}</select></label><NumberEdit label="Mulch radius (m, assumed)" value={draft.mulch.radius} onCommit={v=>patch("mulch",{radius:v})}/><FeatureHelp id="mulch"/>{draft.selection.entries.map(p=><label className="designer-choice" key={p.id}><input type="checkbox" checked={draft.mulch.plant_ids.includes(p.id)} onChange={e=>patch("mulch",{plant_ids:e.target.checked?[...draft.mulch.plant_ids,p.id]:draft.mulch.plant_ids.filter(v=>v!==p.id)})}/>{plantName(p.id)}</label>)}</>}
             <button type="button" onClick={()=>setReference("plant")}>Carob planting and establishment guidance</button>
           </>}
         </fieldset>
@@ -242,34 +263,66 @@ export function SiteDesigner({ data, request, onApplied, onSaved, planningInputs
         <details open={evaluation.issues.length>0}><summary>Unresolved information ({evaluation.issues.length})</summary><ul>{evaluation.issues.map(v=><li key={v}>{v}</li>)}</ul>{!workspace.available&&<p>{workspace.reason}</p>}</details>
       </div>
       <aside className="designer-inspector" aria-label="Selected element and evidence">
-        {modern&&selected!==undefined&&<p className="plant-symbol-selected"><PlantSymbol appearance={symbolForPlant(species===undefined?selectedRow:species)}/>{species===undefined?selectedRow.label:species.label} · {selected.id.split(":")[1]*1+1}</p>}
-        {editable&&evaluation.placement.unplaced.length>0&&<details><summary>Why plants are unplaced</summary><ul>{[...new Set(evaluation.placement.unplaced.map(p=>`${plantName(p.id.split(":")[0])}: ${p.reason}`))].map(reason=><li key={reason}>{reason}</li>)}</ul><p>Counts and costs are retained. Use “Place next in zone” and the coordinate fields to position them manually.</p></details>}
-        {reference!==null?<><button type="button" onClick={()=>setReference(null)}>Back to selection</button>{reference==="plant"?<GuideViews guide={validatePlantingGuide(guideData)} onExploreModels={()=>setReference("models")} modelsTrigger={modelsTrigger}/>:<ModelsBody guide={validateRestorationModels(modelData,guideData)}/>}</>:<><h2>{selection==="pocket"?"Assumed moisture pocket":selection==="zone"?"Planting zone":species===null?"Design evidence":species===undefined?selectedRow.label:species.label}</h2>
-          {selection==="pocket"&&modern&&<fieldset disabled={busy||stale}><legend>Pocket position</legend><NumberEdit label="Selected pocket x (m)" value={draft.pocket.x} onCommit={x=>patch("pocket",{x})}/><NumberEdit label="Selected pocket y (m)" value={draft.pocket.y} onCommit={y=>patch("pocket",{y})}/><NumberEdit label="Selected pocket radius (m, assumed)" value={draft.pocket.radius} min="0.01" onCommit={radius=>patch("pocket",{radius})}/><p>Its automatic example encina follows the pocket. Manually positioned plants stay where you placed them.</p></fieldset>}
-          {selection==="zone"&&modern&&<fieldset disabled={busy||stale}><legend>Area-preserving dimensions</legend><NumberEdit label="Selected zone width (m)" value={evaluation.width} min="0.01" onCommit={length=>command({kind:"resize",axis:"width",length})}/><NumberEdit label="Selected zone height (m)" value={evaluation.height} min="0.01" onCommit={length=>command({kind:"resize",axis:"height",length})}/><p>{draft.physical.restoration_area} m² · Centre and area stay fixed. Out-of-zone plants remain listed as unplaced.</p></fieldset>}
-          {selected!==undefined&&<>{species!==undefined&&<><PlantPortrait id={selected.species}/><p lang="es">{plantIllustration(selected.species).spanish_name} · <i>{plantIllustration(selected.species).scientific_name}</i></p></>}
-            <fieldset disabled={!editable||busy||stale}><legend>Selected plant</legend><NumberEdit label="Plant x (m)" value={selected.x} onCommit={v=>command({kind:"position",id:selected.id,x:v,y:selected.y})}/><NumberEdit label="Plant y (m)" value={selected.y} onCommit={v=>command({kind:"position",id:selected.id,x:selected.x,y:v})}/><details><summary>Advanced layout clearance (historical drawing)</summary><NumberEdit label="Layout clearance radius (m, assumed)" value={selected.radius} min="0.01" onCommit={v=>command({kind:"radius",id:selected.species,radius:v})}/><p>This retained historical drawing radius is separate from the 1 m automatic centre clearance and does not control new placement.</p></details><label className="designer-choice"><input type="checkbox" checked={draft.manual_ids.includes(selected.species)} onChange={e=>toggle("manual_ids",selected.species,e.target.checked)}/>Keep this species when combinations change</label>
-              {modern&&<DensityControl row={selectedDensity} label={species===undefined?selectedRow.label:species.label} disabled={busy||stale} onDensity={value=>command({kind:"density",id:selected.species,value})} onStep={step=>command({kind:"density_step",id:selected.species,step})}/>}
-            </fieldset><p>Position: {selected.manual?"placed manually":"generated example"}.</p>{editable&&<><p>{selected.placement_explanation}</p>{(species===undefined?selectedRow.group:species.group)!=="tree"&&<PlacementControl species={selected.species} category={evaluation.placement.categories[selected.species]} command={command} disabled={busy||stale}/>}<p>Automatic clearance: {evaluation.placement.minimum_clearance} m between centres. Moving a shrub detaches it; moving a tree carries its associated shrubs.</p>{Object.entries(draft.associations).filter(([id,link])=>id===selected.id||link.parent_id===selected.id).map(([id,link])=><p key={id}>{plantName(id.split(":")[0])} {Number(id.split(":")[1])+1} → {plantName(link.parent_id.split(":")[0])} {Number(link.parent_id.split(":")[1])+1}</p>)}</>}{modern&&<PlantDimensions key={selected.species} id={selected.species} draft={draft} overlays={evaluation.overlays[selected.species]} command={command} disabled={busy||stale}/>}<details><summary>Why this plant is included</summary><p>{selected.reasons.map(reason=>reason==="manual"?"Selected or retained by you":reason==="pocket"?"Conditional example for the moisture pocket":bundle.vegetation_combinations.find(c=>"combination:"+c.id===reason).title).join("; ")}</p></details>{selected.species==="carob"&&<button type="button" onClick={()=>setReference("plant")}>Planting information</button>}</>}
-          <p>All generated geometry and starter quantities are editable assumptions. Source guidance is shown separately.</p>
-          {evaluation.rules.map(r=><details key={r.id} open={r.condition!=="always"&&selected!==undefined&&evaluation.reasons.find(v=>v.species===selected.species)?.rules.includes(r.id)}><summary>{r.title}</summary><small>{r.evidence} · {r.id}</small><p>{r.description}</p><p className="muted">{r.limitations}</p><SourceLinks refs={r.sources}/></details>)}
-          {draft.combinations.map(id=>{const c=bundle.vegetation_combinations.find(v=>v.id===id);return <details key={id}><summary>{c.title}</summary><p>{c.description}</p><SourceLinks refs={c.sources}/></details>;})}
-          <details><summary>Manual edits and overrides ({draft.overrides.length})</summary><pre>{JSON.stringify(draft.overrides,null,2)}</pre></details>
+        {reference!==null?<><button type="button" onClick={()=>setReference(null)}>Back to selection</button>{reference==="plant"?<GuideViews guide={validatePlantingGuide(guideData)} onExploreModels={()=>setReference("models")} modelsTrigger={modelsTrigger}/>:<ModelsBody guide={validateRestorationModels(modelData,guideData)}/>}</>:<>
+          <h2>{selection==="pocket"?"Assumed moisture pocket":selection==="zone"?"Planting zone":selectedSpecies===null?"Your design":plantName(selectedSpecies)}</h2>
+          {selection==="pocket"&&modern&&<>
+            <PocketHelp facts={evaluation.display.pocket} showCrowns={showCrowns}/>
+            <fieldset disabled={!editable||busy||stale}><legend>Pocket size and position</legend><NumberEdit label="Selected pocket radius (m, assumed)" value={draft.pocket.radius} min="0.01" onCommit={radius=>patch("pocket",{radius})}/><NumberEdit label="Selected pocket x (m)" value={draft.pocket.x} onCommit={x=>patch("pocket",{x})}/><NumberEdit label="Selected pocket y (m)" value={draft.pocket.y} onCommit={y=>patch("pocket",{y})}/></fieldset>
+            {evaluation.display.pocket.plotted&&<button type="button" onClick={()=>{setSelection(evaluation.display.pocket.example_id);setReference(null);}}>Select example encina</button>}
+          </>}
+          {selection==="zone"&&modern&&<><FeatureHelp id="zone"/><fieldset disabled={!editable||busy||stale}><legend>Area-preserving dimensions</legend><NumberEdit label="Selected zone width (m)" value={evaluation.width} min="0.01" onCommit={length=>command({kind:"resize",axis:"width",length})}/><NumberEdit label="Selected zone height (m)" value={evaluation.height} min="0.01" onCommit={length=>command({kind:"resize",axis:"height",length})}/><p>{draft.physical.restoration_area} m² · Centre and area stay fixed.</p></fieldset></>}
+          {selectedSpecies!==null&&<>
+            <p className="plant-symbol-selected"><PlantSymbol appearance={symbolForPlant(species===undefined?selectedRow:species)}/>{plantName(selectedSpecies)}{selected!==undefined&&` · ${Number(selected.id.split(":")[1])+1}`}</p>
+            {modern&&<CrownEditor id={selectedSpecies} facts={evaluation.display.crown_editors[selectedSpecies]} pending={Object.hasOwn(crownEdits,selectedSpecies)?crownEdits[selectedSpecies]:null} onEdit={value=>editCrown(selectedSpecies,value)} onDiscard={()=>discardCrownEdit(selectedSpecies)} command={command} disabled={!editable||busy||stale}/>}
+            {species!==undefined&&<><PlantPortrait id={selectedSpecies}/><p lang="es">{plantIllustration(selectedSpecies).spanish_name} · <i>{plantIllustration(selectedSpecies).scientific_name}</i></p></>}
+            <fieldset disabled={!editable||busy||stale}><legend>Selected plant</legend>
+              {selected!==undefined&&<><NumberEdit label="Plant x (m)" value={selected.x} onCommit={v=>command({kind:"position",id:selected.id,x:v,y:selected.y})}/><NumberEdit label="Plant y (m)" value={selected.y} onCommit={v=>command({kind:"position",id:selected.id,x:selected.x,y:v})}/></>}
+              <label className="designer-choice"><input type="checkbox" checked={draft.manual_ids.includes(selectedSpecies)} onChange={e=>toggle("manual_ids",selectedSpecies,e.target.checked)}/>Keep this species when combinations change</label>
+              {modern&&<DensityControl row={selectedDensity} label={plantName(selectedSpecies)} disabled={busy||stale} onDensity={value=>command({kind:"density",id:selectedSpecies,value})} onStep={step=>command({kind:"density_step",id:selectedSpecies,step})}/>}
+            </fieldset>
+            {selected!==undefined&&<p>{designerHelp.placement[evaluation.display.plants[selected.id].mode].replace("{parent}",evaluation.display.plants[selected.id].parent_name)}</p>}
+            {editable&&selected!==undefined&&Object.values(draft.associations).some(link=>link.parent_id===selected.id)&&<p>Moves with this tree: {Object.entries(draft.associations).filter(([,link])=>link.parent_id===selected.id).map(([id])=>`${plantName(id.split(":")[0])} ${Number(id.split(":")[1])+1}`).join(", ")}. Move a shrub separately to keep its own position.</p>}
+            {editable&&<>{(species===undefined?selectedRow.group:species.group)!=="tree"&&<PlacementControl species={selectedSpecies} category={evaluation.placement.categories[selectedSpecies]} command={command} disabled={busy||stale}/>}<p>New plants are placed at least {evaluation.placement.minimum_clearance} m apart, measured between their centres. You can move them closer; the app will warn you.</p></>}
+            {modern&&<PlantDimensions key={selectedSpecies} id={selectedSpecies} draft={draft} overlays={evaluation.overlays[selectedSpecies]} command={command} disabled={!editable||busy||stale}/>}
+            <details><summary>Why this plant is included</summary><p>{evaluation.reasons.find(row=>row.species===selectedSpecies).reasons.map(reason=>reason==="manual"?"Selected or kept by you":reason==="pocket"?"Example encina for the moisture pocket":bundle.vegetation_combinations.find(c=>"combination:"+c.id===reason).title).join("; ")}</p></details>
+            {selectedSpecies==="carob"&&<button type="button" onClick={()=>setReference("plant")}>Planting information</button>}
+            {selected!==undefined&&<details><summary>Advanced layout clearance</summary><NumberEdit label="Layout clearance radius (m, assumed)" value={selected.radius} min="0.01" onCommit={v=>command({kind:"radius",id:selectedSpecies,radius:v})}/><p>This older drawing size is separate from the root ball and crown. It does not control where new plants are placed.</p></details>}
+          </>}
+          {selectedSpecies===null&&selection!=="pocket"&&selection!=="zone"&&<p>Select a plant, the pocket or a zone edge to see its controls. The guides below explain the design choices.</p>}
+          {evaluation.display.unplaced.length>0&&<details><summary>Why plants are unplaced ({evaluation.display.unplaced.length})</summary><FeatureHelp id="unplaced"/><ul>{evaluation.display.unplaced.map(p=><li key={p.id}>{p.name}: {designerHelp.unplaced[p.reason]}</li>)}</ul></details>}
+          <DesignGuide evaluation={evaluation} showCrowns={showCrowns} onReference={setReference}/>
         </>}
       </aside>
     </div>
   </section>;
 }
 
-function SourceLinks({refs}){return <p>{refs.map(ref=><span key={ref.id}>{ref.pages.map(page=><a key={page} href={`/api/designer/sources/${ref.id}#page=${page}`} target="_blank" rel="noreferrer">{ref.id} p. {page} </a>)}</span>)}</p>;}
 function ExistingEditor({plant,catalogue,onChange}){return <><label>Species<select value={plant.species} onChange={e=>onChange({...plant,species:e.target.value})}>{catalogue.map(p=><option key={p.id} value={p.id}>{p.label}</option>)}</select></label>{["x","y","radius"].map(k=><NumberEdit key={k} label={`Existing ${k} (m)`} value={plant[k]} onCommit={v=>onChange({...plant,[k]:v})}/>)}</>;}
+
+function CrownEditor({id,facts,pending,onEdit,onDiscard,command,disabled}) {
+  required(facts!==undefined,`Crown diameter information unavailable for ${id}. Restart Python and reload.`);
+  const value=pending===null?initialCrownEditor(facts):pending;
+  return <section className="dimension-editor crown-editor" aria-label="Crown diameter editor"><h3>Crown / plant diameter</h3>
+    <p>Applies to every plant of this species in this design. The circle is a drawing estimate, not a growth forecast.</p>
+    {facts.value===null&&<p className="reason">{facts.range===null?"Diameter not established; no circle is drawn.":`This saved design records a ${facts.range[0]}–${facts.range[1]} m range, not a single diameter.`} Review the designer upgrade before editing.</p>}
+    {facts.default_value!==null&&Number(value.diameter)!==facts.default_value&&<p>Configured drawing default: <strong>{facts.default_value} m</strong>.</p>}
+    <fieldset disabled={disabled||!facts.editable}>
+      <label>Crown / plant diameter (m)<input type="number" min="0.001" max="200" step="any" value={value.diameter} onChange={e=>onEdit({...value,diameter:e.target.value})}/></label>
+      <label>Dimension basis<select aria-label="Dimension basis" value={value.basis} onChange={e=>onEdit({...value,basis:e.target.value})}><option value="assumption">My planning assumption</option><option value="measured">Measured / supplied dimensions</option></select></label>
+      <label>Note (optional)<input value={value.note} maxLength="500" onChange={e=>onEdit({...value,note:e.target.value})}/></label>
+      <button type="button" disabled={pending===null||!validCrownEditor(value)} onClick={()=>command({kind:"dimension",id,feature:"crown",value:{diameter:Number(value.diameter),basis:value.basis,note:value.note}})}>Use this diameter</button>
+      {facts.has_override&&<button type="button" onClick={async()=>{if(await command({kind:"dimension",id,feature:"crown",value:null}))onDiscard();}}>Reset to default</button>}
+      {pending!==null&&<button type="button" onClick={onDiscard}>Discard diameter edit</button>}
+    </fieldset>
+  </section>;
+}
 
 function PlantDimensions({id,draft,overlays,command,disabled}) {
   const record=draft.bundle.plant_dimensions.plants.find(p=>p.id===id);
-  return <section className="plant-dimensions"><h3>Plant dimensions</h3>
-    <p>{record===undefined?"Custom plant: no botanical dimensions have been verified.":record.stock}</p>
-    {[{key:"root_ball",label:"Root-ball diameter at planting"},{key:"crown",label:"Crown / plant diameter"}].map(feature=><DimensionEditor key={feature.key} id={id} feature={feature} overlay={overlays[feature.key]} command={command} disabled={disabled} hasOverride={Object.hasOwn(draft.dimensions,id)&&draft.dimensions[id][feature.key]!==null}/>)}
-    {record!==undefined&&<details><summary>Stock, evidence and limitations</summary><p>{record.limitations}</p>{draft.version===3&&<><p>{record.planning.basis}</p><p>Original published horizontal range: {record.crown===null?"Not established":`${record.crown.diameter_m.join("–")} m · ${record.crown.context}`}. The chosen drawing value is separate from this evidence.</p></>}<p>Reviewed {record.reviewed}. Garden spread ranges are not dryland growth predictions. The shared root-ball drawing default is an assumption; actual stock dimensions can replace it.</p>{record.references.map(url=><p key={url}><a href={url} target="_blank" rel="noreferrer">Botanical/reference source ↗</a></p>)}</details>}
+  return <section className="plant-dimensions"><FeatureHelp id="dimensions"/>
+    <DimensionEditor id={id} feature={{key:"root_ball",label:"Root-ball diameter at planting"}} overlay={overlays.root_ball} command={command} disabled={disabled} hasOverride={Object.hasOwn(draft.dimensions,id)&&draft.dimensions[id].root_ball!==null}/>
+    {record===undefined&&<p>Custom plant: no botanical dimensions have been verified.</p>}
+    {record!==undefined&&<details><summary>Sources and details · dimensions</summary><p>{record.stock}</p><p>{record.limitations}</p>{draft.version===3&&<><p>{record.planning.basis}</p><p>Original published horizontal range: {record.crown===null?"Not established":`${record.crown.diameter_m.join("–")} m · ${record.crown.context}`}. The chosen drawing value is separate from this evidence.</p></>}<p>Reviewed {record.reviewed}. Garden spread ranges are not dryland growth predictions. The shared root-ball drawing default is an assumption; actual stock dimensions can replace it.</p>{record.references.map(url=><p key={url}><a href={url} target="_blank" rel="noreferrer">Botanical/reference source ↗</a></p>)}</details>}
   </section>;
 }
 
@@ -280,10 +333,10 @@ function DimensionEditor({id,feature,overlay,command,disabled,hasOverride}) {
     {overlay===null?<p>Not established · no circle drawn.</p>:<p>{overlay.diameter_m[0]===overlay.diameter_m[1]?overlay.diameter_m[0]:`${overlay.diameter_m[0]}–${overlay.diameter_m[1]}`} m · {overlay.evidence}<small>{overlay.context}</small>{overlay.source!==null&&<a href={overlay.source} target="_blank" rel="noreferrer">Source · {overlay.section} ↗</a>}</p>}
     <details><summary>{hasOverride?"Edit your dimension":"Enter a measured or assumed dimension"}</summary><fieldset disabled={disabled}>
       <label>{feature.label} (m)<input type="number" min="0.001" max="200" step="any" value={diameter} onChange={e=>setDiameter(e.target.value)}/></label>
-      <label>Dimension basis<select value={basis} onChange={e=>setBasis(e.target.value)}><option value="">Choose basis</option><option value="measured">Measured / supplied stock dimensions</option><option value="assumption">My planning assumption</option></select></label>
+      <label>Dimension basis<select aria-label="Dimension basis" value={basis} onChange={e=>setBasis(e.target.value)}><option value="">Choose basis</option><option value="measured">Measured / supplied stock dimensions</option><option value="assumption">My planning assumption</option></select></label>
       <label>Measurement or assumption note<input value={note} onChange={e=>setNote(e.target.value)} maxLength="500"/></label>
       <button type="button" disabled={!valid} onClick={()=>command({kind:"dimension",id,feature:feature.key,value:{diameter:Number(diameter),basis,note}})}>Use this diameter</button>
-      {hasOverride&&<button type="button" onClick={()=>command({kind:"dimension",id,feature:feature.key,value:null})}>Clear override</button>}
+      {hasOverride&&<button type="button" onClick={()=>command({kind:"dimension",id,feature:feature.key,value:null})}>Reset to default</button>}
     </fieldset></details>
   </div>;
 }

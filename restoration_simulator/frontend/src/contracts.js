@@ -348,6 +348,7 @@ export function validateResponse(path, data) {
     }
     for(const key of ["plants","trees","shrubs","placed","unplaced","tree_density","carob_density","plant_cost"])required(typeof data.summary[key]==="number"&&Number.isFinite(data.summary[key]),`Invalid designer summary ${key}.`);
     required(Number.isFinite(data.width)&&Number.isFinite(data.height)&&data.width>0&&data.height>0,"Invalid designer dimensions.");
+    designerDisplayContract(data.display,data);
     return data;
   }
   if(path==="designer/apply-preview"){
@@ -629,4 +630,38 @@ export function validateResponse(path, data) {
     throw new Error(`No client contract registered for API endpoint ${path}.`);
   }
   return data;
+}
+
+function designerDisplayContract(value,evaluation) {
+  properties(value,["version","density_defaults","crown_editors","plants","unplaced","pocket"],"designer display facts; restart Python and reload");
+  required(value.version===1,"Unsupported designer display facts.");
+  for(const key of ["crown_editors","plants"])object(value[key],`designer display ${key}`);
+  if(value.density_defaults!==null){
+    properties(value.density_defaults,["carob","tree","shrub","grass"],"saved density defaults");
+    required(Object.values(value.density_defaults).every(n=>Number.isFinite(n)&&n>0),"Invalid saved density defaults.");
+  }
+  const diameter=v=>v===null||(Number.isFinite(v)&&v>0);
+  const range=v=>v===null||(Array.isArray(v)&&v.length===2&&v.every(n=>Number.isFinite(n)&&n>0)&&v[1]>=v[0]);
+  for(const facts of Object.values(value.crown_editors)){
+    properties(facts,["value","range","default_value","basis","note","has_override","editable"],"crown editor facts");
+    required(diameter(facts.value)&&diameter(facts.default_value)&&range(facts.range)&&["measured","assumption"].includes(facts.basis)&&typeof facts.note==="string"&&typeof facts.has_override==="boolean"&&typeof facts.editable==="boolean","Invalid crown editor facts.");
+    required(facts.value===(facts.range!==null&&facts.range[0]===facts.range[1]?facts.range[0]:null),"A crown range must not be replaced by an invented diameter.");
+  }
+  if(evaluation.draft.version>=2)for(const row of evaluation.species){
+    required(Object.hasOwn(value.crown_editors,row.id),`Missing crown editor facts for ${row.id}.`);
+    const facts=value.crown_editors[row.id],overlay=evaluation.overlays[row.id].crown;
+    required(JSON.stringify(facts.range)===JSON.stringify(overlay===null?null:overlay.diameter_m)&&facts.editable===(evaluation.draft.version===3),"Crown editor does not match the saved design.");
+  }
+  for(const facts of Object.values(value.plants)){
+    properties(facts,["mode","parent_id","parent_name","name"],"plant display facts");
+    required(["associated","manual","tree","open_ground","independent"].includes(facts.mode)&&typeof facts.name==="string"&&(facts.parent_id===null||typeof facts.parent_id==="string")&&(facts.parent_name===null||typeof facts.parent_name==="string"),"Invalid plant display facts.");
+  }
+  for(const instance of evaluation.instances)required(Object.hasOwn(value.plants,instance.id),`Missing display facts for ${instance.id}.`);
+  required(Array.isArray(value.unplaced),"Missing readable unplaced facts.");
+  for(const facts of value.unplaced){properties(facts,["id","name","reason"],"unplaced facts");required(typeof facts.id==="string"&&typeof facts.name==="string"&&["with_tree_outside","outside","not_positioned"].includes(facts.reason),"Invalid unplaced facts.");}
+  const pocket=value.pocket;
+  properties(pocket,["enabled","supported_count","species","name","example_id","state","plotted","moves_with_pocket","quantity","extra_quantity","radius","crown_diameter","crown_range"],"pocket display facts");
+  required([pocket.enabled,pocket.plotted,pocket.moves_with_pocket].every(v=>typeof v==="boolean")&&pocket.supported_count===1&&typeof pocket.species==="string"&&(pocket.name===null||typeof pocket.name==="string")&&(pocket.example_id===null||typeof pocket.example_id==="string")&&["off","linked","independent","unplaced","absent"].includes(pocket.state),"Invalid pocket identity or status.");
+  required(Number.isInteger(pocket.quantity)&&pocket.quantity>=0&&Number.isInteger(pocket.extra_quantity)&&pocket.extra_quantity===Math.max(0,pocket.quantity-1)&&Number.isFinite(pocket.radius)&&pocket.radius>0&&diameter(pocket.crown_diameter)&&range(pocket.crown_range),"Invalid pocket quantities or dimensions.");
+  required(pocket.example_id===(pocket.quantity>0?`${pocket.species}:0`:null)&&pocket.plotted===evaluation.instances.some(p=>p.id===pocket.example_id),"Pocket example-tree identity does not match the plan.");
 }

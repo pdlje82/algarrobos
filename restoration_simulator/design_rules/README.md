@@ -54,6 +54,17 @@ shades. Selection adds a ring without changing identity colour. These visual
 choices never select species, change placement or quantities, modify the saved
 design, or require rules adoption. Keep them out of ecological generation rules.
 
+Plain-language help is similarly separate: `frontend/src/designer-help.json`,
+validated by `frontend/src/designerHelp.js`, maps stable feature, rule and
+combination IDs to presentation text. Original descriptions and sources remain in
+embedded bundles, reports and the inspector's Sources/Technical disclosures.
+`backend/designer_display.py` adds read-only facts to the existing evaluation:
+the pocket's actual example-tree identity/status/dimensions, saved density
+defaults, effective crown-editor values, and readable placement states. It does
+not change a draft or its frozen evaluation. No new save version, rule version or
+endpoint is needed for wording updates. Historical missing dimensions remain
+explicitly unknown; ranges never acquire an invented single value.
+
 ## Registered evaluator operations
 
 The generic operations are selection union, manual exclusion/retention, geometry,

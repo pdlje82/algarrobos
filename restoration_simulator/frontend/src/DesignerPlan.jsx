@@ -82,6 +82,7 @@ export function DesignerPlan({ evaluation, catalogue, selected, onSelect, onComm
       {max > min && <circle cx={v.x} cy={v.y} r={(max+min)/4} style={{strokeWidth:(max-min)/2}} className="designer-crown-band"/>}
       <circle cx={v.x} cy={v.y} r={max/2} vectorEffect="non-scaling-stroke"/>
       {max > min && <circle cx={v.x} cy={v.y} r={min/2} vectorEffect="non-scaling-stroke"/>}
+      {draft.pocket.enabled&&evaluation.display.pocket.example_id===p.id&&<text className="designer-dimension-label" x={v.x} y={v.y-max/2-.15} textAnchor="middle" fontSize={padding*.25}>Encina crown · diameter {min===max?min:`${min}–${max}`} m</text>}
       <title>{p.species}: crown / plant drawing diameter {min===max?min:`${min}–${max}`} m; {overlay.context}</title>
     </g>;
   }
@@ -102,7 +103,7 @@ export function DesignerPlan({ evaluation, catalogue, selected, onSelect, onComm
         {draft.pocket.enabled && <g className={`designer-pocket-group ${selected==="pocket"?"is-selected":""}`} role="button" tabIndex="0" aria-label="Select moisture pocket" onKeyDown={e=>activate(e,"pocket")} onPointerDown={e=>down(e,"pocket","pocket")} onClick={e=>{e.stopPropagation();onSelect("pocket");}}>
           <circle cx={pocket.x} cy={pocket.y} r={draft.pocket.radius} className="designer-pocket"/>
           <circle cx={pocket.x} cy={pocket.y} r={draft.pocket.radius} className="designer-pocket-hit" vectorEffect="non-scaling-stroke"/>
-          <text x={pocket.x} y={pocket.y-draft.pocket.radius} textAnchor="middle" fontSize={padding*.25}>Assumed moisture pocket</text>
+          <text className="designer-dimension-label" x={pocket.x} y={pocket.y+draft.pocket.radius+.4} textAnchor="middle" fontSize={padding*.25}>Moisture pocket · radius {evaluation.display.pocket.radius} m</text>
         </g>}
         {draft.existing.map(p=>{const v=position(p);return <g key={p.id} className="designer-existing" pointerEvents="none"><circle cx={v.x} cy={v.y} r={p.radius}/><path d={`M${v.x} ${v.y-.2}l.2 .2-.2 .2-.2-.2Z`}/><title>Existing {p.species}; assumed position, retained even outside resized zone</title></g>;})}
         {evaluation.instances.map(p=>{
@@ -129,6 +130,7 @@ export function DesignerPlan({ evaluation, catalogue, selected, onSelect, onComm
         </g>)}
       </g>
     </svg>
+    {draft.pocket.enabled&&<p className="designer-pocket-key"><span>Solid blue pocket · radius {evaluation.display.pocket.radius} m</span><span>{!showCrowns?"Crown display off":!evaluation.display.pocket.plotted?"Example encina not plotted":evaluation.display.pocket.crown_range===null?"Encina crown diameter not established":`Dashed encina crown · diameter ${evaluation.display.pocket.crown_range[0]===evaluation.display.pocket.crown_range[1]?evaluation.display.pocket.crown_range[0]:evaluation.display.pocket.crown_range.join("–")} m`}</span></p>}
     <p className="designer-live-size" aria-live="polite">{w.toFixed(2)} m × {h.toFixed(2)} m · {area} m²{moving?.type==="resize"?" · area fixed":""}</p>
   </div>;
 }

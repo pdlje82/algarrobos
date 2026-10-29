@@ -16,7 +16,7 @@ export function DesignerLibraryDialog({ dialog, busy, error, limit, canSave, onC
       <div className="designer-dialog-actions"><button type="submit" disabled={busy||dialog.name.trim().length===0}>{dialog.operation==="rename"?"Rename":"Save"}</button><button type="button" disabled={busy} onClick={onCancel}>Cancel</button></div>
     </form>:dialog.kind==="unsaved"?<>
       <p>Save changes to “{dialog.name}” before {dialog.action.operation==="new"?"starting a new design":dialog.action.operation==="reload"?"reloading":"loading another design"}?</p>
-      {!canSave&&<p>Finish incomplete plant inputs before saving, or choose Discard to continue.</p>}
+      {!canSave&&<p>Use or discard pending diameter edits and finish incomplete plant inputs before saving. Choose Cancel to return to them, or Discard to continue without them.</p>}
       <div className="designer-dialog-actions"><button type="button" disabled={busy||!canSave} onClick={onSaveBefore}>Save</button><button type="button" disabled={busy} onClick={onDiscard}>Discard</button><button type="button" disabled={busy} onClick={onCancel}>Cancel</button></div>
     </>:<>
       <p>Delete “{dialog.name}” from this project's saved designs?</p>

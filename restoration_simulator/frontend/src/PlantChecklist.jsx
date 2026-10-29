@@ -288,6 +288,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
                       </label>
                     </div>
                     {plant.id === "carob" && (designerMode ? <button type="button" onClick={onPlantInformation}>Planting information</button> : <PlantingExplorer />)}
+                    {designerMode&&entry&&<button type="button" onClick={()=>designer.inspectSpecies(plant.id)}>Edit diameter · {plant.label}</button>}
                   </div>
                   {(!designerMode || entry !== undefined) && priceControls(entry, plant)}
                   <details className="plant-info">
@@ -341,6 +342,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
                   </span>
                 </label>
                 {priceControls(p, p)}
+                {designerMode&&<button type="button" onClick={()=>designer.inspectSpecies(p.id)}>Edit diameter · {p.label}</button>}
                 <small className="plant-info muted">
                   User-defined; identity, water needs and suitability
                   unverified. Uncheck to remove.

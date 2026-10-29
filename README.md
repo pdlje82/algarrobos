@@ -384,3 +384,33 @@ the saved planting design or simulation.
 
 Restart the Python backend after updating its source, then refresh the frontend.
 There are no new Conda or npm dependencies for these improvements.
+
+### Designer explanations and Project ordering
+
+The right inspector opens with the selected plant or feature's controls. The
+**Design guide** contains plain-language help, a practical carob planting-season
+and nursery-buying guide, and links to the full Planting and Restoration Model
+Explorers. Expand **Sources and details** for original guidance and qualifications,
+or **Technical details** for rule IDs, saved placement explanations and edit records.
+Presentation wording lives in the validated
+`restoration_simulator/frontend/src/designer-help.json`; wording updates do not
+rewrite embedded rules or require a saved-design upgrade.
+
+The single moisture pocket has a solid blue outline and pale blue fill. Its radius
+and the example encina's dashed crown diameter are labelled separately using saved
+dimensions. The inspector explains whether that tree follows the pocket, has been
+moved independently, is unplaced or is no longer selected. Additional encinas come
+from density, not additional pockets. The drawing does not measure soil moisture.
+
+Selecting a plant opens its **Crown / plant diameter (m)** editor with the current
+value, planning basis and optional note. Selection alone changes nothing. Choose
+**Use this diameter**, **Reset to default**, or discard the pending input before
+Save/Apply. Pending entries survive species switches and unrelated calculations;
+New/Load and browser navigation include them in the unsaved-change warning.
+Historical ranges remain ranges until their explicit designer upgrade.
+
+**Project → Plant order list** is a read-only table of plant names, recorded unit
+prices and purchasing quantities from the applied demonstrator. It includes custom
+plants and marks unconfirmed estimates. Exploring or deleting a saved alternative
+does not change the list. Older aggregate-only plans explicitly show that ordering
+records are unavailable; current catalogue prices never replace recorded prices.

@@ -21,8 +21,20 @@ validate_bundle = current.validate_bundle
 load_bundle = current.load_bundle
 new_draft = current.new_draft
 validate_draft = current.validate_draft
-evaluate = current.evaluate
-import_plan = current.import_plan
+@checked
+def evaluate(original, project, command=None):
+    from .designer_display import describe
+    result = current.evaluate(original, project, command)
+    result["display"] = describe(result)
+    return result
+
+
+@checked
+def import_plan(project):
+    from .designer_display import describe
+    result = current.import_plan(project)
+    result["display"] = describe(result)
+    return result
 
 @checked
 def apply_inputs(project, draft, administration):

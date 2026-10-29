@@ -2092,6 +2092,11 @@ footer p {
 .demo-record > p {
   font-size: 13px;
 }
+.plant-order-list table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:.9rem}
+.plant-order-list th,.plant-order-list td{text-align:left;vertical-align:top;padding:.65rem .4rem;border-bottom:1px solid var(--border);overflow-wrap:anywhere}
+.plant-order-list th:first-child{width:48%}.plant-order-list th:nth-child(2){width:30%}
+.plant-order-list tbody th{font-weight:600}.plant-order-list small{display:block;font-weight:400;color:var(--muted);font-size:.78rem;margin-top:.2rem}
+@media(max-width:450px){.plant-order-list th,.plant-order-list td{padding:.5rem .2rem}.plant-order-list th:first-child{width:43%}.plant-order-list th:nth-child(2){width:33%}}
 .demo-phases {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
