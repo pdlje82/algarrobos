@@ -1,4 +1,5 @@
 import { required } from "./contracts.js";
+import { plantPresentation } from "./plantNames.js";
 import { evidenceLabels, validateHandbookPages, validatePhotograph, validatePlantingGuide } from "./plantingGuide.js";
 
 const modelIds = ["mr1", "mr2", "mr3"];
@@ -75,5 +76,5 @@ export function validateRestorationModels(data, plantingGuide) {
     text(item.title, "production model title"); text(item.text, "production model explanation"); validateHandbookPages(item.pages);
   }
   strings(data.limitations, "restoration evidence limitations");
-  return { ...data, source: plantingGuide.source, examples, oak: plantingGuide.oak };
+  return plantPresentation({ ...data, source: plantingGuide.source, examples, oak: plantingGuide.oak });
 }

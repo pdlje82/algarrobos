@@ -40,8 +40,8 @@ In particular:
 - Do not swallow exceptions, silently ignore unsupported fields or silently
   drop actions that cannot be replayed. Dependency removal must be an explicit editing operation with a readable
   explanation. In the exploratory Site Designer it applies immediately with
-  session Undo/Redo; applying a design or adopting updated rules still requires
-  a review before confirmation.
+  session Undo/Redo; transferring a design to Project planning, committing a
+  demonstrator or adopting updated rules requires a review before confirmation.
 - Do not silently try a different file, configuration, implementation or data
   source when the intended one is unavailable.
 - Do not guess a save version or repair missing fields implicitly during normal

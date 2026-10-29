@@ -31,7 +31,7 @@ export function RestorationModelContent({ headingId, descriptionId, onDismiss, o
       <header className="explorer-heading">
         <div><p className="explorer-eyebrow">The parcel and its landscape</p>
           <h2 id={headingId}>Restoration Model Explorer</h2>
-          <p id={descriptionId}>Read and compare · carob-based reference models from Andalusia</p>
+          <p id={descriptionId}>Read and compare · algarrobo-based reference models from Andalusia</p>
         </div>
         <div className="model-heading-actions">
           {onBackToPlant !== null && <button type="button" onClick={onBackToPlant}>← Back to planting information</button>}
@@ -91,9 +91,9 @@ export function ModelsBody({ guide }) {
           <ModelComparison guide={guide} selected={selected} chooseModel={chooseModel} />
         </section>
         <aside className="model-combination"><Evidence kind={guide.combination.kind} /><h3>These approaches can work together</h3><p>{guide.combination.text}</p><References guide={guide} pages={guide.combination.pages} /></aside>
-        <details className="explorer-treatment model-related"><summary>Related landscape: oak–carob dehesa enrichment (MP1)</summary>
+        <details className="explorer-treatment model-related"><summary>Related landscape: oak–algarrobo dehesa enrichment (MP1)</summary>
           <GuideCard guide={guide} card={guide.related} />
-          <GuidePhotograph guide={guide} photo={guide.oak.photo} page={guide.oak.photo_page} subject="mixed oak–carob dehesa" sourceLabel="Mixed dehesa photograph" />
+          <GuidePhotograph guide={guide} photo={guide.oak.photo} page={guide.oak.photo_page} subject="mixed oak–algarrobo dehesa" sourceLabel="Mixed dehesa photograph" />
         </details>
         <details className="explorer-treatment"><summary>Production models in section 5.5</summary>
           <p>These describe productive uses. They provide context and do not redefine the restoration models as grant categories.</p>
@@ -120,7 +120,7 @@ function ModelDetail({ guide, model }) {
       <div className="model-diagram-layout">
         <figure className="model-diagram"><ParcelDiagram model={model} />
           <figcaption>Conceptual parcel · not to scale. Symbol counts, crown sizes and areas do not specify planting density.</figcaption>
-          <ul className="model-legend"><li><span className="model-symbol new" aria-hidden="true" />New carob / tree group</li><li><span className="model-symbol existing" aria-hidden="true" />Existing trees</li><li><span className="model-symbol shrub" aria-hidden="true" />Native shrubs</li></ul>
+          <ul className="model-legend"><li><span className="model-symbol new" aria-hidden="true" />New algarrobo / tree group</li><li><span className="model-symbol existing" aria-hidden="true" />Existing trees</li><li><span className="model-symbol shrub" aria-hidden="true" />Native shrubs</li></ul>
           {model.id === "mr2" && <ol className="model-water-legend"><li>Donor catchment supplies run-on.</li><li>Planting islands receive and infiltrate water.</li><li>Assess a safe overflow route.</li></ol>}
           <p className="model-diagram-note">{model.diagram_note}</p>
         </figure>

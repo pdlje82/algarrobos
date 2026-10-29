@@ -1,4 +1,5 @@
 import data from "./designer-help.json" with { type: "json" };
+import { plantPresentation } from "./plantNames.js";
 
 export function validateDesignerHelp(value) {
   const fail=message=>{throw new Error(`Invalid designer help: ${message}`);};
@@ -30,7 +31,7 @@ export function validateDesignerHelp(value) {
   return value;
 }
 
-export const designerHelp=validateDesignerHelp(data);
+export const designerHelp=plantPresentation(validateDesignerHelp(data));
 export function helpFor(group,id){
   const value=designerHelp[group][id];
   if(value===undefined)throw new Error(`Designer help unavailable for ${group}: ${id}. Update the presentation content.`);

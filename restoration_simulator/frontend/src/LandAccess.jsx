@@ -3,6 +3,7 @@ import { area, money, year } from "./format.js";
 import { ParcelRemoval } from "./ParcelRemoval.jsx";
 import { required, inputValue, record } from "./contracts.js";
 import {DocumentLink} from "./DocumentLink.jsx";
+import { Alert } from "./Alert.jsx";
 
 export function FieldHelp({ label, children }) {
   const id = useId();
@@ -1002,6 +1003,7 @@ export function LandRecords({
 }
 
 export function PreviewStatus({ preview, previewBusy, previewError }) {
+  if(previewError&&!previewBusy)return <Alert variant="warning" title="Draft needs attention" className="preview-status">{preview?"Your previous calculation remains visible; correct the inputs or retry to update it.":"Correct the inputs or retry to prepare a preview."}</Alert>;
   return (
     <p className="preview-status muted" role="status" aria-live="polite">
       {previewBusy
@@ -1024,12 +1026,12 @@ export function Outcome({ preview, previewBusy, previewError, onRetry, busy, rea
     <>
       {showStatus && <PreviewStatus preview={preview} previewBusy={previewBusy} previewError={previewError} />}
       {previewError && (
-        <div className="error" role="alert">
+        <Alert variant="error" title="Preview could not be updated">
           <p>{previewError}</p>
           <button type="button" disabled={busy || previewBusy} onClick={onRetry}>
             Retry preview
           </button>
-        </div>
+        </Alert>
       )}
       {preview && (
         <div className="preview" aria-busy={previewBusy}>

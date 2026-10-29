@@ -93,18 +93,23 @@ than encoding executable Python or JavaScript in JSON. Unsupported operations fa
 
 Changing a default must not overwrite manual prices, quantities or positions.
 Shared species are not added twice. Ordinary draft removals apply immediately with a readable explanation and session
-Undo/Redo. Only applying to the demonstrator or adopting updated rules requires
-explicit review. Manually retained pocket plants become unplaced when the
+Undo/Redo. Transferring to planning, committing in Project or adopting updated rules
+requires explicit review. Manually retained pocket plants become unplaced when the
 pocket is removed; they can be positioned explicitly in the remaining zone.
 
 ## Persistence and compatibility
 
-Autosave/export envelope 6 contains the existing simulation-schema-4 project plus
+Autosave/export envelope 7 contains the existing simulation-schema-4 project plus
 a versioned project-local named-design library and a separate designer revision. Upgrading an old
 autosave makes a byte-preserving backup before writing the new envelope. Saving a
 draft leaves simulation revision, time, cash, history and project undo unchanged.
-Applying uses the existing demonstrator transition and retains an applied rules
-snapshot. Parcel deletion removes dependent designs; its explicit undo can restore
+An explicit handoff copies the named design into the independent planning draft;
+only Project's final commit uses the demonstrator transition and retains an applied
+rules snapshot. Saving/loading an alternative never changes planning. The planning
+attachment is managed in `backend/planning_draft.py`; editable administration saves
+with its own revision and incomplete values, without simulation effects. Envelope 6
+migrates explicitly with a byte-preserving backup and no change to committed plans.
+Parcel deletion removes dependent designs and planning drafts; its explicit undo can restore
 them. Exports after deletion omit the deletion undo buffer.
 
 Library orchestration lives in `backend/designer_library.py`. The attachment has
@@ -127,6 +132,13 @@ revision, leaving simulation state and its Undo untouched. Applied snapshots rem
 independent of library deletion and retain their origin ID/name when newly applied.
 Ordinary project Undo preserves later library saves; parcel-deletion Undo restores
 the library snapshot captured before deletion, matching the existing semantics.
+
+Checklist growth-form grouping, Spanish sorting and membership presentation are
+read-only projections of the catalogue and the embedded combination snapshot.
+Legacy catalogue `system` fields are preserved for replay, not used as current
+checklist headings. No membership, quantity, placement or ecological rule changed
+with this presentation update. Handoff interfaces replace the retired designer
+apply endpoints; they never invoke the simulation transition.
 
 ## Source cautions
 
@@ -206,6 +218,22 @@ replacement resets it. Undo/Redo re-evaluates the selected complete draft in Pyt
 before accepting it, and does not change simulation history or the project undo.
 Pointer motion renders a temporary gesture preview; Python validates the final
 metres/area/positions on release. Escape cancels without a domain command.
+The same applies to arrow-key plant movement: presentation-only step sizes are
+validated in `frontend/src/designer-interactions.json`; release sends the existing
+position command. Checklist location highlights do not evaluate rules or mutate
+drafts. Crown editor Enter/blur completion sends the existing dimension command;
+it does not change dimension precedence, provenance or pinned snapshots.
+
+`defaults.placement.treeless_series` and the matching registered `treeless_series`
+rule gate standalone placement for the two vegetation series. Without plotted
+planned trees, their newly generated within-crown shrubs use independent placement;
+manual categories win. With trees the base category applies. A missing policy/rule
+pair in an older supported snapshot explicitly retains historical behaviour; a
+partial or invalid pair is rejected. Adoption never retries old unplaced instances.
+
+`scenarios/plant-names.json` owns Spanish/German/scientific presentation names.
+It never replaces immutable replay catalogue labels or taxonomic IDs. New runtime
+messages use Spanish; saved original explanations stay in technical details.
 
 
 ## Shared root-ball drawing default

@@ -2,16 +2,18 @@ import React, { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import illustrations from "./plant-illustrations.json";
 import { properties, required } from "./contracts.js";
+import { germanName, plantNames, plantText } from "./plantNames.js";
 
 export function plantIllustration(id) {
-  required(illustrations.version === 2, "Unsupported plant illustration metadata.");
+  required(illustrations.version === 3, "Unsupported plant illustration metadata.");
   const value = illustrations.plants.find((plant) => plant.id === id);
   required(value !== undefined, `Missing botanical illustration for ${id}.`);
-  properties(value, ["spanish_name", "scientific_name", "image", "features", "whole_image", "habit", "references"], `plant illustration ${id}`);
-  for (const key of ["spanish_name", "scientific_name", "image", "features", "whole_image", "habit"])
+  properties(value, ["image", "features", "whole_image", "habit", "references"], `plant illustration ${id}`);
+  for (const key of ["image", "features", "whole_image", "habit"])
     required(typeof value[key] === "string" && value[key].trim().length > 0, `Invalid ${key} for ${id}.`);
   required(Array.isArray(value.references) && value.references.length > 0, `Missing botanical references for ${id}.`);
-  return value;
+  const identity=plantNames(id);
+  return {...value,features:plantText(value.features),habit:plantText(value.habit),spanish_name:identity.spanish,german_name:germanName(identity),scientific_name:identity.scientific};
 }
 
 export function PlantPortrait({ id }) {
@@ -66,6 +68,7 @@ function PlantImageViewer({ illustration, onClose }) {
       <header className="plant-image-heading">
         <div id={titleId}>
           <strong lang="es">{illustration.spanish_name}</strong>
+          <small>{illustration.german_name}</small>
           <i>{illustration.scientific_name}</i>
           <small>Whole plant and botanical detail · illustrations not to scale</small>
         </div>

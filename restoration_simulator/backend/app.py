@@ -23,7 +23,7 @@ from .parcel_removal import plan as removal_plan, delete as delete_parcels
 from .configuration import load_defaults
 from . import plant_prices
 from . import designer
-from . import documents
+from . import documents, planning_draft
 
 
 class StrictModel(BaseModel):
@@ -48,6 +48,7 @@ class ActionRequest(StrictModel):
 
 class CommitRequest(ActionRequest):
     request_id: UUID
+    planning_revision: Annotated[StrictInt, Field(ge=0)] | None = None
 
 
 class ImportRequest(Mutation):
@@ -99,15 +100,20 @@ class DesignerLibraryRequest(Mutation):
     confirm: StrictBool
 
 
-class DesignerApplyPreview(StrictModel):
+class PlanningEditRequest(Mutation):
+    planning_revision: Annotated[StrictInt, Field(ge=0)]
+    administration: dict[str, Any]
+
+
+class HandoffPreviewRequest(StrictModel):
     revision: StrictInt
     design_revision: StrictInt
-    administration: dict[str, Any]
+    planning_revision: StrictInt
 
 
-class DesignerApplyRequest(Mutation):
+class HandoffRequest(Mutation):
     design_revision: StrictInt
-    administration: dict[str, Any]
+    planning_revision: StrictInt
 
 
 def view(data, explanation=None):
@@ -127,6 +133,7 @@ def view(data, explanation=None):
         "can_undo": data["undo"] is not None,
         "designer_saved": data["designer"] is not None and data["designer"]["active_id"] is not None,
         "designer_revision": data["designer_revision"],
+        "planning": None if project is None else planning_draft.workspace(project, data["planning"], data["planning_revision"]),
         "undo_kind": "delete" if data["undo_edit"] is not None else "action",
         "actions": list_actions(project) if project else [],
         "summary": summary(project) if project else None,
@@ -253,17 +260,36 @@ def create_app(save_path=None):
         return designer.workspace(data["project"],data["designer"],data["designer_revision"])
 
     @app.post("/api/designer/apply-preview")
-    def designer_apply_preview(req: DesignerApplyPreview):
-        data = designer_state(req.revision)
-        if req.design_revision != data["designer_revision"]: raise Conflict("Designer draft changed. Review again.")
-        if data["designer"] is None or data["designer"]["active_id"] is None: raise Invalid("Save the active design under a name first.")
-        inputs = designer.apply_inputs(data["project"],data["designer"]["draft"],req.administration)
-        result = engine_preview(data["project"],"demonstrator",inputs)
-        return {"preview":result,"previous":data["project"]["demonstrator"],"notice":"Applying replaces the current demonstrator plan and resets its baseline/funding preparation as in the existing planning action. Review all costs and retained administration before confirming."}
-
     @app.post("/api/designer/apply")
-    def designer_apply(req: DesignerApplyRequest):
-        return mutate("apply_designer",req)
+    def designer_apply_retired():
+        return JSONResponse({"detail": "This designer apply operation was retired. Refresh the app, use the design in Project planning, and commit the demonstrator there."}, status_code=410)
+
+    @app.get("/api/demonstrator/draft")
+    def get_planning():
+        data = designer_state()
+        return planning_draft.workspace(data["project"], data["planning"], data["planning_revision"])
+
+    @app.post("/api/demonstrator/draft")
+    def update_planning(req: PlanningEditRequest):
+        data = get_store().planning_mutation("edit", req.revision, req.planning_revision, str(req.request_id), administration=req.administration)
+        return planning_draft.workspace(data["project"], data["planning"], data["planning_revision"])
+
+    @app.post("/api/designer/handoff-preview")
+    def handoff_preview(req: HandoffPreviewRequest):
+        data = designer_state(req.revision)
+        if req.design_revision != data["designer_revision"] or req.planning_revision != data["planning_revision"]:
+            raise Conflict("Design or planning draft changed. Review the transfer again.")
+        proposed = planning_draft.handoff(data["planning"], data["project"], data["designer"])
+        previous = planning_draft.initial(data["project"]) if data["planning"] is None else data["planning"]
+        recorded = planning_draft.workspace(data["project"], data["planning"], data["planning_revision"])["planting"]
+        return {"planning": planning_draft.workspace(data["project"], proposed, data["planning_revision"]),
+                "previous": None if recorded is None else {k: previous["inputs"][k] for k in designer.PHYSICAL},
+                "notice": "Only the physical planning draft changes. Demonstration, funding, remaining budget, timing and notes are retained. No demonstrator is created; cash, time and history stay unchanged."}
+
+    @app.post("/api/designer/handoff")
+    def handoff(req: HandoffRequest):
+        data = get_store().planning_mutation("handoff", req.revision, req.planning_revision, str(req.request_id), design_revision=req.design_revision)
+        return planning_draft.workspace(data["project"], data["planning"], data["planning_revision"])
 
     @app.get("/api/designer/report")
     def designer_report(design_id: UUID | None = None):
@@ -342,6 +368,8 @@ def create_app(save_path=None):
             "revision": data["revision"],
             **removal_plan(data["project"], req.parcel_id),
         }
+        if data["planning"] is not None and planning_draft.after_parcel_deletion(data["planning"], data["project"], delete_parcels(data["project"], [req.parcel_id]), req.parcel_id) is None:
+            result["removed_actions"].append({"title": "Demonstrator planning draft", "year": data["project"]["time"], "reason": "Linked to a parcel removed by this deletion."})
         if data["designer"] is not None:
             before = data["project"]
             after = delete_parcels(before,[req.parcel_id])

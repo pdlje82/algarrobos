@@ -140,6 +140,10 @@
     "grass": 0.6
   },
   "placement": {
+    "treeless_series": {
+      "combinations": ["lentisk_series", "coscoja_series"],
+      "category": "independent"
+    },
     "minimum_clearance": 1,
     "seed": 0,
     "attempts_per_parent": 160,

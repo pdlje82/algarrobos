@@ -4,17 +4,19 @@ import { readFile } from "node:fs/promises";
 import baseCatalogue from "../../scenarios/planting-catalog-v2.json" with { type: "json" };
 import priceDefaults from "../../scenarios/plant-prices.json" with { type: "json" };
 import illustrations from "../src/plant-illustrations.json" with { type: "json" };
+import { plantNames } from "../src/plantNames.js";
 import { checklistSystems, preselectPlants, changeUnitCost, cataloguePricePatch } from "../src/plantSelection.js";
 import { unitCost } from "../src/contracts.js";
 import { initialPreview, previewReducer, previewView } from "../src/previewState.js";
 const catalogue = { ...baseCatalogue, plants: baseCatalogue.plants.map((plant) => ({ ...plant, default_unit_cost: priceDefaults.unit_costs[plant.id] })) };
 
 test("all catalogue plants have names, references, and distinct transparent whole-plant and detail images", async () => {
-  assert.equal(illustrations.version, 2);
+  assert.equal(illustrations.version, 3);
   assert.deepEqual(illustrations.plants.map((plant) => plant.id).sort(), catalogue.plants.map((plant) => plant.id).sort());
   for (const plant of illustrations.plants) {
-    assert.ok(plant.spanish_name.trim().length > 0);
-    assert.ok(plant.scientific_name.trim().length > 0);
+    assert.ok(plantNames(plant.id).spanish.trim().length > 0);
+    assert.ok(plantNames(plant.id).scientific.trim().length > 0);
+    assert.equal(Object.hasOwn(plant,"spanish_name"),false,"Illustration files do not duplicate the name authority");
     assert.ok(plant.habit.trim().length > 0);
     assert.ok(plant.references.length > 0);
     for (const reference of plant.references) assert.equal(new URL(reference.url).protocol, "https:");

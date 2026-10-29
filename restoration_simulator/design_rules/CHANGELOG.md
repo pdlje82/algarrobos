@@ -1,5 +1,15 @@
 # Rule changes
 
+## 2026-10-29 · algarroba-designer-2026-10-29-v5 · engine/draft v3
+
+- Register the explicit treeless-series placement policy for lentisco/coscoja
+  starters and selected optional shrubs. Only newly generated instances change;
+  manual preferences win and plotted trees retain ordinary crown placement.
+- Existing bundles without this optional policy preserve historical behaviour.
+  Rules adoption preserves counts, prices, positions and already unplaced plants.
+- Spanish/German/scientific display identities live in scenarios/plant-names.json;
+  they do not replace historical catalogue labels or saved evidence.
+
 ## 2026-10-29 · algarroba-designer-2026-10-29-v4 · engine/draft v3
 
 - All 23 plants receive one positive, editable crown/plant drawing diameter.

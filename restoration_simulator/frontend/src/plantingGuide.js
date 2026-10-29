@@ -1,4 +1,5 @@
 import { required } from "./contracts.js";
+import { plantPresentation } from "./plantNames.js";
 
 export const evidenceLabels = Object.freeze({
   guidance: "Book guidance",
@@ -81,7 +82,7 @@ function validateGuideContents(guide) {
   cards([guide.oak], "oak comparison", ["title", "text"], true);
   list(guide.limitations, "evidence limitations");
   for (const limitation of guide.limitations) nonempty(limitation, "evidence limitation");
-  return guide;
+  return plantPresentation(guide);
 }
 
 export function handbookPageUrl(source, page) {

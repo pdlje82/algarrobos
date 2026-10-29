@@ -204,7 +204,9 @@ class ApiTests(unittest.TestCase):
                 vegetation_system="woodland",
                 water_plan="temporary",
             )
-            self.post("commit", action_id="demonstrator", inputs=values)
+            from planning_helpers import stage_plan
+            staged=stage_plan(self.client,values)
+            self.post("commit", action_id="demonstrator", inputs=staged["draft"]["inputs"],planning_revision=staged["planning_revision"])
             baseline = next(
                 a
                 for a in self.current()["actions"]

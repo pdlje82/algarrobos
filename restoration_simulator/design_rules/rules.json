@@ -323,5 +323,15 @@
       }
     ],
     "limitations": "Woodland co-occurrence does not prove beneath-crown compatibility with every tree. Clearance, grouping, seed and attempts are geometric project assumptions. Failed placements retain counts and costs. Only new instances are generated. Manual movement detaches shrubs; tree movement translates associated offsets. No sun, wind, soil or mycelial suitability model."
+  },
+  {
+    "id": "treeless_series",
+    "title": "Standalone shrub-series layout without plotted trees",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "designer-v3.placement_category registers defaults.placement.treeless_series. New within-crown shrubs contributed by either registered vegetation series use independent placement when no planned trees are plotted. Explicit user categories take precedence. When plotted trees exist, the ordinary species category applies. Existing positions and unplaced instances are never regenerated.",
+    "evidence": "assumption",
+    "sources": [{"id": "FOREST-003", "pages": [3]}],
+    "limitations": "This is an explicit geometric project assumption for exploring shrub communities, not evidence of ecological suitability or an inferred source planting distance. Bounded attempts, centre clearance and zone limits still apply. Older bundles without this policy retain their previous tree requirement until reviewed."
   }
 ]

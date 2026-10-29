@@ -4,7 +4,7 @@ from . import designer_v1 as legacy
 from . import designer_v3 as current
 from . import planting, plant_prices
 from .configuration import keys
-from .engine import require, list_actions
+from .engine import require
 
 DIRECTORY = legacy.DIRECTORY
 LIBRARY = legacy.LIBRARY
@@ -54,11 +54,10 @@ def workspace(project, attachment, revision):
     current = load_bundle()
     draft = new_draft(project) if attachment is None else attachment["draft"]
     result = evaluate(draft,project)
-    action = next(a for a in list_actions(project) if a["kind"]=="demo_plan")
     return {"design_revision":revision,"project_revision":project["revision"],"saved":attachment is not None and attachment["active_id"] is not None,
         "evaluation":result,"catalogue":planting.catalogue(),"price_defaults":plant_prices.snapshot(),
         "fields":workspace_fields(project), "library":library.summaries(attachment), "active_design_id":None if attachment is None else attachment["active_id"],
-        "library_defaults":library.defaults(), "suggested_name":library.available_name(attachment),"available":action["available"],"reason":action["reason"],
+        "library_defaults":library.defaults(), "suggested_name":library.available_name(attachment),"available":True,"reason":None,
         "rules_update_available":digest(current)!=digest(draft["bundle"]),"can_import":project["demonstrator"] is not None and not project["demonstrator"]["legacy"]}
 
 

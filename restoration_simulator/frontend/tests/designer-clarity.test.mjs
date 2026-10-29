@@ -34,7 +34,7 @@ test("order rows preserve applied purchasing prices and quantities; alternatives
   const applied={status:"planned",legacy:false,planting:{entries:plants}};
   const before=JSON.stringify(applied);
   const list=plantOrderRows(applied);
-  assert.deepEqual(list.rows.map(p=>[p.label,p.unit_cost,p.quantity]),[["Carob",6.41,7],["Z custom",0,12]]);
+  assert.deepEqual(list.rows.map(p=>[p.label,p.unit_cost,p.quantity]),[["Algarrobo",6.41,7],["Z custom",0,12]]);
   assert.equal(JSON.stringify(applied),before);
   assert.equal(list.rows[0].price_confirmed,false);
   assert.equal(plantOrderRows({status:"Not planned"}).state,"empty");

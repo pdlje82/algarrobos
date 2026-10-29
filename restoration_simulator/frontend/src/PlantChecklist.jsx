@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
 import { properties, required, inputValue, record, unitCost, validUnitCost } from "./contracts.js";
 import { checklistSystems, preselectPlants, changeUnitCost, cataloguePricePatch } from "./plantSelection.js";
 import { PlantPortrait, plantIllustration } from "./PlantPortrait.jsx";
@@ -8,10 +8,12 @@ import { money } from "./format.js";
 import { DensityControl } from "./DensityControl.jsx";
 import { PlantSymbol } from "./PlantSymbol.jsx";
 import { symbolForPlant } from "./plantSymbols.js";
+import { displayCatalogue, plantNames, plantSearchText, plantText } from "./plantNames.js";
+import { PlantNames } from "./PlantNames.jsx";
 
-export function PlantChecklist({ field, value, onChange, disabled, request, designerMode = false, designer, onPlantInformation }) {
+export function PlantChecklist({ field, value, onChange, disabled, request, designerMode = false, designer, onPlantInformation, onLocate, active = true, selectedSpecies = null, reveal = null }) {
   const checklistId = useId();
-  const catalog = field.catalogue;
+  const catalog = displayCatalogue(field.catalogue);
   properties(value, ["version", "entries"], "plant selection");
   required(
     Array.isArray(value.entries),
@@ -23,11 +25,49 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
     properties(entry, ["unit_cost", "price_confirmed"], "priced plant entry");
     required(typeof entry.price_confirmed === "boolean", "Missing plant price confirmation value.");
   }
-  const systems = checklistSystems(catalog);
+  const systems = designerMode ? catalog.groups.map(group=>({...group,plants:[...catalog.plants.filter(p=>p.group===group.id),...entries.filter(p=>Object.hasOwn(p,"label")&&p.group===group.id)].sort((a,b)=>a.label.localeCompare(b.label,"es"))})) : checklistSystems(catalog);
+  const host=useRef(null),lastScroll=useRef(null);
   const PricePanel = designerMode ? "details" : "div";
   const [search,setSearch]=useState("");
   const [selectedOnly,setSelectedOnly]=useState(false);
-  function visiblePlant(plant){const botanical=plantIllustration(plant.id);return (!selectedOnly || entries.some(e=>e.id===plant.id)) && [plant.label,botanical.spanish_name,botanical.scientific_name].join(" ").toLocaleLowerCase().includes(search.toLocaleLowerCase());}
+  function matchesFilter(plant){return (!selectedOnly || entries.some(e=>e.id===plant.id)) && (plant.id.startsWith("custom-")?plant.label.toLocaleLowerCase():plantSearchText(plant.id)).includes(search.toLocaleLowerCase());}
+  const revealedId=reveal!==null&&reveal.species===selectedSpecies?selectedSpecies:null;
+  function visiblePlant(plant){return plant.id===revealedId||matchesFilter(plant);}
+  useEffect(()=>{
+    if(!active||reveal===null||revealedId===null||lastScroll.current===reveal.token)return;
+    const frame=requestAnimationFrame(()=>{
+      const row=[...host.current.querySelectorAll("[data-plant-row]")].find(node=>node.dataset.plantRow===revealedId);
+      required(row!==undefined,"The selected plant row is unavailable.");
+      const container=host.current.closest(".designer-controls");
+      required(container!==null,"The designer checklist scroll container is unavailable.");
+      const identity=row.querySelector(".plant-checkbox");required(identity!==null,"The selected plant identity is unavailable.");
+      const r=identity.getBoundingClientRect(),c=container.getBoundingClientRect();
+      const visibleTop=Math.max(c.top,0),visibleBottom=Math.min(c.bottom,window.innerHeight);
+      // On a phone the entire controls panel can be below the drawing. Prepare
+      // its own scroll position without jumping the page to that offscreen panel.
+      const visible=visibleBottom>visibleTop;
+      const origin=visible?visibleTop:c.top,height=visible?visibleBottom-visibleTop:container.clientHeight;
+      const top=Math.max(0,Math.min(container.scrollHeight-container.clientHeight,container.scrollTop+r.top-origin-Math.max(0,(height-r.height)/2)));
+      container.scrollTo({top,behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});lastScroll.current=reveal.token;
+    });
+    return()=>cancelAnimationFrame(frame);
+  },[active,reveal?.token,revealedId]);
+  const [pointerSpecies,setPointerSpecies]=useState(null), [focusSpecies,setFocusSpecies]=useState(null);
+  const visibleIds=JSON.stringify([...catalog.plants.filter(visiblePlant).map(p=>p.id),...entries.filter(p=>Object.hasOwn(p,"label")).map(p=>p.id)]);
+  useEffect(()=>{
+    if(!designerMode)return;
+    const visible=new Set(JSON.parse(visibleIds));
+    if(!active||!visible.has(pointerSpecies))setPointerSpecies(null);
+    if(!active||!visible.has(focusSpecies))setFocusSpecies(null);
+    onLocate(active ? (visible.has(pointerSpecies)?pointerSpecies:visible.has(focusSpecies)?focusSpecies:null) : null);
+  },[designerMode,active,visibleIds,pointerSpecies,focusSpecies,onLocate]);
+  useEffect(()=>()=>{if(designerMode)onLocate(null);},[designerMode,onLocate]);
+  const locateEvents=id=>designerMode?{
+    onPointerEnter:e=>{if(e.pointerType!=="touch")setPointerSpecies(id);},
+    onPointerLeave:()=>setPointerSpecies(current=>current===id?null:current),
+    onFocus:()=>setFocusSpecies(id),
+    onBlur:e=>{if(!e.currentTarget.contains(e.relatedTarget))setFocusSpecies(current=>current===id?null:current);},
+  }:{};
   const [customName, setCustomName] = useState("");
   const [customGroup, setCustomGroup] = useState(
     catalog.custom_defaults.custom_group,
@@ -74,12 +114,25 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
     onChange({ version: catalog.selection_version, entries: next });
   }
   function toggle(plant, checked) {
-    if (designerMode) { designer.command({kind:"plant",id:plant.id,enabled:checked}); return; }
+    if (designerMode) return designer.command({kind:"plant",id:plant.id,enabled:checked});
     change(
       checked
         ? [...entries, { id: plant.id, quantity: plant.suggested_quantity, unit_cost: priceDefaults.unit_costs[plant.id], price_confirmed: false }]
         : entries.filter((p) => p.id !== plant.id),
     );
+  }
+  async function activatePlant(plant){
+    if(disabled||priceSaving)return;
+    if(selected(plant.id)===undefined){
+      if(!defaultsReady){setMessage("Load default prices before selecting a plant.");return;}
+      const accepted=await toggle(plant,true);
+      if(designerMode&&!accepted)return;
+    }
+    if(designerMode)designer.inspectSpecies(plant.id);
+  }
+  function rowClick(event,plant){
+    if(event.target.closest('button,input,select,textarea,a,summary,details,label,[role="button"]')!==null)return;
+    activatePlant(plant);
   }
   function quantity(id, next) {
     change(entries.map((p) => (p.id === id ? { ...p, quantity: next } : p)));
@@ -206,8 +259,15 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
       </label>
     </div>
   );
+  function customRow(p){return <div className={`plant-row plant-selected ${selectedSpecies===p.id?"is-drawing-selected":""}`} key={p.id} data-plant-row={p.id} {...locateEvents(p.id)} onClick={e=>rowClick(e,p)}>
+    <div className="plant-checkbox"><input type="checkbox" aria-label={`Select ${p.label}`} checked onChange={()=>designerMode?designer.command({kind:"plant",id:p.id,enabled:false}):change(entries.filter(x=>x.id!==p.id))}/>
+      <span className="plant-custom-portrait" aria-label="No illustration: plant identity not verified">?</span><button type="button" className="plant-names plant-name-select" onClick={()=>activatePlant(p)} aria-label={`Open ${p.label}`}>{designerMode&&<PlantSymbol appearance={symbolForPlant(p)}/>} {p.label}<small>Custom plant</small></button></div>
+    {priceControls(p,p)}{designerMode&&<button type="button" onClick={()=>designer.inspectSpecies(p.id)}>Edit diameter · {p.label}</button>}
+    <small className="plant-info muted">User-defined; identity, water needs and suitability unverified. Uncheck to remove.</small>
+  </div>;}
+  const temporarilyShown=revealedId===null?undefined:systems.flatMap(s=>s.plants).find(p=>p.id===revealedId&&!matchesFilter(p));
   return (
-    <div className="plant-checklist">
+    <div className="plant-checklist" ref={host}>
       {field.legacy_notice && <p className="reason">{field.legacy_notice}</p>}
       <p>
         {designerMode ? "Check plants and edit density and prices. Counts are calculated for your planting area. Approaches supply optional starter mixes." : "Use a system preset to check its plants, then adjust the checklist and quantities. Combine systems freely. Each plant appears once in your quantity cart; presets preserve quantities you have already entered."}
@@ -234,7 +294,8 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
         references. Quantities and growth forms are planning assumptions.
       </p>
       }
-      {designerMode && <><label>Find a plant<input type="search" value={search} onChange={e=>setSearch(e.target.value)} placeholder="English, Spanish or Latin name" /></label><label className="designer-choice"><input type="checkbox" checked={selectedOnly} onChange={e=>setSelectedOnly(e.target.checked)}/>Show selected plants only</label></>}
+      {designerMode && <><label>Find a plant<input type="search" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Spanish, German or scientific name" /></label><label className="designer-choice"><input type="checkbox" checked={selectedOnly} onChange={e=>setSelectedOnly(e.target.checked)}/>Show selected plants only</label><p className="muted">Click a plant row to select it or open its controls. Uncheck its checkbox to remove it.</p></>}
+      {temporarilyShown!==undefined&&<p className="muted" role="status">Showing selected {temporarilyShown.label} despite the current filter.</p>}
       <p role="status" className="plant-message">
         {message}
       </p>
@@ -260,14 +321,18 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
             {system.plants.filter((plant) => selected(plant.id)).length} of {system.plants.length} species checked
           </p>
           {system.plants.filter(plant=>!designerMode || visiblePlant(plant)).map((plant) => {
+              if(plant.id.startsWith("custom-"))return customRow(plant);
               const entry = selected(plant.id);
               const illustration = plantIllustration(plant.id);
               const group = catalog.groups.find((g) => g.id === plant.group);
               required(group !== undefined, `Missing growth form for ${plant.label}.`);
               return (
                 <div
-                  className={`plant-row ${entry ? "plant-selected" : ""}`}
+                  className={`plant-row ${entry ? "plant-selected" : ""} ${selectedSpecies===plant.id?"is-drawing-selected":""}`}
                   key={plant.id}
+                  data-plant-row={plant.id}
+                  {...locateEvents(plant.id)}
+                  onClick={e=>rowClick(e,plant)}
                 >
                   <div className="plant-identity">
                     <div className="plant-checkbox">
@@ -280,13 +345,11 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
                         onChange={(e) => toggle(plant, e.target.checked)}
                       />
                       <PlantPortrait id={plant.id} />
-                      <label className="plant-names" htmlFor={`${checklistId}-${plant.id}`}>
+                      <button type="button" className="plant-names plant-name-select" disabled={entry===undefined&&!defaultsReady} onClick={()=>activatePlant(plant)} aria-label={`Open ${plant.label}`}>
                         {designerMode&&<PlantSymbol appearance={symbolForPlant(plant)}/>}
-                        {plant.label}
-                        <small className="plant-spanish" lang="es"><span className="sr-only">Español: </span>{illustration.spanish_name}</small>
-                        <small><i>{illustration.scientific_name}</i></small>
+                        <PlantNames id={plant.id}/>
                         <small>{group.label}</small>
-                      </label>
+                      </button>
                     </div>
                     {plant.id === "carob" && (designerMode ? <button type="button" onClick={onPlantInformation}>Planting information</button> : <PlantingExplorer />)}
                     {designerMode&&entry&&<button type="button" onClick={()=>designer.inspectSpecies(plant.id)}>Edit diameter · {plant.label}</button>}
@@ -294,14 +357,15 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
                   {(!designerMode || entry !== undefined) && priceControls(entry, plant)}
                   <details className="plant-info">
                     <summary>Details for {plant.label}</summary>
+                    {designerMode&&<div className="plant-memberships"><strong>Approach membership</strong>{designer.combinations.filter(c=>c.starter.includes(plant.id)||c.optional.includes(plant.id)).map(c=><p key={c.id}>{c.title}: <strong>{c.starter.includes(plant.id)?"Starter":"Optional companion"}</strong></p>)}<small>Membership is a reference choice, not proof of suitability for this site.</small></div>}
                     {designerMode && entry!==undefined && plant.group!=="tree" && designer.placement!==null && <label>Automatic placement for new plants<select value={designer.placement.categories[plant.id]} onChange={e=>designer.command({kind:"placement",id:plant.id,category:e.target.value})}><option value="within_crowns">Within tree crowns</option><option value="open_ground">Open ground</option><option value="independent">Independent</option></select><small>Existing positions stay unchanged. Provisional drawing preference.</small></label>}
                     {designerMode && <label className="plant-exclusion"><input type="checkbox" checked={designer.exclusions.includes(plant.id)} onChange={e=>designer.command({kind:"exclude",id:plant.id,enabled:e.target.checked})} aria-label={`Exclude ${plant.label} from automatic suggestions`}/>Exclude from automatic suggestions</label>}
                     <p>
                       {illustration.features}
                     </p>
-                    <p>{plant.detail}{" "}
+                    <p>{designerMode?"Choose native provenance and check soil, water and permissions for the actual site.":plantText(plant.detail)}{" "}
                       <DocumentLink href={plant.source} target="_blank" rel="noreferrer">
-                        Vegetation systems poster
+                        {plant.source==="/api/sources/dryland-systems"?"Vegetation systems poster":"Plant reference"}
                       </DocumentLink>
                     </p>
                     <ul>
@@ -312,6 +376,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
                       ))}
                     </ul>
                     <p>{illustration.habit} Form varies with age, site and management.</p>
+                    <p>{plantNames(plant.id).note}</p>
                     <small>AI-generated botanical illustrations, checked against the features above. Not to scale.</small>
                     <p><a href={illustration.whole_image} target="_blank" rel="noreferrer">Open whole plant at original size</a>{" · "}<a href={illustration.image} target="_blank" rel="noreferrer">Open botanical detail at original size</a></p>
                   </details>
@@ -320,28 +385,27 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
             })}
         </fieldset>
       ))}
-      {entries.some((p) => Object.hasOwn(p, "label")) && (
+      {!designerMode&&entries.some((p) => Object.hasOwn(p, "label")) && (
         <fieldset className="plant-group" disabled={disabled}>
           <legend>Your custom plants</legend>
           {entries
             .filter((p) => Object.hasOwn(p, "label"))
+            .sort((a,b)=>a.label.localeCompare(b.label,"es"))
             .map((p) => (
-              <div className="plant-row plant-selected" key={p.id}>
-                <label className="plant-checkbox">
+              <div className="plant-row plant-selected" key={p.id} data-plant-row={p.id} {...locateEvents(p.id)} onClick={e=>rowClick(e,p)}>
+                <div className="plant-checkbox">
                   <input
                     type="checkbox"
                     aria-label={`Select ${p.label}`}
                     checked
-                    onChange={() =>
-                      change(entries.filter((x) => x.id !== p.id))
-                    }
+                    onChange={() => designerMode?designer.command({kind:"plant",id:p.id,enabled:false}):change(entries.filter((x) => x.id !== p.id))}
                   />
                   <span className="plant-custom-portrait" aria-label="No illustration: plant identity not verified">?</span>
-                  <span>
+                  <button type="button" className="plant-names plant-name-select" onClick={()=>activatePlant(p)} aria-label={`Open ${p.label}`}>
                     {designerMode&&<PlantSymbol appearance={symbolForPlant(p)}/>}
                     {p.label} <small>Custom plant</small>
-                  </span>
-                </label>
+                  </button>
+                </div>
                 {priceControls(p, p)}
                 {designerMode&&<button type="button" onClick={()=>designer.inspectSpecies(p.id)}>Edit diameter · {p.label}</button>}
                 <small className="plant-info muted">

@@ -119,6 +119,7 @@ test("missing access area cannot be replaced by another summary field", () => {
     configuration_mode: "json-snapshot-v2",
     configuration_notice: null,
     revision: 1,
+    planning:{project_revision:1,planning_revision:0,draft:{version:1,inputs:{},source:null},saved:false,committed:false,planting:null,available:false,reason:"No land"},
     can_undo: false,
     undo_kind: "action",
     actions: [],

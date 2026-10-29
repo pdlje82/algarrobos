@@ -20,7 +20,7 @@ export function PocketHelp({facts,showCrowns}) {
 
 export function DensityHelp({defaults}) {
   const help=designerHelp.features.density;
-  return <><p>{help.text}</p>{defaults===null?<p>This historical design has no saved density defaults; it uses recorded plant counts.</p>:<p>Saved starting values, per species: carob <strong>{defaults.carob}/ha</strong>, shrubs <strong>{defaults.shrub}/ha</strong>, other trees <strong>{defaults.tree}/ha</strong>, grasses <strong>{defaults.grass}/ha</strong>. You can change each species separately.</p>}<p>{help.example}</p></>;
+  return <><p>{help.text}</p>{defaults===null?<p>This historical design has no saved density defaults; it uses recorded plant counts.</p>:<p>Saved starting values, per species: algarrobo <strong>{defaults.carob}/ha</strong>, shrubs <strong>{defaults.shrub}/ha</strong>, other trees <strong>{defaults.tree}/ha</strong>, grasses <strong>{defaults.grass}/ha</strong>. You can change each species separately.</p>}<p>{help.example}</p></>;
 }
 
 export function FeatureHelp({id}) {
@@ -43,12 +43,12 @@ export function DesignGuide({evaluation,showCrowns,onReference}) {
   const combinations=draft.bundle.vegetation_combinations.filter(c=>draft.combinations.includes(c.id)||draft.approaches.some(id=>c.id===id+"_mix"));
   return <section className="designer-guide"><h2>Design guide</h2>
     <p>Read about the drawing and the planting choices.</p>
-    <div className="designer-reference-links"><button type="button" onClick={()=>onReference("plant")}>Carob Planting Explorer</button><button type="button" onClick={()=>onReference("models")}>Restoration Model Explorer</button></div>
+    <div className="designer-reference-links"><button type="button" onClick={()=>onReference("plant")}>Algarrobo Planting Explorer</button><button type="button" onClick={()=>onReference("models")}>Restoration Model Explorer</button></div>
     {evaluation.rules.filter(r=>r.id!=="density_scenarios").map(r=><details key={r.id}><summary>{designerHelp.rules[r.id]===undefined?r.title:designerHelp.rules[r.id].title}</summary>
       <RuleHelp id={r.id} evaluation={evaluation} showCrowns={showCrowns}/>
       <details className="designer-source-details"><summary>Sources and details</summary><p>{r.description}</p><p>{r.limitations}</p><SourceLinks refs={r.sources} sources={draft.bundle.sources}/>
         {r.id==="density"&&evaluation.rules.filter(rule=>rule.id==="density_scenarios").map(rule=><React.Fragment key={rule.id}><p>{rule.description}</p><p>{rule.limitations}</p><SourceLinks refs={rule.sources} sources={draft.bundle.sources}/></React.Fragment>)}
-        {r.id==="autumn"&&<p>For container comparisons, the Níjar example and differences between specifications, open Buying plants and Establishment care in the Carob Planting Explorer.</p>}
+        {r.id==="autumn"&&<p>For container comparisons, the Níjar example and differences between specifications, open Buying plants and Establishment care in the Algarrobo Planting Explorer.</p>}
       </details>
     </details>)}
     <details><summary>Vegetation combinations</summary><FeatureHelp id="combinations"/>{combinations.map(c=><section key={c.id}><h4>{c.title}</h4><p>{designerHelp.combinations[c.id]===undefined?`Help unavailable for combination ${c.id}.`:designerHelp.combinations[c.id]}</p><details><summary>Sources and details</summary><p>{c.description}</p><SourceLinks refs={c.sources} sources={draft.bundle.sources}/></details></section>)}</details>

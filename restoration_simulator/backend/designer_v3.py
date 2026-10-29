@@ -10,7 +10,7 @@ from pathlib import Path
 
 from . import designer_v1 as legacy
 from . import designer_v2 as previous
-from . import planting, plant_prices
+from . import planting, plant_prices, plant_names
 from .configuration import read_json, keys
 from .engine import Invalid, require, number
 
@@ -31,7 +31,7 @@ def catalogue_context(function):
     def call(*args, **kwargs):
         if _catalogue.get() is not None:
             return function(*args, **kwargs)
-        token = _catalogue.set({p["id"]: p for p in planting.catalogue()["plants"]})
+        token = _catalogue.set(display_catalogue())
         try:
             return function(*args, **kwargs)
         finally:
@@ -43,8 +43,13 @@ def catalogue_rows():
     rows = _catalogue.get()
     if rows is None:
         # Direct helper calls outside a preview still require a validated read.
-        return {p["id"]: p for p in planting.catalogue()["plants"]}
+        return display_catalogue()
     return rows
+
+
+def display_catalogue():
+    names = plant_names.load()
+    return {p["id"]: {**p, "display_label": names[p["id"]]["spanish"]} for p in planting.catalogue()["plants"]}
 
 
 def v2_bundle(bundle):
@@ -79,7 +84,15 @@ def validate_bundle(bundle):
     keys(d["custom_diameters"], {"tree", "shrub", "grass"}, "custom diameter defaults")
     require(all(number(v, .001, 200) for v in [*d["mature_diameters"].values(), *d["custom_diameters"].values()]), "Every plant needs a positive drawing diameter.")
     policy = d["placement"]
-    keys(policy, {"minimum_clearance", "seed", "attempts_per_parent", "attempts_open", "categories", "custom_category", "by_species"}, "placement policy")
+    keys(policy, {"minimum_clearance", "seed", "attempts_per_parent", "attempts_open", "categories", "custom_category", "by_species"} | ({"treeless_series"} if "treeless_series" in policy else set()), "placement policy")
+    has_series_rule = any(r["id"] == "treeless_series" for r in bundle["rules"])
+    require(("treeless_series" in policy) == has_series_rule, "Treeless-series policy and its registered rule must appear together.")
+    if has_series_rule:
+        series = policy["treeless_series"]
+        keys(series, {"combinations", "category"}, "treeless series policy")
+        require(series["category"] == "independent" and isinstance(series["combinations"], list) and series["combinations"] and len(set(series["combinations"])) == len(series["combinations"]) and set(series["combinations"]) <= {c["id"] for c in bundle["vegetation_combinations"]}, "Invalid treeless-series placement configuration.")
+        rule = next(r for r in bundle["rules"] if r["id"] == "treeless_series")
+        require(rule["effect"] == "advisory" and rule["condition"] == "always", "Unsupported treeless-series rule handler.")
     require(number(policy["minimum_clearance"], .001, 100) and type(policy["seed"]) is int and 0 <= policy["seed"] <= 2**32-1, "Invalid placement clearance/seed.")
     require(all(type(policy[k]) is int and 1 <= policy[k] <= 10000 for k in ("attempts_per_parent", "attempts_open")), "Placement attempts must be bounded positive integers.")
     require(policy["categories"] == ["within_crowns", "open_ground", "independent"] and policy["custom_category"] in policy["categories"], "Unsupported placement categories.")
@@ -108,7 +121,9 @@ def load_bundle():
     m = read_json(DIRECTORY / "manifest.json")
     require(m["version"] == 3 and m["engine"] == "designer-v3", "Current repository rules must use designer-v3. Restore the versioned manifest; saved older bundles are supported only as pinned snapshots.")
     require(m["files"] == ["defaults.json", "sources.json", "rules.json", "vegetation_combinations.json", "treatments.json", "plant_dimensions.json"], "Unsupported designer file manifest.")
-    return validate_bundle({"manifest": m, **{Path(f).stem: read_json(DIRECTORY / f) for f in m["files"]}})
+    bundle = validate_bundle({"manifest": m, **{Path(f).stem: read_json(DIRECTORY / f) for f in m["files"]}})
+    require("treeless_series" in bundle["defaults"]["placement"], "Current repository rules require the registered treeless-series policy.")
+    return bundle
 
 
 def count_for(density, area):
@@ -308,7 +323,15 @@ def placement_category(draft, species):
     if species in draft["placement_preferences"]: return draft["placement_preferences"][species]
     policy = draft["bundle"]["defaults"]["placement"]
     if species.startswith("custom-"): return policy["custom_category"]
-    return policy["by_species"][species]
+    category = policy["by_species"][species]
+    # Older pinned bundles explicitly retain their original category behaviour.
+    if category == "within_crowns" and "treeless_series" in policy:
+        plotted_tree = any(group_for(draft, ident.rsplit(":", 1)[0]) == "tree" for ident in draft["positions"])
+        if not plotted_tree:
+            sources = wanted_species(draft)[species]
+            if any("combination:" + ident in sources for ident in policy["treeless_series"]["combinations"]):
+                return policy["treeless_series"]["category"]
+    return category
 
 
 def store_position(draft, ident, pos):
@@ -378,7 +401,7 @@ def tree_candidates(draft):
 
 def plant_name(draft, ident):
     species, index = ident.rsplit(":", 1)
-    catalogue = {ident: p["label"] for ident, p in catalogue_rows().items()}
+    catalogue = {ident: p["display_label"] for ident, p in catalogue_rows().items()}
     label = catalogue[species] if species in catalogue else draft["preferences"][species]["entry"]["label"]
     return f"{label} {int(index)+1}"
 
@@ -437,7 +460,7 @@ def place_new(draft, valid):
                         chosen, parent_id = candidate, parent
                         break
                 if chosen is not None: break
-            note = ("Placed within " + plant_name(draft, parent_id) + "’s indicative crown using the woodland-companion assumption.") if parent_id is not None else "Unplaced: no planned tree crown with available space beyond the trunk clearance."
+            note = ("Placed within " + plant_name(draft, parent_id) + "’s indicative crown using the woodland-companion assumption.") if parent_id is not None else "Unplaced: no planned tree crown is available with enough space beyond the trunk clearance."
         else:
             rng = random_for(ident)
             crowns = [circle(p) for p in trees()]
@@ -448,6 +471,8 @@ def place_new(draft, valid):
                     chosen = (x, y)
                     break
             note = ("Placed in open ground outside current planned-tree crowns." if category == "open_ground" else "Independent illustrative position within the planting zone.") if chosen is not None else "Unplaced: no space found within the zone and automatic placement preference."
+            if category == "independent" and not species.startswith("custom-") and policy["by_species"][species] == "within_crowns" and species not in draft["placement_preferences"]:
+                note += " Standalone shrub-series example because no planned trees are plotted (treeless_series rule)."
         draft["placement_notes"][ident] = note
         if chosen is None:
             if ident not in draft["unplaced"]: draft["unplaced"].append(ident)
@@ -703,7 +728,7 @@ def evaluate(original, project, command=None):
     result["reasons"] = [{"species": ident, "reasons": reasons, "rules": [r["id"] for r in result["rules"] if r["condition"] == "always" or any(c["rule"] == r["id"] and "combination:" + c["id"] in reasons for c in draft["bundle"]["vegetation_combinations"]) or r["id"] in reasons]} for ident, reasons in demand.items()]
     result["overlays"] = {ident: {k: overlay_for(draft, ident, k) for k in ("root_ball", "crown")} for ident in demand}
     result["species"] = [{"id": ident, "requested_density": draft["preferences"][ident]["density"], "effective_density": draft["preferences"][ident]["quantity"] * 10000 / draft["physical"]["restoration_area"], "density_step": 10000 / draft["physical"]["restoration_area"], "quantity": draft["preferences"][ident]["quantity"], "entry": {**draft["preferences"][ident]["entry"], "quantity": draft["preferences"][ident]["quantity"]}} for ident in demand]
-    labels = {p["id"]: p["label"] for p in planting.catalogue()["plants"]}
+    labels = {ident: p["display_label"] for ident, p in catalogue_rows().items()}
     for ident, pref in {**original["preferences"], **draft["preferences"]}.items():
         if ident not in labels: labels[ident] = pref["entry"]["label"]
     removed = before.keys() - demand.keys(); added = demand.keys() - before.keys()

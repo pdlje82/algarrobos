@@ -1,6 +1,6 @@
 """Read-only inspector facts. Never modifies saved drafts or frozen evaluators."""
 from copy import deepcopy
-from . import planting
+from . import planting, plant_names
 from .designer_v1 import checked
 
 
@@ -14,11 +14,12 @@ def single(value):
 def describe(evaluation):
     draft = evaluation["draft"]
     catalogue = {p["id"]: p for p in planting.catalogue()["plants"]}
+    names = plant_names.load()
     rows = {p["id"]: p for p in draft["selection"]["entries"]}
     remembered = {ident: pref["entry"] for ident, pref in draft["preferences"].items()} if draft["version"] >= 2 else rows
     plotted = {p["id"]: p for p in evaluation["instances"]}
     def label(species):
-        return catalogue[species]["label"] if species in catalogue else rows[species]["label"]
+        return names[species]["spanish"] if species in catalogue else rows[species]["label"]
     def numbered(ident):
         species, index = ident.rsplit(":", 1)
         return f"{label(species)} {int(index)+1}"
@@ -78,6 +79,8 @@ def describe(evaluation):
                 reason = "with_tree_outside" if ident in links else "outside"
             else:
                 reason = "not_positioned"
+                if draft["version"] == 3 and evaluation["placement"]["categories"][ident.rsplit(":", 1)[0]] == "within_crowns" and not any((catalogue[p["species"]]["group"] if p["species"] in catalogue else rows[p["species"]]["group"]) == "tree" for p in plotted.values()):
+                    reason = "no_tree"
             unplaced.append({"id": ident, "name": numbered(ident), "reason": reason})
     return {
         "version": 1, "density_defaults": densities, "crown_editors": editors, "plants": plants, "unplaced": unplaced,

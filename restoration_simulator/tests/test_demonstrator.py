@@ -459,7 +459,7 @@ class DemonstratorPersistenceTests(unittest.TestCase):
             path.write_bytes(raw)
             store = Store(path)
             current = store.snapshot()
-            self.assertEqual(current["format_version"], 6)
+            self.assertEqual(current["format_version"], 7)
             self.assertEqual(current["project"]["history"], old["history"])
             self.assertEqual(current["project"]["cash"], old["cash"])
             self.assertTrue(current["project"]["demonstrator"]["legacy"])
@@ -558,10 +558,10 @@ class DemonstratorPersistenceTests(unittest.TestCase):
                 ),
             ).json()
             s = result["project"]
-            v = values(s, "demonstrator")
             fields = next(a for a in result["actions"] if a["id"] == "demonstrator")[
                 "fields"
             ]
+            v = {f["name"]: f["default"] for f in fields}
             self.assertGreater(
                 len([f for f in fields if f["type"] in {"select", "category"}]), 12
             )
@@ -574,10 +574,13 @@ class DemonstratorPersistenceTests(unittest.TestCase):
             )
             self.assertEqual(p.status_code, 200, p.text)
             self.assertEqual(path.read_bytes(), original)
+            from planning_helpers import stage_plan
+            staged=stage_plan(client,v)
             request = dict(
                 revision=result["revision"],
                 action_id="demonstrator",
-                inputs=v,
+                inputs=staged["draft"]["inputs"],
+                planning_revision=staged["planning_revision"],
                 request_id=str(uuid4()),
             )
             first = client.post("/api/commit", json=request)
@@ -585,7 +588,7 @@ class DemonstratorPersistenceTests(unittest.TestCase):
             retry = client.post("/api/commit", json=request)
             self.assertEqual(retry.status_code, 200)
             self.assertEqual(first.json()["project"], retry.json()["project"])
-            self.assertEqual(client.get("/api/export").json()["format_version"], 6)
+            self.assertEqual(client.get("/api/export").json()["format_version"], 7)
             for source in [
                 "plant-supply",
                 "pilot-primer",

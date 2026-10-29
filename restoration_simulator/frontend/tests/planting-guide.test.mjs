@@ -6,7 +6,9 @@ import guide from "../src/carob-planting-guide.json" with { type: "json" };
 import { handbookPageUrl, validatePlantingGuide } from "../src/plantingGuide.js";
 
 test("the carob reference guide has valid sources and deliberate initial navigation", () => {
-  assert.equal(validatePlantingGuide(guide), guide);
+  const original=JSON.stringify(guide),presentation=validatePlantingGuide(guide);
+  assert.equal(JSON.stringify(guide),original,"Presentation leaves original guide evidence unchanged");
+  assert.equal(presentation.source,guide.source,"Original source titles and URLs stay intact");
   assert.equal(guide.presentation.initial_view, "planting");
   assert.equal(guide.presentation.initial_feature, "collar");
   assert.equal(guide.plant_id, "carob");

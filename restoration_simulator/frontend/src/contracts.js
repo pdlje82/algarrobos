@@ -286,7 +286,19 @@ export function demonstratorContract(value) {
 export function validateResponse(path, data) {
   object(data, "API response");
   if (path === "plant-prices") return priceDefaultsContract(data);
-  if (path === "designer/apply") return validateResponse("commit", data);
+  if (["demonstrator/draft","designer/handoff"].includes(path)) {
+    properties(data,["project_revision","planning_revision","draft","saved","committed","planting","available","reason"],"demonstrator planning draft; restart Python and reload");
+    properties(data.draft,["version","inputs","source"],"planning draft");
+    object(data.draft.inputs,"planning inputs");
+    required(data.draft.version===1&&Number.isInteger(data.project_revision)&&Number.isInteger(data.planning_revision)&&[data.saved,data.committed,data.available].every(v=>typeof v==="boolean"),"Invalid planning draft metadata.");
+    if(data.draft.source!==null){properties(data.draft.source,["draft","origin","ruleset_hash"],"planning design snapshot");properties(data.draft.source.origin,["id","name"],"planning design identity");}
+    if(data.planting!==null)required(Array.isArray(data.planting.entries),"Missing Python-resolved draft plants.");
+    required(data.reason===null||typeof data.reason==="string","Missing planning availability reason.");
+    return data;
+  }
+  if(path==="designer/handoff-preview"){
+    properties(data,["planning","previous","notice"],"design handoff preview");validateResponse("demonstrator/draft",data.planning);if(data.previous!==null)object(data.previous,"previous physical plan");required(typeof data.notice==="string","Missing handoff explanation.");return data;
+  }
   if (["designer/save","designer/library"].includes(path)) return validateResponse("designer",data);
   if (path === "designer") {
     properties(data,["evaluation","fields","catalogue","design_revision","project_revision","available","reason","saved","can_import","rules_update_available","library","active_design_id","library_defaults","suggested_name"],"designer workspace");
@@ -401,6 +413,9 @@ export function validateResponse(path, data) {
       "Invalid project revision or undo state.",
     );
     required(Array.isArray(data.actions), "Missing action list.");
+    properties(data,["planning"],"Project planning contract; restart Python and reload");
+    if(data.project!==null)validateResponse("demonstrator/draft",data.planning);
+    else required(data.planning===null,"Unexpected planning draft without a project.");
     for (const action of data.actions) {
       properties(
         action,
@@ -658,7 +673,7 @@ function designerDisplayContract(value,evaluation) {
   }
   for(const instance of evaluation.instances)required(Object.hasOwn(value.plants,instance.id),`Missing display facts for ${instance.id}.`);
   required(Array.isArray(value.unplaced),"Missing readable unplaced facts.");
-  for(const facts of value.unplaced){properties(facts,["id","name","reason"],"unplaced facts");required(typeof facts.id==="string"&&typeof facts.name==="string"&&["with_tree_outside","outside","not_positioned"].includes(facts.reason),"Invalid unplaced facts.");}
+  for(const facts of value.unplaced){properties(facts,["id","name","reason"],"unplaced facts");required(typeof facts.id==="string"&&typeof facts.name==="string"&&["with_tree_outside","outside","not_positioned","no_tree"].includes(facts.reason),"Invalid unplaced facts.");}
   const pocket=value.pocket;
   properties(pocket,["enabled","supported_count","species","name","example_id","state","plotted","moves_with_pocket","quantity","extra_quantity","radius","crown_diameter","crown_range"],"pocket display facts");
   required([pocket.enabled,pocket.plotted,pocket.moves_with_pocket].every(v=>typeof v==="boolean")&&pocket.supported_count===1&&typeof pocket.species==="string"&&(pocket.name===null||typeof pocket.name==="string")&&(pocket.example_id===null||typeof pocket.example_id==="string")&&["off","linked","independent","unplaced","absent"].includes(pocket.state),"Invalid pocket identity or status.");

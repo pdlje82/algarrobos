@@ -64,7 +64,7 @@ class NamedDesignTests(unittest.TestCase):
         self.save(changed,"Alternative");second=self.w["active_design_id"]
         self.assertNotEqual(first,second)
         reopened=Store(self.path).snapshot()
-        self.assertEqual(reopened["format_version"],6)
+        self.assertEqual(reopened["format_version"],7)
         records={r["id"]:r for r in reopened["designer"]["designs"]}
         self.assertEqual(records[first]["draft"],d);self.assertEqual(records[second]["draft"],changed)
         self.operation("load",first);self.assertEqual(self.w["evaluation"]["draft"],d)
@@ -119,7 +119,8 @@ class NamedDesignTests(unittest.TestCase):
         self.assertEqual(self.w["evaluation"]["summary"]["plants"],0)
         self.assertEqual(len(self.w["library"]),1)
         admin={f["name"]:f["default"] for f in self.w["fields"] if f["name"] not in designer.PHYSICAL}
-        r=self.client.post("/api/designer/apply-preview",json=dict(revision=self.rev,design_revision=self.w["design_revision"],administration=admin))
+        planning=self.client.get("/api/demonstrator/draft").json()
+        r=self.client.post("/api/designer/handoff-preview",json=dict(revision=self.rev,design_revision=self.w["design_revision"],planning_revision=planning["planning_revision"]))
         self.assertEqual(r.status_code,422)
         self.operation("load",ident)
         self.operation("delete",ident,status=422)
@@ -148,7 +149,10 @@ class NamedDesignTests(unittest.TestCase):
         self.save(d,"Applied")
         ident=self.w["active_design_id"]
         admin={f["name"]:f["default"] for f in self.w["fields"] if f["name"] not in designer.PHYSICAL}
-        r=self.client.post("/api/designer/apply",json=dict(revision=self.rev,design_revision=self.w["design_revision"],administration=admin,request_id=str(uuid4())))
+        p=self.client.get("/api/demonstrator/draft").json()
+        h=self.client.post("/api/designer/handoff",json=dict(revision=self.rev,design_revision=self.w["design_revision"],planning_revision=p["planning_revision"],request_id=str(uuid4())))
+        self.assertEqual(h.status_code,200,h.text);p=h.json()
+        r=self.client.post("/api/commit",json=dict(revision=self.rev,planning_revision=p["planning_revision"],action_id="demonstrator",inputs=p["draft"]["inputs"],request_id=str(uuid4())))
         self.assertEqual(r.status_code,200,r.text);self.rev=r.json()["revision"]
         self.w=self.client.get("/api/designer").json()
         self.operation("delete",ident,confirm=True)
@@ -179,7 +183,10 @@ class NamedDesignTests(unittest.TestCase):
         d=self.planted();d["physical"]["parcel_id"]=self.project["project"]["parcels"][0]["id"]
         self.save(d,"Applied")
         admin={f["name"]:f["default"] for f in self.w["fields"] if f["name"] not in designer.PHYSICAL}
-        r=self.client.post("/api/designer/apply",json=dict(revision=self.rev,design_revision=self.w["design_revision"],administration=admin,request_id=str(uuid4())))
+        p=self.client.get("/api/demonstrator/draft").json()
+        h=self.client.post("/api/designer/handoff",json=dict(revision=self.rev,design_revision=self.w["design_revision"],planning_revision=p["planning_revision"],request_id=str(uuid4())))
+        self.assertEqual(h.status_code,200,h.text);p=h.json()
+        r=self.client.post("/api/commit",json=dict(revision=self.rev,planning_revision=p["planning_revision"],action_id="demonstrator",inputs=p["draft"]["inputs"],request_id=str(uuid4())))
         self.assertEqual(r.status_code,200,r.text);self.rev=r.json()["revision"]
         self.w=self.client.get("/api/designer").json()
         later=self.edit(d,kind="density",id="carob",value=100)
@@ -222,7 +229,7 @@ class LibraryStoreTests(unittest.TestCase):
             path=Path(folder)/"old.json";original=json.dumps(raw).encode();path.write_bytes(original)
             s=Store(path);self.assertIsNone(s.error)
             self.assertEqual(next(Path(folder).glob("*.schema-v5-*.json")).read_bytes(),original)
-            value=s.snapshot();self.assertEqual(value["format_version"],6)
+            value=s.snapshot();self.assertEqual(value["format_version"],7)
             self.assertEqual(value["designer"]["designs"][0]["name"],"Current design")
             self.assertEqual(value["designer"]["draft"],d)
             self.assertEqual(Store(path).snapshot(),value)

@@ -1,6 +1,7 @@
 import React, { useId, useLayoutEffect, useRef, useState } from "react";
 import guideData from "./carob-planting-guide.json";
 import { plantIllustration } from "./PlantPortrait.jsx";
+import { PlantNames } from "./PlantNames.jsx";
 import { validatePlantingGuide } from "./plantingGuide.js";
 import { Evidence, References, GuideCard, GuidePhotograph } from "./ExplorerContent.jsx";
 import { LearningDialog } from "./LearningDialog.jsx";
@@ -53,7 +54,7 @@ function ExplorerDialog({ onClose, opener }) {
           </div>
           <div>
             <p className="explorer-eyebrow">Planting Explorer</p>
-            <h2 id={titleId}><span lang="es">Algarrobo</span> · Carob · <i>{illustration.scientific_name}</i></h2>
+            <h2 id={titleId}><PlantNames id="carob"/></h2>
             <p id={descriptionId}>Read and explore · seed-grown, ungrafted restoration</p>
             {imageFailed && <p role="alert" className="explorer-image-error">Plant image unavailable. Close and reopen to retry; the guidance remains readable.</p>}
           </div>
@@ -235,7 +236,7 @@ function EvidenceView({ guide, onExploreModels, modelsTrigger }) {
         <p>{example.lesson}</p><References guide={guide} pages={example.pages} />
       </article>)}</div>
       <GuideCard guide={guide} card={guide.oak} />
-      <GuidePhotograph guide={guide} photo={guide.oak.photo} page={guide.oak.photo_page} subject="mixed oak–carob dehesa" sourceLabel="Mixed oak–carob dehesa photograph" />
+      <GuidePhotograph guide={guide} photo={guide.oak.photo} page={guide.oak.photo_page} subject="mixed oak–algarrobo dehesa" sourceLabel="Mixed oak–algarrobo dehesa photograph" />
     </>
   );
 }

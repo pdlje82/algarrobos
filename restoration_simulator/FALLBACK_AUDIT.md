@@ -91,3 +91,16 @@ New selections start unconfirmed, and a price edit clears confirmation. Default
 updates do not write the active project, carry confirmations across projects or
 create history entries. Configuration reads, concurrent edits and write failures
 are explicit, with atomic replacement and retry/reload controls.
+
+## Demonstrator preparation · 29 October 2026
+
+Envelope 7 adds an independent planning draft and revision. A missing attachment
+explicitly means no saved draft: initial inputs come from the existing committed
+plan/form configuration, not hardcoded recovery values. Incomplete administrative
+values are intentionally retained as entered (`null` means an unentered numeric
+field); simulation validation remains mandatory at Project review/commit. No
+configured starter list is presented as an actual selected physical plan before
+handoff. Only the explicit handoff copies a named design and its embedded evidence;
+Save/Load never do so. Required fields, source snapshots, revisions and finite JSON
+are validated, failed writes remain atomic and retries retain their request IDs.
+Unsupported old designer apply calls return an explicit refresh instruction.

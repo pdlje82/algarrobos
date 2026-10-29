@@ -6,6 +6,7 @@ import { DemonstratorEditor, DemonstratorRecord } from "./Demonstrator.jsx";
 import { SiteDesigner } from "./SiteDesigner.jsx";
 import {DocumentProvider} from "./DocumentLink.jsx";
 import { PlantOrderList } from "./PlantOrderList.jsx";
+import { Alert } from "./Alert.jsx";
 import {
   AccessTimeline,
   Fields,
@@ -17,6 +18,8 @@ import { area, money, year } from "./format.js";
 import "./styles.css";
 import { clientDefaults, validateResponse } from "./contracts.js";
 import { usePreview } from "./usePreview.js";
+import {usePlanningDraft} from "./usePlanningDraft.js";
+import {DemonstratorReview} from "./DemonstratorReview.jsx";
 
 async function api(path, body) {
   let response;
@@ -167,12 +170,15 @@ function App() {
   const [selected, setSelected] = useState("");
   const [workspace, setWorkspace] = useState("project");
   const [designerVisited, setDesignerVisited] = useState(false);
-  const [planningInputs, setPlanningInputs] = useState(null);
+  const planning=usePlanningDraft(data,api);
+  const [planReview,setPlanReview]=useState(null);
   function openDesigner(){setDesignerVisited(true);setWorkspace("designer");}
-  function designerSaved(physical){
+  function openPlanning(result){
+    if(result!==undefined)planning.adopt(result);
     const definition=data.actions.find(a=>a.kind==="demo_plan");
-    const base=planningInputs===null?Object.fromEntries(definition.fields.map(f=>[f.name,f.default])):planningInputs;
-    const next={...base,...physical};setPlanningInputs(next);if(action?.kind==="demo_plan")setInputs(next);
+    if(definition===undefined){setError("Demonstrator planning is unavailable in this project contract. Reload the project.");return;}
+    setSelected(definition.id);setConfigReady(true);setWorkspace("project");
+    requestAnimationFrame(()=>previewPanel.current?.scrollIntoView({block:"start"}));
   }
   const [inputs, setInputs] = useState({});
   const [configReady, setConfigReady] = useState(true);
@@ -206,12 +212,13 @@ function App() {
   const isDemo = action?.kind?.startsWith("demo_");
   const updateInputs = useCallback((next) => {
     setInputs(next);
-    if(action?.kind==="demo_plan")setPlanningInputs(next);
-  }, [action?.kind]);
-  const previewEligible = action?.available && project !== null && configReady;
+    if(action?.kind==="demo_plan"){planning.edit(next);setPlanReview(null);}
+  }, [action?.kind,planning.edit]);
+  const activeInputs=action?.kind==="demo_plan"&&planning.inputs!==null?planning.inputs:inputs;
+  const previewEligible = action?.available && project !== null && configReady && (action.kind!=="demo_plan"||(planning.value!==null&&planning.value.draft.source!==null)||project.demonstrator!==null);
   const { preview, previewBusy, previewError, previewCurrent, retryPreview } = usePreview(
     previewEligible
-      ? { revision: data.revision, action_id: action.id, inputs }
+      ? { revision: data.revision, action_id: action.id, inputs:activeInputs }
       : null,
     previewEligible ? `${project.id}:${data.revision}:${action.id}` : null,
     api,
@@ -226,6 +233,7 @@ function App() {
 
   async function load() {
     if (pending.current) return;
+    if(planning.dirty&&!(await planning.flush()))return;
     pending.current = true;
     setBusy(true);
     setError("");
@@ -250,7 +258,7 @@ function App() {
   function choose(a) {
     setConfigReady(a.kind !== "land_access" && a.kind !== "activate_access");
     setSelected(a.id);
-    setInputs(a.kind==="demo_plan" && planningInputs!==null ? planningInputs : Object.fromEntries(a.fields.map((f) => [f.name, f.default])));
+    setInputs(a.kind==="demo_plan" && planning.inputs!==null ? planning.inputs : Object.fromEntries(a.fields.map((f) => [f.name, f.default])));
     if (window.matchMedia("(max-width: 650px)").matches) {
       requestAnimationFrame(() =>
         previewPanel.current?.scrollIntoView({
@@ -266,6 +274,7 @@ function App() {
 
   async function mutate(path, body, existingRequest) {
     if (pending.current) return;
+    if(project!==null&&!(await planning.flush()))return;
     try {
       validateResponse("project", data);
     } catch (e) {
@@ -286,7 +295,8 @@ function App() {
     setRetry(null);
     try {
       setData(await api(path, request));
-      if(["project/new","import"].includes(path)){setPlanningInputs(null);setDesignerVisited(false);setWorkspace("project");}
+      if(["project/new","import"].includes(path)){setDesignerVisited(false);setWorkspace("project");}
+      setPlanReview(null);
       setSelected("");
       setHistoryIndex(null);
       setReplacement(null);
@@ -301,6 +311,22 @@ function App() {
       pending.current = false;
       setBusy(false);
     }
+  }
+
+  async function reviewDemonstrator(){
+    const saved=await planning.flush();if(saved===false)return;
+    setError("");setBusy(true);
+    try{
+      const result=await api("preview",{revision:data.revision,action_id:action.id,inputs:saved.draft.inputs});
+      setPlanReview({preview:result,inputs:saved.draft.inputs,planning_revision:saved.planning_revision,revision:data.revision});
+    }catch(e){setError(e.message);}finally{setBusy(false);}
+  }
+
+  async function discardPlanningEdits(){
+    if(pending.current)return;
+    pending.current=true;setBusy(true);setError("");
+    try{const result=await api("project");planning.adopt(result.planning);setData(result);setPlanReview(null);}
+    catch(e){setError(e.message);}finally{pending.current=false;setBusy(false);}
   }
 
   function startNew(event) {
@@ -370,14 +396,14 @@ function App() {
             </select>
           </label>
           {themeWarning !== "" && (
-            <span className="theme-warning" role="status">
+            <Alert variant="warning" title="Theme preference not saved" className="theme-warning">
               {themeWarning}
-            </span>
+            </Alert>
           )}
         </div>
       </header>
       {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" aria-pressed={workspace==="project"} onClick={()=>setWorkspace("project")}>Project</button><button type="button" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button></nav>}
-      {project!==null && designerVisited && <div className="designer-workspace-host" hidden={workspace!=="designer"}><SiteDesigner key={project.id} data={data} request={priceRequest} planningInputs={planningInputs} onSaved={designerSaved} onApplied={result=>{setData(result);setPlanningInputs(null);setSelected("");}} /></div>}
+      {project!==null && designerVisited && <div className="designer-workspace-host" hidden={workspace!=="designer"}><SiteDesigner key={project.id} active={workspace==="designer"} data={data} request={priceRequest} beforeHandoff={planning.flush} onHandoff={openPlanning} /></div>}
       <main id="main" className="project-workspace" hidden={workspace!=="project"}>
         <div className="hero">
           <div>
@@ -502,7 +528,7 @@ function App() {
           </section>
         )}
         {error && (
-          <div className="error" role="alert">
+          <Alert variant="error" title="Project update failed">
             <p>{error}</p>
             {retry && (
               <button
@@ -516,11 +542,11 @@ function App() {
               {" "}
               You can reload the saved project to check what was persisted.
             </span>
-          </div>
+          </Alert>
         )}
         {replacement && (
           <section
-            className="replacement panel"
+            className="replacement panel app-alert app-alert--danger"
             role="region"
             aria-labelledby="replace-title"
           >
@@ -533,7 +559,7 @@ function App() {
               replaces its saved undo too.
             </p>
             <button
-              className="primary"
+              className="remove-parcel"
               disabled={busy}
               onClick={() =>
                 replacement.kind === "new"
@@ -588,10 +614,10 @@ function App() {
         ) : (
           <>
             {data.summary.migration_notice && (
-              <p className="fictional">{data.summary.migration_notice}</p>
+              <Alert variant="warning" title="Project save updated">{data.summary.migration_notice}</Alert>
             )}
             {data.configuration_notice !== null && (
-              <p className="fictional">{data.configuration_notice}</p>
+              <Alert variant="warning" title="Configuration needs attention">{data.configuration_notice}</Alert>
             )}
             <div className="project-title">
               <h2>{project.name}</h2>
@@ -643,7 +669,9 @@ function App() {
               <p>{data.explanation}</p>
             </section>
             <DemonstratorRecord value={data.summary.demonstrator} onOpenDesigner={openDesigner} />
-            <PlantOrderList demonstrator={data.summary.demonstrator}/>
+            <PlantOrderList demonstrator={data.summary.demonstrator} planning={planning.value}/>
+            <button type="button" onClick={()=>openPlanning()}>Open demonstrator planning</button>
+            {planReview!==null&&<DemonstratorReview review={planReview} previous={project.demonstrator} busy={busy||planning.saving} error={error} onClose={()=>setPlanReview(null)} onCommit={()=>mutate("commit",{action_id:"demonstrator",inputs:planReview.inputs,planning_revision:planReview.planning_revision},{revision:planReview.revision,request_id:crypto.randomUUID(),action_id:"demonstrator",inputs:planReview.inputs,planning_revision:planReview.planning_revision})}/>}
             {data.summary.complete && (
               <section className="final panel" aria-labelledby="final-title">
                 <p className="eyebrow">Year 30 · your accumulated work</p>
@@ -708,10 +736,10 @@ function App() {
                   </p>
                 )}
                 {!categoriesReady ? (
-                  <p className="reason decision-update" role="status">
+                  <Alert variant="warning" title="Restart the Python API" className="decision-update">
                     Restart the Python API, then reload the saved project to
                     load the new decision groups.
-                  </p>
+                  </Alert>
                 ) : (
                   <>
                     <details className="decision-group">
@@ -786,13 +814,13 @@ function App() {
                 ) : (
                   <>
                     <p>{action.description}</p>
-                    {!action.available ? (
+                    {!action.available&&action.kind!=="demo_plan" ? (
                       <p className="reason">{action.reason}</p>
                     ) : (
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
-                          if (action.kind === "demo_plan") {openDesigner();return;}
+                          if (action.kind === "demo_plan") {reviewDemonstrator();return;}
                           if (previewCurrent && !busy && configReady)
                             mutate("commit", { action_id: action.id, inputs });
                         }}
@@ -802,7 +830,7 @@ function App() {
                             key={selected}
                             data={data}
                             action={action}
-                            inputs={inputs}
+                            inputs={activeInputs}
                             onChange={updateInputs}
                             onReady={setConfigReady}
                             request={api}
@@ -821,7 +849,7 @@ function App() {
                           <DemonstratorEditor
                             key={selected}
                             action={action}
-                            inputs={inputs}
+                            inputs={activeInputs}
                             onChange={updateInputs}
                             busy={busy}
                             preview={preview}
@@ -831,7 +859,15 @@ function App() {
                             onOpenDesigner={openDesigner}
                             request={priceRequest}
                           >
-                            {action.kind === "demo_plan" ? <button type="button" onClick={openDesigner}>Review and apply in Site Designer</button> : <Outcome
+                            {action.kind === "demo_plan" ? <>
+                              <Alert variant={planning.error!==""?"error":planning.dirty?"warning":"info"} title={planning.error!==""?"Planning draft not saved":planning.saving?"Saving planning draft":planning.dirty?"Unsaved planning changes":"Planning draft saved"}>
+                                {planning.error!==""?<><p>{planning.error}</p><button type="button" onClick={planning.flush}>Retry saving draft</button><button type="button" onClick={discardPlanningEdits}>Discard edits and reload saved planning draft</button></>:<p>Preparing this draft does not create a demonstrator or change simulation time.</p>}
+                              </Alert>
+                              {!action.available&&<Alert variant="warning" title="Commit unavailable">{action.reason}</Alert>}
+                              {typeof previewError==="string"&&previewError!==""&&<Alert variant="warning" title="Complete the plan">{previewError}</Alert>}
+                              {planning.value!==null&&planning.value.draft.source===null&&project.demonstrator===null&&<p>Use a saved site design in demonstrator planning before committing.</p>}
+                              <button type="button" disabled={busy||!action.available||!previewCurrent||planning.error!==""||(planning.value!==null&&planning.value.draft.source===null&&project.demonstrator===null)} onClick={reviewDemonstrator}>Review demonstrator plan</button>
+                            </> : <Outcome
                               showStatus={action.kind !== "demo_plan"}
                               preview={preview}
                               previewBusy={previewBusy}

@@ -73,7 +73,7 @@ export function ParcelRemoval({
       )}
       {impact && (
         <section
-          className="parcel-removal-preview"
+          className="parcel-removal-preview app-alert app-alert--danger"
           aria-labelledby={`removal-${parcel.id}`}
         >
           <h4 ref={heading} tabIndex={-1} id={`removal-${parcel.id}`}>

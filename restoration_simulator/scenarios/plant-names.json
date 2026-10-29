@@ -1,0 +1,342 @@
+{
+  "version": 1,
+  "reviewed": "2026-10-29",
+  "plants": [
+    {
+      "id": "carob",
+      "spanish": "Algarrobo",
+      "spanish_aliases": [],
+      "german": "Johannisbrotbaum",
+      "scientific": "Ceratonia siliqua",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://www.ual.es/vida-universitaria/patrimonio-cultural/ciencias-naturales/obra/22483/ceratonia-siliqua-l",
+        "https://gd.eppo.int/taxon/CEQSI"
+      ]
+    },
+    {
+      "id": "wild_olive",
+      "spanish": "Acebuche",
+      "spanish_aliases": [],
+      "german": "Wilder Olivenbaum",
+      "scientific": "Olea europaea var. sylvestris",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://mhnc.up.pt/pt/colecoes/colecao-botanica-viva/zambujeiro/",
+        "https://jardins.valencia.es/es/especie/olea-europea",
+        "https://gd.eppo.int/taxon/OLVES"
+      ]
+    },
+    {
+      "id": "lentisk",
+      "spanish": "Lentisco",
+      "spanish_aliases": [],
+      "german": "Mastixstrauch",
+      "scientific": "Pistacia lentiscus",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://nevada.ual.es/biocon/pistacia-lentiscus.html",
+        "https://jardinbotanico.uma.es/jb-43-01/",
+        "https://gd.eppo.int/taxon/PIALE"
+      ]
+    },
+    {
+      "id": "buckthorn",
+      "spanish": "Aladierno",
+      "spanish_aliases": [],
+      "german": "Immergrüner Kreuzdorn",
+      "scientific": "Rhamnus alaternus",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://www.jardibotanic.org/index.php?apid=cataleg_virtual_despecies-220&pid=2337",
+        "https://gd.eppo.int/taxon/RHAAL"
+      ]
+    },
+    {
+      "id": "palmetto",
+      "spanish": "Palmito",
+      "spanish_aliases": [],
+      "german": "Zwergpalme",
+      "scientific": "Chamaerops humilis",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Chamaerops_humilis.pdf",
+        "https://www.creaf.uab.es/guiagarrafpol/esp/chamaerops_humilis.html",
+        "https://gd.eppo.int/taxon/CMEHU"
+      ]
+    },
+    {
+      "id": "retama",
+      "spanish": "Retama amarilla",
+      "spanish_aliases": [],
+      "german": null,
+      "scientific": "Retama sphaerocarpa",
+      "german_status": "not_established",
+      "note": "No German common name verified for this exact taxon in the reviewed institutional sources. This is a research gap, not proof that no name exists.",
+      "references": [
+        "https://nevada.ual.es/biocon/retama-sphaerocarpa.html",
+        "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Retama_sphaerocarpa.pdf",
+        "https://gd.eppo.int/taxon/LGOSP"
+      ]
+    },
+    {
+      "id": "esparto",
+      "spanish": "Esparto",
+      "spanish_aliases": [
+        "atocha"
+      ],
+      "german": "Espartogras",
+      "scientific": "Macrochloa tenacissima",
+      "german_status": "verified",
+      "note": "EPPO lists the German name under Stipa tenacissima and records Macrochloa tenacissima as its synonym.",
+      "references": [
+        "https://nevada.ual.es/biocon/macrochloa-tenacissima.html",
+        "https://gd.eppo.int/taxon/STDTE"
+      ]
+    },
+    {
+      "id": "thyme",
+      "spanish": "Tomillo de invierno",
+      "spanish_aliases": [],
+      "german": null,
+      "scientific": "Thymus hyemalis",
+      "german_status": "not_established",
+      "note": "No German common name verified for this exact taxon in the reviewed institutional sources. This is a research gap, not proof that no name exists.",
+      "references": [
+        "https://nevada.ual.es/biocon/thymus-hyemalis-subsp.-hyemalis.html"
+      ]
+    },
+    {
+      "id": "rosemary",
+      "spanish": "Romero",
+      "spanish_aliases": [],
+      "german": "Rosmarin",
+      "scientific": "Salvia rosmarinus",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Rosmarinus_officinalis.pdf",
+        "https://gd.eppo.int/taxon/RMSOF"
+      ]
+    },
+    {
+      "id": "rhamnus_lycioides",
+      "spanish": "Espino negro",
+      "spanish_aliases": [
+        "espino prieto"
+      ],
+      "german": null,
+      "scientific": "Rhamnus lycioides",
+      "german_status": "not_established",
+      "note": "No German common name verified for this exact taxon in the reviewed institutional sources. This is a research gap, not proof that no name exists.",
+      "references": [
+        "https://jardinbotanico.uma.es/jb-psa1-03/",
+        "https://gd.eppo.int/taxon/RHALY"
+      ]
+    },
+    {
+      "id": "ephedra_fragilis",
+      "spanish": "Hierba de las coyunturas",
+      "spanish_aliases": [],
+      "german": "Schlaffes Meerträubel",
+      "scientific": "Ephedra fragilis",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://nevada.ual.es/biocon/ephedra-fragilis-desf.-subsp.-fragilis.html",
+        "https://gd.eppo.int/taxon/EPEFR"
+      ]
+    },
+    {
+      "id": "ziziphus",
+      "spanish": "Azufaifo",
+      "spanish_aliases": [
+        "arto"
+      ],
+      "german": "Italienischer Jujubenstrauch",
+      "scientific": "Ziziphus lotus",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Ziziphus_lotus.pdf",
+        "https://jardinbotanico.uma.es/jb-alm-01/",
+        "https://gd.eppo.int/taxon/ZIPLO"
+      ]
+    },
+    {
+      "id": "lycium",
+      "spanish": "Cambrón",
+      "spanish_aliases": [
+        "cambronera"
+      ],
+      "german": null,
+      "scientific": "Lycium intricatum",
+      "german_status": "not_established",
+      "note": "No German common name verified for this exact taxon in the reviewed institutional sources. This is a research gap, not proof that no name exists.",
+      "references": [
+        "https://herbarivirtual.uib.es/es/general/505/especie/arc-intricat",
+        "https://gd.eppo.int/taxon/LYUIN"
+      ]
+    },
+    {
+      "id": "salsola",
+      "spanish": "Mata conejera",
+      "spanish_aliases": [],
+      "german": null,
+      "scientific": "Salsola webbii",
+      "german_status": "not_established",
+      "note": "No German common name verified for this exact taxon in the reviewed institutional sources. This is a research gap, not proof that no name exists.",
+      "references": [
+        "https://www.dipalme.org/Servicios/Anexos/anexosiea.nsf/VAnexos/IEA-FA-f-c9/%24File/FA-f-c9.pdf"
+      ]
+    },
+    {
+      "id": "oleander",
+      "spanish": "Adelfa",
+      "spanish_aliases": [],
+      "german": "Oleander",
+      "scientific": "Nerium oleander",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://museuvirtual.ub.edu/objecte/cpvfs00041/",
+        "https://gd.eppo.int/taxon/NEROL"
+      ]
+    },
+    {
+      "id": "tamarix",
+      "spanish": "Taray",
+      "spanish_aliases": [
+        "taraje"
+      ],
+      "german": "Tamarisken",
+      "scientific": "Tamarix spp.",
+      "german_status": "verified",
+      "note": "Genus-level German name only; no Tamarix species is inferred.",
+      "references": [
+        "https://www.jardibotanic.org/?apid=cataleg_virtual_despecies-220&pid=2663",
+        "https://gd.eppo.int/taxon/1TAAG",
+        "https://opus.bibliothek.uni-augsburg.de/opus4/files/2088/Exkursion_Teneriffa_2012.pdf"
+      ]
+    },
+    {
+      "id": "kermes_oak",
+      "spanish": "Coscoja",
+      "spanish_aliases": [],
+      "german": "Kermes-Eiche",
+      "scientific": "Quercus coccifera",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://www.juntadeandalucia.es/medioambiente/BIO/DOC/BIO-DOC-6120-003.pdf",
+        "https://gd.eppo.int/taxon/QUECC"
+      ]
+    },
+    {
+      "id": "holm_oak",
+      "spanish": "Encina / Carrasca",
+      "spanish_aliases": [
+        "carrasca"
+      ],
+      "german": "Rundblättrige Eiche",
+      "scientific": "Quercus rotundifolia",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/255221248/UMBRIA-ENE-2025.pdf/638e27d7-29a8-8718-0c4f-9ac034bbb20d?t=1745493497879",
+        "https://gd.eppo.int/taxon/QUERF"
+      ]
+    },
+    {
+      "id": "phillyrea_angustifolia",
+      "spanish": "Labiérnago de hoja estrecha",
+      "spanish_aliases": [
+        "olivilla"
+      ],
+      "german": "Schmalblättrige Steinlinde",
+      "scientific": "Phillyrea angustifolia",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/255221248/ODIEL_ABR_2025.pdf/af593fff-c306-0419-192d-6d8ea88c66c1?t=1752574806811",
+        "https://gd.eppo.int/taxon/PLRAN"
+      ]
+    },
+    {
+      "id": "phillyrea_latifolia",
+      "spanish": "Labiérnago de hoja ancha",
+      "spanish_aliases": [],
+      "german": "Breitblättrige Steinlinde",
+      "scientific": "Phillyrea latifolia",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Phillyrea_latifolia.pdf",
+        "https://gd.eppo.int/taxon/PLRLA"
+      ]
+    },
+    {
+      "id": "myrtle",
+      "spanish": "Mirto",
+      "spanish_aliases": [
+        "arrayán"
+      ],
+      "german": "Echte Myrte",
+      "scientific": "Myrtus communis",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://smantenimiento.us.es/uma/fichas_plantas.php?q=Myrtus+communis",
+        "https://gd.eppo.int/taxon/MYVCO"
+      ]
+    },
+    {
+      "id": "terebinth",
+      "spanish": "Cornicabra",
+      "spanish_aliases": [],
+      "german": "Terpentinpistazie",
+      "scientific": "Pistacia terebinthus",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://www.miteco.gob.es/es/parques-nacionales-oapn/centros-fincas/quintos/flora.html",
+        "https://gd.eppo.int/taxon/PIATE"
+      ]
+    },
+    {
+      "id": "cork_oak",
+      "spanish": "Alcornoque",
+      "spanish_aliases": [],
+      "german": "Korkeiche",
+      "scientific": "Quercus suber",
+      "german_status": "verified",
+      "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+      "references": [
+        "https://www.juntadeandalucia.es/medioambiente/contenidoExterno/habitats/310/",
+        "https://gd.eppo.int/taxon/QUESU"
+      ]
+    }
+  ],
+  "downloadable_documents": [
+    {
+      "title": "University of Augsburg — Teneriffa excursion 2012 (Tamarix / Tamarisken, p. 42)",
+      "url": "https://opus.bibliothek.uni-augsburg.de/opus4/files/2088/Exkursion_Teneriffa_2012.pdf",
+      "library_status": "suggested"
+    },
+    {
+      "title": "Flora iberica — Thymus (Thymus hyemalis, botanical identity)",
+      "url": "https://www.floraiberica.es/floraiberica/texto/imprenta/tomoXII/entrega_3/12_140_34_thymus.pdf",
+      "library_status": "suggested"
+    },
+    {
+      "title": "University of Hohenheim — Cyprus conifers excursion 2020 (wild olive German name)",
+      "url": "https://botanik.uni-hohenheim.de/fileadmin/einrichtungen/botanik/exkursion_i/2020_Nordzypern/05_Die_Koniferen_der_Insel_Zypern.pdf",
+      "library_status": "suggested"
+    }
+  ]
+}

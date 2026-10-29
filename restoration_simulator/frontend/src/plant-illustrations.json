@@ -1,10 +1,8 @@
 {
-  "version": 2,
+  "version": 3,
   "plants": [
     {
       "id": "carob",
-      "spanish_name": "Algarrobo",
-      "scientific_name": "Ceratonia siliqua",
       "image": "/plants/carob.png",
       "features": "Broad, leathery oval leaflets in pairs without a terminal leaflet; long flattened brown pods.",
       "references": [
@@ -18,8 +16,6 @@
     },
     {
       "id": "wild_olive",
-      "spanish_name": "Acebuche",
-      "scientific_name": "Olea europaea var. sylvestris",
       "image": "/plants/wild_olive.png",
       "features": "Opposite, simple narrow leaves with a pale silvery underside; small olive drupes, dark when ripe.",
       "references": [
@@ -37,8 +33,6 @@
     },
     {
       "id": "lentisk",
-      "spanish_name": "Lentisco",
-      "scientific_name": "Pistacia lentiscus",
       "image": "/plants/lentisk.png",
       "features": "Pinnate leaves with paired leathery leaflets, a winged central stalk and no terminal leaflet; small red drupes turn dark at maturity.",
       "references": [
@@ -56,8 +50,6 @@
     },
     {
       "id": "buckthorn",
-      "spanish_name": "Aladierno",
-      "scientific_name": "Rhamnus alaternus",
       "image": "/plants/buckthorn.png",
       "features": "Alternate, simple leathery oval leaves with small marginal teeth; small round drupes darken at maturity. This entry represents the poster’s R. alaternus, not R. lycioides.",
       "references": [
@@ -71,8 +63,6 @@
     },
     {
       "id": "palmetto",
-      "spanish_name": "Palmito",
-      "scientific_name": "Chamaerops humilis",
       "image": "/plants/palmetto.png",
       "features": "Low, clumping palm with folded fan-shaped leaves divided into narrow segments; stiff spines along the leaf stalks.",
       "references": [
@@ -90,8 +80,6 @@
     },
     {
       "id": "retama",
-      "spanish_name": "Retama amarilla",
-      "scientific_name": "Retama sphaerocarpa",
       "image": "/plants/retama.png",
       "features": "Slender, flexible grey-green shoots, losing their small leaves early; small yellow pea flowers in short lateral clusters. Yellow-flowered R. sphaerocarpa, rather than white-flowered R. monosperma.",
       "references": [
@@ -109,8 +97,6 @@
     },
     {
       "id": "esparto",
-      "spanish_name": "Esparto / atocha",
-      "scientific_name": "Macrochloa tenacissima",
       "image": "/plants/esparto.png",
       "features": "Also known as Stipa tenacissima. Dense basal tussock of long, tough rolled leaves. Shown without flowers; flowering plants have slender stems with narrow panicles and awned spikelets.",
       "references": [
@@ -124,8 +110,6 @@
     },
     {
       "id": "thyme",
-      "spanish_name": "Tomillo de invierno",
-      "scientific_name": "Thymus hyemalis",
       "image": "/plants/thyme.png",
       "features": "Small woody stems with tiny opposite, narrow rolled-margin leaves; compact terminal heads of pink, two-lipped flowers. The poster specifies winter thyme.",
       "references": [
@@ -139,8 +123,6 @@
     },
     {
       "id": "rosemary",
-      "spanish_name": "Romero",
-      "scientific_name": "Salvia rosmarinus",
       "image": "/plants/rosemary.png",
       "features": "Also called Rosmarinus officinalis. Opposite narrow leaves have rolled-under edges, dark green upper surfaces and whitish undersides. Small pale blue-lavender, two-lipped flowers sit near the stems; this is rosemary, not lavender.",
       "references": [
@@ -154,8 +136,6 @@
     },
     {
       "id": "rhamnus_lycioides",
-      "spanish_name": "Espino negro / espino prieto",
-      "scientific_name": "Rhamnus lycioides",
       "image": "/plants/rhamnus_lycioides.png",
       "features": "Grey-brown woody branches end in thorns. Small narrow leathery leaves have entire margins, with little visible lateral venation; small globose drupes turn black. This is the poster’s R. lycioides, distinct from the broader-leaved R. alaternus (Aladierno) already listed.",
       "references": [
@@ -169,8 +149,6 @@
     },
     {
       "id": "ephedra_fragilis",
-      "spanish_name": "Hierba de las coyunturas",
-      "scientific_name": "Ephedra fragilis",
       "image": "/plants/ephedra_fragilis.png",
       "features": "Dense, slender green jointed stems with tiny scale-like leaves at the nodes and older grey woody branches. The depicted female sprig bears small red fleshy seed-cone bracts; these are not ordinary fruits or flowers. Male and female structures occur on separate plants.",
       "references": [
@@ -184,8 +162,6 @@
     },
     {
       "id": "ziziphus",
-      "spanish_name": "Azufaifo / arto",
-      "scientific_name": "Ziziphus lotus",
       "image": "/plants/ziziphus.png",
       "features": "Zigzag thorny shoots; alternate small oval leaves with three strong veins from the base and a finely scalloped margin; small drupes. This is wild Z. lotus, not cultivated Z. jujuba.",
       "references": [
@@ -203,8 +179,6 @@
     },
     {
       "id": "lycium",
-      "spanish_name": "Cambrón / cambronera",
-      "scientific_name": "Lycium intricatum",
       "image": "/plants/lycium.png",
       "features": "Tortuous thorny branches, small fleshy grey-green leaves and violet tubular flowers with a flared mouth. The illustration represents the poster’s Mediterranean boxthorn.",
       "references": [
@@ -218,8 +192,6 @@
     },
     {
       "id": "salsola",
-      "spanish_name": "Mata conejera",
-      "scientific_name": "Salsola webbii",
       "image": "/plants/salsola.png",
       "features": "Pale woody branches with very slender, curved, cylindrical grey-green leaves, alternate or in small axillary tufts. Shown in non-flowering foliage state, without broad flat blades. The poster uses the name Salsola webbii.",
       "references": [
@@ -233,8 +205,6 @@
     },
     {
       "id": "oleander",
-      "spanish_name": "Adelfa",
-      "scientific_name": "Nerium oleander",
       "image": "/plants/oleander.png",
       "features": "Long leathery lanceolate leaves, opposite or in whorls, with a strong midrib; terminal clusters of simple five-lobed pink flowers.",
       "references": [
@@ -248,8 +218,6 @@
     },
     {
       "id": "tamarix",
-      "spanish_name": "Taray / taraje",
-      "scientific_name": "Tamarix spp.",
       "image": "/plants/tamarix.png",
       "features": "Fine branching twigs with tiny overlapping scale leaves and slender racemes of minute pink flowers. Genus-level representation: the poster does not identify a Tamarix species. The linked T. gallica describes an example, not the confirmed planting identity.",
       "references": [
@@ -263,8 +231,6 @@
     },
     {
       "id": "kermes_oak",
-      "spanish_name": "Coscoja",
-      "scientific_name": "Quercus coccifera",
       "image": "/plants/kermes_oak.png",
       "whole_image": "/plants/whole/kermes_oak.png",
       "features": "Stiff glossy evergreen leaves with spiny teeth; prickly acorn cups.",
@@ -278,8 +244,6 @@
     },
     {
       "id": "holm_oak",
-      "spanish_name": "Encina / carrasca",
-      "scientific_name": "Quercus rotundifolia",
       "image": "/plants/holm_oak.png",
       "whole_image": "/plants/whole/holm_oak.png",
       "features": "Rounded leathery leaves, dark above, grey-white felt beneath; acorns in scaly cups.",
@@ -293,8 +257,6 @@
     },
     {
       "id": "phillyrea_angustifolia",
-      "spanish_name": "Labiérnago de hoja estrecha / olivilla",
-      "scientific_name": "Phillyrea angustifolia",
       "image": "/plants/phillyrea_angustifolia.png",
       "whole_image": "/plants/whole/phillyrea_angustifolia.png",
       "features": "Opposite narrow lanceolate leathery leaves with usually entire margins; small black drupes.",
@@ -308,8 +270,6 @@
     },
     {
       "id": "phillyrea_latifolia",
-      "spanish_name": "Labiérnago de hoja ancha",
-      "scientific_name": "Phillyrea latifolia",
       "image": "/plants/phillyrea_latifolia.png",
       "whole_image": "/plants/whole/phillyrea_latifolia.png",
       "features": "Opposite broad ovate leathery leaves with serrated margins; small black drupes.",
@@ -323,8 +283,6 @@
     },
     {
       "id": "myrtle",
-      "spanish_name": "Mirto / arrayán",
-      "scientific_name": "Myrtus communis",
       "image": "/plants/myrtle.png",
       "whole_image": "/plants/whole/myrtle.png",
       "features": "Opposite glossy entire ovate-lanceolate leaves; five white petals, many long stamens; blue-black berries.",
@@ -338,8 +296,6 @@
     },
     {
       "id": "terebinth",
-      "spanish_name": "Cornicabra",
-      "scientific_name": "Pistacia terebinthus",
       "image": "/plants/terebinth.png",
       "whole_image": "/plants/whole/terebinth.png",
       "features": "Alternate pinnate deciduous leaves with a terminal leaflet, unwinged rachis; reddish drupes in clusters.",
@@ -353,8 +309,6 @@
     },
     {
       "id": "cork_oak",
-      "spanish_name": "Alcornoque",
-      "scientific_name": "Quercus suber",
       "image": "/plants/cork_oak.png",
       "whole_image": "/plants/whole/cork_oak.png",
       "features": "Deep fissured cork bark; leathery ovate leaves with grey felt beneath; acorns in scaly cups.",

@@ -120,7 +120,7 @@ Python remaps surviving parcel/agreement references and replays their original i
 
 **Project** retains demonstration protocol, funding, participation, reporting, other budget fields and timing. **Site Designer** owns physical planting choices. Open it from the workspace navigation or the demonstrator summary. There is one plant editor; the project form links to it rather than repeating area, species, prices, methods and water controls.
 
-The Site Designer **Plants** panel has the single checklist/cart, grouped by vegetation system, with English, Spanish and scientific names, quantities, editable prices and custom plants. Approaches activates source-qualified combinations; shared species are not duplicated, starter counts are explicitly illustrative, and manual exclusions persist. Python derives tree/shrub totals and plant costs. The catalogue now has **23 species**; original catalogue-v1 records remain unchanged for historical replay.
+The Site Designer **Plants** panel has the single checklist/cart, grouped under **Trees**, **Shrubs** and **Grasses / herbaceous plants**, with Spanish names first, German names second and scientific names in italics, densities, editable prices and custom plants. Each species appears once; details distinguish starter and optional approach memberships. Approaches activates source-qualified combinations; shared species are not duplicated, starter counts are explicitly illustrative, and manual exclusions persist. Python derives tree/shrub totals and plant costs. The catalogue has **23 entries**; original catalogue records remain unchanged for historical replay.
 
 Each selected plant has an editable **€/plant** field and a **Price confirmed** checkbox. Confirmation means the user checked that amount, for example with a supplier; it is not a certified quote or funding approval. Changing the amount clears confirmation. Unconfirmed prices can still be used for exploratory planning and are labelled **Estimate**. Quantity, unit price, line total and confirmation appear in the preview and saved record.
 
@@ -154,7 +154,7 @@ Record **funding feedback → application → decision → reimbursement** expli
 
 Python atomically saves `restoration_simulator/data/active-project.json` after each successful mutation. It includes the exact scenario snapshot, history, one-level undo snapshot, monotonic revision and request receipts. Saves live on the **computer running Python**, not in browser storage or the cloud. Runtime data, environments, dependencies and build output are Git-ignored.
 
-JSON export contains the project and undo snapshot in a versioned envelope. Import validates schema, field types, ranges, supported scenario ID/version and the complete deterministic history before replacing anything. Invalid/unsupported imports preserve the current project. New saves/exports use **envelope 6** around **simulation schema 4**, with explicit `area_unit: "m2"`; the default scenario also uses schema 4. Version-1, version-2 and version-3 saves/exports are validated with the frozen legacy engines and explicitly upgraded. Historic cash, time, history and undo remain. Version-1 access keeps its legacy assumptions with no retroactive rent and temporary access through year 30; version-2 agreements retain their recorded periods, payments and obligations. The original snapshot remains embedded for replay. Live parcel, covered and restoration areas are converted from hectares to square metres without rounding away original precision (2 ha becomes 20,000 m²). Original history retains its exact hectare-based inputs and wording, identified in the UI; old action dates, cash and maintenance commitments are not rewritten. Before migrating an older local autosave, Python creates a byte-for-byte `active-project.schema-v<version>-<checksum>.json` backup and atomically replaces the active file; failed migration preserves the original. Projects without a previous demonstrator receive the guided workflow. Projects with an earlier demonstrator or grant stage retain their original action table, historic costs/grants and undo; they are clearly labelled as an earlier workflow, and **New project** starts a guided pilot. No old grant is relabelled as AL20 3.4. Importing an old export upgrades the active save without rewriting the source export. Scenario imports are data, not executable scripts.
+JSON export contains the project and undo snapshot in a versioned envelope. Import validates schema, field types, ranges, supported scenario ID/version and the complete deterministic history before replacing anything. Invalid/unsupported imports preserve the current project. New saves/exports use **envelope 7** around **simulation schema 4**, with explicit `area_unit: "m2"`; the default scenario also uses schema 4. Version-1, version-2 and version-3 saves/exports are validated with the frozen legacy engines and explicitly upgraded. Historic cash, time, history and undo remain. Version-1 access keeps its legacy assumptions with no retroactive rent and temporary access through year 30; version-2 agreements retain their recorded periods, payments and obligations. The original snapshot remains embedded for replay. Live parcel, covered and restoration areas are converted from hectares to square metres without rounding away original precision (2 ha becomes 20,000 m²). Original history retains its exact hectare-based inputs and wording, identified in the UI; old action dates, cash and maintenance commitments are not rewritten. Before migrating an older local autosave, Python creates a byte-for-byte `active-project.schema-v<version>-<checksum>.json` backup and atomically replaces the active file; failed migration preserves the original. Projects without a previous demonstrator receive the guided workflow. Projects with an earlier demonstrator or grant stage retain their original action table, historic costs/grants and undo; they are clearly labelled as an earlier workflow, and **New project** starts a guided pilot. No old grant is relabelled as AL20 3.4. Importing an old export upgrades the active save without rewriting the source export. Scenario imports are data, not executable scripts.
 
 Undo restores the last action's cash, time and state and survives restart/export/import. It is one level, with no redo. Revisions continue increasing after undo. New-project replacement clears undo; import restores the imported undo.
 
@@ -266,7 +266,7 @@ conda env create --file environment.yml
 Open **Site Designer** after creating a project. The drawing shows an assumed
 planting zone, not the whole parcel. A square of 200 m² is the initial geometry;
 area, proportions and reference-boundary side/type are editable. Link a parcel
-before applying. Existing plans can be imported explicitly: recorded species,
+before transferring to Project planning. Existing plans can be imported explicitly: recorded species,
 quantities and prices are preserved, but coordinates are new assumptions.
 
 Use **Approaches** to combine MR1/MR2 and starter vegetation combinations.
@@ -274,17 +274,20 @@ Optional companions stay visible. Use **Plants** for quantities, prices and
 custom selections. **Establishment** controls the assumed moisture pocket,
 conditional encina example, water/method declaration and material-specific mulch.
 Stone is the first mulch type; other types can be added with separate rules.
-Select symbols to inspect provenance and edit coordinates/footprints. Drag to move,
-drag blank ground to pan, and use Zoom/Fit. Coordinates provide a keyboard
-alternative. Existing vegetation is drawn separately and excluded from new-plant
+Select symbols to inspect provenance and edit drawing diameters. Drag plants to
+move them, or focus a symbol and use arrow keys (0.1 m; Shift+Arrow: 1 m).
+Holding an arrow previews the movement; releasing accepts one Undo step, and
+Escape cancels. Drag blank ground to pan and use Zoom/Fit. Existing vegetation
+is drawn separately and excluded from new-plant
 costs. Planning circles are not measured crowns or roots. Overflow quantities are
 explicitly unplaced and remain in totals; no plants are silently dropped.
 
 **Save** persists a named design without changing simulation time, cash, history or undo.
-**Apply to demonstrator** reviews the saved design with retained administration and
-budget settings before committing through the existing planning action. Submitted
-or installed plans keep their existing locks. Export/import includes designer
-attachments. Autosave/export envelope 6 retains simulation schema 4; upgrading
+**Use in demonstrator planning** reviews and copies the saved physical design,
+then opens Project for administration, budget and timing. Only **Commit demonstrator
+plan** in Project creates or replaces the demonstrator. Submitted or installed plans
+keep their existing commit locks. Export/import includes designer and planning
+attachments. Autosave/export envelope 7 retains simulation schema 4; upgrading
 older autosaves creates a checksum-named backup before writing. Parcel deletion
 previews and removes linked designs; explicit undo can restore them.
 
@@ -345,7 +348,7 @@ Drag a moisture-pocket outline to move it and its automatic example encina.
 Drag rectangle edge handles to change proportions at fixed area. The assumed
 north marker is a drawing convention. Numeric fields provide keyboard alternatives.
 Ordinary design edits apply immediately and have session Undo/Redo. Persistent
-exclusions are separate from unchecking a plant. Save and Apply remain distinct.
+exclusions are separate from unchecking a plant. Saving, transferring to Project planning and committing a demonstrator remain distinct.
 
 Root-ball and crown/plant overlays are separate. Every catalogue plant has one
 editable drawing diameter: a rounded reference midpoint or an explicit
@@ -396,24 +399,110 @@ Presentation wording lives in the validated
 `restoration_simulator/frontend/src/designer-help.json`; wording updates do not
 rewrite embedded rules or require a saved-design upgrade.
 
-The single moisture pocket has a solid blue outline and pale blue fill. Its radius
-and the example encina's dashed crown diameter are labelled separately using saved
-dimensions. The inspector explains whether that tree follows the pocket, has been
+The single moisture pocket has a solid blue outline and pale blue fill. Select the
+pocket or example encina to inspect or adjust their dimensions in the inspector.
+The drawing omits radius and diameter annotations. The inspector explains whether
+that tree follows the pocket, has been
 moved independently, is unplaced or is no longer selected. Additional encinas come
 from density, not additional pockets. The drawing does not measure soil moisture.
 
 Selecting a plant opens its **Crown / plant diameter (m)** editor with the current
-value, planning basis and optional note. Selection alone changes nothing. Choose
-**Use this diameter**, **Reset to default**, or discard the pending input before
-Save/Apply. Pending entries survive species switches and unrelated calculations;
+value, planning basis and optional note. Selection alone changes nothing. Press
+**Enter** or leave the diameter/note field to update the circle; basis changes
+apply immediately. **Reset to default** restores the drawing default. Each accepted
+edit is undoable. Invalid or failed edits retain their input and the last valid
+diagram, with Retry/Discard; correct or discard them before Save or transfer.
+Pending entries survive species switches and unrelated calculations;
 New/Load and browser navigation include them in the unsaved-change warning.
 Historical ranges remain ranges until their explicit designer upgrade.
 
+Hover a checklist row, or focus a control inside it, to highlight every plotted
+plant of that species without changing the design. The status shows plotted and
+unplaced counts. Highlights do not move the camera or trigger Python calculations.
+Keyboard movement increments live in the validated presentation configuration
+`restoration_simulator/frontend/src/designer-interactions.json`, separate from
+the ecological rules and saved designs.
+
+Warnings across Project and Site Designer use amber panels; errors and destructive
+confirmations use red. Success is green and routine progress is neutral. Headings
+and icons identify the message type without relying on colour alone.
+
 **Project → Plant order list** is a read-only table of plant names, recorded unit
-prices and purchasing quantities from the applied demonstrator. It includes custom
-plants and marks unconfirmed estimates. Exploring or deleting a saved alternative
-does not change the list. Older aggregate-only plans explicitly show that ordering
-records are unavailable; current catalogue prices never replace recorded prices.
+prices and purchasing quantities. It follows the transferred planning draft, marked
+**Draft** until Project commits the matching plan, then **Committed**. It includes
+custom plants and unconfirmed estimates. Exploring, saving or deleting a named
+alternative does not change this list. Older aggregate-only plans explicitly show
+that ordering records are unavailable; current prices never replace recorded prices.
+
+### Site design to demonstrator planning
+
+1. Save a named site design with at least one plant and a linked parcel.
+2. Choose **Use in demonstrator planning**, review the physical changes, then
+   **Use design in planning**. Project opens its planning form. This copies the
+   design snapshot; it does not create a demonstrator, advance time or spend cash.
+3. Configure demonstration design, participation, funding route, remaining budget,
+   timing and notes in Project. These edits autosave separately, including
+   incomplete inputs, and survive restart. Later design transfers preserve them.
+4. Choose **Review demonstrator plan**, inspect costs, timing and replacement
+   consequences, then **Commit demonstrator plan**. Only this confirmation performs
+   the simulation action. Existing installed/submitted restrictions still apply.
+
+Saving or loading a design never transfers it automatically. The planning snapshot
+is independent of later saves, renames and deletion of its source alternative.
+Failed draft saves retain entered values and provide Retry or explicit Discard and
+reload. The debounce setting is validated in `frontend/src/planning-ui.json`.
+Autosave/export envelope **7** includes planning drafts and their independent
+revision, while simulation schema **4** and frozen replay remain unchanged. Older
+autosaves receive a byte-preserving backup before migration; already committed
+demonstrators are not reversed. Parcel deletion previews include dependent drafts.
+No new Conda/npm dependencies are required. Restart Python and refresh the frontend.
+
+Selecting a plant symbol opens Plants and centres its checklist row within the
+available list scroll range, without changing focus, diagram zoom or page scroll.
+A selected row hidden by a filter is temporarily revealed; the filter is retained.
+The visible name **Encina / Carrasca** retains *Quercus rotundifolia* and its existing
+ID. Both Spanish names remain searchable.
+
+### Plant names, selection and saved checkpoints
+
+`restoration_simulator/scenarios/plant-names.json` is the validated shared name
+reference for Python and React. Catalogue IDs and historical labels remain stable.
+Spanish is the main display name; German and scientific names follow. The five
+entries without a verified German common name are Retama sphaerocarpa, Thymus
+hyemalis, Rhamnus lycioides, Lycium intricatum and Salsola webbii. They explicitly
+show **German name not established**. Tamarix retains its genus-level identity.
+Search supports Spanish aliases, German and scientific names. Original document
+titles, quotations and technical evidence records keep their original wording.
+
+Click a checklist row/name to select a species or open its inspector. Only its
+checkbox can remove it; images, prices, disclosures and other controls keep their
+own actions. Checkbox Space toggles deliberately; Undo restores removed positions.
+
+The new `treeless_series` rule lets newly generated lentisco/coscoja series shrubs
+stand alone without plotted planned trees. With trees, existing placement categories
+apply; explicit manual categories take priority. Saved designs retain their rules
+until **Review with updated rules**. Existing positions and unplaced plants are
+never automatically regenerated by adopting the update or adding trees later.
+
+**Reload saved design**, beside the dropdown, restores the active design's last
+Save. Unsaved or incomplete inputs require **Reload saved version / Cancel**.
+Reload resets selection, view and session Undo/Redo; failed requests preserve the
+current working design. **Save after Clear overwrites that saved checkpoint**;
+use **Save as…** to retain alternatives. Applied demonstrator plans are independent.
+
+**Why unavailable?**, beside **Use in demonstrator planning**, lists the outstanding
+requirements and links to the relevant controls. It works on hover, keyboard focus
+and tap. The list and button use one readiness calculation. **Ready to review**
+opens the physical transfer review. Advisory notes about prices,
+unplaced plants or assumed moisture do not become transfer prerequisites.
+
+Name verification used the institutional sources linked per plant in the name
+reference, including EPPO's multilingual records. Relevant downloadable references
+verified on 29 October 2026 are suggested library additions; none were added:
+
+- [University of Augsburg: Teneriffa excursion 2012, Tamarix/Tamarisken on p. 42](https://opus.bibliothek.uni-augsburg.de/opus4/files/2088/Exkursion_Teneriffa_2012.pdf).
+- [University of Hohenheim: Cyprus conifers excursion 2020, wild olive German name](https://botanik.uni-hohenheim.de/fileadmin/einrichtungen/botanik/exkursion_i/2020_Nordzypern/05_Die_Koniferen_der_Insel_Zypern.pdf).
+- [Flora iberica: Thymus, including Thymus hyemalis](https://www.floraiberica.es/floraiberica/texto/imprenta/tomoXII/entrega_3/12_140_34_thymus.pdf).
 
 ### In-app PDF viewer
 

@@ -1,5 +1,7 @@
 import React from "react";
 import { symbolForGroup, symbolForPlant, symbolPath, symbolScheme } from "./plantSymbols.js";
+import { displayPlant } from "./plantNames.js";
+import { PlantNames } from "./PlantNames.jsx";
 
 export function PlantSymbol({ appearance }) {
   const path = symbolPath(appearance.shape, 0, 0);
@@ -17,9 +19,9 @@ export function PlantSymbolLegend({ plants }) {
     {plants.length > 0 && <details className="plant-symbol-species-key"><summary>Species colour key ({plants.length})</summary>
       <p>Each species keeps its colour. Shapes identify growth forms; names identify similar shades.</p>
       <div>{Object.entries(symbolScheme.groups).map(([id,group])=>{
-        const members = plants.filter(p=>p.group===id);
+        const members = plants.filter(p=>p.group===id).map(displayPlant).sort((a,b)=>a.label.localeCompare(b.label,"es"));
         return members.length === 0 ? null : <section key={id}><h3>{group.label}</h3><ul>{members.map(plant=>
-          <li key={plant.id}><PlantSymbol appearance={symbolForPlant(plant)}/><span>{plant.label}{plant.id.startsWith("custom-")&&<small>Custom plant</small>}</span></li>
+          <li key={plant.id}><PlantSymbol appearance={symbolForPlant(plant)}/><span>{plant.id.startsWith("custom-")?<>{plant.label}<small>Custom plant</small></>:<PlantNames id={plant.id}/>}</span></li>
         )}</ul></section>;
       })}</div>
     </details>}
