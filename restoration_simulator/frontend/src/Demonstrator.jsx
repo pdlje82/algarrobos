@@ -120,7 +120,7 @@ export function DemonstratorEditor({
       )}
       <div className="land-detail-grid">
         <div>
-          {planning&&selected==="Plant order list"?<PlantOrderList demonstrator={demonstrator} planning={planningDraft}/>:<fieldset className="demo-fields">
+          {planning&&selected==="Plant order list"?<PlantOrderList demonstrator={demonstrator} planning={planningDraft} embedded/>:<fieldset className="demo-fields">
             <legend>{planning ? selected : action.title}</legend>
             {selected === "Budget" && (
               <p>

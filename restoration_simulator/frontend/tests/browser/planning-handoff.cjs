@@ -27,7 +27,8 @@ async function poll(fn){for(let i=0;i<200;i++){if(await fn())return;await new Pr
   });
   if(process.env.DESIGNER_PRODUCTION_DIR)await productionAssets(context,url,process.env.DESIGNER_PRODUCTION_DIR);
   const page=await context.newPage();page.setDefaultTimeout(12000);page.on('pageerror',e=>{errors.push(e.message);console.error('Page error:',e.message);});
-  await page.goto(url);await page.getByRole('button',{name:'Open demonstrator planning',exact:true}).click();
+  await page.goto(url);assert.equal(await page.locator('.plant-order-list').count(),0);await page.getByRole('button',{name:'Open demonstrator planning',exact:true}).click();
+  await page.getByRole('button',{name:'Plant order list',exact:true}).click();assert.equal(await page.locator('.demo-editor .plant-order-list').count(),1);assert.match(await page.locator('.plant-order-list').innerText(),/Use a site design/);
   await page.getByRole('button',{name:'Timing',exact:true}).click();
   const note=page.getByLabel('Additional site / custom-method notes (optional)',{exact:true});
   await note.fill('Keep my demonstration choices');await poll(async()=>(await api('demonstrator/draft')).draft.inputs.notes==='Keep my demonstration choices');
@@ -54,7 +55,10 @@ async function poll(fn){for(let i=0;i<200;i++){if(await fn())return;await new Pr
   await page.getByRole('button',{name:'Use in demonstrator planning',exact:true}).click();await page.getByRole('region',{name:'Design transfer review'}).waitFor();
   await page.getByRole('button',{name:'Use design in planning',exact:true}).click();await note.waitFor();assert.equal(await note.inputValue(),'Retain after failed save');
   assert.equal(JSON.stringify((await api('project')).project),before);
+  await page.getByRole('button',{name:'Plant order list',exact:true}).click();
   assert.match(await page.locator('.plant-order-list').innerText(),/Draft/);assert.match(await page.locator('.plant-order-list').innerText(),/Mi arbusto/);
+  assert.deepEqual(await page.locator('.plant-order-list thead th').allTextContents(),['Plant','Price per plant','Quantity']);
+  await page.getByRole('button',{name:'Timing',exact:true}).click();assert.equal(await note.inputValue(),'Retain after failed save');
   await page.reload();await page.getByRole('button',{name:'Open demonstrator planning',exact:true}).click();await page.getByRole('button',{name:'Timing',exact:true}).click();assert.equal(await note.inputValue(),'Retain after failed save');
   await page.getByRole('button',{name:'Budget',exact:true}).click();const labour=page.getByLabel('Planting labour (days)',{exact:true});
   await labour.fill('');await labour.press('Tab');await poll(async()=>(await api('demonstrator/draft')).draft.inputs.labour_days===null);
@@ -62,9 +66,12 @@ async function poll(fn){for(let i=0;i<200;i++){if(await fn())return;await new Pr
   await labour.fill(String(defaults.labour_days));await labour.press('Tab');await poll(async()=>await page.getByRole('button',{name:'Review demonstrator plan',exact:true}).isEnabled());
   await page.getByRole('button',{name:'Review demonstrator plan',exact:true}).click();await page.getByRole('dialog').waitFor();assert.equal((await api('project')).project.demonstrator,null);
   await page.getByRole('button',{name:'Commit demonstrator plan',exact:true}).click();await page.getByRole('dialog').waitFor({state:'detached'});
-  await poll(async()=>(await api('project')).project.demonstrator!==null);await poll(async()=>await page.locator('.plant-order-list').innerText().then(t=>t.includes('Committed')));
+  await poll(async()=>(await api('project')).project.demonstrator!==null);assert.equal(await page.locator('.plant-order-list').count(),0);
+  await page.getByRole('button',{name:'Open demonstrator planning',exact:true}).click();await page.getByRole('button',{name:'Plant order list',exact:true}).click();await poll(async()=>await page.locator('.plant-order-list').innerText().then(t=>t.includes('Committed')));
   for(const theme of ['light','dark'])for(const width of [1680,390,320]){
-   await page.setViewportSize({width,height:1000});await page.getByRole('combobox',{name:'Theme',exact:true}).selectOption(theme);await page.getByRole('button',{name:'Site Designer',exact:true}).click();await page.getByRole('button',{name:'Plants',exact:true}).click();await search.fill('');
+   await page.setViewportSize({width,height:1000});await page.getByRole('combobox',{name:'Theme',exact:true}).selectOption(theme);
+   const order=page.locator('.demo-editor .plant-order-list');await order.scrollIntoViewIfNeeded();assert.equal(await order.count(),1);assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:`../test-artifacts/order-list-tab-${theme}-${width}.png`});
+   await page.getByRole('button',{name:'Site Designer',exact:true}).click();await page.getByRole('button',{name:'Plants',exact:true}).click();await search.fill('');
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:`../test-artifacts/planning-${theme}-${width}.png`});await page.getByRole('button',{name:'Project',exact:true}).click();
   }
   assert.deepEqual(errors,[]);console.log(JSON.stringify({result:'passed',checks:'draft autosave/retry, grouping, filtered selection scroll/focus, transfer, reload, validation, explicit commit, themes and phones',calls}));
