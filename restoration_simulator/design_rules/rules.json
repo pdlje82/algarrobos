@@ -1,0 +1,209 @@
+[
+  {
+    "id": "mr1",
+    "title": "MR1 · Recover degraded land",
+    "effect": "group_layout",
+    "condition": "approach",
+    "description": "Seed-grown carob in favourable rootable and moisture pockets; irregular mixed groups and retained open ground.",
+    "evidence": "guidance",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          123,
+          124,
+          125,
+          126
+        ]
+      }
+    ],
+    "limitations": "Illustrative planning guidance, not a verified site prescription."
+  },
+  {
+    "id": "mr2",
+    "title": "MR2 · Rainfall capture",
+    "effect": "island_layout",
+    "condition": "approach",
+    "description": "Conceptual planting islands, donor catchment and safe overflow. MR1 and MR2 can be combined.",
+    "evidence": "guidance",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          131,
+          132,
+          133,
+          134
+        ]
+      }
+    ],
+    "limitations": "Illustrative planning guidance, not a verified site prescription."
+  },
+  {
+    "id": "pocket",
+    "title": "Assumed moisture pocket",
+    "effect": "include_species",
+    "condition": "feature",
+    "description": "A configurable assumed pocket introduces one encina example. Its size does not establish water availability or oak suitability.",
+    "evidence": "assumption",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          91,
+          124
+        ]
+      },
+      {
+        "id": "FOREST-004",
+        "pages": [
+          1
+        ]
+      }
+    ],
+    "limitations": "Illustrative planning guidance, not a verified site prescription."
+  },
+  {
+    "id": "stone_mulch",
+    "title": "Stone surface mulch",
+    "effect": "treatment",
+    "condition": "feature",
+    "description": "Surface stone cover around selected plants; not a buried drainage layer. Ring dimensions are project assumptions.",
+    "evidence": "guidance",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          125,
+          134
+        ]
+      }
+    ],
+    "limitations": "Illustrative planning guidance, not a verified site prescription."
+  },
+  {
+    "id": "density",
+    "title": "Density and area basis",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "Pies/ha means individual trees or stems per hectare. MR1 passages give <350, <100 and <200 in different contexts: no single target is inferred. Whole-zone density differs from spacing within groups; carob, total trees and shrubs are separate.",
+    "evidence": "unresolved",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          123,
+          124,
+          126
+        ]
+      }
+    ],
+    "limitations": "Illustrative planning guidance, not a verified site prescription."
+  },
+  {
+    "id": "autumn",
+    "title": "Planting season and stock",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "For limited-care restoration plant in autumn and avoid delays, especially on shallow or stony soils. Una savia means one growing season (1+0); >200 cm³ is >0.2 L. Table 5.14 gives November–March and 200–300 cm³; these contexts differ. Larger stock is not automatically better.",
+    "evidence": "guidance",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          125,
+          126
+        ]
+      }
+    ],
+    "limitations": "Illustrative planning guidance, not a verified site prescription."
+  },
+  {
+    "id": "survival",
+    "title": "Reported Almería survival",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "The handbook reports 40–60% carob survival in Almería (Planelles et al., 2001), without a monitoring period here. Historical evidence, not an annual probability or a forecast for this zone.",
+    "evidence": "observation",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          124
+        ]
+      }
+    ],
+    "limitations": "Illustrative planning guidance, not a verified site prescription."
+  },
+  {
+    "id": "care",
+    "title": "Low-maintenance protective restoration",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "Routine field fertilizer, formation pruning and continuing competition control are generally omitted. Table 5.14 also lists establishment weeding. This is a protective-management baseline, not proof of maximum growth or zero establishment water.",
+    "evidence": "guidance",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          125,
+          126,
+          127,
+          134
+        ]
+      }
+    ],
+    "limitations": "Illustrative planning guidance, not a verified site prescription."
+  },
+  {
+    "id": "layout",
+    "title": "Illustrative geometry and quantities",
+    "effect": "geometry",
+    "condition": "always",
+    "description": "Deterministic layout, starter counts, footprints, pocket and mulch dimensions are editable project assumptions. Circles are planning footprints, not root zones or measured mature crowns.",
+    "evidence": "assumption",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          123,
+          124,
+          132
+        ]
+      }
+    ],
+    "limitations": "No source supplies these exact generated coordinates or universally optimal quantities."
+  },
+  {
+    "id": "companion_context",
+    "title": "Oak and companion context",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "Coscoja is usually a shrub; its natural occurrence near 200 mm annual rainfall at Cabo de Gata is not a seedling survival guarantee. Encina is a conditional larger-tree candidate for favourable soil/moisture pockets. Cork oak needs suitable soil chemistry and moisture; myrtle is a moisture-pocket candidate. Phillyrea angustifolia and P. latifolia are distinct taxa. A vegetation series describes reference communities and related stages, not a mandatory planting mix or a guarantee of tall forest.",
+    "evidence": "unresolved",
+    "sources": [
+      {
+        "id": "FOREST-003",
+        "pages": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "id": "FOREST-004",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "id": "FOREST-002",
+        "pages": [
+          91,
+          124
+        ]
+      }
+    ],
+    "limitations": "No series or species suitability is assigned to this assumed zone. Rainfall alone is insufficient."
+  }
+]

@@ -37,3 +37,8 @@ genus-level tree-form example. Original detail files were not replaced.
 
 The source pages guide morphology and habit; their artwork was not copied.
 Species identity and its catalogue growth-form category remain unchanged.
+
+
+Seven further whole-plant views were added on 29 October 2026 for the Site Designer.
+See [their reference review and provenance](../designer-species-README.md). The
+collection now has 23 whole-plant portraits; existing originals were not replaced.

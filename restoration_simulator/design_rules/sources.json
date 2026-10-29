@@ -1,0 +1,32 @@
+{
+  "FOREST-002": {
+    "filename": "FOREST-002 - Andalusia - Carob Cultivation and Restoration Handbook - 2026.pdf",
+    "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+    "title": "FOREST-002 - Andalusia - Carob Cultivation and Restoration Handbook - 2026",
+    "pages": 168
+  },
+  "FOREST-003": {
+    "filename": "FOREST-003 - Andalusia - Kermes Oak Ecology and Restoration Factsheet - Quercus coccifera.pdf",
+    "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+    "title": "FOREST-003 - Andalusia - Kermes Oak Ecology and Restoration Factsheet - Quercus coccifera",
+    "pages": 4
+  },
+  "FOREST-004": {
+    "filename": "FOREST-004 - Almeria - Holm Oak Botanical Factsheet - Quercus rotundifolia - 2025-01.pdf",
+    "sha256": "701ca670ffafd20157f5ece7da051a2f099b9bcfafe1e038135e44986a906ee1",
+    "title": "FOREST-004 - Almeria - Holm Oak Botanical Factsheet - Quercus rotundifolia - 2025-01",
+    "pages": 1
+  },
+  "NIJAR-003": {
+    "filename": "NIJAR-003 - Campo de Nijar - Native Plant Supply Technical Specification - TSA0078436.pdf",
+    "sha256": "c6d6d436460d34536653c386a7fcb7943b918cc5540c94fca44d3cd0cb213543",
+    "title": "NIJAR-003 - Campo de Nijar - Native Plant Supply Technical Specification - TSA0078436",
+    "pages": 8
+  },
+  "DRYLAND-POSTER": {
+    "filename": "4033da1d50147790d978b646b319874c1f83950c7c4db915d51131eabc57e6a6.png",
+    "sha256": "ae144e8bba5408608d2613189779568667e46be4ce9e4e7a82a070bf356c5322",
+    "title": "Supplied dryland systems PNG — author, date and original source unverified",
+    "pages": 1
+  }
+}

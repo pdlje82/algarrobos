@@ -74,3 +74,11 @@ slender curved cylindrical leaves, removing the broad-blade appearance and
 oversized fruiting structures. Additional university references were added where
 earlier links were intermittently unavailable. No plant ID or simulation data
 changed in this resolution update.
+
+
+## Site Designer additions
+
+The collection now includes 23 species / 46 images. Seven species were added on
+29 October 2026, retaining the same original resolution and transparency. See
+[designer species references and review](designer-species-README.md) and
+[exact generation prompts and checksums](designer-illustrations-manifest.json).

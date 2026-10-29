@@ -158,6 +158,69 @@
       "suggested_quantity": 5,
       "source": "/api/sources/dryland-systems",
       "detail": "Library example for Seasonal watercourse · system 2. Confirm exact species, native provenance, soil, water and permissions for the site. Growth form is a budgeting assumption; use a custom plant for another form."
+    },
+    {
+      "id": "kermes_oak",
+      "label": "Kermes oak",
+      "group": "shrub",
+      "system": "woodland",
+      "suggested_quantity": 1,
+      "source": "/api/designer/sources/FOREST-003",
+      "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. "
+    },
+    {
+      "id": "holm_oak",
+      "label": "Holm oak",
+      "group": "tree",
+      "system": "woodland",
+      "suggested_quantity": 1,
+      "source": "/api/designer/sources/FOREST-004",
+      "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. "
+    },
+    {
+      "id": "phillyrea_angustifolia",
+      "label": "Narrow-leaved mock privet",
+      "group": "shrub",
+      "system": "woodland",
+      "suggested_quantity": 1,
+      "source": "https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/255221248/ODIEL_ABR_2025.pdf/af593fff-c306-0419-192d-6d8ea88c66c1?t=1752574806811",
+      "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. "
+    },
+    {
+      "id": "phillyrea_latifolia",
+      "label": "Broad-leaved mock privet",
+      "group": "shrub",
+      "system": "woodland",
+      "suggested_quantity": 1,
+      "source": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Phillyrea_latifolia.pdf",
+      "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. "
+    },
+    {
+      "id": "myrtle",
+      "label": "Common myrtle",
+      "group": "shrub",
+      "system": "woodland",
+      "suggested_quantity": 1,
+      "source": "https://smantenimiento.us.es/uma/fichas_plantas.php?q=Myrtus+communis",
+      "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. Myrtle needs moisture-retaining sites."
+    },
+    {
+      "id": "terebinth",
+      "label": "Terebinth",
+      "group": "shrub",
+      "system": "woodland",
+      "suggested_quantity": 1,
+      "source": "https://www.miteco.gob.es/es/parques-nacionales-oapn/centros-fincas/quintos/flora.html",
+      "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. "
+    },
+    {
+      "id": "cork_oak",
+      "label": "Cork oak",
+      "group": "tree",
+      "system": "woodland",
+      "suggested_quantity": 1,
+      "source": "https://www.juntadeandalucia.es/medioambiente/contenidoExterno/habitats/310/",
+      "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. Cork oak requires suitable soil chemistry and moisture."
     }
   ],
   "mixes": [

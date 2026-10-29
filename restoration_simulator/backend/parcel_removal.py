@@ -16,7 +16,7 @@ from .parcel_removal_legacy import (
 ACTION = "remove_parcel"  # Frozen historical action ID; new edits use the API.
 
 
-def rebuild(state, parcel_ids):
+def rebuild(state, parcel_ids, with_mapping=False):
     from . import engine
 
     core.require(
@@ -150,7 +150,7 @@ def rebuild(state, parcel_ids):
     rebuilt["revision"] = state["revision"]
     engine.validate_state(rebuilt)
     missing = [p for p in state["parcels"] if p["id"] not in maps["parcel_id"]]
-    return rebuilt, removed, missing
+    return (rebuilt, removed, missing, maps) if with_mapping else (rebuilt, removed, missing)
 
 
 def plan(state, parcel_id):

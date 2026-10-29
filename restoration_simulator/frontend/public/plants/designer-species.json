@@ -1,0 +1,72 @@
+[
+  [
+    "kermes_oak",
+    "Kermes oak",
+    "Coscoja",
+    "Quercus coccifera",
+    "shrub",
+    "Stiff glossy evergreen leaves with spiny teeth; prickly acorn cups.",
+    "Dense evergreen shrub, rarely a small tree.",
+    "/api/designer/sources/FOREST-003"
+  ],
+  [
+    "holm_oak",
+    "Holm oak",
+    "Encina / carrasca",
+    "Quercus rotundifolia",
+    "tree",
+    "Rounded leathery leaves, dark above, grey-white felt beneath; acorns in scaly cups.",
+    "Broad rounded evergreen crown on a sturdy trunk.",
+    "/api/designer/sources/FOREST-004"
+  ],
+  [
+    "phillyrea_angustifolia",
+    "Narrow-leaved mock privet",
+    "Labiérnago de hoja estrecha / olivilla",
+    "Phillyrea angustifolia",
+    "shrub",
+    "Opposite narrow lanceolate leathery leaves with usually entire margins; small black drupes.",
+    "Dense evergreen shrub.",
+    "https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/255221248/ODIEL_ABR_2025.pdf/af593fff-c306-0419-192d-6d8ea88c66c1?t=1752574806811"
+  ],
+  [
+    "phillyrea_latifolia",
+    "Broad-leaved mock privet",
+    "Labiérnago de hoja ancha",
+    "Phillyrea latifolia",
+    "shrub",
+    "Opposite broad ovate leathery leaves with serrated margins; small black drupes.",
+    "Dense evergreen shrub or small tree.",
+    "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Phillyrea_latifolia.pdf"
+  ],
+  [
+    "myrtle",
+    "Common myrtle",
+    "Mirto / arrayán",
+    "Myrtus communis",
+    "shrub",
+    "Opposite glossy entire ovate-lanceolate leaves; five white petals, many long stamens; blue-black berries.",
+    "Dense aromatic evergreen shrub.",
+    "https://smantenimiento.us.es/uma/fichas_plantas.php?q=Myrtus+communis"
+  ],
+  [
+    "terebinth",
+    "Terebinth",
+    "Cornicabra",
+    "Pistacia terebinthus",
+    "shrub",
+    "Alternate pinnate deciduous leaves with a terminal leaflet, unwinged rachis; reddish drupes in clusters.",
+    "Open branching deciduous shrub or small tree.",
+    "https://www.miteco.gob.es/es/parques-nacionales-oapn/centros-fincas/quintos/flora.html"
+  ],
+  [
+    "cork_oak",
+    "Cork oak",
+    "Alcornoque",
+    "Quercus suber",
+    "tree",
+    "Deep fissured cork bark; leathery ovate leaves with grey felt beneath; acorns in scaly cups.",
+    "Broad irregular evergreen tree with a rugged cork-covered trunk.",
+    "https://www.juntadeandalucia.es/medioambiente/contenidoExterno/habitats/310/"
+  ]
+]

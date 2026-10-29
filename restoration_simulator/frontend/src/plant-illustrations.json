@@ -260,6 +260,111 @@
       ],
       "whole_image": "/plants/whole/tamarix.png",
       "habit": "Representative tree form with a loose crown and fine branchlets; Tamarix species can also be shrubby."
+    },
+    {
+      "id": "kermes_oak",
+      "spanish_name": "Coscoja",
+      "scientific_name": "Quercus coccifera",
+      "image": "/plants/kermes_oak.png",
+      "whole_image": "/plants/whole/kermes_oak.png",
+      "features": "Stiff glossy evergreen leaves with spiny teeth; prickly acorn cups.",
+      "habit": "Dense evergreen shrub, rarely a small tree.",
+      "references": [
+        {
+          "label": "Botanical reference / official guidance",
+          "url": "https://www.juntadeandalucia.es/medioambiente/BIO/DOC/BIO-DOC-6120-003.pdf"
+        }
+      ]
+    },
+    {
+      "id": "holm_oak",
+      "spanish_name": "Encina / carrasca",
+      "scientific_name": "Quercus rotundifolia",
+      "image": "/plants/holm_oak.png",
+      "whole_image": "/plants/whole/holm_oak.png",
+      "features": "Rounded leathery leaves, dark above, grey-white felt beneath; acorns in scaly cups.",
+      "habit": "Broad rounded evergreen crown on a sturdy trunk.",
+      "references": [
+        {
+          "label": "Botanical reference / official guidance",
+          "url": "https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/255221248/UMBRIA-ENE-2025.pdf/638e27d7-29a8-8718-0c4f-9ac034bbb20d?t=1745493497879"
+        }
+      ]
+    },
+    {
+      "id": "phillyrea_angustifolia",
+      "spanish_name": "Labiérnago de hoja estrecha / olivilla",
+      "scientific_name": "Phillyrea angustifolia",
+      "image": "/plants/phillyrea_angustifolia.png",
+      "whole_image": "/plants/whole/phillyrea_angustifolia.png",
+      "features": "Opposite narrow lanceolate leathery leaves with usually entire margins; small black drupes.",
+      "habit": "Dense evergreen shrub.",
+      "references": [
+        {
+          "label": "Botanical reference / official guidance",
+          "url": "https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/255221248/ODIEL_ABR_2025.pdf/af593fff-c306-0419-192d-6d8ea88c66c1?t=1752574806811"
+        }
+      ]
+    },
+    {
+      "id": "phillyrea_latifolia",
+      "spanish_name": "Labiérnago de hoja ancha",
+      "scientific_name": "Phillyrea latifolia",
+      "image": "/plants/phillyrea_latifolia.png",
+      "whole_image": "/plants/whole/phillyrea_latifolia.png",
+      "features": "Opposite broad ovate leathery leaves with serrated margins; small black drupes.",
+      "habit": "Dense evergreen shrub or small tree.",
+      "references": [
+        {
+          "label": "Botanical reference / official guidance",
+          "url": "https://herbariodocenteuam.github.io/Paneles/paneles/fichas/Phillyrea_latifolia.pdf"
+        }
+      ]
+    },
+    {
+      "id": "myrtle",
+      "spanish_name": "Mirto / arrayán",
+      "scientific_name": "Myrtus communis",
+      "image": "/plants/myrtle.png",
+      "whole_image": "/plants/whole/myrtle.png",
+      "features": "Opposite glossy entire ovate-lanceolate leaves; five white petals, many long stamens; blue-black berries.",
+      "habit": "Dense aromatic evergreen shrub.",
+      "references": [
+        {
+          "label": "Botanical reference / official guidance",
+          "url": "https://smantenimiento.us.es/uma/fichas_plantas.php?q=Myrtus+communis"
+        }
+      ]
+    },
+    {
+      "id": "terebinth",
+      "spanish_name": "Cornicabra",
+      "scientific_name": "Pistacia terebinthus",
+      "image": "/plants/terebinth.png",
+      "whole_image": "/plants/whole/terebinth.png",
+      "features": "Alternate pinnate deciduous leaves with a terminal leaflet, unwinged rachis; reddish drupes in clusters.",
+      "habit": "Open branching deciduous shrub or small tree.",
+      "references": [
+        {
+          "label": "Botanical reference / official guidance",
+          "url": "https://www.miteco.gob.es/es/parques-nacionales-oapn/centros-fincas/quintos/flora.html"
+        }
+      ]
+    },
+    {
+      "id": "cork_oak",
+      "spanish_name": "Alcornoque",
+      "scientific_name": "Quercus suber",
+      "image": "/plants/cork_oak.png",
+      "whole_image": "/plants/whole/cork_oak.png",
+      "features": "Deep fissured cork bark; leathery ovate leaves with grey felt beneath; acorns in scaly cups.",
+      "habit": "Broad irregular evergreen tree with a rugged cork-covered trunk.",
+      "references": [
+        {
+          "label": "Botanical reference / official guidance",
+          "url": "https://www.juntadeandalucia.es/medioambiente/contenidoExterno/habitats/310/"
+        }
+      ]
     }
   ]
 }

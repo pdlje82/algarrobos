@@ -16,7 +16,7 @@ class Conflict(Invalid):
     pass
 
 
-def validate_export(payload):
+def _validate_project_export(payload):
     require(
         isinstance(payload, dict)
         and {"format_version", "project", "undo"} <= set(payload)
@@ -81,6 +81,29 @@ def validate_export(payload):
     return result
 
 
+def validate_export(payload):
+    """Envelope 5 adds designer attachments; the simulation remains schema 4."""
+    require(isinstance(payload, dict), "Invalid export envelope.")
+    if payload.get("format_version") == 5:
+        required_keys = {"format_version", "project", "undo", "designer", "designer_revision", "designer_undo"}
+        require(required_keys <= set(payload) and set(payload) <= required_keys | {"undo_edit"}, "Invalid designer export envelope.")
+        require(isinstance(payload["project"],dict) and payload["project"].get("schema_version") == 4, "Designer envelope requires simulation schema 4.")
+        base = {k: payload[k] for k in ("project", "undo")}
+        base["format_version"] = 4
+        if "undo_edit" in payload: base["undo_edit"] = payload["undo_edit"]
+        result = _validate_project_export(base)
+        from .designer import validate_attachment
+        require(type(payload["designer_revision"]) is int and payload["designer_revision"] >= 0, "Invalid designer revision.")
+        result.update(designer=deepcopy(validate_attachment(payload["designer"],result["project"])), designer_revision=payload["designer_revision"], designer_undo=deepcopy(validate_attachment(payload["designer_undo"],result["undo"]) if result["undo"] is not None else None))
+        require(result["undo"] is not None or payload["designer_undo"] is None, "Designer undo requires a project undo snapshot.")
+    else:
+        # Explicit envelope migration. Existing simulation migration/replay stays frozen.
+        result = _validate_project_export(payload)
+        result.update(designer=None, designer_revision=0, designer_undo=None)
+    result["format_version"] = 5
+    return result
+
+
 def clean_removed(data):
     """Upgrade earlier soft deletions without retaining them in project history."""
     cleaned, ids = parcel_removal.cleanup(data["project"])
@@ -99,7 +122,10 @@ class Store:
         self.lock = RLock()
         self.error = None
         self.data = {
-            "format_version": 4,
+            "format_version": 5,
+            "designer": None,
+            "designer_revision": 0,
+            "designer_undo": None,
             "project": None,
             "undo": None,
             "undo_edit": None,
@@ -111,13 +137,13 @@ class Store:
                 original = self.path.read_bytes()
                 raw = json.loads(original.decode("utf-8"))
                 require(
-                    set(raw) in (set(self.data), set(self.data) - {"undo_edit"}),
+                    set(raw) in (set(self.data), set(self.data) - {"designer", "designer_revision", "designer_undo"}, set(self.data) - {"undo_edit", "designer", "designer_revision", "designer_undo"}),
                     "Invalid autosave envelope.",
                 )
                 validated = validate_export(
                     {
                         k: raw[k]
-                        for k in ("format_version", "project", "undo", "undo_edit")
+                        for k in ("format_version", "project", "undo", "undo_edit", "designer", "designer_revision", "designer_undo")
                         if k in raw
                     }
                 )
@@ -136,7 +162,7 @@ class Store:
                 )
                 candidate = {**self.data, **raw, **validated}
                 cleaned = clean_removed(candidate)
-                if raw["format_version"] in (1, 2, 3):
+                if raw["format_version"] in (1, 2, 3, 4):
                     checksum = hashlib.sha256(original).hexdigest()[:12]
                     backup = self.path.with_name(
                         self.path.stem
@@ -214,6 +240,8 @@ class Store:
             candidate = deepcopy(self.data)
             candidate["undo_edit"] = None
             current = candidate["project"]
+            if operation not in {"undo", "import"}:
+                candidate["designer_undo"] = deepcopy(candidate["designer"])
             if operation == "new":
                 require(
                     current is None or body["confirm_replace"],
@@ -221,6 +249,9 @@ class Store:
                 )
                 candidate["project"] = new_project(body["name"])
                 candidate["undo"] = None
+                candidate["designer"] = None
+                candidate["designer_undo"] = None
+                candidate["designer_revision"] += 1
                 explanation = "New project created. Choose a starting land route."
             elif operation == "import":
                 require(
@@ -231,6 +262,15 @@ class Store:
                 candidate.update(imported)
                 clean_removed(candidate)
                 explanation = "Project and undo snapshot imported. Its embedded scenario is preserved."
+            elif operation == "apply_designer":
+                from .designer import apply_inputs, evaluate, digest
+                require(current is not None and candidate["designer"] is not None, "Save a designer draft first.")
+                require(body["design_revision"] == candidate["designer_revision"], "Designer draft changed; review it again.")
+                draft = candidate["designer"]["draft"]
+                values = apply_inputs(current, draft, body["administration"])
+                candidate["project"], explanation = transition(current, "demonstrator", values)
+                candidate["undo"] = deepcopy(current)
+                candidate["designer"]["applied"].append(dict(draft=deepcopy(draft), plan=deepcopy(candidate["project"]["demonstrator"]["plan"]), ruleset_hash=digest(draft["bundle"])))
             elif operation == "commit":
                 require(current is not None, "Create a project first.")
                 require(
@@ -254,10 +294,23 @@ class Store:
                 candidate["undo_edit"] = dict(
                     kind="delete_parcels", parcel_ids=[body["parcel_id"]]
                 )
+                from .designer import after_parcel_deletion
+                candidate["designer"] = after_parcel_deletion(candidate["designer"], current, candidate["project"], body["parcel_id"])
+                candidate["designer_revision"] += 1
                 explanation = "Parcel and dependent choices deleted. Cash and time were recalculated from the remaining choices."
             elif operation == "undo":
                 require(candidate["undo"] is not None, "No saved action to undo.")
                 candidate["project"] = deepcopy(candidate["undo"])
+                if self.data["undo_edit"] is not None:
+                    candidate["designer"] = deepcopy(candidate["designer_undo"])
+                elif candidate["designer"] is not None:
+                    # Project undo must not discard a draft saved afterwards.
+                    prior = candidate["designer_undo"]
+                    candidate["designer"]["applied"] = [] if prior is None else deepcopy(prior["applied"])
+                    from .designer import validate_attachment
+                    validate_attachment(candidate["designer"], candidate["project"])
+                candidate["designer_undo"] = None
+                candidate["designer_revision"] += 1
                 candidate["undo"] = None
                 explanation = (
                     "Deletion undone. The previous project was restored."
@@ -278,7 +331,33 @@ class Store:
     def export(self):
         data = self.snapshot()
         require(data["project"] is not None, "Create a project first.")
-        exported = {k: data[k] for k in ("format_version", "project", "undo")}
+        exported = {k: data[k] for k in ("format_version", "project", "undo", "designer", "designer_revision", "designer_undo")}
         if data.get("undo_edit"):
             exported["undo"] = None
+            exported["designer_undo"] = None
         return exported
+
+
+    def save_designer(self, draft, revision, design_revision, request_id):
+        from .designer import evaluate
+        with self.lock:
+            self.check()
+            try:
+                fingerprint = hashlib.sha256(json.dumps(["designer", revision, design_revision, draft], sort_keys=True, allow_nan=False).encode()).hexdigest()
+            except (ValueError,TypeError,RecursionError) as exc:
+                raise Invalid("Designer save must contain finite, valid JSON values.") from exc
+            if request_id in self.data["receipts"]:
+                require(self.data["receipts"][request_id] == fingerprint, "Request ID was reused with different designer content.")
+                return self.snapshot()
+            if revision != self.data["revision"] or design_revision != self.data["designer_revision"]:
+                raise Conflict("Project or designer changed. Reload before saving; your draft is retained.")
+            require(self.data["project"] is not None, "Create a project first.")
+            result = evaluate(draft,self.data["project"])
+            candidate = deepcopy(self.data)
+            applied = [] if candidate["designer"] is None else candidate["designer"]["applied"]
+            candidate["designer"] = dict(draft=result["draft"],applied=applied)
+            candidate["designer_revision"] += 1
+            candidate["receipts"][request_id] = fingerprint
+            self.write(candidate)
+            self.data = candidate
+            return self.snapshot()

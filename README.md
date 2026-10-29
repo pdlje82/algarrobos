@@ -2,7 +2,7 @@
 
 A local, playable 30-year restoration journey implementing [the MVP brief](Restoration_Simulator_MVP_Brief.md). Python owns the simulation; FastAPI connects it to React. All amounts, areas, delays and outcomes are **fictional placeholders for playtesting**, not ecological, investment, legal or grant forecasts.
 
-The application lives in `restoration_simulator/`. Existing documents remain separately in `doc_library/`; this MVP does not ingest them.
+The application lives in `restoration_simulator/`. Existing documents remain separately in `doc_library/`; reference rules are curated from these documents; there is no automatic document ingestion.
 
 The interface uses the Algarroba identity from the supplied logo sheet: forest green, warm ivory, restrained carob-brown accents and serif headings. Light, dark and system themes are available; dark mode keeps botanical image canvases black. Production logo assets and their provenance are documented in [the branding guide](restoration_simulator/frontend/public/branding/README.md). The checkout directory and Conda environment names remain as shown in the installation commands.
 
@@ -118,9 +118,9 @@ Python remaps surviving parcel/agreement references and replays their original i
 
 ## Establishing the planting demonstrator
 
-**Plan the demonstrator** groups its inputs into **Site and planting**, **Plant checklist**, **Demonstration design**, **Funding route**, **Budget** and **Timing**. Presets cover the new picture's four dryland systems, candidate native planting mixes, objectives, comparison methods, baseline/monitoring approaches, public participation and results-sharing. **Custom option…** reveals text input without discarding other selections. Planting presets are documented examples, not site prescriptions or pre-approved fundable operations. Sources link to the existing picture, Níjar plant specification, pilot primer, AL20 table and official rules.
+**Project** retains demonstration protocol, funding, participation, reporting, other budget fields and timing. **Site Designer** owns physical planting choices. Open it from the workspace navigation or the demonstrator summary. There is one plant editor; the project form links to it rather than repeating area, species, prices, methods and water controls.
 
-The **Plant checklist** section replaces the general planting-mix dropdown and aggregate count inputs with individual plant checkboxes and quantities. System preset buttons check individual plants in the checklist; there is no separate system to add. Plants are visually grouped into the four vegetation systems, with editable quantities in the same checklist/cart. Combining presets preserves existing selections and quantities without duplicates. All plants remain editable, and **Add another plant** supports a custom name, growth form and quantity. Python derives the tree and shrub/grass totals and calculates the budget from the individual unit prices. The preview and saved record show the selected planting list and questions about combined habitats or custom plants. The library picture supplies example names and habitat groupings; suggested quantities and growth forms are planning assumptions. No ecological compatibility or grant eligibility is inferred. Existing version-4 aggregate plans replay unchanged; their editing form explains that species counts were not recorded and requires an explicit checklist before revising them. Catalogue version 1 remains stable for deterministic replay. Each of the 16 current catalogue entries includes a botanical illustration and English, Spanish and Latin names, also shown in the planting summary. Plant details include identifying features, primary references and a larger drawing. See [illustration provenance and prompts](restoration_simulator/frontend/public/plants/README.md). Tamarix stays genus-level; custom plants are explicitly unidentified.
+The Site Designer **Plants** panel has the single checklist/cart, grouped by vegetation system, with English, Spanish and scientific names, quantities, editable prices and custom plants. Approaches activates source-qualified combinations; shared species are not duplicated, starter counts are explicitly illustrative, and manual exclusions persist. Python derives tree/shrub totals and plant costs. The catalogue now has **23 species**; original catalogue-v1 records remain unchanged for historical replay.
 
 Each selected plant has an editable **€/plant** field and a **Price confirmed** checkbox. Confirmation means the user checked that amount, for example with a supplier; it is not a certified quote or funding approval. Changing the amount clears confirmation. Unconfirmed prices can still be used for exploratory planning and are labelled **Estimate**. Quantity, unit price, line total and confirmation appear in the preview and saved record.
 
@@ -130,13 +130,13 @@ New checklist submissions use selection version 2 with explicit unit prices and 
 
 Catalogue v2 completes the poster’s semi-arid system with **Rosemary / Romero (*Salvia rosmarinus*)**, **Mediterranean buckthorn / Espino negro (*Rhamnus lycioides*)**, and **Joint pine / Hierba de las coyunturas (*Ephedra fragilis*)**. Its preset selects six plants; each can be selected or removed independently. The original 13 plant records and existing selections remain unchanged. The three new plants each start with an explicit **€2.50 estimate**, editable in `plant-prices.json` or the checklist, and start unconfirmed. New drawings retain their 1254 × 1254 transparent originals and support the click-to-view viewer. Restart Python and refresh the frontend after updating the catalogue. If using `RESTORATION_PLANT_PRICES_PATH`, add explicit amounts for `rosemary`, `rhamnus_lycioides` and `ephedra_fragilis` to that file; incomplete price files produce an error.
 
-Each of the 16 plants now has a **whole-plant portrait and its retained botanical detail**, both at **1254 × 1254 pixels** with transparency. Checklist thumbnails show the whole plant. Clicking one compares **Representative mature form** and **Botanical detail** side by side on desktop, stacked on phones. Each panel has independent **Original size / Fit view** controls; the original view scrolls within its panel. Whole-plant notes describe the form and its variation with age, site and management; images are not to a shared biological scale. Escape, Close and backdrop dismissal return to the checklist without changing selections. See [whole-plant files and prompts](restoration_simulator/frontend/public/plants/whole/README.md) and the [botanical detail review](restoration_simulator/frontend/public/plants/botanical-review-2026-10-28.md). Refresh the browser after updating the files.
+Each of the 23 plants now has a **whole-plant portrait and its retained botanical detail**, both at **1254 × 1254 pixels** with transparency. Checklist thumbnails show the whole plant. Clicking one compares **Representative mature form** and **Botanical detail** side by side on desktop, stacked on phones. Each panel has independent **Original size / Fit view** controls; the original view scrolls within its panel. Whole-plant notes describe the form and its variation with age, site and management; images are not to a shared biological scale. Escape, Close and backdrop dismissal return to the checklist without changing selections. See [whole-plant files and prompts](restoration_simulator/frontend/public/plants/whole/README.md) and the [botanical detail review](restoration_simulator/frontend/public/plants/botanical-review-2026-10-28.md). Refresh the browser after updating the files. The seven designer additions have [source references, exact prompts and checksums](restoration_simulator/frontend/public/plants/designer-species-README.md).
 
 **Algarrobo Planting Explorer:** **Planting information** beside Carob / Algarrobo opens a read-only guide, available with the plant checked or unchecked. Its four views cover **Planting**, **Buying plants**, **Establishment care**, and **Examples and evidence**. Select numbered features or their labels in the original SVG section to understand root-ball dimensions, collar level, stable support and deeper soil preparation. Book recommendations, finca observations, project suggestions and unresolved questions carry distinct text labels, with handbook page links and expandable evidence limitations. Example cards label **Annual rainfall** explicitly and display the original finca photographs beside the source links; selecting an image opens its original pixels. Photo attribution and noncommercial share-alike terms are documented in the [example photograph guide](restoration_simulator/frontend/public/planting-explorer/carob/README.md).
 
 The guide is based on [LEARN-008](doc_library/LEARN-008%20-%20Carob%20Restoration%20-%20Nursery%20Buying%20Guide%20and%20Mixed%20Planting%20Models.md) and [LEARN-007](doc_library/LEARN-007%20-%20Carob%20Establishment%20-%20Soil%20Preparation%20and%20Growth%20with%20Limited%20Water.md). Curated reference text and initial navigation are maintained in [carob-planting-guide.json](restoration_simulator/frontend/src/carob-planting-guide.json), validated separately from project data. This content does not define simulation rules or planting defaults. Reading the guide preserves quantities, prices, confirmations and the existing preview without requesting another calculation. Invalid guide data and failed botanical images produce explicit messages. Only algarrobo currently has a planting guide; no API or save-format change or extra dependency is required.
 
-**Restoration Model Explorer:** open **Explore restoration models** beside the demonstrator's **Site and planting** controls, or from the carob guide's **Examples and evidence** view. Read the book's MR1 degraded-land recovery, MR2 rainfall capture and MR3 agricultural diversification approaches, with original parcel diagrams, finca photographs and a comparison table. The related MP1 oak–carob dehesa and MP2–MP4 production contexts are expandable. Reported rainfall, density area bases, irrigation/grafting differences and source conflicts remain explicit. MR1 and MR2 can be combined where appropriate; the order starts at MR1 for reading, not suitability ranking.
+**Restoration Model Explorer:** read and compare MR1, MR2, MR3 and related production/dehesa examples from the designer Approaches panel, or from the carob guide. The reference content appears in the designer inspector while the plan remains visible. Reading guidance does not select plants, save a model or trigger calculations. The designer separately supports explicit MR1/MR2 example generation and vegetation combinations.
 
 The model reference is maintained in [restoration-models.json](restoration_simulator/frontend/src/restoration-models.json), validated against its model/topic IDs, evidence categories, source pages, finca references and image metadata. It reuses the carob guide's credited photographs and adds the original Rozas Altas photograph ([asset provenance](restoration_simulator/frontend/public/restoration-models/README.md)). Both explorers share one accessible dialog. Close, Back or Escape from the contextual model view restores the carob guide's tab, diagram selection, disclosures, scroll and focus. Exploring does not save a strategy, apply presets, change a budget, calculate suitability or assess funding; no backend API or project-save change is introduced.
 
@@ -259,3 +259,44 @@ $env:CONDA_PKGS_DIRS = Join-Path (Get-Location) '.conda\pkgs'
 conda env create --file environment.yml
 # If already created: conda env update --file environment.yml
 ```
+
+
+## Site Designer
+
+Open **Site Designer** after creating a project. The drawing shows an assumed
+planting zone, not the whole parcel. A square of 200 m² is the initial geometry;
+area, proportions and reference-boundary side/type are editable. Link a parcel
+before applying. Existing plans can be imported explicitly: recorded species,
+quantities and prices are preserved, but coordinates are new assumptions.
+
+Use **Approaches** to combine MR1/MR2 and starter vegetation combinations.
+Optional companions stay visible. Use **Plants** for quantities, prices and
+custom selections. **Establishment** controls the assumed moisture pocket,
+conditional encina example, water/method declaration and material-specific mulch.
+Stone is the first mulch type; other types can be added with separate rules.
+Select symbols to inspect provenance and edit coordinates/footprints. Drag to move,
+drag blank ground to pan, and use Zoom/Fit. Coordinates provide a keyboard
+alternative. Existing vegetation is drawn separately and excluded from new-plant
+costs. Planning circles are not measured crowns or roots. Overflow quantities are
+explicitly unplaced and remain in totals; no plants are silently dropped.
+
+**Save draft** persists without changing simulation time, cash, history or undo.
+**Apply to demonstrator** reviews the saved draft with retained administration and
+budget settings before committing through the existing planning action. Submitted
+or installed plans keep their existing locks. Export/import includes designer
+attachments. Autosave/export envelope 5 retains simulation schema 4; upgrading
+older autosaves creates a checksum-named backup before writing. Parcel deletion
+previews and removes linked designs; explicit undo can restore them.
+
+The [rules library](restoration_simulator/design_rules/README.md) is the entry point
+for rule maintenance. Run `python -m backend.designer` from restoration_simulator to
+validate its schema, references and source checksums. Saved designs retain embedded
+rules until **Review with updated rules** is accepted. **Saved design report**
+downloads the inputs, output, evidence, overrides and applied snapshots as JSON.
+No document-derived statement is treated as an ecological forecast or grant award.
+
+After installing an update, restart the Python backend and reload the browser.
+No new Conda or npm dependencies are required. If using an external
+RESTORATION_PLANT_PRICES_PATH, explicitly add rates for kermes_oak, holm_oak,
+phillyrea_angustifolia, phillyrea_latifolia, myrtle, terebinth and cork_oak; an
+incomplete custom price file is rejected rather than filled silently.

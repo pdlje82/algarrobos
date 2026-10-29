@@ -286,6 +286,35 @@ export function demonstratorContract(value) {
 export function validateResponse(path, data) {
   object(data, "API response");
   if (path === "plant-prices") return priceDefaultsContract(data);
+  if (path === "designer/apply") return validateResponse("commit", data);
+  if (path === "designer") {
+    properties(data,["evaluation","fields","catalogue","design_revision","project_revision","available","reason","saved","can_import","rules_update_available"],"designer workspace");
+    fieldsContract(data.fields,true);
+    validateResponse("designer/preview",data.evaluation);
+    required(Number.isInteger(data.design_revision)&&Number.isInteger(data.project_revision),"Invalid designer revision.");
+    return data;
+  }
+  if (["designer/preview","designer/import-plan"].includes(path)) {
+    properties(data,["draft","width","height","instances","rules","issues","removed","summary","ruleset_hash","reasons","features"],"designer evaluation");
+    properties(data.features,["catchment"],"designer features");
+    required(data.draft.version===1&&data.draft.bundle.manifest.version===1,"Unsupported designer contract.");
+    for(const key of ["instances","rules","issues","removed","reasons"])required(Array.isArray(data[key]),`Missing designer ${key}.`);
+    for(const instance of data.instances){
+      properties(instance,["id","species","x","y","radius","manual","reasons"],"designer plant instance");
+      required([instance.x,instance.y,instance.radius].every(Number.isFinite)&&Array.isArray(instance.reasons),"Invalid designer plant position or provenance.");
+      const trace=data.reasons.find(row=>row.species===instance.species);
+      required(trace!==undefined&&Array.isArray(trace.rules)&&Array.isArray(trace.reasons),`Missing rule trace for ${instance.species}.`);
+    }
+    for(const key of ["plants","trees","shrubs","placed","unplaced","tree_density","carob_density","plant_cost"])required(typeof data.summary[key]==="number"&&Number.isFinite(data.summary[key]),`Invalid designer summary ${key}.`);
+    required(Number.isFinite(data.width)&&Number.isFinite(data.height)&&data.width>0&&data.height>0,"Invalid designer dimensions.");
+    return data;
+  }
+  if(path==="designer/save"){
+    properties(data,["saved","design_revision"],"designer save");required(data.saved===true&&Number.isInteger(data.design_revision),"Invalid designer save receipt.");return data;
+  }
+  if(path==="designer/apply-preview"){
+    properties(data,["preview","previous","notice"],"designer apply preview");validateResponse("preview",data.preview);return data;
+  }
   if (
     [
       "project",

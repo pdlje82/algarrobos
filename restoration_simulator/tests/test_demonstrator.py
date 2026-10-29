@@ -459,7 +459,7 @@ class DemonstratorPersistenceTests(unittest.TestCase):
             path.write_bytes(raw)
             store = Store(path)
             current = store.snapshot()
-            self.assertEqual(current["format_version"], 4)
+            self.assertEqual(current["format_version"], 5)
             self.assertEqual(current["project"]["history"], old["history"])
             self.assertEqual(current["project"]["cash"], old["cash"])
             self.assertTrue(current["project"]["demonstrator"]["legacy"])
@@ -585,7 +585,7 @@ class DemonstratorPersistenceTests(unittest.TestCase):
             retry = client.post("/api/commit", json=request)
             self.assertEqual(retry.status_code, 200)
             self.assertEqual(first.json()["project"], retry.json()["project"])
-            self.assertEqual(client.get("/api/export").json()["format_version"], 4)
+            self.assertEqual(client.get("/api/export").json()["format_version"], 5)
             for source in [
                 "plant-supply",
                 "pilot-primer",

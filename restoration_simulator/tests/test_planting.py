@@ -38,11 +38,11 @@ class PlantChecklistTests(unittest.TestCase):
             [plant for plant in current["plants"] if plant["id"] in original_ids],
             original["plants"],
         )
-        additions = {"rosemary", "rhamnus_lycioides", "ephedra_fragilis"}
+        additions = {"rosemary", "rhamnus_lycioides", "ephedra_fragilis", "kermes_oak", "holm_oak", "phillyrea_angustifolia", "phillyrea_latifolia", "myrtle", "terebinth", "cork_oak"}
         self.assertEqual({p["id"] for p in current["plants"]} - original_ids, additions)
         scrub = next(m for m in current["mixes"] if m["id"] == "scrub")
         self.assertEqual(len(scrub["plant_ids"]), 6)
-        self.assertTrue(additions <= set(scrub["plant_ids"]))
+        self.assertTrue({"rosemary", "rhamnus_lycioides", "ephedra_fragilis"} <= set(scrub["plant_ids"]))
         for version in [0, 3, True, None]:
             with self.subTest(version=version), self.assertRaises(engine.Invalid):
                 planting.catalogue(version)
@@ -238,7 +238,7 @@ class PlantChecklistTests(unittest.TestCase):
                 )
                 self.assertEqual(len(field["catalogue"]["mixes"]), 4)
                 self.assertEqual(field["catalogue"]["version"], 2)
-                self.assertEqual(len(field["catalogue"]["plants"]), 16)
+                self.assertEqual(len(field["catalogue"]["plants"]), 23)
                 raw = path.read_bytes()
                 v = inputs(state)
                 preview = client.post(

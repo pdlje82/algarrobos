@@ -86,3 +86,21 @@ The current audit scope, JSON configuration layout and intentional optional or
 legacy cases are documented in `restoration_simulator/FALLBACK_AUDIT.md`. Preserve
 the frozen replay contracts; do not use their historical prefills as a reason
 to reintroduce silent recovery into current code.
+
+
+## Site Designer: one traceable rule library
+
+All current Site Designer decisions affecting generated species, starter quantities,
+placement, assumed dimensions or treatments must be declared in
+`restoration_simulator/design_rules/`, or registered there with an explicit Python
+handler. Do not introduce ecological heuristics or substitute defaults in React.
+Read that directory's README before changing designer behaviour. Every rule needs
+stable identity, evidence classification, limitations and document/page references.
+Source evidence and project layout assumptions are different. Mulch is a treatment
+category: each material has its own stable type and rule; never reinterpret an old
+stone-mulch design as another material.
+
+Rule updates require validation, a changelog entry and relevant tests. Saved designs
+retain their rules snapshot until the user reviews and adopts an update. Scenario
+JSON owns simulation/funding assumptions; plant-prices.json owns current catalogue
+price defaults. Frozen historical replay data is not an active designer rule source.

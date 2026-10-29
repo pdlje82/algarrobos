@@ -44,7 +44,7 @@ export function RestorationModelContent({ headingId, descriptionId, onDismiss, o
   );
 }
 
-function ModelsBody({ guide }) {
+export function ModelsBody({ guide }) {
   const [view, setView] = useState(guide.presentation.initial_view);
   const [selected, setSelected] = useState(guide.presentation.initial_model);
   const body = useRef(null);

@@ -17,7 +17,14 @@
     "tamarix": 6,
     "rosemary": 2.5,
     "rhamnus_lycioides": 2.5,
-    "ephedra_fragilis": 2.5
+    "ephedra_fragilis": 2.5,
+    "kermes_oak": 2.5,
+    "holm_oak": 6,
+    "phillyrea_angustifolia": 2.5,
+    "phillyrea_latifolia": 2.5,
+    "myrtle": 2.5,
+    "terebinth": 2.5,
+    "cork_oak": 6
   },
   "custom_unit_costs": {
     "tree": 6,

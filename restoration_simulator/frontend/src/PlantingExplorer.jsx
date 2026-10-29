@@ -70,7 +70,7 @@ function ExplorerDialog({ onClose, opener }) {
   );
 }
 
-function GuideViews({ guide, onExploreModels, modelsTrigger }) {
+export function GuideViews({ guide, onExploreModels, modelsTrigger }) {
   const [view, setView] = useState(guide.presentation.initial_view);
   const [feature, setFeature] = useState(guide.presentation.initial_feature);
   const id = useId();

@@ -1,0 +1,90 @@
+{
+  "area": 200,
+  "aspect": 1,
+  "boundary_side": "bottom",
+  "boundary_type": "unspecified",
+  "boundary_custom": "",
+  "starter_quantity": 1,
+  "footprint_radius": 0.5,
+  "pocket_radius": 2,
+  "pocket_position": [
+    0.5,
+    0.55
+  ],
+  "mulch_radius": 0.6,
+  "collar_gap": 0.1,
+  "max_instances": 500,
+  "placement_step": 1.25,
+  "placement_margin": 0.6,
+  "mr1_centres": [
+    [
+      0.25,
+      0.3
+    ],
+    [
+      0.7,
+      0.4
+    ],
+    [
+      0.45,
+      0.75
+    ]
+  ],
+  "mr2_centres": [
+    [
+      0.25,
+      0.5
+    ],
+    [
+      0.5,
+      0.65
+    ],
+    [
+      0.75,
+      0.5
+    ]
+  ],
+  "baseline_layout": "grid",
+  "pocket_species": "holm_oak",
+  "mulch_type": "stone",
+  "boundary_types": [
+    "unspecified",
+    "road",
+    "desert",
+    "neighbour",
+    "wall",
+    "custom"
+  ],
+  "boundary_sides": [
+    "bottom",
+    "top",
+    "left",
+    "right"
+  ],
+  "max_candidates": 2500,
+  "rainfall_capture": {
+    "donor": [
+      0.08,
+      0.06,
+      0.84,
+      0.2
+    ],
+    "flow_start": 0.28,
+    "island_width": 2,
+    "island_depth": 2,
+    "overflow": [
+      0.8,
+      0.7,
+      0.9,
+      0.85
+    ],
+    "donor_label": [
+      0.5,
+      0.16
+    ],
+    "overflow_label": [
+      0.7,
+      0.92
+    ]
+  }
+}

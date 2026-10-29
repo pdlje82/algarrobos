@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { useTheme } from "./theme.js";
 import { BrandFooter, BrandLockup, LandscapeMotif } from "./Brand.jsx";
 import { DemonstratorEditor, DemonstratorRecord } from "./Demonstrator.jsx";
+import { SiteDesigner } from "./SiteDesigner.jsx";
 import {
   AccessTimeline,
   Fields,
@@ -162,6 +163,15 @@ function App() {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState("");
+  const [workspace, setWorkspace] = useState("project");
+  const [designerVisited, setDesignerVisited] = useState(false);
+  const [planningInputs, setPlanningInputs] = useState(null);
+  function openDesigner(){setDesignerVisited(true);setWorkspace("designer");}
+  function designerSaved(physical){
+    const definition=data.actions.find(a=>a.kind==="demo_plan");
+    const base=planningInputs===null?Object.fromEntries(definition.fields.map(f=>[f.name,f.default])):planningInputs;
+    const next={...base,...physical};setPlanningInputs(next);if(action?.kind==="demo_plan")setInputs(next);
+  }
   const [inputs, setInputs] = useState({});
   const [configReady, setConfigReady] = useState(true);
   const [name, setName] = useState(configured.project_name);
@@ -194,7 +204,8 @@ function App() {
   const isDemo = action?.kind?.startsWith("demo_");
   const updateInputs = useCallback((next) => {
     setInputs(next);
-  }, []);
+    if(action?.kind==="demo_plan")setPlanningInputs(next);
+  }, [action?.kind]);
   const previewEligible = action?.available && project !== null && configReady;
   const { preview, previewBusy, previewError, previewCurrent, retryPreview } = usePreview(
     previewEligible
@@ -237,7 +248,7 @@ function App() {
   function choose(a) {
     setConfigReady(a.kind !== "land_access" && a.kind !== "activate_access");
     setSelected(a.id);
-    setInputs(Object.fromEntries(a.fields.map((f) => [f.name, f.default])));
+    setInputs(a.kind==="demo_plan" && planningInputs!==null ? planningInputs : Object.fromEntries(a.fields.map((f) => [f.name, f.default])));
     if (window.matchMedia("(max-width: 650px)").matches) {
       requestAnimationFrame(() =>
         previewPanel.current?.scrollIntoView({
@@ -273,6 +284,7 @@ function App() {
     setRetry(null);
     try {
       setData(await api(path, request));
+      if(["project/new","import"].includes(path)){setPlanningInputs(null);setDesignerVisited(false);setWorkspace("project");}
       setSelected("");
       setHistoryIndex(null);
       setReplacement(null);
@@ -346,6 +358,7 @@ function App() {
           <label className="theme-picker">
             Theme
             <select
+              aria-label="Theme"
               value={theme}
               onChange={(event) => setTheme(event.target.value)}
             >
@@ -361,7 +374,9 @@ function App() {
           )}
         </div>
       </header>
-      <main id="main">
+      {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" aria-pressed={workspace==="project"} onClick={()=>setWorkspace("project")}>Project</button><button type="button" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button></nav>}
+      {project!==null && designerVisited && <div className="designer-workspace-host" hidden={workspace!=="designer"}><SiteDesigner key={project.id} data={data} request={priceRequest} planningInputs={planningInputs} onSaved={designerSaved} onApplied={result=>{setData(result);setPlanningInputs(null);setSelected("");}} /></div>}
+      <main id="main" className="project-workspace" hidden={workspace!=="project"}>
         <div className="hero">
           <div>
             <p className="eyebrow">Algarroba · From a small beginning</p>
@@ -625,7 +640,7 @@ function App() {
               <span className="eyebrow">Latest result</span>
               <p>{data.explanation}</p>
             </section>
-            <DemonstratorRecord value={data.summary.demonstrator} />
+            <DemonstratorRecord value={data.summary.demonstrator} onOpenDesigner={openDesigner} />
             {data.summary.complete && (
               <section className="final panel" aria-labelledby="final-title">
                 <p className="eyebrow">Year 30 · your accumulated work</p>
@@ -774,6 +789,7 @@ function App() {
                       <form
                         onSubmit={(e) => {
                           e.preventDefault();
+                          if (action.kind === "demo_plan") {openDesigner();return;}
                           if (previewCurrent && !busy && configReady)
                             mutate("commit", { action_id: action.id, inputs });
                         }}
@@ -809,9 +825,10 @@ function App() {
                             previewBusy={previewBusy}
                             previewError={previewError}
                             sources={data.summary.demonstrator?.sources}
+                            onOpenDesigner={openDesigner}
                             request={priceRequest}
                           >
-                            <Outcome
+                            {action.kind === "demo_plan" ? <button type="button" onClick={openDesigner}>Review and apply in Site Designer</button> : <Outcome
                               showStatus={action.kind !== "demo_plan"}
                               preview={preview}
                               previewBusy={previewBusy}
@@ -819,7 +836,7 @@ function App() {
                               onRetry={retryPreview}
                               busy={busy}
                               ready={configReady && previewCurrent}
-                            />
+                            />}
                           </DemonstratorEditor>
                         ) : (
                           <>

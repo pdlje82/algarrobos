@@ -1,0 +1,175 @@
+{
+  "generated": "2026-10-29",
+  "tool": "image_gen",
+  "images": [
+    {
+      "id": "kermes_oak",
+      "view": "whole",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-bba4edd6-b05c-4df0-af13-ae858cc188e2.png",
+      "prompt": "Use case scientific-educational. Create ONE square botanical whole-plant portrait asset for an existing restoration app, 1254 by 1254 pixels, true transparent background. Subject Quercus coccifera (coscoja/Kermes oak), an unpruned mature dense spreading Mediterranean evergreen shrub about 1.5 m tall, several woody stems, small rigid glossy green spiny-toothed leaves, natural irregular branching. Whole plant visible with discreet soil line only, no pot, no scenery, no background, no labels or text. Accurate naturalist botanical watercolor with fine ink detail, restrained realistic colours. Do not depict a tall holm oak, do not exaggerate tree trunk. Save original image as project asset.",
+      "asset": "whole/kermes_oak.png",
+      "sha256": "11da4dcbf52d28c2fc9e2167dfd1e049f0449946736122a0d27eba38a9fb1c44",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "kermes_oak",
+      "view": "detail",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-9fb87e18-9768-43f2-8e8e-54cee4635785.png",
+      "prompt": "Use case scientific-educational. ONE square botanical portrait asset, 1254 x 1254 pixels, true transparent background. Species Quercus coccifera. Show botanical detail: stiff small glossy green evergreen leaves with spiny toothed edges; both leaf surfaces green, not grey felt; twig and two acorns with strongly prickly cup scales. Naturalist watercolor and precise fine ink detail, realistic muted greens and woody browns, same botanical reference illustration style as the Algarroba plant checklist. Isolated specimen fully inside frame with generous transparent margins. No writing, labels, frame, pot, scenery or background. Botanically accurate leaf arrangement and reproductive structures.",
+      "asset": "kermes_oak.png",
+      "sha256": "b9cc65730efd98d84d005f7ce22205d6802427ddf19c77913042cda97619854c",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "holm_oak",
+      "view": "whole",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-21ba79ce-993e-4dab-b1af-ca2c76b062ca.png",
+      "prompt": "Use case scientific-educational. ONE square botanical portrait asset, 1254 x 1254 pixels, true transparent background. Species Quercus rotundifolia. Show whole plant: unpruned mature broad rounded evergreen Mediterranean holm oak with sturdy grey fissured trunk and spreading crown, not cork bark. Naturalist watercolor and precise fine ink detail, realistic muted greens and woody browns, same botanical reference illustration style as the Algarroba plant checklist. Isolated specimen fully inside frame with generous transparent margins. No writing, labels, frame, pot, scenery or background. Botanically accurate leaf arrangement and reproductive structures.",
+      "asset": "whole/holm_oak.png",
+      "sha256": "7cbe0b37ce543950f49da196fbe8e57bed1859eba7e8cd1c8423d10351a8f1a5",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "holm_oak",
+      "view": "detail",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-a41566fa-10a3-4225-8c14-9481d212931f.png",
+      "prompt": "Use case scientific-educational. ONE square botanical portrait asset, 1254 x 1254 pixels, true transparent background. Species Quercus rotundifolia. Show botanical detail: rounded to oval leathery small leaves, dark green upper surface and densely grey-white felted undersurface; variable toothed margins; elongated brown acorns in shallow scaly cups. Naturalist watercolor and precise fine ink detail, realistic muted greens and woody browns, same botanical reference illustration style as the Algarroba plant checklist. Isolated specimen fully inside frame with generous transparent margins. No writing, labels, frame, pot, scenery or background. Botanically accurate leaf arrangement and reproductive structures.",
+      "asset": "holm_oak.png",
+      "sha256": "7f810cdd138ea91275111db8aeae44499020af965baa5752bad15bdd1bbfba7f",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "phillyrea_angustifolia",
+      "view": "whole",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-6bd2acdb-913c-43f9-bd62-22145e9a47bb.png",
+      "prompt": "Use case scientific-educational. ONE square botanical portrait asset, 1254 x 1254 pixels, true transparent background. Species Phillyrea angustifolia. Show whole plant: dense natural evergreen shrub with many fine woody branches, narrow lanceolate leaves in opposite pairs, not an olive tree. Naturalist watercolor and precise fine ink detail, realistic muted greens and woody browns, same botanical reference illustration style as the Algarroba plant checklist. Isolated specimen fully inside frame with generous transparent margins. No writing, labels, frame, pot, scenery or background. Botanically accurate leaf arrangement and reproductive structures.",
+      "asset": "whole/phillyrea_angustifolia.png",
+      "sha256": "d8f9b8f102ff7923bdb18131aa32ee6138d5243f54c23c4a43feb9c905056b82",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "phillyrea_angustifolia",
+      "view": "detail",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-3ca8c609-0bbf-4106-9e0b-7b3c2c395e71.png",
+      "prompt": "Use case scientific-educational. ONE square botanical illustration, 1254 x 1254 pixels, true transparent background. Species Phillyrea angustifolia. Show botanical detail: branching twig with OPPOSITE narrow linear-lanceolate leathery green leaves, smooth entire margins, small black spherical drupes at leaf axils; no silver olive leaf underside. Naturalist watercolor with precise fine ink, restrained realistic greens, matching the Algarroba botanical checklist. Isolate the entire specimen within generous transparent margins. No lettering, labels, pot, scenery or background. Accurate botanical morphology and natural branching.",
+      "asset": "phillyrea_angustifolia.png",
+      "sha256": "389532dafd8f27948d738c054663b8a3359d53b59ee2979050b3c3d73cf9aa70",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "phillyrea_latifolia",
+      "view": "whole",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-f7afb7f5-342d-4e91-bc05-b47ea8c5b930.png",
+      "prompt": "Use case scientific-educational. ONE square botanical illustration, 1254 x 1254 pixels, true transparent background. Species Phillyrea latifolia. Show whole plant: natural dense evergreen shrub or small multi-stemmed tree with opposite BROAD oval leathery leaves, toothed margins, small black drupes; not narrow-leaved Phillyrea. Naturalist watercolor with precise fine ink, restrained realistic greens, matching the Algarroba botanical checklist. Isolate the entire specimen within generous transparent margins. No lettering, labels, pot, scenery or background. Accurate botanical morphology and natural branching.",
+      "asset": "whole/phillyrea_latifolia.png",
+      "sha256": "4779438683fe425c9aea5ff765958a767a4dbcd2779258963bfd93cfd50a7d2c",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "phillyrea_latifolia",
+      "view": "detail",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-400b4b0c-d7df-4bce-bc6b-f0a7e751d7a1.png",
+      "prompt": "Use case scientific-educational. ONE square botanical illustration, 1254 x 1254 pixels, true transparent background. Species Phillyrea latifolia. Show botanical detail: twig with OPPOSITE BROAD ovate leathery dark-green leaves with distinctly serrated margins, small round black drupes in leaf axils; no narrow olive leaves. Naturalist watercolor with precise fine ink, restrained realistic greens, matching the Algarroba botanical checklist. Isolate the entire specimen within generous transparent margins. No lettering, labels, pot, scenery or background. Accurate botanical morphology and natural branching.",
+      "asset": "phillyrea_latifolia.png",
+      "sha256": "900d3bedb44dc4c47479d2e647f812d6f93829285c1c7ab6bee9bce1e0ed8c1e",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "myrtle",
+      "view": "whole",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-16f6e8e6-7c9e-447c-ab81-053857c119f1.png",
+      "prompt": "Use case scientific-educational. ONE square botanical illustration, 1254 x 1254 pixels, true transparent background. Species Myrtus communis. Show whole plant: dense unpruned rounded evergreen myrtle shrub with fine upright branches, small opposite glossy entire leaves, a few five-petalled white flowers with many long stamens, sparse blue-black berries. Naturalist watercolor with precise fine ink, restrained realistic greens, matching the Algarroba botanical checklist. Isolate the entire specimen within generous transparent margins. No lettering, labels, pot, scenery or background. Accurate botanical morphology and natural branching.",
+      "asset": "whole/myrtle.png",
+      "sha256": "59d728b71957b8829f3ab976bd75f74fcfcc54dcc36677eea3977ef9e461ef52",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "myrtle",
+      "view": "detail",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-b96a3f2e-138f-4ef5-9b92-013c5f8dad85.png",
+      "prompt": "Use case scientific-educational. ONE square botanical reference illustration, 1254 x 1254 pixels, true transparent background. Species Myrtus communis. Show botanical detail: twig with OPPOSITE small glossy ovate-lanceolate entire leaves; white flowers with FIVE petals and MANY LONG STAMENS; a few blue-black spherical berries. Naturalist watercolor with fine ink details, realistic greens and woody browns, matching existing Algarroba botanical checklist. Entire specimen inside frame with transparent margins. No text, labels, frame, pot, scenery or background. Anatomically accurate botanical features and leaf arrangement.",
+      "asset": "myrtle.png",
+      "sha256": "619bd620727449c79fe1e0d66cfa2dd9799c84e2ffeca6eda50d0cefecdcb3d0",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "terebinth",
+      "view": "whole",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-f17a1813-2126-4895-8d52-ad3852c4ede3.png",
+      "prompt": "Use case scientific-educational. ONE square botanical reference illustration, 1254 x 1254 pixels, true transparent background. Species Pistacia terebinthus. Show whole plant: natural open branching deciduous Mediterranean shrub or small tree, compound pinnate leaves WITH terminal leaflet, unwinged rachis, green summer foliage with modest reddish fruit clusters. Naturalist watercolor with fine ink details, realistic greens and woody browns, matching existing Algarroba botanical checklist. Entire specimen inside frame with transparent margins. No text, labels, frame, pot, scenery or background. Anatomically accurate botanical features and leaf arrangement.",
+      "asset": "whole/terebinth.png",
+      "sha256": "ff5043d9b0e9ce61f50e1cccc79f8fb102ae7f33d70f9af596c07a16288eead5",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "terebinth",
+      "view": "detail",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-dd169a3b-99f0-4573-9818-feebe68e6927.png",
+      "prompt": "Use case scientific-educational. ONE square botanical reference illustration, 1254 x 1254 pixels, true transparent background. Species Pistacia terebinthus. Show botanical detail: pinnate leaf with paired oval entire leaflets AND A TERMINAL LEAFLET, unwinged rachis, red drupes in a loose branched cluster, deciduous terebinth, NOT evergreen lentisk with winged rachis and no terminal leaflet. Naturalist watercolor with fine ink details, realistic greens and woody browns, matching existing Algarroba botanical checklist. Entire specimen inside frame with transparent margins. No text, labels, frame, pot, scenery or background. Anatomically accurate botanical features and leaf arrangement.",
+      "asset": "terebinth.png",
+      "sha256": "496abf00379223588ec94c75f62e2d01cacad2ba2e67e94d6cdfea0c7778fb9b",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "cork_oak",
+      "view": "whole",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-b2fa81e6-91a3-4c32-b14c-d7e877c30523.png",
+      "prompt": "Use case scientific-educational. ONE square botanical reference illustration, 1254 x 1254 pixels, true transparent background. Species Quercus suber. Show whole plant: mature broad irregular evergreen cork oak, stout trunk with very thick deeply fissured grey-brown cork bark, spreading limbs, small leathery oval leaves, not recently stripped red bark. Naturalist watercolor with fine ink details, realistic greens and woody browns, matching existing Algarroba botanical checklist. Entire specimen inside frame with transparent margins. No text, labels, frame, pot, scenery or background. Anatomically accurate botanical features and leaf arrangement.",
+      "asset": "whole/cork_oak.png",
+      "sha256": "3c9773d0865764f2ae5c91fa36ce5d5c5ded3e1df9863eef828db39163b12dd5",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "id": "cork_oak",
+      "view": "detail",
+      "original": "C:\\Users\\JanEngelke\\.codex\\generated_images\\01a179f5-fd50-7fe2-91e6-7f15bb5d2db1\\exec-1df9f07a-cbe1-4a88-89bc-d3626ef3a078.png",
+      "prompt": "Use case scientific-educational. ONE square botanical reference illustration, 1254 x 1254 pixels, true transparent background. Species Quercus suber. Show botanical detail: a twig with alternate leathery oval leaves, modest marginal teeth, dark green above and grey felt beneath; elongated acorns in scaly cups with some loose upper scales; inset small piece of deeply fissured cork bark. Naturalist watercolor with fine ink details, realistic greens and woody browns, matching existing Algarroba botanical checklist. Entire specimen inside frame with transparent margins. No text, labels, frame, pot, scenery or background. Anatomically accurate botanical features and leaf arrangement.",
+      "asset": "cork_oak.png",
+      "sha256": "d65b7e7538bfaee79721d8c8a8b7db29fcbd94a4b1daa2aafbf7a43cf3a76961",
+      "dimensions": [
+        1254,
+        1254
+      ]
+    }
+  ],
+  "review": "Reviewed leaf arrangement, oak bark/acorn cups, Phillyrea leaf-width distinctions, myrtle flowers and terebinth terminal leaflets. Illustrative specimens; not measured plants or identification guarantees."
+}

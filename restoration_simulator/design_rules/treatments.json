@@ -1,0 +1,9 @@
+[
+  {
+    "id": "stone",
+    "label": "Stone mulch",
+    "rule": "stone_mulch",
+    "pattern": "stones",
+    "description": "Surface stone cover; dimensions are editable assumptions. No automatic material or labour cost is inferred."
+  }
+]

@@ -1,0 +1,211 @@
+[
+  {
+    "id": "mr1_mix",
+    "title": "MR1 companion palette",
+    "rule": "mr1",
+    "starter": [
+      "carob"
+    ],
+    "optional": [
+      "wild_olive",
+      "palmetto",
+      "lentisk",
+      "holm_oak",
+      "phillyrea_angustifolia",
+      "phillyrea_latifolia",
+      "myrtle",
+      "terebinth",
+      "cork_oak"
+    ],
+    "description": "Carob-centred starter; companions require site review, not simultaneous planting of every listed species.",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          91,
+          123,
+          124
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mr2_mix",
+    "title": "MR2 mixed planting palette",
+    "rule": "mr2",
+    "starter": [
+      "carob"
+    ],
+    "optional": [
+      "wild_olive",
+      "lentisk",
+      "palmetto",
+      "kermes_oak"
+    ],
+    "description": "Illustrative companion choices for planting islands; not a fixed MR2 recipe.",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          131,
+          132,
+          133,
+          134
+        ]
+      }
+    ]
+  },
+  {
+    "id": "lentisk_series",
+    "title": "Warm lentisco series · Bupleuro–Pistacieto",
+    "rule": "layout",
+    "starter": [
+      "lentisk"
+    ],
+    "optional": [
+      "wild_olive",
+      "kermes_oak",
+      "palmetto"
+    ],
+    "description": "Vegetation-series reference, not a compulsory mixture. FOREST-003 calls it a coscoja series although the Latin name identifies lentisco: the source conflict is retained. Optional members are illustrative companions, not a complete association.",
+    "sources": [
+      {
+        "id": "FOREST-003",
+        "pages": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "coscoja_series",
+    "title": "Semi-arid coscoja series · Rhamno–Querceto",
+    "rule": "layout",
+    "starter": [
+      "kermes_oak",
+      "rhamnus_lycioides"
+    ],
+    "optional": [
+      "ephedra_fragilis",
+      "retama",
+      "esparto"
+    ],
+    "description": "Coscoja with espino negro; optional plants illustrate related stages rather than a required combined planting. Mesomediterranean and semi-arid are climatic categories, not an automatic parcel classification.",
+    "sources": [
+      {
+        "id": "FOREST-003",
+        "pages": [
+          3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "system_woodland",
+    "title": "Woodland–shrub mosaic · system 3",
+    "rule": "layout",
+    "starter": [
+      "carob",
+      "wild_olive",
+      "lentisk",
+      "buckthorn",
+      "palmetto"
+    ],
+    "optional": [],
+    "description": "Illustrative grouping from the supplied dryland poster (author/date unverified), supplemented by Níjar species procurement. Not a verified community recipe.",
+    "sources": [
+      {
+        "id": "DRYLAND-POSTER",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "id": "NIJAR-003",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "system_scrub",
+    "title": "Semi-arid shrubland / grassland · system 4",
+    "rule": "layout",
+    "starter": [
+      "retama",
+      "esparto",
+      "thyme",
+      "rosemary",
+      "rhamnus_lycioides",
+      "ephedra_fragilis"
+    ],
+    "optional": [],
+    "description": "Illustrative grouping from the supplied dryland poster (author/date unverified), supplemented by Níjar species procurement. Not a verified community recipe.",
+    "sources": [
+      {
+        "id": "DRYLAND-POSTER",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "id": "NIJAR-003",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "system_arid",
+    "title": "Very arid scrub · system 5",
+    "rule": "layout",
+    "starter": [
+      "ziziphus",
+      "lycium",
+      "salsola"
+    ],
+    "optional": [],
+    "description": "Illustrative grouping from the supplied dryland poster (author/date unverified), supplemented by Níjar species procurement. Not a verified community recipe.",
+    "sources": [
+      {
+        "id": "DRYLAND-POSTER",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "id": "NIJAR-003",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "id": "system_watercourse",
+    "title": "Seasonal watercourse · system 2",
+    "rule": "layout",
+    "starter": [
+      "oleander",
+      "tamarix"
+    ],
+    "optional": [],
+    "description": "Illustrative grouping from the supplied dryland poster (author/date unverified), supplemented by Níjar species procurement. Not a verified community recipe.",
+    "sources": [
+      {
+        "id": "DRYLAND-POSTER",
+        "pages": [
+          1
+        ]
+      },
+      {
+        "id": "NIJAR-003",
+        "pages": [
+          1
+        ]
+      }
+    ]
+  }
+]

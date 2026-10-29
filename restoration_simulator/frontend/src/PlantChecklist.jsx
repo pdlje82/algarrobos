@@ -5,7 +5,7 @@ import { PlantPortrait, plantIllustration } from "./PlantPortrait.jsx";
 import { PlantingExplorer } from "./PlantingExplorer.jsx";
 import { money } from "./format.js";
 
-export function PlantChecklist({ field, value, onChange, disabled, request }) {
+export function PlantChecklist({ field, value, onChange, disabled, request, designerMode = false, onPlantInformation }) {
   const checklistId = useId();
   const catalog = field.catalogue;
   properties(value, ["version", "entries"], "plant selection");
@@ -20,6 +20,10 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
     required(typeof entry.price_confirmed === "boolean", "Missing plant price confirmation value.");
   }
   const systems = checklistSystems(catalog);
+  const PricePanel = designerMode ? "details" : "div";
+  const [search,setSearch]=useState("");
+  const [selectedOnly,setSelectedOnly]=useState(false);
+  function visiblePlant(plant){const botanical=plantIllustration(plant.id);return (!selectedOnly || entries.some(e=>e.id===plant.id)) && [plant.label,botanical.spanish_name,botanical.scientific_name].join(" ").toLocaleLowerCase().includes(search.toLocaleLowerCase());}
   const [customName, setCustomName] = useState("");
   const [customGroup, setCustomGroup] = useState(
     catalog.custom_defaults.custom_group,
@@ -190,13 +194,11 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
     <div className="plant-checklist">
       {field.legacy_notice && <p className="reason">{field.legacy_notice}</p>}
       <p>
-        Use a system preset to check its plants, then adjust the checklist and
-        quantities. Combine systems freely. Each plant appears once in your
-        quantity cart; presets preserve quantities you have already entered.
+        {designerMode ? "Check plants and edit quantities and prices. Approaches supplies optional starter mixes." : "Use a system preset to check its plants, then adjust the checklist and quantities. Combine systems freely. Each plant appears once in your quantity cart; presets preserve quantities you have already entered."}
       </p>
-      <fieldset className="plant-mixes" disabled={disabled || priceSaving || !defaultsReady}>
+      {!designerMode && <fieldset className="plant-mixes" disabled={disabled || priceSaving || !defaultsReady}>
         <legend>Preselect plants by vegetation system</legend>
-        {systems.map((system) => (
+        {systems.filter(system=>!designerMode || system.plants.some(visiblePlant)).map((system) => (
           <button
             key={system.id}
             type="button"
@@ -208,17 +210,20 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
             <span>{system.plant_ids.every((id) => selected(id)) ? "All plants checked" : "Select plant checkboxes"}</span>
           </button>
         ))}
-      </fieldset>
-      <p className="muted">
+      </fieldset>}
+      {!designerMode && <p className="muted">
         Plants are grouped by the poster’s systems. Click a whole-plant depiction
         to compare its representative mature form with botanical detail. Each view
         has an original-size option. Open plant details for identification
         references. Quantities and growth forms are planning assumptions.
       </p>
+      }
+      {designerMode && <><label>Find a plant<input type="search" value={search} onChange={e=>setSearch(e.target.value)} placeholder="English, Spanish or Latin name" /></label><label className="designer-choice"><input type="checkbox" checked={selectedOnly} onChange={e=>setSelectedOnly(e.target.checked)}/>Show selected plants only</label></>}
       <p role="status" className="plant-message">
         {message}
       </p>
-      <div className="plant-price-defaults">
+      <PricePanel className="plant-price-defaults">
+        {designerMode && <summary>Prices, confirmation and default rates</summary>}
         <p id="price-confirm-help">Edit €/plant for this draft. Check <strong>Price confirmed</strong> only after checking the amount, for example with a supplier. Changing a price clears its confirmation. Unconfirmed prices remain estimates.</p>
         <p>Save selected catalogue prices as defaults for later selections. Existing plans keep their prices; custom plants stay in this project.</p>
         <div className="plant-default-actions">
@@ -231,14 +236,14 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
         {loadError && <p className="error" role="alert">{loadError} Your selected plants and prices are retained. Reload default prices to retry.</p>}
         {priceError && <p className="error" role="alert">{priceError}</p>}
         {priceMessage && <p role="status">{priceMessage}</p>}
-      </div>
-      {systems.map((system) => (
+      </PricePanel>
+      {systems.filter(system=>!designerMode || system.plants.some(visiblePlant)).map((system) => (
         <fieldset className="plant-group plant-system" key={system.id} disabled={disabled || priceSaving}>
           <legend>{system.label}</legend>
           <p className="plant-system-count muted">
             {system.plants.filter((plant) => selected(plant.id)).length} of {system.plants.length} plants checked
           </p>
-          {system.plants.map((plant) => {
+          {system.plants.filter(plant=>!designerMode || visiblePlant(plant)).map((plant) => {
               const entry = selected(plant.id);
               const illustration = plantIllustration(plant.id);
               const group = catalog.groups.find((g) => g.id === plant.group);
@@ -266,9 +271,9 @@ export function PlantChecklist({ field, value, onChange, disabled, request }) {
                         <small>{group.label}</small>
                       </label>
                     </div>
-                    {plant.id === "carob" && <PlantingExplorer />}
+                    {plant.id === "carob" && (designerMode ? <button type="button" onClick={onPlantInformation}>Planting information</button> : <PlantingExplorer />)}
                   </div>
-                  {priceControls(entry, plant)}
+                  {(!designerMode || entry !== undefined) && priceControls(entry, plant)}
                   <details className="plant-info">
                     <summary>Details for {plant.label}</summary>
                     <p>

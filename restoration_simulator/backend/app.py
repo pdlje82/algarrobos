@@ -19,9 +19,10 @@ from .engine import (
     summary,
 )
 from .storage import Conflict, Store
-from .parcel_removal import plan as removal_plan
+from .parcel_removal import plan as removal_plan, delete as delete_parcels
 from .configuration import load_defaults
 from . import plant_prices
+from . import designer
 
 
 class StrictModel(BaseModel):
@@ -75,6 +76,28 @@ class PlantPriceRequest(StrictModel):
     unit_costs: dict[str, Any]
 
 
+class DesignerPreviewRequest(StrictModel):
+    revision: StrictInt
+    draft: dict[str, Any]
+    command: dict[str, Any] | None = None
+
+
+class DesignerSaveRequest(Mutation):
+    design_revision: StrictInt
+    draft: dict[str, Any]
+
+
+class DesignerApplyPreview(StrictModel):
+    revision: StrictInt
+    design_revision: StrictInt
+    administration: dict[str, Any]
+
+
+class DesignerApplyRequest(Mutation):
+    design_revision: StrictInt
+    administration: dict[str, Any]
+
+
 def view(data, explanation=None):
     project = data["project"]
     return {
@@ -90,6 +113,8 @@ def view(data, explanation=None):
         "project": project,
         "revision": data["revision"],
         "can_undo": data["undo"] is not None,
+        "designer_saved": data["designer"] is not None,
+        "designer_revision": data["designer_revision"],
         "undo_kind": "delete" if data["undo_edit"] is not None else "action",
         "actions": list_actions(project) if project else [],
         "summary": summary(project) if project else None,
@@ -179,6 +204,59 @@ def create_app(save_path=None):
     def actions():
         return view(get_store().snapshot())["actions"]
 
+    def designer_state(revision=None):
+        data = get_store().snapshot()
+        if revision is not None and revision != data["revision"]:
+            raise Conflict("Project changed. Reload it; your designer draft is retained.")
+        if data["project"] is None: raise Invalid("Create a project first.")
+        return data
+
+    @app.get("/api/designer")
+    def get_designer():
+        data = designer_state()
+        return designer.workspace(data["project"],data["designer"],data["designer_revision"])
+
+    @app.post("/api/designer/preview")
+    def designer_preview(req: DesignerPreviewRequest):
+        data = designer_state(req.revision)
+        return designer.evaluate(req.draft,data["project"],req.command)
+
+    @app.post("/api/designer/import-plan")
+    def designer_import_plan(req: ActionRequest):
+        data = designer_state(req.revision)
+        return designer.import_plan(data["project"])
+
+    @app.post("/api/designer/save")
+    def designer_save(req: DesignerSaveRequest):
+        data = get_store().save_designer(req.draft,req.revision,req.design_revision,str(req.request_id))
+        return {"design_revision":data["designer_revision"],"saved":True}
+
+    @app.post("/api/designer/apply-preview")
+    def designer_apply_preview(req: DesignerApplyPreview):
+        data = designer_state(req.revision)
+        if req.design_revision != data["designer_revision"]: raise Conflict("Designer draft changed. Review again.")
+        if data["designer"] is None: raise Invalid("Save a designer draft first.")
+        inputs = designer.apply_inputs(data["project"],data["designer"]["draft"],req.administration)
+        result = engine_preview(data["project"],"demonstrator",inputs)
+        return {"preview":result,"previous":data["project"]["demonstrator"],"notice":"Applying replaces the current demonstrator plan and resets its baseline/funding preparation as in the existing planning action. Review all costs and retained administration before confirming."}
+
+    @app.post("/api/designer/apply")
+    def designer_apply(req: DesignerApplyRequest):
+        return mutate("apply_designer",req)
+
+    @app.get("/api/designer/report")
+    def designer_report():
+        data = designer_state()
+        if data["designer"] is None: raise Invalid("Save a designer draft before downloading its report.")
+        evaluation = designer.evaluate(data["designer"]["draft"],data["project"])
+        return JSONResponse({"project":data["project"]["name"],"design_revision":data["designer_revision"],"design":data["designer"],"evaluation":evaluation},headers={"Content-Disposition":'attachment; filename="algarroba-design-report.json"'})
+
+    @app.get("/api/designer/sources/{source_id}")
+    def designer_source(source_id: str):
+        data = designer_state()
+        bundle = designer.load_bundle() if data["designer"] is None else data["designer"]["draft"]["bundle"]
+        return FileResponse(designer.source_file(bundle,source_id))
+
     @app.get("/api/plant-prices")
     def default_plant_prices():
         return plant_prices.snapshot()
@@ -223,10 +301,17 @@ def create_app(save_path=None):
             raise Conflict("This view is out of date. Reload the saved project.")
         if data["project"] is None:
             raise Invalid("Create a project first.")
-        return {
+        result = {
             "revision": data["revision"],
             **removal_plan(data["project"], req.parcel_id),
         }
+        if data["designer"] is not None:
+            before = data["project"]
+            after = delete_parcels(before,[req.parcel_id])
+            retained = designer.after_parcel_deletion(data["designer"],before,after,req.parcel_id)
+            if retained is None:
+                result["removed_actions"].append({"title":"Saved Site Designer and dependent applied snapshots","year":before["time"],"reason":"Linked to the deleted parcel."})
+        return result
 
     @app.post("/api/parcels/delete")
     def delete_parcel(req: DeleteParcelRequest):

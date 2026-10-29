@@ -3,7 +3,7 @@ import { Fields, PreviewStatus } from "./LandAccess.jsx";
 import { area, money, year } from "./format.js";
 import { PlantChecklist, PlantingList } from "./PlantChecklist.jsx";
 import { required } from "./contracts.js";
-import { RestorationModelExplorer } from "./RestorationModelExplorer.jsx";
+import { DESIGNER_FIELDS } from "./SiteDesigner.jsx";
 
 const phases = [
   ["planned", "Plan"],
@@ -75,8 +75,9 @@ export function DemonstratorEditor({
   sources,
   request,
   children,
+  onOpenDesigner,
 }) {
-  const sections = [...new Set(action.fields.map((f) => f.section))];
+  const sections = [...new Set(action.fields.filter(f=>action.kind!=="demo_plan" || !DESIGNER_FIELDS.has(f.name)).map((f) => f.section))];
   required(
     sections.length > 0 && sections.every((s) => typeof s === "string"),
     "Missing demonstrator form sections.",
@@ -92,12 +93,8 @@ export function DemonstratorEditor({
     <div className="demo-editor">
       {planning && (
         <>
-          <p className="demo-intro">
-            Build a planting-led dryland pilot. Choose plants with checkboxes,
-            use system presets to check plants and configure a potential AL20 3.4 route.
-            Choose <strong>Custom option…</strong> for your own method or
-            description. No option is automatically funded.
-          </p>
+          <p className="demo-intro">Configure the demonstration, reporting, funding and remaining budget here. Physical planting choices and plant prices are edited in the Site Designer.</p>
+          <button type="button" onClick={onOpenDesigner}>Open Site Designer</button>
           <nav
             className="demo-section-nav"
             aria-label="Demonstrator configuration sections"
@@ -119,10 +116,6 @@ export function DemonstratorEditor({
         <div>
           <fieldset className="demo-fields">
             <legend>{planning ? selected : action.title}</legend>
-            {planning && selected === "Site and planting" && <div className="demo-model-explorer">
-              <RestorationModelExplorer />
-              <p className="muted">Read parcel-level restoration approaches alongside your site and planting choices. Exploring keeps this draft unchanged.</p>
-            </div>}
             {selected === "Budget" && (
               <p>
                 Editable playtest rates. Planting, monitoring and reporting are
@@ -141,7 +134,7 @@ export function DemonstratorEditor({
             <Fields
               fields={action.fields
                 .filter(
-                  (f) => f.section === selected && f.type !== "plant_selection",
+                  (f) => f.section === selected && f.type !== "plant_selection" && (!planning || !DESIGNER_FIELDS.has(f.name)),
                 )
                 .map((f) =>
                   f.type === "category"
@@ -153,7 +146,7 @@ export function DemonstratorEditor({
               disabled={busy}
             />
             {action.fields
-                .filter((f) => f.type === "plant_selection")
+                .filter((f) => !planning && f.type === "plant_selection")
               .map((f) => (
                   <div key={f.name} hidden={f.section !== selected}>
                 <PlantChecklist
@@ -188,24 +181,6 @@ export function DemonstratorEditor({
               </button>
             </div>
           )}
-          {planning && (
-            <details className="demo-picture">
-              <summary>Compare the dryland vegetation systems</summary>
-              <p>
-                Illustrative reference; select a system after site assessment.
-              </p>
-              <a
-                href="/api/sources/dryland-systems"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img
-                  src="/api/sources/dryland-systems"
-                  alt="Dryland vegetation systems: seasonal watercourses, woodland–shrub mosaic, semi-arid shrubland and very arid scrub"
-                />
-              </a>
-            </details>
-          )}
           <Sources sources={sources} />
         </div>
         <div className="land-result">
@@ -228,7 +203,7 @@ function DemonstratorPreview({ value: d, updating }) {
         {d.parcel_name} · {area(d.plan.restoration_area)} · {d.plan.trees} trees
         · {d.plan.shrubs} shrubs / grasses
       </p>
-      <PlantingList planting={d.planting} />
+      <p>Species, quantities and plant prices are available in the Site Designer.</p>
       <table className="demo-budget">
         <caption>Configured budget — eligibility unverified</caption>
         <tbody>
@@ -274,7 +249,7 @@ function DemonstratorPreview({ value: d, updating }) {
   );
 }
 
-export function DemonstratorRecord({ value: d }) {
+export function DemonstratorRecord({ value: d, onOpenDesigner }) {
   required(
     d !== null && typeof d === "object",
     "Missing demonstrator record from Python.",
@@ -325,6 +300,7 @@ export function DemonstratorRecord({ value: d }) {
           : `Planting installed in year ${year(d.installed_year)}; follow-up due in year ${year(d.followup_due)}.`}{" "}
         Installed work does not establish ecological recovery.
       </p>
+      <button type="button" onClick={onOpenDesigner}>Open Site Designer</button>
       <div className="demo-record-totals">
         <p>
           Planned budget<strong>{money(d.budget.total)}</strong>
@@ -356,7 +332,7 @@ export function DemonstratorRecord({ value: d }) {
       )}
       <details>
         <summary>Planting plan and demonstration design</summary>
-        <PlantingList planting={d.planting} />
+        <p>Physical planting choices are edited in the Site Designer.</p>
         <dl className="demo-description">
           {d.details.map((x) => (
             <div key={x.label}>
