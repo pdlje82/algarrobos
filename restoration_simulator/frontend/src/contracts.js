@@ -297,7 +297,21 @@ export function validateResponse(path, data) {
   if (["designer/preview","designer/import-plan"].includes(path)) {
     properties(data,["draft","width","height","instances","rules","issues","removed","summary","ruleset_hash","reasons","features"],"designer evaluation");
     properties(data.features,["catchment"],"designer features");
-    required(data.draft.version===1&&data.draft.bundle.manifest.version===1,"Unsupported designer contract.");
+    required([1,2].includes(data.draft.version)&&data.draft.bundle.manifest.version===data.draft.version,"Unsupported designer contract.");
+    if(data.draft.version===2){
+      properties(data,["species","overlays","density_update","message"],"designer-v2 evaluation");
+      properties(data.draft,["preferences","dismissed","legacy_exclusions","dimensions","displaced","area_density_update"],"designer-v2 draft");
+      required(Array.isArray(data.species)&&typeof data.message==="string"&&(data.density_update===null||Array.isArray(data.density_update)),"Invalid density evaluation.");
+      for(const row of data.species){
+        properties(row,["id","requested_density","effective_density","density_step","quantity","entry"],"species density");
+        required([row.requested_density,row.effective_density,row.density_step].every(Number.isFinite)&&row.density_step>0&&Number.isInteger(row.quantity)&&row.quantity>=0,"Invalid density/count values.");
+        properties(row.entry,["id","quantity","unit_cost","price_confirmed"],"density plant entry");
+        required(row.entry.id===row.id&&row.entry.quantity===row.quantity&&typeof row.entry.price_confirmed==="boolean"&&validUnitCost(row.entry.unit_cost),"Invalid density entry identity, price or count.");
+        properties(data.overlays[row.id],["root_ball","crown"],"plant overlays");
+        for(const feature of ["root_ball","crown"]){const overlay=data.overlays[row.id][feature];if(overlay!==null){properties(overlay,["diameter_m","kind","evidence","source","section","context"],"dimension overlay");required(Array.isArray(overlay.diameter_m)&&overlay.diameter_m.length===2&&overlay.diameter_m.every(v=>Number.isFinite(v)&&v>0),"Invalid overlay diameter.");}}
+      }
+      for(const key of ["shrub_density","overall_density"])required(Number.isFinite(data.summary[key]),`Invalid designer summary ${key}.`);
+    }
     for(const key of ["instances","rules","issues","removed","reasons"])required(Array.isArray(data[key]),`Missing designer ${key}.`);
     for(const instance of data.instances){
       properties(instance,["id","species","x","y","radius","manual","reasons"],"designer plant instance");

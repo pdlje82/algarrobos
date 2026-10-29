@@ -1,0 +1,372 @@
+{
+  "version": 1,
+  "units": "metres",
+  "plants": [
+    {
+      "id": "carob",
+      "scientific_name": "Ceratonia siliqua",
+      "crown": {
+        "diameter_m": [
+          4,
+          8
+        ],
+        "kind": "range",
+        "evidence": "guidance",
+        "source": "https://www.rhs.org.uk/plants/3403/ceratonia-siliqua/details",
+        "section": "Size / Max spread",
+        "context": "Horticultural reference; not a measured Almeria restoration canopy."
+      },
+      "root_ball": null,
+      "stock": "1 L; NIJAR-003 p. 1. Handbook alternatives 0.2–0.3 L and 1–2 L are context dependent.",
+      "references": [
+        "https://www.rhs.org.uk/plants/3403/ceratonia-siliqua/details"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "wild_olive",
+      "scientific_name": "Olea europaea var. sylvestris",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://mhnc.up.pt/pt/colecoes/colecao-botanica-viva/zambujeiro/"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "lentisk",
+      "scientific_name": "Pistacia lentiscus",
+      "crown": {
+        "diameter_m": [
+          2.5,
+          4
+        ],
+        "kind": "range",
+        "evidence": "guidance",
+        "source": "https://www.rhs.org.uk/plants/25153/pistacia-lentiscus/details",
+        "section": "Size / Max spread",
+        "context": "Horticultural reference; not a measured Almeria restoration canopy."
+      },
+      "root_ball": null,
+      "stock": "Forestry cell at least 250 cc; NIJAR-003 p. 1.",
+      "references": [
+        "https://www.rhs.org.uk/plants/25153/pistacia-lentiscus/details"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "buckthorn",
+      "scientific_name": "Rhamnus alaternus",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Forestry cell at least 250 cc; NIJAR-003 p. 1.",
+      "references": [
+        "https://www.rhs.org.uk/plants/19895/rhamnus-alaternus/details"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "palmetto",
+      "scientific_name": "Chamaerops humilis",
+      "crown": {
+        "diameter_m": [
+          1.8288,
+          6.096
+        ],
+        "kind": "range",
+        "evidence": "guidance",
+        "source": "https://plants.ces.ncsu.edu/plants/chamaerops-humilis/",
+        "section": "Dimensions / Width (6–20 feet; multiplied by 0.3048)",
+        "context": "Horticultural reference; not a measured Almeria restoration canopy."
+      },
+      "root_ball": null,
+      "stock": "1 L; NIJAR-003 p. 1.",
+      "references": [
+        "https://plants.ces.ncsu.edu/plants/chamaerops-humilis/"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "retama",
+      "scientific_name": "Retama sphaerocarpa",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Forestry cell at least 250 cc; NIJAR-003 p. 1.",
+      "references": [
+        "https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2745.13309"
+      ],
+      "limitations": "A field study reports different observed crown-size distributions for shrubs with and without recruiting oaks; these are samples of mixed ages, not mature-size defaults.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "esparto",
+      "scientific_name": "Macrochloa tenacissima",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://www.mdpi.com/2072-4292/13/15/2970"
+      ],
+      "limitations": "Biomass research describes tussock height, which is not spread. No justified mature spread range adopted.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "thyme",
+      "scientific_name": "Thymus hyemalis",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Forestry cell at least 250 cc; NIJAR-003 p. 2.",
+      "references": [
+        "https://jardinbotanico.uma.es/jb-alm-19/"
+      ],
+      "limitations": "University of Malaga describes a small woody shrub without numerical spread. Do not substitute a different thyme species.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "rosemary",
+      "scientific_name": "Salvia rosmarinus",
+      "crown": {
+        "diameter_m": [
+          1.5,
+          2.5
+        ],
+        "kind": "range",
+        "evidence": "guidance",
+        "source": "https://www.rhs.org.uk/plants/384211/salvia-rosmarinus-ro/details",
+        "section": "Size / Max spread",
+        "context": "Horticultural reference; not a measured Almeria restoration canopy."
+      },
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://www.rhs.org.uk/plants/384211/salvia-rosmarinus-ro/details"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "rhamnus_lycioides",
+      "scientific_name": "Rhamnus lycioides",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://www.miteco.gob.es/content/dam/miteco/es/parques-nacionales-oapn/publicaciones/Semillas%20-%20Fichas%20de%20especies%20Q-R_tcm30-100341.pdf"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "ephedra_fragilis",
+      "scientific_name": "Ephedra fragilis",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A77171468-1"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "ziziphus",
+      "scientific_name": "Ziziphus lotus",
+      "crown": null,
+      "root_ball": null,
+      "stock": "1 L; NIJAR-003 p. 2.",
+      "references": [
+        "https://onlinelibrary.wiley.com/doi/10.1111/mec.15950"
+      ],
+      "limitations": "A research paper mentions canopies up to 30 m across; this is an extreme size, not an average or a suitable initial design diameter.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "lycium",
+      "scientific_name": "Lycium intricatum",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Forestry cell at least 250 cc; NIJAR-003 p. 1.",
+      "references": [
+        "https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A816497-1/general-information"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "salsola",
+      "scientific_name": "Salsola webbii",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Forestry cell at least 250 cc; NIJAR-003 p. 2.",
+      "references": [
+        "https://www.floraiberica.es/floraiberica/texto/pdfs/02_052_20_Salsola.pdf"
+      ],
+      "limitations": "Flora Iberica provides taxon morphology; plant height and leaf sizes are not crown diameter.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "oleander",
+      "scientific_name": "Nerium oleander",
+      "crown": {
+        "diameter_m": [
+          1,
+          1.5
+        ],
+        "kind": "range",
+        "evidence": "guidance",
+        "source": "https://www.rhs.org.uk/plants/98456/nerium-oleander-l/details",
+        "section": "Size / Max spread",
+        "context": "Horticultural reference; not a measured Almeria restoration canopy."
+      },
+      "root_ball": null,
+      "stock": "1 L; NIJAR-003 p. 2.",
+      "references": [
+        "https://www.rhs.org.uk/plants/98456/nerium-oleander-l/details"
+      ],
+      "limitations": "RHS gives a comparatively small cultivated spread; other growing/pruning contexts differ. Not a local watercourse prediction.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "tamarix",
+      "scientific_name": "Tamarix spp.",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://herbario.ual.es/wp-content/uploads/2016/04/JARDIN-SAL-FINALIZADO.pdf"
+      ],
+      "limitations": "Catalogue identity remains Tamarix spp. A species must be identified before assigning a species crown range.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "kermes_oak",
+      "scientific_name": "Quercus coccifera",
+      "crown": {
+        "diameter_m": [
+          4,
+          8
+        ],
+        "kind": "range",
+        "evidence": "guidance",
+        "source": "https://www.rhs.org.uk/plants/14248/quercus-coccifera/details",
+        "section": "Size / Max spread",
+        "context": "Horticultural reference; not a measured Almeria restoration canopy."
+      },
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://www.rhs.org.uk/plants/14248/quercus-coccifera/details"
+      ],
+      "limitations": "RHS garden size is much larger than the usual shrub habit described in the Andalusian factsheet; this is a reference possibility, not an Almeria expectation.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "holm_oak",
+      "scientific_name": "Quercus rotundifolia",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://www.mdpi.com/1999-4907/12/11/1499"
+      ],
+      "limitations": "The reviewed Portugal study concerns trunk wood and sampled declining trees, not a universal mature crown range. Do not substitute Quercus ilex measurements unqualified.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "phillyrea_angustifolia",
+      "scientific_name": "Phillyrea angustifolia",
+      "crown": {
+        "diameter_m": [
+          1.5,
+          2.5
+        ],
+        "kind": "range",
+        "evidence": "guidance",
+        "source": "https://www.rhs.org.uk/plants/24488/phillyrea-angustifolia/details",
+        "section": "Size / Max spread",
+        "context": "Horticultural reference; not a measured Almeria restoration canopy."
+      },
+      "root_ball": null,
+      "stock": "1 L; NIJAR-003 p. 1.",
+      "references": [
+        "https://www.rhs.org.uk/plants/24488/phillyrea-angustifolia/details"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "phillyrea_latifolia",
+      "scientific_name": "Phillyrea latifolia",
+      "crown": {
+        "diameter_m": [
+          4,
+          8
+        ],
+        "kind": "range",
+        "evidence": "guidance",
+        "source": "https://www.rhs.org.uk/plants/12668/phillyrea-latifolia/details",
+        "section": "Size / Max spread",
+        "context": "Horticultural reference; not a measured Almeria restoration canopy."
+      },
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://www.rhs.org.uk/plants/12668/phillyrea-latifolia/details"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "myrtle",
+      "scientific_name": "Myrtus communis",
+      "crown": {
+        "diameter_m": [
+          1.5,
+          2.5
+        ],
+        "kind": "range",
+        "evidence": "guidance",
+        "source": "https://www.rhs.org.uk/plants/11311/myrtus-communis/details",
+        "section": "Size / Max spread",
+        "context": "Horticultural reference; not a measured Almeria restoration canopy."
+      },
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://www.rhs.org.uk/plants/11311/myrtus-communis/details"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "terebinth",
+      "scientific_name": "Pistacia terebinthus",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://www.rhs.org.uk/plants/13170/pistacia-terebinthus/details"
+      ],
+      "limitations": "No species-specific root-ball width verified. Obtain actual stock dimensions; garden spread depends on site, age and management.",
+      "reviewed": "2026-10-29"
+    },
+    {
+      "id": "cork_oak",
+      "scientific_name": "Quercus suber",
+      "crown": null,
+      "root_ball": null,
+      "stock": "Stock format not established for this exact catalogue taxon in the reviewed local procurement.",
+      "references": [
+        "https://www.rhs.org.uk/plants/14309/quercus-suber/details"
+      ],
+      "limitations": "RHS gives spread wider than 8 m, without an upper bound. No closed range or typical diameter is inferred.",
+      "reviewed": "2026-10-29"
+    }
+  ]
+}

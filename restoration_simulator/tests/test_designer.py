@@ -30,7 +30,9 @@ class DesignerRulesTests(unittest.TestCase):
         original=deepcopy(self.project)
         e=designer.evaluate(self.draft,self.project); self.assertEqual(e["summary"]["plants"],0)
         d=toggle(self.draft,self.project,"approaches","mr1")
-        d["selection"]["entries"][0].update(quantity=3,unit_cost=9.5,price_confirmed=True)
+        d=designer.evaluate(d,self.project,dict(kind="density",id="carob",value=150))["draft"]
+        selection=deepcopy(d["selection"]);selection["entries"][0].update(unit_cost=9.5,price_confirmed=True)
+        d=designer.evaluate(d,self.project,dict(kind="selection",selection=selection))["draft"]
         d=toggle(d,self.project,"approaches","mr2")
         self.assertEqual(len(d["selection"]["entries"]),1)
         self.assertEqual(d["selection"]["entries"][0]["quantity"],3)
@@ -38,6 +40,9 @@ class DesignerRulesTests(unittest.TestCase):
         self.assertTrue(d["selection"]["entries"][0]["price_confirmed"])
         d=designer.evaluate(d,self.project,dict(kind="selection",selection=dict(version=2,entries=[])))["draft"]
         d=toggle(d,self.project,"combinations","system_woodland")
+        self.assertIn("carob",[p["id"] for p in d["selection"]["entries"]])
+        d=designer.evaluate(d,self.project,dict(kind="exclude",id="carob",enabled=True))["draft"]
+        d=toggle(d,self.project,"combinations","system_arid")
         self.assertNotIn("carob",[p["id"] for p in d["selection"]["entries"]])
         self.assertEqual(self.project,original)
 
@@ -72,19 +77,18 @@ class DesignerRulesTests(unittest.TestCase):
 
     def test_saved_rules_are_not_replaced_by_current_bundle(self):
         d=toggle(self.draft,self.project,"approaches","mr1")
-        current=designer.load_bundle();current["manifest"]["ruleset_id"]="reviewed-v2";current["defaults"]["starter_quantity"]=9
-        with patch.object(designer,"load_bundle",return_value=current):
+        current=designer.load_bundle();current["manifest"]["ruleset_id"]="reviewed-v2";current["defaults"]["density_defaults"]["carob"]=900
+        with patch.object(designer,"load_bundle",return_value=current), patch.object(designer.current,"load_bundle",return_value=current):
             w=designer.workspace(self.project,dict(draft=d,applied=[]),1)
             self.assertTrue(w["rules_update_available"])
             self.assertEqual(w["evaluation"]["draft"]["bundle"],d["bundle"])
             updated=designer.evaluate(d,self.project,dict(kind="upgrade_rules"))
             self.assertEqual(updated["draft"]["bundle"]["manifest"]["ruleset_id"],"reviewed-v2")
-            self.assertEqual(updated["summary"]["plants"],1)
+            self.assertEqual(updated["summary"]["plants"],7)
 
     def test_large_quantities_remain_counted_and_invalid_positions_fail(self):
         d=toggle(self.draft,self.project,"approaches","mr1")
-        d["selection"]["entries"][0]["quantity"]=1000
-        e=designer.evaluate(d,self.project)
+        e=designer.evaluate(d,self.project,dict(kind="density",id="carob",value=50000))
         self.assertEqual(e["summary"]["plants"],1000)
         self.assertGreater(e["summary"]["unplaced"],0)
         self.assertEqual(e["summary"]["plant_cost"],6000)
@@ -107,7 +111,7 @@ class DesignerRulesTests(unittest.TestCase):
         d=deepcopy(self.draft);del d["selection"]
         with self.assertRaisesRegex(engine.Invalid,"designer"):designer.evaluate(d,self.project)
         row=dict(id="custom-local",label="Local trial plant",group="shrub",quantity=2,unit_cost=0.1,price_confirmed=False)
-        e=designer.evaluate(self.draft,self.project,dict(kind="selection",selection=dict(version=2,entries=[row])))
+        e=designer.evaluate(self.draft,self.project,dict(kind="custom",entry=row,density=100))
         self.assertEqual(e["summary"]["plant_cost"],0.2)
         removed=designer.evaluate(e["draft"],self.project,dict(kind="selection",selection=dict(version=2,entries=[])))
         self.assertEqual(removed["removed"][0]["id"],row["id"])
@@ -149,12 +153,12 @@ class DesignerPersistenceTests(unittest.TestCase):
                 body=dict(revision=w["project_revision"],design_revision=1,administration=admin)
                 preview=c.post("/api/designer/apply-preview",json=body);self.assertEqual(preview.status_code,200,preview.text)
                 applied=c.post("/api/designer/apply",json={**body,"request_id":str(uuid4())});self.assertEqual(applied.status_code,200,applied.text)
-                data=applied.json();self.assertEqual(data["project"]["demonstrator"]["plan"]["trees"],1)
+                data=applied.json();self.assertEqual(data["project"]["demonstrator"]["plan"]["trees"],7)
                 self.assertEqual(len(c.get("/api/designer/report").json()["design"]["applied"]),1)
                 self.assertEqual(c.get("/api/designer/sources/FOREST-003").status_code,200)
                 # A subsequent saved draft must survive undo of the plan application.
                 edited=c.get("/api/designer").json()["evaluation"]["draft"]
-                edited["selection"]["entries"][0]["quantity"]=2
+                edited=designer.evaluate(edited,s.snapshot()["project"],dict(kind="density",id="carob",value=100))["draft"]
                 res=c.post("/api/designer/save",json=dict(revision=data["revision"],design_revision=1,request_id=str(uuid4()),draft=edited))
                 self.assertEqual(res.status_code,200,res.text)
                 undo=c.post("/api/undo",json=dict(revision=data["revision"],request_id=str(uuid4())));self.assertEqual(undo.status_code,200,undo.text)

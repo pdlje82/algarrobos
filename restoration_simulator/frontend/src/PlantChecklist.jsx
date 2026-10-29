@@ -4,8 +4,9 @@ import { checklistSystems, preselectPlants, changeUnitCost, cataloguePricePatch 
 import { PlantPortrait, plantIllustration } from "./PlantPortrait.jsx";
 import { PlantingExplorer } from "./PlantingExplorer.jsx";
 import { money } from "./format.js";
+import { DensityControl } from "./DensityControl.jsx";
 
-export function PlantChecklist({ field, value, onChange, disabled, request, designerMode = false, onPlantInformation }) {
+export function PlantChecklist({ field, value, onChange, disabled, request, designerMode = false, designer, onPlantInformation }) {
   const checklistId = useId();
   const catalog = field.catalogue;
   properties(value, ["version", "entries"], "plant selection");
@@ -31,6 +32,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
   const [customQuantity, setCustomQuantity] = useState(
     catalog.custom_defaults.custom_quantity,
   );
+  const [customDensity, setCustomDensity] = useState(designerMode ? designer.defaults.other : null);
   const [message, setMessage] = useState("");
   const [priceDefaults, setPriceDefaults] = useState(null);
   const [priceLoading, setPriceLoading] = useState(true);
@@ -69,6 +71,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
     onChange({ version: catalog.selection_version, entries: next });
   }
   function toggle(plant, checked) {
+    if (designerMode) { designer.command({kind:"plant",id:plant.id,enabled:checked}); return; }
     change(
       checked
         ? [...entries, { id: plant.id, quantity: plant.suggested_quantity, unit_cost: priceDefaults.unit_costs[plant.id], price_confirmed: false }]
@@ -106,7 +109,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
       setPriceSaving(false);
     }
   }
-  function addCustom() {
+  async function addCustom() {
     const label = customName.trim();
     const names = entries.map((p) =>
       Object.hasOwn(p, "label")
@@ -124,13 +127,17 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
       );
       return;
     }
-    if (!Number.isInteger(customQuantity) || customQuantity < 1) {
+    if (!designerMode && (!Number.isInteger(customQuantity) || customQuantity < 1)) {
       setMessage(
         "Enter a positive whole-number quantity for the custom plant.",
       );
       return;
     }
     try { unitCost(customPrice); } catch (error) { setMessage(error.message); return; }
+    if (designerMode) {
+      const accepted=await designer.command({kind:"custom",density:customDensity,entry:{id:`custom-${crypto.randomUUID()}`,label,group:customGroup,quantity:1,unit_cost:customPrice,price_confirmed:false}});
+      if(accepted)setCustomName(""); return;
+    }
     change([
       ...entries,
       {
@@ -145,7 +152,13 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
     setCustomName("");
     setMessage(`Added ${label} to the planting list.`);
   }
-  const quantityInput = (p, label) => (
+  const quantityInput = (p, label) => designerMode ? (() => {
+    const row = designer.species.find(s=>s.id===p.id);
+    required(row !== undefined, `Missing density for ${label}.`);
+    return <DensityControl row={row} label={label} disabled={disabled || priceSaving}
+      onDensity={value=>designer.command({kind:"density",id:p.id,value})}
+      onStep={step=>designer.command({kind:"density_step",id:p.id,step})}/>;
+  })() : (
     <label className="plant-quantity">
       <span>
         Quantity <span className="sr-only">for {label}</span>
@@ -194,7 +207,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
     <div className="plant-checklist">
       {field.legacy_notice && <p className="reason">{field.legacy_notice}</p>}
       <p>
-        {designerMode ? "Check plants and edit quantities and prices. Approaches supplies optional starter mixes." : "Use a system preset to check its plants, then adjust the checklist and quantities. Combine systems freely. Each plant appears once in your quantity cart; presets preserve quantities you have already entered."}
+        {designerMode ? "Check plants and edit density and prices. Counts are calculated for your planting area. Approaches supply optional starter mixes." : "Use a system preset to check its plants, then adjust the checklist and quantities. Combine systems freely. Each plant appears once in your quantity cart; presets preserve quantities you have already entered."}
       </p>
       {!designerMode && <fieldset className="plant-mixes" disabled={disabled || priceSaving || !defaultsReady}>
         <legend>Preselect plants by vegetation system</legend>
@@ -241,7 +254,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
         <fieldset className="plant-group plant-system" key={system.id} disabled={disabled || priceSaving}>
           <legend>{system.label}</legend>
           <p className="plant-system-count muted">
-            {system.plants.filter((plant) => selected(plant.id)).length} of {system.plants.length} plants checked
+            {system.plants.filter((plant) => selected(plant.id)).length} of {system.plants.length} species checked
           </p>
           {system.plants.filter(plant=>!designerMode || visiblePlant(plant)).map((plant) => {
               const entry = selected(plant.id);
@@ -276,6 +289,7 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
                   {(!designerMode || entry !== undefined) && priceControls(entry, plant)}
                   <details className="plant-info">
                     <summary>Details for {plant.label}</summary>
+                    {designerMode && <label className="plant-exclusion"><input type="checkbox" checked={designer.exclusions.includes(plant.id)} onChange={e=>designer.command({kind:"exclude",id:plant.id,enabled:e.target.checked})} aria-label={`Exclude ${plant.label} from automatic suggestions`}/>Exclude from automatic suggestions</label>}
                     <p>
                       {illustration.features}
                     </p>
@@ -372,18 +386,16 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
             />
           </label>
           <label>
-            Custom plant quantity
+            {designerMode ? "Custom plant density (plants/ha)" : "Custom plant quantity"}
             <input
               type="number"
-              min="1"
+              min={designerMode ? "0" : "1"}
               max="1000000"
-              step="1"
-              value={customQuantity}
+              step={designerMode ? "any" : "1"}
+              value={designerMode ? (customDensity === null ? "" : customDensity) : customQuantity}
               disabled={disabled}
               onChange={(e) =>
-                setCustomQuantity(
-                  e.target.value === "" ? "" : Number(e.target.value),
-                )
+                designerMode ? setCustomDensity(e.target.value === "" ? null : Number(e.target.value)) : setCustomQuantity(e.target.value === "" ? "" : Number(e.target.value))
               }
             />
           </label>

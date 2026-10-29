@@ -44,7 +44,7 @@
     "title": "Assumed moisture pocket",
     "effect": "include_species",
     "condition": "feature",
-    "description": "A configurable assumed pocket introduces one encina example. Its size does not establish water availability or oak suitability.",
+    "description": "An assumed pocket offers a conditional encina suggestion at the editable species density. Its first automatically positioned example follows the pocket. Additional individuals are layout examples, not verified moist microsites. Pocket size does not establish water availability or oak suitability.",
     "evidence": "assumption",
     "sources": [
       {
@@ -157,10 +157,10 @@
   },
   {
     "id": "layout",
-    "title": "Illustrative geometry and quantities",
+    "title": "Illustrative geometry and layout clearance",
     "effect": "geometry",
     "condition": "always",
-    "description": "Deterministic layout, starter counts, footprints, pocket and mulch dimensions are editable project assumptions. Circles are planning footprints, not root zones or measured mature crowns.",
+    "description": "Generated coordinates, layout clearances, moisture-pocket and mulch geometry are editable project assumptions. Root-ball and mature-crown overlays are separate, evidence-qualified dimensions; they do not establish planting spacing.",
     "evidence": "assumption",
     "sources": [
       {
@@ -205,5 +205,53 @@
       }
     ],
     "limitations": "No series or species suitability is assigned to this assumed zone. Rainfall alone is insufficient."
+  },
+  {
+    "id": "density_scenarios",
+    "title": "Editable density scenarios",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "Carob starts at 350/ha and other species at 50/ha. These are project assumptions, not handbook recommendations. Counts use whole-zone area and round halves upward. At 200 square metres, 350/ha gives seven plants.",
+    "evidence": "assumption",
+    "sources": [
+      {
+        "id": "FOREST-002",
+        "pages": [
+          124,
+          126,
+          134
+        ]
+      }
+    ],
+    "limitations": "350 equals, and does not satisfy, the strict <350 passage. The <100 and <200 passages have different contexts; no suitability cap is inferred."
+  },
+  {
+    "id": "plant_dimensions",
+    "title": "Root balls and indicative mature spread",
+    "effect": "advisory",
+    "condition": "always",
+    "description": "Root-ball dimensions depend on supplied nursery stock. Mature crown ranges are context-qualified references, never growth or root-spread forecasts. Unknown dimensions remain unknown.",
+    "evidence": "unresolved",
+    "sources": [
+      {
+        "id": "NIJAR-003",
+        "pages": [
+          1,
+          2,
+          4,
+          5,
+          6
+        ]
+      },
+      {
+        "id": "FOREST-002",
+        "pages": [
+          13,
+          75,
+          80
+        ]
+      }
+    ],
+    "limitations": "Container volume does not establish width. Garden spread ranges do not predict dryland restoration performance."
   }
 ]

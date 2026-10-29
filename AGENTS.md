@@ -38,9 +38,10 @@ In particular:
 - Do not replace failed reads, requests, validation or calculations with empty
   collections, zero, `null`, stale data or fabricated success.
 - Do not swallow exceptions, silently ignore unsupported fields or silently
-  drop actions that cannot be replayed. Dependency removal is allowed only as
-  an explicit editing operation whose preview lists the affected choices and
-  reasons before confirmation.
+  drop actions that cannot be replayed. Dependency removal must be an explicit editing operation with a readable
+  explanation. In the exploratory Site Designer it applies immediately with
+  session Undo/Redo; applying a design or adopting updated rules still requires
+  a review before confirmation.
 - Do not silently try a different file, configuration, implementation or data
   source when the intended one is unavailable.
 - Do not guess a save version or repair missing fields implicitly during normal
@@ -104,3 +105,6 @@ Rule updates require validation, a changelog entry and relevant tests. Saved des
 retain their rules snapshot until the user reviews and adopts an update. Scenario
 JSON owns simulation/funding assumptions; plant-prices.json owns current catalogue
 price defaults. Frozen historical replay data is not an active designer rule source.
+
+The designer-v1 evaluator is frozen for historical snapshots. New editing policy
+belongs in the registered designer-v2 handlers; do not change v1 replay semantics.

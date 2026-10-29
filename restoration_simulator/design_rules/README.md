@@ -1,8 +1,8 @@
 # Site Designer rule library
 
 This directory is the authoritative index for generated planting decisions. The
-Python evaluator is `backend/designer.py`; React only renders its evaluation and
-collects commands. The designer is a hypothetical layout, not a suitability model.
+Python facade is `backend/designer.py`; current editing is in
+`backend/designer_v2.py`. React renders evaluations and collects commands. The designer is a hypothetical layout, not a suitability model.
 
 ## Files and responsibilities
 
@@ -54,8 +54,9 @@ than encoding executable Python or JavaScript in JSON. Unsupported operations fa
    Exported reports include inputs, outputs, manual edits and source/rule traces.
 
 Changing a default must not overwrite manual prices, quantities or positions.
-Shared species are not added twice. Removing a feature/preset requires reviewing
-its dependent removals. Manually retained pocket plants become unplaced when the
+Shared species are not added twice. Ordinary draft removals apply immediately with a readable explanation and session
+Undo/Redo. Only applying to the demonstrator or adopting updated rules requires
+explicit review. Manually retained pocket plants become unplaced when the
 pocket is removed; they can be positioned explicitly in the remaining zone.
 
 ## Persistence and compatibility
@@ -90,3 +91,55 @@ explicit project illustrations.
 parameters. Their dimensions are assumptions; React receives evaluated coordinates.
 For an earlier snapshot without that optional geometry, the overlay is unavailable
 with an explicit issue requesting rule review; no replacement dimensions are guessed.
+
+
+## Designer v2 editing and density rules
+
+`designer_v1.py` preserves the historical evaluator. New drafts use engine v2;
+old drafts are read unchanged until **Review designer upgrade** is accepted.
+Upgrading derives density from existing count and area, preserves prices and
+positions, and labels prior persistent exclusions as legacy exclusions. Envelope 5
+and the existing simulation schema remain unchanged; applied historical snapshots
+are not rewritten. An explicit versioned review supplies missing v2 metadata;
+normal execution never guesses it.
+
+The registered v2 handlers are density conversion, half-up integer rounding,
+per-species preferences, source-specific dismissal, persistent exclusion,
+centre-preserving resize, overlay evidence/overrides and readable change messages.
+The frozen evaluator supplies existing deterministic layout and pricing. The
+adapter passes only positive-count selected plants and in-zone features to that
+old engine; zero-count species and out-of-zone features remain in the v2 draft and
+response with explicit status. No botanical dimension is used as a spacing rule.
+
+- `density_defaults` declares carob 350/ha and other species 50/ha as assumptions.
+  Selecting either through the checklist or an approach uses the same values.
+  350 does not satisfy a strict <350 source limit and is not a recommendation.
+- Positive density may round to zero; its selection and requested value remain
+  visible. A zero input/last decrement removes the current selection. Rechecking
+  such a zero-density choice explicitly starts its configured scenario again.
+- Source overlap uses set union and preserves the first edited density and price;
+  it never adds counts. Ordinary unchecking dismisses currently active sources.
+  A new/reactivated source may offer the plant again. Persistent exclusions are a
+  distinct visible setting, and checking a plant clears them deliberately.
+- `preferences` retains previously edited prices, confirmations and density when a
+  species is removed. `selection` contains only positive integer priced entries
+  used by the existing budget/application path.
+- `resize` keeps area and the centre fixed. Coordinates shift by half the change
+  in dimensions, preserving metre offsets. Out-of-zone plants retain recoverable
+  coordinates in `displaced`; they are explicitly unplaced and remain costed.
+- An area edit retains counts and exposes previous targets and proposed counts.
+  Only **Update plants to previous densities** changes those counts. Repeated area
+  edits retain the original pending target until that explicit update.
+- `plant_dimensions.json` covers all 23 catalogue taxa. `null` means not
+  established. Reference ranges are drawn as annuli, not averaged. User overrides
+  require an explicit measured/supplied or assumption basis and stay in the draft.
+  Root-ball volume is never converted to a guessed diameter. Sources and gaps are
+  documented in LEARN-009; the existing placement clearance is separate.
+
+The browser's reversible edit history is session-only presentation state. One
+accepted command or completed gesture is one step; new edits clear Redo. Saving
+and workspace switching preserve the session stack; explicit reload/project
+replacement resets it. Undo/Redo re-evaluates the selected complete draft in Python
+before accepting it, and does not change simulation history or the project undo.
+Pointer motion renders a temporary gesture preview; Python validates the final
+metres/area/positions on release. Escape cancels without a domain command.

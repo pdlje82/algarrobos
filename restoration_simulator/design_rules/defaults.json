@@ -86,5 +86,14 @@
       0.7,
       0.92
     ]
-  }
+  },
+  "density_defaults": {
+    "carob": 350,
+    "other": 50
+  },
+  "density_rounding": "half_up",
+  "aspect_limits": [
+    0.05,
+    20
+  ]
 }

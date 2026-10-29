@@ -300,3 +300,29 @@ No new Conda or npm dependencies are required. If using an external
 RESTORATION_PLANT_PRICES_PATH, explicitly add rates for kermes_oak, holm_oak,
 phillyrea_angustifolia, phillyrea_latifolia, myrtle, terebinth and cork_oak; an
 incomplete custom price file is rejected rather than filled silently.
+
+
+### Site Designer density and direct editing
+
+New designs use per-species plants/ha controls and derived purchasing counts.
+Carob starts at an illustrative 350/ha (seven plants on 200 m²); other species
+start at 50/ha. These are editable project scenarios, not handbook prescriptions.
+Arrows add/remove one actual plant. Typed densities round to whole plants, with
+requested and effective values displayed. Changing area preserves current plants
+until **Update plants to previous densities** is chosen.
+
+Drag a moisture-pocket outline to move it and its automatic example encina.
+Drag rectangle edge handles to change proportions at fixed area. The assumed
+north marker is a drawing convention. Numeric fields provide keyboard alternatives.
+Ordinary design edits apply immediately and have session Undo/Redo. Persistent
+exclusions are separate from unchecking a plant. Save and Apply remain distinct.
+
+Root-ball and indicative mature-crown overlays carry evidence and explicit gaps.
+No dimensions are inferred from pot litres or plant height. All 23 taxa were
+reviewed in [LEARN-009](doc_library/LEARN-009%20-%20Site%20Designer%20-%20Root%20Ball%20and%20Mature%20Crown%20Dimension%20Evidence%20-%202026-10-29.md),
+including links to downloadable references for possible library addition. An older
+designer draft opens unchanged and offers **Review designer upgrade**; adopting it
+preserves recorded counts, prices, positions and legacy exclusions.
+
+Restart the Python backend after updating its source, then refresh the frontend.
+There are no new Conda or npm dependencies for these improvements.

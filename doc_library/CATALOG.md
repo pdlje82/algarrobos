@@ -1,6 +1,6 @@
 # Restoration and Environment Document Library
 
-Catalog updated: 29 October 2026. Inventory: 32 library entries (24 PDFs, four overview/research Markdown documents, three supplied PNG infographics and one generated planting-poster collection). Companion images and asset metadata are counted within their parent research entries. The catalog, rename log and archived overview are additional metadata/history files.
+Catalog updated: 29 October 2026. Inventory: 33 library entries (24 PDFs, five overview/research Markdown documents, three supplied PNG infographics and one generated planting-poster collection). Companion images and asset metadata are counted within their parent research entries. The catalog, rename log and archived overview are additional metadata/history files.
 
 Built for the Climate + Environment Career Transition context: understand real restoration work, develop an Almeria pilot, explore land stewardship and funding, and identify useful engineering, software and monitoring skills.
 
@@ -139,3 +139,9 @@ The older research overview lists some material that is not actually stored here
 ## Rename audit and recovery
 
 RENAME_LOG.csv records every old/new filename, original SHA-256 checksum and descriptive metadata. All 21 PDFs and both PNG infographics were checked after renaming for byte-for-byte integrity. The research overview was intentionally updated to use the new names; its original bytes are retained in catalog_history/Original research overview.md. The CSV checksum for that overview refers to its original version. To reverse naming, use the CSV mapping in reverse after checking for filename collisions. Do not overwrite a newer overview with the historical copy without reviewing edits.
+
+### Dimension reference research
+
+| Document | Contents and learning value | Technical tags | Lifecycle tags | Pages |
+|---|---|---|---|---|
+| [LEARN-009 - Site Designer - Root Ball and Mature Crown Dimension Evidence - 2026-10-29](LEARN-009%20-%20Site%20Designer%20-%20Root%20Ball%20and%20Mature%20Crown%20Dimension%20Evidence%20-%202026-10-29.md) | All 23 catalogue taxa reviewed; sourced crown ranges, nursery-stock gaps and downloadable reference links | VEG ECO GIS | DES PROC-L MON-L | Markdown |
