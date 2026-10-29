@@ -2,6 +2,7 @@ import React, { useEffect, useId, useRef, useState } from "react";
 import { area, money, year } from "./format.js";
 import { ParcelRemoval } from "./ParcelRemoval.jsx";
 import { required, inputValue, record } from "./contracts.js";
+import {DocumentLink} from "./DocumentLink.jsx";
 
 export function FieldHelp({ label, children }) {
   const id = useId();
@@ -535,13 +536,13 @@ export function LandEditor({
                   <ul>
                     {form.category_sources.map((s) => (
                       <li key={s.id}>
-                        <a
+                        <DocumentLink
                           href={`/api/sources/${s.id}`}
                           target="_blank"
                           rel="noreferrer"
                         >
                           {s.label}
-                        </a>
+                        </DocumentLink>
                       </li>
                     ))}
                   </ul>
@@ -580,9 +581,9 @@ export function LandEditor({
               <details className="land-section">
                 <summary>Sources and scenario assumptions</summary>
                 <p>
-                  <a href={form.source_url} target="_blank" rel="noreferrer">
+                  <DocumentLink href={form.source_url} target="_blank" rel="noreferrer">
                     Open source document
-                  </a>{" "}
+                  </DocumentLink>{" "}
                   — {form.source}
                 </p>
                 <ul>

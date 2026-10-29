@@ -16,6 +16,7 @@ import { DensityControl } from "./DensityControl.jsx";
 import { DesignerLibraryDialog } from "./DesignerLibraryDialog.jsx";
 import { PlantSymbol, PlantSymbolLegend } from "./PlantSymbol.jsx";
 import { symbolForPlant } from "./plantSymbols.js";
+import {DocumentLink} from "./DocumentLink.jsx";
 import { DesignGuide, FeatureHelp, PocketHelp } from "./DesignerHelp.jsx";
 import { designerHelp } from "./designerHelp.js";
 import { initialCrownEditor, sameCrownEditor, validCrownEditor } from "./dimensionEditor.js";
@@ -322,7 +323,7 @@ function PlantDimensions({id,draft,overlays,command,disabled}) {
   return <section className="plant-dimensions"><FeatureHelp id="dimensions"/>
     <DimensionEditor id={id} feature={{key:"root_ball",label:"Root-ball diameter at planting"}} overlay={overlays.root_ball} command={command} disabled={disabled} hasOverride={Object.hasOwn(draft.dimensions,id)&&draft.dimensions[id].root_ball!==null}/>
     {record===undefined&&<p>Custom plant: no botanical dimensions have been verified.</p>}
-    {record!==undefined&&<details><summary>Sources and details · dimensions</summary><p>{record.stock}</p><p>{record.limitations}</p>{draft.version===3&&<><p>{record.planning.basis}</p><p>Original published horizontal range: {record.crown===null?"Not established":`${record.crown.diameter_m.join("–")} m · ${record.crown.context}`}. The chosen drawing value is separate from this evidence.</p></>}<p>Reviewed {record.reviewed}. Garden spread ranges are not dryland growth predictions. The shared root-ball drawing default is an assumption; actual stock dimensions can replace it.</p>{record.references.map(url=><p key={url}><a href={url} target="_blank" rel="noreferrer">Botanical/reference source ↗</a></p>)}</details>}
+    {record!==undefined&&<details><summary>Sources and details · dimensions</summary><p>{record.stock}</p><p>{record.limitations}</p>{draft.version===3&&<><p>{record.planning.basis}</p><p>Original published horizontal range: {record.crown===null?"Not established":`${record.crown.diameter_m.join("–")} m · ${record.crown.context}`}. The chosen drawing value is separate from this evidence.</p></>}<p>Reviewed {record.reviewed}. Garden spread ranges are not dryland growth predictions. The shared root-ball drawing default is an assumption; actual stock dimensions can replace it.</p>{record.references.map(url=><p key={url}><DocumentLink href={url} target="_blank" rel="noreferrer">Botanical/reference source ↗</DocumentLink></p>)}</details>}
   </section>;
 }
 
@@ -330,7 +331,7 @@ function DimensionEditor({id,feature,overlay,command,disabled,hasOverride}) {
   const [diameter,setDiameter]=useState(""), [basis,setBasis]=useState(""), [note,setNote]=useState("");
   const valid=diameter!==""&&Number(diameter)>0&&Number(diameter)<=200&&basis!=="";
   return <div className="dimension-editor"><strong>{feature.label}</strong>
-    {overlay===null?<p>Not established · no circle drawn.</p>:<p>{overlay.diameter_m[0]===overlay.diameter_m[1]?overlay.diameter_m[0]:`${overlay.diameter_m[0]}–${overlay.diameter_m[1]}`} m · {overlay.evidence}<small>{overlay.context}</small>{overlay.source!==null&&<a href={overlay.source} target="_blank" rel="noreferrer">Source · {overlay.section} ↗</a>}</p>}
+    {overlay===null?<p>Not established · no circle drawn.</p>:<p>{overlay.diameter_m[0]===overlay.diameter_m[1]?overlay.diameter_m[0]:`${overlay.diameter_m[0]}–${overlay.diameter_m[1]}`} m · {overlay.evidence}<small>{overlay.context}</small>{overlay.source!==null&&<DocumentLink href={overlay.source} target="_blank" rel="noreferrer">Source · {overlay.section} ↗</DocumentLink>}</p>}
     <details><summary>{hasOverride?"Edit your dimension":"Enter a measured or assumed dimension"}</summary><fieldset disabled={disabled}>
       <label>{feature.label} (m)<input type="number" min="0.001" max="200" step="any" value={diameter} onChange={e=>setDiameter(e.target.value)}/></label>
       <label>Dimension basis<select aria-label="Dimension basis" value={basis} onChange={e=>setBasis(e.target.value)}><option value="">Choose basis</option><option value="measured">Measured / supplied stock dimensions</option><option value="assumption">My planning assumption</option></select></label>

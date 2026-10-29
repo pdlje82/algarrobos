@@ -2,6 +2,7 @@ import React, { useEffect, useId, useState } from "react";
 import { properties, required, inputValue, record, unitCost, validUnitCost } from "./contracts.js";
 import { checklistSystems, preselectPlants, changeUnitCost, cataloguePricePatch } from "./plantSelection.js";
 import { PlantPortrait, plantIllustration } from "./PlantPortrait.jsx";
+import {DocumentLink} from "./DocumentLink.jsx";
 import { PlantingExplorer } from "./PlantingExplorer.jsx";
 import { money } from "./format.js";
 import { DensityControl } from "./DensityControl.jsx";
@@ -299,14 +300,14 @@ export function PlantChecklist({ field, value, onChange, disabled, request, desi
                       {illustration.features}
                     </p>
                     <p>{plant.detail}{" "}
-                      <a href={plant.source} target="_blank" rel="noreferrer">
+                      <DocumentLink href={plant.source} target="_blank" rel="noreferrer">
                         Vegetation systems poster
-                      </a>
+                      </DocumentLink>
                     </p>
                     <ul>
                       {illustration.references.map((reference) => (
                         <li key={reference.url}>
-                          <a href={reference.url} target="_blank" rel="noreferrer">{reference.label}</a>
+                          <DocumentLink href={reference.url} target="_blank" rel="noreferrer">{reference.label}</DocumentLink>
                         </li>
                       ))}
                     </ul>

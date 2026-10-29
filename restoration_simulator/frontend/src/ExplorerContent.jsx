@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { evidenceLabels, handbookPageUrl } from "./plantingGuide.js";
+import {DocumentLink} from "./DocumentLink.jsx";
 
 export function Evidence({ kind }) {
   return <span className={`explorer-evidence explorer-evidence-${kind}`}>{evidenceLabels[kind]}</span>;
@@ -12,7 +13,7 @@ export function References({ guide, pages }) {
       {pages.map((page, index) => (
         <React.Fragment key={page}>
           {index > 0 && ", "}
-          <a href={handbookPageUrl(guide.source, page)} target="_blank" rel="noreferrer" aria-label={`Read handbook page ${page} (opens in a new tab)`}>{page}</a>
+          <DocumentLink documentId="FOREST-002" page={page} pageBasis="printed" href={handbookPageUrl(guide.source, page)} target="_blank" rel="noreferrer" aria-label={`Read handbook page ${page} (opens PDF viewer)`}>{page}</DocumentLink>
         </React.Fragment>
       ))}
     </span>
@@ -48,7 +49,7 @@ export function GuidePhotograph({ guide, photo, page, subject, sourceLabel }) {
         )}
       </div>
       <figcaption>
-        <a href={handbookPageUrl(guide.source, page)} target="_blank" rel="noreferrer">{sourceLabel} · book p. {page} ↗</a>
+        <DocumentLink documentId="FOREST-002" page={page} pageBasis="printed" href={handbookPageUrl(guide.source, page)} target="_blank" rel="noreferrer">{sourceLabel} · book p. {page} ↗</DocumentLink>
         <span>{photo.figure} · {photo.credit} · <a href={photo.license_url} target="_blank" rel="noreferrer">{photo.license}</a></span>
       </figcaption>
     </figure>

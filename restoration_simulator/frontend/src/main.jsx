@@ -4,6 +4,7 @@ import { useTheme } from "./theme.js";
 import { BrandFooter, BrandLockup, LandscapeMotif } from "./Brand.jsx";
 import { DemonstratorEditor, DemonstratorRecord } from "./Demonstrator.jsx";
 import { SiteDesigner } from "./SiteDesigner.jsx";
+import {DocumentProvider} from "./DocumentLink.jsx";
 import { PlantOrderList } from "./PlantOrderList.jsx";
 import {
   AccessTimeline,
@@ -1001,6 +1002,6 @@ class AppBoundary extends React.Component {
 }
 createRoot(document.getElementById("root")).render(
   <AppBoundary>
-    <App />
+    <DocumentProvider><App /></DocumentProvider>
   </AppBoundary>,
 );

@@ -10,7 +10,7 @@ Development follows the mandatory [repository coding rules](AGENTS.md). Silent f
 
 ## Install with Conda (Windows PowerShell)
 
-You need an installed Conda distribution (Miniforge, Miniconda or Anaconda), PowerShell, internet for initial installation, and a modern browser. Conda installs **Python 3.12, Node.js 22, FastAPI (0.120–0.x), Uvicorn (0.38–0.x) and HTTPX (0.28.x)** from conda-forge. No separate Python/Node installer, pip command, Docker, API key or account is required. npm installs React and Vite from the committed frontend lockfile.
+You need an installed Conda distribution (Miniforge, Miniconda or Anaconda), PowerShell, internet for initial installation, and a modern browser. Conda installs **Python 3.12, Node.js 22 (at least 22.13), FastAPI (0.120–0.x), Uvicorn (0.38–0.x) and HTTPX (0.28.x)** from conda-forge. No separate Python/Node installer, pip command, Docker, API key or account is required. npm installs React, Vite and the pinned PDF.js viewer from the committed frontend lockfile.
 
 If `conda activate` is unavailable, run `conda init powershell` from your Conda prompt and reopen PowerShell.
 
@@ -414,3 +414,24 @@ prices and purchasing quantities from the applied demonstrator. It includes cust
 plants and marks unconfirmed estimates. Exploring or deleting a saved alternative
 does not change the list. Older aggregate-only plans explicitly show that ordering
 records are unavailable; current catalogue prices never replace recorded prices.
+
+### In-app PDF viewer
+
+Registered library PDFs open inside an almost full-screen window at the cited
+page. Use PDF page entry, previous/next, zoom, Fit to width, selectable text and
+Find in document. Download and Open in new tab remain available. Close PDF or
+Escape returns to the same guide, focus and scroll position, keeping unfinished
+designer inputs. Phones use the full screen. Viewer controls follow the theme;
+the document's original paper, photographs and colours are preserved.
+
+The [document catalogue and viewer guide](restoration_simulator/PDF_VIEWER.md)
+explains source IDs, verified page mappings, checksums and tests. Unregistered
+external PDFs and ordinary webpages keep opening as normal links. The viewer has
+no OCR, uploads, annotation editor or saved reading history, and does not change
+project saves or rules snapshots.
+
+For this update, update the Conda environment as above, run `npm.cmd ci` from
+`restoration_simulator/frontend`, restart Python and refresh the browser.
+PDF.js **6.4.299** and its worker/rendering assets are bundled locally by Vite;
+Node **22.13 or later in the 22.x series** is required. No additional Python PDF
+package or online viewer is needed at runtime.

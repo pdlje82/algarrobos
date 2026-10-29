@@ -1,8 +1,13 @@
 import React from "react";
 import { designerHelp } from "./designerHelp.js";
+import {DocumentLink} from "./DocumentLink.jsx";
 
-export function SourceLinks({refs}) {
-  return <p>{refs.map(ref=><span key={ref.id}>{ref.pages.map(page=><a key={page} href={`/api/designer/sources/${ref.id}#page=${page}`} target="_blank" rel="noreferrer">{ref.id} p. {page} </a>)}</span>)}</p>;
+export function SourceLinks({refs,sources}) {
+  return <p>{refs.map(ref=>{
+    const source=sources[ref.id];
+    if(source===undefined||typeof source.sha256!=="string"||! /^[a-f0-9]{64}$/.test(source.sha256))return <span key={ref.id} role="alert">Reference {ref.id} cannot be opened: its saved document checksum is missing or invalid. Reload after checking the source data.</span>;
+    return <span key={ref.id}>{ref.pages.map(page=><DocumentLink key={page} expectedSha256={source.sha256} href={`/api/designer/sources/${ref.id}#page=${page}`} target="_blank" rel="noreferrer">{ref.id} p. {page} </DocumentLink>)}</span>;
+  })}</p>;
 }
 
 export function PocketHelp({facts,showCrowns}) {
@@ -41,12 +46,12 @@ export function DesignGuide({evaluation,showCrowns,onReference}) {
     <div className="designer-reference-links"><button type="button" onClick={()=>onReference("plant")}>Carob Planting Explorer</button><button type="button" onClick={()=>onReference("models")}>Restoration Model Explorer</button></div>
     {evaluation.rules.filter(r=>r.id!=="density_scenarios").map(r=><details key={r.id}><summary>{designerHelp.rules[r.id]===undefined?r.title:designerHelp.rules[r.id].title}</summary>
       <RuleHelp id={r.id} evaluation={evaluation} showCrowns={showCrowns}/>
-      <details className="designer-source-details"><summary>Sources and details</summary><p>{r.description}</p><p>{r.limitations}</p><SourceLinks refs={r.sources}/>
-        {r.id==="density"&&evaluation.rules.filter(rule=>rule.id==="density_scenarios").map(rule=><React.Fragment key={rule.id}><p>{rule.description}</p><p>{rule.limitations}</p><SourceLinks refs={rule.sources}/></React.Fragment>)}
+      <details className="designer-source-details"><summary>Sources and details</summary><p>{r.description}</p><p>{r.limitations}</p><SourceLinks refs={r.sources} sources={draft.bundle.sources}/>
+        {r.id==="density"&&evaluation.rules.filter(rule=>rule.id==="density_scenarios").map(rule=><React.Fragment key={rule.id}><p>{rule.description}</p><p>{rule.limitations}</p><SourceLinks refs={rule.sources} sources={draft.bundle.sources}/></React.Fragment>)}
         {r.id==="autumn"&&<p>For container comparisons, the Níjar example and differences between specifications, open Buying plants and Establishment care in the Carob Planting Explorer.</p>}
       </details>
     </details>)}
-    <details><summary>Vegetation combinations</summary><FeatureHelp id="combinations"/>{combinations.map(c=><section key={c.id}><h4>{c.title}</h4><p>{designerHelp.combinations[c.id]===undefined?`Help unavailable for combination ${c.id}.`:designerHelp.combinations[c.id]}</p><details><summary>Sources and details</summary><p>{c.description}</p><SourceLinks refs={c.sources}/></details></section>)}</details>
+    <details><summary>Vegetation combinations</summary><FeatureHelp id="combinations"/>{combinations.map(c=><section key={c.id}><h4>{c.title}</h4><p>{designerHelp.combinations[c.id]===undefined?`Help unavailable for combination ${c.id}.`:designerHelp.combinations[c.id]}</p><details><summary>Sources and details</summary><p>{c.description}</p><SourceLinks refs={c.sources} sources={draft.bundle.sources}/></details></section>)}</details>
     <details><summary>Unplaced plants</summary><FeatureHelp id="unplaced"/></details>
     <details className="designer-technical"><summary>Technical details</summary>
       <p>Saved rules, original placement explanations and edit records. These remain unchanged by wording updates.</p>

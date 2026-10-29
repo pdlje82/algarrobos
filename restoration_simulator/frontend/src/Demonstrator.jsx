@@ -4,6 +4,7 @@ import { area, money, year } from "./format.js";
 import { PlantChecklist, PlantingList } from "./PlantChecklist.jsx";
 import { required } from "./contracts.js";
 import { DESIGNER_FIELDS } from "./SiteDesigner.jsx";
+import {DocumentLink} from "./DocumentLink.jsx";
 
 const phases = [
   ["planned", "Plan"],
@@ -24,9 +25,9 @@ function Sources({ sources }) {
       <ul>
         {sources.map((s) => (
           <li key={s.url}>
-            <a href={s.url} target="_blank" rel="noreferrer">
+            <DocumentLink href={s.url} target="_blank" rel="noreferrer">
               {s.label}
-            </a>
+            </DocumentLink>
           </li>
         ))}
       </ul>

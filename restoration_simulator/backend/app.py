@@ -23,6 +23,7 @@ from .parcel_removal import plan as removal_plan, delete as delete_parcels
 from .configuration import load_defaults
 from . import plant_prices
 from . import designer
+from . import documents
 
 
 class StrictModel(BaseModel):
@@ -277,6 +278,16 @@ def create_app(save_path=None):
         return JSONResponse({"project":data["project"]["name"],"design_revision":data["designer_revision"],"design":report,"evaluation":evaluation},
             headers={"Content-Disposition":'attachment; filename="algarroba-design-report.json"'})
 
+    @app.get("/api/documents/{document_id}")
+    def document_metadata(document_id: str, expected_sha256: str | None = None):
+        return documents.metadata(document_id, expected_sha256)
+
+    @app.get("/api/documents/{document_id}/file")
+    def document_file(document_id: str, expected_sha256: str | None = None, download: bool = False):
+        entry, path = documents.verified_file(document_id, expected_sha256)
+        return FileResponse(path, media_type="application/pdf", filename=entry["filename"],
+                            content_disposition_type="attachment" if download else "inline")
+
     @app.get("/api/designer/sources/{source_id}")
     def designer_source(source_id: str):
         data = designer_state()
@@ -353,17 +364,12 @@ def create_app(save_path=None):
     def source(source_id: str):
         filenames = {
             "land-poster": "LEARN-003 - Land Restoration - Seven Land Access Options - Infographic.png",
-            "coast-tender": "COAST-001 - COASTRUST Nijar - Gunter Kunkel Park Stewardship Activities Tender Specification.pdf",
-            "nature-finance": "FUND-003 - Nature Finance - Funding Instruments for Land Stewardship - 2025-11.pdf",
-            "vega-assessment": "VEGA-003 - Vega del Andarax - Strategic Environmental Assessment.pdf",
-            "vega-baseline": "VEGA-001 - Vega del Andarax - Baseline and Territorial Diagnosis.pdf",
             "dryland-systems": "4033da1d50147790d978b646b319874c1f83950c7c4db915d51131eabc57e6a6.png",
-            "plant-supply": "NIJAR-003 - Campo de Nijar - Native Plant Supply Technical Specification - TSA0078436.pdf",
-            "pilot-primer": "LEARN-001 - Almeria Restoration - Illustrated Strategy Primer for a Pilot and Organisation - 2026-10-18.pdf",
-            "al20-categories": "FUND-005 - Alpujarra Sierra Nevada Almeriense - LEADER AL20 Eligible Activities and Budgets - 2026.pdf",
-            "forest-habitats": "FOREST-001 - Ferreira Granada - Silvicultural Habitat Improvement Project - 2025-02.pdf",
         }
         if source_id not in filenames:
+            document_id = documents.alias_id("/api/sources/" + source_id)
+            if document_id is not None:
+                return document_file(document_id)
             return JSONResponse({"detail": "Unknown source."}, status_code=404)
         path = (
             Path(__file__).resolve().parents[2] / "doc_library" / filenames[source_id]
