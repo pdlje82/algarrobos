@@ -1,6 +1,6 @@
 # Restoration and Environment Document Library
 
-Catalog updated: 29 October 2026. Inventory: 33 library entries (24 PDFs, five overview/research Markdown documents, three supplied PNG infographics and one generated planting-poster collection). Companion images and asset metadata are counted within their parent research entries. The catalog, rename log and archived overview are additional metadata/history files.
+Catalog updated: 30 October 2026. Inventory: 34 library entries (24 PDFs, six overview/research Markdown documents, three supplied PNG infographics and one generated planting-poster collection). Companion images and asset metadata are counted within their parent research entries. The catalog, rename log and archived overview are additional metadata/history files.
 
 Built for the Climate + Environment Career Transition context: understand real restoration work, develop an Almeria pilot, explore land stewardship and funding, and identify useful engineering, software and monitoring skills.
 
@@ -91,6 +91,8 @@ All entries below are stored locally. ANDARAX-002 contains a download link, not 
 | [FUND-005 - Alpujarra Sierra Nevada Almeriense - LEADER AL20 Eligible Activities and Budgets - 2026](FUND-005%20-%20Alpujarra%20Sierra%20Nevada%20Almeriense%20-%20LEADER%20AL20%20Eligible%20Activities%20and%20Budgets%20-%202026.pdf) | Selected eligible operation types and budgets by aid line | ECON | FIN | 1 |
 | [FUND-006 - Horizon Europe - Work Programme 2026-2027 - Part 14 Horizontal Activities](FUND-006%20-%20Horizon%20Europe%20-%20Work%20Programme%202026-2027%20-%20Part%2014%20Horizontal%20Activities.pdf) | Cross-cutting research and innovation calls; broader than restoration funding | ECON CLIM | FIN | 162 |
 
+| [FUND-007 - Algarroba - Funding Navigator Reference Catalogue - 2026-10-30](FUND-007%20-%20Algarroba%20-%20Funding%20Navigator%20Reference%20Catalogue%20-%202026-10-30.md) | Supplied funding reference dated 30 October 2026: LEADER AL20 typologies; Andalusian, Spanish and EU programmes; 25 LIFE CUSTODIA nature-finance instruments; private finance and procurement; eligibility examples, source crosswalk and Funding Navigator data fields. Distinguishes regulations, calls, historical precedents and interpretations; authorship and independent source verification unconfirmed. | ECON ENV SOC PROC MON PM | FIN REG PLAN-L | Markdown |
+
 ### LEARN
 
 | Document | Contents and learning value | Technical tags | Lifecycle tags | Pages |
@@ -121,6 +123,7 @@ Lifecycle tags: BASE baseline/diagnosis; PLAN-L strategic planning; DES design; 
 - Read FOREST-002 for the original Andalusian carob cultivation/restoration handbook cited in LEARN-007.
 - Follow engineering delivery: VEGA-001 baseline, ALJIBE-001 design requirements, ANDARAX-003 bidding, NIJAR-002 implementation, NIJAR-001 supervision and monitoring.
 - Explore land stewardship: COAST-002 strategy, COAST-001 contracted activities, FUND-003 finance.
+- Use FUND-007 for the broad funding taxonomy, applicant and project conditions, source crosswalk and Funding Navigator reference fields; funding mechanisms are independent options rather than a prescribed sequence.
 - Explore degraded-land and habitat interventions: LAUJAR-001 and FOREST-001.
 - For software/GIS opportunities, compare ALJIBE-001 design deliverables, ANDARAX-002 data access, COAST-002 mapping and monitoring actions, and NIJAR-001 surveillance requirements.
 
