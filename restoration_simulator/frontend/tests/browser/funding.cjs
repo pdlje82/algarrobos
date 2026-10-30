@@ -39,6 +39,7 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     }
     await page.getByRole('button',{name:'3. Explore options',exact:true}).click();
     await page.getByLabel('Search mechanisms',{exact:true}).fill('LEADER-AL20-2.7');
+    await page.locator('.funding-graph-option[data-option-id="LEADER-AL20-2.7"]').click();
     const card=page.locator('.funding-option').filter({hasText:'LEADER-AL20-2.7'}).first();
     await card.waitFor();
     await poll(async()=>/50[,.\s]?000/.test(await card.innerText()));
@@ -59,6 +60,7 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     await poll(async()=>!await page.getByLabel('PDF page',{exact:true}).isDisabled());
     assert.equal(await page.getByLabel('PDF page',{exact:true}).inputValue(),'112');
     await page.keyboard.press('Escape');
+    await page.getByText('Saved explorations, context and funding projects',{exact:true}).click();
     await page.getByRole('button',{name:'Save exploration',exact:true}).click();
     await poll(async()=>(await api('funding')).attachment.scenarios.length===1);
     await page.getByRole('button',{name:'6. Review and use',exact:true}).click();
@@ -80,6 +82,7 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
       await page.setViewportSize({width:390,height:844});
       await page.getByRole('button',{name:'3. Explore options',exact:true}).click();
       await page.getByLabel('Search mechanisms',{exact:true}).fill('LEADER-AL20-2.7');
+      if(await page.getByRole('button',{name:'Expand funding visual workspace',exact:true}).isVisible())await page.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();
       await page.screenshot({path:`test-artifacts/funding-${theme}-mobile.png`,fullPage:true});
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Funding page overflows phone width');
     }

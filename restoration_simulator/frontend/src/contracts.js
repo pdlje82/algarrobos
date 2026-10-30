@@ -285,6 +285,29 @@ export function demonstratorContract(value) {
 
 export function validateResponse(path, data) {
   object(data, "API response");
+  if(path==="funding/visualise") {
+    properties(data,["assessment","visualisation"],"funding visualisation");
+    validateResponse("funding/evaluate",data.assessment);
+    const v=data.visualisation;
+    properties(v,["version","conditions","coverage"],"funding dependencies");
+    required(v.version===1&&Array.isArray(v.conditions)&&Array.isArray(v.coverage),"Incompatible funding dependencies. Restart Python and reload.");
+    const options=new Set(data.assessment.results.map(r=>r.id)), fields=new Set(data.assessment.draft.bundle.questions.map(q=>q.id)), ids=new Set();
+    for(const c of v.conditions){
+      properties(c,["id","option_id","fields","effect","result","message","sources","value"],"funding condition");
+      required(typeof c.id==="string"&&!ids.has(c.id)&&options.has(c.option_id)&&Array.isArray(c.fields)&&c.fields.length>0&&c.fields.every(f=>fields.has(f))&&["eligibility","amount"].includes(c.effect)&&["pass","fail","unknown"].includes(c.result)&&typeof c.message==="string"&&Array.isArray(c.sources)&&(c.value===null||typeof c.value==="number"&&Number.isFinite(c.value)),"Invalid funding condition dependencies.");
+      for(const s of c.sources){properties(s,["document_id","page","label","role","sha256"],"funding source edition");required(Number.isInteger(s.page)&&s.page>0&&typeof s.sha256==="string"&&s.sha256.length===64,"Invalid funding source page / edition.");}
+      ids.add(c.id);
+    }
+    const covered=new Set();
+    for(const c of v.coverage){
+      properties(c,["option_id","requirements","condition_ids","unresolved_count","scope_fields"],"funding coverage");
+      required(options.has(c.option_id)&&!covered.has(c.option_id)&&["modelled","research_only"].includes(c.requirements)&&Array.isArray(c.condition_ids)&&c.condition_ids.every(id=>ids.has(id)&&v.conditions.find(x=>x.id===id).option_id===c.option_id)&&Number.isInteger(c.unresolved_count)&&c.unresolved_count>=0&&Array.isArray(c.scope_fields)&&c.scope_fields.every(f=>fields.has(f)),"Invalid funding coverage.");
+      required(c.requirements==="research_only" ? c.condition_ids.length===0 : c.condition_ids.length>0,"Inconsistent funding coverage.");
+      covered.add(c.option_id);
+    }
+    required(covered.size===options.size,"Missing funding coverage.");
+    return data;
+  }
   if (["funding", "funding/save"].includes(path)) {
     properties(data,["version","project_revision","funding_revision","attachment","legacy"],"funding workspace");
     properties(data.attachment,["version","draft","scenarios","plans"],"funding attachment");

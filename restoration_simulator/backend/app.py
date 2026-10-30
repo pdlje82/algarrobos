@@ -23,7 +23,7 @@ from .parcel_removal import plan as removal_plan, delete as delete_parcels
 from .configuration import load_defaults
 from . import plant_prices
 from . import designer
-from . import documents, planning_draft, demonstrator_removal, funding
+from . import documents, planning_draft, demonstrator_removal, funding, funding_visual
 
 
 class StrictModel(BaseModel):
@@ -291,6 +291,11 @@ def create_app(save_path=None):
     def funding_evaluate(req: FundingEvaluationRequest):
         data = designer_state(req.revision)
         return funding.evaluate(req.draft, data["project"], data["planning"])
+
+    @app.post("/api/funding/visualise")
+    def funding_visualise(req: FundingEvaluationRequest):
+        data = designer_state(req.revision)
+        return funding_visual.visualise(funding.evaluate(req.draft, data["project"], data["planning"]))
 
     @app.post("/api/funding/save")
     def funding_save(req: FundingMutationRequest):

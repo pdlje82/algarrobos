@@ -4,6 +4,8 @@ A local, playable 30-year restoration journey implementing [the MVP brief](Resto
 
 The application lives in `restoration_simulator/`. Existing documents remain separately in `doc_library/`; reference rules are curated from these documents; there is no automatic document ingestion.
 
+**Funding Navigator** is available beside Project and Site Designer, from each parcel and from demonstrator planning. Explore funding mechanisms and hypothetical arrangements, compare named alternatives and adopt provisional funding plans. LEADER 2.7 includes a source-backed business-startup lump-sum preview; existing AL20 demonstrator application/payment actions remain separate. See the [navigator guide](restoration_simulator/FUNDING_NAVIGATOR.md) for scope, official source downloads, save compatibility and verification. Restart Python and refresh the browser after updating.
+
 The interface uses the Algarroba identity from the supplied logo sheet: forest green, warm ivory, restrained carob-brown accents and serif headings. Light, dark and system themes are available; dark mode keeps botanical image canvases black. Production logo assets and their provenance are documented in [the branding guide](restoration_simulator/frontend/public/branding/README.md). The checkout directory and Conda environment names remain as shown in the installation commands.
 
 Development follows the mandatory [repository coding rules](AGENTS.md). Silent fallbacks are prohibited: required configuration and data must be validated, failures must be visible, and compatibility changes must use explicit migrations. The [fallback audit](restoration_simulator/FALLBACK_AUDIT.md) records the changes and intentional optional/legacy cases.

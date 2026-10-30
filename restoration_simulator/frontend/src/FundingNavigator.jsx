@@ -1,8 +1,10 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useReducer, useRef, useState} from "react";
 import {DocumentLink} from "./DocumentLink.jsx";
 import {Alert} from "./Alert.jsx";
 import {money} from "./format.js";
 import {FUNDING_STEPS, effectiveFacts, overrideAnswer, resetAnswer, fundingResults, answerLabel} from "./fundingState.js";
+import {FundingVisualisation} from "./FundingVisualisation.jsx";
+import {fundingVisualReducer, initialFundingVisual} from "./fundingVisualState.js";
 import "./FundingNavigator.css";
 
 function Sources({sources}) {
@@ -28,10 +30,12 @@ function Option({result:r, selected, onSelect}) {
 }
 
 export function FundingNavigator({data, active, entry, request, onNavigate, onSaved, onSimulationFinancing, guardRef}) {
-  const [workspace, setWorkspace] = useState(null), [draft, setDraft] = useState(null), [assessment, setAssessment] = useState(null);
+  const [workspace, setWorkspace] = useState(null), [draft, setDraft] = useState(null);
+  const [live,dispatchVisual] = useReducer(fundingVisualReducer,initialFundingVisual);
+  const [visualContext,setVisualContext] = useState(0), [visualRetry,setVisualRetry] = useState(0), [inspected,setInspected] = useState(null);
   const [step, setStep] = useState(0), [questionIndex, setQuestionIndex] = useState(0), [error, setError] = useState(""), [notice, setNotice] = useState("");
-  const [busy, setBusy] = useState(false), [evaluating, setEvaluating] = useState(false), [dirty, setDirty] = useState(false), [review, setReview] = useState(null);
-  const [query, setQuery] = useState(""), [group, setGroup] = useState(""), [requireChanges, setRequireChanges] = useState(true), [all, setAll] = useState(false), [showAll, setShowAll] = useState(false);
+  const [busy, setBusy] = useState(false), [dirty, setDirty] = useState(false), [review, setReview] = useState(null);
+  const [query, setQuery] = useState(""), [requireChanges, setRequireChanges] = useState(true), [all, setAll] = useState(false);
   const [scope, setScope] = useState("activity"), [parcels, setParcels] = useState([]), [compareIds, setCompareIds] = useState([]);
   const [loadedScenarioId, setLoadedScenarioId] = useState(null);
   const [reloadKey, setReloadKey] = useState(0);
@@ -39,6 +43,12 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   const loadSerial = useRef(0);
   draftRef.current = draft;
   const revision = data.revision, planningRevision = data.planning.planning_revision;
+  const visualInputKey = JSON.stringify({draft,revision,planningRevision,visualRetry});
+  const visualValue = live.context === visualContext ? live.value : null;
+  const assessment = visualValue?.assessment ?? null;
+  const evaluating = draft !== null && (live.context !== visualContext || live.inputKey !== visualInputKey || live.status === "pending" || live.status === "idle");
+  const visualFailure = live.context === visualContext && live.inputKey === visualInputKey ? live.error : "";
+  function resetVisual() {serial.current++;dispatchVisual({type:"reset"});setVisualContext(k=>k+1);setInspected(null);}
   async function context(target, parcelIds) {
     return request("funding/context", {revision, planning_revision: planningRevision, design_revision: data.designer_revision, target, parcel_ids: parcelIds});
   }
@@ -49,7 +59,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
         const w = await request("funding");
         let d = w.attachment.draft;
         if (entry?.target || d === null) d = await context(entry?.target ?? "activity", entry?.parcelId ? [entry.parcelId] : []);
-        if (token === loadSerial.current) {setWorkspace(w); setDraft(d); setScope(d.baseline.target); setParcels(d.baseline.parcel_ids); setStep(0); setDirty(false); setReview(null); setLoadedScenarioId(null); retry.current = null;}
+        if (token === loadSerial.current) {resetVisual();setWorkspace(w); setDraft(d); setScope(d.baseline.target); setParcels(d.baseline.parcel_ids); setStep(0); setQuestionIndex(0); setDirty(false); setReview(null); setLoadedScenarioId(null); retry.current = null;}
       } catch (e) {if (token === loadSerial.current) setError(e.message);}
       finally {if (token === loadSerial.current) setBusy(false);}
     })();
@@ -57,14 +67,14 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   }, [data.project.id, entry?.token, reloadKey]);
   useEffect(() => {
     if (draft === null || !active) return;
-    const token = ++serial.current; setEvaluating(true);
+    const token = ++serial.current;
+    dispatchVisual({type:"start",context:visualContext,token,inputKey:visualInputKey});
     const timer = setTimeout(async () => {
-      try {const a = await request("funding/evaluate", {revision, draft}); if (serial.current === token) {setAssessment(a);if(retry.current===null)setError("");}}
-      catch (e) {if (serial.current === token) {setError(e.message); setAssessment(null);}}
-      finally {if (serial.current === token) setEvaluating(false);}
+      try {const value = await request("funding/visualise", {revision, draft}); if (serial.current === token) dispatchVisual({type:"success",context:visualContext,token,value});}
+      catch (e) {if (serial.current === token) dispatchVisual({type:"error",context:visualContext,token,error:e.message});}
     }, 200);
     return () => {clearTimeout(timer); serial.current++;};
-  }, [draft, revision, planningRevision, active]);
+  }, [draft, revision, planningRevision, active, visualContext, visualRetry]);
   useEffect(() => {
     const warn = e => {if (dirty) {e.preventDefault(); e.returnValue = "";}};
     window.addEventListener("beforeunload", warn); return () => window.removeEventListener("beforeunload", warn);
@@ -94,31 +104,41 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   }
   async function refresh() {
     setBusy(true); setError("");
-    try {const latest=await request("project");const seed=await request("funding/context",{revision:latest.revision,planning_revision:latest.planning.planning_revision,design_revision:latest.designer_revision,target:draft.baseline.target,parcel_ids:draft.baseline.parcel_ids});edit({...draft,baseline:seed.baseline,bundle:seed.bundle});retry.current=null;const w=await request("funding");setWorkspace(w);await onSaved();}
+    try {const latest=await request("project");const seed=await request("funding/context",{revision:latest.revision,planning_revision:latest.planning.planning_revision,design_revision:latest.designer_revision,target:draft.baseline.target,parcel_ids:draft.baseline.parcel_ids});resetVisual();edit({...draft,baseline:seed.baseline,bundle:seed.bundle});retry.current=null;const w=await request("funding");setWorkspace(w);await onSaved();}
     catch (e) {setError(e.message);} finally {setBusy(false);}
   }
   async function start() {
     setBusy(true); setError("");
-    try {if (dirty) throw new Error("Save the current draft before starting a separate exploration."); const d = await context(scope, parcels); edit(d); setLoadedScenarioId(null); setQuestionIndex(0); setStep(0);}
+    try {if (dirty) throw new Error("Save the current draft before starting a separate exploration."); const d = await context(scope, parcels); resetVisual();edit(d); setLoadedScenarioId(null); setQuestionIndex(0); setStep(0);}
     catch(e) {setError(e.message);} finally {setBusy(false);}
   }
   async function previewAdoption() {
     setBusy(true); setError("");
-    try {const a = await request("funding/plan-preview", {revision, draft}); setAssessment(a); setReview(a);}
+    try {const a = await request("funding/plan-preview", {revision, draft}); setReview(a);}
     catch(e) {setError(e.message);} finally {setBusy(false);}
   }
   if (draft === null || workspace === null) return <section className="panel"><h1>Funding Navigator</h1>{error ? <Alert variant="error" title="Funding unavailable">{error}<button onClick={()=>setReloadKey(k=>k+1)}>Retry loading funding</button></Alert> : <p role="status">Loading funding context…</p>}</section>;
   const facts = effectiveFacts(draft), c = draft.bundle, parties = draft.baseline.parties;
   const businessWithoutLand = ["business","monitoring"].includes(facts.activity) && draft.baseline.parcel_ids.length === 0;
-  const questions = c.questions.filter(q => q.id !== "activity" && (!q.activities || q.activities.includes(facts.activity)) && (!businessWithoutLand || !["owner_id","operator_id","rights","rights_sufficient","area_m2","public_access","permits","related_competence"].includes(q.id)) && (step === 1 ? !["budget_total", "eligible_cost", "available_contribution", "cash_before_receipts"].includes(q.id) : step === 4 ? ["budget_total", "eligible_cost", "available_contribution", "cash_before_receipts"].includes(q.id) : false));
+  const budgetFields = ["budget_total", "eligible_cost", "available_contribution", "cash_before_receipts"];
+  function questionsFor(targetStep) {return c.questions.filter(q => q.id !== "activity" && (!q.activities || q.activities.includes(facts.activity)) && (!businessWithoutLand || !["owner_id","operator_id","rights","rights_sufficient","area_m2","public_access","permits","related_competence"].includes(q.id)) && (targetStep === 1 ? !budgetFields.includes(q.id) : targetStep === 4 ? budgetFields.includes(q.id) : false));}
+  const questions = questionsFor(step);
   const q = questions[Math.min(questionIndex, Math.max(0, questions.length-1))];
-  const current = assessment !== null && JSON.stringify(assessment.draft) === JSON.stringify(draft) && !evaluating;
+  const current = assessment !== null && live.status === "success" && live.inputKey === visualInputKey && !evaluating;
   const results = assessment?.results ?? [], selected = results.filter(r => draft.selected.includes(r.id));
-  const filtered = fundingResults(results, {query, group, requireChanges, all});
-  const shown = showAll ? filtered : filtered.slice(0, 3);
+  const filtered = fundingResults(results, {query, requireChanges, all});
+  const visualStep = [0,1,2,4].includes(step);
+  function focusQuestion(id) {
+    const targetStep = id === "activity" ? 0 : budgetFields.includes(id) ? 4 : 1;
+    const index = id === "activity" ? 0 : questionsFor(targetStep).findIndex(q=>q.id===id);
+    if(index<0) {setNotice("This condition’s question is outside the current activity’s question flow. Change the activity to explore that circumstance.");return;}
+    setStep(targetStep);setQuestionIndex(index);
+    requestAnimationFrame(()=>document.getElementById(`funding-${id}`)?.focus());
+  }
+  function selectOption(id) {edit({...draft,selected:draft.selected.includes(id) ? draft.selected.filter(v=>v!==id) : [...draft.selected,id],allocations:draft.selected.includes(id) ? draft.allocations.filter(a=>a.mechanism_id!==id) : draft.allocations});}
   function answer(question) {
     const value = facts[question.id], overridden = Object.hasOwn(draft.overrides, question.id);
-    return <div className="funding-question" key={question.id}><label htmlFor={`funding-${question.id}`}>{question.label}</label><p>{question.help || "Choose an answer for this exploration. Unknown is allowed."}</p>
+    return <div className="funding-question" key={question.id}><label htmlFor={`funding-${question.id}`}>{question.label}</label>{question.help?.trim() && <p className="funding-question-help">{question.help}</p>}
       {question.type === "choice" ? <select id={`funding-${question.id}`} value={value ?? ""} disabled={busy} onChange={e => edit(overrideAnswer(draft, question.id, e.target.value === "" ? null : e.target.value))}><option value="">Unknown / I don’t know yet</option>{question.options.map(([v,l]) => <option key={v} value={v}>{l}</option>)}</select>
       : question.type === "party" ? <select id={`funding-${question.id}`} value={value ?? ""} disabled={busy} onChange={e => edit(overrideAnswer(draft, question.id, e.target.value === "" ? null : e.target.value))}><option value="">Unknown / not chosen</option>{parties.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}<option value="hypothetical">A hypothetical partner / organisation</option></select>
       : <input id={`funding-${question.id}`} type={question.type === "number" ? "number" : "text"} min={question.min} max={question.max} step="any" value={value ?? ""} disabled={busy} placeholder="Unknown" onChange={e => edit(overrideAnswer(draft, question.id, e.target.value === "" ? null : question.type === "number" ? Number(e.target.value) : e.target.value))}/>}
@@ -132,12 +152,14 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
     </header>
     <nav className="funding-steps" aria-label="Funding exploration steps">{FUNDING_STEPS.map((s,i) => <button key={s} type="button" aria-current={step === i ? "step" : undefined} onClick={() => {setStep(i); setQuestionIndex(0);}}>{i+1}. {s}</button>)}</nav>
     {error && <Alert variant="error" title="Exploration retained">{error}{retry.current && <button disabled={busy} onClick={() => save(retry.current.operation, retry.current.record_id)}>Retry failed save</button>}<button disabled={busy} onClick={refresh}>Reload revisions and update assessment</button></Alert>}
+    {!visualStep && evaluating && <p role="status">{assessment ? "Updating—showing previous assessment" : "Updating funding assessment…"}</p>}
+    {!visualStep && visualFailure && <Alert variant="error" title="Assessment unavailable">{visualFailure}<p>{assessment ? "Showing previous assessment. Entered answers are retained." : "Entered answers are retained."}</p><button type="button" onClick={()=>setVisualRetry(k=>k+1)}>Retry assessment</button></Alert>}
     {notice && <p role="status">{notice}</p>}
-    <div className="funding-layout"><main className="panel funding-main" aria-busy={evaluating}>
+    <div className={`funding-layout ${visualStep ? "has-visual" : ""}`}><main className="panel funding-main">
       <h2>{FUNDING_STEPS[step]}</h2>
       {step === 0 && <><label>Exploration name<input maxLength={80} disabled={busy} value={draft.name} onChange={e => edit({...draft,name:e.target.value})}/></label>{answer(c.questions.find(q => q.id === "activity"))}<p>Business creation can be explored without a planting design. LEADER 2.7 includes a conditional €37,000 base and additions up to a €50,000 overall maximum.</p></>}
       {(step === 1 || step === 4) && q && <><p>Question {Math.min(questionIndex+1, questions.length)} of {questions.length}</p>{answer(q)}<div className="funding-actions"><button disabled={questionIndex === 0} onClick={() => setQuestionIndex(i => i-1)}>Previous question</button><button disabled={questionIndex >= questions.length-1} onClick={() => setQuestionIndex(i => i+1)}>Next question</button></div></>}
-      {step === 2 && <><label>Search mechanisms<input value={query} onChange={e => {setQuery(e.target.value);setShowAll(true);}}/></label><label>Funding family<select value={group} onChange={e => setGroup(e.target.value)}><option value="">All families</option>{Object.entries(c.groups).map(([v,l]) => <option key={v} value={v}>{l}</option>)}</select></label><label className="funding-pick"><input type="checkbox" checked={all} onChange={e => setAll(e.target.checked)}/>Browse the full catalogue, beyond this activity</label><label className="funding-pick"><input type="checkbox" checked={requireChanges} onChange={e => setRequireChanges(e.target.checked)}/>Show options that require changes</label><p>{filtered.length} options · {c.entries.length} catalogue entries</p>{shown.map(r => <Option key={r.id} result={r} selected={draft.selected.includes(r.id)} onSelect={() => edit({...draft,selected:draft.selected.includes(r.id) ? draft.selected.filter(id => id !== r.id) : [...draft.selected,r.id],allocations:draft.selected.includes(r.id) ? draft.allocations.filter(a => a.mechanism_id !== r.id) : draft.allocations})}/>)}{filtered.length > 3 && <button onClick={() => setShowAll(v => !v)}>{showAll ? "Show a smaller set" : "Show all matching options"}</button>}{!filtered.length && <p>No options match these browsing filters. Browse all families or include options requiring changes.</p>}</>}
+      {step === 2 && <><p>Browse families in the visual workspace. Inspect an option to read its requirements, then explicitly shortlist it.</p><label>Search mechanisms<input value={query} onChange={e => setQuery(e.target.value)}/></label><label className="funding-pick"><input type="checkbox" checked={all} onChange={e => setAll(e.target.checked)}/>Browse the full catalogue, beyond this activity</label><label className="funding-pick"><input type="checkbox" checked={requireChanges} onChange={e => setRequireChanges(e.target.checked)}/>Show options that require changes</label><p>{filtered.length} options · {c.entries.length} catalogue entries</p><p>{draft.selected.length} explicitly shortlisted. Inspecting never changes your shortlist.</p></>}
       {step === 3 && <><p>Compare mechanisms under the same assumptions, or saved scenarios under different arrangements.</p><div className="funding-table"><table><caption>Shortlisted mechanisms</caption><thead><tr><th>Mechanism</th><th>Fit</th><th>Financial basis</th><th>Conditional estimate</th></tr></thead><tbody>{selected.map(r => <tr key={r.id}><th>{r.id} · {r.title}</th><td>{r.status}</td><td>{r.finance.basis}</td><td>{r.finance.estimate === null ? "Unknown" : money(r.finance.estimate)}</td></tr>)}</tbody></table></div>
         <fieldset><legend>Saved alternatives to compare</legend>{workspace.attachment.scenarios.map(r => <label className="funding-pick" key={r.id}><input type="checkbox" checked={compareIds.includes(r.id)} onChange={e => setCompareIds(e.target.checked ? [...compareIds,r.id] : compareIds.filter(id => id !== r.id))}/>{r.draft.name}</label>)}</fieldset>
         {workspace.attachment.scenarios.filter(r => compareIds.includes(r.id)).map(r => <article key={r.id}><h3>{r.draft.name}</h3><p>Applicant: {effectiveFacts(r.draft).applicant_kind ?? "Unknown"} · Activity: {effectiveFacts(r.draft).activity ?? "Unknown"}</p>{r.assessment.results.filter(x => r.draft.selected.includes(x.id)).map(x => <p key={x.id}>{x.id} · {x.status} · {x.finance.estimate === null ? "Amount unknown" : money(x.finance.estimate)}</p>)}<p>{Object.keys(r.draft.overrides).length} explicit assumptions · source snapshot {r.assessment.catalogue_hash.slice(0,8)}</p></article>)}
@@ -155,12 +177,13 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
         {review && <section className="funding-review" aria-label="Funding plan review"><h3>Confirm preferred plan</h3><p>{draft.name} · {draft.selected.join(", ")}</p><p>{review.differences.length} scenario overrides. {review.results.filter(r => draft.selected.includes(r.id)).reduce((n,r) => n+r.checks.filter(c => c.result !== "pass").length,0)} conditions require changes or verification.</p><p>Using this plan changes planning records only. Existing AL20 application and payment actions remain separate. Other mechanisms, including 2.7, are planning previews.</p><button disabled={busy || review.stale || review.catalogue_changed} onClick={() => save("adopt")}>Use this funding plan</button><button onClick={() => setReview(null)}>Keep exploring</button></section>}
       </>}
       <div className="funding-actions"><button disabled={step === 0} onClick={() => {setStep(s => s-1);setQuestionIndex(0);}}>← Previous</button><button disabled={step === 5} onClick={() => {setStep(s => s+1);setQuestionIndex(0);}}>Next →</button></div>
-    </main><aside className="panel funding-context"><h2>Your exploration</h2><p>{draft.name}</p><p>{draft.baseline.target} · {draft.baseline.parcel_ids.length} linked parcel(s)</p><p>{draft.selected.length} shortlisted mechanism(s) · {Object.keys(draft.overrides).length} overrides</p><p>Applicant: {facts.applicant_kind ?? "Unknown"}</p><p role="status">{busy ? "Saving / loading…" : dirty ? "Draft not yet saved" : "Draft saved or recorded context loaded"}{evaluating ? " · Updating assessment…" : ""}</p><button disabled={busy} onClick={() => save("draft")}>Save draft</button><button disabled={busy || !draft.name.trim()} onClick={() => save("save")}>{loadedScenarioId === null ? "Save exploration" : "Update saved exploration"}</button><button disabled={busy} onClick={refresh}>Update assessment / refresh baseline</button><p>Refresh keeps your explicit overrides and adopts current recorded facts and source rules.</p>{assessment?.warnings.map((w,i) => <p className="reason" key={i}>{w}</p>)}
-      <h3>Saved explorations</h3>{workspace.attachment.scenarios.map(r => <div key={r.id}><strong>{r.draft.name}</strong><button disabled={busy} onClick={() => {edit({...structuredClone(r.draft),name:r.draft.name});setLoadedScenarioId(r.id);setStep(3);}}>Load / rename</button><button disabled={busy} onClick={() => {edit({...structuredClone(r.draft),name:(r.draft.name+" copy").slice(0,80)});setLoadedScenarioId(null);setStep(0);}}>Duplicate exploration</button><button disabled={busy} onClick={() => save("delete",r.id)}>Delete exploration</button></div>)}
-      <h3>Funding projects</h3>{workspace.attachment.plans.length === 0 && <p>No adopted plans yet.</p>}{workspace.attachment.plans.map(r => <details key={r.id}><summary>{r.draft.name} · {r.active ? "Preferred / provisional" : "Previous revision"}</summary><p>{r.draft.selected.join(", ")}</p><p>{r.assessment.warnings.join(" ")}</p><button disabled={busy} onClick={() => {edit(structuredClone(r.draft));setStep(5);}}>Review / revise plan</button><button disabled={busy} onClick={() => save("delete",r.id)}>Delete funding plan</button></details>)}
+    </main><div hidden={!visualStep} className="funding-visual-column"><FundingVisualisation value={visualValue} latestFields={live.context===visualContext ? live.latestFields : []} changes={live.context===visualContext ? live.changes : null} pending={evaluating} failure={visualFailure} onRetry={()=>setVisualRetry(k=>k+1)} results={filtered} catalogue={c} draft={draft} currentField={step===0 ? "activity" : q?.id ?? null} onQuestion={focusQuestion} inspected={inspected} onInspect={setInspected} renderOption={r=><Option result={r} selected={draft.selected.includes(r.id)} onSelect={()=>selectOption(r.id)}/>}/></div></div>
+    <aside className="panel funding-context"><h2>Your exploration</h2><p>{draft.name} · {draft.selected.length} shortlisted · {Object.keys(draft.overrides).length} assumptions</p><p>{draft.baseline.target} · {draft.baseline.parcel_ids.length} linked parcel(s)</p><details className="funding-admin"><summary>Saved explorations, context and funding projects</summary><p>{draft.name}</p><p>{draft.selected.length} shortlisted mechanism(s) · {Object.keys(draft.overrides).length} overrides</p><p>Applicant: {facts.applicant_kind ?? "Unknown"}</p><p role="status">{busy ? "Saving / loading…" : dirty ? "Draft not yet saved" : "Draft saved or recorded context loaded"}{evaluating ? " · Updating assessment…" : ""}</p><button disabled={busy} onClick={() => save("draft")}>Save draft</button><button disabled={busy || !draft.name.trim()} onClick={() => save("save")}>{loadedScenarioId === null ? "Save exploration" : "Update saved exploration"}</button><button disabled={busy} onClick={refresh}>Update assessment / refresh baseline</button><p>Refresh keeps your explicit overrides and adopts current recorded facts and source rules.</p>{assessment?.warnings.map((w,i) => <p className="reason" key={i}>{w}</p>)}
+      <h3>Saved explorations</h3>{workspace.attachment.scenarios.map(r => <div key={r.id}><strong>{r.draft.name}</strong><button disabled={busy} onClick={() => {resetVisual();edit({...structuredClone(r.draft),name:r.draft.name});setLoadedScenarioId(r.id);setStep(3);}}>Load / rename</button><button disabled={busy} onClick={() => {resetVisual();edit({...structuredClone(r.draft),name:(r.draft.name+" copy").slice(0,80)});setLoadedScenarioId(null);setStep(0);}}>Duplicate exploration</button><button disabled={busy} onClick={() => save("delete",r.id)}>Delete exploration</button></div>)}
+      <h3>Funding projects</h3>{workspace.attachment.plans.length === 0 && <p>No adopted plans yet.</p>}{workspace.attachment.plans.map(r => <details key={r.id}><summary>{r.draft.name} · {r.active ? "Preferred / provisional" : "Previous revision"}</summary><p>{r.draft.selected.join(", ")}</p><p>{r.assessment.warnings.join(" ")}</p><button disabled={busy} onClick={() => {resetVisual();edit(structuredClone(r.draft));setStep(5);}}>Review / revise plan</button><button disabled={busy} onClick={() => save("delete",r.id)}>Delete funding plan</button></details>)}
       {workspace.legacy && <details><summary>Existing demonstrator financing</summary><p>{workspace.legacy.label} · {workspace.legacy.route ?? "Legacy"}</p><p>Grant status: {workspace.legacy.grant.status}</p><button onClick={() => onNavigate("demonstrator")}>Open existing planning and funding actions</button></details>}
       {draft.baseline.target === "demonstrator" && <details><summary>Configure existing simulation financing</summary><p>These actions transfer only financing settings into the demonstrator planning draft for its separate review. They do not create receipts or execute unsupported mechanisms.</p>{draft.selected.includes("LEADER-AL20-3.4") && <button disabled={busy} onClick={()=>onSimulationFinancing("al20_34",facts)}>Use potential AL20 3.4 in planning draft</button>}<button disabled={busy} onClick={()=>onSimulationFinancing("self",facts)}>Use funds already in project cash</button><button disabled={busy} onClick={()=>onSimulationFinancing("partner",facts)}>Use partner funds already in project cash</button></details>}
       <details><summary>Source review and coverage</summary><p>{c.source_review}</p><a href={c.official_pages.territory} target="_blank" rel="noreferrer">Official AL20 territory and local documents</a></details>
-    </aside></div>
+    </details></aside>
   </section>;
 }

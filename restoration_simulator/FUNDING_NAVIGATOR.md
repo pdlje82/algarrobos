@@ -103,6 +103,10 @@ API operations:
 - `GET /api/funding/catalogue`, `GET /api/funding`.
 - `POST /api/funding/context`: capture a recorded context and catalogue snapshot.
 - `POST /api/funding/evaluate`, `POST /api/funding/plan-preview`: read-only assessment.
+- `POST /api/funding/visualise`: the identical assessment plus transient, versioned
+  condition dependencies and modelled/research-only coverage. Composite income
+  checks explicitly include the income and SMI fields; startup bonuses are amount
+  dependencies, separate from eligibility. Metadata never enters saved snapshots.
 - `POST /api/funding/save`: draft, save/update exploration, adopt/revise plan, delete.
 
 Mutations check project, funding, design and planning revisions, use idempotent
@@ -121,11 +125,38 @@ Actual applicants must be existing recorded parties. Existing AL20 application,
 award and payment actions stay authoritative. Other mechanisms, including 2.7,
 have no new cash-posting workflow in this release.
 
+## Live funding consequences
+
+Questions use prominent labels and only specific explanatory help. Activity,
+people/land, option browsing and budget steps share a native HTML/SVG graph and
+matrix. The family selector includes counts for the entire catalogue. One family
+or the explicit shortlist is shown at a time, with catalogue-order pages of at
+most 12 options. Inspection reveals modelled dependencies, explanations and exact
+source editions; it never selects funding. Research-only entries remain labelled
+“Requirements not yet modelled”. The matrix and graph share browsing scope,
+selection and Python assessments. Selecting a circumstance focuses its existing
+question; conditions outside the current activity's question flow explain that
+limitation without changing the activity or relevance filtering.
+
+Accepted responses are compared with the previous accepted response in the same
+exploration. The feedback distinguishes fit, resolved conditions and conditional
+amount/schedule changes, including multiple edits and unchanged overall fit.
+Loading/duplicating an exploration or refreshing context resets this comparison.
+Pending and failed requests retain an explicitly labelled previous assessment;
+late responses cannot replace the current result. Retry preserves entered inputs.
+No graph coordinates, transitions or dependencies are persisted, and envelope 8
+requires no migration. On phones the visual panel expands below the question;
+diagram/table scrolling stays inside the panel. Reduced motion is supported.
+
 ## Verification
 
 Run Python unittest discovery, frontend `npm test` and `npm run build`.
 `tests/test_funding.py` covers assessments, catalogue coverage, side-effect isolation,
 compatibility warnings, persistence, migration, stale revisions and failed writes.
+`tests/test_funding_visual.py` checks endpoint equivalence, composite/shared inputs,
+amount-only bonuses, coverage, stable identifiers and absence of save/cash effects.
+Frontend visual-state tests cover transition comparisons, rejected late responses,
+failed requests/retries, scope/paging and invalid dependency contracts.
 
 For isolated browser verification use the existing 8013 API / 5174 Vite test
 configuration, with a dedicated save under `test-artifacts/`. Set `PLAYWRIGHT_MODULE`,
@@ -134,3 +165,6 @@ configuration, with a dedicated save under `test-artifacts/`. Set `PLAYWRIGHT_MO
 The browser check covers the guided 2.7 scenario, bonus cap, source viewer, adoption,
 reload, failed-save retry and phone layouts in both themes. Screenshots are ignored
 test artifacts. The user's active save is not used.
+Run `node tests/browser/funding-visual.cjs` for graph/matrix, request-race, PDF focus,
+question hierarchy, keyboard and 390px checks, followed by the existing funding and
+`planning-handoff.cjs` checks. Each workflow uses the isolated save and test servers.
