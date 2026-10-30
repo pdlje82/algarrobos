@@ -81,6 +81,8 @@ export function DemonstratorEditor({
   onOpenDesigner,
   demonstrator,
   planningDraft,
+  onOpenFunding,
+  fundingPlans,
 }) {
   const formSections = [...new Set(action.fields.filter(f=>action.kind!=="demo_plan" || !DESIGNER_FIELDS.has(f.name)).map((f) => f.section))];
   required(
@@ -130,18 +132,14 @@ export function DemonstratorEditor({
               </p>
             )}
             {selected === "Funding route" && (
-              <p>
-                AL20 3.4 concerns a nonproductive, locally novel demonstration
-                with open participation and shared results. Feedback,
-                application, award and reimbursement are separate records. A
-                nonprofit partner can apply without changing land ownership.
-              </p>
+              <div><p>Compare grants, business support, own funding and other arrangements in the Funding Navigator.</p><p>Existing simulation financing: {inputs.funding_route === "al20_34" ? "Potential AL20 3.4" : inputs.funding_route === "self" ? "Available own funds" : "Available partner funds"}.</p>{fundingPlans?.filter(p=>p.active&&p.activity_key==="demonstrator").map(p=><p key={p.id}>Preferred funding plan: {p.name}</p>)}<button type="button" onClick={onOpenFunding}>Explore funding</button><p>Applications, decisions and reimbursements remain separate recorded actions.</p></div>
             )}
             <Fields
               fields={action.fields
                 .filter(
                   (f) => f.section === selected && f.type !== "plant_selection" && (!planning || !DESIGNER_FIELDS.has(f.name)),
                 )
+                .filter(f=>!planning || selected!=="Funding route")
                 .map((f) =>
                   f.type === "category"
                     ? { ...f, custom_label: "Custom option…" }

@@ -9,7 +9,7 @@ import tempfile
 from threading import RLock
 
 from .engine import Invalid, new_project, require, transition, validate_state, same_json
-from . import parcel_removal
+from . import parcel_removal, funding
 
 
 class Conflict(Invalid):
@@ -88,10 +88,12 @@ def validate_export(payload):
     """Explicit envelope migrations; simulation schema/replay remains version 4."""
     require(isinstance(payload, dict), "Invalid export envelope.")
     require("format_version" in payload and type(payload["format_version"]) is int, "Export version must be an integer supported by this application.")
-    if payload.get("format_version") in (5, 6, 7):
+    if payload.get("format_version") in (5, 6, 7, 8):
         required_keys = {"format_version", "project", "undo", "designer", "designer_revision", "designer_undo"}
-        if payload["format_version"] == 7:
+        if payload["format_version"] in (7, 8):
             required_keys |= {"planning", "planning_revision", "planning_undo"}
+        if payload["format_version"] == 8:
+            required_keys |= {"funding", "funding_revision", "funding_undo"}
         require(required_keys <= set(payload) and set(payload) <= required_keys | {"undo_edit"}, "Invalid designer export envelope.")
         require(isinstance(payload["project"],dict) and payload["project"].get("schema_version") == 4, "Designer envelope requires simulation schema 4.")
         base = {k: payload[k] for k in ("project", "undo")}
@@ -112,7 +114,7 @@ def validate_export(payload):
         # Explicit envelope migration. Existing simulation migration/replay stays frozen.
         result = _validate_project_export(payload)
         result.update(designer=None, designer_revision=0, designer_undo=None)
-    if payload["format_version"] == 7:
+    if payload["format_version"] in (7, 8):
         from .planning_draft import validate
         require(type(payload["planning_revision"]) is int and payload["planning_revision"] >= 0, "Invalid planning revision.")
         require(result["undo"] is not None or payload["planning_undo"] is None, "Planning undo requires a project undo snapshot.")
@@ -120,7 +122,13 @@ def validate_export(payload):
                       planning_undo=deepcopy(validate(payload["planning_undo"], result["undo"]) if result["undo"] is not None else None))
     else:
         result.update(planning=None, planning_revision=0, planning_undo=None)
-    result["format_version"] = 7
+    if payload["format_version"] == 8:
+        require(type(payload["funding_revision"]) is int and payload["funding_revision"] >= 0, "Invalid funding revision.")
+        require(result["undo"] is not None or payload["funding_undo"] is None, "Funding undo requires a project undo snapshot.")
+        result.update(funding=deepcopy(funding.validate_attachment(payload["funding"], result["project"])), funding_revision=payload["funding_revision"], funding_undo=deepcopy(funding.validate_attachment(payload["funding_undo"], result["undo"])))
+    else:
+        result.update(funding=None, funding_revision=0, funding_undo=None)
+    result["format_version"] = 8
     return result
 
 
@@ -142,7 +150,10 @@ class Store:
         self.lock = RLock()
         self.error = None
         self.data = {
-            "format_version": 7,
+            "format_version": 8,
+            "funding": None,
+            "funding_revision": 0,
+            "funding_undo": None,
             "planning": None,
             "planning_revision": 0,
             "planning_undo": None,
@@ -160,13 +171,13 @@ class Store:
                 original = self.path.read_bytes()
                 raw = json.loads(original.decode("utf-8"))
                 require(
-                    set(raw) in (set(self.data), set(self.data) - {"planning", "planning_revision", "planning_undo"}, set(self.data) - {"planning", "planning_revision", "planning_undo", "designer", "designer_revision", "designer_undo"}, set(self.data) - {"planning", "planning_revision", "planning_undo", "undo_edit", "designer", "designer_revision", "designer_undo"}),
+                    set(raw) in (set(self.data), set(self.data) - {"funding", "funding_revision", "funding_undo"}, set(self.data) - {"funding", "funding_revision", "funding_undo", "planning", "planning_revision", "planning_undo"}, set(self.data) - {"funding", "funding_revision", "funding_undo", "planning", "planning_revision", "planning_undo", "designer", "designer_revision", "designer_undo"}, set(self.data) - {"funding", "funding_revision", "funding_undo", "planning", "planning_revision", "planning_undo", "undo_edit", "designer", "designer_revision", "designer_undo"}),
                     "Invalid autosave envelope.",
                 )
                 validated = validate_export(
                     {
                         k: raw[k]
-                        for k in ("format_version", "project", "undo", "undo_edit", "designer", "designer_revision", "designer_undo", "planning", "planning_revision", "planning_undo")
+                        for k in ("format_version", "project", "undo", "undo_edit", "designer", "designer_revision", "designer_undo", "planning", "planning_revision", "planning_undo", "funding", "funding_revision", "funding_undo")
                         if k in raw
                     }
                 )
@@ -185,7 +196,7 @@ class Store:
                 )
                 candidate = {**self.data, **raw, **validated}
                 cleaned = clean_removed(candidate)
-                if raw["format_version"] in (1, 2, 3, 4, 5, 6):
+                if raw["format_version"] in (1, 2, 3, 4, 5, 6, 7):
                     checksum = hashlib.sha256(original).hexdigest()[:12]
                     backup = self.path.with_name(
                         self.path.stem
@@ -264,6 +275,7 @@ class Store:
             candidate["undo_edit"] = None
             current = candidate["project"]
             if operation not in {"undo", "import"}:
+                candidate["funding_undo"] = deepcopy(candidate["funding"])
                 candidate["designer_undo"] = deepcopy(candidate["designer"])
                 candidate["planning_undo"] = deepcopy(candidate["planning"])
             if operation == "new":
@@ -277,6 +289,7 @@ class Store:
                 candidate["designer_undo"] = None
                 candidate["designer_revision"] += 1
                 candidate.update(planning=None, planning_undo=None, planning_revision=candidate["planning_revision"] + 1)
+                candidate.update(funding=None, funding_undo=None, funding_revision=candidate["funding_revision"] + 1)
                 explanation = "New project created. Choose a starting land route."
             elif operation == "import":
                 require(
@@ -313,6 +326,10 @@ class Store:
                 require(current is not None, "Create a project first.")
                 require(body["confirm"] is True, "Review and confirm demonstrator removal first.")
                 candidate["project"] = delete(current)
+                if candidate["funding"] is not None:
+                    for record in candidate["funding"]["plans"]:
+                        if record["draft"]["baseline"]["target"] == "demonstrator": record["active"] = False
+                candidate["funding_revision"] += 1
                 candidate["undo"] = deepcopy(current)
                 candidate["undo_edit"] = {"kind": "delete_demonstrator"}
                 if candidate["designer"] is not None:
@@ -329,6 +346,8 @@ class Store:
                 candidate["project"] = parcel_removal.delete(
                     current, [body["parcel_id"]]
                 )
+                candidate["funding"] = funding.after_delete(candidate["funding"], current, candidate["project"], [body["parcel_id"]])
+                candidate["funding_revision"] += 1
                 candidate["undo"] = deepcopy(current)
                 candidate["undo_edit"] = dict(
                     kind="delete_parcels", parcel_ids=[body["parcel_id"]]
@@ -343,6 +362,35 @@ class Store:
             elif operation == "undo":
                 require(candidate["undo"] is not None, "No saved action to undo.")
                 candidate["project"] = deepcopy(candidate["undo"])
+                if self.data["undo_edit"] is not None:
+                    # Reconcile restored links while preserving later unrelated exploration edits.
+                    prior = candidate["funding_undo"]
+                    live = candidate["funding"]
+                    if prior is not None and live is not None:
+                        if self.data["undo_edit"]["kind"] == "delete_parcels":
+                            _, _, _, maps = parcel_removal.rebuild(candidate["project"], self.data["undo_edit"]["parcel_ids"], with_mapping=True)
+                            inverse = {v:k for k,v in maps["parcel_id"].items()}
+                            live = deepcopy(live)
+                            drafts = ([live["draft"]] if live["draft"] is not None else []) + [r["draft"] for r in live["scenarios"]+live["plans"]]
+                            for d in drafts:
+                                require(set(d["baseline"]["parcel_ids"]) <= set(inverse), "Cannot remap a later funding draft during deletion Undo.")
+                                d["baseline"]["parcel_ids"] = [inverse[p] for p in d["baseline"]["parcel_ids"]]
+                            for r in live["scenarios"]+live["plans"]: r["assessment"]["draft"] = deepcopy(r["draft"])
+                        prior_scenarios = {r["id"] for r in prior["scenarios"]}
+                        prior_plans = {r["id"] for r in prior["plans"]}
+                        prior["scenarios"].extend(r for r in live["scenarios"] if r["id"] not in prior_scenarios)
+                        newer_keys = {r["draft"]["activity_key"] for r in live["plans"] if r["active"] and r["id"] not in prior_plans}
+                        for r in prior["plans"]:
+                            if r["draft"]["activity_key"] in newer_keys: r["active"] = False
+                        prior["plans"].extend(r for r in live["plans"] if r["id"] not in prior_plans)
+                        if live["draft"] is not None: prior["draft"] = live["draft"]
+                    candidate["funding"] = prior if prior is not None else live
+                elif candidate["funding"] is not None:
+                    missing = [p["id"] for p in current["parcels"] if p["id"] not in {q["id"] for q in candidate["project"]["parcels"]}]
+                    if missing: candidate["funding"] = funding.after_delete(candidate["funding"], current, candidate["project"], missing)
+                funding.validate_attachment(candidate["funding"], candidate["project"])
+                candidate["funding_undo"] = None
+                candidate["funding_revision"] += 1
                 if self.data["undo_edit"] is not None and self.data["undo_edit"]["kind"] == "delete_parcels":
                     candidate["designer"] = deepcopy(candidate["designer_undo"])
                     candidate["planning"] = deepcopy(candidate["planning_undo"])
@@ -376,12 +424,31 @@ class Store:
     def export(self):
         data = self.snapshot()
         require(data["project"] is not None, "Create a project first.")
-        exported = {k: data[k] for k in ("format_version", "project", "undo", "designer", "designer_revision", "designer_undo", "planning", "planning_revision", "planning_undo")}
+        exported = {k: data[k] for k in ("format_version", "project", "undo", "designer", "designer_revision", "designer_undo", "planning", "planning_revision", "planning_undo", "funding", "funding_revision", "funding_undo")}
         if data.get("undo_edit"):
             exported["undo"] = None
             exported["designer_undo"] = None
             exported["planning_undo"] = None
+            exported["funding_undo"] = None
         return exported
+
+    def funding_mutation(self, operation, revision, funding_revision, planning_revision, design_revision, request_id, draft=None, record_id=None):
+        with self.lock:
+            self.check()
+            fingerprint = funding.digest([operation, revision, funding_revision, planning_revision, design_revision, draft, record_id])
+            if request_id in self.data["receipts"]:
+                require(self.data["receipts"][request_id] == fingerprint, "Request ID was reused with different funding content.")
+                return self.snapshot()
+            if revision != self.data["revision"] or funding_revision != self.data["funding_revision"] or planning_revision != self.data["planning_revision"] or design_revision != self.data["designer_revision"]:
+                raise Conflict("Project, funding or planning changed. Reload saved context; your entered exploration is retained.")
+            require(self.data["project"] is not None, "Create a project before saving funding explorations.")
+            candidate = deepcopy(self.data)
+            candidate["funding"] = funding.operate(candidate["funding"], candidate["project"], candidate["planning"], operation, draft, record_id)
+            candidate["funding_revision"] += 1
+            candidate["receipts"][request_id] = fingerprint
+            self.write(candidate)
+            self.data = candidate
+            return self.snapshot()
 
 
     def _designer_mutation(self, operation, payload, revision, design_revision, request_id, transform):

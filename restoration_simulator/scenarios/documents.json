@@ -420,6 +420,42 @@
       ],
       "printed_pages": {},
       "mapping_note": "PDF positions counted from the unchanged local file. Printed numbering has not been established; cite PDF page positions."
+    },
+    {
+      "id": "FUND-008",
+      "title": "FUND-008 - Andalusia - LEADER Governing Rules - BOJA 29 - 2026-02-03",
+      "filename": "FUND-008 - Andalusia - LEADER Governing Rules - BOJA 29 - 2026-02-03.pdf",
+      "pages": 163,
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "aliases": [
+        "https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "PDF page positions verified against the unchanged downloaded official edition. Retrieved 30 October 2026; cite PDF page positions."
+    },
+    {
+      "id": "FUND-009",
+      "title": "FUND-009 - Andalusia - LEADER Call for Non-GDR Applicants - 2026-04-13",
+      "filename": "FUND-009 - Andalusia - LEADER Call for Non-GDR Applicants - 2026-04-13.pdf",
+      "pages": 61,
+      "sha256": "ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e",
+      "aliases": [
+        "https://www.juntadeandalucia.es/eboja/2026/76/BOJA26-076-00061-5258-01_00336495.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "PDF page positions verified against the unchanged downloaded official edition. Retrieved 30 October 2026; cite PDF page positions."
+    },
+    {
+      "id": "FUND-010",
+      "title": "FUND-010 - Andalusia - LEADER Selection Criteria Verification Guide - v2-4 - 2026-09",
+      "filename": "FUND-010 - Andalusia - LEADER Selection Criteria Verification Guide - v2-4 - 2026-09.pdf",
+      "pages": 231,
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "aliases": [
+        "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/Guia-instrucciones-especificas-publicas_Criterios-seleccion-promotores_7119-2_LEADER_v2-4.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "PDF page positions verified against the unchanged downloaded official edition. Retrieved 30 October 2026; cite PDF page positions."
     }
   ]
 }

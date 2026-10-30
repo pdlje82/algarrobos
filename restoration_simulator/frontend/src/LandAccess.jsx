@@ -845,6 +845,7 @@ export function LandRecords({
   busy,
   onRemovalPreview,
   onRemovalConfirm,
+  onExploreFunding,
 }) {
   const party = (id) => record(project.parties, id, "party").name;
   return (
@@ -882,6 +883,7 @@ export function LandRecords({
               {p.name}
               <span>{area(p.area)} total</span>
             </h3>
+            {onExploreFunding && <button type="button" onClick={()=>onExploreFunding(p.id)}>Explore funding</button>}
             <p>
               Owner: {party(p.owner_id)} · {p.location}
             </p>

@@ -19,6 +19,7 @@ import { clientDefaults, validateResponse } from "./contracts.js";
 import { usePreview } from "./usePreview.js";
 import {usePlanningDraft} from "./usePlanningDraft.js";
 import {DemonstratorReview} from "./DemonstratorReview.jsx";
+import {FundingNavigator} from "./FundingNavigator.jsx";
 
 async function api(path, body) {
   let response;
@@ -169,9 +170,39 @@ function App() {
   const [selected, setSelected] = useState("");
   const [workspace, setWorkspace] = useState("project");
   const [designerVisited, setDesignerVisited] = useState(false);
+  const [fundingEntry, setFundingEntry] = useState(null);
+  const fundingGuard = useRef(null);
   const planning=usePlanningDraft(data,api);
   const [planReview,setPlanReview]=useState(null);
-  function openDesigner(){setDesignerVisited(true);setWorkspace("designer");}
+  async function openDesigner(){if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return;setDesignerVisited(true);setWorkspace("designer");}
+  async function openFunding(options = {}) {
+    try {
+    if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return;
+    if (planning.value !== null && !(await planning.flush())) return;
+    const latest = await api("project"); setData(latest);
+    if(fundingEntry!==null && !options.target){setWorkspace("funding");return;}
+    setFundingEntry({...options,token:crypto.randomUUID()}); setWorkspace("funding");
+    } catch(e) {setError(e.message);}
+  }
+  function fundingNavigate(target) {
+    setWorkspace("project");
+    if(target === "demonstrator") openPlanning();
+    if(target === "land") document.querySelector(".records")?.scrollIntoView({block:"start"});
+  }
+  async function fundingSaved() {
+    try {setData(await api("project"));} catch(e) {setError(e.message);}
+  }
+  function useSimulationFinancing(route, facts) {
+    const current=planning.inputs;
+    if(current===null){setError("Open demonstrator planning before transferring simulation financing.");return;}
+    const next={...current,funding_route:route};
+    if(route==="al20_34") {
+      const party=data.project.parties.find(p=>p.id===facts.applicant_id);
+      if(!party || party.kind!==facts.applicant_kind){setError("Record and verify the applicant arrangement in Project before using it for simulation planning.");return;}
+      next.applicant_id=party.id;next.municipality=facts.municipality ?? "unknown";next.purpose=facts.purpose ?? "unknown";
+    }
+    planning.edit(next);openPlanning();
+  }
   function openPlanning(result){
     if(result!==undefined)planning.adopt(result);
     const definition=data.actions.find(a=>a.kind==="demo_plan");
@@ -278,6 +309,7 @@ function App() {
 
   async function mutate(path, body, existingRequest) {
     if (pending.current) return {ok:false,error:"Another save is in progress. Wait for it to finish, then retry."};
+    if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return {ok:false,error:"Save or resolve the funding draft before changing the project."};
     if(project!==null&&!(await planning.flush())){
       const message="Finish saving or resolve the planning draft error before changing the project.";
       setError(message);return {ok:false,error:message};
@@ -302,7 +334,7 @@ function App() {
     setRetry(null);
     try {
       setData(await api(path, request));
-      if(["project/new","import"].includes(path)){setDesignerVisited(false);setWorkspace("project");}
+      if(["project/new","import"].includes(path)){setDesignerVisited(false);setFundingEntry(null);setWorkspace("project");}
       setPlanReview(null);
       setSelected("");
       setHistoryIndex(null);
@@ -412,7 +444,8 @@ function App() {
           )}
         </div>
       </header>
-      {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" aria-pressed={workspace==="project"} onClick={()=>setWorkspace("project")}>Project</button><button type="button" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button></nav>}
+      {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" aria-pressed={workspace==="project"} onClick={()=>setWorkspace("project")}>Project</button><button type="button" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button><button type="button" aria-pressed={workspace==="funding"} onClick={()=>openFunding()}>Funding Navigator</button></nav>}
+      {project!==null && fundingEntry!==null && <div hidden={workspace!=="funding"}><FundingNavigator key={project.id} active={workspace==="funding"} entry={fundingEntry} data={data} request={api} onNavigate={fundingNavigate} onSaved={fundingSaved} onSimulationFinancing={useSimulationFinancing} guardRef={fundingGuard}/></div>}
       {project!==null && designerVisited && <div className="designer-workspace-host" hidden={workspace!=="designer"}><SiteDesigner key={project.id} active={workspace==="designer"} data={data} request={priceRequest} beforeHandoff={planning.flush} onHandoff={openPlanning} /></div>}
       <main id="main" className="project-workspace" hidden={workspace!=="project"}>
         <div className="hero">
@@ -868,6 +901,8 @@ function App() {
                             previewError={previewError}
                             sources={data.summary.demonstrator?.sources}
                             onOpenDesigner={openDesigner}
+                            onOpenFunding={()=>openFunding({target:"demonstrator",parcelId:activeInputs.parcel_id})}
+                            fundingPlans={data.funding_plans}
                             demonstrator={data.summary.demonstrator}
                             planningDraft={planning.value}
                             request={priceRequest}
@@ -935,6 +970,7 @@ function App() {
                     summary={data.summary}
                     revision={data.revision}
                     busy={busy}
+                    onExploreFunding={parcelId=>openFunding({target:"activity",parcelId})}
                     onRemovalPreview={(parcel_id) =>
                       api("parcels/removal-preview", {
                         revision: data.revision,

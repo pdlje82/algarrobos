@@ -130,7 +130,7 @@ class PlanningDraftTests(unittest.TestCase):
 
     def test_v6_backup_and_invalid_v7_import_are_explicit(self):
         old=self.client.get("/api/export").json()
-        for k in ["planning","planning_revision","planning_undo"]:del old[k]
+        for k in ["planning","planning_revision","planning_undo","funding","funding_revision","funding_undo"]:del old[k]
         old.update(format_version=6,receipts={},revision=self.rev,undo_edit=None)
         path=Path(self.folder.name)/"v6.json";original=json.dumps(old).encode();path.write_bytes(original)
         migrated=Store(path);self.assertIsNone(migrated.error)

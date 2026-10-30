@@ -7,3 +7,4 @@ __pycache__/
 .conda/
 restoration_simulator/data/
 restoration_simulator/test-artifacts/
+restoration_simulator/frontend/test-artifacts/

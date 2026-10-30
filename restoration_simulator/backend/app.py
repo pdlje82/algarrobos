@@ -23,7 +23,7 @@ from .parcel_removal import plan as removal_plan, delete as delete_parcels
 from .configuration import load_defaults
 from . import plant_prices
 from . import designer
-from . import documents, planning_draft, demonstrator_removal
+from . import documents, planning_draft, demonstrator_removal, funding
 
 
 class StrictModel(BaseModel):
@@ -124,6 +124,28 @@ class HandoffRequest(Mutation):
     planning_revision: StrictInt
 
 
+class FundingContextRequest(StrictModel):
+    revision: StrictInt
+    planning_revision: StrictInt
+    design_revision: StrictInt
+    parcel_ids: list[StrictStr]
+    target: Literal["activity", "demonstrator", "business"]
+
+
+class FundingEvaluationRequest(StrictModel):
+    revision: StrictInt
+    draft: dict[str, Any]
+
+
+class FundingMutationRequest(Mutation):
+    funding_revision: StrictInt
+    planning_revision: StrictInt
+    design_revision: StrictInt
+    operation: Literal["draft", "save", "adopt", "delete"]
+    draft: dict[str, Any] | None = None
+    record_id: UUID | None = None
+
+
 def view(data, explanation=None):
     project = data["project"]
     return {
@@ -141,6 +163,8 @@ def view(data, explanation=None):
         "can_undo": data["undo"] is not None,
         "designer_saved": data["designer"] is not None and data["designer"]["active_id"] is not None,
         "designer_revision": data["designer_revision"],
+        "funding_revision": data["funding_revision"],
+        "funding_plans": [] if data["funding"] is None else [{"id": r["id"], "name": r["draft"]["name"], "activity_key": r["draft"]["activity_key"], "active": r["active"]} for r in data["funding"]["plans"]],
         "planning": None if project is None else planning_draft.workspace(project, data["planning"], data["planning_revision"]),
         "undo_kind": "delete" if data["undo_edit"] is not None else "action",
         "actions": list_actions(project) if project else [],
@@ -163,6 +187,7 @@ def create_app(save_path=None):
     plant_prices.snapshot()  # Required editable configuration; never invent missing prices.
     from . import designer_library
     designer_library.defaults()
+    funding.catalogue()
     app = FastAPI(title="Algarroba — Restoration planning", version="0.4.0")
     if save_path is not None:
         resolved_save_path = save_path
@@ -197,9 +222,9 @@ def create_app(save_path=None):
             body = bytearray()
             async for chunk in request.stream():
                 body.extend(chunk)
-                if len(body) > 2_000_000:
+                if len(body) > 10_000_000:
                     return JSONResponse(
-                        {"detail": "JSON import is too large (maximum 2 MB)."},
+                        {"detail": "JSON request is too large (maximum 10 MB)."},
                         status_code=413,
                     )
             request._body = bytes(body)
@@ -244,6 +269,33 @@ def create_app(save_path=None):
     def get_designer():
         data = designer_state()
         return designer.workspace(data["project"],data["designer"],data["designer_revision"])
+
+    @app.get("/api/funding/catalogue")
+    def funding_catalogue():
+        return funding.catalogue()
+
+    @app.get("/api/funding")
+    def funding_workspace():
+        data = designer_state()
+        return funding.workspace(data["project"], data["funding"], data["funding_revision"])
+
+    @app.post("/api/funding/context")
+    def funding_context(req: FundingContextRequest):
+        data = designer_state(req.revision)
+        if req.planning_revision != data["planning_revision"] or req.design_revision != data["designer_revision"]:
+            raise Conflict("Planning changed. Save/reload planning before opening funding context.")
+        return funding.new_draft(data["project"], data["planning"], req.parcel_ids, req.target)
+
+    @app.post("/api/funding/evaluate")
+    @app.post("/api/funding/plan-preview")
+    def funding_evaluate(req: FundingEvaluationRequest):
+        data = designer_state(req.revision)
+        return funding.evaluate(req.draft, data["project"], data["planning"])
+
+    @app.post("/api/funding/save")
+    def funding_save(req: FundingMutationRequest):
+        data = get_store().funding_mutation(req.operation, req.revision, req.funding_revision, req.planning_revision, req.design_revision, str(req.request_id), draft=req.draft, record_id=None if req.record_id is None else str(req.record_id))
+        return funding.workspace(data["project"], data["funding"], data["funding_revision"])
 
     @app.post("/api/designer/preview")
     def designer_preview(req: DesignerPreviewRequest):
@@ -376,6 +428,13 @@ def create_app(save_path=None):
             "revision": data["revision"],
             **removal_plan(data["project"], req.parcel_id),
         }
+        if data["funding"] is not None:
+            after = delete_parcels(data["project"], [req.parcel_id])
+            retained = funding.after_delete(data["funding"], data["project"], after, [req.parcel_id])
+            kept = {r["id"] for r in retained["plans"] + retained["scenarios"]}
+            for r in data["funding"]["plans"] + data["funding"]["scenarios"]:
+                if r["id"] not in kept:
+                    result["removed_actions"].append({"title": "Funding: " + r["draft"]["name"], "year": data["project"]["time"], "reason": "Linked to a removed parcel."})
         if data["planning"] is not None and planning_draft.after_parcel_deletion(data["planning"], data["project"], delete_parcels(data["project"], [req.parcel_id]), req.parcel_id) is None:
             result["removed_actions"].append({"title": "Demonstrator planning draft", "year": data["project"]["time"], "reason": "Linked to a parcel removed by this deletion."})
         if data["designer"] is not None:

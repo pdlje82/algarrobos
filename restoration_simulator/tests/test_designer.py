@@ -191,4 +191,4 @@ class DesignerPersistenceTests(unittest.TestCase):
             original=json.dumps(old).encode();path.write_bytes(original)
             s=Store(path);self.assertEqual(s.snapshot()["project"],p)
             self.assertEqual(next(Path(folder).glob("*.schema-v4-*.json")).read_bytes(),original)
-            self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["format_version"], 7)
+            self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["format_version"], 8)

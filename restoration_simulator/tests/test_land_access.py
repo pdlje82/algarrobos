@@ -335,7 +335,7 @@ class MigrationTests(unittest.TestCase):
                 next(Path(folder).glob("*.schema-v1-*.json")).read_bytes(), raw
             )
             self.assertEqual(
-                json.loads(path.read_text(encoding="utf-8"))["format_version"], 7
+                json.loads(path.read_text(encoding="utf-8"))["format_version"], 8
             )
             self.assertEqual(
                 current_engine.validate_state(current["project"]), current["project"]
@@ -344,7 +344,7 @@ class MigrationTests(unittest.TestCase):
             result, _ = store.mutate("undo", old["revision"], str(uuid4()), {})
             self.assertEqual(result["project"]["activities"], [])
             self.assertEqual(result["project"]["cash"], before["cash"])
-            self.assertEqual(validate_export(store.export())["format_version"], 7)
+            self.assertEqual(validate_export(store.export())["format_version"], 8)
 
     def test_failed_migration_preserves_original_file(self):
         old = legacy.new_project("Original")

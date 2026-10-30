@@ -285,6 +285,26 @@ export function demonstratorContract(value) {
 
 export function validateResponse(path, data) {
   object(data, "API response");
+  if (["funding", "funding/save"].includes(path)) {
+    properties(data,["version","project_revision","funding_revision","attachment","legacy"],"funding workspace");
+    properties(data.attachment,["version","draft","scenarios","plans"],"funding attachment");
+    required(data.version===1&&data.attachment.version===1&&Number.isInteger(data.funding_revision)&&Array.isArray(data.attachment.scenarios)&&Array.isArray(data.attachment.plans),"Incompatible funding workspace. Restart Python and reload.");
+    return data;
+  }
+  if(path==="funding/context") {
+    properties(data,["version","name","activity_key","baseline","overrides","selected","allocations","calendar_start","notes","bundle"],"funding context");
+    properties(data.baseline,["facts","parties","target","parcel_ids","work_budget"],"funding recorded baseline");
+    properties(data.bundle,["version","entries","questions","groups","source_review","official_pages"],"funding catalogue");
+    required(data.version===1&&Array.isArray(data.bundle.entries)&&Array.isArray(data.bundle.questions)&&Array.isArray(data.selected),"Incompatible funding context.");
+    return data;
+  }
+  if(["funding/evaluate","funding/plan-preview"].includes(path)) {
+    properties(data,["draft","facts","results","differences","stale","catalogue_changed","catalogue_hash","warnings","allocation_totals","uncovered","upfront_shortfall","calendar_note"],"funding assessment");
+    validateResponse("funding/context",data.draft);
+    required(Array.isArray(data.results)&&Array.isArray(data.differences)&&Array.isArray(data.warnings)&&typeof data.stale==="boolean"&&typeof data.catalogue_changed==="boolean","Invalid funding assessment.");
+    for(const r of data.results){properties(r,["id","title","status","group","description","availability","source_strength","maturity","checked_on","finance","checks","sources","source_gaps","related","relevant"],"funding result");properties(r.finance,["basis","estimate","schedule","notes"],"funding financial result");required(Array.isArray(r.checks)&&Array.isArray(r.sources)&&Array.isArray(r.finance.schedule)&&Array.isArray(r.finance.notes),"Missing funding evidence or financial schedule.");}
+    return data;
+  }
   if (path === "plant-prices") return priceDefaultsContract(data);
   if (["demonstrator/draft","designer/handoff"].includes(path)) {
     properties(data,["project_revision","planning_revision","draft","saved","committed","planting","available","reason"],"demonstrator planning draft; restart Python and reload");

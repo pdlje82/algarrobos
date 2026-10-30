@@ -341,7 +341,7 @@ class ApiTests(unittest.TestCase):
             "commit", expected=422, action_id="use_own_land", inputs={}, revision=True
         )
         self.assertEqual(self.current(), before)
-        response = self.client.post("/api/import", content=" " * 2_000_001)
+        response = self.client.post("/api/import", content=" " * 10_000_001)
         self.assertEqual(response.status_code, 413)
 
     def test_corrupt_autosave_is_never_overwritten(self):

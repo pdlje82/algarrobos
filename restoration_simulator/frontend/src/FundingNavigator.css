@@ -1,0 +1,22 @@
+.funding-workspace{max-width:1450px;margin:2rem auto;padding:0 1rem;color:var(--text)}
+.funding-workspace h1{font-size:clamp(2rem,4vw,3.1rem)}
+.funding-steps{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
+.funding-steps button[aria-current=step]{outline:3px solid currentColor;outline-offset:2px}
+.funding-layout{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(250px,1fr);gap:1.25rem;align-items:start}
+.funding-main,.funding-context{min-width:0}.funding-context{position:sticky;top:1rem}
+.funding-workspace label:not(.funding-pick){display:grid;gap:.4rem;margin:.8rem 0;font-weight:600}
+.funding-workspace input:not([type=checkbox]),.funding-workspace select,.funding-workspace textarea{box-sizing:border-box;width:100%;min-width:0;font:inherit;padding:.65rem;border:1px solid currentColor;border-radius:.35rem;background:var(--control);color:inherit}
+.funding-pick{display:flex;align-items:flex-start;gap:.65rem;margin:.75rem 0;line-height:1.5}
+.funding-workspace .funding-pick input[type=checkbox]{flex:0 0 1.1rem;width:1.1rem;min-width:1.1rem;max-width:1.1rem;height:1.1rem;margin:.35rem 0 0;padding:0;accent-color:#407752}
+.funding-option,.funding-check,.funding-question,.funding-review{border:1px solid color-mix(in srgb,currentColor 28%,transparent);border-radius:.65rem;padding:1rem;margin:1rem 0;overflow-wrap:anywhere}
+.funding-check-fail{border-inline-start:4px solid #a54e35}.funding-check-unknown{border-inline-start:4px solid #a27c28}
+.funding-status,.funding-basis{font-weight:600}.funding-basis{font-size:.85rem}
+.funding-actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.2rem}
+.funding-workspace button{margin:.25rem .35rem .25rem 0;max-width:100%;white-space:normal}
+.funding-workspace summary{cursor:pointer;font-weight:600;padding:.45rem 0}
+.funding-workspace details>details{margin-left:.5rem}
+.funding-sources{font-size:.86rem;padding-left:1.3rem}.funding-sources li{margin:.5rem 0}
+.funding-meta{display:grid;grid-template-columns:minmax(90px,1fr) 3fr;gap:.45rem}.funding-meta dd{margin:0}
+.funding-table{overflow-x:auto;max-width:100%}.funding-table table{border-collapse:collapse;width:100%}.funding-table td,.funding-table th{padding:.65rem;border-bottom:1px solid currentColor;text-align:left;vertical-align:top}
+.funding-research p{line-height:1.6}.funding-context>div{border-bottom:1px solid color-mix(in srgb,currentColor 25%,transparent);padding:.7rem 0}
+@media(max-width:800px){.funding-layout{grid-template-columns:1fr}.funding-context{position:static}.funding-workspace{padding:0 .5rem}.funding-steps button{flex:1 1 42%}.funding-main,.funding-context{padding:1rem}.funding-meta{grid-template-columns:1fr}.funding-meta dd{margin-bottom:.6rem}}
