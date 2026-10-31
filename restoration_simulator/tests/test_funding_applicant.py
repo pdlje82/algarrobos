@@ -24,7 +24,7 @@ class ApplicantTests(unittest.TestCase):
         self.assertEqual(next(c for c in r["checks"] if c["field"]=="applicant_kind")["result"],"pass")
         self.assertEqual(r["status"],"Needs information")
         v=funding_visual.visualise(a)
-        c=next(c for c in v["visualisation"]["conditions"] if c["option_id"]==r["id"] and c["fields"]==["applicant_id","applicant_kind"])
+        c=next(c for c in v["visualisation"]["conditions"] if c["option_id"]==r["id"] and c["fields"]==["applicant_choice"])
         self.assertEqual(c["result"],"pass")
         self.assertTrue(v["applicant_context"]["derived"])
         self.assertEqual(v["applicant_context"]["inherited_form"],"public")
@@ -60,8 +60,11 @@ class ApplicantTests(unittest.TestCase):
         saved=funding.operate(None,self.project,None,"save",d,None)
         snapshot=deepcopy(saved)
         self.assertEqual(saved["scenarios"][0]["assessment"]["facts"]["applicant_kind"],"individual")
-        prepared=funding.prepare(d,self.project)
-        self.assertEqual(prepared["draft"]["version"],2)
+        pending=funding.prepare(d,self.project)
+        self.assertIsNotNone(pending["applicant_review"])
+        self.assertEqual(pending["draft"],d)
+        prepared=funding.prepare(d,self.project,{"kind":"recorded","party_id":"municipality"},resolve=True)
+        self.assertEqual(prepared["draft"]["version"],3)
         self.assertTrue(prepared["notice"])
         self.assertEqual(funding.effective(prepared["draft"])["applicant_kind"],"public")
         funding.validate_attachment(saved,self.project)
@@ -76,7 +79,7 @@ class PrepareEndpointTests(unittest.TestCase):
     seed = fixtures.FundingPersistenceTests.seed
 
     def test_prepare_never_writes_or_changes_rules_and_sources(self):
-        d=self.seed();d["version"]=1
+        d=self.seed();d["version"]=1;del d["applicant_choice"]
         before=self.path.read_bytes()
         r=self.client.post("/api/funding/prepare",json={"revision":self.view["revision"],"draft":d})
         self.assertEqual(r.status_code,200,r.text)

@@ -286,14 +286,24 @@ export function demonstratorContract(value) {
 export function validateResponse(path, data) {
   object(data, "API response");
   if(path==="funding/visualise") {
-    properties(data,["assessment","visualisation","applicant_context"],"funding visualisation");
+    properties(data,["assessment","visualisation","applicant_context","input_context"],"funding visualisation");
     validateResponse("funding/evaluate",data.assessment);
     properties(data.applicant_context,["party_name","inherited_form","derived","override_conflict"],"funding applicant context");
     required((data.applicant_context.party_name===null||typeof data.applicant_context.party_name==="string")&&(data.applicant_context.inherited_form===null||typeof data.applicant_context.inherited_form==="string")&&typeof data.applicant_context.derived==="boolean"&&typeof data.applicant_context.override_conflict==="boolean","Invalid funding applicant provenance.");
     const v=data.visualisation;
     properties(v,["version","conditions","coverage"],"funding dependencies");
     required(v.version===1&&Array.isArray(v.conditions)&&Array.isArray(v.coverage),"Incompatible funding dependencies. Restart Python and reload.");
-    const options=new Set(data.assessment.results.map(r=>r.id)), fields=new Set(data.assessment.draft.bundle.questions.map(q=>q.id)), ids=new Set();
+    properties(data.input_context,["editing_ready","questions"],"logical funding questions");
+    required(typeof data.input_context.editing_ready==="boolean"&&Array.isArray(data.input_context.questions)&&data.input_context.questions.length>0,"Missing logical funding questions.");
+    const questionIds=new Set();
+    for(const q of data.input_context.questions){
+      properties(q,["id","label","type","step","relevant","current_value","initial_value","display_value","initial_label","unknown","overridden","origin"],"funding question state");
+      required(typeof q.id==="string"&&!questionIds.has(q.id)&&typeof q.label==="string"&&["applicant","choice","number","party","text"].includes(q.type)&&[0,1,4].includes(q.step)&&typeof q.relevant==="boolean"&&typeof q.unknown==="boolean"&&typeof q.overridden==="boolean"&&[q.display_value,q.initial_label,q.origin].every(s=>typeof s==="string"),"Invalid logical funding question.");
+      if(q.type==="applicant"){required(q.id==="applicant_choice"&&Array.isArray(q.options)&&q.options.length>0&&Array.isArray(q.other_forms),"Missing applicant choices.");for(const o of q.options)properties(o,["group","label","choice"],"applicant option");}
+      questionIds.add(q.id);
+    }
+    required(questionIds.has("applicant_choice")&&!questionIds.has("applicant_id")&&!questionIds.has("applicant_kind"),"Incompatible merged applicant question.");
+    const options=new Set(data.assessment.results.map(r=>r.id)), fields=questionIds, ids=new Set();
     for(const c of v.conditions){
       properties(c,["id","option_id","fields","effect","result","message","sources","value"],"funding condition");
       required(typeof c.id==="string"&&!ids.has(c.id)&&options.has(c.option_id)&&Array.isArray(c.fields)&&c.fields.length>0&&c.fields.every(f=>fields.has(f))&&["eligibility","amount"].includes(c.effect)&&["pass","fail","unknown"].includes(c.result)&&typeof c.message==="string"&&Array.isArray(c.sources)&&(c.value===null||typeof c.value==="number"&&Number.isFinite(c.value)),"Invalid funding condition dependencies.");
@@ -317,16 +327,18 @@ export function validateResponse(path, data) {
     return data;
   }
   if(path==="funding/prepare") {
-    properties(data,["draft","notice"],"prepared funding exploration");
+    properties(data,["draft","notice","applicant_review"],"prepared funding exploration");
     validateResponse("funding/context",data.draft);
-    required(data.draft.version===2&&typeof data.notice==="string","Incompatible funding editing policy.");
+    required(typeof data.notice==="string"&&(data.applicant_review===null?data.draft.version===3:[1,2].includes(data.draft.version)),"Incompatible funding editing policy.");
+    if(data.applicant_review!==null)properties(data.applicant_review,["party_name","legal_form","message"],"legacy applicant review");
     return data;
   }
   if(path==="funding/context") {
     properties(data,["version","name","activity_key","baseline","overrides","selected","allocations","calendar_start","notes","bundle"],"funding context");
     properties(data.baseline,["facts","parties","target","parcel_ids","work_budget"],"funding recorded baseline");
     properties(data.bundle,["version","entries","questions","groups","source_review","official_pages"],"funding catalogue");
-    required([1,2].includes(data.version)&&Array.isArray(data.bundle.entries)&&Array.isArray(data.bundle.questions)&&Array.isArray(data.selected),"Incompatible funding context.");
+    required([1,2,3].includes(data.version)&&Array.isArray(data.bundle.entries)&&Array.isArray(data.bundle.questions)&&Array.isArray(data.selected),"Incompatible funding context.");
+    if(data.version===3){properties(data,["applicant_choice"],"merged applicant choice");required(!Object.hasOwn(data.overrides,"applicant_id")&&!Object.hasOwn(data.overrides,"applicant_kind"),"Conflicting legacy applicant overrides in a new exploration.");}
     return data;
   }
   if(["funding/evaluate","funding/plan-preview"].includes(path)) {

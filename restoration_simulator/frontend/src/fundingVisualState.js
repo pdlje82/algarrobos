@@ -3,23 +3,30 @@ export const initialFundingVisual = {context:null, token:null, inputKey:null, st
 
 export function assessmentChanges(previous, next) {
   if (previous === null) return null;
-  const fields = Object.keys(next.assessment.facts).filter(k => previous.assessment.facts[k] !== next.assessment.facts[k]);
+  const beforeQuestions=new Map(previous.input_context.questions.map(q=>[q.id,q]));
+  const fields=next.input_context.questions.filter(q=>JSON.stringify(beforeQuestions.get(q.id)?.current_value)!==JSON.stringify(q.current_value)).map(q=>q.id);
   const oldConditions = new Map(previous.visualisation.conditions.map(c => [c.id,c]));
+  const nextIds=new Set(next.visualisation.conditions.map(c=>c.id));
   const changedConditions = next.visualisation.conditions.filter(c => {
     const before = oldConditions.get(c.id);
     return !before || before.result !== c.result || before.value !== c.value || before.message !== c.message;
-  }).map(c => ({...c, resolved:oldConditions.get(c.id)?.result === "unknown" && c.result !== "unknown"}));
+  }).map(c => ({...c, before_result:oldConditions.get(c.id)?.result ?? null, before_value:oldConditions.get(c.id)?.value ?? null,resolved:oldConditions.get(c.id)?.result === "unknown" && c.result !== "unknown"}));
+  const removed=previous.visualisation.conditions.filter(c=>!nextIds.has(c.id)).map(c=>({...c,removed:true,before_result:c.result,before_value:c.value,resolved:false}));
+  changedConditions.push(...removed);
+  const affectedConditions=[...next.visualisation.conditions.filter(c=>c.fields.some(f=>fields.includes(f))).map(c=>({...c,before_result:oldConditions.get(c.id)?.result ?? null,before_value:oldConditions.get(c.id)?.value ?? null})),...removed];
   const oldOptions = new Map(previous.assessment.results.map(r => [r.id,r]));
   const options = next.assessment.results.flatMap(r => {
     const before = oldOptions.get(r.id);
     if (!before) return [];
     const conditions = changedConditions.filter(c => c.option_id === r.id);
+    const affected=affectedConditions.filter(c=>c.option_id===r.id);
     const fit = before.status !== r.status;
     const amount = before.finance.estimate !== r.finance.estimate || JSON.stringify(before.finance.schedule) !== JSON.stringify(r.finance.schedule);
     const scope = before.relevant !== r.relevant;
-    return fit || amount || scope || conditions.length ? [{id:r.id,fit,amount,scope,conditions,before:before.status,after:r.status,previousAmount:before.finance.estimate,nextAmount:r.finance.estimate}] : [];
+    return fit || amount || scope || conditions.length || affected.length || fields.includes("activity") ? [{id:r.id,fit,amount,scope,conditions,affected,before:before.status,after:r.status,previousAmount:before.finance.estimate,nextAmount:r.finance.estimate}] : [];
   });
-  return {fields,conditions:changedConditions,options};
+  const answers=fields.map(id=>({id,label:next.input_context.questions.find(q=>q.id===id).label,before:beforeQuestions.get(id)?.display_value ?? "Not previously specified",after:next.input_context.questions.find(q=>q.id===id).display_value}));
+  return {fields,answers,conditions:changedConditions,options,applicantFormBefore:previous.assessment.facts.applicant_kind,applicantFormAfter:next.assessment.facts.applicant_kind};
 }
 
 export function fundingVisualReducer(state, event) {
@@ -29,7 +36,7 @@ export function fundingVisualReducer(state, event) {
   if (state.token !== event.token || state.context !== event.context) return state;
   if (event.type === "error") return {...state,status:"error",error:event.error};
   const changes=assessmentChanges(state.value,event.value);
-  return {...state,status:"success",error:"",value:event.value,changes,latestFields:changes?.fields.length ? changes.fields : state.latestFields};
+  return {...state,status:"success",error:"",value:event.value,changes:changes?.fields.length?changes:state.changes,latestFields:changes?.fields.length ? changes.fields : state.latestFields};
 }
 
 export function visualScope(results, {group,shortlistOnly,selected,page, pageSize=12,expanded=false}) {

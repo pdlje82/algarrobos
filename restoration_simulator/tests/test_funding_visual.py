@@ -35,14 +35,14 @@ class VisualMetadataTests(unittest.TestCase):
     def test_duplicate_checks_and_shared_fields_keep_separate_stable_ids(self):
         d = self.eligible(); d["overrides"]["applicant_kind"] = "public_company"
         v = funding_visual.describe(funding.evaluate(d, self.project))
-        checks = [c for c in v["conditions"] if c["option_id"] == "LEADER-AL20-3.4" and c["fields"] == ["applicant_kind"]]
+        checks = [c for c in v["conditions"] if c["option_id"] == "LEADER-AL20-3.4" and c["fields"] == ["applicant_choice"]]
         self.assertEqual([c["result"] for c in checks], ["pass", "unknown"])
         self.assertNotEqual(checks[0]["id"], checks[1]["id"])
-        shared = [c for c in v["conditions"] if c["fields"] == ["applicant_kind"]]
+        shared = [c for c in v["conditions"] if c["fields"] == ["applicant_choice"]]
         self.assertEqual(len({c["option_id"] for c in shared}), 5)
         d["overrides"]["applicant_kind"] = "university"
         updated = funding_visual.describe(funding.evaluate(d, self.project))
-        self.assertEqual([c["id"] for c in checks], [c["id"] for c in updated["conditions"] if c["option_id"] == "LEADER-AL20-3.4" and c["fields"] == ["applicant_kind"]])
+        self.assertEqual([c["id"] for c in checks], [c["id"] for c in updated["conditions"] if c["option_id"] == "LEADER-AL20-3.4" and c["fields"] == ["applicant_choice"]])
 
     def test_amount_inputs_are_not_eligibility_conditions(self):
         d = self.eligible()

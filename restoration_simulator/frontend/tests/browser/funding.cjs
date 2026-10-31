@@ -23,10 +23,11 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     await page.goto(url);
     await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();
     await page.getByRole('heading',{name:'Funding Navigator',exact:true}).waitFor();
+    await page.getByRole('button',{name:'Graph',exact:true}).click();
     await page.getByLabel('What would you like support for?',{exact:true}).selectOption('business');
     await page.getByLabel('Exploration name',{exact:true}).fill('My rural business');
     await page.getByRole('button',{name:'2. People and land',exact:true}).click();
-    const answers={applicant_id:'individual',applicant_kind:'individual',municipality:'Alhama de Almería',territory_verified:'yes',sector:'general',unemployed:'yes',new_activity:'yes',no_same_reta:'yes',resident:'yes',exclusive:'yes',start_after_application:'yes',plan_24_months:'yes',retention:'yes',unemployment_percent:'50',net_year1:'10000',smi_year1:'20000',net_year2:'20000',smi_year2:'20000',other_aid:'no',bonus_location:'yes',bonus_young:'yes',bonus_woman:'yes',bonus_job:'yes',bonus_climate:'yes'};
+    const answers={applicant_choice:'recorded:individual',municipality:'Alhama de Almería',territory_verified:'yes',sector:'general',unemployed:'yes',new_activity:'yes',no_same_reta:'yes',resident:'yes',exclusive:'yes',start_after_application:'yes',plan_24_months:'yes',retention:'yes',unemployment_percent:'50',net_year1:'10000',smi_year1:'20000',net_year2:'20000',smi_year2:'20000',other_aid:'no',bonus_location:'yes',bonus_young:'yes',bonus_woman:'yes',bonus_job:'yes',bonus_climate:'yes'};
     for(let i=0;i<60;i++){
       const field=page.locator('.funding-question select,.funding-question input').first();
       const id=(await field.getAttribute('id')).replace('funding-','');

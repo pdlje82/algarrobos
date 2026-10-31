@@ -103,17 +103,22 @@ API operations:
 - `GET /api/funding/catalogue`, `GET /api/funding`.
 - `POST /api/funding/context`: capture a recorded context and catalogue snapshot.
 - `POST /api/funding/prepare`: read-only adapter for editing older explorations.
-  Draft version 2 derives an inherited legal form from the selected applicant's
-  recorded type. An explicit legal-form override (including Unknown) takes
-  precedence. Selecting an unrecorded/hypothetical applicant yields Unknown.
-  Version-1 saved assessments retain their original evaluation semantics.
+  Draft version 3 has one nullable `applicant_choice`: null inherits the captured
+  applicant; recorded choices carry a party ID; planned/potential choices carry a
+  legal form; an explicit unknown choice clears the whole applicant assumption.
+  Independent identity/form overrides are rejected in v3. Version-1/2 assessments
+  retain their original evaluation semantics. Lossless editing adapters combine
+  compatible older answers; conflicting older identity/form pairs require an
+  explicit choice before conversion. `/prepare` accepts an optional
+  `applicant_choice` to resolve that review, without writing any records.
 - `POST /api/funding/evaluate`, `POST /api/funding/plan-preview`: read-only assessment.
 - `POST /api/funding/visualise`: the identical assessment plus transient, versioned
   condition dependencies and modelled/research-only coverage. Composite income
   checks explicitly include the income and SMI fields; startup bonuses are amount
   dependencies, separate from eligibility. It also returns transient applicant
-  provenance and flags explicit form overrides that differ from the selected
-  party's recorded type. Metadata never enters saved snapshots.
+  logical questions, grouped applicant options, current/initial values, relevance,
+  provenance and reset destinations in `input_context`. Applicant dependencies
+  map to `applicant_choice`. Metadata never enters saved assessments.
 - `POST /api/funding/save`: draft, save/update exploration, adopt/revise plan, delete.
 
 Mutations check project, funding, design and planning revisions, use idempotent
@@ -136,42 +141,52 @@ have no new cash-posting workflow in this release.
 
 ## Live funding consequences
 
-Questions use prominent labels and only specific explanatory help. Activity,
-people/land, option browsing and budget steps share a native HTML/SVG graph and
-matrix. The family selector includes counts for the entire catalogue. One family
-or the explicit shortlist is shown at a time, with catalogue-order pages of at
-most 12 options in compact view. **Expand view** shows all nodes/rows in the
-current family or shortlist and removes the internal height limit, allowing page
-scrolling. **Compact view** restores paging and scroll position. Inspection
-reveals modelled dependencies, explanations and exact source editions; it never
-selects funding. Research-only entries are labelled **Assessment not implemented**
-and counted separately from **Needs your answers**. Conflicting modelled inputs
-are labelled **Conflicts with current scenario**. These are presentation labels;
-historical stored status values remain unchanged. The matrix and graph share browsing scope,
-selection and Python assessments. Selecting a circumstance focuses its existing
-question; conditions outside the current activity's question flow explain that
-limitation without changing the activity or relevance filtering.
+Questions use prominent labels and only specific explanatory help. The single
+**Who would apply for the funding?** question replaces the old identity and legal-
+form questions. Recorded parties use their recorded form; creating a nonprofit or
+business and seeking a potential partner are distinct hypothetical selections.
+The less common hypothetical types are inline choices inside that same question.
+No organisation, ownership or agreement is created by choosing a scenario.
 
-Help buttons explain the four outcome categories and the three change counters
-on hover, keyboard focus or tap. They close on Escape/outside interaction, fit
-inside phone viewports and leave the question and entered answers unchanged.
-Inherited inputs are marked as not answered here and may include planning
-defaults. The legal-form field explicitly identifies its selected-party source;
-resetting an explicit legal-form override resumes that inheritance. Parcel
-ownership never determines applicant form. Saved comparisons use the Python
-assessment's facts, including derived form, rather than reconstructing them in JS.
-Envelope 8 remains unchanged; the nested draft version preserves historical
-snapshots while opening a separately upgraded editing copy with a visible notice.
+**Your answers and assumptions** is available across all six stops. It includes
+inherited values, groups unknowns and retained answers for other activities, and
+supports direct editing. **Set to Unknown** removes the current assumption;
+**Restore initial: …** returns to the captured baseline and names its destination.
+Applicant resets apply to the complete choice. Hidden activity answers are
+retained, and direct editing can inspect one without changing the activity.
+The active question is identified by stable logical ID rather than its index.
 
-Accepted responses are compared with the previous accepted response in the same
-exploration. The feedback distinguishes fit, resolved conditions and conditional
-amount/schedule changes, including multiple edits and unchanged overall fit.
-Loading/duplicating an exploration or refreshing context resets this comparison.
-Pending and failed requests retain an explicitly labelled previous assessment;
-late responses cannot replace the current result. Retry preserves entered inputs.
-No graph coordinates, transitions or dependencies are persisted, and envelope 8
-requires no migration. On phones the visual panel expands below the question;
-diagram/table scrolling stays inside the panel. Reduced motion is supported.
+**Matrix is the default**, with the graph one toggle away. The separate What
+changed panel and aggregate change counters are removed. Affected rows/nodes and
+changed fit/condition/amount cells carry text markers and highlights. Hover/focus
+shows concise explanations; **Inspect effects** opens persistent interactive
+detail with before/after condition results and exact PDF citations. Conditions
+that are affected but unchanged are explained, including changes between two
+nonprofit applicants, capped amounts and removed conditional requirements.
+Unimplemented assessments remain separate from missing user answers and conflicts.
+Family/page indicators locate affected options outside the current visible set.
+
+A selection or reset triggers Python evaluation immediately, independently of
+saving or question navigation. Text/numeric edits use a short debounce flushed
+by Enter/blur. Current selection labels update immediately; eligibility and money
+always come from Python. Old results remain explicitly labelled during pending
+or failed requests, retries retain answers, and stale responses are ignored.
+Highlights remain through non-answer updates until another accepted answer edit
+or an explicit exploration/baseline change. Activity navigation waits for its
+updated relevant question set, preventing rapid navigation into obsolete questions.
+
+Catalogue order, browsing filters, shortlist, source viewing and selected visual
+view are retained during input changes. Compact view pages up to 12 options in
+one family/shortlist. **Expand view** removes the internal height limit and shows
+all rows/nodes in that scope using page scrolling; **Compact view** restores its
+scroll position. Phones use an expandable visual panel and compact matrix rows.
+Help works with hover, keyboard focus and touch, supports Escape/outside closing,
+and stays inside the viewport. Reduced-motion and both themes are supported.
+
+Saved source editions, historical assessments, simulation schema 4 and save/export
+envelope 8 remain unchanged. Opening an editing copy does not overwrite an older
+snapshot. An unresolved legacy applicant can be inspected read-only or cancelled;
+editing/adoption stay unavailable until the user selects a coherent applicant.
 
 ## Verification
 
@@ -193,6 +208,8 @@ test artifacts. The user's active save is not used.
 Run `node tests/browser/funding-visual.cjs` for graph/matrix, request-race, PDF focus,
 question hierarchy, keyboard and 390px checks, followed by the existing funding and
 `planning-handoff.cjs` checks. Each workflow uses the isolated save and test servers.
-`funding-refinements.cjs` covers version-1 editing, selected-party inheritance,
-explicit overrides/reset/reload, saved comparison facts, distinct assessment
-categories, help interactions, expanded graph/matrix and direct demonstrator entry.
+`funding-refinements.cjs` covers legacy applicant review/cancellation, complete
+applicant replacement, the overview and both resets, retained activity answers,
+unchanged-condition effects, sources, expanded views, phone themes, save/reload
+and the direct demonstrator entry. `test_funding_choice.py` covers the v3 contract,
+lossless/review adapters, provenance/relevance and unchanged financial rules.

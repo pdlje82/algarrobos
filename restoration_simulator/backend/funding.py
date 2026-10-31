@@ -126,13 +126,14 @@ def baseline(project, planning, parcel_ids, target):
 
 def new_draft(project, planning, parcel_ids, target):
     c = catalogue()
-    return {"version": 2, "name": "Funding exploration", "activity_key": "demonstrator" if target == "demonstrator" else str(uuid4()), "baseline": baseline(project, planning, parcel_ids, target), "overrides": {}, "selected": [], "allocations": [], "calendar_start": None, "notes": "", "bundle": c}
+    return {"version": 3, "applicant_choice": None, "name": "Funding exploration", "activity_key": "demonstrator" if target == "demonstrator" else str(uuid4()), "baseline": baseline(project, planning, parcel_ids, target), "overrides": {}, "selected": [], "allocations": [], "calendar_start": None, "notes": "", "bundle": c}
 
 
 @checked
 def validate_draft(d, project):
-    keys(d, set("version name activity_key baseline overrides selected allocations calendar_start notes bundle".split()), "funding draft")
-    require(type(d["version"]) is int and d["version"] in {1, 2}, "Unsupported funding draft version.")
+    require(type(d["version"]) is int and d["version"] in {1, 2, 3}, "Unsupported funding draft version.")
+    required = set("version name activity_key baseline overrides selected allocations calendar_start notes bundle".split())
+    keys(d, required | ({"applicant_choice"} if d["version"] == 3 else set()), "funding draft")
     require(isinstance(d["name"], str) and 0 < len(d["name"].strip()) <= 80 and isinstance(d["notes"], str) and len(d["notes"]) <= 10000, "Enter a funding name (up to 80 characters) and valid notes.")
     require(isinstance(d["activity_key"], str) and 0 < len(d["activity_key"]) <= 80, "Invalid funding activity identity.")
     c = validate_catalogue(d["bundle"])
@@ -145,6 +146,9 @@ def validate_draft(d, project):
     questions = {q["id"]: q for q in c["questions"]}
     keys(b["facts"], set(questions), "funding facts")
     require(isinstance(d["overrides"], dict) and set(d["overrides"]) <= set(questions), "Unknown funding override.")
+    if d["version"] == 3:
+        require(not ({"applicant_id", "applicant_kind"} & set(d["overrides"])), "Choose the applicant as one complete choice; independent identity/form overrides are no longer supported.")
+        validate_applicant_choice(d["applicant_choice"], d)
     for values in [b["facts"], d["overrides"]]:
         for k, v in values.items():
             q = questions[k]
@@ -172,27 +176,104 @@ def effective(d):
     # party unless the user has explicitly chosen a hypothetical legal form.
     if d["version"] == 2 and "applicant_kind" not in d["overrides"]:
         facts["applicant_kind"] = applicant_form(d, facts["applicant_id"])
+    if d["version"] == 3:
+        choice = resolved_applicant(d)
+        if choice["kind"] == "recorded":
+            facts.update(applicant_id=choice["party_id"], applicant_kind=applicant_form(d, choice["party_id"]))
+        elif choice["kind"] in {"planned", "potential"}:
+            facts.update(applicant_id="hypothetical", applicant_kind=choice["legal_form"])
+        else:
+            facts.update(applicant_id=None, applicant_kind=None)
     return facts
+
+
+def legal_forms(d):
+    question = next((q for q in d["bundle"]["questions"] if q["id"] == "applicant_kind"), None)
+    require(question is not None and question["type"] == "choice", "The applicant legal-form question is missing or incompatible.")
+    return dict(question["options"])
+
+
+def validate_applicant_choice(choice, d):
+    if choice is None: return  # Explicit inheritance, distinct from an unknown choice.
+    require(isinstance(choice, dict) and "kind" in choice, "Choose a valid applicant.")
+    kind = choice["kind"]
+    if kind == "recorded":
+        keys(choice, {"kind", "party_id"}, "recorded applicant")
+        require(choice["party_id"] in {p["id"] for p in d["baseline"]["parties"]}, "The selected applicant is not in the recorded context. Refresh the baseline.")
+    elif kind in {"planned", "potential"}:
+        keys(choice, {"kind", "legal_form"}, "hypothetical applicant")
+        require(choice["legal_form"] is None or choice["legal_form"] in legal_forms(d), "Unsupported hypothetical applicant type.")
+        require(kind != "planned" or choice["legal_form"] in {"individual", "nonprofit", "company"}, "Choose a supported organisation/business to create.")
+    else:
+        require(kind == "unknown", "Unknown applicant choice category.")
+        keys(choice, {"kind"}, "unknown applicant")
+
+
+def initial_applicant(d):
+    identity = d["baseline"]["facts"]["applicant_id"]
+    if identity is None: return {"kind": "unknown"}
+    require(any(p["id"] == identity for p in d["baseline"]["parties"]), "The initial applicant is missing from the recorded context. Review this exploration.")
+    return {"kind": "recorded", "party_id": identity}
+
+
+def resolved_applicant(d):
+    return initial_applicant(d) if d["applicant_choice"] is None else deepcopy(d["applicant_choice"])
+
+
+def applicant_label(choice, d):
+    if choice["kind"] == "recorded":
+        party = next(p for p in d["baseline"]["parties"] if p["id"] == choice["party_id"])
+        form = applicant_form(d, party["id"])
+        return party["name"] + " · " + (legal_forms(d)[form] if form is not None else "Legal form unknown")
+    if choice["kind"] == "unknown": return "Unknown / I don’t know yet"
+    form = choice["legal_form"]
+    if form is None: return "Another hypothetical applicant type…"
+    if choice["kind"] == "planned":
+        return {"nonprofit": "New nonprofit organisation I plan to create", "individual": "New self-employed business I plan to create", "company": "New company I plan to create"}[form]
+    if form in {"nonprofit", "public"}:
+        return {"nonprofit": "Nonprofit partner not yet identified", "public": "Public-body partner not yet identified"}[form]
+    return "Potential applicant · " + legal_forms(d)[form]
 
 
 def applicant_form(d, applicant_id):
     party = next((p for p in d["baseline"]["parties"] if p["id"] == applicant_id), None)
-    question = next((q for q in d["bundle"]["questions"] if q["id"] == "applicant_kind"), None)
-    require(question is not None and question["type"] == "choice", "The applicant legal-form question is missing or incompatible.")
-    allowed = {value for value, label in question["options"]}
+    allowed = legal_forms(d)
     # No selected/recorded party (including a hypothetical partner) means unknown.
     return party["kind"] if party is not None and party["kind"] in allowed else None
 
 
 @checked
-def prepare(draft, project):
+def prepare(draft, project, applicant_choice=None, resolve=False):
     """Explicit editing adapter; never rewrite stored alternatives or snapshots."""
     d = deepcopy(validate_draft(draft, project))
-    notice = ""
-    if d["version"] == 1:
-        d["version"] = 2
-        notice = "Editing copy updated: inherited legal form now follows the selected applicant. Explicit legal-form overrides are retained. Saved assessment snapshots are unchanged."
-    return {"draft": d, "notice": notice}
+    if d["version"] == 3:
+        if resolve:
+            validate_applicant_choice(applicant_choice, d)
+            d["applicant_choice"] = deepcopy(applicant_choice)
+        return {"draft": d, "notice": "", "applicant_review": None}
+    facts = effective(d)
+    identity, form = facts["applicant_id"], facts["applicant_kind"]
+    party = next((p for p in d["baseline"]["parties"] if p["id"] == identity), None)
+    coherent = party is not None and form == applicant_form(d, identity)
+    unrecorded = identity in {None, "hypothetical"}
+    if not resolve and not coherent and not unrecorded:
+        return {"draft": d, "notice": "Review the previous applicant identity and legal-form assumption before editing.",
+                "applicant_review": {"party_name": identity if party is None else party["name"], "legal_form": form,
+                                     "message": "These older answers cannot be combined without changing the scenario. Choose the recorded applicant or a hypothetical applicant type; the saved assessment will remain unchanged."}}
+    if resolve:
+        validate_applicant_choice(applicant_choice, d)
+        choice = deepcopy(applicant_choice)
+    elif coherent:
+        choice = {"kind": "recorded", "party_id": identity}
+    else:
+        choice = {"kind": "unknown"} if form is None else {"kind": "potential", "legal_form": form}
+    if not resolve and not ({"applicant_id", "applicant_kind"} & set(d["overrides"])) and choice == initial_applicant(d):
+        choice = None
+    d["overrides"].pop("applicant_id", None)
+    d["overrides"].pop("applicant_kind", None)
+    d.update(version=3, applicant_choice=choice)
+    validate_draft(d, project)
+    return {"draft": d, "notice": "Editing copy updated to one applicant choice. Saved assessment snapshots and source editions are unchanged.", "applicant_review": None}
 
 
 def assess(entry, f, c):
@@ -281,6 +362,8 @@ def evaluate(draft, project, planning=None):
         entry = next(e for e in c["entries"] if e["id"] == r["id"])
         r.update(title=entry["title"], group=entry["group"], mechanism=entry["mechanism"], availability=entry["availability"], source_strength=entry["source_strength"], maturity=entry["maturity"], checked_on=entry["checked_on"], description=entry["description"], sources=entry["sources"], source_gaps=entry["source_gaps"], related=entry["related"])
     warnings = []
+    if d["version"] == 3 and resolved_applicant(d)["kind"] in {"planned", "potential"}:
+        warnings.append("This applicant is proposed or not yet identified. Matching the modelled conditions is a scenario preview; formation, a real applicant and official eligibility still require verification.")
     if d["version"] == 2 and "applicant_kind" in d["overrides"]:
         inherited = applicant_form(d, f["applicant_id"])
         if inherited is not None and f["applicant_kind"] != inherited:
@@ -306,6 +389,8 @@ def evaluate(draft, project, planning=None):
     difference_fields = set(d["overrides"])
     if d["version"] == 2: difference_fields.add("applicant_kind")
     differences = [{"field": q["id"], "label": q["label"], "recorded": d["baseline"]["facts"][q["id"]], "assumed": f[q["id"]], "editor": "land" if q["id"] in {"owner_id", "operator_id", "rights", "municipality", "area_m2", "rights_sufficient"} else "demonstrator" if q["id"] in {"novelty", "testable", "public_access", "dissemination", "publication_three_years", "purpose"} else "project"} for q in c["questions"] if q["id"] in difference_fields and f[q["id"]] != d["baseline"]["facts"][q["id"]]]
+    if d["version"] == 3 and resolved_applicant(d) != initial_applicant(d):
+        differences.insert(0, {"field": "applicant_choice", "label": "Who would apply for the funding?", "recorded": applicant_label(initial_applicant(d), d), "assumed": applicant_label(resolved_applicant(d), d), "editor": "project"})
     return {"draft": d, "facts": f, "results": results, "differences": differences, "stale": stale, "catalogue_changed": catalogue_changed, "catalogue_hash": digest(c), "warnings": warnings, "allocation_totals": totals, "uncovered": None if f["budget_total"] is None or any(a["amount"] is None for a in d["allocations"]) else max(0, f["budget_total"] - sum(totals[k] for k in ["available", "anticipated", "loan"])), "upfront_shortfall": None if need is None or available is None else max(0, need-available), "calendar_note": "Call window: 23 April 2026–31 December 2028, subject to local interruption and budget confirmation. Simulation years remain relative."}
 
 

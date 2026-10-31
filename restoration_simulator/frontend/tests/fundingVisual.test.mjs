@@ -6,7 +6,7 @@ import {validateResponse} from "../src/contracts.js";
 
 const condition=(result="unknown",value=null)=>({id:"A:amount:bonus",option_id:"A",fields:["bonus"],effect:"amount",result,value,message:"Addition",sources:[]});
 function response({facts={bonus:null,income:null},status="Needs information",estimate=37000,checks=[condition()]}={}) {
-  return {assessment:{facts,results:[{id:"A",status,relevant:true,finance:{estimate,schedule:[]}}]},visualisation:{conditions:checks,coverage:[]}};
+  return {assessment:{facts,results:[{id:"A",status,relevant:true,finance:{estimate,schedule:[]}}]},input_context:{questions:Object.entries(facts).map(([id,v])=>({id,label:id,current_value:v,display_value:v===null?"Unknown":String(v)}))},visualisation:{conditions:checks,coverage:[]}};
 }
 test("consecutive accepted results report resolved conditions without claiming fit or amount changes",()=>{
   const first=response(),next=response({facts:{bonus:"no",income:null},checks:[condition("fail",0)]});
@@ -25,7 +25,8 @@ test("combined edits compare with the previous accepted assessment; fit and amou
   assert.deepEqual(diff.fields,["bonus","income"]);
   assert.equal(diff.options[0].fit,true);assert.equal(diff.options[0].amount,true);
   const unchanged=response({facts:{bonus:"yes",income:30000},checks:[condition()]});
-  assert.equal(assessmentChanges(before,unchanged).options.length,0);
+  const affected=assessmentChanges(before,unchanged).options;
+  assert.equal(affected.length,1);assert.equal(affected[0].conditions.length,0);assert.equal(affected[0].affected.length,1);assert.equal(affected[0].fit,false);
 });
 test("rapid edits, late responses and retries preserve explicitly previous results",()=>{
   const accepted=response();
@@ -44,7 +45,7 @@ test("rapid edits, late responses and retries preserve explicitly previous resul
   const acceptedLatest=s.value;
   s=reduce(s,{type:"start",context:1,token:6,inputKey:"shortlist-change"});
   s=reduce(s,{type:"success",context:1,token:6,value:acceptedLatest});
-  assert.deepEqual(s.changes.fields,[]);
+  assert.deepEqual(s.changes.fields,["bonus","income"],"Non-answer updates retain the previous answer highlights");
   assert.deepEqual(s.latestFields,["bonus","income"],"Shortlisting does not erase the latest answered fields");
   const other=reduce(s,{type:"start",context:2,token:5,inputKey:"d"});
   assert.equal(other.value,null);assert.equal(other.changes,null);
@@ -68,11 +69,26 @@ test("visual contract rejects incomplete metadata and preserves multi-input rela
   const d={version:1,name:"Test",activity_key:"test",baseline:{facts:{},parties:[],target:"business",parcel_ids:[],work_budget:null},overrides:{},selected:[],allocations:[],calendar_start:null,notes:"",bundle:catalogue};
   const a={draft:d,facts:{},results:[{...catalogue.entries[0],status:"Needs information",relevant:true,finance:{basis:"Unknown",estimate:null,schedule:[],notes:[]},checks:[]}],differences:[],stale:false,catalogue_changed:false,catalogue_hash:"hash",warnings:[],allocation_totals:{},uncovered:null,upfront_shortfall:null,calendar_note:""};
   const id=a.results[0].id, c={...condition(),id:"income",option_id:id,fields:["net_year1","smi_year1"],effect:"eligibility"};
-  const value={assessment:a,applicant_context:{party_name:null,inherited_form:null,derived:true,override_conflict:false},visualisation:{version:1,conditions:[c],coverage:[{option_id:id,requirements:"modelled",condition_ids:["income"],unresolved_count:1,scope_fields:["activity"]}]}};
+  const questions=["activity","applicant_choice","net_year1","smi_year1"].map(id=>({id,label:id,type:id==="applicant_choice"?"applicant":"number",step:id==="activity"?0:1,relevant:true,current_value:null,initial_value:null,display_value:"Unknown",initial_label:"Unknown",unknown:true,overridden:false,origin:"Inherited",options:[{group:"Undecided",label:"Unknown",choice:{kind:"unknown"}}],other_forms:[]}));
+  const value={assessment:a,input_context:{editing_ready:false,questions},applicant_context:{party_name:null,inherited_form:null,derived:true,override_conflict:false},visualisation:{version:1,conditions:[c],coverage:[{option_id:id,requirements:"modelled",condition_ids:["income"],unresolved_count:1,scope_fields:["activity"]}]}};
   assert.equal(validateResponse("funding/visualise",value),value);
   const bad=structuredClone(value);bad.visualisation.coverage=[];
   assert.throws(()=>validateResponse("funding/visualise",bad),/coverage/);
   const missing=structuredClone(value);missing.visualisation.conditions[0].fields=["guessed_rule"];
   assert.throws(()=>validateResponse("funding/visualise",missing),/dependencies/);
   assert.throws(()=>validateResponse("funding/visualise",{assessment:a}),/visualisation/);
+});
+test("applicant lifecycle changes affect conditions even when modelled form and fit stay unchanged",()=>{
+  const before=response({facts:{applicant_kind:"nonprofit"},checks:[{...condition("pass",null),fields:["applicant_choice"],effect:"eligibility"}]});
+  const next=structuredClone(before);
+  before.input_context.questions=[{id:"applicant_choice",label:"Applicant",current_value:{kind:"planned",legal_form:"nonprofit"},display_value:"Planned nonprofit"}];
+  next.input_context.questions=[{id:"applicant_choice",label:"Applicant",current_value:{kind:"potential",legal_form:"nonprofit"},display_value:"Potential nonprofit"}];
+  const changes=assessmentChanges(before,next);
+  assert.deepEqual(changes.fields,["applicant_choice"]);assert.equal(changes.options[0].fit,false);assert.equal(changes.options[0].conditions.length,0);assert.equal(changes.options[0].affected.length,1);
+});
+test("conditions removed by an applicant change remain explainable",()=>{
+  const before=response({facts:{bonus:null},checks:[condition(),{...condition(),id:"extra",fields:["bonus"],effect:"eligibility"}]});
+  const next=response({facts:{bonus:"yes"},checks:[condition("pass",1)]});
+  const changes=assessmentChanges(before,next);
+  assert(changes.conditions.some(c=>c.id==="extra"&&c.removed));
 });

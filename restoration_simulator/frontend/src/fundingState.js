@@ -1,10 +1,38 @@
 export const FUNDING_STEPS = ["Activity", "People and land", "Explore options", "Compare alternatives", "Build a funding plan", "Review and use"];
 export function effectiveFacts(draft) { return {...draft.baseline.facts, ...draft.overrides}; }
+export function assumptionCount(draft){return Object.keys(draft.overrides).length+(draft.version===3&&draft.applicant_choice!==null?1:0);}
+export function explicitlyUnknown(question){return question.overridden&&(question.type==="applicant"?question.current_value.kind==="unknown":question.current_value===null);}
 export function overrideAnswer(draft, field, value) {
+  if(field==="applicant_choice")return {...draft,applicant_choice:value};
+  if(draft.version===3&&["applicant_id","applicant_kind"].includes(field))throw Error("Choose the applicant as one complete choice.");
   return {...draft, overrides: {...draft.overrides, [field]: value}};
 }
 export function resetAnswer(draft, field) {
+  if(field==="applicant_choice")return {...draft,applicant_choice:null};
   const overrides = {...draft.overrides}; delete overrides[field]; return {...draft, overrides};
+}
+export function logicalQuestionId(id){return ["applicant_id","applicant_kind"].includes(id)?"applicant_choice":id;}
+export function applicantKey(choice){
+  if(choice===null)return "";
+  if(choice.kind==="recorded")return `recorded:${choice.party_id}`;
+  if(["planned","potential"].includes(choice.kind))return `${choice.kind}:${choice.legal_form===null?"":choice.legal_form}`;
+  if(choice.kind==="unknown")return "unknown";
+  throw Error("Unsupported applicant choice.");
+}
+export function presentQuestion(q,draft){
+  if(draft.version!==3)return q;
+  const applicant=q.id==="applicant_choice";
+  const overridden=applicant?draft.applicant_choice!==null:Object.hasOwn(draft.overrides,q.id);
+  const value=applicant?(draft.applicant_choice===null?q.initial_value:draft.applicant_choice):(overridden?draft.overrides[q.id]:draft.baseline.facts[q.id]);
+  let display;
+  if(applicant){
+    const match=q.options.find(o=>applicantKey(o.choice)===applicantKey(value));
+    if(match)display=match.label;
+    else {const form=q.other_forms.find(([id])=>id===value.legal_form);if(!form)throw Error("Applicant option is missing from the question model.");display=`Potential applicant · ${form[1]}`;}
+  }else display=answerLabel(q,value,draft.baseline.parties);
+  const unknown=applicant?value.kind==="unknown"||value.kind==="potential"&&value.legal_form===null:value===null||q.id==="municipality"&&value==="unknown";
+  const pending=JSON.stringify(value)!==JSON.stringify(q.current_value)||overridden!==q.overridden;
+  return {...q,current_value:value,display_value:unknown&&!applicant?"Unknown / not decided":display,unknown,overridden,origin:pending?"Updating answer…":q.origin};
 }
 export const FUNDING_HELP = {
   matches:"All modelled fit conditions are satisfied by the current recorded or hypothetical answers. Eligibility and call availability still require verification. Zero does not mean that funding is unavailable.",

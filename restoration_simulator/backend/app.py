@@ -137,6 +137,10 @@ class FundingEvaluationRequest(StrictModel):
     draft: dict[str, Any]
 
 
+class FundingPrepareRequest(FundingEvaluationRequest):
+    applicant_choice: dict[str, Any] | None = None
+
+
 class FundingMutationRequest(Mutation):
     funding_revision: StrictInt
     planning_revision: StrictInt
@@ -293,9 +297,9 @@ def create_app(save_path=None):
         return funding.evaluate(req.draft, data["project"], data["planning"])
 
     @app.post("/api/funding/prepare")
-    def funding_prepare(req: FundingEvaluationRequest):
+    def funding_prepare(req: FundingPrepareRequest):
         data = designer_state(req.revision)
-        return funding.prepare(req.draft, data["project"])
+        return funding.prepare(req.draft, data["project"], req.applicant_choice, resolve="applicant_choice" in req.model_fields_set)
 
     @app.post("/api/funding/visualise")
     def funding_visualise(req: FundingEvaluationRequest):

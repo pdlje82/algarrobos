@@ -19,6 +19,9 @@ class FundingTests(unittest.TestCase):
     def setUp(self):
         self.project = site()
         self.draft = funding.new_draft(self.project, None, [], "business")
+        # Pin the previous input contract to prove historical assessment replay.
+        self.draft["version"] = 2
+        del self.draft["applicant_choice"]
 
     def eligible(self):
         d = deepcopy(self.draft)
