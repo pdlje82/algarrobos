@@ -1,5 +1,11 @@
 # Browser checks
 
+Run `node tests/browser/funding-guides.cjs` for introductions across all six
+families, keyboard focus and scrolling, mobile reading, a newly registered PDF,
+unchanged project/draft state and failed guide loading with explicit retry.
+Use the isolated API/app variables below. This check replaces only its isolated
+fixture and must never target the normal project API.
+
 Run `node tests/browser/funding-edl.cjs` with the isolated API/app settings below
 to verify source-cited EDL information inside annex nodes, optional references,
 route isolation, autosave/reload, explicit scoring, scoped bilingual search,
@@ -9,7 +15,7 @@ mutation scripts replace only the isolated fixture and must run sequentially.
 
 Run `node tests/browser/funding-height.cjs` for portrait node-area click and
 keyboard expansion, complete height, collapse and focus, unchanged option scope,
-Matrix switching and narrow-screen scrolling. It uses the isolated API/app below
+requirement-scope switching and narrow-screen scrolling. It uses the isolated API/app below
 and checks that height changes never trigger funding mutations or evaluations.
 
 Run `node tests/browser/funding-statistics.cjs` for AL20 municipality lookup,
@@ -93,6 +99,6 @@ project and planning records must remain unchanged.
 
 Run `node tests/browser/funding-working-option.cjs` to verify direct radio/checkbox
 activation, independent card inspection and shortlisting, working-option colours
-and connections, hidden/paged options, Graph/Matrix, keyboard/touch at 390/320 px,
+and connections, hidden/paged options, graph navigation, keyboard/touch at 390/320 px,
 PDF focus, exploration resets and absence of saved/adopted or simulation effects
 from working-option changes. Use the same isolated API/app settings.

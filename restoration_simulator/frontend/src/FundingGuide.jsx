@@ -30,7 +30,7 @@ export function FundingGuide({id}){
       {guide.unresolved.length>0&&<details><summary>Questions still to verify</summary><ul>{guide.unresolved.map(s=><li key={s}>{s}</li>)}</ul></details>}
       <details className="funding-guide-sources"><summary>Sources and verification ({guide.source_ids.length})</summary><ul>{guide.source_ids.map(sid=>{const s=value.library.sources[sid];return <li key={sid}>
         <DocumentLink href={s.url} documentId={s.document_id} page={s.page} expectedSha256={s.sha256} target="_blank" rel="noreferrer">{s.title}</DocumentLink>
-        <p>{s.issuer} · {s.date===null?"Publication date unverified":s.date} · checked {s.checked_on}{s.document_id!==null?` · ${s.document_id}, PDF page ${s.page}`:" · external reference"}</p><p>{s.note}</p>
+        <p>{s.issuer} · {s.date===null?"Exact publication date not recorded":s.date} · checked {s.checked_on}{s.document_id!==null?` · ${s.document_id}, PDF page ${s.page}`:" · external reference"}</p><p>{s.note}</p>
       </li>;})}</ul></details>
       {guide.related.length>0&&<p><strong>Related options:</strong> {guide.related.join(", ")}. Check overlap before combining support.</p>}
     </>}

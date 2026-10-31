@@ -39,7 +39,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   const settled=()=>poll(async()=>!/Updating/.test(await visual.locator('.funding-visual-status').innerText()));await settled();
   await page.getByRole('button',{name:'2. People and land',exact:true}).click();
   await visual.getByRole('button',{name:'Answer questions',exact:true}).click();
-  assert.equal(await visual.getByRole('button',{name:'Graph',exact:true}).getAttribute('aria-pressed'),'true');
+  await visual.locator('.funding-diagram-scroll').waitFor();
   assert.equal(await visual.getByRole('button',{name:'All fit requirements',exact:true}).getAttribute('aria-pressed'),'true');
   const nodes=()=>visual.locator('.funding-circumstance').evaluateAll(ns=>ns.map(n=>[n.dataset.questionId,n.style.top,n.style.left]));
   const initialNodes=await nodes();assert(initialNodes.some(n=>n[0]==='applicant_choice'));assert(!initialNodes.some(n=>n[0]==='eligible_cost'));
@@ -47,6 +47,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await visual.getByRole('button',{name:'Next options',exact:true}).click();assert.deepEqual(await nodes(),initialNodes);await visual.getByRole('button',{name:'Previous options',exact:true}).click();
   await visual.getByLabel('Show amount conditions',{exact:true}).check();assert((await nodes()).some(n=>n[0]==='eligible_cost'));assert.deepEqual((await nodes()).slice(0,initialNodes.length),initialNodes);await visual.getByLabel('Show amount conditions',{exact:true}).uncheck();
   await visual.getByRole('button',{name:'Focus current question',exact:true}).click();assert.equal(await visual.locator('.funding-circumstance').count(),1);await visual.getByRole('button',{name:'All fit requirements',exact:true}).click();assert.deepEqual(await nodes(),initialNodes);
+  await page.getByRole('button',{name:'Close question editor',exact:true}).click();
   await page.locator('.funding-answers>summary').click();const answers=page.locator('.funding-answers');
   const city=answers.locator('[data-question-id="municipality"]');await city.getByRole('button',{name:'Edit',exact:true}).click();assert.equal(await page.locator('#funding-municipality').inputValue(),'Alhama de Almería');
   const listedMunicipalities=page.locator('#funding-municipality optgroup option');assert.equal(await listedMunicipalities.count(),32);assert((await listedMunicipalities.allTextContents()).includes('Terque'));
@@ -54,7 +55,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await question.getByRole('button',{name:'Show all municipalities',exact:true}).click();assert.equal(await listedMunicipalities.count(),32);assert.equal(await page.locator('#funding-municipality').inputValue(),'Alhama de Almería');
   await page.locator('#funding-municipality-search').fill('canjayar');await page.locator('#funding-municipality').selectOption('Canjáyar');await settled();assert.equal(await listedMunicipalities.count(),32);assert.equal(await page.locator('#funding-municipality-search').inputValue(),'');assert.equal(await page.locator('#funding-municipality').inputValue(),'Canjáyar');
   await page.locator('#funding-municipality').selectOption('__other__');await page.locator('#funding-municipality-other').fill('A location to be verified');await settled();
-  await visual.getByRole('button',{name:'Matrix',exact:true}).click();const demo=visual.locator('tr[data-option-id="LEADER-AL20-3.4"]');await demo.getByRole('button',{name:'Inspect effects for LEADER-AL20-3.4',exact:true}).click();await visual.getByLabel('Answer effects for LEADER-AL20-3.4',{exact:true}).getByText('Municipality coverage has not been verified. An unrecognised name is not treated as outside the programme area.',{exact:true}).waitFor();
+  const demo=visual.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]');await demo.locator('.funding-option-open').click();await visual.getByLabel('Answer effects for LEADER-AL20-3.4',{exact:true}).getByText('Municipality coverage has not been verified. An unrecognised name is not treated as outside the programme area.',{exact:true}).waitFor();
   await page.locator('#funding-municipality').selectOption('__outside__');await settled();await visual.getByLabel('Answer effects for LEADER-AL20-3.4',{exact:true}).getByText('The location is confirmed outside AL20; category 3.4 requires an operation/study within its LEADER area.',{exact:true}).waitFor();
   await city.locator('.funding-answer-reset>summary').click();await city.getByRole('button',{name:'Set to Unknown',exact:true}).click();await settled();assert.equal(await page.locator('#funding-municipality').inputValue(),'__unknown__');
   await answers.getByText(/^Unknown questions/).click();await city.locator('.funding-answer-reset>summary').click();await city.getByRole('button',{name:/^Restore initial:/}).click();await settled();assert.equal(await page.locator('#funding-municipality').inputValue(),'Alhama de Almería');
@@ -65,7 +66,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await poll(async()=>!await page.locator('#funding-municipality-search').isDisabled());await page.locator('#funding-municipality-search').focus();assert.equal(await page.locator('#funding-municipality-search').evaluate(n=>n===document.activeElement),true);await page.keyboard.press('Shift+Tab');await poll(async()=>await page.getByRole('tooltip').count()>0);await page.keyboard.press('Escape');
   if(!await answers.locator(':scope>details').first().evaluate(n=>n.open))await answers.getByText(/^Unknown questions/).click();const rights=answers.locator('[data-question-id="rights_sufficient"]');await rights.getByRole('button',{name:'Edit',exact:true}).click();assert.equal(await page.locator('#funding-rights_sufficient').inputValue(),'');
   await question.getByRole('button',{name:/About Applicant.*land rights/}).click();await page.getByRole('dialog',{name:/About Applicant.*land rights/}).getByText(/personal ownership/).waitFor();await page.keyboard.press('Escape');
-  await visual.getByRole('button',{name:'Graph',exact:true}).click();await page.getByRole('button',{name:'Next question',exact:true}).click();assert.deepEqual(await nodes(),initialNodes);
+  await page.getByRole('button',{name:'Next question',exact:true}).click();assert.deepEqual(await nodes(),initialNodes);
   await page.locator('.funding-layout').evaluate(n=>n.scrollIntoView({block:'start'}));await page.screenshot({path:'test-artifacts/funding-context-desktop.png'});
   for(const theme of ['light','dark']){
    await page.getByLabel('Theme',{exact:true}).selectOption(theme);await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));

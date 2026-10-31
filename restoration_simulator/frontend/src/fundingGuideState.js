@@ -1,4 +1,5 @@
 // Current reference content never edits the saved assessment or its rule snapshot.
+import documents from "../../scenarios/documents.json" with {type:"json"};
 export const GUIDE_SECTIONS=[
   ["what","What is it?"], ["fit","Why consider it for Algarrobos?"],
   ["advantages","What makes it interesting?"], ["limitations","What are the limitations?"],
@@ -13,8 +14,9 @@ export function validateGuideResponse(value){
   const data=value.library;
   require(object(data)&&data.version===1&&date(data.checked_on)&&object(data.guides)&&Object.keys(data.guides).length>0&&object(data.sources)&&Object.keys(data.sources).length>0);
   for(const s of Object.values(data.sources)){
-    require(object(s)&&["title","issuer","url","note"].every(k=>text(s[k]))&&/^https:\/\/[^/\s]+/.test(s.url)&&date(s.checked_on)&&s.checked_on<=data.checked_on&&(s.date===null||date(s.date)));
+    require(object(s)&&["title","issuer","note"].every(k=>text(s[k]))&&(s.url===null&&s.document_id!==null||typeof s.url==="string"&&/^https:\/\/[^/\s]+/.test(s.url))&&date(s.checked_on)&&s.checked_on<=data.checked_on&&(s.date===null||date(s.date)));
     require(s.document_id===null?s.page===null&&s.sha256===null:text(s.document_id)&&Number.isInteger(s.page)&&s.page>0&&typeof s.sha256==="string"&&/^[a-f0-9]{64}$/.test(s.sha256));
+    if(s.document_id!==null){const d=documents.documents.find(d=>d.id===s.document_id);require(d!==undefined&&d.sha256===s.sha256&&s.page<=d.pages);}
   }
   for(const g of Object.values(data.guides)){
     require(object(g)&&[...GUIDE_SECTIONS.map(([key])=>key),"title","availability"].every(k=>text(g[k]))&&["programme","programme_family","legal_framework","historical","mechanism","emerging","advisory"].includes(g.kind)&&date(g.checked_on)&&g.checked_on<=data.checked_on);

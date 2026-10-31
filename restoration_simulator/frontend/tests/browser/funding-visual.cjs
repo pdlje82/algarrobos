@@ -25,8 +25,8 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
     assert.equal(await page.getByText('Choose an answer for this exploration. Unknown is allowed.',{exact:true}).count(),0);
     const label=await question.locator('label').evaluate(n=>({size:parseFloat(getComputedStyle(n).fontSize),weight:Number(getComputedStyle(n).fontWeight)}));
     assert(label.size>=20&&label.weight>=600);
-    assert.equal(await visual.getByRole('button',{name:'Graph',exact:true}).getAttribute('aria-pressed'),'true');
-    await visual.getByRole('button',{name:'Graph',exact:true}).click();
+    assert.equal(await visual.getByRole('button',{name:'Matrix',exact:true}).count(),0);assert.equal(await visual.getByRole('button',{name:'Graph',exact:true}).count(),0);
+
     const workspace=await visual.boundingBox();
     assert(workspace.width>1400,'Visual workspace uses the screen width');
     await page.getByLabel('What would you like support for?',{exact:true}).selectOption('business');await settled();
@@ -49,29 +49,22 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
     const positions=await visual.locator('.funding-graph-option').evaluateAll(nodes=>nodes.map(n=>[n.dataset.optionId,n.style.top,n.style.left]));
     await applicant.selectOption('recorded:individual');await settled();
     const applicantNode=visual.locator('.funding-circumstance[data-question-id="applicant_choice"]');
-    assert.equal(await applicantNode.getAttribute('data-condition-status'),'pass');
-    assert.match(await applicantNode.locator('.funding-node-status').innerText(),/Linked conditions met/);
+    assert.equal(await applicantNode.getAttribute('data-condition-status'),'mixed');
+    assert.match(await applicantNode.locator('.funding-node-status').innerText(),/Mixed across programmes/);
     await applicant.selectOption('planned:company');await settled();assert.equal(await applicantNode.getAttribute('data-condition-status'),'mixed');
     assert(await applicantNode.locator('.funding-node-count-pass').count()>0&&await applicantNode.locator('.funding-node-count-fail').count()>0);
     await visual.locator('.funding-graph-option[data-option-id="LEADER-AL20-2.7"]').click();assert.equal(await applicantNode.getAttribute('data-condition-status'),'mixed','Inspecting keeps the current colour basis');
     await visual.locator('.funding-graph-option[data-option-id="LEADER-AL20-2.7"]').getByRole('radio',{name:'Work on LEADER-AL20-2.7',exact:true}).check();assert.equal(await applicantNode.getAttribute('data-condition-status'),'fail','The working control sets the colour basis');
     await visual.getByRole('button',{name:'Clear working option',exact:true}).click();
     await visual.getByRole('button',{name:'Clear inspection',exact:true}).click();assert.equal(await applicantNode.getAttribute('data-condition-status'),'mixed');
-    await applicant.selectOption('recorded:individual');await settled();assert.equal(await applicantNode.getAttribute('data-condition-status'),'pass');
+    await applicant.selectOption('recorded:individual');await settled();assert.equal(await applicantNode.getAttribute('data-condition-status'),'mixed');
     await visual.locator('.funding-change-label').first().waitFor();
     assert.deepEqual(await visual.locator('.funding-graph-option').evaluateAll(nodes=>nodes.map(n=>[n.dataset.optionId,n.style.top,n.style.left])),positions);
     assert(await visual.locator('.funding-affected').count()>0);
     const graphRows=await visual.locator('.funding-graph-option').evaluateAll(nodes=>nodes.map(n=>n.dataset.optionId));assert(graphRows.length<=12);
-    const graphStatuses=await visual.locator('.funding-graph-option').evaluateAll(nodes=>nodes.map(n=>({id:n.dataset.optionId,status:n.querySelector('span').textContent,count:n.querySelector('small').textContent})));
-    await visual.getByRole('button',{name:'Matrix',exact:true}).click();
-    await page.screenshot({path:'test-artifacts/funding-layout-matrix-desktop.png'});
-    assert.deepEqual(await visual.locator('.funding-matrix tr[data-option-id]').evaluateAll(nodes=>nodes.map(n=>n.dataset.optionId)),graphRows);
-    const matrixStatuses=await visual.locator('.funding-matrix tr[data-option-id]').evaluateAll(nodes=>nodes.map(n=>({id:n.dataset.optionId,status:n.querySelector('td').textContent,count:n.querySelectorAll('td')[2].textContent})));
-    for(let i=0;i<graphStatuses.length;i++){assert(matrixStatuses[i].status.includes(graphStatuses[i].status));assert.equal(matrixStatuses[i].count,graphStatuses[i].count.startsWith('Assessment')?'Not modelled':graphStatuses[i].count.split(' ')[0]);}
     assert.equal(await applicant.inputValue(),'recorded:individual');
-    await visual.getByRole('button',{name:'Graph',exact:true}).click();
     hold=true;await applicant.selectOption('planned:nonprofit');await poll(async()=>release!==null);
-    assert.equal(await applicantNode.getAttribute('data-condition-status'),'pass','Pending node colours retain the previous assessment');
+    assert.equal(await applicantNode.getAttribute('data-condition-status'),'mixed','Pending node colours retain the previous assessment');
     await visual.getByText('Updating—showing previous assessment',{exact:true}).waitFor();
     assert.deepEqual(await visual.locator('.funding-graph-option').evaluateAll(nodes=>nodes.map(n=>[n.dataset.optionId,n.style.top,n.style.left])),positions);
     // A later successful answer wins even if the older request finishes last.
@@ -80,7 +73,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
     fail=true;await applicant.selectOption('planned:nonprofit');await visual.getByText('Assessment failed—showing previous assessment',{exact:true}).waitFor();
     assert.equal(await applicant.inputValue(),'planned:nonprofit');assert.deepEqual(await visual.locator('.funding-graph-option').allTextContents(),newest);
     await visual.getByRole('button',{name:'Retry assessment',exact:true}).click();await settled();
-    assert.equal(await applicantNode.getAttribute('data-condition-status'),'fail');
+    assert.equal(await applicantNode.getAttribute('data-condition-status'),'mixed');
     assert.equal(await visual.getByText('Assessment temporarily unavailable',{exact:true}).count(),0);
     await question.getByRole('button',{name:'Restore initial: Unknown / I don’t know yet',exact:true}).click();await settled();assert.equal(await applicant.inputValue(),'unknown');
     assert.equal(await applicantNode.getAttribute('data-condition-status'),'unknown');
@@ -90,7 +83,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
     await visual.getByRole('button',{name:'Previous options',exact:true}).click();
     await visual.getByLabel('Funding family',{exact:true}).selectOption({index:4});
     const research=visual.locator('.funding-graph-option').first();await research.click();
-    await visual.getByText('Assessment not implemented. Programme requirements must be verified and modelled before this option can be assessed. Answering more questions cannot resolve this gap.',{exact:true}).waitFor();
+    const researchId=await research.getAttribute('data-option-id');await visual.getByRole('region',{name:`Introduction to ${researchId}`,exact:true}).getByText('Automated assessment unavailable.',{exact:true}).waitFor();
     assert.equal(await visual.locator('.funding-inspection input[type=checkbox]').isChecked(),false,'Inspecting does not shortlist');
     await visual.getByRole('button',{name:'Clear inspection',exact:true}).click();
     await page.getByRole('button',{name:'3. Explore options',exact:true}).click();await page.getByLabel('Search mechanisms',{exact:true}).fill('LEADER-AL20-2.7');
@@ -99,8 +92,8 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
     const option=visual.locator('.funding-option');await option.locator('input[type=checkbox]').check();
     // Complete network includes both inputs of income comparisons and amount-only bonuses.
     const net=visual.locator('.funding-circumstance').filter({hasText:'SMI'});assert(await net.count()>=2);
-    await visual.getByRole('button',{name:'Matrix',exact:true}).click();assert.equal(await visual.locator('.funding-option input[type=checkbox]').isChecked(),true);
-    await visual.getByRole('button',{name:'Graph',exact:true}).click();
+    assert.equal(await visual.locator('.funding-option input[type=checkbox]').isChecked(),true);
+
     const circumstances=visual.locator('.funding-circumstance');
     const target=circumstances.filter({hasText:'unemployed'}).first();await target.click();
     assert.equal(await question.locator('select,input').getAttribute('id'),'funding-unemployed');assert.equal(await question.locator('select,input').inputValue(),'');
@@ -125,10 +118,10 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
       await visual.getByRole('button',{name:'Answer questions',exact:true}).click();
       const helpSize=await question.locator('label').evaluate(n=>parseFloat(getComputedStyle(n).fontSize));assert(helpSize>=20);
       await page.getByRole('button',{name:'Close question editor',exact:true}).click();
-      await visual.getByRole('button',{name:'Matrix',exact:true}).click();
+
       await page.screenshot({path:`test-artifacts/funding-visual-${theme}-390.png`,fullPage:true});
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
-      const graph=visual.getByRole('button',{name:'Graph',exact:true});await graph.focus();await page.keyboard.press('Enter');assert.equal(await graph.getAttribute('aria-pressed'),'true');
+      await visual.getByRole('button',{name:'Answer questions',exact:true}).focus();await page.keyboard.press('Enter');await page.getByRole('button',{name:'Close question editor',exact:true}).click();
       await visual.getByRole('button',{name:'Collapse funding visual workspace',exact:true}).click();
     }
     await page.getByText('Saved explorations, context and funding projects',{exact:true}).click();
@@ -140,6 +133,6 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
     assert.equal(await visual.locator('.funding-affected').count(),0);
     assert.equal(JSON.stringify((await api('project')).project),before,'Visual interactions changed simulation');
     assert.deepEqual(errors,[]);await context.close();
-    console.log('Funding visuals: question hierarchy, stable graph/matrix scope, stale/failure/retry, dependencies, unknowns, keyboard, 390px themes and no simulation effects passed.');
+    console.log('Funding visuals: question hierarchy, stable graph scope, stale/failure/retry, dependencies, unknowns, keyboard, 390px themes and no simulation effects passed.');
   }finally{await Promise.race([browser.close(),new Promise(r=>setTimeout(r,5000))]);}
 })().then(()=>process.exit(0)).catch(e=>{console.error(e);process.exit(1);});

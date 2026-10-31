@@ -25,13 +25,13 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await visual.getByRole('button',{name:'Collapse node area',exact:true}).click();
   await poll(async()=>Math.abs((await graph.boundingBox()).height-initial)<3);assert.equal(await graph.evaluate(n=>n.scrollTop),200);assert(await bar.evaluate(n=>n===document.activeElement));
   await expand.focus();await page.keyboard.press('Enter');await poll(async()=>await graph.evaluate(n=>n.scrollHeight<=n.clientHeight+1));
-  await visual.getByRole('button',{name:'Matrix',exact:true}).click();await visual.getByRole('button',{name:'Graph',exact:true}).click();assert.equal(await bar.getAttribute('aria-expanded'),'true');
+  await visual.getByRole('button',{name:'Focus current question',exact:true}).click();await visual.getByRole('button',{name:'All fit requirements',exact:true}).click();assert.equal(await bar.getAttribute('aria-expanded'),'true');
   await bar.focus();await page.keyboard.press('Space');await poll(async()=>Math.abs((await graph.boundingBox()).height-initial)<3);
   // On narrow screens, click/tap toggles full height and horizontal graph scroll remains available.
   await page.setViewportSize({width:390,height:844});await visual.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();const phone=(await graph.boundingBox()).height;
   await bar.click();await poll(async()=>await graph.evaluate(n=>n.scrollHeight<=n.clientHeight+1));await bar.click();await poll(async()=>Math.abs((await graph.boundingBox()).height-phone)<3);
   assert(await graph.evaluate(n=>n.scrollWidth>n.clientWidth));assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   assert.equal(fundingRequests,0,'Canvas height is a transient display preference');assert.equal(JSON.stringify((await api('funding')).attachment.draft),savedDraft);assert.equal(JSON.stringify((await api('project')).project),before);assert.deepEqual(errors,[]);
-  console.log('Funding node area: portrait click/keyboard expansion, complete height, collapse/focus, unchanged option scope, Matrix preservation, mobile scrolling and no funding mutations passed.');
+  console.log('Funding node area: portrait click/keyboard expansion, complete height, collapse/focus, unchanged option scope, requirement-scope preservation, mobile scrolling and no funding mutations passed.');
  }catch(e){if(page)await page.screenshot({path:'test-artifacts/funding-node-height-failure.png'});throw e;}finally{await Promise.race([browser.close(),new Promise(r=>setTimeout(r,3000))]);}
 })().then(()=>process.exit(0)).catch(e=>{console.error(e);process.exit(1);});

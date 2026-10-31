@@ -53,11 +53,11 @@ test("rapid edits, late responses and retries preserve explicitly previous resul
   assert.equal(reduce(other,{type:"success",context:2,token:5,value:accepted}).changes,null);
   assert.deepEqual(reduce(s,{type:"reset"}),initial);
 });
-test("graph and matrix share stable catalogue order, family paging and shortlist scope",()=>{
+test("graph keeps stable catalogue order, family paging and shortlist scope",()=>{
   const rows=Array.from({length:29},(_,i)=>({id:String(i),group:i<25?"public":"other",status:i%2 ? "Needs information" : "Does not match these facts"}));
   const args={group:"public",shortlistOnly:false,selected:["1","26"],page:1};
-  const graph=visualScope(rows,args), matrix=visualScope(rows,args);
-  assert.deepEqual(graph,matrix);assert.equal(graph.count,25);assert.equal(graph.pages,3);
+  const graph=visualScope(rows,args);
+  assert.equal(graph.count,25);assert.equal(graph.pages,3);
   assert.deepEqual(graph.options.map(r=>r.id),Array.from({length:12},(_,i)=>String(i+12)));
   assert.deepEqual(visualScope(rows,{...args,page:0,shortlistOnly:true}).options.map(r=>r.id),["1","26"]);
   assert.equal(visualScope(rows,{...args,expanded:true}).options.length,25);

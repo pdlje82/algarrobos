@@ -510,6 +510,97 @@
         "527": 527
       },
       "mapping_note": "Official AL20 and ADR publication pages link this consolidated strategy as V1 (19 November 2024). Downloaded unchanged on 31 October 2026. Selected printed page numbers visually checked against matching PDF positions; other pages use PDF positions."
+    },
+    {
+      "id": "FUND-014",
+      "title": "FUND-014 - European Commission - Roadmap towards Nature Credits - COM-2025-374 - 2025-07-07",
+      "filename": "FUND-014 - European Commission - Roadmap towards Nature Credits - COM-2025-374 - 2025-07-07.pdf",
+      "pages": 12,
+      "sha256": "bc30e314e1ec0365859eb52067da8c942106bbb502684ca6ecaf54b8b1bdf402",
+      "aliases": [
+        "https://environment.ec.europa.eu/document/download/c5f74a0c-4c19-4af4-99bd-b77ed5073298_en",
+        "https://eur-lex.europa.eu/legal-content/EN/ALL/?uri=celex%3A52025DC0374"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged publisher PDF downloaded 31 October–1 November 2026. Cite PDF page positions; printed page labels are not mapped."
+    },
+    {
+      "id": "FUND-015",
+      "title": "FUND-015 - MITECO - Carbon Absorption Project Registration Guide - v12 - 2026-04",
+      "filename": "FUND-015 - MITECO - Carbon Absorption Project Registration Guide - v12 - 2026-04.pdf",
+      "pages": 27,
+      "sha256": "b7d04a3e29011029a2d243b9cf14693cf904d2e1d0593479f60e39418dfa89c5",
+      "aliases": [
+        "https://www.miteco.gob.es/content/dam/miteco/es/cambio-climatico/temas/mitigacion-politicas-y-medidas/documentoapoyopa_tcm30-479077.pdf",
+        "https://www.miteco.gob.es/es/cambio-climatico/temas/registro-huella/proyectos-de-absorcioninscripcion.html"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged publisher PDF downloaded 31 October–1 November 2026. Cite PDF page positions; printed page labels are not mapped."
+    },
+    {
+      "id": "FUND-016",
+      "title": "FUND-016 - European Commission - LIFE Multiannual Work Programme 2025-2027 - 2025-04-15",
+      "filename": "FUND-016 - European Commission - LIFE Multiannual Work Programme 2025-2027 - 2025-04-15.pdf",
+      "pages": 43,
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "aliases": [
+        "https://cinea.ec.europa.eu/document/download/de5f9617-f5e5-4834-8477-e8aa03a85bf2_en?filename=C_2025_955_Multi-Annual+Work+Programme.PDF",
+        "https://cinea.ec.europa.eu/programmes/life/life-legal-basis/life-multiannual-work-programme-2025-2027_en"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged publisher PDF downloaded 31 October–1 November 2026. Cite PDF page positions; printed page labels are not mapped."
+    },
+    {
+      "id": "FUND-017",
+      "title": "FUND-017 - EU CAP Network - EIP-AGRI Operational Groups Collaboration and Funding - 2024-04",
+      "filename": "FUND-017 - EU CAP Network - EIP-AGRI Operational Groups Collaboration and Funding - 2024-04.pdf",
+      "pages": 16,
+      "sha256": "39a01b98d0d2001581bd41eaeb0f2e77fca6a49821879b9094ce14b9909bd4f2",
+      "aliases": [
+        "https://eu-cap-network.ec.europa.eu/sites/default/files/publications/2024-04/eu-cap-network-brochure-operational-groups-funding-en.pdf",
+        "https://eu-cap-network.ec.europa.eu/publications/eip-agri-operational-groups-collaboration-and-funding-opportunities_en"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged publisher PDF downloaded 31 October–1 November 2026. Cite PDF page positions; printed page labels are not mapped."
+    },
+    {
+      "id": "FUND-018",
+      "title": "FUND-018 - Spain - Nonprofit Tax Regime and Charitable Giving - Law 49-2002 - Consolidated",
+      "filename": "FUND-018 - Spain - Nonprofit Tax Regime and Charitable Giving - Law 49-2002 - Consolidated.pdf",
+      "pages": 30,
+      "sha256": "862afb09f13ce76bc8040af2212f374d312b7bdc0cc3c1b48dbf7d003156e14f",
+      "aliases": [
+        "https://www.boe.es/buscar/pdf/2002/BOE-A-2002-25039-consolidado.pdf",
+        "https://www.boe.es/buscar/act.php?id=BOE-A-2002-25039"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged publisher PDF downloaded 31 October–1 November 2026. Cite PDF page positions; printed page labels are not mapped."
+    },
+    {
+      "id": "FUND-019",
+      "title": "FUND-019 - Andalusia - Nonproductive Forestry Investment Rules - 6881-2 and 6881-4 - 2025-12-05",
+      "filename": "FUND-019 - Andalusia - Nonproductive Forestry Investment Rules - 6881-2 and 6881-4 - 2025-12-05.pdf",
+      "pages": 53,
+      "sha256": "cbef682d8f49a2e4b9054a5c8a7646c1b9784e5734f601a2919fc8f2ce6e1fb7",
+      "aliases": [
+        "https://www.juntadeandalucia.es/boja/2025/240/BOJA25-240-00053-16685-01_00330283.pdf",
+        "https://www.juntadeandalucia.es/boja/2025/240/"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged publisher PDF downloaded 31 October–1 November 2026. Cite PDF page positions; printed page labels are not mapped."
+    },
+    {
+      "id": "FUND-020",
+      "title": "FUND-020 - European Investment Bank - Investing in Nature-Based Solutions - 2023",
+      "filename": "FUND-020 - European Investment Bank - Investing in Nature-Based Solutions - 2023.pdf",
+      "pages": 144,
+      "sha256": "9062df5e2879ed9b0071b6b79f5b51075c2c61456f98a7bab8611a9d01da0045",
+      "aliases": [
+        "https://www.eib.org/files/publications/20230095_investing_in_nature_based_solutions_en.pdf",
+        "https://www.eib.org/en/publications/20230095-investing-in-nature-based-solutions"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged publisher PDF downloaded 31 October–1 November 2026. Cite PDF page positions; printed page labels are not mapped."
     }
   ]
 }

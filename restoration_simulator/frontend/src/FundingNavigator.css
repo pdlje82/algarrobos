@@ -50,10 +50,10 @@
 .funding-circumstance span,.funding-circumstance small,.funding-graph-option span,.funding-graph-option small,.funding-graph-origin small{display:block;line-height:1.25;margin-top:.25rem}
 .funding-no-connections{position:absolute;left:190px;top:40px;width:220px;font-size:.9rem}
 .funding-network-explanation{font-size:.85rem;line-height:1.5}
-.funding-inspection{overflow-wrap:anywhere}.funding-matrix{max-height:clamp(480px,72dvh,900px);overscroll-behavior:contain}.funding-matrix table{font-size:.85rem;min-width:660px}.funding-matrix th:first-child{min-width:160px}.funding-matrix td{min-width:95px}
+.funding-inspection{overflow-wrap:anywhere}
 .funding-mobile-expand{display:none}.funding-admin{font-size:.95rem}
 .funding-workspace button,.funding-workspace summary{min-height:44px}
-@media(max-width:800px){.funding-layout.has-visual{grid-template-columns:minmax(0,1fr)}.funding-visual{padding:1rem}.funding-mobile-expand{display:inline-block}.funding-visual-body:not(.is-expanded){display:none}.funding-diagram-scroll{max-height:430px}.funding-matrix table{min-width:0}.funding-matrix thead{display:none}.funding-matrix tr{display:block;border-bottom:2px solid var(--border);padding:.6rem 0}.funding-matrix td,.funding-matrix th{display:block;min-width:0!important;border:0;padding:.35rem}.funding-matrix td:nth-child(2)::before{content:"Overall fit: ";font-weight:700}.funding-matrix td:nth-child(3)::before{content:"Answer effect: ";font-weight:700}.funding-matrix td:nth-child(4)::before{content:"Unresolved conditions: ";font-weight:700}.funding-matrix td:nth-child(5)::before{content:"Call availability: ";font-weight:700}.funding-matrix .funding-inspection{max-width:100%}}
+@media(max-width:800px){.funding-layout.has-visual{grid-template-columns:minmax(0,1fr)}.funding-visual{padding:1rem}.funding-mobile-expand{display:inline-block}.funding-visual-body:not(.is-expanded){display:none}.funding-diagram-scroll{max-height:430px}}
 @media(prefers-reduced-motion:reduce){.funding-workspace *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 .funding-metric{display:inline-block;margin:0 .8rem .3rem 0}
 .funding-change-metrics{display:flex;flex-wrap:wrap;gap:.3rem .8rem;align-items:center}
@@ -61,7 +61,6 @@
 .funding-workspace .funding-help>button{display:inline-grid;place-items:center;width:44px;height:44px;padding:0;margin:0 .15rem;vertical-align:middle;font-size:1.1rem;border-color:transparent;background:transparent}
 .funding-help-popup{position:fixed;z-index:1100;display:block;width:min(340px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;padding:.9rem;border:1px solid var(--border);border-radius:.5rem;background:var(--raised);color:var(--text);box-shadow:0 4px 18px var(--overlay-shadow);font-size:.9rem;font-weight:400;line-height:1.5;text-align:left;white-space:normal}
 .funding-help-popup>strong,.funding-help-popup>span{display:block}.funding-help-popup>strong{margin-bottom:.4rem}
-.funding-visual.is-full .funding-matrix{max-height:none;overscroll-behavior:auto}
 .funding-node-area{min-width:0}.funding-node-area .funding-diagram-scroll{min-height:280px}
 .funding-node-height-controls{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem .6rem;margin:.4rem 0;font-size:.85rem}.funding-node-height-controls button{margin:0;font-size:.85rem}
 .funding-workspace button.funding-node-height-toggle{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;min-height:44px;box-sizing:border-box;border:1px solid var(--border);border-radius:.4rem;background:var(--control);color:var(--text);cursor:pointer;font-size:.85rem;margin:.25rem 0 0}
@@ -71,10 +70,9 @@
 .funding-answers{margin:1rem 0}.funding-answer-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:.7rem}
 .funding-answer-row{min-width:0;border:1px solid var(--border);border-radius:.5rem;padding:.75rem;display:flex;flex-direction:column;gap:.35rem;overflow-wrap:anywhere}
 .funding-answer-row .funding-actions{margin-top:0}.funding-answer-row button{font-size:.85rem}.funding-answer-row small{line-height:1.4}
-.funding-feedback-key{font-size:.85rem;line-height:1.5}.funding-cell-changed{background:var(--selected-bg);box-shadow:inset 0 0 0 2px var(--accent)}
-.funding-cell-amount{border-inline-start:4px double var(--focus)!important}.funding-amount-change{display:block;font-size:.85rem}
+.funding-feedback-key{font-size:.85rem;line-height:1.5}
 .funding-option-effects{border-inline-start:4px solid var(--accent);padding:.6rem .8rem;margin:.7rem 0}
-.funding-matrix td>span,.funding-matrix td>button{display:block}.funding-legacy-review{margin:1rem 0;border:2px solid var(--focus)}
+.funding-legacy-review{margin:1rem 0;border:2px solid var(--focus)}
 .funding-question-heading{display:flex;align-items:flex-start;gap:.3rem}.funding-question-heading>label{font-size:1.25rem;line-height:1.4;font-weight:750;margin:.2rem 0 1rem!important;flex:1}.funding-question-heading>.funding-help{flex:0 0 auto}
 .funding-workspace label.funding-input-caption{font-size:.85rem;font-weight:500;margin:.6rem 0 .3rem}.funding-municipality input[type=search]{margin-bottom:.5rem}
 .funding-help-popup.is-interactive{width:min(440px,calc(100vw - 24px));max-height:min(620px,calc(100dvh - 24px));outline:2px solid var(--focus)}.funding-help-detail,.funding-question-rule,.funding-question-rule>span,.funding-question-rule>small,.funding-question-rule .funding-sources>span{display:block}.funding-question-rule{border-top:1px solid var(--border);padding-top:.6rem;margin-top:.6rem}.funding-question-rule small{font-size:.76rem}.funding-help-detail p{margin:.6rem 0}
@@ -145,8 +143,6 @@
 .funding-workspace .funding-graph-option.is-inspected:not(.is-working){border-color:var(--water)}
 .funding-workspace .funding-graph-option .funding-option-open{grid-column:2;grid-row:1;display:block;min-width:0;width:100%;height:100%;margin:0;padding:.15rem;border:0;border-radius:.3rem;text-align:left;background:transparent;color:var(--text);font-size:.8rem}
 .funding-graph-option .funding-working-control{grid-column:1;grid-row:1;display:flex;flex-direction:column;align-items:center;gap:0;align-self:start;color:var(--muted);font-size:.68rem}
-.funding-matrix tr.is-working>th{background:var(--selected-bg);border-inline-start:3px solid var(--focus)}
-.funding-matrix tr.is-inspected:not(.is-working)>th{border-inline-start:1px solid var(--water)}
 .funding-workspace>header.panel{background:linear-gradient(110deg,var(--water-bg),var(--panel) 75%)}
 .funding-workspace>header h1,.funding-visual h2{color:var(--water)}
 .funding-steps button[aria-current=step]{background:var(--selected-bg);color:var(--assumption-text);outline-color:var(--focus)}
@@ -184,10 +180,10 @@
 .funding-selection-editor h3{font-size:1.1rem}.funding-selection-editor fieldset{min-width:0}.funding-selection-editor .funding-selection-choice{border-bottom:1px solid var(--border);padding:.6rem 0;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem}
 .funding-selection-choice label{margin:0!important;line-height:1.4}.funding-selection-choice input[type=radio]{align-self:start}.funding-selection-choice select{max-width:150px;margin:0;align-self:start}
 .funding-selection-choice small,.funding-selection-choice details{grid-column:1/-1}.funding-selection-choice details{font-size:.8rem}.funding-selection-choice small{color:var(--muted)}
-.funding-selection-matrix-summary{padding:.6rem;background:var(--water-bg);border-radius:.5rem}.funding-selection-matrix-summary p{font-size:.8rem;margin:.4rem 0}
 .funding-annex-live-result{position:absolute;box-sizing:border-box;z-index:2;padding:.8rem;border:1px solid var(--water);border-radius:.5rem;background:var(--panel);color:var(--text);font-size:.85rem;box-shadow:0 3px 12px var(--overlay-shadow)}
 .funding-annex-live-result p{margin:.5rem 0}.funding-annex-live-result button{font-size:.8rem;margin:0}.funding-selection-legacy{font-size:.85rem}
 .funding-selection-editor a{overflow-wrap:anywhere}
+.funding-selection-summary{padding:.65rem;background:var(--water-bg);border-radius:.5rem;margin:.6rem 0}.funding-selection-summary h3{font-size:1rem;margin:.2rem 0}.funding-selection-summary p{display:flex;align-items:center;flex-wrap:wrap;gap:.35rem .75rem;font-size:.85rem;margin:.4rem 0}.funding-selection-summary p>span{flex:1;min-width:min(100%,240px);overflow-wrap:anywhere}.funding-selection-summary button{margin:0;font-size:.85rem}
 .funding-save-status{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem 1rem;padding:.65rem 1rem;margin:.65rem 0;background:var(--panel)}
 .funding-save-status strong{color:var(--water);font-size:.9rem}.funding-save-status span{flex:1;min-width:min(100%,230px);font-size:.8rem}.funding-save-status button{margin:0;font-size:.85rem}
 @media(max-width:1000px){.funding-question-editor{width:600px}.funding-workspace .funding-editor-handle{cursor:default;touch-action:auto}.funding-editor-move-hint{display:none}}
@@ -201,7 +197,6 @@
   .funding-question-heading{align-items:flex-start}
   .funding-question-input,.funding-question-tools{grid-column:1/-1}
   .funding-visual-controls{gap:.5rem}.funding-scope-bar{margin:.5rem 0}
-  .funding-diagram-scroll,.funding-matrix{max-height:430px}
 }
 
 .funding-location-lookup{border:1px solid var(--border);border-radius:.5rem;padding:.75rem;margin:.75rem 0}.funding-location-lookup h4{margin:.25rem 0}.funding-statistics-table{max-height:300px;overflow:auto}.funding-statistics-table table{width:100%;font-size:.8rem}.funding-statistics-table th,.funding-statistics-table td{text-align:left;padding:.25rem;white-space:normal}

@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from "react";
-import {answerLabel,fundingClass,fundingStatus,fundingCounts,statusLabel,FUNDING_HELP} from "./fundingState.js";
+import {fundingClass,fundingStatus,fundingCounts,statusLabel,FUNDING_HELP} from "./fundingState.js";
 import {FundingHelp} from "./FundingHelp.jsx";
 import {conditionText, visualScope, graphQuestions,graphLinkStatus,graphAnswerStatus} from "./fundingVisualState.js";
 import {money} from "./format.js";
@@ -20,7 +20,7 @@ function Changed({change}) {
 }
 
 export function FundingVisualisation({annex=null,value,changes,latestFields,pending,failure,onRetry,results,catalogue,draft,currentField,onQuestion,editorOpen,canEditQuestions,onEditQuestions,navigation,inspected,onInspect,workingOption,onWork,renderOption,questions:questionStates}) {
-  const [view,setView]=useState("graph"), [family,setFamily]=useState(Object.keys(catalogue.groups)[0]);
+  const [family,setFamily]=useState(Object.keys(catalogue.groups)[0]);
   const [page,setPage]=useState(0), [shortlistOnly,setShortlistOnly]=useState(false);
   const [expanded,setExpanded]=useState(false);
   const [fullView,setFullView]=useState(false);
@@ -33,20 +33,20 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
   const nodeCompactScroll=useRef(null);
   useEffect(()=>{
     if(annex===null||annex.signal===0)return;
-    setView("graph");setExpanded(true);
+    setExpanded(true);
     requestAnimationFrame(()=>visualRoot.current?.querySelector('.funding-circumstance[data-question-id="selection_score"]')?.scrollIntoView({block:"nearest",inline:"nearest"}));
   },[annex?.signal]);
-  const graphPanel=useRef(null),matrixPanel=useRef(null),compactScroll=useRef(null);
+  const graphPanel=useRef(null),compactScroll=useRef(null);
   const visualRoot=useRef(null);
   useEffect(()=>{const media=matchMedia("(min-width:1001px)"),change=()=>setWide(media.matches);media.addEventListener("change",change);return()=>media.removeEventListener("change",change);},[]);
   useEffect(()=>{
-    if(view!=="graph"||!graphPanel.current)return;
+    if(!graphPanel.current)return;
     const panel=graphPanel.current;
     const resize=()=>setDiagramWidth(Math.max(800,panel.clientWidth));
     resize();
     const observer=new ResizeObserver(resize);observer.observe(panel);
     return()=>observer.disconnect();
-  },[view,value!==null]);
+  },[value!==null]);
   useEffect(()=>{
     if(!inspected)return;
     const modalOpen=()=>document.querySelector("[role='dialog'],dialog[open]")!==null;
@@ -89,7 +89,7 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
     if(!nodesExpanded){nodeCompactScroll.current={trigger,top:panel.scrollTop,left:panel.scrollLeft,windowY:window.scrollY};setNodesExpanded(true);return;}
     setNodesExpanded(false);
     const previous=nodeCompactScroll.current;
-    // A graph first opened from an expanded Matrix has no compact graph position.
+    // Expand view can reveal the complete canvas without a node-area opener.
     requestAnimationFrame(()=>{if(previous!==null){panel.scrollTop=previous.top;panel.scrollLeft=previous.left;window.scrollTo({top:previous.windowY,behavior:"instant"});}const opener=previous!==null&&previous.trigger.isConnected?previous.trigger:trigger;opener.focus({preventScroll:true});});
   }
   const columns=fundingColumns(diagramWidth,wide?columnSplits:DEFAULT_FUNDING_COLUMNS);
@@ -123,13 +123,12 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
   function choose(id) {onInspect(inspected===id ? null : id);}
   function toggleFullView(event) {
     const trigger=event.currentTarget;
-    if(!fullView){compactScroll.current={nodesExpanded,windowY:window.scrollY,graphY:graphPanel.current?.scrollTop ?? 0,graphX:graphPanel.current?.scrollLeft ?? 0,matrixY:matrixPanel.current?.scrollTop ?? 0,matrixX:matrixPanel.current?.scrollLeft ?? 0};setNodesExpanded(true);setFullView(true);return;}
+    if(!fullView){const panel=graphPanel.current;compactScroll.current={nodesExpanded,windowY:window.scrollY,graph:panel===null?null:{top:panel.scrollTop,left:panel.scrollLeft}};setNodesExpanded(true);setFullView(true);return;}
     setFullView(false);
     setNodesExpanded(compactScroll.current.nodesExpanded);
     requestAnimationFrame(()=>{
       const s=compactScroll.current;
-      if(graphPanel.current){graphPanel.current.scrollTop=s.graphY;graphPanel.current.scrollLeft=s.graphX;}
-      if(matrixPanel.current){matrixPanel.current.scrollTop=s.matrixY;matrixPanel.current.scrollLeft=s.matrixX;}
+      if(s.graph!==null){const panel=graphPanel.current;if(panel===null)throw Error("The funding graph is unavailable. Reload Funding Navigator before restoring its scroll position.");panel.scrollTop=s.graph.top;panel.scrollLeft=s.graph.left;}
       trigger.focus({preventScroll:true});window.scrollTo({top:s.windowY,behavior:"instant"});
     });
   }
@@ -160,7 +159,7 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
       {effectDetails(r)}
       {renderOption(r)}
       <h4>Modelled requirement network</h4>
-      {coverage(r.id).requirements==="research_only" ? <p>Assessment not implemented. Programme requirements must be verified and modelled before this option can be assessed. Answering more questions cannot resolve this gap.</p> : conditions.filter(c=>c.option_id===r.id).map(c=><div key={c.id} className={`funding-check funding-check-${c.result} ${changes?.conditions.some(x=>x.id===c.id) ? "funding-affected" : ""}`}>
+      {conditions.filter(c=>c.option_id===r.id).map(c=><div key={c.id} className={`funding-check funding-check-${c.result} ${changes?.conditions.some(x=>x.id===c.id) ? "funding-affected" : ""}`}>
         <strong>{c.effect==="amount" ? "Amount condition" : "Fit condition"} · {conditionText(c)}</strong>
         <p>{c.message}</p>
         {c.effect==="amount" && c.value!==null && <p>Input / uncapped addition: {money(c.value)}. The overall conditional estimate remains subject to the assessment’s caps and conditions.</p>}
@@ -176,7 +175,7 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
     {failure && <div role="alert"><p>{failure}</p><button type="button" onClick={onRetry}>Retry assessment</button></div>}
     <button type="button" className="funding-mobile-expand" aria-expanded={expanded} onClick={()=>setExpanded(v=>!v)}>{expanded ? "Collapse" : "Expand"} funding visual workspace</button>
     <div className={`funding-visual-body ${expanded ? "is-expanded" : ""}`}>
-      <div className="funding-visual-controls"><div className="funding-visual-toolbar" role="group" aria-label="Funding visual view"><button type="button" className="funding-edit-questions" disabled={!canEditQuestions} aria-haspopup="dialog" aria-controls="funding-answer-editor" aria-expanded={editorOpen} onClick={onEditQuestions}>Answer questions</button><button type="button" aria-pressed={view==="graph"} onClick={()=>setView("graph")}>Graph</button><button type="button" aria-pressed={view==="matrix"} onClick={()=>setView("matrix")}>Matrix</button><button type="button" aria-expanded={fullView} onClick={toggleFullView}>{fullView ? "Compact view" : "Expand view"}</button><button type="button" aria-pressed={shortlistOnly} onClick={()=>{setShortlistOnly(v=>!v);setPage(0);}}>{shortlistOnly ? "Show family options" : `Focus shortlist (${draft.selected.length})`}</button></div>
+      <div className="funding-visual-controls"><div className="funding-visual-toolbar" role="group" aria-label="Funding visual view"><button type="button" className="funding-edit-questions" disabled={!canEditQuestions} aria-haspopup="dialog" aria-controls="funding-answer-editor" aria-expanded={editorOpen} onClick={onEditQuestions}>Answer questions</button><button type="button" aria-expanded={fullView} onClick={toggleFullView}>{fullView ? "Compact view" : "Expand view"}</button><button type="button" aria-pressed={shortlistOnly} onClick={()=>{setShortlistOnly(v=>!v);setPage(0);}}>{shortlistOnly ? "Show family options" : `Focus shortlist (${draft.selected.length})`}</button></div>
       <label className="funding-family-chooser">Funding family<select aria-label="Funding family" value={shortlistOnly ? "shortlist" : family} onChange={e=>{if(e.target.value==="shortlist"){setShortlistOnly(true);}else{setFamily(e.target.value);setShortlistOnly(false);}setPage(0);}}>{Object.entries(catalogue.groups).map(([id,label])=><option key={id} value={id}>{label} ({results.filter(r=>r.group===id).length} in scope / {catalogue.entries.filter(e=>e.group===id).length} total){results.filter(r=>r.group===id&&changed.has(r.id)).length>0?` · ${results.filter(r=>r.group===id&&changed.has(r.id)).length} affected`:""}</option>)}<option value="shortlist">Shortlist ({draft.selected.length})</option></select></label>
       </div>
       <div className="funding-working-summary" role="status" aria-label="Working funding option">
@@ -188,14 +187,13 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
           <button type="button" onClick={()=>onWork(null)}>Clear working option</button>
         </>}
       </div>
-      {view==="graph"&&<div className="funding-graph-controls"><div role="group" aria-label="Graph requirement scope"><button type="button" aria-pressed={!focusCurrent} onClick={()=>setFocusCurrent(false)}>All fit requirements</button><button type="button" aria-pressed={focusCurrent} onClick={()=>setFocusCurrent(true)}>Focus current question</button></div><label className="funding-pick"><input type="checkbox" checked={showAmount} onChange={e=>setShowAmount(e.target.checked)}/>Show amount conditions</label>{wide&&<button type="button" onClick={()=>setColumnSplits(DEFAULT_FUNDING_COLUMNS)}>Reset column widths</button>}{currentField&&!questions.some(q=>q.id===currentField)&&<span>The current question has no visible modelled fit connection.</span>}</div>}
+      <div className="funding-graph-controls"><div role="group" aria-label="Graph requirement scope"><button type="button" aria-pressed={!focusCurrent} onClick={()=>setFocusCurrent(false)}>All fit requirements</button><button type="button" aria-pressed={focusCurrent} onClick={()=>setFocusCurrent(true)}>Focus current question</button></div><label className="funding-pick"><input type="checkbox" checked={showAmount} onChange={e=>setShowAmount(e.target.checked)}/>Show amount conditions</label>{wide&&<button type="button" onClick={()=>setColumnSplits(DEFAULT_FUNDING_COLUMNS)}>Reset column widths</button>}{currentField&&!questions.some(q=>q.id===currentField)&&<span>The current question has no visible modelled fit connection.</span>}</div>
       {draft.version===4&&draft.legacy_selection_score!==null&&<p className="funding-selection-legacy">Previous manual AL20 score: {draft.legacy_selection_score} points · historical information only; not used in the annex calculation.</p>}
       <div className="funding-scope-bar"><p>{results.length} in browsing scope · {catalogue.entries.length} catalogue entries. {shortlistOnly ? "Shortlist focus" : catalogue.groups[family]} · {fullView ? `Showing all ${scope.count} options; scroll the explorer` : `Page ${displayedPage+1} of ${scope.pages} · ${scope.count} options`}{results.filter(r=>changed.has(r.id)&&!visible.options.some(v=>v.id===r.id)).length>0&&` · ${results.filter(r=>changed.has(r.id)&&!visible.options.some(v=>v.id===r.id)).length} affected outside this page/family`}</p>
       <div className="funding-actions">{!fullView&&<><button type="button" disabled={displayedPage===0} onClick={()=>setPage(displayedPage-1)}>Previous options</button><button type="button" disabled={displayedPage>=scope.pages-1} onClick={()=>setPage(displayedPage+1)}>Next options</button></>}{inspected && <button type="button" onClick={()=>onInspect(null)}>Clear inspection</button>}</div></div>
       <details className="funding-view-help"><summary>How to read this view</summary><p className="funding-feedback-key">Use the circle to choose one working option for answer colours and emphasised connections. Clicking a card opens its details without changing the working option. Shortlist checkboxes are separate; only clicking the control changes a checked selection. Working on an option does not adopt a plan or create an application.</p><p>Inset outlines show the effects of your latest answer. Fit nodes cover this family/shortlist and the working option, including options on other pages. Question navigation keeps their positions. Focus current question shows only the active question.</p><p className="funding-network-explanation">All applicable requirements must be satisfied. A single connection does not establish eligibility. Amount connections affect the conditional estimate; call availability is separate. Neutral scope connections describe activity browsing only.</p></details>
-      {view==="matrix"&&model?.version===2&&<div className="funding-selection-matrix-summary"><strong>AL20 selection assessments</strong>{Object.entries(model.annex.routes).map(([id,score])=><p key={id}>{id} · {selectionSummary(score)} <button type="button" onClick={e=>{annex.onRoute(id);onQuestion("selection_score",e.currentTarget);}}>Open in graph</button></p>)}</div>}
       {value && <><p className="funding-network-legend">All applicable requirements must be satisfied. ✓ Meets · × Conflicts · ? Unresolved · {workingOption===null?"Mixed: results differ across programmes. Choose a working option for its colours.":`Colours and emphasised connections: ${workingOption}.`} Call availability is separate from fit.</p>
-        {view==="graph" ? <div className="funding-node-area"><div className="funding-node-height-controls"><strong>Node area</strong><button type="button" aria-expanded={nodesExpanded} onClick={toggleNodeHeight}>{nodesExpanded?"Collapse node area":"Expand node area"}</button></div><div ref={graphPanel} className={`funding-diagram-scroll${resizing!==null?" is-resizing":""}`} style={nodesExpanded?{maxHeight:"none",overscrollBehavior:"auto"}:undefined} onScroll={e=>setGraphScroll(e.currentTarget.scrollTop)} tabIndex={0} aria-label="Funding graph, scroll to explore"><div className="funding-diagram" style={{width:diagramWidth,height:diagramHeight}}>
+        <div className="funding-node-area"><div className="funding-node-height-controls"><strong>Node area</strong><button type="button" aria-expanded={nodesExpanded} onClick={toggleNodeHeight}>{nodesExpanded?"Collapse node area":"Expand node area"}</button></div><div ref={graphPanel} className={`funding-diagram-scroll${resizing!==null?" is-resizing":""}`} style={nodesExpanded?{maxHeight:"none",overscrollBehavior:"auto"}:undefined} onScroll={e=>setGraphScroll(e.currentTarget.scrollTop)} tabIndex={0} aria-label="Funding graph, scroll to explore"><div className="funding-diagram" style={{width:diagramWidth,height:diagramHeight}}>
           {wide&&columns.dividers.map((left,index)=><div key={index} className="funding-column-divider" role="separator" aria-label={index===0?"Resize exploration and circumstances columns":"Resize circumstances and funding options columns"} aria-orientation="vertical" aria-valuemin={Math.round(columns.limits[index][0])} aria-valuemax={Math.round(columns.limits[index][1])} aria-valuenow={Math.round(left)} aria-valuetext={`${Math.round(left)} pixels from the graph’s left edge`} tabIndex={0} style={{left:left-9}} title="Drag to resize columns. Arrow keys move 10 pixels; Shift moves 40. Home/End reach the limits." onPointerDown={e=>startColumnResize(e,index)} onPointerMove={moveColumn} onPointerUp={endColumnResize} onPointerCancel={endColumnResize} onLostPointerCapture={()=>{columnDrag.current=null;setResizing(null);}} onKeyDown={e=>resizeColumnByKey(e,index)}><span aria-hidden="true">⋮</span></div>)}
           <div className="funding-layer-label" style={{left:12}}>Exploration</div><div className="funding-layer-label" style={{left:circumstanceLeft}}>Circumstances / answers</div><div className="funding-layer-label" style={{left:optionLeft}}>Funding options</div>
           <svg aria-hidden="true" width={diagramWidth} height={diagramHeight}>
@@ -237,9 +235,9 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
             <FundingWorkingOption id={r.id} checked={workingOption===r.id} onChange={onWork} group="funding-working-graph" compact/>
           </div>)}
           {!questions.length && <p className="funding-no-connections">Choose a question or inspect an option to see its modelled dependencies.</p>}
-        </div></div><button type="button" className="funding-node-height-toggle" aria-expanded={nodesExpanded} aria-label={nodesExpanded?"Collapse node area completely":"Expand node area completely"} onClick={toggleNodeHeight}><span aria-hidden="true">{nodesExpanded?"▴":"▾"}</span> {nodesExpanded?"Collapse node area":"Expand node area completely"}</button></div> : <div ref={matrixPanel} className="funding-table funding-matrix" tabIndex={0} aria-label="Funding matrix, scroll to explore"><table><caption>Funding options · {shortlistOnly ? "Shortlist" : catalogue.groups[family]}</caption><thead><tr><th>Funding option</th><th>Overall fit</th><th>Current / latest answer</th><th>Unresolved conditions</th><th>Call availability</th></tr></thead><tbody>{visible.options.map(r=><React.Fragment key={r.id}><tr data-option-id={r.id} className={`${workingOption===r.id?"is-working":""} ${inspected===r.id?"is-inspected":""} ${changed.has(r.id)?"funding-affected":""}`}><th scope="row"><button type="button" onClick={()=>choose(r.id)} aria-expanded={inspected===r.id}>{r.id} · {r.title}</button><FundingWorkingOption id={r.id} checked={workingOption===r.id} onChange={onWork} group="funding-working-matrix"/></th><td className={changed.get(r.id)?.fit?"funding-cell-changed":""}><span className={`funding-fit-text funding-outcome-${fundingClass(r)}`}>{fundingStatus(r)}</span><FundingHelp label={fundingStatus(r)}>{FUNDING_HELP[fundingClass(r)]}</FundingHelp><Changed change={changed.get(r.id)}/></td><td className={changed.get(r.id)?.amount?"funding-cell-changed funding-cell-amount":changed.get(r.id)?.conditions.length?"funding-cell-changed":""}><span>{effectText(r.id)}</span><FundingHelp label={`answer effect on ${r.id}`}>{effectBrief(r)}</FundingHelp><button type="button" onClick={()=>onInspect(r.id)} aria-label={`Inspect effects for ${r.id}`}>Inspect effects</button>{changed.get(r.id)?.amount&&<strong className="funding-amount-change">Conditional amount changed: {money(changed.get(r.id).previousAmount)} → {money(changed.get(r.id).nextAmount)}</strong>}</td><td>{coverage(r.id).requirements==="research_only" ? "Not modelled" : coverage(r.id).unresolved_count}</td><td>{r.availability}</td></tr>{inspected===r.id && <tr><td colSpan={5}>{details(r)}</td></tr>}</React.Fragment>)}</tbody></table></div>}
+        </div></div><button type="button" className="funding-node-height-toggle" aria-expanded={nodesExpanded} aria-label={nodesExpanded?"Collapse node area completely":"Expand node area completely"} onClick={toggleNodeHeight}><span aria-hidden="true">{nodesExpanded?"▴":"▾"}</span> {nodesExpanded?"Collapse node area":"Expand node area completely"}</button></div>
         {visible.options.length===0 && <p>No options in this scope. Adjust the browsing filters, choose another family or leave shortlist focus.</p>}
-        {option && (view==="graph" || !visible.options.some(r=>r.id===option.id)) && <><h3>Inspecting {option.id}</h3>{!visible.options.some(r=>r.id===option.id) && <p>This option is outside the displayed family/page or current filters. Its assessment is still available below.</p>}{details(option)}</>}
+        {option && <><h3>Inspecting {option.id}</h3>{!visible.options.some(r=>r.id===option.id) && <p>This option is outside the displayed family/page or current filters. Its assessment is still available below.</p>}{details(option)}</>}
       </>}
     </div>
   </aside>;

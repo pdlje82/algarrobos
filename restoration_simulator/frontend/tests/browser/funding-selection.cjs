@@ -84,7 +84,7 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   await openCriterion('AT.3');await editor.getByLabel('Assessment notes (optional)',{exact:true}).fill('Keep this note across failed save and restart');
   await page.getByText(/Annex test save unavailable/).waitFor();assert.equal(await editor.getByLabel('Assessment notes (optional)',{exact:true}).inputValue(),'Keep this note across failed save and restart');
   await page.getByRole('button',{name:'Retry failed save',exact:true}).click();await poll(async()=>!(await page.getByRole('button',{name:'Retry failed save',exact:true}).count()));await close();
-  await visual.getByRole('button',{name:'Matrix',exact:true}).click();const summary=visual.locator('.funding-selection-matrix-summary');assert.match(await summary.innerText(),/Calculated score: 63 points/);
+  await page.locator('.funding-answers>summary').click();const summary=page.getByRole('region',{name:'AL20 selection assessments',exact:true});assert.equal(await summary.locator('[data-selection-route]').count(),5);assert.equal(await visual.getByRole('button',{name:'Matrix',exact:true}).count(),0);assert.match(await summary.innerText(),/Calculated score: 63 points/);
   await summary.locator('p').filter({hasText:'LEADER-AL20-3.5'}).getByRole('button',{name:'Open in graph',exact:true}).click();assert.equal(await route.inputValue(),'LEADER-AL20-3.5');
   await route.selectOption('LEADER-AL20-3.4');
   for(const theme of ['light','dark']){
@@ -92,6 +92,9 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
    await checkHierarchy();
    const box=await editor.boundingBox();assert(box.x>=0&&box.y>=0&&box.x+box.width<=390&&box.y+box.height<=844);
    await page.screenshot({path:`test-artifacts/funding-selection-${theme}-phone.png`});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await close();
+   const openOther=summary.locator('[data-selection-route="LEADER-AL20-3.5"]').getByRole('button',{name:'Open in graph',exact:true});await openOther.focus();await page.keyboard.press('Enter');assert.equal(await route.inputValue(),'LEADER-AL20-3.5');
+   await summary.locator('[data-selection-route="LEADER-AL20-3.4"]').getByRole('button',{name:'Open in graph',exact:true}).click();assert.equal(await route.inputValue(),'LEADER-AL20-3.4');
+   await summary.scrollIntoViewIfNeeded();await page.screenshot({path:`test-artifacts/funding-route-summary-${theme}-phone.png`});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   }
   await page.setViewportSize({width:1500,height:1000});await poll(async()=>(await api('funding')).attachment.draft.selection_assessments['LEADER-AL20-3.4'].criteria['AT.3'].notes.includes('Keep this note'));
   const saved=(await api('funding')).attachment.draft.selection_assessments;
@@ -108,6 +111,6 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   await enterpriseResearch.getByText('Read the research context',{exact:true}).click();
   for(const href of ['https://alpujarraalmeria.es/wp-content/uploads/2026/06/Necesidades-priorizadas-ALPUJARRA_SN_ALMERIENSE_EDLL_Epig_4-2.pdf','https://alpujarraalmeria.es/wp-content/uploads/2026/06/Objetivos-y-necesidades-por-lineas_epig-5.pdf'])assert.equal(await enterpriseResearch.getByRole('link',{name:href,exact:true}).getAttribute('href'),href);
   const after=await api('project');assert.equal(JSON.stringify(after.project),before);assert.equal(JSON.stringify(after.planning.draft),planning);assert.deepEqual(errors,[]);
-  console.log('AL20 branch: complete 63-point assessment, all five routes, route isolation, sources/focus, stable funding nodes, explicit zero, matrix navigation, save failure/retry, reload, and phone themes passed.');
+  console.log('AL20 branch: complete 63-point assessment, all five routes, route isolation, sources/focus, stable funding nodes, explicit zero, answer-overview navigation, save failure/retry, reload, and phone themes passed.');
  }catch(e){console.error(e);if(page)await page.screenshot({path:'test-artifacts/funding-selection-failure.png'});throw e;}finally{await Promise.race([browser.close(),new Promise(r=>setTimeout(r,3000))]);}
 })().then(()=>process.exit(0)).catch(e=>{console.error(e);process.exit(1);});

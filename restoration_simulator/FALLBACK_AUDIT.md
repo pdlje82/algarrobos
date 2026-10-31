@@ -1,11 +1,28 @@
 # Silent-fallback audit · 28 October 2026
 
+Funding introductions (1 November 2026): the separate version-1 guide library
+requires exact coverage of research-only assessment options, five nonempty text
+sections and registered source references. Local PDF pages and hashes must match
+the document registry. Unsupported versions, missing/invalid files, incomplete
+content and failed requests are explicit errors with a retry in the inspection
+area. No generated text, empty guide, alternative source or changed assessment
+substitutes for a failure. Existing optional source metadata uses explicit null:
+unknown exact publication date, unknown original URL for an existing local PDF,
+or absent local PDF identifiers for an external source. No broader audit is claimed.
+
 Scope: current Python engine/API/configuration/persistence/deletion code, React
 components, formatting, theme initialization, HTML startup and Vite configuration.
 Dependencies, generated output and saved user projects are outside the source audit.
 The frozen replay modules were reviewed for compatibility boundaries and preserved.
 
 ## Changes
+
+Funding graph workspace (1 November 2026): Matrix presentation state is removed;
+Your answers receives authoritative per-route AL20 results. Missing route scores
+raise an actionable incompatibility error. Full-view scroll restoration records
+an explicit null when the graph has not loaded, rather than substituting zero.
+Existing loading/previous-result presentation and historical save contracts are
+unchanged; this is not an audit of unrelated funding or persistence code.
 
 AL20 EDL context (1 November 2026): required strategy content is validated against
 FUND-013 and complete node bindings. Fetch failures/absent bindings show explicit

@@ -1,5 +1,31 @@
 # Funding Navigator changes
 
+## 2026-11-01 — introductions for every research-only funding option
+
+- Added 92 individually written, source-cited introductions across all six families,
+  each covering the mechanism, an illustrative Algarrobos use, advantages,
+  limitations and practical next checks. Every introduction has 200–350 words.
+- Clicking an option opens the introduction first in the existing inspection
+  area and moves keyboard focus to its heading. Cards say **Explore this option**
+  and **Automated assessment unavailable**; the internal assessment category is
+  unchanged. Reference loading has visible errors and an explicit retry.
+- Current guides use a separate versioned library and read-only API. Reading
+  them does not adopt rules, change a shortlist or modify saved assessments.
+- Added seven unchanged official PDFs (FUND-014–020), catalogue/audit records,
+  verified viewer references and a research report documenting unresolved leads.
+
+## 2026-11-01 — one funding graph workspace
+
+- Removed Matrix, the Graph/Matrix toggle, and their unused rendering, state and
+  styles. Graph remains the funding workspace, with existing paging, shortlist,
+  option inspection, keyboard controls and expansion.
+- Moved the five-route AL20 score summary into Your answers, with direct Open in
+  graph actions that select the requested route and retain its assessment.
+- Compare alternatives remains available. Saved answers, source snapshots,
+  exports and scoring rules are unchanged; no migration is required.
+- Updated the affected frontend/browser checks for graph navigation, route
+  summaries, expansion, sources/focus, working options and phone layouts.
+
 ## 2026-11-01 — EDL content inside assessment nodes and shared explorer
 
 - Added the full, hash-verified AL20 strategy as FUND-013 and a versioned library

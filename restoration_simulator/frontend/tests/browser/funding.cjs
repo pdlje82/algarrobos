@@ -23,7 +23,7 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     await page.goto(url);
     await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();
     await page.getByRole('heading',{name:'Funding Navigator',exact:true}).waitFor();
-    await page.getByRole('button',{name:'Graph',exact:true}).click();
+    await page.locator('.funding-diagram-scroll').waitFor();
     await page.getByRole('button',{name:'Choose activity',exact:true}).click();
     await page.getByLabel('What would you like support for?',{exact:true}).selectOption('business');
     await page.getByLabel('Exploration name',{exact:true}).fill('My rural business');

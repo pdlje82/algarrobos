@@ -30,17 +30,19 @@ def validate(data, catalogue):
     require(type(data["version"]) is int and data["version"] == 1, "Unsupported funding guide version.")
     date.fromisoformat(data["checked_on"])
     require(isinstance(data["sources"], dict) and data["sources"], "Funding guide sources are missing.")
+    records = {d["id"]: d for d in documents.catalogue()["documents"]}
     for sid, ref in data["sources"].items():
         keys(ref, {"title", "issuer", "date", "url", "checked_on", "note", "document_id", "page", "sha256"}, "funding guide source " + sid)
         require(all(isinstance(ref[k], str) and ref[k].strip() for k in ("title", "issuer", "note")), "Incomplete funding guide source: " + sid)
-        require(isinstance(ref["url"], str) and urlparse(ref["url"]).scheme == "https" and bool(urlparse(ref["url"]).netloc), "Invalid funding source URL: " + sid)
+        require(ref["url"] is None and ref["document_id"] is not None or isinstance(ref["url"], str) and urlparse(ref["url"]).scheme == "https" and bool(urlparse(ref["url"]).netloc), "Invalid funding source URL: " + sid)
         date.fromisoformat(ref["checked_on"])
         require(ref["checked_on"] <= data["checked_on"], "Guide source verification date exceeds the library date.")
         if ref["date"] is not None: date.fromisoformat(ref["date"])
         if ref["document_id"] is None:
             require(ref["page"] is None and ref["sha256"] is None, "An external source cannot claim a local PDF edition.")
         else:
-            record = documents.record(ref["document_id"])
+            require(isinstance(ref["document_id"], str) and ref["document_id"] in records, "Unregistered funding guide PDF: " + sid)
+            record = records[ref["document_id"]]
             require(type(ref["page"]) is int and 1 <= ref["page"] <= record["pages"] and ref["sha256"] == record["sha256"], "Funding guide PDF page or edition mismatch: " + sid)
     keys(data["guides"], research_ids(catalogue), "research-only funding guides")
     all_ids = {e["id"] for e in catalogue["entries"]}

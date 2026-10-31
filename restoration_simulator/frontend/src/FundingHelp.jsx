@@ -1,7 +1,7 @@
 import React, {useEffect,useId,useLayoutEffect,useRef,useState} from "react";
 
 // Hover, keyboard focus and touch share the same explanation. Fixed positioning
-// keeps text inside the viewport even in a scrolling matrix or on a narrow phone.
+// keeps text inside the viewport even in a scrolling graph or on a narrow phone.
 export function FundingHelp({label,children,details=null}) {
   const id=useId(),root=useRef(null),button=useRef(null),popup=useRef(null);
   const suppressFocus=useRef(false);

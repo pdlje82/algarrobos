@@ -1,5 +1,32 @@
 # Funding Navigator
 
+## Funding introductions across all families
+
+All 92 research-only options have a plain-English introduction: **What is it?**,
+**Why consider it for Algarrobos?**, **What makes it interesting?**, **What are
+the limitations?**, and **What would we investigate next?** Examples are
+illustrative interpretations, not eligibility decisions. Each guide also shows
+dated availability, unresolved questions, related options and source references.
+
+Click an **Explore this option** card in the graph to show its introduction first
+in the existing inspection area. The heading receives keyboard focus and scrolls
+into view. **Automated assessment unavailable** distinguishes these references
+from modelled assessments. Original catalogue research remains available below.
+The current explorer is graph-only; guides follow that existing workspace.
+
+`GET /api/funding/guides` serves the validated, versioned
+`scenarios/funding-guides-v1.json` library. Content is current editorial reference
+information, visibly separate from the exploration’s frozen rule/source snapshot.
+Reading a guide or retrying its load does not edit answers, working options,
+shortlists, allocations or saved assessments. Missing coverage, text, versions,
+references or PDF editions fails explicitly; unavailable information has a Retry
+button. This library never performs live web research or generates text at runtime.
+
+The five assessed AL20 routes and two existing-cash arrangements retain their
+existing assessment behaviour. See [the research report](FUNDING_GUIDES_RESEARCH.md)
+for the complete crosswalk, seven new PDFs (FUND-014–020), download links,
+verification limits and sources that could not be retrieved.
+
 ## EDL information in AL20 assessments
 
 EDL means *Estrategia de Desarrollo Local* (Local Development Strategy); EDLL
@@ -51,7 +78,8 @@ Question 19 is **AL20 selection assessment**. Open it in Graph to expand its
 branch, select a funding route and expand criterion groups. Clicking a
 subcriterion opens the existing floating editor. Funding options remain in their
 column; expanding the annex creates space in the circumstances column. Collapse
-and route switching preserve answers. Matrix and Your answers link back to Graph.
+and route switching preserve answers. Your answers lists all five route scores
+with a direct **Open in graph** action for each route.
 Each expanded level is indented: assessment → route → criterion group →
 subcriterion. Branch lines connect each child to its parent; narrow columns keep
 subcriterion nodes readable while funding options retain their positions.
@@ -345,11 +373,12 @@ Applicant resets apply to the complete choice. Hidden activity answers are
 retained, and direct editing can inspect one without changing the activity.
 The active question is identified by stable logical ID rather than its index.
 
-**Graph is the default**, with Matrix one toggle away. The separate What
-changed panel and aggregate change counters are removed. Affected rows/nodes and
-changed fit/condition/amount cells carry text markers and highlights. Hover/focus
-shows concise explanations; **Inspect effects** opens persistent interactive
-detail with before/after condition results and exact PDF citations. Conditions
+**Graph is the funding workspace**. The Matrix view and its view toggle have
+been removed. **Your answers** retains the route-by-route AL20 score summary and
+direct graph navigation; **Compare alternatives** remains available for saved
+explorations. Affected nodes carry text markers and highlights. Opening a funding
+option shows persistent detail with before/after condition results and exact PDF
+citations. Conditions
 that are affected but unchanged are explained, including changes between two
 nonprofit applicants, capped amounts and removed conditional requirements.
 Unimplemented assessments remain separate from missing user answers and conflicts.
@@ -364,17 +393,17 @@ Highlights remain through non-answer updates until another accepted answer edit
 or an explicit exploration/baseline change. Activity navigation waits for its
 updated relevant question set, preventing rapid navigation into obsolete questions.
 
-Catalogue order, browsing filters, shortlist, source viewing and selected visual
-view are retained during input changes. Compact view pages up to 12 options in
+Catalogue order, browsing filters, shortlist and source viewing are retained
+during input changes. Compact view pages up to 12 options in
 one family/shortlist. **Expand view** removes the internal height limit and shows
-all rows/nodes in that scope using page scrolling; **Compact view** restores its
+all nodes in that scope using page scrolling; **Compact view** restores its
 scroll position. Click **Expand node area** above the canvas or **Expand node
 area completely** on the bar below it to reveal the full height of all displayed
 nodes. Click **Collapse node area** to restore its compact height and previous
 scroll position. These buttons support Enter/Space and retain the current option
-page and filters. Expansion is retained while editing and switching visual views,
+page and filters. Expansion is retained while editing and changing requirement scope,
 and is not saved with the assessment.
-Phones use an expandable visual panel and compact matrix rows.
+Phones use an expandable visual panel, a scrollable graph and compact editors.
 Help works with hover, keyboard focus and touch, supports Escape/outside closing,
 and stays inside the viewport. Reduced-motion and both themes are supported.
 
@@ -400,7 +429,7 @@ configuration, with a dedicated save under `test-artifacts/`. Set `PLAYWRIGHT_MO
 The browser check covers the guided 2.7 scenario, bonus cap, source viewer, adoption,
 reload, failed-save retry and phone layouts in both themes. Screenshots are ignored
 test artifacts. The user's active save is not used.
-Run `node tests/browser/funding-visual.cjs` for graph/matrix, request-race, PDF focus,
+Run `node tests/browser/funding-visual.cjs` for the graph, request-race, PDF focus,
 question hierarchy, keyboard and 390px checks, followed by the existing funding and
 `planning-handoff.cjs` checks. Each workflow uses the isolated save and test servers.
 `funding-refinements.cjs` covers legacy applicant review/cancellation, complete
@@ -460,7 +489,7 @@ surface and a segmented green/amber/red rail with labelled result counts. The
 working-option radio focuses colours and emphasised connections on one option.
 Card/title clicks only open details; they never change the working option or
 shortlist. Shortlist checkboxes are activated only through their inputs. The
-working choice survives Graph/Matrix, question navigation, paging, filters and
+working choice survives question navigation, paging, filters and
 source viewing; the summary identifies when it is outside the displayed scope.
 Its requirements remain available in the graph. Clearing it restores the whole
 family/shortlist colour summary. This is session presentation state, reset by
