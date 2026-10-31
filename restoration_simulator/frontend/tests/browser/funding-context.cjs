@@ -34,6 +34,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   const summary=page.getByRole('region',{name:'Demonstrator parcel and design context',exact:true});await summary.getByText('Context parcel',{exact:true}).waitFor();assert.match(await summary.innerText(),/Record existing ownership/);assert.match(await summary.innerText(),/Alhama de Almeria/);assert.match(await summary.innerText(),/differs from the parcel/);
   await summary.getByRole('button',{name:'Context parcel',exact:true}).click();assert.equal(await page.locator(`[data-parcel-id="${parcelId}"]`).evaluate(n=>n===document.activeElement),true);
   await page.locator('.demo-editor').getByRole('button',{name:'Explore funding',exact:true}).click();
+  await page.getByRole('button',{name:'Save and open requested exploration',exact:true}).click();
   const visual=page.getByLabel('Live funding consequences',{exact:true}),question=page.locator('.funding-question');
   const settled=()=>poll(async()=>!/Updating/.test(await visual.locator('.funding-visual-status').innerText()));await settled();
   await page.getByRole('button',{name:'2. People and land',exact:true}).click();

@@ -1,6 +1,7 @@
 import React,{useState} from "react";
 import {DocumentLink} from "./DocumentLink.jsx";
 import {selectionChoices,selectionSummary,setSelectionChoice,clearSelectionRow} from "./fundingSelectionState.js";
+import {FundingLocationLookup} from "./FundingLocationLookup.jsx";
 
 export function SelectionSources({sources}){
   return <ul className="funding-sources">{sources.map((s,i)=><li key={i}><DocumentLink documentId={s.document_id} page={s.page} expectedSha256={s.sha256}>{s.label}</DocumentLink><small> · {s.role}</small></li>)}</ul>;
@@ -11,7 +12,7 @@ export function SelectionRoute({routes,route,onRoute,disabled}){
 function SelectionGuidance({text}){
   return text.split("\n\n").map((paragraph,index)=><p key={index}>{paragraph.split(/(https:\/\/[^\s]+)/g).map((part,i)=>part.startsWith("https://")?<DocumentLink key={i} href={part} target="_blank" rel="noreferrer">{part}</DocumentLink>:part)}</p>);
 }
-export function FundingSelectionEditor({route,criterion,row,result,onChange,disabled,focusChoice}){
+export function FundingSelectionEditor({route,criterion,row,result,onChange,disabled,focusChoice,assessment,municipality,request,onLookup,onManual}){
   const [error,setError]=useState("");
   const choices=selectionChoices(criterion,route);
   const radio=criterion.method==="sum"&&criterion.exclusive_groups.some(g=>g.length===choices.length&&choices.every(c=>g.includes(c.id)));
@@ -23,6 +24,7 @@ export function FundingSelectionEditor({route,criterion,row,result,onChange,disa
   }
   return <div className="funding-selection-editor">
     <p className="eyebrow">{route} · Self-assessed</p><h3>{criterion.id} · {criterion.label}</h3>
+    {["AT.3","RD.5"].includes(criterion.id)&&<FundingLocationLookup criterion={criterion.id} assessment={assessment} municipality={municipality} request={request} onApply={onLookup} onManual={onManual} disabled={disabled}/>}
     <SelectionGuidance text={criterion.guidance}/><p>Criterion subtotal: {result.subtotal} / {result.cap} points{result.complete?" · Complete":" · Incomplete"}{result.uncapped>result.cap?` · Uncapped selections: ${result.uncapped}`:""}</p>
     {criterion.limitations.map(text=><p className="reason" key={text}>{text}</p>)}
     <SelectionSources sources={criterion.sources}/>
@@ -61,7 +63,7 @@ export function FundingSelectionBranch({rows,left,width,route,routes,score,answe
       aria-expanded={r.kind==="group"?rows.some(x=>x.criterion?.id===r.criterion.id&&x.kind!=="group"):undefined}
       aria-haspopup={r.kind==="group"?undefined:"dialog"} onClick={e=>r.kind==="group"?onGroup(r.criterion.id):onCriterion(r.criterion.id,e.currentTarget,choice===null?null:choice.id)}>
       <strong>{choice?`${choice.id} · ${choice.label}`:r.kind==="calculation"?"Enter grant and qualifying jobs":`${r.criterion.id} · ${r.criterion.label}`}</strong>
-      <span>{choice?`${value===null?"? Unanswered":value?"✓ Selected":"− Does not apply"} · ${choice.points} points`:`${result.subtotal} / ${result.cap} points · ${result.complete?"Complete":"Incomplete"}`}</span>
+      <span>{choice?`${value===null?"? Unanswered":value?"✓ Selected":"− Does not apply"} · ${choice.points} points`:`${result.subtotal} / ${result.cap} points · ${result.complete?"Complete":"Incomplete"}`}{Object.hasOwn(answers,"location_lookup")&&answers.location_lookup.automated.includes(r.criterion.id)?" · Provisional lookup":""}</span>
     </button>;
   });
 }

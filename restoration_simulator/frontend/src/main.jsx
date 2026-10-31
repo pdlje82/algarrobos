@@ -188,7 +188,8 @@ function App() {
   function openParcelRecord(parcelId){
     setWorkspace("project");requestAnimationFrame(()=>{const node=document.querySelector(`[data-parcel-id="${CSS.escape(parcelId)}"]`);if(node===null){setError("The linked parcel record is unavailable. Reload the project and review the planning link.");return;}node.scrollIntoView({block:"start"});node.focus({preventScroll:true});});
   }
-  function fundingNavigate(target,parcelId=null) {
+  async function fundingNavigate(target,parcelId=null) {
+    if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return;
     setWorkspace("project");
     if(target === "demonstrator") openPlanning();
     if(target === "land"){if(parcelId!==null)openParcelRecord(parcelId);else document.querySelector(".records")?.scrollIntoView({block:"start"});}
@@ -196,7 +197,8 @@ function App() {
   async function fundingSaved() {
     try {setData(await api("project"));} catch(e) {setError(e.message);}
   }
-  function useSimulationFinancing(route, facts) {
+  async function useSimulationFinancing(route, facts) {
+    if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return;
     const current=planning.inputs;
     if(current===null){setError("Open demonstrator planning before transferring simulation financing.");return;}
     const next={...current,funding_route:route};
@@ -448,7 +450,7 @@ function App() {
           )}
         </div>
       </header>
-      {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" data-workspace="project" aria-pressed={workspace==="project"} onClick={()=>setWorkspace("project")}>Project</button><button type="button" data-workspace="designer" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button><button type="button" data-workspace="funding" aria-pressed={workspace==="funding"} onClick={()=>openFunding()}>Funding Navigator</button></nav>}
+      {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" data-workspace="project" aria-pressed={workspace==="project"} onClick={async()=>{if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return;setWorkspace("project");}}>Project</button><button type="button" data-workspace="designer" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button><button type="button" data-workspace="funding" aria-pressed={workspace==="funding"} onClick={()=>openFunding()}>Funding Navigator</button></nav>}
       {project!==null && fundingEntry!==null && <div hidden={workspace!=="funding"}><FundingNavigator key={project.id} active={workspace==="funding"} entry={fundingEntry} data={data} request={api} onNavigate={fundingNavigate} onSaved={fundingSaved} onSimulationFinancing={useSimulationFinancing} guardRef={fundingGuard}/></div>}
       {project!==null && designerVisited && <div className="designer-workspace-host" hidden={workspace!=="designer"}><SiteDesigner key={project.id} openRequest={designerEntry} active={workspace==="designer"} data={data} request={priceRequest} beforeHandoff={planning.flush} onHandoff={openPlanning} /></div>}
       <main id="main" className="project-workspace" hidden={workspace!=="project"}>

@@ -1,5 +1,11 @@
 # Browser checks
 
+Run `node tests/browser/funding-statistics.cjs` for AL20 municipality lookup,
+provisional population/business selections, manual overrides, per-route isolation,
+notes and setup persistence after reload, actual settlement input, lookup failure
+recovery and the 32-municipality table on narrow screens. It uses the isolated API
+and app settings below and leaves simulation records unchanged.
+
 Use an isolated project save; never point these mutation tests at the normal API
 on port 8000. Activate the project's Conda environment first.
 

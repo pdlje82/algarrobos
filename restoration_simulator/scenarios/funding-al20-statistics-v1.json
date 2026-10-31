@@ -1,0 +1,288 @@
+{
+  "version": 1,
+  "id": "al20-statistics-2025-v1",
+  "territory": "AL20",
+  "label": "Alpujarra-Sierra Nevada Almeriense",
+  "year": 2025,
+  "status": "provisional",
+  "limitations": [
+    "The local AL20 scoring annex refers to INE 2023; the later verification guide tables are labelled 2025. The guide also prints 2497 in AT.3 text but 2256 in its Andalusia table. These lookups are explicit self-assessment assumptions, not confirmation of the applicable official reference year.",
+    "Municipality totals are not settlement (núcleo) counts. The guide does not list individual settlements. Use a separately verified settlement count, or explicitly choose the municipality total as a provisional proxy.",
+    "RD.5 compares the number of businesses with the published ZRL average (60), not its median (21.5). Location is an explicit assumption that this operation supports the selected municipality."
+  ],
+  "sources": [
+    {
+      "document_id": "FUND-010",
+      "page": 113,
+      "label": "FUND-010 · Population by municipality (2025) · PDF page 113",
+      "role": "published statistics (provisional scoring reference)",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-10-31"
+    },
+    {
+      "document_id": "FUND-010",
+      "page": 126,
+      "label": "FUND-010 · Andalusian population median · PDF page 126",
+      "role": "published statistics (provisional scoring reference)",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-10-31"
+    },
+    {
+      "document_id": "FUND-010",
+      "page": 181,
+      "label": "FUND-010 · Businesses (2025) · PDF page 181",
+      "role": "published statistics (provisional scoring reference)",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-10-31"
+    },
+    {
+      "document_id": "FUND-010",
+      "page": 182,
+      "label": "FUND-010 · Businesses continued · PDF page 182",
+      "role": "published statistics (provisional scoring reference)",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-10-31"
+    }
+  ],
+  "benchmarks": {
+    "population_zrl_median": "539",
+    "population_zrl_mean": "1244",
+    "population_andalusia_median": "2256",
+    "population_andalusia_mean": "5344",
+    "businesses_zrl_median": "21.5",
+    "businesses_zrl_mean": "60"
+  },
+  "municipalities": [
+    {
+      "name": "Abla",
+      "population": 1267,
+      "businesses": 54,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Abrucena",
+      "population": 1235,
+      "businesses": 53,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Alboloduy",
+      "population": 578,
+      "businesses": 21,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Alcolea",
+      "population": 831,
+      "businesses": 38,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Alhabia",
+      "population": 750,
+      "businesses": 41,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Alhama de Almería",
+      "population": 4016,
+      "businesses": 284,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Alicún",
+      "population": 203,
+      "businesses": 9,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Almócita",
+      "population": 215,
+      "businesses": 15,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Alsodux",
+      "population": 125,
+      "businesses": 1,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Bayárcal",
+      "population": 294,
+      "businesses": 11,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Beires",
+      "population": 140,
+      "businesses": 4,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Bentarique",
+      "population": 226,
+      "businesses": 11,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Berja",
+      "population": 12997,
+      "businesses": 653,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Canjáyar",
+      "population": 1143,
+      "businesses": 58,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Dalías",
+      "population": 4184,
+      "businesses": 172,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Enix",
+      "population": 624,
+      "businesses": 29,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Felix",
+      "population": 772,
+      "businesses": 37,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Fiñana",
+      "population": 1991,
+      "businesses": 78,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Fondón",
+      "population": 1151,
+      "businesses": 60,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Huécija",
+      "population": 527,
+      "businesses": 21,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Íllar",
+      "population": 484,
+      "businesses": 14,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Instinción",
+      "population": 507,
+      "businesses": 24,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Las Tres Villas",
+      "population": 551,
+      "businesses": 7,
+      "population_page": 113,
+      "businesses_page": 182
+    },
+    {
+      "name": "Laujar de Andarax",
+      "population": 1670,
+      "businesses": 117,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Nacimiento",
+      "population": 485,
+      "businesses": 19,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Ohanes",
+      "population": 553,
+      "businesses": 25,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Padules",
+      "population": 435,
+      "businesses": 18,
+      "population_page": 113,
+      "businesses_page": 181
+    },
+    {
+      "name": "Paterna del Río",
+      "population": 399,
+      "businesses": 11,
+      "population_page": 113,
+      "businesses_page": 182
+    },
+    {
+      "name": "Rágol",
+      "population": 294,
+      "businesses": 9,
+      "population_page": 113,
+      "businesses_page": 182
+    },
+    {
+      "name": "Santa Cruz de Marchena",
+      "population": 236,
+      "businesses": 1,
+      "population_page": 113,
+      "businesses_page": 182
+    },
+    {
+      "name": "Santa Fe de Mondújar",
+      "population": 523,
+      "businesses": 22,
+      "population_page": 113,
+      "businesses_page": 182
+    },
+    {
+      "name": "Terque",
+      "population": 389,
+      "businesses": 17,
+      "population_page": 113,
+      "businesses_page": 182
+    }
+  ],
+  "defaults": {
+    "municipality": null,
+    "population_mode": "unconfirmed",
+    "settlement_name": null,
+    "population": null,
+    "population_year": null
+  }
+}

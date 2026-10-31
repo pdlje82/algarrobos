@@ -1,7 +1,8 @@
 // Editing and geometry only. Scores and applicability come from Python/the snapshot.
 export function selectionSummary(score){
   if(!score||!Number.isFinite(score.subtotal)||!Number.isInteger(score.unresolved)||score.unresolved<0)throw Error("The AL20 scoring response is incompatible. Restart the backend and refresh the app.");
-  return score.total===null?`Partial subtotal: ${score.subtotal} points · ${score.unresolved} criteria unresolved`:`Calculated score: ${score.total} points · self-assessed`;
+  const provisional=Object.hasOwn(score,"location_basis")&&score.location_basis!==null?" · provisional location data":"";
+  return (score.total===null?`Partial subtotal: ${score.subtotal} points · ${score.unresolved} criteria unresolved`:`Calculated score: ${score.total} points · self-assessed`)+provisional;
 }
 export function selectionProfile(draft,route){
   if(draft.version!==4||!Object.hasOwn(draft.bundle.selection.routes,route))throw Error("Choose a supported AL20 assessment route.");
@@ -11,7 +12,10 @@ export function selectionChoices(criterion,route){return criterion.choices.filte
 export function editSelectionRow(draft,route,id,row){
   selectionProfile(draft,route);
   if(!Object.hasOwn(draft.selection_assessments[route].criteria,id))throw Error("The AL20 criterion is missing from this assessment.");
-  return {...draft,selection_assessments:{...draft.selection_assessments,[route]:{criteria:{...draft.selection_assessments[route].criteria,[id]:row}}}};
+  const assessment=draft.selection_assessments[route];
+  const next={...assessment,criteria:{...assessment.criteria,[id]:row}};
+  if(Object.hasOwn(assessment,"location_lookup")&&JSON.stringify(row.answers)!==JSON.stringify(assessment.criteria[id].answers))next.location_lookup={...assessment.location_lookup,automated:assessment.location_lookup.automated.filter(cid=>cid!==id)};
+  return {...draft,selection_assessments:{...draft.selection_assessments,[route]:next}};
 }
 export function setSelectionChoice(row,criterion,id,value){
   if(!Object.hasOwn(row.answers,id)||![true,false,null].includes(value))throw Error("Invalid AL20 subcriterion selection.");

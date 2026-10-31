@@ -188,7 +188,7 @@ class GuidanceUpdateTests(unittest.TestCase):
         for profile in old["bundle"]["selection"]["profiles"].values():
             criterion = next(c for c in profile["criteria"] if c["id"] == "AT.3")
             criterion.update(guidance="Use the INE 2023 settlement population and local median.", limitations=[])
-            criterion["sources"] = [s for s in criterion["sources"] if s["page"] not in {11, 113}]
+            criterion["sources"] = [s for s in criterion["sources"] if s["page"] not in {11, 113, 126}]
         row = old["selection_assessments"]["LEADER-AL20-3.4"]["criteria"]["AT.3"]
         row["answers"] = {"AT.3.1": True, "AT.3.2": False}
         row["reference"] = "Keep my population evidence"
@@ -204,6 +204,7 @@ class GuidanceUpdateTests(unittest.TestCase):
             self.assertIn("2025", criterion["guidance"])
             self.assertIn("https://www.ine.es/nomen2/index.do?L=1", criterion["guidance"])
             self.assertIn(113, [s["page"] for s in criterion["sources"] if s["document_id"] == "FUND-010"])
+            self.assertIn(126, [s["page"] for s in criterion["sources"] if s["document_id"] == "FUND-010"])
         self.assertEqual(self.score(draft=prepared["draft"])["subtotal"], 10)
         after = funding.operate(saved, self.project, None, "draft", prepared["draft"], None)
         self.assertEqual(after["scenarios"], saved["scenarios"])

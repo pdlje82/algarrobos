@@ -5733,7 +5733,7 @@
               ]
             ],
             "requires": {},
-            "guidance": "How to check the population comparison:\n\n1. Use the INE population lookup (Nomenclátor). Select Almería, the municipality and the actual settlement (núcleo) where the operation takes place. Read its total population for the applicable reference year; a settlement can have a different population from the whole municipality.\n\nhttps://www.ine.es/nomen2/index.do?L=1\n\n2. Open FUND-010, Annex I, PDF page 113. In the AL20 / Alpujarra-Sierra Nevada Almeriense row, use Mediana ZRL (median), not Media ZRL (average). The published 2025 table lists a median of 539 inhabitants. This is a 2025 reference, not a verified 2023 benchmark.\n\n3. Compare the settlement population with the confirmed applicable median. Below means strictly smaller: if 539 were the applicable benchmark, 538 would be below it; 539 would be equal and would not qualify as below; 540 would be above it. This example does not establish the applicable reference year.\n\nReference-year discrepancy: the local AL20 table (FUND-004) says INE 2023, while the later verification guidance (FUND-010, PDF pages 10–11) refers to the latest published figures and its Annex I is labelled 2025. Confirm the applicable reference year and benchmark with AL20 before selecting a scored alternative. Do not mix a 2023 settlement figure with the 2025 median. If unsure, keep the answer Unanswered and record the question in your assessment notes.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense. Mediana ZRL means the median across the territory for the indicator in that table. In the population table it refers to inhabitants, not businesses or the population of Alhama alone.\n\nHow to check the population comparison:\n\n1. Use the INE population lookup (Nomenclátor). Select Almería, the municipality and the actual settlement (núcleo) where the operation takes place. Read its total population for the applicable reference year; a settlement can have a different population from the whole municipality.\n\nhttps://www.ine.es/nomen2/index.do?L=1\n\n2. Open FUND-010, Annex I, PDF page 113. In the AL20 / Alpujarra-Sierra Nevada Almeriense row, use Mediana ZRL (median), not Media ZRL (average). The published 2025 table lists a median of 539 inhabitants. This is a 2025 reference, not a verified 2023 benchmark. For the Andalusia-wide population median, open FUND-010, Annex I, PDF page 126; this is a separate comparison from the AL20 ZRL median.\n\n3. Compare the settlement population with the confirmed applicable median. Below means strictly smaller: if 539 were the applicable benchmark, 538 would be below it; 539 would be equal and would not qualify as below; 540 would be above it. This example does not establish the applicable reference year.\n\nReference-year discrepancy: the local AL20 table (FUND-004) says INE 2023, while the later verification guidance (FUND-010, PDF pages 10–11) refers to the latest published figures and its Annex I is labelled 2025. Confirm the applicable reference year and benchmark with AL20 before selecting a scored alternative. Do not mix a 2023 settlement figure with the 2025 median. If unsure, keep the answer Unanswered and record the question in your assessment notes.",
             "limitations": [
               "The 539-inhabitant AL20 median is from the 2025 Annex I table. It is not a verified INE 2023 threshold. Obtain AL20 confirmation of the applicable year before relying on this comparison. No population or score is inferred from the selected municipality."
             ],
@@ -5774,6 +5774,14 @@
                 "document_id": "FUND-010",
                 "page": 113,
                 "label": "FUND-010 · AL20 median (2025) · PDF page 113",
+                "role": "population verification guidance",
+                "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-010",
+                "page": 126,
+                "label": "FUND-010 · Andalusian population median · PDF page 126",
                 "role": "population verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
@@ -6058,7 +6066,7 @@
             ],
             "exclusive_groups": [],
             "requires": {},
-            "guidance": "Compare the municipality business count with the ZRL mean specified in the local AL20 table. Do not infer this from location alone.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense. This criterion compares business counts, not inhabitants. Media means average; mediana means median. Use the measure specified by the criterion.\n\nCompare the municipality business count with the ZRL mean specified in the local AL20 table. Do not infer this from location alone.",
             "limitations": [],
             "sources": [
               {
@@ -6687,7 +6695,7 @@
               ]
             ],
             "requires": {},
-            "guidance": "Select only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense.\n\nSelect only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application.",
             "limitations": [
               "PE.1.5 and PE.1.6 apply only to route 2.7, as stated in the local table and verification guide."
             ],
@@ -8248,7 +8256,7 @@
             ],
             "exclusive_groups": [],
             "requires": {},
-            "guidance": "Select only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application. Where the row refers to the EDL, confirm that the relevant need, sector, theme or action is explicitly identified there; a general environmental benefit is not sufficient.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense.\n\nSelect only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application. Where the row refers to the EDL, confirm that the relevant need, sector, theme or action is explicitly identified there; a general environmental benefit is not sufficient.",
             "limitations": [
               "EDL qualifications are user assertions, not inferred from this project. FUND-010 PDF page 231 requires objective, transparent identification in the strategy."
             ],
@@ -8702,7 +8710,7 @@
               ]
             ],
             "requires": {},
-            "guidance": "How to check the population comparison:\n\n1. Use the INE population lookup (Nomenclátor). Select Almería, the municipality and the actual settlement (núcleo) where the operation takes place. Read its total population for the applicable reference year; a settlement can have a different population from the whole municipality.\n\nhttps://www.ine.es/nomen2/index.do?L=1\n\n2. Open FUND-010, Annex I, PDF page 113. In the AL20 / Alpujarra-Sierra Nevada Almeriense row, use Mediana ZRL (median), not Media ZRL (average). The published 2025 table lists a median of 539 inhabitants. This is a 2025 reference, not a verified 2023 benchmark.\n\n3. Compare the settlement population with the confirmed applicable median. Below means strictly smaller: if 539 were the applicable benchmark, 538 would be below it; 539 would be equal and would not qualify as below; 540 would be above it. This example does not establish the applicable reference year.\n\nReference-year discrepancy: the local AL20 table (FUND-004) says INE 2023, while the later verification guidance (FUND-010, PDF pages 10–11) refers to the latest published figures and its Annex I is labelled 2025. Confirm the applicable reference year and benchmark with AL20 before selecting a scored alternative. Do not mix a 2023 settlement figure with the 2025 median. If unsure, keep the answer Unanswered and record the question in your assessment notes.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense. Mediana ZRL means the median across the territory for the indicator in that table. In the population table it refers to inhabitants, not businesses or the population of Alhama alone.\n\nHow to check the population comparison:\n\n1. Use the INE population lookup (Nomenclátor). Select Almería, the municipality and the actual settlement (núcleo) where the operation takes place. Read its total population for the applicable reference year; a settlement can have a different population from the whole municipality.\n\nhttps://www.ine.es/nomen2/index.do?L=1\n\n2. Open FUND-010, Annex I, PDF page 113. In the AL20 / Alpujarra-Sierra Nevada Almeriense row, use Mediana ZRL (median), not Media ZRL (average). The published 2025 table lists a median of 539 inhabitants. This is a 2025 reference, not a verified 2023 benchmark. For the Andalusia-wide population median, open FUND-010, Annex I, PDF page 126; this is a separate comparison from the AL20 ZRL median.\n\n3. Compare the settlement population with the confirmed applicable median. Below means strictly smaller: if 539 were the applicable benchmark, 538 would be below it; 539 would be equal and would not qualify as below; 540 would be above it. This example does not establish the applicable reference year.\n\nReference-year discrepancy: the local AL20 table (FUND-004) says INE 2023, while the later verification guidance (FUND-010, PDF pages 10–11) refers to the latest published figures and its Annex I is labelled 2025. Confirm the applicable reference year and benchmark with AL20 before selecting a scored alternative. Do not mix a 2023 settlement figure with the 2025 median. If unsure, keep the answer Unanswered and record the question in your assessment notes.",
             "limitations": [
               "The 539-inhabitant AL20 median is from the 2025 Annex I table. It is not a verified INE 2023 threshold. Obtain AL20 confirmation of the applicable year before relying on this comparison. No population or score is inferred from the selected municipality."
             ],
@@ -8743,6 +8751,14 @@
                 "document_id": "FUND-010",
                 "page": 113,
                 "label": "FUND-010 · AL20 median (2025) · PDF page 113",
+                "role": "population verification guidance",
+                "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-010",
+                "page": 126,
+                "label": "FUND-010 · Andalusian population median · PDF page 126",
                 "role": "population verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
@@ -9033,7 +9049,7 @@
             ],
             "exclusive_groups": [],
             "requires": {},
-            "guidance": "Compare the municipality business count with the ZRL mean specified in the local AL20 table. Do not infer this from location alone.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense. This criterion compares business counts, not inhabitants. Media means average; mediana means median. Use the measure specified by the criterion.\n\nCompare the municipality business count with the ZRL mean specified in the local AL20 table. Do not infer this from location alone.",
             "limitations": [],
             "sources": [
               {
@@ -9491,7 +9507,7 @@
               ]
             ],
             "requires": {},
-            "guidance": "Select only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense.\n\nSelect only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application.",
             "limitations": [
               "PE.1.5 and PE.1.6 apply only to route 2.7, as stated in the local table and verification guide."
             ],
@@ -11085,7 +11101,7 @@
             ],
             "exclusive_groups": [],
             "requires": {},
-            "guidance": "Select only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application. Where the row refers to the EDL, confirm that the relevant need, sector, theme or action is explicitly identified there; a general environmental benefit is not sufficient.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense.\n\nSelect only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application. Where the row refers to the EDL, confirm that the relevant need, sector, theme or action is explicitly identified there; a general environmental benefit is not sufficient.",
             "limitations": [
               "EDL qualifications are user assertions, not inferred from this project. FUND-010 PDF page 231 requires objective, transparent identification in the strategy."
             ],
@@ -11546,7 +11562,7 @@
               ]
             ],
             "requires": {},
-            "guidance": "How to check the population comparison:\n\n1. Use the INE population lookup (Nomenclátor). Select Almería, the municipality and the actual settlement (núcleo) where the operation takes place. Read its total population for the applicable reference year; a settlement can have a different population from the whole municipality.\n\nhttps://www.ine.es/nomen2/index.do?L=1\n\n2. Open FUND-010, Annex I, PDF page 113. In the AL20 / Alpujarra-Sierra Nevada Almeriense row, use Mediana ZRL (median), not Media ZRL (average). The published 2025 table lists a median of 539 inhabitants. This is a 2025 reference, not a verified 2023 benchmark.\n\n3. Compare the settlement population with the confirmed applicable median. Below means strictly smaller: if 539 were the applicable benchmark, 538 would be below it; 539 would be equal and would not qualify as below; 540 would be above it. This example does not establish the applicable reference year.\n\nReference-year discrepancy: the local AL20 table (FUND-004) says INE 2023, while the later verification guidance (FUND-010, PDF pages 10–11) refers to the latest published figures and its Annex I is labelled 2025. Confirm the applicable reference year and benchmark with AL20 before selecting a scored alternative. Do not mix a 2023 settlement figure with the 2025 median. If unsure, keep the answer Unanswered and record the question in your assessment notes.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense. Mediana ZRL means the median across the territory for the indicator in that table. In the population table it refers to inhabitants, not businesses or the population of Alhama alone.\n\nHow to check the population comparison:\n\n1. Use the INE population lookup (Nomenclátor). Select Almería, the municipality and the actual settlement (núcleo) where the operation takes place. Read its total population for the applicable reference year; a settlement can have a different population from the whole municipality.\n\nhttps://www.ine.es/nomen2/index.do?L=1\n\n2. Open FUND-010, Annex I, PDF page 113. In the AL20 / Alpujarra-Sierra Nevada Almeriense row, use Mediana ZRL (median), not Media ZRL (average). The published 2025 table lists a median of 539 inhabitants. This is a 2025 reference, not a verified 2023 benchmark. For the Andalusia-wide population median, open FUND-010, Annex I, PDF page 126; this is a separate comparison from the AL20 ZRL median.\n\n3. Compare the settlement population with the confirmed applicable median. Below means strictly smaller: if 539 were the applicable benchmark, 538 would be below it; 539 would be equal and would not qualify as below; 540 would be above it. This example does not establish the applicable reference year.\n\nReference-year discrepancy: the local AL20 table (FUND-004) says INE 2023, while the later verification guidance (FUND-010, PDF pages 10–11) refers to the latest published figures and its Annex I is labelled 2025. Confirm the applicable reference year and benchmark with AL20 before selecting a scored alternative. Do not mix a 2023 settlement figure with the 2025 median. If unsure, keep the answer Unanswered and record the question in your assessment notes.",
             "limitations": [
               "The 539-inhabitant AL20 median is from the 2025 Annex I table. It is not a verified INE 2023 threshold. Obtain AL20 confirmation of the applicable year before relying on this comparison. No population or score is inferred from the selected municipality."
             ],
@@ -11587,6 +11603,14 @@
                 "document_id": "FUND-010",
                 "page": 113,
                 "label": "FUND-010 · AL20 median (2025) · PDF page 113",
+                "role": "population verification guidance",
+                "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-010",
+                "page": 126,
+                "label": "FUND-010 · Andalusian population median · PDF page 126",
                 "role": "population verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
@@ -11772,7 +11796,7 @@
             ],
             "exclusive_groups": [],
             "requires": {},
-            "guidance": "Compare the municipality business count with the ZRL mean specified in the local AL20 table. Do not infer this from location alone.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense. This criterion compares business counts, not inhabitants. Media means average; mediana means median. Use the measure specified by the criterion.\n\nCompare the municipality business count with the ZRL mean specified in the local AL20 table. Do not infer this from location alone.",
             "limitations": [],
             "sources": [
               {
@@ -12828,7 +12852,7 @@
               ]
             ],
             "requires": {},
-            "guidance": "Select only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application. Where the row refers to the EDL, confirm that the relevant need, sector, theme or action is explicitly identified there; a general environmental benefit is not sufficient.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense.\n\nSelect only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application. Where the row refers to the EDL, confirm that the relevant need, sector, theme or action is explicitly identified there; a general environmental benefit is not sufficient.",
             "limitations": [
               "EDL qualifications are user assertions, not inferred from this project. FUND-010 PDF page 231 requires objective, transparent identification in the strategy."
             ],
@@ -13232,7 +13256,7 @@
             ],
             "exclusive_groups": [],
             "requires": {},
-            "guidance": "Select only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application. Where the row refers to the EDL, confirm that the relevant need, sector, theme or action is explicitly identified there; a general environmental benefit is not sufficient.",
+            "guidance": "ZRL means Zona Rural LEADER (LEADER rural area): the territory covered by the local LEADER programme. Here it is AL20, Alpujarra-Sierra Nevada Almeriense.\n\nSelect only conditions met by this operation. Supporting references are optional during scenario exploration; source guidance describes the documents required for an actual application. Where the row refers to the EDL, confirm that the relevant need, sector, theme or action is explicitly identified there; a general environmental benefit is not sufficient.",
             "limitations": [
               "EDL qualifications are user assertions, not inferred from this project. FUND-010 PDF page 231 requires objective, transparent identification in the strategy."
             ],

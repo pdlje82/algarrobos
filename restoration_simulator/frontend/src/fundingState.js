@@ -1,4 +1,20 @@
 export const FUNDING_STEPS = ["Activity", "People and land", "Explore options", "Compare alternatives", "Build a funding plan", "Review and use"];
+// Opening a context resumes its draft; changing context needs an explicit choice
+// so that the next autosave cannot overwrite unrelated work.
+export function fundingEntryAction(draft,entry){
+  const target=entry?.target;
+  if(target!==undefined&&!["activity","demonstrator","business"].includes(target))throw Error("Unsupported funding entry context.");
+  if(draft===null)return "create";
+  if(target===undefined)return "resume";
+  const parcelIds=entry.parcelId===undefined?[]:[entry.parcelId];
+  if(parcelIds.some(id=>typeof id!=="string"||!id))throw Error("The funding entry parcel is invalid.");
+  const captured=draft.baseline.parcel_ids;
+  if(!Array.isArray(captured))throw Error("The saved funding context is incomplete. Reload the project and review the saved exploration.");
+  return draft.baseline.target===target&&captured.length===parcelIds.length&&captured.every(id=>parcelIds.includes(id))?"resume":"review";
+}
+export function fundingSaveIsCurrent(savedDraft,currentDraft){
+  return JSON.stringify(savedDraft)===JSON.stringify(currentDraft);
+}
 export function effectiveFacts(draft) { return {...draft.baseline.facts, ...draft.overrides}; }
 export function assumptionCount(draft){
   const scoring=draft.version===4?Object.values(draft.selection_assessments).filter(a=>Object.values(a.criteria).some(row=>Object.values(row.answers).some(v=>v!==null)||Object.values(row.inputs).some(v=>v!==null))).length:0;

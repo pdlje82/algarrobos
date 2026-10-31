@@ -33,6 +33,9 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   const medianSource=editor.getByRole('link',{name:'FUND-010 · AL20 median (2025) · PDF page 113',exact:true});
   await medianSource.click();await page.locator('dialog.document-viewer').waitFor();await poll(async()=>!await page.getByLabel('PDF page',{exact:true}).isDisabled());assert.equal(await page.getByLabel('PDF page',{exact:true}).inputValue(),'113');
   await page.keyboard.press('Escape');assert(await medianSource.evaluate(n=>document.activeElement===n));
+  const andalusiaSource=editor.getByRole('link',{name:'FUND-010 · Andalusian population median · PDF page 126',exact:true});
+  await andalusiaSource.click();await page.locator('dialog.document-viewer').waitFor();await poll(async()=>!await page.getByLabel('PDF page',{exact:true}).isDisabled());assert.equal(await page.getByLabel('PDF page',{exact:true}).inputValue(),'126');
+  await page.keyboard.press('Escape');assert(await andalusiaSource.evaluate(n=>document.activeElement===n));
   await editor.locator('[id="al20-AT.3.1"]').check();
   await editor.getByLabel('Supporting reference (optional)',{exact:true}).fill('Assumed settlement population comparison');
   await settled();await poll(async()=>/Partial subtotal: 10 points/.test(await graph.locator('.funding-annex-total').innerText()));

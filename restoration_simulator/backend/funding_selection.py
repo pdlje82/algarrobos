@@ -149,7 +149,7 @@ def validate_answers(assessments, bundle):
     require(isinstance(assessments, dict), "AL20 assessments must be an object.")
     keys(assessments, set(bundle["selection"]["routes"]), "AL20 route assessments")
     for route, assessment in assessments.items():
-        keys(assessment, {"criteria"}, "AL20 route assessment")
+        keys(assessment, {"criteria"} | ({"location_lookup"} if "location_lookup" in assessment else set()), "AL20 route assessment")
         profile = profile_for(bundle, route)
         rows = assessment["criteria"]
         keys(rows, {c["id"] for c in profile["criteria"]}, "AL20 criterion answers")
@@ -175,6 +175,8 @@ def validate_answers(assessments, bundle):
                 require(len(selected & set(group)) <= 1, "AL20 " + cid + ": these subcriteria are mutually exclusive: " + ", ".join(sorted(selected & set(group))))
             for child, parents in criterion["requires"].items():
                 require(child not in selected or set(parents) <= selected, "AL20 " + child + " requires " + ", ".join(parents) + ".")
+        from .funding_statistics import validate_assessment
+        validate_assessment(assessment, bundle)
     return assessments
 
 
@@ -215,10 +217,17 @@ def calculate(bundle, assessments, route):
     unresolved = sum(not c["complete"] for c in breakdown)
     subtotal = sum((Decimal(str(c["subtotal"])) for c in breakdown), Decimal(0))
     threshold = bundle["rules"][route.removeprefix("LEADER-AL20-")]["minimum_score"]
+    location_basis = None
+    assessment = assessments[route]
+    if "location_lookup" in assessment and assessment["location_lookup"]["automated"]:
+        from .funding_statistics import dataset
+        metadata = assessment["location_lookup"]
+        location_basis = {"status": "provisional", "municipality": metadata["settings"]["municipality"], "year": dataset()["year"],
+                          "automated": deepcopy(metadata["automated"]), "dataset_id": metadata["dataset_id"]}
     return {"route": route, "profile": bundle["selection"]["routes"][route], "basis": "Self-assessed; supporting references are not certified",
             "subtotal": float(subtotal), "total": float(subtotal) if unresolved == 0 else None, "unresolved": unresolved,
             "threshold": threshold, "result": "unknown" if unresolved else "pass" if subtotal >= Decimal(str(threshold)) else "fail",
-            "criteria": breakdown}
+            "criteria": breakdown, "location_basis": location_basis}
 
 
 def assess(entry, facts, bundle, assessments):
@@ -231,5 +240,9 @@ def assess(entry, facts, bundle, assessments):
     check = next(c for c in result["checks"] if c["field"] == "selection_score")
     check.update(result=score["result"], message=(f"Self-assessed AL20 score: {score['total']:g} points; threshold {score['threshold']:g}." if score["total"] is not None else f"Partial subtotal: {score['subtotal']:g} points · {score['unresolved']} criteria unresolved. Complete the annex assessment."),
                  sources=list({(s["document_id"], s["page"], s["sha256"]): s for c in score["criteria"] for s in c["sources"]}.values()))
+    if score["location_basis"] is not None:
+        from .funding_statistics import dataset
+        check["message"] += " Includes provisional 2025 location assumptions; the applicable official reference year requires confirmation."
+        check["sources"].extend(dataset()["sources"])
     result["selection_assessment"] = score
     return result

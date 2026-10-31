@@ -105,6 +105,7 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     Object.assign(inputs,{route_id:'existing',parcel_id:'new',parcel_name:'Navigator parcel',parcel_area:4500,covered_area:4500});
     await api('commit',{revision:p.revision,request_id:crypto.randomUUID(),action_id:'establish_access',inputs});
     await page.reload();await page.getByRole('button',{name:'Explore funding',exact:true}).click();
+    await page.getByRole('button',{name:'Save and open requested exploration',exact:true}).click();
     await page.getByRole('heading',{name:'Funding Navigator',exact:true}).waitFor();
     await page.getByText('activity · 1 linked parcel(s)',{exact:true}).waitFor();
     await page.getByRole('button',{name:'Project',exact:true}).click();
@@ -113,6 +114,7 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     assert.equal(await page.locator('.demo-editor').getByRole('button',{name:'Explore funding',exact:true}).count(),1);
     assert.equal(await page.locator('.demo-editor').getByLabel('Planned funding route',{exact:true}).count(),0);
     await page.locator('.demo-editor').getByRole('button',{name:'Explore funding',exact:true}).click();
+    await page.getByRole('button',{name:'Save and open requested exploration',exact:true}).click();
     await page.getByText('demonstrator · 1 linked parcel(s)',{exact:true}).waitFor();
     assert.deepEqual(errors,[]);
     console.log('Funding browser: guided business assumptions, €50k cap, source PDF, saved plan, reload, retry and phone themes passed.');

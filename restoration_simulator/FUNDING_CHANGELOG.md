@@ -1,5 +1,44 @@
 # Funding Navigator changes
 
+## 2026-10-31 — AL20 municipality statistics and explicit location lookup
+
+- Added a source-cited database of all 32 AL20 municipalities: 2025 population,
+  business counts and separate ZRL/Andalusia benchmarks from FUND-010.
+- AT.3/RD.5 editors can populate their selections from a chosen municipality.
+  Actual settlement counts remain explicit inputs; municipality totals require
+  an explicit provisional-proxy choice. RD.5 uses the published mean of 60.
+- Lookup setup is route-specific and persisted with an immutable dataset hash.
+  Existing assessments remain manual until explicitly enabled. Manual overrides
+  detach only the changed criterion; notes/references are preserved. Provisional
+  labels and reference-year discrepancies remain visible.
+- Added authoritative lookup API validation, boundary/override/isolation and
+  persistence checks, plus isolated browser coverage of the complete workflow.
+
+## 2026-10-31 — explain ZRL in annex nodes
+
+- Expanded ZRL as Zona Rural LEADER and identified the AL20 territory in all
+  affected criterion explanations (AT.3, RD.5, PE.1, PS.1 and JR.3 as applicable).
+  AT.3 explains the territorial population median; RD.5 distinguishes business
+  counts and the mean/median terminology. Scoring and original wording are unchanged.
+
+## 2026-10-31 — AT.3 Andalusian median source
+
+- Added the FUND-010 page 126 document-viewer link to AT.3 in all three profiles,
+  labelled separately from the AL20 ZRL median on page 113. Existing assessments
+  receive the added source through the reviewed catalogue update.
+
+## 2026-10-31 — resume saved answers from direct funding entry
+
+- Fixed demonstrator/parcel **Explore funding** entry replacing a matching saved
+  draft with a fresh context. Matching entries now resume answers, annex choices
+  and notes; a different context offers explicit preservation as a named alternative
+  before switching.
+- Exposed save status and **Save now** beside the funding workspace. Autosave
+  starts after 1.2 seconds without an edit and confirms success after Python writes.
+  New drafts remain pending until actually saved; Project navigation flushes edits.
+- Fixed retries of older failed requests marking newer edits saved. Only the
+  exact saved snapshot clears the dirty state; newer edits then autosave separately.
+
 ## 2026-10-31 — CO.1 strategy links
 
 - Added the official ADR Alpujarra EDLL 2023–2027 version-1 publication page

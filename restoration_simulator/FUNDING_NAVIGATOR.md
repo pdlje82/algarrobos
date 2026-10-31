@@ -10,8 +10,9 @@ and route switching preserve answers. Matrix and Your answers link back to Graph
 
 Three aid-line profiles cover 1.11, 2.6, 2.7, 3.4 and 3.5. Each route has its
 own answers, even when two routes share a profile. The working option selects the
-route when supported; otherwise choose one explicitly. No answers are inferred
-from location, plants, applicant descriptions or environmental labels.
+route when supported; otherwise choose one explicitly. Location answers can be
+calculated through the explicit provisional lookup described below. No answers
+are inferred from plants, applicant descriptions or environmental labels.
 
 Python calculates exact decimal sums, source-defined exclusions/additions and
 criterion caps. Every applicable subcriterion must be selected or explicitly
@@ -31,11 +32,51 @@ was added. Links open the existing viewer with edition verification.
 
 AT.3 includes instructions and a link for the INE settlement lookup, the
 distinction between a settlement and its municipality, and the strict below/equal/
-above comparison. Its sources open FUND-010 PDF pp. 10–11 and Annex I p. 113.
+above comparison. Its sources open FUND-010 PDF pp. 10–11 and Annex I pp. 113/126.
 The 539-person AL20 median is labelled **2025**, not a verified 2023 threshold:
 the local table says 2023 while the later guide refers to the latest figures.
-Confirm the applicable year with AL20; the guidance does not choose a year or
-award points automatically. Uncertainty should remain an unanswered selection.
+Confirm the applicable year with AL20. Uncertainty can remain an unanswered
+selection; using the 2025 lookup is an explicit provisional scenario assumption.
+
+### Population and business lookup
+
+Open AT.3 or RD.5 in the graph editor. **Population and business lookup** starts
+with the existing municipality choice where it matches the database. Choose a
+municipality, then **Set AT.3 and RD.5 from this location**. The lookup calculates
+both criteria for the current route and autosaves their selections and setup.
+Changing that lookup municipality recalculates the criteria still in automatic
+mode. Other routes retain their own setup and answers. Notes/references survive.
+
+AT.3 initially leaves the settlement population unconfirmed. Enter the actual
+núcleo name and its 2025 population, or explicitly choose the municipality total
+as a provisional proxy. The guide does not provide settlement counts, so the app
+does not fabricate a list of núcleos. A different source year needs manual answers.
+After entering settlement details, apply the lookup. A population below 539
+selects AT.3.1; otherwise one below 2256 selects AT.3.2; equality does not qualify.
+Only one alternative is selected. Published criterion points remain unchanged.
+
+RD.5 uses **businesses < 60**, the published ZRL average, not its median of 21.5.
+Using it asserts that the operation supports the selected municipality; location
+alone does not certify that support. Manual editing of a selection switches only
+that criterion to manual. **Use manual answers** also detaches its automatic
+relationship while retaining the current answers. Reapplying the two-criterion
+lookup explicitly replaces both selections. Provisional lookup labels appear in
+the graph and score; these do not resolve the official reference-year discrepancy.
+
+`scenarios/funding-al20-statistics-v1.json` is the immutable, versioned database
+of all 32 municipalities, their published population/business counts, and separate
+population/business means and medians. It cites FUND-010 pp. 113, 126, 181–182,
+including the stored document hash. All values are labelled 2025. Its published
+rounded means are preserved as printed, rather than replaced with recalculations.
+The full table and source links are inspectable from each lookup editor.
+
+Funding draft v4 has an explicit optional `selection_assessments[route].location_lookup`
+v1 contract: absence means manual/historical assessment; no fields are repaired or
+inferred during loading. Opting in stores the dataset ID/hash, settings and list
+of automated criteria. Backend validation recomputes automatic selections and
+rejects inconsistent answers or missing/incompatible data. Dataset editions must
+remain available unchanged for replay. Ordinary loading and catalogue updates
+never opt in, alter saved alternatives or change historical manual scores.
 
 CO.1 links to the [official EDLL version-1 publication page (ADR Alpujarra,
 2023–2027 strategy)](https://alpujarraalmeria.es/edll-version-1/), the
@@ -102,6 +143,22 @@ or use **Duplicate exploration** and save a new alternative. **Use this funding 
 requires a review and records the preferred provisional plan for the activity.
 Revisions retain previous adopted plans. No exploration, save or adoption changes
 simulation cash, time, ownership, organisations, employment or grant decisions.
+
+Answers, annex selections and notes autosave **1.2 seconds after the last edit**
+while Funding Navigator is active. That interval starts the save request; the
+visible **Funding save status** changes to **Saved to this computer** only after
+Python confirms persistence of the current draft. Wait for that status before a
+browser reload, or use **Save now**. A failed request shows an error and explicit
+retry. If newer edits exist when an older request is retried, the older save
+cannot mark them saved: the newer draft remains pending and autosaves separately.
+
+Opening **Explore funding** from the same demonstrator or parcel resumes its
+saved draft, including notes and annex answers. Opening a different activity or
+parcel retains the current draft and shows a choice: continue it, or preserve it
+as a named alternative before opening the requested exploration. A draft already
+identical to a named alternative is not duplicated. Project navigation flushes
+pending funding edits before leaving. **Save exploration** remains useful for
+named checkpoints; it is not required for ordinary draft autosave.
 
 **Review proposed changes** links back to the owning tools. **Update assessment /
 refresh baseline** explicitly adopts the current recorded context and catalogue,

@@ -2,7 +2,7 @@ import React, {useEffect, useReducer, useRef, useState} from "react";
 import {DocumentLink} from "./DocumentLink.jsx";
 import {Alert} from "./Alert.jsx";
 import {money} from "./format.js";
-import {FUNDING_STEPS, effectiveFacts, overrideAnswer, resetAnswer, fundingResults, answerLabel, fundingStatus, fundingClass, FUNDING_HELP, presentQuestion, logicalQuestionId, assumptionCount, explicitlyUnknown} from "./fundingState.js";
+import {FUNDING_STEPS, effectiveFacts, overrideAnswer, resetAnswer, fundingResults, answerLabel, fundingStatus, fundingClass, FUNDING_HELP, presentQuestion, logicalQuestionId, assumptionCount, explicitlyUnknown,fundingEntryAction,fundingSaveIsCurrent} from "./fundingState.js";
 import {FundingHelp} from "./FundingHelp.jsx";
 import {ApplicantPicker,FundingAnswers} from "./FundingAnswers.jsx";
 import {FundingQuestionHelp} from "./FundingQuestionHelp.jsx";
@@ -52,12 +52,13 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   const [answersOpen,setAnswersOpen]=useState(false),[upgrade,setUpgrade]=useState(null);
   const [catalogueReview,setCatalogueReview]=useState(null),[answerReset,setAnswerReset]=useState(0);
   const [editor,setEditor]=useState(null);
+  const [entryReview,setEntryReview]=useState(null);
   const [annexOpen,setAnnexOpen]=useState(false),[annexRoute,setAnnexRoute]=useState(null),[annexGroups,setAnnexGroups]=useState({}),[annexSignal,setAnnexSignal]=useState(0);
   const scoringRoute=draft?.version===4&&Object.hasOwn(draft.bundle.selection.routes,workingOption)?workingOption:annexRoute;
   useEffect(()=>{if(editor?.criterion&&editor.route!==scoringRoute)setEditor(null);},[scoringRoute]);
   const editorOpener=useRef(null);
   const evaluationDelay=useRef(0);
-  const serial = useRef(0), retry = useRef(null), editSerial = useRef(0), draftRef = useRef(null);
+  const serial = useRef(0), retry = useRef(null), draftRef = useRef(null);
   const loadSerial = useRef(0);
   draftRef.current = draft;
   const revision = data.revision, planningRevision = data.planning.planning_revision;
@@ -76,11 +77,12 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
       try {
         const w = await request("funding");
         let d = w.attachment.draft;
-        if (entry?.target || d === null) d = await context(entry?.target ?? "activity", entry?.parcelId ? [entry.parcelId] : []);
-        let editingNotice="";
+        const entryAction=fundingEntryAction(d,entry);
+        if (entryAction==="create") d = await context(entry?.target ?? "activity", entry?.parcelId ? [entry.parcelId] : []);
+        let editingNotice=entryAction==="resume"?"Resumed your saved funding exploration, including its answers, annex selections and notes.":"";
         let applicantReview=null;
         if(d.version<3){const prepared=await request("funding/prepare",{revision,draft:d});d=prepared.draft;editingNotice=prepared.notice;applicantReview=prepared.applicant_review;}
-        if (token === loadSerial.current) {resetVisual();setWorkspace(w); setDraft(d); setScope(d.baseline.target); setParcels(d.baseline.parcel_ids); setStep(0); setQuestionId(null); setDirty(false); setReview(null); setLoadedScenarioId(null); setNotice(editingNotice);setUpgrade(applicantReview===null?null:{review:applicantReview,visible:true,previous:null,targetStep:1});retry.current = null;}
+        if (token === loadSerial.current) {resetVisual();setEntryReview(entryAction==="review"?{target:entry.target,parcelIds:entry.parcelId===undefined?[]:[entry.parcelId]}:null);setWorkspace(w); setDraft(d); setScope(d.baseline.target); setParcels(d.baseline.parcel_ids); setStep(0); setQuestionId(null); setDirty(!fundingSaveIsCurrent(d,w.attachment.draft)); setReview(null); setLoadedScenarioId(null); setNotice(editingNotice);setUpgrade(applicantReview===null?null:{review:applicantReview,visible:true,previous:null,targetStep:1});retry.current = null;}
       } catch (e) {if (token === loadSerial.current) setError(e.message);}
       finally {if (token === loadSerial.current) setBusy(false);}
     })();
@@ -106,20 +108,21 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
     const timer = setTimeout(() => save("draft"), 1200);
     return () => clearTimeout(timer);
   }, [draft, dirty, busy, active]);
-  function edit(next,delay=0) {evaluationDelay.current=delay;setDraft(next); setDirty(true); setReview(null); setNotice(""); editSerial.current++;}
+  function edit(next,delay=0) {evaluationDelay.current=delay;setDraft(next); setDirty(true); setReview(null); setNotice("");}
   useEffect(()=>{if(guardRef)guardRef.current={dirty,flush:()=>save("draft")};return()=>{if(guardRef)guardRef.current=null;};});
   async function save(operation, recordId = null) {
     if (busy || workspace === null || operation!=="delete"&&![3,4].includes(draft.version)) return false;
     if(operation === "save" && recordId === null)recordId=loadedScenarioId;
     const body = retry.current ?? {revision, funding_revision: workspace.funding_revision, planning_revision: planningRevision, design_revision: data.designer_revision, request_id: crypto.randomUUID(), operation, draft: operation === "delete" ? null : draft, record_id: recordId};
     if (body.operation !== operation) {setError("Retry the failed save or reload saved funding before a different operation."); return false;}
-    retry.current = body; const editedAt = editSerial.current; setBusy(true); setError("");
+    retry.current = body; setBusy(true); setError("");
     try {
       const w = await request("funding/save", body); setWorkspace(w); retry.current = null;
-      if (editSerial.current === editedAt && operation !== "delete") setDirty(false);
-      if(operation !== "draft")setReview(null); setNotice(operation === "adopt" ? "Funding plan adopted. No cash, simulation time, application or ownership changed." : operation === "save" ? "Named exploration saved." : operation === "delete" ? "Funding record deleted." : "Exploration draft saved.");
+      const savedCurrent=operation!=="delete"&&fundingSaveIsCurrent(body.draft,draftRef.current);
+      if (savedCurrent) setDirty(false);
+      if(operation !== "draft")setReview(null); setNotice(operation === "adopt" ? "Funding plan adopted. No cash, simulation time, application or ownership changed." : operation === "save" ? "Named exploration saved." : operation === "delete" ? "Funding record deleted." : savedCurrent?"Exploration draft saved.":"Earlier draft saved; your latest edits are still waiting to be saved.");
       if(operation === "delete" && recordId === loadedScenarioId)setLoadedScenarioId(null);
-      await onSaved(); return true;
+      await onSaved(); return operation==="delete"||savedCurrent;
     } catch(e) {setError(e.message);return false;}
     finally {setBusy(false);}
   }
@@ -137,6 +140,19 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
     setBusy(true); setError("");
     try {if (dirty) throw new Error("Save the current draft before starting a separate exploration."); const d = await context(scope, parcels); resetVisual();edit(d);setUpgrade(null); setLoadedScenarioId(null); setQuestionId(null); setStep(0);}
     catch(e) {setError(e.message);} finally {setBusy(false);}
+  }
+  async function switchEntryContext(){
+    setBusy(true);setError("");
+    let next;
+    try{next=await context(entryReview.target,entryReview.parcelIds);}
+    catch(e){setError(e.message);return;}
+    finally{setBusy(false);}
+    // Save the current exploration by name before replacing the active draft.
+    // Read failures above and failed writes below leave the current draft intact.
+    const alreadyNamed=workspace.attachment.scenarios.some(record=>fundingSaveIsCurrent(record.draft,draftRef.current));
+    if(!await save(alreadyNamed?"draft":"save"))return;
+    resetVisual();edit(next);setScope(next.baseline.target);setParcels(next.baseline.parcel_ids);setStep(0);setQuestionId(null);setLoadedScenarioId(null);setEntryReview(null);
+    setNotice("Previous exploration preserved as a named alternative. The new exploration will autosave separately as the active draft.");
   }
   async function previewAdoption() {
     setBusy(true); setError("");
@@ -214,6 +230,20 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
     setQuestionId("selection_score");setEditor({anchor,criterion:id,route:scoringRoute,choice});
   }
   function chooseScoringRoute(route){setAnnexRoute(route);setWorkingOption(route);setEditor(null);}
+  async function applyLocationLookup(settings,automated,datasetHash){
+    const input=draftRef.current,route=editor.route;
+    setBusy(true);
+    try{
+      const next=await request("funding/location-preview",{revision,draft:input,route,settings,automated,dataset_hash:datasetHash});
+      if(!fundingSaveIsCurrent(input,draftRef.current))throw Error("Answers changed while the location lookup was calculated. Your newer answers are retained; apply the lookup again.");
+      edit(next);setNotice("Location lookup applied to this route as a provisional self-assessment. Notes and references retained; autosave pending.");
+    }finally{setBusy(false);}
+  }
+  function manualLocationCriterion(id){
+    const route=editor.route,assessment=draft.selection_assessments[route];
+    if(!Object.hasOwn(assessment,"location_lookup"))throw Error("This route has no automatic location setup.");
+    edit({...draft,selection_assessments:{...draft.selection_assessments,[route]:{...assessment,location_lookup:{...assessment.location_lookup,automated:assessment.location_lookup.automated.filter(cid=>cid!==id)}}}});
+  }
   const annex={open:annexOpen,signal:annexSignal,route:scoringRoute,groups:scoringRoute===null?[]:(Object.hasOwn(annexGroups,scoringRoute)?annexGroups[scoringRoute]:[]),
     onRoute:chooseScoringRoute,onCriterion:openCriterion,
     onGroup:id=>setAnnexGroups(current=>{const before=Object.hasOwn(current,scoringRoute)?current[scoringRoute]:[];return {...current,[scoringRoute]:before.includes(id)?before.filter(x=>x!==id):[...before,id]};}),
@@ -232,10 +262,17 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
       {question.type==="applicant"&&<p className="funding-applicant-note">{question.display_value}. Planned or potential applicants are assumptions; no organisation or agreement is created.</p>}
     </div>;
   }
+  function contextLabel(target,ids){
+    const labels={activity:"Parcel/activity funding",demonstrator:"Demonstrator funding",business:"Business funding"};
+    const names=ids.map(id=>{const parcel=data.project.parcels.find(p=>p.id===id);if(parcel===undefined)throw Error("The funding entry refers to a missing parcel. Reload the project.");return parcel.name;});
+    return `${labels[target]} · ${names.length===0?"no linked parcels":names.join(", ")}`;
+  }
   return <section className="funding-workspace" aria-labelledby="funding-title">
     <header className="panel"><p className="eyebrow">Explore · learn · compare</p><h1 id="funding-title">Funding Navigator</h1><p>Explore arrangements for land, activities and businesses. Save alternatives, then choose a funding plan.</p>
       <details><summary>Start a separate exploration</summary><label>Activity scope<select value={scope} onChange={e => setScope(e.target.value)}><option value="activity">Parcel / other activity</option><option value="demonstrator">Current demonstrator planning</option><option value="business">Start a self-employed rural business</option></select></label><fieldset><legend>Linked parcels (optional)</legend>{data.project.parcels.map(p => <label className="funding-pick" key={p.id}><input type="checkbox" checked={parcels.includes(p.id)} onChange={e => setParcels(e.target.checked ? [...parcels,p.id] : parcels.filter(id => id !== p.id))}/>{p.name}</label>)}</fieldset><button type="button" disabled={busy || dirty} onClick={start}>Start separate exploration</button></details>
     </header>
+    <div className="panel funding-save-status" role="status" aria-label="Funding save status"><strong>{busy?"Saving / loading…":retry.current!==null?"Save failed — latest changes are not saved":dirty?"Unsaved changes — autosave pending":"Saved to this computer"}</strong><span>Answers, annex selections and notes autosave after 1.2 seconds without an edit. Wait for “Saved to this computer” before reloading.</span><button type="button" disabled={busy||readOnly||retry.current!==null} onClick={()=>save("draft")}>Save now</button></div>
+    {entryReview!==null&&<section className="panel funding-entry-review" aria-label="Funding context review"><h2>Keep your saved exploration</h2><p>Saved exploration: {contextLabel(draft.baseline.target,draft.baseline.parcel_ids)}. Its answers have been retained.</p><p>Requested exploration: {contextLabel(entryReview.target,entryReview.parcelIds)}.</p><p>Continue the saved exploration, or preserve it as a named alternative before opening the requested activity.</p><button type="button" disabled={busy} onClick={()=>setEntryReview(null)}>Continue saved exploration</button><button type="button" disabled={busy||readOnly||retry.current!==null} onClick={switchEntryContext}>Save and open requested exploration</button>{readOnly&&<p>Review the previous applicant choice before saving and opening another exploration.</p>}</section>}
     <nav className="funding-steps" aria-label="Funding exploration steps">{FUNDING_STEPS.map((s,i) => <button key={s} type="button" disabled={busy||activityPending} aria-current={step === i ? "step" : undefined} onClick={() => navigateStep(i)}>{i+1}. {s}</button>)}</nav>
     {error && <Alert variant="error" title="Exploration retained">{error}{retry.current && <button disabled={busy} onClick={() => save(retry.current.operation, retry.current.record_id)}>Retry failed save</button>}<button disabled={busy} onClick={refresh}>Reload revisions and update assessment</button></Alert>}
     {!visualStep && evaluating && <p role="status">{assessment ? "Updating—showing previous assessment" : "Updating funding assessment…"}</p>}
@@ -271,7 +308,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
       {!visualStep&&stageNavigation()}
     </main>}<div hidden={!visualStep} className="funding-visual-column"><FundingVisualisation annex={draft.version===4?annex:null} value={visualValue} latestFields={live.context===visualContext ? live.latestFields : []} changes={live.context===visualContext ? live.changes : null} pending={evaluating} failure={visualFailure} onRetry={()=>setVisualRetry(k=>k+1)} results={filtered} catalogue={c} draft={draft} currentField={q?.id ?? null} questions={questionStates} onQuestion={focusQuestion} editorOpen={editor!==null} canEditQuestions={!readOnly&&q!==undefined} onEditQuestions={e=>focusQuestion(q.id,e.currentTarget)} navigation={step===1?stageNavigation():null} inspected={inspected} onInspect={setInspected} workingOption={workingOption} onWork={setWorkingOption} renderOption={r=><Option result={r} selected={draft.selected.includes(r.id)} disabled={readOnly} onSelect={()=>selectOption(r.id)} working={workingOption===r.id} onWork={setWorkingOption} workingGroup="funding-working-details"/>}/></div></div>
     {active&&!readOnly&&editor!==null&&q!==undefined&&<FundingQuestionEditor question={q} anchor={editor.anchor} onClose={closeEditor} title={editor.criterion?"Edit AL20 criterion":"Edit funding answer"} focusTarget={editor.choice?`al20-${editor.choice}`:null} positionLabel={editor.criterion?`${editor.route} · ${editor.criterion}`:`${FUNDING_STEPS[q.step]} · ${questionIndex<0?"Retained answer—outside the current activity’s question flow":`Question ${questionIndex+1} of ${questions.length}`}`}>
-      {editor.criterion?<FundingSelectionEditor key={`${editor.route}-${editor.criterion}`} route={editor.route} criterion={selectionProfile(draft,editor.route).criteria.find(c=>c.id===editor.criterion)} row={draft.selection_assessments[editor.route].criteria[editor.criterion]} result={visualValue.visualisation.annex.routes[editor.route].criteria.find(c=>c.id===editor.criterion)} disabled={busy||readOnly} focusChoice={editor.choice} onChange={row=>edit(editSelectionRow(draft,editor.route,editor.criterion,row),150)}/>:answer(q,true)}
+      {editor.criterion?<FundingSelectionEditor key={`${editor.route}-${editor.criterion}`} route={editor.route} assessment={draft.selection_assessments[editor.route]} municipality={visualValue.input_context.questions.find(q=>q.id==="municipality").municipality_selection} request={request} onLookup={applyLocationLookup} onManual={manualLocationCriterion} criterion={selectionProfile(draft,editor.route).criteria.find(c=>c.id===editor.criterion)} row={draft.selection_assessments[editor.route].criteria[editor.criterion]} result={visualValue.visualisation.annex.routes[editor.route].criteria.find(c=>c.id===editor.criterion)} disabled={busy||readOnly} focusChoice={editor.choice} onChange={row=>edit(editSelectionRow(draft,editor.route,editor.criterion,row),150)}/>:answer(q,true)}
     </FundingQuestionEditor>}
     <aside className="panel funding-context"><h2>Your exploration</h2><p>{draft.name} · {draft.selected.length} shortlisted · {assumptionCount(draft)} assumptions</p><p>{draft.baseline.target} · {draft.baseline.parcel_ids.length} linked parcel(s)</p>{draft.baseline.target==="demonstrator"&&data.planning.context.municipality_conflict&&draft.baseline.parcel_ids.includes(data.planning.context.parcel.id)&&<p className="reason">Current planning municipality: {data.planning.context.planning_municipality}; recorded parcel location: {data.planning.context.parcel.municipality}. This exploration retains its captured baseline and explicit assumptions. <button type="button" onClick={()=>onNavigate("demonstrator")}>Review demonstrator context</button></p>}<details className="funding-admin"><summary>Saved explorations, context and funding projects</summary><p>{draft.name}</p><p>{draft.selected.length} shortlisted mechanism(s) · {assumptionCount(draft)} overrides</p><p>Applicant: {facts.applicant_kind ?? "Unknown"}</p><p role="status">{busy ? "Saving / loading…" : dirty ? "Draft not yet saved" : "Draft saved or recorded context loaded"}{evaluating ? " · Updating assessment…" : ""}</p><button disabled={busy||readOnly} onClick={() => save("draft")}>Save draft</button><button disabled={busy || readOnly || !draft.name.trim()} onClick={() => save("save")}>{loadedScenarioId === null ? "Save exploration" : "Update saved exploration"}</button><button disabled={busy||readOnly} onClick={refresh}>Update assessment / refresh baseline</button><p>Refresh keeps your explicit overrides and adopts current recorded facts and source rules.</p>{assessment?.warnings.map((w,i) => <p className="reason" key={i}>{w}</p>)}
       <h3>Saved explorations</h3>{workspace.attachment.scenarios.map(r => <div key={r.id}><strong>{r.draft.name}</strong><button disabled={busy} onClick={() => openSaved(r,3)}>Load / rename</button><button disabled={busy} onClick={() => openSaved(r,0,true)}>Duplicate exploration</button><button disabled={busy} onClick={() => save("delete",r.id)}>Delete exploration</button></div>)}

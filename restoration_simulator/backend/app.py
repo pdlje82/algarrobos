@@ -142,6 +142,13 @@ class FundingPrepareRequest(FundingEvaluationRequest):
     adopt_current_catalogue: StrictBool = False
 
 
+class FundingLocationRequest(FundingEvaluationRequest):
+    route: StrictStr
+    settings: dict[str, Any]
+    automated: list[StrictStr]
+    dataset_hash: StrictStr
+
+
 class FundingMutationRequest(Mutation):
     funding_revision: StrictInt
     planning_revision: StrictInt
@@ -306,6 +313,17 @@ def create_app(save_path=None):
     def funding_visualise(req: FundingEvaluationRequest):
         data = designer_state(req.revision)
         return funding_visual.visualise(funding.evaluate(req.draft, data["project"], data["planning"]))
+
+    @app.get("/api/funding/statistics")
+    def funding_statistics():
+        from .funding_statistics import describe
+        return describe()
+
+    @app.post("/api/funding/location-preview")
+    def funding_location_preview(req: FundingLocationRequest):
+        from .funding_statistics import apply
+        data = designer_state(req.revision)
+        return apply(req.draft, data["project"], req.route, req.settings, req.automated, req.dataset_hash)
 
     @app.post("/api/funding/save")
     def funding_save(req: FundingMutationRequest):

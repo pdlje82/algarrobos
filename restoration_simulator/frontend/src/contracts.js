@@ -1,4 +1,5 @@
 import defaults from "../../scenarios/defaults.json" with { type: "json" };
+import {validateStatisticsResponse} from "./fundingStatisticsState.js";
 
 export function required(value, message) {
   if (!value) throw new Error(message);
@@ -349,6 +350,8 @@ export function validateResponse(path, data) {
     if(data.catalogue_review!==null){properties(data.catalogue_review,["from_edition","to_edition","changes","retained_answers","messages"],"catalogue update review");required(Array.isArray(data.catalogue_review.changes)&&Array.isArray(data.catalogue_review.retained_answers)&&Array.isArray(data.catalogue_review.messages),"Incomplete catalogue conversion review.");}
     return data;
   }
+  if(path==="funding/statistics")return validateStatisticsResponse(data);
+  if(path==="funding/location-preview")return validateResponse("funding/context",data);
   if(path==="funding/context") {
     properties(data,["version","name","activity_key","baseline","overrides","selected","allocations","calendar_start","notes","bundle"],"funding context");
     properties(data.baseline,["facts","parties","target","parcel_ids","work_budget"],"funding recorded baseline");
@@ -372,6 +375,12 @@ export function validateResponse(path, data) {
         properties(profile,["label","maximum","criteria"],"AL20 profile");
         required(Array.isArray(profile.criteria)&&profile.criteria.length>0,"Missing AL20 criteria.");
         const answer=data.selection_assessments[route];properties(answer,["criteria"],"AL20 assessment");
+        if(Object.hasOwn(answer,"location_lookup")){
+          const lookup=answer.location_lookup;
+          properties(lookup,["version","dataset_id","dataset_hash","settings","automated"],"AL20 location lookup");
+          properties(lookup.settings,["municipality","population_mode","settlement_name","population","population_year"],"AL20 location settings");
+          required(lookup.version===1&&typeof lookup.dataset_id==="string"&&typeof lookup.dataset_hash==="string"&&lookup.dataset_hash.length===64&&Array.isArray(lookup.automated)&&lookup.automated.every(cid=>["AT.3","RD.5"].includes(cid)),"Unsupported AL20 location lookup. Restart Python and reload.");
+        }
         for(const criterion of profile.criteria){
           properties(criterion,["id","label","label_es","cap","method","choices","exclusive_groups","requires","guidance","limitations","sources","parameters"],"AL20 criterion");
           required(["sum","ratio","employment"].includes(criterion.method)&&Array.isArray(criterion.choices)&&criterion.choices.length>0&&Array.isArray(criterion.exclusive_groups)&&Array.isArray(criterion.sources)&&criterion.sources.length>0,"Incomplete AL20 criterion definitions.");
