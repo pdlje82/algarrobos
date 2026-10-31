@@ -19,7 +19,7 @@ function Sources({sources}) {
   return <ul className="funding-sources">{sources.map((s, i) => <li key={i}><DocumentLink documentId={s.document_id} page={s.page} expectedSha256={s.sha256}>{s.label}</DocumentLink><small> · {s.role}</small></li>)}</ul>;
 }
 function Text({value}) {
-  return <div className="funding-research">{value.split("\n").filter(line => line.trim()).map((line, i) => <p key={i}>{line.replace(/^[-*]\s*/, "").replace(/\*\*/g, "")}</p>)}</div>;
+  return <div className="funding-research">{value.split("\n").filter(line => line.trim()).map((line, i) => <p key={i}>{line.replace(/^[-*]\s*/, "").replace(/\*\*/g, "").split(/(https:\/\/[^\s]+)/g).map((part,j)=>part.startsWith("https://")?<DocumentLink key={j} href={part} target="_blank" rel="noreferrer">{part}</DocumentLink>:part)}</p>)}</div>;
 }
 function Option({result:r, selected, disabled=false, onSelect,working,onWork,workingGroup}) {
   return <article className="funding-option">
@@ -45,7 +45,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   const [workingOption,setWorkingOption] = useState(null);
   const [step, setStep] = useState(0), [questionId, setQuestionId] = useState(null), [error, setError] = useState(""), [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false), [dirty, setDirty] = useState(false), [review, setReview] = useState(null);
-  const [query, setQuery] = useState(""), [requireChanges, setRequireChanges] = useState(true), [all, setAll] = useState(false);
+  const [query, setQuery] = useState(""), [requireChanges, setRequireChanges] = useState(true);
   const [scope, setScope] = useState("activity"), [parcels, setParcels] = useState([]), [compareIds, setCompareIds] = useState([]);
   const [loadedScenarioId, setLoadedScenarioId] = useState(null);
   const [reloadKey, setReloadKey] = useState(0);
@@ -182,7 +182,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   const current=assessment!==null&&[3,4].includes(draft.version)&&live.status==="success"&&live.inputKey===visualInputKey&&!evaluating;
   const readOnly=![3,4].includes(draft.version);
   const results=assessment===null?[]:assessment.results,selected=results.filter(r=>draft.selected.includes(r.id));
-  const filtered=fundingResults(results,{query,requireChanges,all});
+  const filtered=fundingResults(results,{query,requireChanges});
   const visualStep=[0,1,2,4].includes(step);
   const activityPending=evaluating&&(assessment===null||assessment.facts.activity!==facts.activity);
   if(assessment!==null&&JSON.stringify(assessment.draft)===JSON.stringify(draft))Object.assign(facts,assessment.facts);
@@ -288,7 +288,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
       <div className="funding-main-heading"><h2>{FUNDING_STEPS[step]}</h2>{visualStep&&stageNavigation()}</div>
       {step === 0 && !readOnly && <><label>Exploration name<input maxLength={80} disabled={busy} value={draft.name} onChange={e => edit({...draft,name:e.target.value})}/></label><p>Activity: {questionStates.length===0?"Loading activity…":questionStates.find(q=>q.id==="activity").display_value}<button type="button" disabled={busy||questionStates.length===0} onClick={e=>focusQuestion("activity",e.currentTarget)}>Choose activity</button></p><p>Business creation can be explored without a planting design. LEADER 2.7 includes a conditional €37,000 base and additions up to a €50,000 overall maximum.</p></>}
       {step===4&&!readOnly&&q&&<button type="button" onClick={e=>focusQuestion(q.id,e.currentTarget)}>Edit budget assumptions</button>}
-      {step === 2 && <><p>Browse families in the visual workspace. Inspect an option to read its requirements, then explicitly shortlist it.</p><label>Search mechanisms<input value={query} onChange={e => setQuery(e.target.value)}/></label><label className="funding-pick"><input type="checkbox" checked={all} onChange={e => setAll(e.target.checked)}/>Browse the full catalogue, beyond this activity</label><label className="funding-pick"><input type="checkbox" checked={requireChanges} onChange={e => setRequireChanges(e.target.checked)}/>Show options that conflict with this scenario</label><p>{filtered.length} options · {c.entries.length} catalogue entries</p><p>{draft.selected.length} explicitly shortlisted. Inspecting never changes your shortlist.</p></>}
+      {step === 2 && <><p>Browse funding families across all activities in the visual workspace. Inspect an option to read its requirements, then explicitly shortlist it.</p><label>Search mechanisms<input value={query} onChange={e => setQuery(e.target.value)}/></label><label className="funding-pick"><input type="checkbox" checked={requireChanges} onChange={e => setRequireChanges(e.target.checked)}/>Show options that conflict with this scenario</label><p>{filtered.length} options · {c.entries.length} catalogue entries</p><p>{draft.selected.length} explicitly shortlisted. Inspecting never changes your shortlist.</p></>}
       {step === 3 && <><p>Compare mechanisms under the same assumptions, or saved scenarios under different arrangements.</p><div className="funding-table"><table><caption>Shortlisted mechanisms</caption><thead><tr><th>Mechanism</th><th>Fit</th><th>Financial basis</th><th>Conditional estimate</th></tr></thead><tbody>{selected.map(r => <tr key={r.id}><th>{r.id} · {r.title}</th><td>{fundingStatus(r)}</td><td>{r.finance.basis}</td><td>{r.finance.estimate === null ? "Unknown" : money(r.finance.estimate)}</td></tr>)}</tbody></table></div>
         <fieldset><legend>Saved alternatives to compare</legend>{workspace.attachment.scenarios.map(r => <label className="funding-pick" key={r.id}><input type="checkbox" checked={compareIds.includes(r.id)} onChange={e => setCompareIds(e.target.checked ? [...compareIds,r.id] : compareIds.filter(id => id !== r.id))}/>{r.draft.name}</label>)}</fieldset>
         {workspace.attachment.scenarios.filter(r => compareIds.includes(r.id)).map(r => <article key={r.id}><h3>{r.draft.name}</h3><p>Applicant: {r.assessment.facts.applicant_kind ?? "Unknown"} · Activity: {r.assessment.facts.activity ?? "Unknown"}</p>{r.assessment.results.filter(x => r.draft.selected.includes(x.id)).map(x => <p key={x.id}>{x.id} · {fundingStatus(x)} · {x.finance.estimate === null ? "Amount unknown" : money(x.finance.estimate)}{r.draft.version===4&&x.selection_assessment&&` · ${selectionSummary(x.selection_assessment)}`}</p>)}<p>{assumptionCount(r.draft)} explicit assumptions · source snapshot {r.assessment.catalogue_hash.slice(0,8)}</p></article>)}

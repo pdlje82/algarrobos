@@ -26,7 +26,14 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   const editor=page.getByRole('dialog',{name:'Edit AL20 criterion',exact:true});
   async function openCriterion(id){if(await group(id).getAttribute('aria-expanded')!=='true')await group(id).click();await graph.locator(`.funding-annex-choice[data-annex-criterion="${id}"]`).first().click();await editor.waitFor();}
   async function close(){await page.getByRole('button',{name:'Close question editor',exact:true}).click();await settled();}
+  async function checkHierarchy(){
+   const nodes=[parent,graph.locator('.funding-annex-route'),group('AT.3'),graph.locator('.funding-annex-choice[data-annex-criterion="AT.3"]').first()];
+   const boxes=[];for(const node of nodes)boxes.push(await node.evaluate(n=>({left:parseFloat(n.style.left),width:parseFloat(n.style.width)})));
+   for(let i=1;i<boxes.length;i++){assert(boxes[i].left>boxes[i-1].left+12,'Each child is visibly indented');assert(Math.abs(boxes[i].left+boxes[i].width-boxes[0].left-boxes[0].width)<1,'Children stay within their lane');}
+   assert(boxes[3].width>=159,'Subcriteria retain readable width');
+  }
   await openCriterion('AT.3');
+  await checkHierarchy();
   await editor.getByText(/The published 2025 table lists a median of 539 inhabitants/).waitFor();
   assert.match(await editor.innerText(),/Do not mix a 2023 settlement figure with the 2025 median/);
   assert.equal(await editor.getByRole('link',{name:'https://www.ine.es/nomen2/index.do?L=1',exact:true}).getAttribute('href'),'https://www.ine.es/nomen2/index.do?L=1');
@@ -47,6 +54,9 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   // Complete the whole nonproductive annex through its nodes, explicitly rejecting unclaimed rows.
   const ids=await graph.locator('.funding-annex-group').evaluateAll(ns=>ns.map(n=>n.dataset.annexCriterion));
   for(const id of ids){await openCriterion(id);
+   if(['CO.1','IN.1','PS.1','IG.8','IG.11','DRI.3','JR.3','PT.1'].includes(id)){
+    for(const href of ['https://alpujarraalmeria.es/edll-version-1/','https://alpujarraalmeria.es/wp-content/uploads/2026/06/Necesidades-priorizadas-ALPUJARRA_SN_ALMERIENSE_EDLL_Epig_4-2.pdf','https://alpujarraalmeria.es/wp-content/uploads/2026/06/Objetivos-y-necesidades-por-lineas_epig-5.pdf'])assert.equal(await editor.getByRole('link',{name:href,exact:true}).getAttribute('href'),href,`${id} strategy link`);
+   }
    if(id==='CO.1'){
     assert.equal(await editor.getByRole('link',{name:'https://alpujarraalmeria.es/edll-version-1/',exact:true}).getAttribute('href'),'https://alpujarraalmeria.es/edll-version-1/');
     const priorities='https://alpujarraalmeria.es/wp-content/uploads/2026/06/Necesidades-priorizadas-ALPUJARRA_SN_ALMERIENSE_EDLL_Epig_4-2.pdf';
@@ -79,6 +89,7 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   await route.selectOption('LEADER-AL20-3.4');
   for(const theme of ['light','dark']){
    await page.getByLabel('Theme',{exact:true}).selectOption(theme);await page.setViewportSize({width:390,height:844});await openCriterion('AT.3');
+   await checkHierarchy();
    const box=await editor.boundingBox();assert(box.x>=0&&box.y>=0&&box.x+box.width<=390&&box.y+box.height<=844);
    await page.screenshot({path:`test-artifacts/funding-selection-${theme}-phone.png`});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await close();
   }
@@ -91,6 +102,11 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   await reviewRow.getByText(/Calculated score: 63 points/).waitFor();
   await reviewRow.getByRole('button',{name:'Review in Funding Navigator',exact:true}).click();
   assert.equal(await route.inputValue(),'LEADER-AL20-3.4');
+  await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-2.6"] .funding-option-open').click();
+  const enterpriseResearch=visual.locator('.funding-inspection[aria-label="Requirements for LEADER-AL20-2.6"]');
+  await enterpriseResearch.getByText('Why this result? Definitions and conditions',{exact:true}).click();
+  await enterpriseResearch.getByText('Read the research context',{exact:true}).click();
+  for(const href of ['https://alpujarraalmeria.es/wp-content/uploads/2026/06/Necesidades-priorizadas-ALPUJARRA_SN_ALMERIENSE_EDLL_Epig_4-2.pdf','https://alpujarraalmeria.es/wp-content/uploads/2026/06/Objetivos-y-necesidades-por-lineas_epig-5.pdf'])assert.equal(await enterpriseResearch.getByRole('link',{name:href,exact:true}).getAttribute('href'),href);
   const after=await api('project');assert.equal(JSON.stringify(after.project),before);assert.equal(JSON.stringify(after.planning.draft),planning);assert.deepEqual(errors,[]);
   console.log('AL20 branch: complete 63-point assessment, all five routes, route isolation, sources/focus, stable funding nodes, explicit zero, matrix navigation, save failure/retry, reload, and phone themes passed.');
  }catch(e){console.error(e);if(page)await page.screenshot({path:'test-artifacts/funding-selection-failure.png'});throw e;}finally{await Promise.race([browser.close(),new Promise(r=>setTimeout(r,3000))]);}

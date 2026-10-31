@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import {DocumentLink} from "./DocumentLink.jsx";
-import {selectionChoices,selectionSummary,setSelectionChoice,clearSelectionRow} from "./fundingSelectionState.js";
+import {selectionChoices,selectionSummary,setSelectionChoice,clearSelectionRow,selectionNodeIndent} from "./fundingSelectionState.js";
 import {FundingLocationLookup} from "./FundingLocationLookup.jsx";
 
 export function SelectionSources({sources}){
@@ -50,7 +50,8 @@ export function FundingSelectionEditor({route,criterion,row,result,onChange,disa
 
 export function FundingSelectionBranch({rows,left,width,route,routes,score,answers,onRoute,onGroup,onCriterion,onCollapse,disabled}){
   return rows.map(r=>{
-    const position={top:r.top,left:left+(r.kind==="choice"||r.kind==="calculation"?24:r.kind==="group"?12:0),width:width-(r.kind==="choice"||r.kind==="calculation"?24:r.kind==="group"?12:0),height:r.height};
+    const indent=selectionNodeIndent(r.kind,width);
+    const position={top:r.top,left:left+indent,width:width-indent,height:r.height};
     if(r.kind==="route")return <div key="route" className="funding-annex-route" style={position}><SelectionRoute routes={routes} route={route} onRoute={onRoute} disabled={disabled}/><button type="button" onClick={onCollapse}>Collapse annex</button></div>;
     if(r.kind==="total")return <div key="total" className={`funding-annex-total funding-node-${score.result}`} style={position}><strong>{selectionSummary(score)}</strong><small>Threshold: {score.threshold} points · {route}</small></div>;
     const result=score.criteria.find(c=>c.id===r.criterion.id);

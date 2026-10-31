@@ -12,11 +12,13 @@ test("funding assumptions override the snapshot without altering recorded facts"
   assert.equal(effectiveFacts(resetAnswer(alternative,"applicant_kind")).applicant_kind,"individual");
   assert.equal(effectiveFacts(overrideAnswer(d,"budget_total",null)).budget_total,null);
 });
-test("unknown and alternative arrangements remain browsable",()=>{
-  const rows=[{id:"A",title:"Startup",description:"new business",group:"public",status:"Needs information",relevant:true},{id:"B",title:"Conservation",description:"habitat",group:"public",status:"Does not match these facts",relevant:false}];
-  assert.equal(fundingResults(rows,{}).length,1);
-  assert.equal(fundingResults(rows,{all:true,requireChanges:true}).length,2);
-  assert.equal(fundingResults(rows,{all:true,requireChanges:true,query:"habitat"})[0].id,"B");
+test("options across activities remain browsable with explicit search, family and conflict filters",()=>{
+  const rows=[{id:"A",title:"Startup",description:"new business",group:"public",status:"Needs information",relevant:true},{id:"B",title:"Conservation",description:"habitat",group:"public",status:"Does not match these facts",relevant:false},{id:"C",title:"Donation",description:"private gift",group:"donations",status:"Needs information",relevant:false}];
+  assert.deepEqual(fundingResults(rows,{}).map(r=>r.id),["A","C"]);
+  assert.deepEqual(fundingResults(rows,{requireChanges:true}).map(r=>r.id),["A","B","C"]);
+  assert.equal(fundingResults(rows,{requireChanges:true,query:"habitat"})[0].id,"B");
+  assert.deepEqual(fundingResults(rows,{requireChanges:true,group:"public"}).map(r=>r.id),["A","B"]);
+  assert.deepEqual(fundingResults(rows,{query:"unmatched"}),[]);
   assert.equal(FUNDING_STEPS.length,6);
 });
 test("funding API contract errors cannot masquerade as empty results",()=>{

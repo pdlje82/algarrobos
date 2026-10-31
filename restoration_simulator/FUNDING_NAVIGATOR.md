@@ -7,6 +7,9 @@ branch, select a funding route and expand criterion groups. Clicking a
 subcriterion opens the existing floating editor. Funding options remain in their
 column; expanding the annex creates space in the circumstances column. Collapse
 and route switching preserve answers. Matrix and Your answers link back to Graph.
+Each expanded level is indented: assessment → route → criterion group →
+subcriterion. Branch lines connect each child to its parent; narrow columns keep
+subcriterion nodes readable while funding options retain their positions.
 
 Three aid-line profiles cover 1.11, 2.6, 2.7, 3.4 and 3.5. Each route has its
 own answers, even when two routes share a profile. The working option selects the
@@ -89,6 +92,12 @@ These external documents are linked for consultation, not added to
 explain how the operation addresses each need. EDLL prioritisation ranks are
 different from CO.1 selection points.
 
+Both strategy extracts and the full publication page are also linked in every
+other EDL-dependent criterion: IN.1, PS.1, IG.8, IG.11, DRI.3, JR.3 and PT.1,
+where present in that aid-line profile, and in the 2.6 funding-option research
+description. For innovation designations, cross-cutting objectives or specific
+actions not covered by the extracts, verify the exact provision in the full EDLL.
+
 PE.1.5/PE.1.6 apply only to 2.7. PE.2 employment additions require their preceding
 subcriterion. Positive PE.2 claims need confirmation of the documented minimum
 one-year / 1 UTA conditions. The stored sources mention part-time graduation but
@@ -134,8 +143,9 @@ alone cannot be adopted as financing or assigned a financial contribution.
 Recorded baseline facts are user-reported, not certified. Scenario overrides are
 separate and individually resettable. Business exploration does not require a
 parcel. A plan can link multiple parcels or an organisation/activity. Questions
-are filtered by activity; unknowns remain unknown. Full-catalogue browsing and
-options requiring changes remain available.
+are filtered by activity; unknowns remain unknown. Funding options are browsed
+across all activities, so activity tags never hide alternative routes. Search,
+family, shortlist and explicit conflict filters remain available.
 
 An active draft autosaves outside simulation history. **Save exploration** creates
 a named alternative. Load and edit its name/settings to **Update saved exploration**,
@@ -313,7 +323,13 @@ Catalogue order, browsing filters, shortlist, source viewing and selected visual
 view are retained during input changes. Compact view pages up to 12 options in
 one family/shortlist. **Expand view** removes the internal height limit and shows
 all rows/nodes in that scope using page scrolling; **Compact view** restores its
-scroll position. Phones use an expandable visual panel and compact matrix rows.
+scroll position. Click **Expand node area** above the canvas or **Expand node
+area completely** on the bar below it to reveal the full height of all displayed
+nodes. Click **Collapse node area** to restore its compact height and previous
+scroll position. These buttons support Enter/Space and retain the current option
+page and filters. Expansion is retained while editing and switching visual views,
+and is not saved with the assessment.
+Phones use an expandable visual panel and compact matrix rows.
 Help works with hover, keyboard focus and touch, supports Escape/outside closing,
 and stays inside the viewport. Reduced-motion and both themes are supported.
 

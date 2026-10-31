@@ -156,7 +156,9 @@ def validate_answers(assessments, bundle):
         for criterion in profile["criteria"]:
             cid = criterion["id"]
             row = rows[cid]
-            keys(row, {"answers", "inputs", "reference", "notes"}, "AL20 answer " + cid)
+            keys(row, {"answers", "inputs", "reference", "notes"} | ({"edl_evidence"} if "edl_evidence" in row else set()), "AL20 answer " + cid)
+            from .funding_edl import validate_evidence
+            validate_evidence(row, criterion, route)
             for key, limit in [("reference", 2000), ("notes", 4000)]:
                 require(isinstance(row[key], str) and len(row[key]) <= limit, "Invalid AL20 " + key + ": " + cid)
             method = criterion["method"]

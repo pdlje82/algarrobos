@@ -468,6 +468,48 @@
       ],
       "printed_pages": {},
       "mapping_note": "Retrieved 31 October 2026. AL20 municipality table verified at PDF position 3; printed header 2605/3. Cite PDF positions."
+    },
+    {
+      "id": "FUND-013",
+      "title": "FUND-013 - Alpujarra Sierra Nevada Almeriense - EDLL 2023-2027 - v1",
+      "filename": "FUND-013 - Alpujarra Sierra Nevada Almeriense - EDLL 2023-2027 - v1.pdf",
+      "pages": 544,
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "aliases": [
+        "https://drive.google.com/file/d/1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK/view",
+        "https://drive.google.com/file/d/1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK/view?usp=sharing",
+        "https://drive.google.com/uc?export=download&id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK"
+      ],
+      "printed_pages": {
+        "3": 3,
+        "186": 186,
+        "187": 187,
+        "191": 191,
+        "275": 275,
+        "276": 276,
+        "283": 283,
+        "332": 332,
+        "333": 333,
+        "336": 336,
+        "372": 372,
+        "383": 383,
+        "393": 393,
+        "395": 395,
+        "396": 396,
+        "397": 397,
+        "398": 398,
+        "399": 399,
+        "400": 400,
+        "401": 401,
+        "472": 472,
+        "473": 473,
+        "475": 475,
+        "476": 476,
+        "478": 478,
+        "479": 479,
+        "527": 527
+      },
+      "mapping_note": "Official AL20 and ADR publication pages link this consolidated strategy as V1 (19 November 2024). Downloaded unchanged on 31 October 2026. Selected printed page numbers visually checked against matching PDF positions; other pages use PDF positions."
     }
   ]
 }

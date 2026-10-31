@@ -1,5 +1,10 @@
 # Browser checks
 
+Run `node tests/browser/funding-height.cjs` for portrait node-area click and
+keyboard expansion, complete height, collapse and focus, unchanged option scope,
+Matrix switching and narrow-screen scrolling. It uses the isolated API/app below
+and checks that height changes never trigger funding mutations or evaluations.
+
 Run `node tests/browser/funding-statistics.cjs` for AL20 municipality lookup,
 provisional population/business selections, manual overrides, per-route isolation,
 notes and setup persistence after reload, actual settlement input, lookup failure

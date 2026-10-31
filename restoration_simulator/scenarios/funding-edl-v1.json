@@ -1,0 +1,1457 @@
+{
+  "version": 1,
+  "id": "al20-edl-v1-2024-11-19",
+  "title": "AL20 Local Development Strategy 2023–2027",
+  "edition": "V1 · 19 November 2024",
+  "intro": "EDL means Estrategia de Desarrollo Local; EDLL adds LEADER. This library summarises the relevant content of the approved AL20 strategy. Source references are supporting evidence for a self-assessment, not certification or automatic point awards.",
+  "source": {
+    "document_id": "FUND-013",
+    "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+    "pages": 544,
+    "publication_url": "https://alpujarraalmeria.es/edll-version-1/",
+    "download_url": "https://drive.google.com/uc?export=download&id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK"
+  },
+  "topics": [
+    {
+      "id": "needs",
+      "title": "Prioritised needs addressable through LEADER",
+      "summary": "All 50 NPL needs, in the strategy’s original priority order. The separate NPNL list is not included as a list addressable through LEADER. The published ranking values do not become CO.1 points.",
+      "item_ids": [
+        "NPL1",
+        "NPL2",
+        "NPL3",
+        "NPL4",
+        "NPL5",
+        "NPL6",
+        "NPL7",
+        "NPL8",
+        "NPL9",
+        "NPL10",
+        "NPL11",
+        "NPL12",
+        "NPL13",
+        "NPL14",
+        "NPL15",
+        "NPL16",
+        "NPL17",
+        "NPL18",
+        "NPL19",
+        "NPL20",
+        "NPL21",
+        "NPL22",
+        "NPL23",
+        "NPL24",
+        "NPL25",
+        "NPL26",
+        "NPL27",
+        "NPL28",
+        "NPL29",
+        "NPL30",
+        "NPL31",
+        "NPL32",
+        "NPL33",
+        "NPL34",
+        "NPL35",
+        "NPL36",
+        "NPL37",
+        "NPL38",
+        "NPL39",
+        "NPL40",
+        "NPL41",
+        "NPL42",
+        "NPL43",
+        "NPL44",
+        "NPL45",
+        "NPL46",
+        "NPL47",
+        "NPL48",
+        "NPL49",
+        "NPL50"
+      ],
+      "pages": [
+        395,
+        396,
+        397
+      ],
+      "section": "4.3",
+      "status": "documented"
+    },
+    {
+      "id": "innovation-sectors",
+      "title": "Innovative sectors: none designated",
+      "summary": "Section 4.4 explicitly opts for innovative themes and integrated aspects instead of designating innovative economic sectors. This edition therefore provides no sector list for IN.1.1. Do not relabel general economic opportunities as designated innovative sectors; a positive claim needs documented GDR clarification.",
+      "item_ids": [],
+      "pages": [
+        383,
+        398
+      ],
+      "section": "4.4",
+      "status": "not_designated"
+    },
+    {
+      "id": "innovation-themes",
+      "title": "Five explicitly innovative themes",
+      "summary": "Section 4.4 lists these five themes. Check the scope and conditions of the operation, not only similarity of its title.",
+      "item_ids": [
+        "IN-T1",
+        "IN-T2",
+        "IN-T3",
+        "IN-T4",
+        "IN-T5"
+      ],
+      "pages": [
+        398
+      ],
+      "section": "4.4",
+      "status": "documented"
+    },
+    {
+      "id": "innovation-aspects",
+      "title": "Twelve explicitly innovative aspects",
+      "summary": "Section 4.4 lists these twelve integrated aspects. Certification, income, staffing, professional-supervision and geographic conditions remain part of the descriptions.",
+      "item_ids": [
+        "IN-A1",
+        "IN-A2",
+        "IN-A3",
+        "IN-A4",
+        "IN-A5",
+        "IN-A6",
+        "IN-A7",
+        "IN-A8",
+        "IN-A9",
+        "IN-A10",
+        "IN-A11",
+        "IN-A12"
+      ],
+      "pages": [
+        399,
+        400,
+        401
+      ],
+      "section": "4.4",
+      "status": "documented"
+    },
+    {
+      "id": "women",
+      "title": "Activities and interests recorded in women’s consultation",
+      "summary": "The diagnosis records the following requests and interests. These are faithful summaries of consultation findings, not a newly invented eligibility schedule. IG.8.2 and IG.11.7 still require an explanation of how the proposed activity or event addresses the documented demand.",
+      "item_ids": [
+        "W1",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14"
+      ],
+      "pages": [
+        186,
+        187,
+        275,
+        276,
+        332,
+        333,
+        473
+      ],
+      "section": "3.2, 3.3.2.3, 3.4.2.3 and 5.12",
+      "status": "documented"
+    },
+    {
+      "id": "inclusion",
+      "title": "Documented needs relevant to inclusion",
+      "summary": "The diagnosis notes limited provision for people at risk of exclusion (page 191). Related prioritised needs concern care, health/education, reconciliation, disability and tolerance. Explain which at-risk population is served and its specific need; these broad needs are not automatic proof of DRI.3.3.",
+      "item_ids": [
+        "NPL9",
+        "NPL14",
+        "NPL17",
+        "NPL23",
+        "NPL30"
+      ],
+      "pages": [
+        191,
+        395,
+        396
+      ],
+      "section": "3.2 diagnosis and 4.3",
+      "status": "context"
+    },
+    {
+      "id": "youth",
+      "title": "Youth needs recorded in consultation",
+      "summary": "The diagnosis and youth-impact report record these needs. Select only the references that the operation actually addresses, and explain that connection.",
+      "item_ids": [
+        "Y1",
+        "Y2",
+        "Y3",
+        "Y4",
+        "Y5",
+        "Y6",
+        "Y7",
+        "Y8",
+        "Y9",
+        "Y10"
+      ],
+      "pages": [
+        187,
+        276,
+        333,
+        476
+      ],
+      "section": "3.3.3, 3.3.2.4, 3.4.2.4 and 5.13",
+      "status": "documented"
+    },
+    {
+      "id": "trades",
+      "title": "Traditional trades explicitly identified",
+      "summary": "Opportunity O(3.12) names carpentry, stone working, breadmaking and wineries. The list is illustrative, not an exhaustive approved menu of crafts or dishes. No named list of traditional dishes is established here; other claims need an exact strategy passage or GDR clarification.",
+      "item_ids": [
+        "TR1",
+        "TR2",
+        "TR3",
+        "TR4"
+      ],
+      "pages": [
+        283,
+        372
+      ],
+      "section": "3.3 DAFO and 3.6",
+      "status": "documented"
+    },
+    {
+      "id": "heritage",
+      "title": "Rural heritage identified in the strategy",
+      "summary": "The diagnosis identifies these heritage resources and landscapes. NPL3 calls for conservation, enhancement and dissemination of rural heritage; NPL18 covers heritage-based tourism. The operation must explain its contribution, rather than claiming points for location alone.",
+      "item_ids": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8",
+        "H9",
+        "H10",
+        "H11",
+        "NPL3",
+        "NPL18"
+      ],
+      "pages": [
+        336,
+        395
+      ],
+      "section": "3.4.3 and 4.3",
+      "status": "documented"
+    },
+    {
+      "id": "cross-cutting",
+      "title": "Cross-cutting objectives of the strategy",
+      "summary": "The prioritisation method and dedicated impact reports identify gender equality, rural youth and climate action. PS.1.2 additionally requires actual membership in an organisation whose objectives include the relevant objective; a project theme alone does not establish membership. Financial percentages on page 527 are programme targets, not this criterion’s point values.",
+      "item_ids": [
+        "OT-G",
+        "OT-Y",
+        "OT-C"
+      ],
+      "pages": [
+        393,
+        472,
+        473,
+        475,
+        476,
+        478,
+        479,
+        527
+      ],
+      "section": "4.2, 5.12–5.14 and 8.0",
+      "status": "documented"
+    }
+  ],
+  "items": [
+    {
+      "id": "NPL1",
+      "code": "NPL1",
+      "label": "Water-cycle management and consumption control",
+      "label_es": "Gestión del ciclo del agua",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL2",
+      "code": "NPL2",
+      "label": "Sustainable farming, including regenerative, agroecological and biodynamic approaches",
+      "label_es": "Agricultura sostenible",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL3",
+      "code": "NPL3",
+      "label": "Conservation, enhancement and dissemination of natural and cultural rural heritage",
+      "label_es": "Patrimonio rural",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL4",
+      "code": "NPL4",
+      "label": "Soil regeneration and reduced erosion and aridity",
+      "label_es": "Regeneración de suelos",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL5",
+      "code": "NPL5",
+      "label": "Economic activity making better use of protected-area resources",
+      "label_es": "Recursos de Espacios Naturales Protegidos",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL6",
+      "code": "NPL6",
+      "label": "Employment opportunities and market gaps, especially for young people and women",
+      "label_es": "Inserción laboral",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL7",
+      "code": "NPL7",
+      "label": "Attract professionals able to work in the territory",
+      "label_es": "Atracción de profesionales",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL8",
+      "code": "NPL8",
+      "label": "Climate-change mitigation and adaptation",
+      "label_es": "Cambio climático",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL9",
+      "code": "NPL9",
+      "label": "Public or private care services for older people",
+      "label_es": "Atención a personas mayores",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL10",
+      "code": "NPL10",
+      "label": "Sustainable livestock farming",
+      "label_es": "Ganadería sostenible",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL11",
+      "code": "NPL11",
+      "label": "Better promotion of agri-food products",
+      "label_es": "Promoción agroalimentaria",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL12",
+      "code": "NPL12",
+      "label": "Public or private local circular-economy initiatives",
+      "label_es": "Economía circular",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL13",
+      "code": "NPL13",
+      "label": "Development of the agri-food industry",
+      "label_es": "Industria agroalimentaria",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL14",
+      "code": "NPL14",
+      "label": "Access to basic health and education services",
+      "label_es": "Servicios sociales básicos",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL15",
+      "code": "NPL15",
+      "label": "Skills and qualifications for employed and unemployed people",
+      "label_es": "Cualificación",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL16",
+      "code": "NPL16",
+      "label": "Local strategies against depopulation, supporting actual residents and attracting newcomers",
+      "label_es": "Despoblamiento",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL17",
+      "code": "NPL17",
+      "label": "Services helping families reconcile work and care responsibilities",
+      "label_es": "Conciliación",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL18",
+      "code": "NPL18",
+      "label": "Tourism based on cultural and heritage resources",
+      "label_es": "Turismo cultural y patrimonial",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL19",
+      "code": "NPL19",
+      "label": "Young people participating in local forums, through associations or other channels",
+      "label_es": "Participación juvenil",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL20",
+      "code": "NPL20",
+      "label": "Food-sovereignty systems",
+      "label_es": "Soberanía alimentaria",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL21",
+      "code": "NPL21",
+      "label": "Support associations and networks between them",
+      "label_es": "Tejido asociativo",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 395,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL22",
+      "code": "NPL22",
+      "label": "Make women’s and young people’s entrepreneurial initiatives visible",
+      "label_es": "Visibilidad emprendedora",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL23",
+      "code": "NPL23",
+      "label": "Services improving life for people with disabilities and their families",
+      "label_es": "Personas con discapacidad",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL24",
+      "code": "NPL24",
+      "label": "Public or private local renewable-energy initiatives",
+      "label_es": "Energías renovables",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL25",
+      "code": "NPL25",
+      "label": "Generational renewal in businesses, associations and public institutions",
+      "label_es": "Relevo generacional",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL26",
+      "code": "NPL26",
+      "label": "Hospitality services for residents, beyond tourism alone",
+      "label_es": "Hostelería para residentes",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL27",
+      "code": "NPL27",
+      "label": "Better leisure provision for young people",
+      "label_es": "Ocio juvenil",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL28",
+      "code": "NPL28",
+      "label": "Public or private local bioeconomy initiatives",
+      "label_es": "Bioeconomía",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL29",
+      "code": "NPL29",
+      "label": "Awareness of the benefits of belonging to protected natural areas",
+      "label_es": "Espacios Naturales Protegidos",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL30",
+      "code": "NPL30",
+      "label": "Tolerance towards diversity",
+      "label_es": "Diversidad",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL31",
+      "code": "NPL31",
+      "label": "Access to basic utilities and services: water, electricity, waste, sanitation, telecoms and public-space services",
+      "label_es": "Servicios económicos básicos",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL32",
+      "code": "NPL32",
+      "label": "Visible entrepreneurial examples encouraging young people to start initiatives",
+      "label_es": "Iniciativa juvenil",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL33",
+      "code": "NPL33",
+      "label": "Renewal and modernisation of women’s associations",
+      "label_es": "Asociaciones de mujeres",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL34",
+      "code": "NPL34",
+      "label": "Access to gender-violence prevention and victim-support services",
+      "label_es": "Violencia de género",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL35",
+      "code": "NPL35",
+      "label": "Innovative access to services in small municipalities, including mobile and multi-service models",
+      "label_es": "Servicios en pequeños municipios",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL36",
+      "code": "NPL36",
+      "label": "Better local retail provision",
+      "label_es": "Oferta comercial",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL37",
+      "code": "NPL37",
+      "label": "Visible participation of women in public and private life",
+      "label_es": "Participación de la mujer",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL38",
+      "code": "NPL38",
+      "label": "More attractive and accessible urban settlements",
+      "label_es": "Paisaje urbano y accesibilidad",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL39",
+      "code": "NPL39",
+      "label": "Stable cooperation between municipalities and public-sector bodies",
+      "label_es": "Cooperación municipal",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL40",
+      "code": "NPL40",
+      "label": "Better leisure and cultural services",
+      "label_es": "Servicios de ocio y culturales",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL41",
+      "code": "NPL41",
+      "label": "Lasting participation in local public management, including co-management, land stewardship, food sovereignty and participatory budgets",
+      "label_es": "Participación en gestión pública",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL42",
+      "code": "NPL42",
+      "label": "More public and private tourism services",
+      "label_es": "Servicios turísticos",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL43",
+      "code": "NPL43",
+      "label": "Education, awareness and training for equality",
+      "label_es": "Formación para la igualdad",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL44",
+      "code": "NPL44",
+      "label": "Non-agri-food industry and its supporting activities",
+      "label_es": "Industria no agroalimentaria",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 396,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL45",
+      "code": "NPL45",
+      "label": "Local e-commerce initiatives",
+      "label_es": "Comercio electrónico",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 397,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL46",
+      "code": "NPL46",
+      "label": "Coworking and alternative workplaces or customer-service premises",
+      "label_es": "Coworking",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 397,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL47",
+      "code": "NPL47",
+      "label": "More public or private tourist accommodation",
+      "label_es": "Alojamiento turístico",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 397,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL48",
+      "code": "NPL48",
+      "label": "Other local proximity services, such as hairdressing, veterinary services and hardware shops",
+      "label_es": "Servicios de proximidad",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 397,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL49",
+      "code": "NPL49",
+      "label": "Construction-related trades and services",
+      "label_es": "Servicios de construcción",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 397,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "NPL50",
+      "code": "NPL50",
+      "label": "Volunteering",
+      "label_es": "Voluntariado",
+      "summary": "Prioritised territorial need in the strategy’s list addressable through LEADER. Its priority-ranking value is not a grant-selection point value.",
+      "page": 397,
+      "section": "4.3",
+      "classification": "prioritised_need"
+    },
+    {
+      "id": "IN-T1",
+      "code": "Theme 1",
+      "label": "Attract residents by promoting municipal assets and proximity services",
+      "label_es": "Atracción residencial",
+      "summary": "The operation develops all or part of an initiative attracting residents through the municipality’s values and proximity-service offer.",
+      "page": 398,
+      "section": "4.4",
+      "classification": "innovative_theme"
+    },
+    {
+      "id": "IN-T2",
+      "code": "Theme 2",
+      "label": "Integrate new residents in municipalities at risk of depopulation",
+      "label_es": "Integración de nuevos pobladores",
+      "summary": "The operation develops all or part of an initiative integrating newcomers in municipalities at risk of depopulation.",
+      "page": 398,
+      "section": "4.4",
+      "classification": "innovative_theme"
+    },
+    {
+      "id": "IN-T3",
+      "code": "Theme 3",
+      "label": "Senior cohousing services",
+      "label_es": "Cohousing sénior",
+      "summary": "The operation develops cohousing services for older people.",
+      "page": 398,
+      "section": "4.4",
+      "classification": "innovative_theme"
+    },
+    {
+      "id": "IN-T4",
+      "code": "Theme 4",
+      "label": "Age-friendly municipality certification plans",
+      "label_es": "Comunidades amigables con las personas mayores",
+      "summary": "The operation develops all or part of a plan for certification within the WHO Global Network for Age-friendly Cities and Communities.",
+      "page": 398,
+      "section": "4.4",
+      "classification": "innovative_theme"
+    },
+    {
+      "id": "IN-T5",
+      "code": "Theme 5",
+      "label": "Child-friendly municipality certification plans",
+      "label_es": "Ciudades Amigas de la Infancia",
+      "summary": "The operation develops all or part of a municipal Child Friendly Cities certification plan.",
+      "page": 398,
+      "section": "4.4",
+      "classification": "innovative_theme"
+    },
+    {
+      "id": "IN-A1",
+      "code": "Aspect 1",
+      "label": "Older people’s residences organised into living units",
+      "label_es": "Unidades de convivencia",
+      "summary": "Create, expand or improve older people’s residences using post-COVID living-unit criteria.",
+      "page": 399,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A2",
+      "code": "Aspect 2",
+      "label": "Mobile or itinerant proximity services",
+      "label_es": "Servicios ambulantes o ambulatorios",
+      "summary": "Businesses guarantee proximity services in municipalities at risk of depopulation through mobile or itinerant provision.",
+      "page": 399,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A3",
+      "code": "Aspect 3",
+      "label": "Documented income from carbon-sink capacity",
+      "label_es": "Ingresos por sumidero de carbono",
+      "summary": "The operation must demonstrate that carbon-sink capacity generates one of its income sources. Planting trees alone does not establish this condition.",
+      "page": 399,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A4",
+      "code": "Aspect 4",
+      "label": "Attract businesses and remote workers",
+      "label_es": "Empresas y teletrabajo",
+      "summary": "Demonstrably facilitate the location of administrative, intellectual or artistic businesses or remote workers in municipalities at risk of depopulation.",
+      "page": 399,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A5",
+      "code": "Aspect 5",
+      "label": "Regenerative-agriculture certification application",
+      "label_es": "Certificación de agricultura regenerativa",
+      "summary": "Demonstrate an application for quality certification of regenerative agricultural activity. Footnote 1 identifies Regenerative Organic Certified (ROC). A generic regenerative claim is insufficient.",
+      "page": 399,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A6",
+      "code": "Aspect 6",
+      "label": "Professionally supervised urban liveability plans",
+      "label_es": "Habitabilidad de cascos urbanos",
+      "summary": "Plans for the main settlements’ urban centres must involve or be supervised by architecture professionals, individually or through professional bodies. Footnotes include mobility, public-space use, leisure areas and urban/periurban trails.",
+      "page": 400,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A7",
+      "code": "Aspect 7",
+      "label": "Business relocation tied to resident employment",
+      "label_es": "Deslocalización de empresas",
+      "summary": "Relocate a business establishment or part of a business, affecting more than one worker resident in municipalities considered at risk of depopulation.",
+      "page": 400,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A8",
+      "code": "Aspect 8",
+      "label": "Certified, communicated carbon or water footprint",
+      "label_es": "Huella de carbono o hídrica",
+      "summary": "Certify and communicate the carbon and/or water footprint to customers or service users; certification must demonstrate efficiency in the greenhouse-gas balance and/or water footprint.",
+      "page": 400,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A9",
+      "code": "Aspect 9",
+      "label": "Integrated Camino Mozárabe tourism services",
+      "label_es": "Camino Mozárabe de Santiago",
+      "summary": "Develop integrated tourism services for the Camino Mozárabe as it crosses the territory.",
+      "page": 400,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A10",
+      "code": "Aspect 10",
+      "label": "Themed tourism through cooperation",
+      "label_es": "Tematización turística",
+      "summary": "The operation develops tourism themes while promoting cooperation between different agents.",
+      "page": 400,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A11",
+      "code": "Aspect 11",
+      "label": "Precision agriculture with territorial limitations",
+      "label_es": "Agricultura de precisión tecnológica",
+      "summary": "Precision agriculture, such as drones and sensors, applies in low-agricultural-production municipalities. In Dalías and Berja the text restricts it to traditional, low-technology agriculture.",
+      "page": 400,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "IN-A12",
+      "code": "Aspect 12",
+      "label": "Agricultural logistics and auxiliary services",
+      "label_es": "Logística y servicios auxiliares agrarios",
+      "summary": "The strategy identifies agricultural logistics and auxiliary services as innovative in low-agricultural-production municipalities, excluding Dalías and Berja.",
+      "page": 401,
+      "section": "4.4",
+      "classification": "innovative_aspect"
+    },
+    {
+      "id": "W1",
+      "code": "Women 1",
+      "label": "Equality, shared care responsibilities and prevention of gender violence",
+      "label_es": "Igualdad y corresponsabilidad",
+      "summary": "Consultation responses call for awareness activities on equality, shared responsibilities and gender violence.",
+      "page": 186,
+      "section": "3.2",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W2",
+      "code": "Women 2",
+      "label": "Active leisure and cultural activities for women",
+      "label_es": "Ocio activo y actividades culturales",
+      "summary": "Consultation responses request better active-leisure opportunities, cultural activities and access to leisure services. The strategy does not prescribe named classes or an exhaustive event schedule.",
+      "page": 186,
+      "section": "3.2",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W3",
+      "code": "Women 3",
+      "label": "Create and renew women’s associations",
+      "label_es": "Renovación del asociacionismo femenino",
+      "summary": "Requests include creating associations, access to finance, reactivation, modernisation and generational renewal.",
+      "page": 187,
+      "section": "3.2",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W4",
+      "code": "Women 4",
+      "label": "Visibility, recognition and cooperation among women",
+      "label_es": "Visibilidad y cooperación",
+      "summary": "Consultation calls for activities recognising women’s role in the territory and cooperation between women.",
+      "page": 187,
+      "section": "3.2",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W5",
+      "code": "Women 5",
+      "label": "Vocational qualifications and tailored training",
+      "label_es": "Cualificación profesional",
+      "summary": "Requests include vocational training, professional accreditation and tailored learning for women.",
+      "page": 187,
+      "section": "3.2",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W6",
+      "code": "Women 6",
+      "label": "Support women’s entrepreneurship",
+      "label_es": "Emprendimiento femenino",
+      "summary": "Consultation explicitly calls for support to women’s entrepreneurial initiatives and visible examples of existing initiatives.",
+      "page": 275,
+      "section": "3.3.2.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W7",
+      "code": "Women 7",
+      "label": "Women’s participation in decision-making",
+      "label_es": "Participación en decisiones",
+      "summary": "Consultation calls for stronger participation in decisions; the gender-impact report reiterates representation in decision-making bodies.",
+      "page": 187,
+      "section": "3.2",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W8",
+      "code": "Women 8",
+      "label": "Services supporting work and family reconciliation",
+      "label_es": "Conciliación familiar y laboral",
+      "summary": "The strategy records repeated requests for reconciliation of professional or working life and family life; it warns against treating this as women’s responsibility alone.",
+      "page": 187,
+      "section": "3.2",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W9",
+      "code": "Women 9",
+      "label": "Equal pay, professional progression and entry into male-dominated sectors",
+      "label_es": "Igualdad salarial y promoción",
+      "summary": "Responses identify unequal pay, glass ceilings and barriers to women’s employment in male-dominated sectors.",
+      "page": 276,
+      "section": "3.3.2.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W10",
+      "code": "Women 10",
+      "label": "Equality and women’s empowerment activities",
+      "label_es": "Empoderamiento femenino",
+      "summary": "The strategy calls for continuing equality-awareness and women’s empowerment activities.",
+      "page": 276,
+      "section": "3.3.2.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W11",
+      "code": "Women 11",
+      "label": "Access to gender-violence services and shelters",
+      "label_es": "Atención a violencia de género",
+      "summary": "Women’s consultation responses identify improved access to gender-violence services, including shelters.",
+      "page": 332,
+      "section": "3.4.2.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W12",
+      "code": "Women 12",
+      "label": "Childcare and care services for older people",
+      "label_es": "Servicios de cuidados",
+      "summary": "Responses call for childcare and older people’s day centres, home support and residences to improve reconciliation.",
+      "page": 332,
+      "section": "3.4.2.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W13",
+      "code": "Women 13",
+      "label": "Employability training and mentoring",
+      "label_es": "Formación y mentoring",
+      "summary": "Women’s consultation responses request vocational learning and mentoring that improves employability.",
+      "page": 332,
+      "section": "3.4.2.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "W14",
+      "code": "Women 14",
+      "label": "Challenge traditional gender roles and build carers’ networks",
+      "label_es": "Roles de género y redes de cuidadoras",
+      "summary": "Responses call for action against traditional gender roles, networks of carers and visibility of women acting as cultural facilitators.",
+      "page": 333,
+      "section": "3.4.2.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "Y1",
+      "code": "Youth 1",
+      "label": "Local training opportunities",
+      "label_es": "Formación juvenil",
+      "summary": "Consultation asks for more training options for young people in the territory.",
+      "page": 187,
+      "section": "3.3.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "Y2",
+      "code": "Youth 2",
+      "label": "Youth participation and associations",
+      "label_es": "Participación y asociacionismo juvenil",
+      "summary": "Responses identify weak youth participation and the need to promote youth associations.",
+      "page": 187,
+      "section": "3.3.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "Y3",
+      "code": "Youth 3",
+      "label": "Youth spaces and diverse activities",
+      "label_es": "Espacios juveniles",
+      "summary": "Consultation requests more spaces and infrastructure for varied activities by young people.",
+      "page": 187,
+      "section": "3.3.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "Y4",
+      "code": "Youth 4",
+      "label": "Housing access for young people",
+      "label_es": "Vivienda juvenil",
+      "summary": "Consultation requests better access to housing for young people.",
+      "page": 187,
+      "section": "3.3.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "Y5",
+      "code": "Youth 5",
+      "label": "Local young people as nature guides",
+      "label_es": "Guías del medio natural",
+      "summary": "The strategy records a proposal to employ local young people as natural-environment guides.",
+      "page": 187,
+      "section": "3.3.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "Y6",
+      "code": "Youth 6",
+      "label": "Youth volunteering and environmental action",
+      "label_es": "Voluntariado y acción ambiental",
+      "summary": "Consultation requests volunteering and environmental-action programmes.",
+      "page": 187,
+      "section": "3.3.3",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "Y7",
+      "code": "Youth 7",
+      "label": "Vocational certificates and employment opportunities",
+      "label_es": "Empleo y cualificación",
+      "summary": "Consultation asks for employment-specific training and professional certificates, mentioning renewable-energy work, and rural employment placements.",
+      "page": 276,
+      "section": "3.3.2.4",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "Y8",
+      "code": "Youth 8",
+      "label": "Retain talent, support self-employment and remote work",
+      "label_es": "Talento y teletrabajo",
+      "summary": "Responses identify youth emigration, a need to retain talent, incentives for self-employment and opportunities through remote work.",
+      "page": 276,
+      "section": "3.3.2.4",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "Y9",
+      "code": "Youth 9",
+      "label": "Sport, leisure and contemporary meeting places",
+      "label_es": "Ocio, deporte y espacios de encuentro",
+      "summary": "Youth consultation asks for gyms, cycle lanes, a covered sports hall and meeting places responding to current young people’s interests.",
+      "page": 333,
+      "section": "3.4.2.4",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "Y10",
+      "code": "Youth 10",
+      "label": "Youth in decision-making and visible local initiatives",
+      "label_es": "Decisiones e iniciativa juvenil",
+      "summary": "The youth-impact report seeks greater participation in decisions, public cultural/sport leisure services, social/environmental/cultural entrepreneurship and visibility of young people’s contribution.",
+      "page": 476,
+      "section": "5.13",
+      "classification": "consultation_priority"
+    },
+    {
+      "id": "TR1",
+      "code": "Trade 1",
+      "label": "Carpentry",
+      "label_es": "Carpintería",
+      "summary": "Explicit examples of traditional trades linked to generational renewal in opportunity O(3.12). A project must explain its actual conservation, promotion or dissemination activity.",
+      "page": 283,
+      "section": "3.3 DAFO, O(3.12)",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "TR2",
+      "code": "Trade 2",
+      "label": "Stone working",
+      "label_es": "Trabajos en piedra",
+      "summary": "Explicit examples of traditional trades linked to generational renewal in opportunity O(3.12). A project must explain its actual conservation, promotion or dissemination activity.",
+      "page": 283,
+      "section": "3.3 DAFO, O(3.12)",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "TR3",
+      "code": "Trade 3",
+      "label": "Breadmaking",
+      "label_es": "Panadería",
+      "summary": "Explicit examples of traditional trades linked to generational renewal in opportunity O(3.12). A project must explain its actual conservation, promotion or dissemination activity.",
+      "page": 283,
+      "section": "3.3 DAFO, O(3.12)",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "TR4",
+      "code": "Trade 4",
+      "label": "Winemaking and wineries",
+      "label_es": "Bodegas",
+      "summary": "Explicit examples of traditional trades linked to generational renewal in opportunity O(3.12). A project must explain its actual conservation, promotion or dissemination activity.",
+      "page": 283,
+      "section": "3.3 DAFO, O(3.12)",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H1",
+      "code": "Heritage 1",
+      "label": "Camino Mozárabe de Santiago",
+      "label_es": "Camino Mozárabe",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H2",
+      "code": "Heritage 2",
+      "label": "Mining heritage",
+      "label_es": "Patrimonio minero",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H3",
+      "code": "Heritage 3",
+      "label": "Archaeological sites",
+      "label_es": "Yacimientos arqueológicos",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H4",
+      "code": "Heritage 4",
+      "label": "Ethnographic heritage",
+      "label_es": "Elementos etnográficos",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H5",
+      "code": "Heritage 5",
+      "label": "Arab, Moorish and repopulation history",
+      "label_es": "Árabes, moriscos y repobladores",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H6",
+      "code": "Heritage 6",
+      "label": "Roman heritage",
+      "label_es": "Romanos",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H7",
+      "code": "Heritage 7",
+      "label": "Vine-training and export-grape culture",
+      "label_es": "Parral y uva de barco",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H8",
+      "code": "Heritage 8",
+      "label": "Los Millares cultural landscape",
+      "label_es": "Los Millares",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H9",
+      "code": "Heritage 9",
+      "label": "Bentarique agricultural landscape",
+      "label_es": "Paisaje agrario de Bentarique",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H10",
+      "code": "Heritage 10",
+      "label": "Ohanes viticultural landscape",
+      "label_es": "Paisaje vitivinícola de Ohanes",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "H11",
+      "code": "Heritage 11",
+      "label": "Sierra de Gádor mining landscape",
+      "label_es": "Paisaje minero de Sierra de Gádor",
+      "summary": "Identified in the strategy’s rural-heritage diagnosis. Naming a heritage asset is not itself proof that an operation enhances or conserves it.",
+      "page": 336,
+      "section": "3.4.3, conclusion 16",
+      "classification": "heritage_reference"
+    },
+    {
+      "id": "OT-G",
+      "code": "OT-G",
+      "label": "Gender equality",
+      "label_es": "Igualdad de género",
+      "summary": "The strategy seeks women’s employment and entrepreneurship, representation in decisions, renewal of women’s associations, equality awareness and recognition of women’s local role.",
+      "page": 473,
+      "section": "5.12",
+      "classification": "cross_cutting_objective"
+    },
+    {
+      "id": "OT-Y",
+      "code": "OT-Y",
+      "label": "Rural youth",
+      "label_es": "Juventud rural",
+      "summary": "The strategy seeks youth participation, employment and enterprise opportunities, cultural/sport leisure and visibility of young people’s contribution.",
+      "page": 476,
+      "section": "5.13",
+      "classification": "cross_cutting_objective"
+    },
+    {
+      "id": "OT-C",
+      "code": "OT-C",
+      "label": "Climate-change mitigation and adaptation",
+      "label_es": "Cambio climático",
+      "summary": "The strategy seeks sustainable agriculture, forest-related initiatives, short supply chains, food sovereignty, reduced emissions, traditional landscapes and improved agricultural soil.",
+      "page": 478,
+      "section": "5.14",
+      "classification": "cross_cutting_objective"
+    }
+  ],
+  "bindings": {
+    "CO.1.1": {
+      "topic_ids": [
+        "needs"
+      ],
+      "note": "Count distinct prioritised needs actually addressed by the operation. Choose the appropriate exclusive CO.1 alternative yourself; selecting source references does not certify delivery or award points."
+    },
+    "CO.1.2": {
+      "topic_ids": [
+        "needs"
+      ],
+      "note": "Count distinct prioritised needs actually addressed by the operation. Choose the appropriate exclusive CO.1 alternative yourself; selecting source references does not certify delivery or award points."
+    },
+    "CO.1.3": {
+      "topic_ids": [
+        "needs"
+      ],
+      "note": "Count distinct prioritised needs actually addressed by the operation. Choose the appropriate exclusive CO.1 alternative yourself; selecting source references does not certify delivery or award points."
+    },
+    "IN.1.1": {
+      "topic_ids": [
+        "innovation-sectors"
+      ],
+      "note": "No innovative economic sector is designated in this strategy edition. Existing manual claims are retained for review; no invented sector options are offered."
+    },
+    "IN.1.2": {
+      "topic_ids": [
+        "innovation-themes"
+      ],
+      "note": "Use the actual innovative-theme definition and explain the operation’s contribution. Multiple matching themes do not multiply IN.1.2 points."
+    },
+    "IN.1.3": {
+      "topic_ids": [
+        "innovation-aspects"
+      ],
+      "note": "Check every condition in the chosen innovative aspect. Multiple references do not multiply IN.1.3 points."
+    },
+    "IG.8.2": {
+      "topic_ids": [
+        "women"
+      ],
+      "note": "Document the women’s demand that the proposed activity addresses. The EDL records consultation interests rather than prescribing named leisure classes. Assess this exclusive subcriterion separately."
+    },
+    "IG.11.7": {
+      "topic_ids": [
+        "women"
+      ],
+      "note": "Identify which documented women’s interest the meeting, workshop, forum or webinar addresses. Format alone does not establish the EDL connection."
+    },
+    "DRI.3.3": {
+      "topic_ids": [
+        "inclusion"
+      ],
+      "note": "Explain the at-risk group and specific need. These contextual references require an explicit link to the beneficiaries; no group or need is inferred from the project description."
+    },
+    "JR.3.8": {
+      "topic_ids": [
+        "youth"
+      ],
+      "note": "Explain the specific youth need addressed by the operation."
+    },
+    "PT.1.2": {
+      "topic_ids": [
+        "trades"
+      ],
+      "note": "Identify the traditional craft, work or food-related practice and the operation’s actual promotion, dissemination or conservation activity."
+    },
+    "PT.1.3": {
+      "topic_ids": [
+        "heritage"
+      ],
+      "note": "Identify the rural-heritage interest and the operation’s actual contribution. The cited diagnosis is contextual evidence, not a list of automatically qualifying projects."
+    },
+    "PS.1.2": {
+      "topic_ids": [
+        "cross-cutting"
+      ],
+      "note": "Support both organisational membership and the organisation’s relevant stated objective."
+    },
+    "LEADER-AL20-2.6": {
+      "topic_ids": [
+        "needs",
+        "innovation-sectors",
+        "innovation-themes",
+        "innovation-aspects"
+      ],
+      "note": "For rural-business diversification, consult the actual strategy and the operation’s funding-line conditions. An innovative theme or prioritised need does not establish eligibility by itself."
+    }
+  }
+}

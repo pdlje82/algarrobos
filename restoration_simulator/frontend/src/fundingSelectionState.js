@@ -33,6 +33,31 @@ export function setSelectionChoice(row,criterion,id,value){
 export function clearSelectionRow(row,value){
   return {...row,answers:Object.fromEntries(Object.keys(row.answers).map(k=>[k,value])),inputs:Object.fromEntries(Object.keys(row.inputs).map(k=>[k,value===false?(k==="qualifying_uta"?false:0):null]))};
 }
+export function selectionNodeIndent(kind,width){
+  const levels={route:1,group:2,choice:3,calculation:3,total:2};
+  if(!Object.hasOwn(levels,kind)||!Number.isFinite(width)||width<=160)throw Error("Invalid AL20 branch geometry. Refresh the funding graph.");
+  // Three visible levels, while retaining at least 160px for the deepest node.
+  return levels[kind]*Math.min(32,(width-160)/3);
+}
+export function selectionBranchConnections(rows,left,width,assessmentTop){
+  const edges=[],groups=new Map();let route=null;
+  for(const row of rows){
+    const x=left+selectionNodeIndent(row.kind,width);
+    let parent;
+    if(row.kind==="route"){
+      if(!Number.isFinite(assessmentTop))throw Error("The AL20 assessment parent is missing. Retry the funding graph.");
+      parent={x:left,top:assessmentTop,height:124};
+    }else if(row.kind==="choice"||row.kind==="calculation")parent=groups.get(row.criterion.id);
+    else parent=route;
+    if(!parent)throw Error("The AL20 branch parent is missing. Retry the funding graph.");
+    const spine=parent.x+8,y=row.top+row.height/2;
+    edges.push({key:`${row.kind}-${row.choice?row.choice.id:row.criterion?row.criterion.id:"route"}`,path:`M ${spine} ${parent.top+parent.height} L ${spine} ${y} L ${x} ${y}`});
+    const node={x,top:row.top,height:row.height};
+    if(row.kind==="route")route=node;
+    if(row.kind==="group")groups.set(row.criterion.id,node);
+  }
+  return edges;
+}
 export function selectionGraphLayout(questions,branch){
   const tops=new Map(),rows=[];
   let y=44;

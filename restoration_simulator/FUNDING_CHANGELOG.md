@@ -1,5 +1,41 @@
 # Funding Navigator changes
 
+## 2026-10-31 — explore funding across all activities
+
+- Removed the activity filter and its full-catalogue toggle. Funding options in
+  the graph and matrix now remain browsable across activities, including all five
+  modelled AL20 routes. Search, family, shortlist and conflict controls still apply.
+- Activity tags, eligibility calculations and saved catalogue snapshots are
+  unchanged.
+
+## 2026-10-31 — clearer hierarchy for expanded annex nodes
+
+- Indented the route, criterion groups and subcriteria in successive levels,
+  with up to 32px per level and readable widths in narrow columns. Node right
+  edges stay within the circumstances lane and funding-option positions stay fixed.
+- Branch lines now connect children to their actual parent, including the
+  assessment-to-route connection; siblings no longer appear as a chain.
+
+## 2026-10-31 — strategy links in every EDL/EDLL node
+
+- Checked all 14 matching annex definitions across the three profiles. CO.1,
+  IN.1, PS.1, IG.8, IG.11, DRI.3, JR.3 and PT.1 now link both official strategy
+  extracts (prioritised needs and objectives/needs by aid line) and the full EDLL
+  publication page wherever applicable. Three CO.1 definitions already linked them.
+- Added the same links to the 2.6 funding-option research description and made
+  its research URLs clickable. Guidance distinguishes the extracts from any
+  additional provision requiring the full strategy. Scoring remains unchanged;
+  saved snapshots receive these additions only through a reviewed update.
+
+## 2026-10-31 — completely expand or collapse the funding node area
+
+- The bar below the graph is a click-to-expand/collapse button. It reveals the
+  complete node-area height, including on portrait screens; collapse restores
+  compact height and scroll position. An equivalent control sits above the canvas.
+- Removed vertical dragging, incremental resizing and reset controls. Buttons
+  support Enter/Space. Expansion remains transient and does not change the option
+  page, filters, answers or funding evaluations.
+
 ## 2026-10-31 — AL20 municipality statistics and explicit location lookup
 
 - Added a source-cited database of all 32 AL20 municipalities: 2025 population,

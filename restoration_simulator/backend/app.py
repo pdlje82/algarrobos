@@ -319,6 +319,11 @@ def create_app(save_path=None):
         from .funding_statistics import describe
         return describe()
 
+    @app.get("/api/funding/edl")
+    def funding_edl_library():
+        from .funding_edl import describe
+        return describe()
+
     @app.post("/api/funding/location-preview")
     def funding_location_preview(req: FundingLocationRequest):
         from .funding_statistics import apply

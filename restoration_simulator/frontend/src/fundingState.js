@@ -88,9 +88,9 @@ export function fundingCounts(results) {
   for(const r of results)counts[fundingClass(r)]++;
   return counts;
 }
-export function fundingResults(results, {query = "", group = "", requireChanges = false, all = false}) {
+export function fundingResults(results, {query = "", group = "", requireChanges = false}) {
   const text = query.trim().toLowerCase();
-  return results.filter(r => (all || r.relevant) && (!group || r.group === group) && (requireChanges || r.status !== "Does not match these facts") && (!text || `${r.id} ${r.title} ${r.description}`.toLowerCase().includes(text)));
+  return results.filter(r => (!group || r.group === group) && (requireChanges || r.status !== "Does not match these facts") && (!text || `${r.id} ${r.title} ${r.description}`.toLowerCase().includes(text)));
 }
 export function answerLabel(question, value, parties) {
   if (value === null) return "Unknown / not yet recorded";

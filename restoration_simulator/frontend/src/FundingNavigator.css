@@ -25,7 +25,7 @@
 .funding-sources{font-size:.86rem;padding-left:1.3rem}.funding-sources li{margin:.5rem 0}
 .funding-meta{display:grid;grid-template-columns:minmax(90px,1fr) 3fr;gap:.45rem}.funding-meta dd{margin:0}
 .funding-table{overflow-x:auto;max-width:100%}.funding-table table{border-collapse:collapse;width:100%}.funding-table td,.funding-table th{padding:.65rem;border-bottom:1px solid currentColor;text-align:left;vertical-align:top}
-.funding-research p{line-height:1.6}.funding-context>div{border-bottom:1px solid color-mix(in srgb,currentColor 25%,transparent);padding:.7rem 0}
+.funding-research p{line-height:1.6}.funding-research a{overflow-wrap:anywhere}.funding-context>div{border-bottom:1px solid color-mix(in srgb,currentColor 25%,transparent);padding:.7rem 0}
 @media(max-width:800px){.funding-layout{grid-template-columns:1fr}.funding-context{position:static}.funding-workspace{padding:0 .5rem}.funding-steps button{flex:1 1 42%}.funding-main,.funding-context{padding:1rem}.funding-meta{grid-template-columns:1fr}.funding-meta dd{margin-bottom:.6rem}}
 .funding-workspace .funding-question>label{font-size:1.3rem;font-weight:750;line-height:1.4;margin:0 0 1rem}
 .funding-question-help{font-size:.95rem;line-height:1.5;margin:0 0 1rem}
@@ -61,7 +61,10 @@
 .funding-workspace .funding-help>button{display:inline-grid;place-items:center;width:44px;height:44px;padding:0;margin:0 .15rem;vertical-align:middle;font-size:1.1rem;border-color:transparent;background:transparent}
 .funding-help-popup{position:fixed;z-index:1100;display:block;width:min(340px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;padding:.9rem;border:1px solid var(--border);border-radius:.5rem;background:var(--raised);color:var(--text);box-shadow:0 4px 18px var(--overlay-shadow);font-size:.9rem;font-weight:400;line-height:1.5;text-align:left;white-space:normal}
 .funding-help-popup>strong,.funding-help-popup>span{display:block}.funding-help-popup>strong{margin-bottom:.4rem}
-.funding-visual.is-full .funding-diagram-scroll,.funding-visual.is-full .funding-matrix{max-height:none;overscroll-behavior:auto}
+.funding-visual.is-full .funding-matrix{max-height:none;overscroll-behavior:auto}
+.funding-node-area{min-width:0}.funding-node-area .funding-diagram-scroll{min-height:280px}
+.funding-node-height-controls{display:flex;flex-wrap:wrap;align-items:center;gap:.3rem .6rem;margin:.4rem 0;font-size:.85rem}.funding-node-height-controls button{margin:0;font-size:.85rem}
+.funding-workspace button.funding-node-height-toggle{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;min-height:44px;box-sizing:border-box;border:1px solid var(--border);border-radius:.4rem;background:var(--control);color:var(--text);cursor:pointer;font-size:.85rem;margin:.25rem 0 0}
 .funding-workspace .funding-circumstance,.funding-workspace .funding-graph-option,.funding-graph-origin{height:124px}
 .funding-graph-option.is-working{background:var(--selected-bg);border-color:var(--selected-border)}
 .demo-funding-summary{margin:.7rem 0;font-size:.9rem}.demo-funding-summary p{margin:.35rem 0}
