@@ -32,8 +32,9 @@
     },
     {
       "file": "algarroba-icon.svg",
-      "sha256": "3493dc2d1adc8082dd98910e8b103af1c2fafb08fb6ea77181b7c4f498905e69",
-      "construction": "Self-contained SVG: embedded symbol, rounded ivory tile; reversed on forest green for dark OS preference."
+      "sha256": "f24c6e825086dd90a6688e88cdf95518d9f96be9782e9fd05f8586825a999c98",
+      "construction": "Self-contained SVG: original-colour embedded symbol on a rounded ivory tile in both OS themes."
     }
-  ]
+  ],
+  "presentation_updated_on": "2026-10-31"
 }

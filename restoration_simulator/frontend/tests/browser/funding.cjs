@@ -24,9 +24,11 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();
     await page.getByRole('heading',{name:'Funding Navigator',exact:true}).waitFor();
     await page.getByRole('button',{name:'Graph',exact:true}).click();
+    await page.getByRole('button',{name:'Choose activity',exact:true}).click();
     await page.getByLabel('What would you like support for?',{exact:true}).selectOption('business');
     await page.getByLabel('Exploration name',{exact:true}).fill('My rural business');
     await page.getByRole('button',{name:'2. People and land',exact:true}).click();
+    await page.getByRole('button',{name:'Answer questions',exact:true}).click();
     const answers={applicant_choice:'recorded:individual',municipality:'Alhama de Almería',territory_verified:'yes',sector:'general',unemployed:'yes',new_activity:'yes',no_same_reta:'yes',resident:'yes',exclusive:'yes',start_after_application:'yes',plan_24_months:'yes',retention:'yes',unemployment_percent:'50',net_year1:'10000',smi_year1:'20000',net_year2:'20000',smi_year2:'20000',other_aid:'no',bonus_location:'yes',bonus_young:'yes',bonus_woman:'yes',bonus_job:'yes',bonus_climate:'yes'};
     for(let i=0;i<60;i++){
       const field=page.locator('.funding-question select[id^=funding],.funding-question input[id^=funding]:not([type=search])').first();
@@ -48,7 +50,7 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     await card.getByText('Why this result? Definitions and conditions',{exact:true}).click();
     const source=card.getByRole('link',{name:'Official requirements · PDF page 112'}).first();
     await source.click();
-    await page.getByRole('dialog').waitFor();
+    await page.locator('dialog.document-viewer').waitFor();
     const pdfPage=page.getByLabel('PDF page',{exact:true});
     await poll(async()=>!await pdfPage.isDisabled());
     assert.equal(await pdfPage.inputValue(),'112');
@@ -90,7 +92,9 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     const activity=page.getByRole('button',{name:'1. Activity',exact:true});
     await activity.scrollIntoViewIfNeeded();
     const box=await activity.boundingBox();await page.touchscreen.tap(box.x+box.width/2,box.y+box.height/2);
+    await page.getByRole('button',{name:'Choose activity',exact:true}).click();
     await page.getByLabel('What would you like support for?',{exact:true}).waitFor();
+    await page.getByRole('button',{name:'Close question editor',exact:true}).click();
     const explore=page.getByRole('button',{name:'3. Explore options',exact:true});await explore.focus();await page.keyboard.press('Enter');
     await page.getByRole('heading',{name:'Explore options',exact:true}).waitFor();
     // Entry points use the selected parcel / demonstrator without depending on funding adoption.

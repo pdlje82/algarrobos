@@ -12,7 +12,7 @@ function luminance(hex){
 function contrast(a,b){const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}
 function backgrounds(theme){
   const block=theme==="light"?css.slice(0,css.indexOf(".theme-warning")):css.slice(css.indexOf(':root[data-theme="dark"]'));
-  return ["hover","panel"].map(name=>{const match=block.match(new RegExp("--"+name+":\\s*(#[0-9a-f]{6})","i"));assert.ok(match,"Missing actual theme background "+name);return match[1];});
+  return ["drawing-ground","panel"].map(name=>{const match=block.match(new RegExp("--"+name+":\\s*(#[0-9a-f]{6})","i"));assert.ok(match,"Missing actual theme background "+name);return match[1];});
 }
 
 test("all catalogue species have distinct colours within their growth-form family",()=>{

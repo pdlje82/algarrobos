@@ -3,6 +3,15 @@
 Use an isolated project save; never point these mutation tests at the normal API
 on port 8000. Activate the project's Conda environment first.
 
+Run `node tests/browser/appearance.cjs` with the same `PLAYWRIGHT_MODULE`,
+`DESIGNER_TEST_API` and `DESIGNER_APP_URL` settings below for Carob & Clay checks.
+It creates an isolated parcel/design fixture and checks Project, demonstrator,
+Site Designer and Funding Navigator in light/dark at 1440, 390 and 320 px;
+original-colour header/footer/favicon symbols, computed contrast, System theme,
+stored preferences and visible logo-load failures. Its visual interactions must
+leave the project and transferred planning snapshot unchanged. Run browser
+workflows sequentially when they share an isolated save.
+
 From `restoration_simulator`, start a separate API:
 
 ```powershell
@@ -56,3 +65,16 @@ dependency blocking, failed writes and lost-response retries, stable request IDs
 preserved parcels/designs/drafts, saved Undo after reload, stale revisions and
 red confirmation controls in both themes at desktop/phone widths. It replaces
 only the isolated fixture project; run mutation browser scripts sequentially.
+
+Run `node tests/browser/funding-layout.cjs` with the same isolated API/app settings
+to check Graph as the initial view, editor placement below two circumstance nodes,
+re-anchoring after dragging, last-node and expanded-view context, desktop resizing,
+keyboard movement, column dividers, nested source PDFs and phone themes. The editor
+must remain usable while graph nodes and their connection states stay visible;
+project and planning records must remain unchanged.
+
+Run `node tests/browser/funding-working-option.cjs` to verify direct radio/checkbox
+activation, independent card inspection and shortlisting, working-option colours
+and connections, hidden/paged options, Graph/Matrix, keyboard/touch at 390/320 px,
+PDF focus, exploration resets and absence of saved/adopted or simulation effects
+from working-option changes. Use the same isolated API/app settings.

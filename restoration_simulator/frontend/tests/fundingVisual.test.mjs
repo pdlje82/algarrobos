@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
-import {assessmentChanges,fundingVisualReducer as reduce,initialFundingVisual as initial,visualScope,conditionText,graphQuestions} from "../src/fundingVisualState.js";
+import {assessmentChanges,fundingVisualReducer as reduce,initialFundingVisual as initial,visualScope,conditionText,graphQuestions,graphLinkStatus,graphAnswerStatus} from "../src/fundingVisualState.js";
 import {validateResponse} from "../src/contracts.js";
 
 const condition=(result="unknown",value=null)=>({id:"A:amount:bonus",option_id:"A",fields:["bonus"],effect:"amount",result,value,message:"Addition",sources:[]});
@@ -103,4 +103,29 @@ test("persistent fit nodes cover all pages while money stays an explicit graph c
   assert.deepEqual(ids({...settings,showAmount:true}),["applicant_choice","municipality","bonus","eligible_cost"]);
   assert.deepEqual(ids({...settings,focus:true,currentField:"owner_id"}),["owner_id"]);
   assert.deepEqual(graphQuestions(questions,checks,["research-only"],settings),[]);
+});
+
+test("circumstance colours summarise Python links across scope and resolve to a working programme",()=>{
+  const checks=[
+    {option_id:"A",fields:["applicant"],effect:"eligibility",result:"pass"},
+    {option_id:"A",fields:["applicant"],effect:"eligibility",result:"unknown"},
+    {option_id:"B",fields:["applicant"],effect:"eligibility",result:"pass"},
+    {option_id:"C",fields:["applicant"],effect:"eligibility",result:"fail"},
+    {option_id:"outside",fields:["applicant"],effect:"eligibility",result:"fail"}
+  ];
+  const state=workingOption=>graphAnswerStatus("applicant",checks,["A","B","C"],{workingOption,showAmount:false});
+  const mixed=state(null);assert.equal(mixed.status,"mixed");assert.deepEqual(mixed.counts,{pass:1,unknown:1,fail:1});assert.match(mixed.label,/across programmes/);
+  assert.equal(state("A").status,"unknown");assert.equal(state("B").status,"pass");assert.equal(state("C").status,"fail");
+  assert.equal(state("outside").status,"fail","Working colours survive browsing filters");
+  assert.equal(graphLinkStatus(checks.slice(0,2)),"unknown");assert.equal(graphLinkStatus(checks),"fail");
+  assert.throws(()=>graphLinkStatus([]),/Invalid/);assert.throws(()=>graphLinkStatus([{result:"invented"}]),/Invalid/);
+});
+
+test("amount-only colours never turn a supplied bonus into a fit verdict or invent research dependencies",()=>{
+  const checks=[{option_id:"A",fields:["bonus"],effect:"amount",result:"fail",value:0},{option_id:"A",fields:["bonus","other"],effect:"eligibility",result:"pass"}];
+  const fit=graphAnswerStatus("bonus",checks,["A"],{workingOption:null,showAmount:true});assert.equal(fit.status,"pass");assert.equal(fit.effect,"eligibility");
+  const amount=graphAnswerStatus("bonus",checks.slice(0,1),["A"],{workingOption:null,showAmount:true});assert.equal(amount.status,"fail");assert.equal(amount.label,"− No addition");assert.equal(amount.effect,"amount");
+  assert.equal(graphAnswerStatus("bonus",checks.slice(0,1),["A"],{workingOption:null,showAmount:false}).status,"neutral");
+  assert.equal(graphAnswerStatus("bonus",checks,["research"],{workingOption:null,showAmount:true}).status,"neutral");
+  assert.equal(graphAnswerStatus("other",[{...checks[1],result:"unknown"}],["A"],{workingOption:null,showAmount:false}).status,"unknown");
 });

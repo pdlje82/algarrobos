@@ -17,7 +17,7 @@
 .model-diagram figcaption, .model-diagram-note { font-size: 12px; color: var(--muted); margin: 10px 0; }
 .model-map { display: block; width: 100%; height: auto; border: 1px solid var(--border); border-radius: 10px; background: var(--page); --model-water: #246783; }
 :root[data-theme="dark"] .model-map { --model-water: #99cce1; }
-.model-ground { fill: var(--selected-bg); stroke: var(--border); stroke-width: 2; }
+.model-ground { fill: var(--drawing-ground); stroke: var(--border); stroke-width: 2; }
 .model-new-tree { fill: var(--green); }
 .model-existing-tree { fill: var(--panel); stroke: var(--carob); stroke-width: 4; }
 .model-existing-centre { fill: var(--carob); }

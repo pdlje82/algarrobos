@@ -156,7 +156,7 @@ Applicant resets apply to the complete choice. Hidden activity answers are
 retained, and direct editing can inspect one without changing the activity.
 The active question is identified by stable logical ID rather than its index.
 
-**Matrix is the default**, with the graph one toggle away. The separate What
+**Graph is the default**, with Matrix one toggle away. The separate What
 changed panel and aggregate change counters are removed. Affected rows/nodes and
 changed fit/condition/amount cells carry text markers and highlights. Hover/focus
 shows concise explanations; **Inspect effects** opens persistent interactive
@@ -255,12 +255,46 @@ initialise only the 3.4 participation answer. New parcel-linked baselines use th
 recorded parcel location; conflicting planning defaults remain visible for review.
 
 The answer overview uses compact rows with origin detail and Edit/Reset controls;
-phones disclose the actions per row. Matrix remains default. Graph defaults to all
+phones disclose the actions per row. Graph opens by default and shows all
 fit nodes across the complete selected family/shortlist, including other pages.
 Question navigation and option inspection preserve their positions. Optional
 current-question focus and amount-condition controls change presentation only.
+Circumstance nodes colour their linked Python conditions green (met), amber
+(unresolved) or red (conflicting). Mixed outcomes across programmes use a lavender
+surface and a segmented green/amber/red rail with labelled result counts. The
+working-option radio focuses colours and emphasised connections on one option.
+Card/title clicks only open details; they never change the working option or
+shortlist. Shortlist checkboxes are activated only through their inputs. The
+working choice survives Graph/Matrix, question navigation, paging, filters and
+source viewing; the summary identifies when it is outside the displayed scope.
+Its requirements remain available in the graph. Clearing it restores the whole
+family/shortlist colour summary. This is session presentation state, reset by
+loading another exploration or refreshing its context, and never saved/adopted
+into funding records. Amount-only nodes label their monetary effect explicitly.
+Clay selection outlines and changed-answer highlights retain the outcome colours.
 Previous counts and reserved update/status slots prevent assessment/blur updates
 from moving controls during clicks.
+
+The People and land stop now gives the visual workspace its full width without
+a static answer panel. Select a circumstance node, **Answer questions**, or Edit
+in the answer overview to open the modeless question editor. Clicking a graph node
+opens the editor below that node and the following node, keeping both nodes and
+their connection states visible. The final node uses the preceding node for context.
+The graph/page scrolls only as needed to leave room, and the editor body scrolls
+within the remaining viewport. Clicking another node re-anchors the editor.
+Other triggers open it beside their controls. It can be moved by its title on
+desktop (or with arrow keys), and retains the moved position while advancing
+questions with the editor's buttons. Escape/Close returns focus to the
+trigger; question help and PDF viewing remain nested interactions. Phones use a
+viewport-contained editor with scrollable content.
+
+Desktop graph columns have two draggable, keyboard-accessible separators. Minimum
+column widths preserve readable nodes; **Reset column widths** restores the initial
+layout. Widths survive view changes within the workspace, while phones use the
+fixed scrollable layout. Editor positions and column widths are presentation state
+and never enter funding snapshots, project records or simulation history.
+`funding-layout.test.mjs` and the isolated `funding-layout.cjs` browser workflow
+cover geometry limits, movement, focus, source PDFs and phone themes.
 
 The planning workspace exposes computed `context`: linked parcel, owner, active
 or inactive access record, operator, source design, planning municipality conflict

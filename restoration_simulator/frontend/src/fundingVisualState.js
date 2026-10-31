@@ -55,3 +55,27 @@ export function conditionText(c) {
   if (c.effect === "amount") return c.result === "unknown" ? "? Amount unresolved" : c.result === "fail" ? "− No addition" : "✓ Amount condition supplied";
   return c.result === "unknown" ? "? Unresolved" : c.result === "fail" ? "× Conflicts" : "✓ Meets condition";
 }
+
+// Summarise authoritative condition results for display, never applicant facts.
+// These are linked conditions, not an additional overall eligibility verdict.
+export function graphLinkStatus(conditions){
+  if(!conditions.length||conditions.some(c=>!["pass","unknown","fail"].includes(c.result)))throw Error("Invalid funding connection results.");
+  return conditions.some(c=>c.result==="fail")?"fail":conditions.some(c=>c.result==="unknown")?"unknown":"pass";
+}
+
+export function graphAnswerStatus(field,conditions,scopeIds,{workingOption,showAmount}){
+  const scope=new Set(workingOption===null?scopeIds:[workingOption]);
+  const linked=conditions.filter(c=>scope.has(c.option_id)&&c.fields.includes(field));
+  const fit=linked.filter(c=>c.effect==="eligibility"),amount=linked.filter(c=>c.effect==="amount");
+  const effect=fit.length?"eligibility":showAmount&&amount.length?"amount":null;
+  const checks=effect==="eligibility"?fit:effect==="amount"?amount:[];
+  const groups=new Map();
+  for(const check of checks){if(!groups.has(check.option_id))groups.set(check.option_id,[]);groups.get(check.option_id).push(check);}
+  const connections=[...groups].map(([id,checks])=>({id,status:graphLinkStatus(checks)}));
+  const counts={pass:0,unknown:0,fail:0};for(const c of connections)counts[c.status]++;
+  const states=Object.keys(counts).filter(key=>counts[key]>0),status=states.length>1?"mixed":states.length===1?states[0]:"neutral";
+  const labels=effect==="amount"?{pass:"✓ Amount input supplied",unknown:"? Amount unresolved",fail:"− No addition",mixed:"Mixed amount conditions",neutral:"No modelled amount condition"}:{pass:"✓ Linked conditions met",unknown:"? Linked conditions unresolved",fail:"× Linked condition conflicts",mixed:"Mixed across programmes",neutral:"No modelled condition"};
+  const label=labels[status];
+  const detail=connections.length?connections.map(c=>`${c.id}: ${labels[c.status]}`).join("; "):"No modelled condition in this scope. This is not an eligibility conclusion.";
+  return {status,effect,counts,label,detail};
+}

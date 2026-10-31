@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 
-function BrandImage({ asset, className, width, height }) {
+function BrandImage({ asset, className, width, height, tileClassName = null }) {
   const [failed, setFailed] = useState(false);
   const source = `/branding/algarroba-${asset}.png`;
+  const image = (
+    <img
+      className={className}
+      src={source}
+      alt=""
+      aria-hidden="true"
+      width={width}
+      height={height}
+      onError={() => setFailed(true)}
+    />
+  );
   return (
     <>
-      <img
-        className={className}
-        src={source}
-        alt=""
-        aria-hidden="true"
-        width={width}
-        height={height}
-        onError={() => setFailed(true)}
-      />
+      {tileClassName === null ? image : <span className={tileClassName}>{image}</span>}
       {failed && (
         <span className="brand-error" role="alert">
           Logo asset could not load: {source}. Reload the application.
@@ -26,7 +29,7 @@ function BrandImage({ asset, className, width, height }) {
 export function BrandLockup() {
   return (
     <a className="brand" href="/" aria-label="Algarroba home — Restoration planning">
-      <BrandImage asset="symbol" className="brand-symbol" width={1254} height={1254} />
+      <BrandImage asset="symbol" className="brand-symbol" tileClassName="brand-symbol-tile" width={1254} height={1254} />
       <span className="brand-name">
         <BrandImage asset="wordmark" className="brand-wordmark" width={2172} height={724} />
         <span className="brand-sub">Restoration planning</span>
@@ -38,7 +41,7 @@ export function BrandLockup() {
 export function BrandFooter() {
   return (
     <span className="footer-brand">
-      <BrandImage asset="symbol" className="footer-symbol" width={1254} height={1254} />
+      <BrandImage asset="symbol" className="footer-symbol" tileClassName="brand-symbol-tile brand-symbol-tile-small" width={1254} height={1254} />
       <span>Algarroba <span aria-hidden="true">/</span> Restoration planning</span>
     </span>
   );

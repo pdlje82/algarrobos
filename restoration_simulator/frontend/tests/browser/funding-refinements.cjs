@@ -26,6 +26,8 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await review.getByRole('button',{name:'Keep saved assessment',exact:true}).click();assert.equal((await api('funding')).attachment.draft.version,2);
   await review.getByRole('button',{name:'Review applicant choice',exact:true}).click();await review.locator('#funding-applicant_choice').selectOption('recorded:individual');await settled();
   await page.getByRole('button',{name:'2. People and land',exact:true}).click();
+  assert.equal(await visual.getByRole('button',{name:'Graph',exact:true}).getAttribute('aria-pressed'),'true');await visual.getByRole('button',{name:'Matrix',exact:true}).click();
+  await visual.getByRole('button',{name:'Answer questions',exact:true}).click();
   const applicant=page.locator('#funding-applicant_choice');await applicant.waitFor();assert.equal(await page.locator('#funding-applicant_kind').count(),0);assert.equal(await page.locator('#funding-applicant_id').count(),0);
   assert.equal(await visual.getByRole('button',{name:'Matrix',exact:true}).getAttribute('aria-pressed'),'true');assert.equal(await page.getByText('What changed',{exact:true}).count(),0);
   const row=visual.locator('tr[data-option-id="LEADER-AL20-3.4"]');await row.getByText('Conflicts with current scenario',{exact:true}).waitFor();
@@ -33,10 +35,12 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await applicant.selectOption('recorded:partner');await evaluation;await settled();await row.getByText('Needs your answers',{exact:true}).waitFor();assert(await row.locator('.funding-cell-changed').count()>0);
   await applicant.selectOption('planned:nonprofit');await settled();await applicant.selectOption('potential:nonprofit');await settled();
   await row.getByText('Input affected · result unchanged',{exact:true}).waitFor();
+  await page.getByRole('button',{name:'Close question editor',exact:true}).click();
   const effectHelp=row.getByRole('button',{name:'About answer effect on LEADER-AL20-3.4',exact:true});await effectHelp.hover();await page.getByRole('tooltip').getByText(/Fit remains Needs your answers/).waitFor();await page.keyboard.press('Escape');
   await row.getByRole('button',{name:'Inspect effects for LEADER-AL20-3.4',exact:true}).click();await visual.getByLabel('Answer effects for LEADER-AL20-3.4',{exact:true}).getByText(/Input affected.*result unchanged/).waitFor();
-  const source=visual.getByRole('link',{name:/Official requirements? · PDF page 120/}).first();await source.click();await page.getByRole('dialog').waitFor();await poll(async()=>!await page.getByLabel('PDF page',{exact:true}).isDisabled());assert.equal(await page.getByLabel('PDF page',{exact:true}).inputValue(),'120');await page.keyboard.press('Escape');assert(await source.evaluate(n=>n===document.activeElement));
+  const source=visual.getByRole('link',{name:/Official requirements? · PDF page 120/}).first();await source.click();await page.locator('dialog.document-viewer').waitFor();await poll(async()=>!await page.getByLabel('PDF page',{exact:true}).isDisabled());assert.equal(await page.getByLabel('PDF page',{exact:true}).inputValue(),'120');await page.keyboard.press('Escape');assert(await source.evaluate(n=>n===document.activeElement));
   await page.keyboard.press('Escape');await visual.getByLabel('Answer effects for LEADER-AL20-3.4',{exact:true}).waitFor({state:'detached'});assert.equal(await row.getByRole('button',{name:/^LEADER-AL20-3.4/}).evaluate(n=>n===document.activeElement),true);
+  await visual.getByRole('button',{name:'Answer questions',exact:true}).click();
   await row.getByRole('button',{name:'Inspect effects for LEADER-AL20-3.4',exact:true}).click();await page.locator('.funding-question label').first().click();await visual.getByLabel('Answer effects for LEADER-AL20-3.4',{exact:true}).waitFor();
   await applicant.selectOption('potential:');await page.locator('#funding-applicant-other-form').selectOption('public_company');await settled();
   await applicant.selectOption('recorded:individual');await settled();assert.equal(await page.locator('#funding-applicant-other-form').count(),0);
@@ -49,7 +53,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   const activity=page.locator('.funding-answer-row[data-question-id="activity"]');await activity.getByRole('button',{name:'Edit',exact:true}).click();await page.locator('#funding-activity').selectOption('business');await settled();
   const income=page.locator('.funding-answer-row[data-question-id="net_year1"]');await income.getByRole('button',{name:'Edit',exact:true}).click();await page.locator('#funding-net_year1').fill('10000');await settled();
   await activity.getByRole('button',{name:'Edit',exact:true}).click();await page.locator('#funding-activity').selectOption('demonstration');await settled();await page.locator('.funding-answers').getByText(/^Other activity answers/).click();await income.getByText('10000',{exact:true}).waitFor();
-  await income.getByRole('button',{name:'Edit',exact:true}).click();await page.getByText('Retained answer—outside the current activity’s question flow',{exact:true}).waitFor();assert.equal(await page.locator('#funding-net_year1').inputValue(),'10000');
+  await income.getByRole('button',{name:'Edit',exact:true}).click();await page.getByText(/Retained answer—outside the current activity’s question flow/).waitFor();assert.equal(await page.locator('#funding-net_year1').inputValue(),'10000');
   await page.getByRole('button',{name:'Return to current questions',exact:true}).click();await applicant.selectOption('recorded:partner');await settled();
   await page.locator('.funding-answers>summary').click();await visual.getByRole('button',{name:'Clear inspection',exact:true}).click();
   const compactIds=await visual.locator('.funding-matrix tr[data-option-id]').evaluateAll(nodes=>nodes.map(n=>n.dataset.optionId));assert.equal(compactIds.length,12);
@@ -57,6 +61,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await visual.getByRole('button',{name:'Graph',exact:true}).click();assert.equal(await visual.locator('.funding-graph-option').count(),fullCount);assert.equal(await visual.locator('.funding-circumstance').filter({hasText:'Applicant legal / economic form'}).count(),0);
   await visual.getByRole('button',{name:'Compact view',exact:true}).click();await visual.getByRole('button',{name:'Matrix',exact:true}).click();assert.deepEqual(await visual.locator('.funding-matrix tr[data-option-id]').evaluateAll(nodes=>nodes.map(n=>n.dataset.optionId)),compactIds);
   await page.locator('.funding-layout').evaluate(n=>n.scrollIntoView({block:'start'}));await page.screenshot({path:'test-artifacts/funding-simplified-desktop.png'});
+  await page.getByRole('button',{name:'Close question editor',exact:true}).click();
   for(const theme of ['light','dark']){
    await page.getByLabel('Theme',{exact:true}).selectOption(theme);await page.setViewportSize({width:390,height:844});
    const help=visual.getByRole('button',{name:'About need your answers',exact:true});await help.scrollIntoViewIfNeeded();const b=await help.boundingBox();await page.touchscreen.tap(b.x+b.width/2,b.y+b.height/2);await page.getByRole('tooltip').waitFor();const tip=await page.getByRole('tooltip').boundingBox();assert(tip.x>=0&&tip.x+tip.width<=391);await page.keyboard.press('Escape');
@@ -65,7 +70,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   }
   await page.getByText('Saved explorations, context and funding projects',{exact:true}).click();await page.getByRole('button',{name:'Save draft',exact:true}).click();await poll(async()=>(await api('funding')).attachment.draft.version===3);
   const current=(await api('funding')).attachment.draft;assert.equal(current.applicant_choice.party_id,'partner');assert(!Object.hasOwn(current.overrides,'applicant_kind'));assert.equal(JSON.stringify((await api('funding')).attachment.scenarios[0].assessment),oldAssessment);
-  await page.reload();await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await page.getByRole('button',{name:'2. People and land',exact:true}).click();await settled();assert.equal(await applicant.inputValue(),'recorded:partner');
+  await page.reload();await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await page.getByRole('button',{name:'2. People and land',exact:true}).click();await visual.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();await visual.getByRole('button',{name:'Answer questions',exact:true}).click();await settled();assert.equal(await applicant.inputValue(),'recorded:partner');
   await page.getByRole('button',{name:'Project',exact:true}).click();await page.getByRole('button',{name:'Open demonstrator planning',exact:true}).click();const editor=page.locator('.demo-editor');assert.equal(await editor.getByRole('button',{name:'Funding route',exact:true}).count(),0);assert.equal(await editor.getByRole('button',{name:'Explore funding',exact:true}).count(),1);await editor.getByRole('button',{name:'Explore funding',exact:true}).click();await page.getByRole('heading',{name:'Funding Navigator',exact:true}).waitFor();
   const after=await api('project');assert.equal(JSON.stringify(after.project),before);assert.equal(JSON.stringify(after.planning.draft),planningBefore);assert.equal((await api('export')).format_version,8);assert.deepEqual(errors,[]);await context.close();
   console.log('Merged funding browser: legacy review, atomic applicants, direct overview/reset, retained answers, matrix effects, PDF, graph/expanded views, phones and unchanged project passed.');

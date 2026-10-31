@@ -19,8 +19,8 @@
   --explorer-root-ball: #b0c6a4;
   --explorer-line: #344e36;
   --explorer-wood: #765530;
-  --explorer-badge: #fffdf6;
-  --explorer-badge-text: #263c2e;
+  --explorer-badge: var(--raised);
+  --explorer-badge-text: var(--text);
   width: min(1220px, calc(100vw - 24px));
   max-width: calc(100vw - 24px);
   height: min(860px, calc(100dvh - 24px));
@@ -29,9 +29,9 @@
   padding: 0;
   border: 1px solid var(--border);
   border-radius: 14px;
-  background: var(--panel);
+  background: var(--raised);
   color: var(--text);
-  box-shadow: 0 20px 70px rgb(0 0 0 / 25%);
+  box-shadow: 0 20px 70px var(--overlay-shadow);
 }
 :root[data-theme="dark"] .planting-explorer {
   --explorer-soil: #453c2c;
@@ -39,8 +39,8 @@
   --explorer-root-ball: #4b6a46;
   --explorer-line: #d3e2c4;
   --explorer-wood: #e0b783;
-  --explorer-badge: #192a20;
-  --explorer-badge-text: #e3eadf;
+  --explorer-badge: var(--raised);
+  --explorer-badge-text: var(--text);
 }
 .planting-explorer[open] { display: flex; flex-direction: column; }
 .planting-explorer::backdrop { background: rgb(0 0 0 / 72%); }
