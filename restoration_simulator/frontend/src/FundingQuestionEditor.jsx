@@ -2,7 +2,7 @@ import React,{useEffect,useLayoutEffect,useRef,useState} from "react";
 import {constrainFundingEditor,placeFundingEditor,fundingEditorContextShift} from "./fundingLayout.js";
 
 // A modeless editor: the graph remains interactive, including while editing an answer.
-export function FundingQuestionEditor({question,anchor,positionLabel,onClose,children}){
+export function FundingQuestionEditor({question,anchor,positionLabel,onClose,children,title="Edit funding answer",focusTarget=null}){
   const root=useRef(null),drag=useRef(null),moved=useRef(false),currentAnchor=useRef(anchor),previousViewport=useRef({width:innerWidth,height:innerHeight});
   const [position,setPosition]=useState(null),[dragging,setDragging]=useState(false);
   const [wide,setWide]=useState(()=>matchMedia("(min-width:1001px)").matches);
@@ -13,7 +13,7 @@ export function FundingQuestionEditor({question,anchor,positionLabel,onClose,chi
     const graph=currentAnchor.current.graph;
     if(!graph||!graph.node.isConnected||innerWidth<=1000)return currentAnchor.current;
     const bounds=()=>{
-      const nodes=[...graph.panel.querySelectorAll(".funding-circumstance")],index=nodes.indexOf(graph.node);
+      const nodes=[...graph.panel.querySelectorAll(".funding-circumstance,.funding-annex-node")],index=nodes.indexOf(graph.node);
       // Keep this node and the following clickable node clear. The final node
       // uses its predecessor; read the current scope after answer changes.
       const context=nodes.slice(index===nodes.length-1?Math.max(0,index-1):index,index+2);
@@ -38,9 +38,9 @@ export function FundingQuestionEditor({question,anchor,positionLabel,onClose,chi
   },[anchor]);
   useLayoutEffect(()=>{
     if(position===null)return;
-    const input=root.current.querySelector(`#funding-${question.id}`);
+    const input=focusTarget===null?root.current.querySelector(`#funding-${question.id}`):document.getElementById(focusTarget);
     if(input!==null&&!input.disabled)input.focus({preventScroll:true});else root.current.focus({preventScroll:true});
-  },[question.id,position!==null,anchor]);
+  },[question.id,position!==null,anchor,focusTarget]);
   useEffect(()=>{
     const resize=(reveal=false)=>{
       // Content changes and nested PDFs must not re-anchor to a graph that the
@@ -89,7 +89,7 @@ export function FundingQuestionEditor({question,anchor,positionLabel,onClose,chi
   }
   const Handle=wide?"button":"div";
   return <section ref={root} id="funding-answer-editor" className={`funding-question-editor${dragging?" is-dragging":""}`} role="dialog" aria-modal="false" aria-labelledby="funding-answer-editor-title" tabIndex={-1} style={position===null?{visibility:"hidden"}:position}>
-    <header className="funding-editor-header"><Handle type={wide?"button":undefined} className="funding-editor-handle" aria-label={wide?"Move question editor":undefined} onPointerDown={start} onPointerMove={move} onPointerUp={end} onPointerCancel={end} onLostPointerCapture={()=>{drag.current=null;setDragging(false);}} onKeyDown={moveByKey}><strong id="funding-answer-editor-title">Edit funding answer</strong><small>{positionLabel}</small><span className="funding-editor-move-hint">Drag here to move · arrow keys also work</span></Handle><button type="button" className="funding-editor-close" aria-label="Close question editor" onClick={onClose}>×</button></header>
+    <header className="funding-editor-header"><Handle type={wide?"button":undefined} className="funding-editor-handle" aria-label={wide?"Move question editor":undefined} onPointerDown={start} onPointerMove={move} onPointerUp={end} onPointerCancel={end} onLostPointerCapture={()=>{drag.current=null;setDragging(false);}} onKeyDown={moveByKey}><strong id="funding-answer-editor-title">{title}</strong><small>{positionLabel}</small><span className="funding-editor-move-hint">Drag here to move · arrow keys also work</span></Handle><button type="button" className="funding-editor-close" aria-label="Close question editor" onClick={onClose}>×</button></header>
     <div className="funding-editor-body">{children}</div>
   </section>;
 }

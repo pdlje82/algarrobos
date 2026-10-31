@@ -31,6 +31,7 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     await page.getByRole('button',{name:'Answer questions',exact:true}).click();
     const answers={applicant_choice:'recorded:individual',municipality:'Alhama de Almería',territory_verified:'yes',sector:'general',unemployed:'yes',new_activity:'yes',no_same_reta:'yes',resident:'yes',exclusive:'yes',start_after_application:'yes',plan_24_months:'yes',retention:'yes',unemployment_percent:'50',net_year1:'10000',smi_year1:'20000',net_year2:'20000',smi_year2:'20000',other_aid:'no',bonus_location:'yes',bonus_young:'yes',bonus_woman:'yes',bonus_job:'yes',bonus_climate:'yes'};
     for(let i=0;i<60;i++){
+      if(await page.getByRole('heading',{name:'AL20 selection assessment',exact:true}).count())break;
       const field=page.locator('.funding-question select[id^=funding],.funding-question input[id^=funding]:not([type=search])').first();
       const id=(await field.getAttribute('id')).replace('funding-','');
       if(Object.hasOwn(answers,id)){

@@ -13,7 +13,12 @@ export function assessmentChanges(previous, next) {
   }).map(c => ({...c, before_result:oldConditions.get(c.id)?.result ?? null, before_value:oldConditions.get(c.id)?.value ?? null,resolved:oldConditions.get(c.id)?.result === "unknown" && c.result !== "unknown"}));
   const removed=previous.visualisation.conditions.filter(c=>!nextIds.has(c.id)).map(c=>({...c,removed:true,before_result:c.result,before_value:c.value,resolved:false}));
   changedConditions.push(...removed);
-  const affectedConditions=[...next.visualisation.conditions.filter(c=>c.fields.some(f=>fields.includes(f))).map(c=>({...c,before_result:oldConditions.get(c.id)?.result ?? null,before_value:oldConditions.get(c.id)?.value ?? null})),...removed];
+  const afterQuestions=new Map(next.input_context.questions.map(q=>[q.id,q]));
+  const affectedConditions=[...next.visualisation.conditions.filter(c=>c.fields.some(f=>{
+    if(!fields.includes(f))return false;
+    if(f==="selection_score"&&next.assessment.draft.version===4)return JSON.stringify(beforeQuestions.get(f)?.current_value[c.option_id])!==JSON.stringify(afterQuestions.get(f).current_value[c.option_id]);
+    return true;
+  })).map(c=>({...c,before_result:oldConditions.get(c.id)?.result ?? null,before_value:oldConditions.get(c.id)?.value ?? null})),...removed];
   const oldOptions = new Map(previous.assessment.results.map(r => [r.id,r]));
   const options = next.assessment.results.flatMap(r => {
     const before = oldOptions.get(r.id);

@@ -1,5 +1,7 @@
 """One applicant choice and logical question state, retaining earlier save semantics."""
 from copy import deepcopy
+import json
+from unittest.mock import patch
 import unittest
 from backend import funding, funding_inputs, funding_visual, engine
 import test_funding as fixtures
@@ -8,6 +10,10 @@ import test_funding as fixtures
 class ChoiceTests(unittest.TestCase):
     def setUp(self):
         self.project=fixtures.site()
+        # These tests freeze edition-2 semantics; edition-3 annex tests are separate.
+        edition2=json.loads((funding.CATALOGUE.parent/"funding-v2.json").read_text(encoding="utf-8"))
+        catalogue=patch.object(funding,"catalogue",return_value=edition2)
+        catalogue.start();self.addCleanup(catalogue.stop)
         self.draft=funding.new_draft(self.project,None,[],"business")
         self.draft["baseline"]["facts"].update(applicant_id="individual",applicant_kind="individual")
 
@@ -95,7 +101,11 @@ class ChoiceTests(unittest.TestCase):
 
 
 class PrepareChoiceApiTests(unittest.TestCase):
-    setUp=fixtures.FundingPersistenceTests.setUp
+    def setUp(self):
+        fixtures.FundingPersistenceTests.setUp(self)
+        edition2=json.loads((funding.CATALOGUE.parent/"funding-v2.json").read_text(encoding="utf-8"))
+        catalogue=patch.object(funding,"catalogue",return_value=edition2)
+        catalogue.start();self.addCleanup(catalogue.stop)
     seed=fixtures.FundingPersistenceTests.seed
     def test_review_and_resolution_do_not_write(self):
         old=self.seed();old["version"]=2;del old["applicant_choice"]

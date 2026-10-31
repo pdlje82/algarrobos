@@ -1,6 +1,8 @@
 """Applicant inheritance is versioned so historical assessment facts stay frozen."""
 from copy import deepcopy
 import unittest
+import json
+from unittest.mock import patch
 from backend import funding, funding_visual
 import test_funding as fixtures
 
@@ -75,7 +77,11 @@ class ApplicantTests(unittest.TestCase):
 
 
 class PrepareEndpointTests(unittest.TestCase):
-    setUp = fixtures.FundingPersistenceTests.setUp
+    def setUp(self):
+        fixtures.FundingPersistenceTests.setUp(self)
+        edition2=json.loads((funding.CATALOGUE.parent/"funding-v2.json").read_text(encoding="utf-8"))
+        catalogue=patch.object(funding,"catalogue",return_value=edition2)
+        catalogue.start();self.addCleanup(catalogue.stop)
     seed = fixtures.FundingPersistenceTests.seed
 
     def test_prepare_never_writes_or_changes_rules_and_sources(self):

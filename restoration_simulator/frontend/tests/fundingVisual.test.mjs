@@ -65,7 +65,7 @@ test("graph and matrix share stable catalogue order, family paging and shortlist
   assert.equal(visualScope(rows,args).options[0].id,"12");
 });
 test("visual contract rejects incomplete metadata and preserves multi-input relationships",()=>{
-  const catalogue=JSON.parse(readFileSync(new URL("../../scenarios/funding.json",import.meta.url)));
+  const catalogue=JSON.parse(readFileSync(new URL("../../scenarios/funding-v2.json",import.meta.url)));
   const d={version:1,name:"Test",activity_key:"test",baseline:{facts:{},parties:[],target:"business",parcel_ids:[],work_budget:null},overrides:{},selected:[],allocations:[],calendar_start:null,notes:"",bundle:catalogue};
   const a={draft:d,facts:{},results:[{...catalogue.entries[0],status:"Needs information",relevant:true,finance:{basis:"Unknown",estimate:null,schedule:[],notes:[]},checks:[]}],differences:[],stale:false,catalogue_changed:false,catalogue_hash:"hash",warnings:[],allocation_totals:{},uncovered:null,upfront_shortfall:null,calendar_note:""};
   const id=a.results[0].id, c={...condition(),id:"income",option_id:id,fields:["net_year1","smi_year1"],effect:"eligibility"};

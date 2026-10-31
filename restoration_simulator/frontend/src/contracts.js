@@ -292,13 +292,22 @@ export function validateResponse(path, data) {
     required((data.applicant_context.party_name===null||typeof data.applicant_context.party_name==="string")&&(data.applicant_context.inherited_form===null||typeof data.applicant_context.inherited_form==="string")&&typeof data.applicant_context.derived==="boolean"&&typeof data.applicant_context.override_conflict==="boolean","Invalid funding applicant provenance.");
     const v=data.visualisation;
     properties(v,["version","conditions","coverage"],"funding dependencies");
-    required(v.version===1&&Array.isArray(v.conditions)&&Array.isArray(v.coverage),"Incompatible funding dependencies. Restart Python and reload.");
+    required([1,2].includes(v.version)&&Array.isArray(v.conditions)&&Array.isArray(v.coverage),"Incompatible funding dependencies. Restart Python and reload.");
     properties(data.input_context,["editing_ready","questions"],"logical funding questions");
     required(typeof data.input_context.editing_ready==="boolean"&&Array.isArray(data.input_context.questions)&&data.input_context.questions.length>0,"Missing logical funding questions.");
+    if(data.assessment.draft.version===4){
+      required(v.version===2,"Missing AL20 graph support. Restart Python and reload.");
+      properties(v,["annex"],"funding dependencies");properties(v.annex,["version","routes"],"AL20 graph");
+      required(v.annex.version===1,"Unsupported AL20 graph version.");
+      for(const route of Object.keys(data.assessment.draft.bundle.selection.routes)){
+        properties(v.annex.routes,[route],"AL20 graph assessments");
+        validateSelectionResult(v.annex.routes[route],route,data.assessment.draft);
+      }
+    }
     const questionIds=new Set();
     for(const q of data.input_context.questions){
       properties(q,["id","label","short_label","type","input_kind","step","relevant","current_value","initial_value","display_value","initial_label","unknown","overridden","origin","retired","guidance","provenance"],"funding question state");
-      required(typeof q.id==="string"&&!questionIds.has(q.id)&&typeof q.label==="string"&&["applicant","choice","number","party","text"].includes(q.type)&&[0,1,4].includes(q.step)&&typeof q.relevant==="boolean"&&typeof q.unknown==="boolean"&&typeof q.overridden==="boolean"&&[q.display_value,q.initial_label,q.origin].every(s=>typeof s==="string"),"Invalid logical funding question.");
+      required(typeof q.id==="string"&&!questionIds.has(q.id)&&typeof q.label==="string"&&["applicant","choice","number","party","text","selection"].includes(q.type)&&[0,1,4].includes(q.step)&&typeof q.relevant==="boolean"&&typeof q.unknown==="boolean"&&typeof q.overridden==="boolean"&&[q.display_value,q.initial_label,q.origin].every(s=>typeof s==="string"),"Invalid logical funding question.");
       if(q.type==="applicant"){required(q.id==="applicant_choice"&&Array.isArray(q.options)&&q.options.length>0&&Array.isArray(q.other_forms),"Missing applicant choices.");for(const o of q.options)properties(o,["group","label","choice"],"applicant option");}
       required(typeof q.short_label==="string"&&q.short_label.trim()&&typeof q.retired==="boolean","Missing compact question labels.");
       properties(q.guidance,["summary","why","verify","requirements"],"question guidance");
@@ -335,7 +344,7 @@ export function validateResponse(path, data) {
   if(path==="funding/prepare") {
     properties(data,["draft","notice","applicant_review","catalogue_review"],"prepared funding exploration");
     validateResponse("funding/context",data.draft);
-    required(typeof data.notice==="string"&&(data.applicant_review===null?data.draft.version===3:[1,2].includes(data.draft.version)),"Incompatible funding editing policy.");
+    required(typeof data.notice==="string"&&(data.applicant_review===null?[3,4].includes(data.draft.version):[1,2].includes(data.draft.version)),"Incompatible funding editing policy.");
     if(data.applicant_review!==null)properties(data.applicant_review,["party_name","legal_form","message"],"legacy applicant review");
     if(data.catalogue_review!==null){properties(data.catalogue_review,["from_edition","to_edition","changes","retained_answers","messages"],"catalogue update review");required(Array.isArray(data.catalogue_review.changes)&&Array.isArray(data.catalogue_review.retained_answers)&&Array.isArray(data.catalogue_review.messages),"Incomplete catalogue conversion review.");}
     return data;
@@ -344,8 +353,34 @@ export function validateResponse(path, data) {
     properties(data,["version","name","activity_key","baseline","overrides","selected","allocations","calendar_start","notes","bundle"],"funding context");
     properties(data.baseline,["facts","parties","target","parcel_ids","work_budget"],"funding recorded baseline");
     properties(data.bundle,["version","entries","questions","groups","source_review","official_pages"],"funding catalogue");
-    required([1,2,3].includes(data.version)&&[1,2].includes(data.bundle.version)&&Array.isArray(data.bundle.entries)&&Array.isArray(data.bundle.questions)&&Array.isArray(data.selected),"Incompatible funding context.");
-    if(data.version===3){properties(data,["applicant_choice"],"merged applicant choice");required(!Object.hasOwn(data.overrides,"applicant_id")&&!Object.hasOwn(data.overrides,"applicant_kind"),"Conflicting legacy applicant overrides in a new exploration.");}
+    required([1,2,3,4].includes(data.version)&&[1,2,3].includes(data.bundle.version)&&Array.isArray(data.bundle.entries)&&Array.isArray(data.bundle.questions)&&Array.isArray(data.selected),"Incompatible funding context.");
+    required((data.version===4)===(data.bundle.version===3),"AL20 catalogue edition 3 requires funding draft version 4. Review the catalogue update.");
+    if([3,4].includes(data.version)){properties(data,["applicant_choice"],"merged applicant choice");required(!Object.hasOwn(data.overrides,"applicant_id")&&!Object.hasOwn(data.overrides,"applicant_kind"),"Conflicting legacy applicant overrides in a new exploration.");}
+    if(data.version===4){
+      properties(data,["selection_assessments","legacy_selection_score"],"AL20 draft");
+      properties(data.bundle,["selection"],"AL20 catalogue");
+      required(data.bundle.version===3,"AL20 structured scoring requires catalogue edition 3.");
+      const rules=data.bundle.selection;
+      properties(rules,["version","routes","profiles"],"AL20 scoring definitions");
+      required(rules.version===1&&Object.keys(rules.routes).length===5,"Incomplete AL20 route coverage.");
+      object(data.selection_assessments,"AL20 route answers");
+      required(Object.keys(data.selection_assessments).length===5,"Missing AL20 route answers.");
+      for(const [route,profileId] of Object.entries(rules.routes)){
+        properties(data.selection_assessments,[route],"AL20 route answers");
+        properties(rules.profiles,[profileId],"AL20 profiles");
+        const profile=rules.profiles[profileId];
+        properties(profile,["label","maximum","criteria"],"AL20 profile");
+        required(Array.isArray(profile.criteria)&&profile.criteria.length>0,"Missing AL20 criteria.");
+        const answer=data.selection_assessments[route];properties(answer,["criteria"],"AL20 assessment");
+        for(const criterion of profile.criteria){
+          properties(criterion,["id","label","label_es","cap","method","choices","exclusive_groups","requires","guidance","limitations","sources","parameters"],"AL20 criterion");
+          required(["sum","ratio","employment"].includes(criterion.method)&&Array.isArray(criterion.choices)&&criterion.choices.length>0&&Array.isArray(criterion.exclusive_groups)&&Array.isArray(criterion.sources)&&criterion.sources.length>0,"Incomplete AL20 criterion definitions.");
+          properties(answer.criteria,[criterion.id],"AL20 criterion answers");
+          properties(answer.criteria[criterion.id],["answers","inputs","reference","notes"],"AL20 criterion answer");
+          for(const choice of criterion.choices)properties(choice,["id","printed_code","label","label_es","points","routes","character","sources"],"AL20 subcriterion");
+        }
+      }
+    }
     return data;
   }
   if(["funding/evaluate","funding/plan-preview"].includes(path)) {
@@ -353,6 +388,10 @@ export function validateResponse(path, data) {
     validateResponse("funding/context",data.draft);
     required(Array.isArray(data.results)&&Array.isArray(data.differences)&&Array.isArray(data.warnings)&&typeof data.stale==="boolean"&&typeof data.catalogue_changed==="boolean","Invalid funding assessment.");
     for(const r of data.results){properties(r,["id","title","status","group","description","availability","source_strength","maturity","checked_on","finance","checks","sources","source_gaps","related","relevant"],"funding result");properties(r.finance,["basis","estimate","schedule","notes"],"funding financial result");required(Array.isArray(r.checks)&&Array.isArray(r.sources)&&Array.isArray(r.finance.schedule)&&Array.isArray(r.finance.notes),"Missing funding evidence or financial schedule.");}
+    if(data.draft.version===4)for(const route of Object.keys(data.draft.bundle.selection.routes)){
+      const result=data.results.find(r=>r.id===route);required(result!==undefined,"Missing AL20 funding result.");
+      properties(result,["selection_assessment"],"AL20 funding result");validateSelectionResult(result.selection_assessment,route,data.draft);
+    }
     return data;
   }
   if (path === "plant-prices") return priceDefaultsContract(data);
@@ -763,4 +802,17 @@ function designerDisplayContract(value,evaluation) {
   required([pocket.enabled,pocket.plotted,pocket.moves_with_pocket].every(v=>typeof v==="boolean")&&pocket.supported_count===1&&typeof pocket.species==="string"&&(pocket.name===null||typeof pocket.name==="string")&&(pocket.example_id===null||typeof pocket.example_id==="string")&&["off","linked","independent","unplaced","absent"].includes(pocket.state),"Invalid pocket identity or status.");
   required(Number.isInteger(pocket.quantity)&&pocket.quantity>=0&&Number.isInteger(pocket.extra_quantity)&&pocket.extra_quantity===Math.max(0,pocket.quantity-1)&&Number.isFinite(pocket.radius)&&pocket.radius>0&&diameter(pocket.crown_diameter)&&range(pocket.crown_range),"Invalid pocket quantities or dimensions.");
   required(pocket.example_id===(pocket.quantity>0?`${pocket.species}:0`:null)&&pocket.plotted===evaluation.instances.some(p=>p.id===pocket.example_id),"Pocket example-tree identity does not match the plan.");
+}
+
+function validateSelectionResult(score,route,draft){
+  properties(score,["route","profile","basis","subtotal","total","unresolved","threshold","result","criteria"],"AL20 scoring result");
+  required(score.route===route&&score.profile===draft.bundle.selection.routes[route]&&typeof score.basis==="string"&&Number.isFinite(score.subtotal)&&score.subtotal>=0&&Number.isInteger(score.unresolved)&&score.unresolved>=0&&Number.isFinite(score.threshold)&&["pass","fail","unknown"].includes(score.result)&&Array.isArray(score.criteria),"Invalid AL20 scoring result.");
+  const profile=draft.bundle.selection.profiles[score.profile];
+  required(score.criteria.length===profile.criteria.length&&new Set(score.criteria.map(c=>c.id)).size===profile.criteria.length,"Incomplete AL20 scoring breakdown.");
+  required(score.unresolved===0?Number.isFinite(score.total)&&score.total===score.subtotal&&score.result!=="unknown":score.total===null&&score.result==="unknown","An incomplete AL20 assessment cannot publish a final score.");
+  for(const definition of profile.criteria){
+    const row=score.criteria.find(r=>r.id===definition.id);required(row!==undefined,"Missing AL20 criterion subtotal.");
+    properties(row,["id","subtotal","uncapped","cap","complete","selected","issues","sources"],"AL20 criterion result");
+    required(Number.isFinite(row.subtotal)&&row.subtotal>=0&&Number.isFinite(row.cap)&&row.subtotal<=row.cap&&typeof row.complete==="boolean"&&Array.isArray(row.selected)&&Array.isArray(row.issues)&&Array.isArray(row.sources)&&row.sources.length>0,"Invalid AL20 criterion result.");
+  }
 }

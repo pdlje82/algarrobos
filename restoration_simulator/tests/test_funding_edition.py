@@ -3,6 +3,7 @@ from copy import deepcopy
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 from backend import funding, funding_inputs, funding_visual, documents, planning_draft, planning_context, designer
 from backend.engine import Invalid
 from test_designer_library import site
@@ -12,6 +13,10 @@ import test_funding as fixtures
 class EditionTests(unittest.TestCase):
     def setUp(self):
         self.project = site()
+        # These tests freeze edition-2 semantics; edition-3 annex tests are separate.
+        edition2=json.loads((funding.CATALOGUE.parent/"funding-v2.json").read_text(encoding="utf-8"))
+        catalogue=patch.object(funding,"catalogue",return_value=edition2)
+        catalogue.start();self.addCleanup(catalogue.stop)
         self.legacy = json.loads((funding.CATALOGUE.parent / "funding-v1.json").read_text(encoding="utf-8"))
         self.draft = funding.new_draft(self.project, None, [], "business")
 

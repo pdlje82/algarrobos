@@ -9,7 +9,7 @@ LAND_FIELDS = {"owner_id", "operator_id", "rights", "rights_sufficient", "area_m
 
 def presentation(q, d):
     """Edition-specific help: never attach current legal guidance to an older snapshot."""
-    if d["bundle"]["version"] == 2:
+    if d["bundle"]["version"] >= 2:
         original = next(x for x in d["bundle"]["questions"] if x["id"] == ("applicant_id" if q["id"] == "applicant_choice" else q["id"]))
         q.update(short_label=original["short_label"], guidance=deepcopy(original["guidance"]), retired=original.get("retired", False))
     else:
@@ -22,7 +22,7 @@ def presentation(q, d):
     if not q["overridden"] and len(parcels) == 1:
         if q["id"] in {"owner_id", "operator_id", "rights"}:
             q["origin"] = "Inherited captured parcel / active-agreement context—not answered here"
-        elif q["id"] == "municipality" and d["bundle"]["version"] == 2:
+        elif q["id"] == "municipality" and d["bundle"]["version"] >= 2:
             q["origin"] = "Inherited recorded parcel location—not answered here"
         q["provenance"]["detail"] = q["origin"]
     if q["id"] == "municipality":
@@ -65,7 +65,7 @@ def answer_text(q, value, parties):
 def describe(d):
     facts = effective(d)
     initial = initial_applicant(d)
-    ready = d["version"] == 3
+    ready = d["version"] in {3, 4}
     if ready:
         selected = resolved_applicant(d)
     else:
@@ -98,9 +98,19 @@ def describe(d):
         # Older catalogue snapshots may omit this optional relevance restriction.
         activities = q["activities"] if "activities" in q else None
         q.update(step=0 if key == "activity" else 4 if key in BUDGET_FIELDS else 1,
-                 relevant=not (d["bundle"]["version"] == 2 and original.get("retired", False)) and (key == "activity" or (activities is None or facts["activity"] in activities) and not (business_without_land and key in LAND_FIELDS)),
+                 relevant=not (d["bundle"]["version"] >= 2 and original.get("retired", False)) and (key == "activity" or (activities is None or facts["activity"] in activities) and not (business_without_land and key in LAND_FIELDS)),
                  current_value=value, initial_value=start, display_value=answer_text(q, value, d["baseline"]["parties"]), initial_label=answer_text(q, start, d["baseline"]["parties"]),
                  unknown=unknown, overridden=overridden,
                  origin="Cleared by you" if overridden and value is None else "Chosen by you / scenario assumption" if overridden else "Inherited context—not answered here; may include planning defaults")
-        questions.append(presentation(q, d))
+        q = presentation(q, d)
+        if key == "selection_score" and d["version"] == 4:
+            from .funding_selection import calculate
+            scores = [calculate(d["bundle"], d["selection_assessments"], route) for route in d["bundle"]["selection"]["routes"]]
+            summary = " · ".join(f"{s['route'].removeprefix('LEADER-AL20-')}: {s['total']:g} points" if s["total"] is not None else f"{s['route'].removeprefix('LEADER-AL20-')}: partial {s['subtotal']:g}, {s['unresolved']} unresolved" for s in scores)
+            q.update(type="selection", input_kind="selection", current_value=deepcopy(d["selection_assessments"]), initial_value=None,
+                     display_value=summary, initial_label="All annex criteria unanswered", unknown=all(s["total"] is None for s in scores),
+                     overridden=any(any(v is not None for v in row["answers"].values()) or any(v is not None for v in row["inputs"].values()) or row["reference"] or row["notes"] for a in d["selection_assessments"].values() for row in a["criteria"].values()),
+                     origin="Self-assessed annex selections; supporting references are not certified", legacy_selection_score=d["legacy_selection_score"])
+            q["provenance"] = {"kind": "assumed", "parcel_ids": [], "detail": q["origin"]}
+        questions.append(q)
     return {"editing_ready": ready, "questions": questions}

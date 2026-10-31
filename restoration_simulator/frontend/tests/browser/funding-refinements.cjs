@@ -13,7 +13,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
  await api('demonstrator/draft',{revision:p.revision,planning_revision:p.planning.planning_revision,request_id:crypto.randomUUID(),administration:Object.fromEntries(Object.entries(p.planning.draft.inputs).filter(([k])=>!physical.has(k)))});
  p=await api('project');const before=JSON.stringify(p.project),planningBefore=JSON.stringify(p.planning.draft);
  const d=await api('funding/context',{revision:p.revision,planning_revision:p.planning.planning_revision,design_revision:p.designer_revision,target:'demonstrator',parcel_ids:[p.project.parcels[0].id]});
- d.version=2;delete d.applicant_choice;d.name='Legacy split applicant';d.overrides={applicant_id:'individual',applicant_kind:'nonprofit'};
+ d.version=2;delete d.applicant_choice;delete d.selection_assessments;delete d.legacy_selection_score;d.bundle=JSON.parse(require('node:fs').readFileSync(require('node:path').resolve(__dirname,'../../../scenarios/funding-v2.json'),'utf8'));d.name='Legacy split applicant';d.overrides={applicant_id:'individual',applicant_kind:'nonprofit'};
  const w=await api('funding');const saved=await api('funding/save',{revision:p.revision,funding_revision:w.funding_revision,planning_revision:p.planning.planning_revision,design_revision:p.designer_revision,request_id:crypto.randomUUID(),operation:'save',draft:d,record_id:null});
  const oldAssessment=JSON.stringify(saved.attachment.scenarios[0].assessment);
  const browser=await chromium.launch({channel:'msedge',headless:true,timeout:20000});

@@ -10,6 +10,7 @@ from pathlib import Path
 from uuid import UUID, uuid4
 
 from .configuration import keys, read_json
+from . import funding_selection
 from .engine import require, same_json, Invalid
 
 CATALOGUE = Path(__file__).resolve().parents[1] / "scenarios" / "funding.json"
@@ -36,8 +37,8 @@ def digest(value):
 
 @checked
 def validate_catalogue(c):
-    require(type(c["version"]) is int and c["version"] in {1, 2}, "Unsupported funding catalogue version.")
-    keys(c, {"version", "checked_on", "reference", "groups", "entries", "questions", "municipalities", "rules", "official_pages", "source_review"} | ({"territory"} if c["version"] == 2 else set()), "funding catalogue")
+    require(type(c["version"]) is int and c["version"] in {1, 2, 3}, "Unsupported funding catalogue version.")
+    keys(c, {"version", "checked_on", "reference", "groups", "entries", "questions", "municipalities", "rules", "official_pages", "source_review"} | ({"territory"} if c["version"] >= 2 else set()) | ({"selection"} if c["version"] == 3 else set()), "funding catalogue")
     date.fromisoformat(c["checked_on"])
     require(isinstance(c["entries"], list) and c["entries"], "Funding entries are missing.")
     ids = set()
@@ -58,7 +59,7 @@ def validate_catalogue(c):
         if q["type"] == "choice":
             require(isinstance(q["options"], list) and q["options"] and all(isinstance(p, list) and len(p) == 2 and all(isinstance(v, str) and v for v in p) for p in q["options"]), "Invalid funding question choices.")
             require(len({p[0] for p in q["options"]}) == len(q["options"]), "Repeated funding question choice.")
-        if c["version"] == 2:
+        if c["version"] >= 2:
             require(isinstance(q["short_label"], str) and q["short_label"].strip(), "Missing short funding label.")
             guidance = q["guidance"]
             keys(guidance, {"summary", "why", "verify", "requirements"}, "funding question guidance")
@@ -69,7 +70,7 @@ def validate_catalogue(c):
                 date.fromisoformat(item["verified_on"])
                 require(item["evidence"] != "verified" or item["sources"], "Verified guidance needs supporting passages.")
                 for source in item["sources"]: validate_guidance_source(source)
-    if c["version"] == 2:
+    if c["version"] >= 2:
         require(set(c["territory"]) == set(c["rules"]), "Missing programme territory rules.")
         for rule in c["territory"].values():
             keys(rule, {"municipalities", "outside_exception", "sources"}, "programme territory")
@@ -83,6 +84,8 @@ def validate_catalogue(c):
     for id in ["3.4", "3.5", "1.11", "2.6"]:
         rule = c["rules"][id]
         require(type(rule["rate"]) in (int, float) and 0 <= rule["rate"] <= 1 and type(rule["cap"]) in (int, float) and isfinite(rule["cap"]) and rule["cap"] >= 0, "Invalid reimbursement rate or cap.")
+    if c["version"] == 3:
+        funding_selection.validate_rules(c["selection"], c)
     return c
 
 
@@ -132,7 +135,7 @@ def baseline(project, planning, parcel_ids, target, bundle=None):
             applicant = next(p for p in project["parties"] if p["id"] == plan["applicant_id"])
             facts["applicant_kind"] = applicant["kind"] if applicant["kind"] in {"individual", "nonprofit", "public", "company"} else None
             mappings = {"novelty": ("novelty", {"new_locally": "yes", "established": "no"}), "public_access": ("public_participation", {"open_demo": "yes", "open_days": "yes", "private": "no"}), "dissemination": ("dissemination", {"web_report": "yes", "web_workshop": "yes", "none": "no"}), "publication_three_years": ("publication_period", {"three_years": "yes"})}
-            if c["version"] == 2:
+            if c["version"] >= 2:
                 mappings["demonstration_participation"] = mappings.pop("public_access")
             for out, (inp, mapping) in mappings.items():
                 facts[out] = mapping[plan[inp]] if plan[inp] in mapping else None
@@ -152,17 +155,26 @@ def baseline(project, planning, parcel_ids, target, bundle=None):
 
 def new_draft(project, planning, parcel_ids, target):
     c = catalogue()
-    return {"version": 3, "applicant_choice": None, "name": "Funding exploration", "activity_key": "demonstrator" if target == "demonstrator" else str(uuid4()), "baseline": baseline(project, planning, parcel_ids, target, c), "overrides": {}, "selected": [], "allocations": [], "calendar_start": None, "notes": "", "bundle": c}
+    draft = {"version": 3, "applicant_choice": None, "name": "Funding exploration", "activity_key": "demonstrator" if target == "demonstrator" else str(uuid4()), "baseline": baseline(project, planning, parcel_ids, target, c), "overrides": {}, "selected": [], "allocations": [], "calendar_start": None, "notes": "", "bundle": c}
+    if c["version"] == 3:
+        draft.update(version=4, selection_assessments=funding_selection.empty(c), legacy_selection_score=None)
+    return draft
 
 
 @checked
 def validate_draft(d, project):
-    require(type(d["version"]) is int and d["version"] in {1, 2, 3}, "Unsupported funding draft version.")
+    require(type(d["version"]) is int and d["version"] in {1, 2, 3, 4}, "Unsupported funding draft version.")
     required = set("version name activity_key baseline overrides selected allocations calendar_start notes bundle".split())
-    keys(d, required | ({"applicant_choice"} if d["version"] == 3 else set()), "funding draft")
+    keys(d, required | ({"applicant_choice"} if d["version"] in {3, 4} else set()) | ({"selection_assessments", "legacy_selection_score"} if d["version"] == 4 else set()), "funding draft")
     require(isinstance(d["name"], str) and 0 < len(d["name"].strip()) <= 80 and isinstance(d["notes"], str) and len(d["notes"]) <= 10000, "Enter a funding name (up to 80 characters) and valid notes.")
     require(isinstance(d["activity_key"], str) and 0 < len(d["activity_key"]) <= 80, "Invalid funding activity identity.")
     c = validate_catalogue(d["bundle"])
+    require((d["version"] == 4) == (c["version"] == 3), "AL20 catalogue edition 3 requires funding draft version 4. Review a version-specific catalogue update.")
+    if d["version"] == 4:
+        funding_selection.validate_answers(d["selection_assessments"], c)
+        legacy = d["legacy_selection_score"]
+        require(legacy is None or type(legacy) in (int, float) and isfinite(legacy) and 0 <= legacy <= 100, "Invalid historical manual AL20 score.")
+        require("selection_score" not in d["overrides"] and d["baseline"]["facts"]["selection_score"] is None, "AL20 scores must be calculated from annex selections; manual score overrides are historical only.")
     b = d["baseline"]
     keys(b, {"project_id", "project_revision", "facts", "parties", "target", "parcel_ids", "work_budget"}, "funding baseline")
     require(b["project_id"] == project["id"] and type(b["project_revision"]) is int and b["project_revision"] >= 0, "Funding baseline belongs to a different project.")
@@ -172,7 +184,7 @@ def validate_draft(d, project):
     questions = {q["id"]: q for q in c["questions"]}
     keys(b["facts"], set(questions), "funding facts")
     require(isinstance(d["overrides"], dict) and set(d["overrides"]) <= set(questions), "Unknown funding override.")
-    if d["version"] == 3:
+    if d["version"] in {3, 4}:
         require(not ({"applicant_id", "applicant_kind"} & set(d["overrides"])), "Choose the applicant as one complete choice; independent identity/form overrides are no longer supported.")
         validate_applicant_choice(d["applicant_choice"], d)
     for values in [b["facts"], d["overrides"]]:
@@ -202,7 +214,7 @@ def effective(d):
     # party unless the user has explicitly chosen a hypothetical legal form.
     if d["version"] == 2 and "applicant_kind" not in d["overrides"]:
         facts["applicant_kind"] = applicant_form(d, facts["applicant_id"])
-    if d["version"] == 3:
+    if d["version"] in {3, 4}:
         choice = resolved_applicant(d)
         if choice["kind"] == "recorded":
             facts.update(applicant_id=choice["party_id"], applicant_kind=applicant_form(d, choice["party_id"]))
@@ -272,7 +284,7 @@ def applicant_form(d, applicant_id):
 def prepare_applicant(draft, project, applicant_choice=None, resolve=False):
     """Explicit editing adapter; never rewrite stored alternatives or snapshots."""
     d = deepcopy(validate_draft(draft, project))
-    if d["version"] == 3:
+    if d["version"] in {3, 4}:
         if resolve:
             validate_applicant_choice(applicant_choice, d)
             d["applicant_choice"] = deepcopy(applicant_choice)
@@ -315,6 +327,13 @@ def prepare(draft, project, applicant_choice=None, resolve=False, adopt_current_
     # These are historical answers, never interpreted as either new participation check.
     for key in ["territory_verified", "public_access"]:
         captured["facts"][key] = previous["baseline"]["facts"][key]
+    if current["version"] == 3:
+        if previous["version"] < 4:
+            historical = effective(previous)["selection_score"]
+            d.update(version=4, selection_assessments=funding_selection.empty(current), legacy_selection_score=historical)
+            d["overrides"].pop("selection_score", None)
+        elif digest(previous["bundle"]["selection"]) != digest(current["selection"]):
+            require(funding_selection.is_guidance_update_v1(previous["bundle"]["selection"], current["selection"]), "AL20 scoring definitions changed. A version-specific assessment migration is required before adopting this catalogue; existing selections are preserved.")
     d.update(bundle=current, baseline=captured)
     validate_draft(d, project)
     old_facts, new_facts = effective(previous), effective(d)
@@ -322,11 +341,18 @@ def prepare(draft, project, applicant_choice=None, resolve=False, adopt_current_
     retained = [{"id": q["id"], "label": q["label"], "value": new_facts[q["id"]]} for q in current["questions"] if q.get("retired", False) and new_facts[q["id"]] is not None]
     result["catalogue_review"] = {"from_edition": previous["bundle"]["version"], "to_edition": current["version"], "changes": differences, "retained_answers": retained,
         "messages": ["Adopt the current recorded baseline, question definitions, rules and source editions. Explicit assumptions are retained.", "The former shared public-access answer is not copied into the new participation/public-use questions. Recorded demonstrator participation may initialise only the 3.4 question.", "Municipality coverage, operation scope and call availability are separate. Conditional outside-area exceptions still require verification."]}
+    if current["version"] == 3 and previous["version"] < 4:
+        result["catalogue_review"]["messages"].append("Replace manual AL20 scoring with separate annex assessments for all five routes. Any old manual total is retained as historical information only; no annex answers are inferred. Saved alternatives and adopted plans remain unchanged.")
+    elif current["version"] == 3 and digest(previous["bundle"]["selection"]) != digest(current["selection"]):
+        result["catalogue_review"]["messages"].append("Update AL20 explanatory guidance and additional source links. Point values, applicability and scoring relationships are identical; all annex selections, references and notes are retained. Criterion guidance includes official reference lookups and document links. Saved assessments remain unchanged.")
     result["notice"] = "Baseline and catalogue update prepared. Review before applying; saved assessments remain unchanged."
     return result
 
 
-def assess(entry, f, c):
+def assess(entry, f, c, selection_assessments=None):
+    if c["version"] == 3:
+        require(selection_assessments is not None, "AL20 annex assessment inputs are missing.")
+        return funding_selection.assess(entry, f, c, selection_assessments)
     if c["version"] == 1:
         from .funding_v1 import assess as evaluate_entry
     else:
@@ -339,12 +365,12 @@ def evaluate(draft, project, planning=None):
     d = validate_draft(deepcopy(draft), project)
     c, f = d["bundle"], effective(d)
     require(f["budget_total"] is None or f["eligible_cost"] is None or f["eligible_cost"] <= f["budget_total"], "Eligible cost cannot exceed the total activity cost. Review the budget assumptions.")
-    results = [assess(e, f, c) for e in c["entries"]]
+    results = [assess(e, f, c, d["selection_assessments"] if d["version"] == 4 else None) for e in c["entries"]]
     for r in results:
         entry = next(e for e in c["entries"] if e["id"] == r["id"])
         r.update(title=entry["title"], group=entry["group"], mechanism=entry["mechanism"], availability=entry["availability"], source_strength=entry["source_strength"], maturity=entry["maturity"], checked_on=entry["checked_on"], description=entry["description"], sources=entry["sources"], source_gaps=entry["source_gaps"], related=entry["related"])
     warnings = []
-    if d["version"] == 3 and resolved_applicant(d)["kind"] in {"planned", "potential"}:
+    if d["version"] in {3, 4} and resolved_applicant(d)["kind"] in {"planned", "potential"}:
         warnings.append("This applicant is proposed or not yet identified. Matching the modelled conditions is a scenario preview; formation, a real applicant and official eligibility still require verification.")
     if d["version"] == 2 and "applicant_kind" in d["overrides"]:
         inherited = applicant_form(d, f["applicant_id"])
@@ -370,11 +396,19 @@ def evaluate(draft, project, planning=None):
     catalogue_changed = digest(c) != digest(catalogue())
     if catalogue_changed: warnings.append("A newer catalogue is available. Update assessment explicitly to adopt its rules and sources.")
     difference_fields = set(d["overrides"])
-    if c["version"] == 2: difference_fields -= {q["id"] for q in c["questions"] if q.get("retired", False)}
+    if c["version"] >= 2: difference_fields -= {q["id"] for q in c["questions"] if q.get("retired", False)}
     if d["version"] == 2: difference_fields.add("applicant_kind")
     differences = [{"field": q["id"], "label": q["label"], "recorded": d["baseline"]["facts"][q["id"]], "assumed": f[q["id"]], "editor": "land" if q["id"] in {"owner_id", "operator_id", "rights", "municipality", "area_m2", "rights_sufficient"} else "demonstrator" if q["id"] in {"novelty", "testable", "public_access", "dissemination", "publication_three_years", "purpose"} else "project"} for q in c["questions"] if q["id"] in difference_fields and f[q["id"]] != d["baseline"]["facts"][q["id"]]]
-    if d["version"] == 3 and resolved_applicant(d) != initial_applicant(d):
+    if d["version"] in {3, 4} and resolved_applicant(d) != initial_applicant(d):
         differences.insert(0, {"field": "applicant_choice", "label": "Who would apply for the funding?", "recorded": applicant_label(initial_applicant(d), d), "assumed": applicant_label(resolved_applicant(d), d), "editor": "project"})
+    if d["version"] == 4:
+        for result in results:
+            if "selection_assessment" not in result: continue
+            rows = d["selection_assessments"][result["id"]]["criteria"].values()
+            if any(any(v is not None for v in row["answers"].values()) or any(v is not None for v in row["inputs"].values()) for row in rows):
+                score = result["selection_assessment"]
+                description = f"Calculated score: {score['total']:g} points" if score["total"] is not None else f"Partial subtotal: {score['subtotal']:g} points; {score['unresolved']} criteria unresolved"
+                differences.append({"field": "selection_assessment:" + result["id"], "label": "AL20 selection assessment · " + result["id"], "recorded": "Annex criteria unanswered", "assumed": description + " · self-assessed", "editor": "funding"})
     return {"draft": d, "facts": f, "results": results, "differences": differences, "stale": stale, "catalogue_changed": catalogue_changed, "catalogue_hash": digest(c), "warnings": warnings, "allocation_totals": totals, "uncovered": None if f["budget_total"] is None or any(a["amount"] is None for a in d["allocations"]) else max(0, f["budget_total"] - sum(totals[k] for k in ["available", "anticipated", "loan"])), "upfront_shortfall": None if need is None or available is None else max(0, need-available), "calendar_note": "Call window: 23 April 2026–31 December 2028, subject to local interruption and budget confirmation. Simulation years remain relative."}
 
 
@@ -402,7 +436,7 @@ def validate_attachment(value, project):
             require(isinstance(results, list) and len(results) == len(entries) and len({x["id"] for x in results}) == len(entries), "Saved funding assessment is incomplete or has duplicate results.")
             lookup = {x["id"]: x for x in results}
             for entry in entries:
-                expected = assess(entry, facts, r["draft"]["bundle"])
+                expected = assess(entry, facts, r["draft"]["bundle"], r["draft"]["selection_assessments"] if r["draft"]["version"] == 4 else None)
                 require(entry["id"] in lookup and all(k in lookup[entry["id"]] and same_json(lookup[entry["id"]][k], v) for k, v in expected.items()), "Saved funding result disagrees with its source-rule snapshot: " + entry["id"])
             require(isinstance(r["assessment"]["warnings"], list) and all(isinstance(w, str) for w in r["assessment"]["warnings"]), "Invalid saved funding warnings.")
     active = [r["draft"]["activity_key"] for r in value["plans"] if r["active"]]

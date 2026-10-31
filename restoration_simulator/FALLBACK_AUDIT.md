@@ -7,6 +7,22 @@ The frozen replay modules were reviewed for compatibility boundaries and preserv
 
 ## Changes
 
+AL20 scoring (31 October 2026): catalogue edition 3 and funding draft v4 require
+all route/profile/criterion definitions and structured answers. No manual total,
+missing answer, unavailable source instruction or financial estimate substitutes
+for an annex selection. Incomplete assessments report a partial subtotal and keep
+their threshold result unknown. PE.2 duration/UTA confirmation is required for
+positive claims; undocumented part-time graduation is explicitly unimplemented.
+PE.4 requires explicit grant/job inputs. Invalid combinations, malformed inputs,
+unsupported editions and failed writes are rejected before save publication.
+Old manual totals survive only as historical information after reviewed upgrade.
+Historical evaluators and intentional optional catalogue fields (`retired`,
+legacy activity restrictions) retain their edition-specific contracts. Existing
+funding allocation summaries that omit explicitly unknown amounts still carry
+their separate incompleteness warnings/unknown balance; that wider presentation
+policy was not changed or audited here. This is not a repository-wide compliance
+claim.
+
 Named Site Designs (29 October 2026): envelope 6 explicitly migrates envelope-5
 attachments to a validated project-local library. Naming defaults are required
 from `scenarios/designer-library-defaults.json`. Create/update and library commands

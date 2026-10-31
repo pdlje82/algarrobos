@@ -1,5 +1,82 @@
 # Funding Navigator
 
+## AL20 annex assessment — catalogue edition 3
+
+Question 19 is **AL20 selection assessment**. Open it in Graph to expand its
+branch, select a funding route and expand criterion groups. Clicking a
+subcriterion opens the existing floating editor. Funding options remain in their
+column; expanding the annex creates space in the circumstances column. Collapse
+and route switching preserve answers. Matrix and Your answers link back to Graph.
+
+Three aid-line profiles cover 1.11, 2.6, 2.7, 3.4 and 3.5. Each route has its
+own answers, even when two routes share a profile. The working option selects the
+route when supported; otherwise choose one explicitly. No answers are inferred
+from location, plants, applicant descriptions or environmental labels.
+
+Python calculates exact decimal sums, source-defined exclusions/additions and
+criterion caps. Every applicable subcriterion must be selected or explicitly
+rejected before a final score is available. **None of these applies** records an
+explicit zero for a group. Until complete, nodes show **Partial subtotal** and
+the unresolved criterion count; the score condition stays unknown even when that
+subtotal exceeds the threshold. Completed assessments use the route's configured
+threshold. These are **self-assessed** results, not certification by the GDR.
+References and notes are optional during exploration.
+
+Definitions in `scenarios/funding.json` preserve Spanish wording, English
+explanations, values, applicability and document/page/checksum references.
+Local tables are FUND-004 PDF pp. 2–8 (line 1), 9–14 (line 2), 16–20 (line 3).
+Relationships use FUND-010 Annex VII, PDF pp. 218–231; general definitions are
+on PDF p. 5. Both documents were already in `doc_library/`; no source document
+was added. Links open the existing viewer with edition verification.
+
+AT.3 includes instructions and a link for the INE settlement lookup, the
+distinction between a settlement and its municipality, and the strict below/equal/
+above comparison. Its sources open FUND-010 PDF pp. 10–11 and Annex I p. 113.
+The 539-person AL20 median is labelled **2025**, not a verified 2023 threshold:
+the local table says 2023 while the later guide refers to the latest figures.
+Confirm the applicable year with AL20; the guidance does not choose a year or
+award points automatically. Uncertainty should remain an unanswered selection.
+
+CO.1 links to the [official EDLL version-1 publication page (ADR Alpujarra,
+2023–2027 strategy)](https://alpujarraalmeria.es/edll-version-1/), the
+[prioritised-needs PDF extract, section 4.3 (ADR Alpujarra; publication date not
+stated)](https://alpujarraalmeria.es/wp-content/uploads/2026/06/Necesidades-priorizadas-ALPUJARRA_SN_ALMERIENSE_EDLL_Epig_4-2.pdf)
+and the [objectives and needs by aid line, section 5 (ADR Alpujarra; publication
+date not stated)](https://alpujarraalmeria.es/wp-content/uploads/2026/06/Objetivos-y-necesidades-por-lineas_epig-5.pdf).
+These external documents are linked for consultation, not added to
+`doc_library/`. References/notes should identify the relevant NPL codes and
+explain how the operation addresses each need. EDLL prioritisation ranks are
+different from CO.1 selection points.
+
+PE.1.5/PE.1.6 apply only to 2.7. PE.2 employment additions require their preceding
+subcriterion. Positive PE.2 claims need confirmation of the documented minimum
+one-year / 1 UTA conditions. The stored sources mention part-time graduation but
+provide no proportional formula: the app does not calculate one, and unconfirmed
+conditions remain unresolved with a GDR clarification message. PE.4 takes an
+explicit grant amount and whole count of qualifying quality jobs and applies
+strict per-job ratio boundaries. No amount is borrowed from another estimate.
+EDL-dependent qualifications remain explicit assertions, requiring objectively
+identified provisions in that strategy for an actual application.
+
+New drafts use version 4 and retain the definitions in their catalogue snapshot.
+The edition-1/2 evaluators are unchanged; edition 2 is frozen in
+`scenarios/funding-v2.json`. **Review catalogue and baseline update** prepares an
+explicit upgrade of an editing copy. Old manual totals remain historical only;
+no choices are reconstructed from them. Saved alternatives and adopted plans
+retain their original snapshots. Changed scoring definitions require an explicit
+version-specific migration before adoption.
+
+The explicit scoring-library-v1 guidance adapter permits reviewed prose updates
+and additional criterion citations while preserving selections. It requires all
+scoring definitions and original citations to remain identical; changed scoring
+or removed/replaced original sources are rejected pending a separate migration.
+
+Selections/references use autosave, named alternatives, duplication, plan review
+and existing export/import. Expansion/editor state is transient. Invalid data or
+failed writes preserve existing saves and expose errors/retry. Dedicated checks
+are `tests/test_funding_selection.py`, frontend `fundingSelection.test.mjs` and
+the isolated browser workflow `tests/browser/funding-selection.cjs`.
+
 Funding Navigator is a project-local workspace available before a site design or
 concluded land agreement. Open it from the workspace navigation, a parcel's
 **Explore funding** button, or demonstrator **Funding route**. Physical design,

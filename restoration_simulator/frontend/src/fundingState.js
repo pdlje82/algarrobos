@@ -1,10 +1,14 @@
 export const FUNDING_STEPS = ["Activity", "People and land", "Explore options", "Compare alternatives", "Build a funding plan", "Review and use"];
 export function effectiveFacts(draft) { return {...draft.baseline.facts, ...draft.overrides}; }
-export function assumptionCount(draft){return Object.keys(draft.overrides).length+(draft.version===3&&draft.applicant_choice!==null?1:0);}
+export function assumptionCount(draft){
+  const scoring=draft.version===4?Object.values(draft.selection_assessments).filter(a=>Object.values(a.criteria).some(row=>Object.values(row.answers).some(v=>v!==null)||Object.values(row.inputs).some(v=>v!==null))).length:0;
+  return Object.keys(draft.overrides).length+([3,4].includes(draft.version)&&draft.applicant_choice!==null?1:0)+scoring;
+}
 export function explicitlyUnknown(question){return question.overridden&&(question.type==="applicant"?question.current_value.kind==="unknown":question.current_value===null);}
 export function overrideAnswer(draft, field, value) {
+  if(field==="selection_score"&&draft.version===4)throw Error("Open the AL20 annex to edit selections; manual totals are not supported.");
   if(field==="applicant_choice")return {...draft,applicant_choice:value};
-  if(draft.version===3&&["applicant_id","applicant_kind"].includes(field))throw Error("Choose the applicant as one complete choice.");
+  if([3,4].includes(draft.version)&&["applicant_id","applicant_kind"].includes(field))throw Error("Choose the applicant as one complete choice.");
   return {...draft, overrides: {...draft.overrides, [field]: value}};
 }
 export function resetAnswer(draft, field) {
@@ -20,7 +24,11 @@ export function applicantKey(choice){
   throw Error("Unsupported applicant choice.");
 }
 export function presentQuestion(q,draft){
-  if(draft.version!==3)return q;
+  if(![3,4].includes(draft.version))return q;
+  if(q.type==="selection"){
+    const pending=JSON.stringify(draft.selection_assessments)!==JSON.stringify(q.current_value);
+    return {...q,current_value:draft.selection_assessments,display_value:pending?"Updating self-assessment…":q.display_value,origin:pending?"Updating annex selections…":q.origin};
+  }
   const applicant=q.id==="applicant_choice";
   const overridden=applicant?draft.applicant_choice!==null:Object.hasOwn(draft.overrides,q.id);
   const value=applicant?(draft.applicant_choice===null?q.initial_value:draft.applicant_choice):(overridden?draft.overrides[q.id]:draft.baseline.facts[q.id]);

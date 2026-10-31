@@ -73,7 +73,11 @@ def describe(assessment):
                              condition_ids=option_conditions,
                              unresolved_count=sum(c["result"] == "unknown" for c in conditions if c["option_id"] == result["id"]),
                              scope_fields=["activity"]))
-    return dict(version=1, conditions=conditions, coverage=coverage)
+    model = dict(version=1, conditions=conditions, coverage=coverage)
+    if draft["version"] == 4:
+        model.update(version=2, annex={"version": 1, "routes": {
+            r["id"]: r["selection_assessment"] for r in assessment["results"] if "selection_assessment" in r}})
+    return model
 
 
 def visualise(assessment):

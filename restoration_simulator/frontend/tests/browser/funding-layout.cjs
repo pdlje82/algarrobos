@@ -64,7 +64,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await visual.getByRole('button',{name:'Reset column widths',exact:true}).click();assert.deepEqual(await positions(),initial);assert.equal(assessments,0);
   // Clicking another node re-anchors even after a manual drag. The last node
   // retains the preceding node as its second piece of context.
-  const last=visual.locator('.funding-circumstance').last();await last.click();await belowPair(last);
+  const last=visual.locator('.funding-circumstance:not([data-question-id="selection_score"])').last();await last.click();await belowPair(last);
   await page.screenshot({path:'test-artifacts/funding-editor-below-last-node.png'});
   await page.getByRole('button',{name:'Close question editor',exact:true}).click();
   await visual.getByRole('button',{name:'Expand view',exact:true}).click();await last.click();await belowPair(last);
