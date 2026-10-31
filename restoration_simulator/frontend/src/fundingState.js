@@ -1,3 +1,4 @@
+import {edlHasEvidence} from "./fundingEdlState.js";
 export const FUNDING_STEPS = ["Activity", "People and land", "Explore options", "Compare alternatives", "Build a funding plan", "Review and use"];
 // Opening a context resumes its draft; changing context needs an explicit choice
 // so that the next autosave cannot overwrite unrelated work.
@@ -17,7 +18,7 @@ export function fundingSaveIsCurrent(savedDraft,currentDraft){
 }
 export function effectiveFacts(draft) { return {...draft.baseline.facts, ...draft.overrides}; }
 export function assumptionCount(draft){
-  const scoring=draft.version===4?Object.values(draft.selection_assessments).filter(a=>Object.values(a.criteria).some(row=>Object.values(row.answers).some(v=>v!==null)||Object.values(row.inputs).some(v=>v!==null))).length:0;
+  const scoring=draft.version===4?Object.values(draft.selection_assessments).filter(a=>Object.values(a.criteria).some(row=>Object.values(row.answers).some(v=>v!==null)||Object.values(row.inputs).some(v=>v!==null)||edlHasEvidence(row))).length:0;
   return Object.keys(draft.overrides).length+([3,4].includes(draft.version)&&draft.applicant_choice!==null?1:0)+scoring;
 }
 export function explicitlyUnknown(question){return question.overridden&&(question.type==="applicant"?question.current_value.kind==="unknown":question.current_value===null);}
@@ -61,7 +62,7 @@ export function presentQuestion(q,draft){
 export const FUNDING_HELP = {
   matches:"All modelled fit conditions are satisfied by the current recorded or hypothetical answers. Eligibility and call availability still require verification. Zero does not mean that funding is unavailable.",
   needs_answers:"This option has modelled requirements, but some remain unknown. Answer the relevant questions or obtain the missing evidence. Inherited values may come from planning defaults; they are not necessarily answers you entered here.",
-  unimplemented:"This option is included for research, but its programme-specific assessment is not implemented. Completing more questions cannot resolve this. Supporting rules and source passages must first be verified and modelled.",
+  unimplemented:"Explore the introduction, practical examples, limitations and sources for this option. Automated assessment is unavailable; completing more questions cannot resolve this. Eligibility and financial terms need separate verification.",
   conflicts:"At least one modelled condition conflicts with the current scenario, including inherited values and hypothetical assumptions. Inspect the conditions for the reason. This is not an official rejection.",
   fit_changes:"Options whose overall assessment changed since the previous successful assessment, for example from needing answers to meeting the modelled conditions.",
   resolved:"Previously unknown conditions now have a definite result: satisfied or conflicting. Resolved does not necessarily mean eligible. Other unknowns can leave the overall fit unchanged.",
@@ -81,7 +82,7 @@ export function fundingClass(result) {
   throw Error(`Unsupported funding status: ${result.status}`);
 }
 export function fundingStatus(result) {
-  return fundingClass(result)==="unimplemented" ? "Assessment not implemented" : statusLabel(result.status);
+  return fundingClass(result)==="unimplemented" ? "Explore this option" : statusLabel(result.status);
 }
 export function fundingCounts(results) {
   const counts={matches:0,needs_answers:0,conflicts:0,unimplemented:0};

@@ -1,5 +1,12 @@
 # Browser checks
 
+Run `node tests/browser/funding-edl.cjs` with the isolated API/app settings below
+to verify source-cited EDL information inside annex nodes, optional references,
+route isolation, autosave/reload, explicit scoring, scoped bilingual search,
+nested source PDFs, focus restoration, unavailable-library retry and phone themes.
+Run `funding-selection.cjs` afterwards for the full annex regression. These
+mutation scripts replace only the isolated fixture and must run sequentially.
+
 Run `node tests/browser/funding-height.cjs` for portrait node-area click and
 keyboard expansion, complete height, collapse and focus, unchanged option scope,
 Matrix switching and narrow-screen scrolling. It uses the isolated API/app below

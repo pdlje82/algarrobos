@@ -7,6 +7,15 @@ The frozen replay modules were reviewed for compatibility boundaries and preserv
 
 ## Changes
 
+AL20 EDL context (1 November 2026): required strategy content is validated against
+FUND-013 and complete node bindings. Fetch failures/absent bindings show explicit
+errors and retry. Optional criterion-row `edl_evidence` means no recorded
+references when absent, preserving historical/manual rows. When present, exact
+library ID/hash, applicable subcriteria and related items are required. Invalid
+references fail before saving; annotations never substitute for scoring answers.
+Future editions require retention and an explicit review adapter. This scope
+does not audit unrelated funding reference guides or the rest of the repository.
+
 AL20 scoring (31 October 2026): catalogue edition 3 and funding draft v4 require
 all route/profile/criterion definitions and structured answers. No manual total,
 missing answer, unavailable source instruction or financial estimate substitutes

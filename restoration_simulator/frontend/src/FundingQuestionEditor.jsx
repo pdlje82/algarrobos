@@ -66,7 +66,7 @@ export function FundingQuestionEditor({question,anchor,positionLabel,onClose,chi
       resize(visible);
     },observer=new ResizeObserver(()=>resize());observer.observe(root.current);window.addEventListener("resize",resized);
     const escape=e=>{
-      if(e.key==="Escape"&&!e.defaultPrevented&&!document.querySelector("dialog.document-viewer[open],.funding-help-popup")){e.preventDefault();e.stopPropagation();onClose();}
+      if(e.key==="Escape"&&!e.defaultPrevented&&!document.querySelector("dialog.document-viewer[open],dialog.funding-edl-explorer[open],.funding-help-popup")){e.preventDefault();e.stopPropagation();onClose();}
     };
     document.addEventListener("keydown",escape,true);
     return()=>{observer.disconnect();window.removeEventListener("resize",resized);document.removeEventListener("keydown",escape,true);};

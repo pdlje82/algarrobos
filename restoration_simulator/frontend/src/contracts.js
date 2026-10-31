@@ -1,5 +1,7 @@
 import defaults from "../../scenarios/defaults.json" with { type: "json" };
 import {validateStatisticsResponse} from "./fundingStatisticsState.js";
+import {validateEdlResponse} from "./fundingEdlState.js";
+import {validateGuideResponse} from "./fundingGuideState.js";
 
 export function required(value, message) {
   if (!value) throw new Error(message);
@@ -351,6 +353,8 @@ export function validateResponse(path, data) {
     return data;
   }
   if(path==="funding/statistics")return validateStatisticsResponse(data);
+  if(path==="funding/edl")return validateEdlResponse(data);
+  if(path==="funding/guides")return validateGuideResponse(data);
   if(path==="funding/location-preview")return validateResponse("funding/context",data);
   if(path==="funding/context") {
     properties(data,["version","name","activity_key","baseline","overrides","selected","allocations","calendar_start","notes","bundle"],"funding context");
@@ -386,6 +390,12 @@ export function validateResponse(path, data) {
           required(["sum","ratio","employment"].includes(criterion.method)&&Array.isArray(criterion.choices)&&criterion.choices.length>0&&Array.isArray(criterion.exclusive_groups)&&Array.isArray(criterion.sources)&&criterion.sources.length>0,"Incomplete AL20 criterion definitions.");
           properties(answer.criteria,[criterion.id],"AL20 criterion answers");
           properties(answer.criteria[criterion.id],["answers","inputs","reference","notes"],"AL20 criterion answer");
+          if(Object.hasOwn(answer.criteria[criterion.id],"edl_evidence")){
+            const evidence=answer.criteria[criterion.id].edl_evidence;
+            properties(evidence,["version","library_id","library_hash","selections"],"EDL supporting references");
+            object(evidence.selections,"EDL reference selections");
+            required(evidence.version===1&&typeof evidence.library_id==="string"&&typeof evidence.library_hash==="string"&&/^[a-f0-9]{64}$/.test(evidence.library_hash)&&Object.values(evidence.selections).every(ids=>Array.isArray(ids)&&ids.every(id=>typeof id==="string")),"Unsupported EDL evidence. Restart Python and reload the saved exploration.");
+          }
           for(const choice of criterion.choices)properties(choice,["id","printed_code","label","label_es","points","routes","character","sources"],"AL20 subcriterion");
         }
       }

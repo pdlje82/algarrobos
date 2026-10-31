@@ -44,6 +44,7 @@ def validate(data):
         require((topic["status"] == "not_designated") == (len(topic["item_ids"]) == 0), "An empty EDL list requires an explicit not-designated explanation.")
         require(isinstance(topic["pages"], list) and topic["pages"] and all(type(p) is int and 1 <= p <= source["pages"] for p in topic["pages"]), "Missing/invalid EDL topic citations.")
     require(isinstance(data["bindings"], dict) and data["bindings"], "EDL node bindings are missing.")
+    require(set(data["bindings"]) == {"CO.1.1", "CO.1.2", "CO.1.3", "IN.1.1", "IN.1.2", "IN.1.3", "IG.8.2", "IG.11.7", "DRI.3.3", "JR.3.8", "PT.1.2", "PT.1.3", "PS.1.2", "LEADER-AL20-2.6"}, "The AL20 EDL library must cover every strategy-dependent node.")
     for binding in data["bindings"].values():
         keys(binding, {"topic_ids", "note"}, "EDL node binding")
         require(isinstance(binding["note"], str) and binding["note"].strip() and isinstance(binding["topic_ids"], list) and binding["topic_ids"] and set(binding["topic_ids"]) <= topics, "An EDL node refers to missing strategy content.")

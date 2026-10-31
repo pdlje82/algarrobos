@@ -6023,6 +6023,30 @@
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 395,
+                "label": "AL20 EDLL V1 · PDF page 395",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 396,
+                "label": "AL20 EDLL V1 · PDF page 396",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 397,
+                "label": "AL20 EDLL V1 · PDF page 397",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
               }
             ],
             "parameters": {}
@@ -8155,6 +8179,46 @@
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 383,
+                "label": "AL20 EDLL V1 · PDF page 383",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 398,
+                "label": "AL20 EDLL V1 · PDF page 398",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 399,
+                "label": "AL20 EDLL V1 · PDF page 399",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 400,
+                "label": "AL20 EDLL V1 · PDF page 400",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 401,
+                "label": "AL20 EDLL V1 · PDF page 401",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
               }
             ],
             "parameters": {}
@@ -8283,6 +8347,70 @@
                 "label": "FUND-010 · PDF page 105",
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 393,
+                "label": "AL20 EDLL V1 · PDF page 393",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 472,
+                "label": "AL20 EDLL V1 · PDF page 472",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 473,
+                "label": "AL20 EDLL V1 · PDF page 473",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 475,
+                "label": "AL20 EDLL V1 · PDF page 475",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 476,
+                "label": "AL20 EDLL V1 · PDF page 476",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 478,
+                "label": "AL20 EDLL V1 · PDF page 478",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 479,
+                "label": "AL20 EDLL V1 · PDF page 479",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 527,
+                "label": "AL20 EDLL V1 · PDF page 527",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
                 "verified_on": "2026-10-31"
               }
             ],
@@ -9004,6 +9132,30 @@
                 "label": "FUND-010 · PDF page 16",
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 395,
+                "label": "AL20 EDLL V1 · PDF page 395",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 396,
+                "label": "AL20 EDLL V1 · PDF page 396",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 397,
+                "label": "AL20 EDLL V1 · PDF page 397",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
                 "verified_on": "2026-10-31"
               }
             ],
@@ -10997,6 +11149,46 @@
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 383,
+                "label": "AL20 EDLL V1 · PDF page 383",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 398,
+                "label": "AL20 EDLL V1 · PDF page 398",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 399,
+                "label": "AL20 EDLL V1 · PDF page 399",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 400,
+                "label": "AL20 EDLL V1 · PDF page 400",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 401,
+                "label": "AL20 EDLL V1 · PDF page 401",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
               }
             ],
             "parameters": {}
@@ -11136,6 +11328,70 @@
                 "label": "FUND-010 · PDF page 105",
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 393,
+                "label": "AL20 EDLL V1 · PDF page 393",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 472,
+                "label": "AL20 EDLL V1 · PDF page 472",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 473,
+                "label": "AL20 EDLL V1 · PDF page 473",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 475,
+                "label": "AL20 EDLL V1 · PDF page 475",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 476,
+                "label": "AL20 EDLL V1 · PDF page 476",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 478,
+                "label": "AL20 EDLL V1 · PDF page 478",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 479,
+                "label": "AL20 EDLL V1 · PDF page 479",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 527,
+                "label": "AL20 EDLL V1 · PDF page 527",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
                 "verified_on": "2026-10-31"
               }
             ],
@@ -11752,6 +12008,30 @@
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 395,
+                "label": "AL20 EDLL V1 · PDF page 395",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 396,
+                "label": "AL20 EDLL V1 · PDF page 396",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 397,
+                "label": "AL20 EDLL V1 · PDF page 397",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
               }
             ],
             "parameters": {}
@@ -12191,6 +12471,62 @@
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 186,
+                "label": "AL20 EDLL V1 · PDF page 186",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 187,
+                "label": "AL20 EDLL V1 · PDF page 187",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 275,
+                "label": "AL20 EDLL V1 · PDF page 275",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 276,
+                "label": "AL20 EDLL V1 · PDF page 276",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 332,
+                "label": "AL20 EDLL V1 · PDF page 332",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 333,
+                "label": "AL20 EDLL V1 · PDF page 333",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 473,
+                "label": "AL20 EDLL V1 · PDF page 473",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
               }
             ],
             "parameters": {}
@@ -12458,6 +12794,62 @@
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 186,
+                "label": "AL20 EDLL V1 · PDF page 186",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 187,
+                "label": "AL20 EDLL V1 · PDF page 187",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 275,
+                "label": "AL20 EDLL V1 · PDF page 275",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 276,
+                "label": "AL20 EDLL V1 · PDF page 276",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 332,
+                "label": "AL20 EDLL V1 · PDF page 332",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 333,
+                "label": "AL20 EDLL V1 · PDF page 333",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 473,
+                "label": "AL20 EDLL V1 · PDF page 473",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
               }
             ],
             "parameters": {}
@@ -12589,6 +12981,30 @@
                 "label": "FUND-010 · PDF page 92",
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 191,
+                "label": "AL20 EDLL V1 · PDF page 191",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 395,
+                "label": "AL20 EDLL V1 · PDF page 395",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 396,
+                "label": "AL20 EDLL V1 · PDF page 396",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
                 "verified_on": "2026-10-31"
               }
             ],
@@ -12888,6 +13304,38 @@
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 187,
+                "label": "AL20 EDLL V1 · PDF page 187",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 276,
+                "label": "AL20 EDLL V1 · PDF page 276",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 333,
+                "label": "AL20 EDLL V1 · PDF page 333",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 476,
+                "label": "AL20 EDLL V1 · PDF page 476",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
               }
             ],
             "parameters": {}
@@ -13019,6 +13467,46 @@
                 "label": "FUND-010 · PDF page 103",
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 383,
+                "label": "AL20 EDLL V1 · PDF page 383",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 398,
+                "label": "AL20 EDLL V1 · PDF page 398",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 399,
+                "label": "AL20 EDLL V1 · PDF page 399",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 400,
+                "label": "AL20 EDLL V1 · PDF page 400",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 401,
+                "label": "AL20 EDLL V1 · PDF page 401",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
                 "verified_on": "2026-10-31"
               }
             ],
@@ -13152,6 +13640,38 @@
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
                 "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 283,
+                "label": "AL20 EDLL V1 · PDF page 283",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 336,
+                "label": "AL20 EDLL V1 · PDF page 336",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 372,
+                "label": "AL20 EDLL V1 · PDF page 372",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 395,
+                "label": "AL20 EDLL V1 · PDF page 395",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
               }
             ],
             "parameters": {}
@@ -13283,6 +13803,70 @@
                 "label": "FUND-010 · PDF page 105",
                 "role": "verification guidance",
                 "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 393,
+                "label": "AL20 EDLL V1 · PDF page 393",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 472,
+                "label": "AL20 EDLL V1 · PDF page 472",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 473,
+                "label": "AL20 EDLL V1 · PDF page 473",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 475,
+                "label": "AL20 EDLL V1 · PDF page 475",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 476,
+                "label": "AL20 EDLL V1 · PDF page 476",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 478,
+                "label": "AL20 EDLL V1 · PDF page 478",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 479,
+                "label": "AL20 EDLL V1 · PDF page 479",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-013",
+                "page": 527,
+                "label": "AL20 EDLL V1 · PDF page 527",
+                "role": "local strategy content",
+                "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
                 "verified_on": "2026-10-31"
               }
             ],

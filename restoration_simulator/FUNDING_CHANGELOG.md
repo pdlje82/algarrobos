@@ -1,5 +1,22 @@
 # Funding Navigator changes
 
+## 2026-11-01 — EDL content inside assessment nodes and shared explorer
+
+- Added the full, hash-verified AL20 strategy as FUND-013 and a versioned library
+  of 109 references across ten topics. EDL-dependent subcriteria now display
+  relevant needs, activities and conditions with exact-page sources.
+- Added optional supporting-reference checkboxes and a searchable EDL explorer,
+  opened for the current node or all topics, with English summaries and Spanish
+  source keywords.
+- Included all 50 NPL needs, five innovative themes and twelve innovative
+  aspects. IN.1.1 explains that no innovative sectors are designated in this
+  strategy edition; contextual references retain their qualification limits.
+- References autosave per route and survive alternative/export flows. They never
+  award points, replace explicit answers or rewrite historical scoring snapshots.
+  Missing/incompatible content fails visibly with retry.
+- Added Python, frontend and isolated browser coverage. FUNDING_EDL.md records
+  source download links, coverage and the edition-maintenance contract.
+
 ## 2026-10-31 — explore funding across all activities
 
 - Removed the activity filter and its full-catalogue toggle. Funding options in

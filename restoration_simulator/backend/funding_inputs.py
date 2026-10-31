@@ -105,11 +105,12 @@ def describe(d):
         q = presentation(q, d)
         if key == "selection_score" and d["version"] == 4:
             from .funding_selection import calculate
+            from .funding_edl import has_evidence
             scores = [calculate(d["bundle"], d["selection_assessments"], route) for route in d["bundle"]["selection"]["routes"]]
             summary = " · ".join(f"{s['route'].removeprefix('LEADER-AL20-')}: {s['total']:g} points" if s["total"] is not None else f"{s['route'].removeprefix('LEADER-AL20-')}: partial {s['subtotal']:g}, {s['unresolved']} unresolved" for s in scores)
             q.update(type="selection", input_kind="selection", current_value=deepcopy(d["selection_assessments"]), initial_value=None,
                      display_value=summary, initial_label="All annex criteria unanswered", unknown=all(s["total"] is None for s in scores),
-                     overridden=any(any(v is not None for v in row["answers"].values()) or any(v is not None for v in row["inputs"].values()) or row["reference"] or row["notes"] for a in d["selection_assessments"].values() for row in a["criteria"].values()),
+                     overridden=any(any(v is not None for v in row["answers"].values()) or any(v is not None for v in row["inputs"].values()) or row["reference"] or row["notes"] or has_evidence(row) for a in d["selection_assessments"].values() for row in a["criteria"].values()),
                      origin="Self-assessed annex selections; supporting references are not certified", legacy_selection_score=d["legacy_selection_score"])
             q["provenance"] = {"kind": "assumed", "parcel_ids": [], "detail": q["origin"]}
         questions.append(q)

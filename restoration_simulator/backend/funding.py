@@ -402,10 +402,11 @@ def evaluate(draft, project, planning=None):
     if d["version"] in {3, 4} and resolved_applicant(d) != initial_applicant(d):
         differences.insert(0, {"field": "applicant_choice", "label": "Who would apply for the funding?", "recorded": applicant_label(initial_applicant(d), d), "assumed": applicant_label(resolved_applicant(d), d), "editor": "project"})
     if d["version"] == 4:
+        from .funding_edl import has_evidence
         for result in results:
             if "selection_assessment" not in result: continue
             rows = d["selection_assessments"][result["id"]]["criteria"].values()
-            if any(any(v is not None for v in row["answers"].values()) or any(v is not None for v in row["inputs"].values()) for row in rows):
+            if any(any(v is not None for v in row["answers"].values()) or any(v is not None for v in row["inputs"].values()) or has_evidence(row) for row in rows):
                 score = result["selection_assessment"]
                 description = f"Calculated score: {score['total']:g} points" if score["total"] is not None else f"Partial subtotal: {score['subtotal']:g} points; {score['unresolved']} criteria unresolved"
                 differences.append({"field": "selection_assessment:" + result["id"], "label": "AL20 selection assessment · " + result["id"], "recorded": "Annex criteria unanswered", "assumed": description + " · self-assessed", "editor": "funding"})

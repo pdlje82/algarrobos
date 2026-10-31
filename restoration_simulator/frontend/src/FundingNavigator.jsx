@@ -14,6 +14,8 @@ import {fundingVisualReducer, initialFundingVisual} from "./fundingVisualState.j
 import {FundingSelectionEditor} from "./FundingSelection.jsx";
 import {selectionProfile,selectionSummary,editSelectionRow,clearSelectionRow} from "./fundingSelectionState.js";
 import "./FundingNavigator.css";
+import {FundingEdlProvider,FundingEdlNode,FundingEdlOpenButton} from "./FundingEdl.jsx";
+import {FundingGuideProvider,FundingGuide} from "./FundingGuide.jsx";
 
 function Sources({sources}) {
   return <ul className="funding-sources">{sources.map((s, i) => <li key={i}><DocumentLink documentId={s.document_id} page={s.page} expectedSha256={s.sha256}>{s.label}</DocumentLink><small> · {s.role}</small></li>)}</ul>;
@@ -22,6 +24,18 @@ function Text({value}) {
   return <div className="funding-research">{value.split("\n").filter(line => line.trim()).map((line, i) => <p key={i}>{line.replace(/^[-*]\s*/, "").replace(/\*\*/g, "").split(/(https:\/\/[^\s]+)/g).map((part,j)=>part.startsWith("https://")?<DocumentLink key={j} href={part} target="_blank" rel="noreferrer">{part}</DocumentLink>:part)}</p>)}</div>;
 }
 function Option({result:r, selected, disabled=false, onSelect,working,onWork,workingGroup}) {
+  if(fundingClass(r)==="unimplemented")return <article className="funding-option">
+    <FundingGuide id={r.id}/>
+    <div className="funding-pick"><input type="checkbox" aria-label={`Shortlist ${r.id}`} checked={selected} disabled={disabled} onChange={onSelect}/><strong>{r.id} · {r.title}</strong></div>
+    <FundingWorkingOption id={r.id} checked={working} onChange={onWork} group={workingGroup}/>
+    <details><summary>Original research and saved assessment context</summary>
+      <p>This context belongs to the exploration’s catalogue snapshot. The dated introduction above is current reference information.</p>
+      <dl className="funding-meta"><dt>Recorded availability</dt><dd>{r.availability}</dd><dt>Evidence</dt><dd>{r.source_strength}</dd><dt>Maturity</dt><dd>{r.maturity}</dd><dt>Source check</dt><dd>{r.checked_on}</dd></dl>
+      <Text value={r.description}/><Sources sources={r.sources}/>
+      {r.source_gaps.map(g=><p className="reason" key={g}>{g}</p>)}
+      <FundingEdlNode bindingId={r.id}/>
+    </details>
+  </article>;
   return <article className="funding-option">
     <div className="funding-pick"><input type="checkbox" aria-label={`Shortlist ${r.id}`} checked={selected} disabled={disabled} onChange={onSelect}/><strong>{r.id} · {r.title}</strong></div>
     <FundingWorkingOption id={r.id} checked={working} onChange={onWork} group={workingGroup}/>
@@ -33,6 +47,7 @@ function Option({result:r, selected, disabled=false, onSelect,working,onWork,wor
       {r.checks.map((c, i) => <div className={`funding-check funding-check-${c.result}`} key={i}><strong>{c.result === "fail" ? "Requires a change" : c.result === "unknown" ? "Unresolved" : "Matches this answer"}</strong><p>{c.message}</p><Sources sources={c.sources}/></div>)}
       {r.source_gaps.map(g => <p className="reason" key={g}>{g}</p>)}
       <details><summary>Read the research context</summary><Text value={r.description}/><Sources sources={r.sources}/></details>
+      <FundingEdlNode bindingId={r.id}/>
       {r.related.length > 0 && <p>Related descriptions of financing: {r.related.join(", ")}. Check for overlap before combining.</p>}
     </details>
   </article>;
@@ -267,8 +282,9 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
     const names=ids.map(id=>{const parcel=data.project.parcels.find(p=>p.id===id);if(parcel===undefined)throw Error("The funding entry refers to a missing parcel. Reload the project.");return parcel.name;});
     return `${labels[target]} · ${names.length===0?"no linked parcels":names.join(", ")}`;
   }
-  return <section className="funding-workspace" aria-labelledby="funding-title">
+  return <FundingGuideProvider request={request}><FundingEdlProvider request={request}><section className="funding-workspace" aria-labelledby="funding-title">
     <header className="panel"><p className="eyebrow">Explore · learn · compare</p><h1 id="funding-title">Funding Navigator</h1><p>Explore arrangements for land, activities and businesses. Save alternatives, then choose a funding plan.</p>
+      <FundingEdlOpenButton/>
       <details><summary>Start a separate exploration</summary><label>Activity scope<select value={scope} onChange={e => setScope(e.target.value)}><option value="activity">Parcel / other activity</option><option value="demonstrator">Current demonstrator planning</option><option value="business">Start a self-employed rural business</option></select></label><fieldset><legend>Linked parcels (optional)</legend>{data.project.parcels.map(p => <label className="funding-pick" key={p.id}><input type="checkbox" checked={parcels.includes(p.id)} onChange={e => setParcels(e.target.checked ? [...parcels,p.id] : parcels.filter(id => id !== p.id))}/>{p.name}</label>)}</fieldset><button type="button" disabled={busy || dirty} onClick={start}>Start separate exploration</button></details>
     </header>
     <div className="panel funding-save-status" role="status" aria-label="Funding save status"><strong>{busy?"Saving / loading…":retry.current!==null?"Save failed — latest changes are not saved":dirty?"Unsaved changes — autosave pending":"Saved to this computer"}</strong><span>Answers, annex selections and notes autosave after 1.2 seconds without an edit. Wait for “Saved to this computer” before reloading.</span><button type="button" disabled={busy||readOnly||retry.current!==null} onClick={()=>save("draft")}>Save now</button></div>
@@ -317,5 +333,5 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
       {draft.baseline.target === "demonstrator" && <details><summary>Configure existing simulation financing</summary><p>These actions transfer only financing settings into the demonstrator planning draft for its separate review. They do not create receipts or execute unsupported mechanisms.</p>{draft.selected.includes("LEADER-AL20-3.4") && <button disabled={busy||!current} onClick={()=>onSimulationFinancing("al20_34",facts)}>Use potential AL20 3.4 in planning draft</button>}<button disabled={busy||!current} onClick={()=>onSimulationFinancing("self",facts)}>Use funds already in project cash</button><button disabled={busy||!current} onClick={()=>onSimulationFinancing("partner",facts)}>Use partner funds already in project cash</button></details>}
       <details><summary>Source review and coverage</summary><p>{c.source_review}</p><a href={c.official_pages.territory} target="_blank" rel="noreferrer">Official AL20 territory and local documents</a></details>
     </details></aside>
-  </section>;
+  </section></FundingEdlProvider></FundingGuideProvider>;
 }

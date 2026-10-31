@@ -35,9 +35,9 @@ test("missing user answers are separate from unimplemented assessments and confl
     {status:"Possible match — eligibility unverified",checks:[{field:"purpose",result:"pass"}]},
   ];
   assert.deepEqual(fundingCounts(rows),{matches:1,needs_answers:1,conflicts:1,unimplemented:1});
-  assert.deepEqual(rows.slice(0,3).map(fundingStatus),["Needs your answers","Assessment not implemented","Conflicts with current scenario"]);
+  assert.deepEqual(rows.slice(0,3).map(fundingStatus),["Needs your answers","Explore this option","Conflicts with current scenario"]);
   assert.match(FUNDING_HELP.resolved,/satisfied or conflicting/);
-  assert.match(FUNDING_HELP.unimplemented,/Completing more questions cannot resolve/);
+  assert.match(FUNDING_HELP.unimplemented,/completing more questions cannot resolve/i);
   assert.throws(()=>fundingStatus({status:"Needs information",checks:[]}),/missing/);
 });
 test("one applicant edit, unknown and restore replace the complete choice",()=>{

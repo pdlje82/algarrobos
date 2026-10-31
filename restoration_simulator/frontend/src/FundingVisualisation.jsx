@@ -49,7 +49,7 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
   },[view,value!==null]);
   useEffect(()=>{
     if(!inspected)return;
-    const modalOpen=()=>document.querySelector("[role='dialog']")!==null;
+    const modalOpen=()=>document.querySelector("[role='dialog'],dialog[open]")!==null;
     const outside=e=>{if(!modalOpen()&&!visualRoot.current.closest(".funding-workspace").contains(e.target))onInspect(null);};
     const escape=e=>{
       if(e.key!=="Escape"||modalOpen()||document.querySelector(".funding-help-popup"))return;
@@ -117,7 +117,7 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
   const effects=id=>conditions.filter(c=>c.option_id===id && c.fields.some(f=>changes!==null?changes.fields.includes(f):currentField?f===currentField:latestFields.includes(f)));
   const effectText=id=>{
     const matches=effects(id);
-    if (!matches.length) return coverage(id).requirements==="research_only" ? "Assessment not implemented" : currentField==="activity" ? (facts.activity===null ? "Activity unknown; scope not narrowed" : allResults.find(r=>r.id===id).relevant ? "Within activity scope" : "Outside activity scope") : "No modelled condition for this answer";
+    if (!matches.length) return coverage(id).requirements==="research_only" ? "Automated assessment unavailable" : currentField==="activity" ? (facts.activity===null ? "Activity unknown; scope not narrowed" : allResults.find(r=>r.id===id).relevant ? "Within activity scope" : "Outside activity scope") : "No modelled condition for this answer";
     return matches.map(c=>`${c.effect==="amount" ? "Amount" : "Fit"}: ${conditionText(c)}`).join(" · ");
   };
   function choose(id) {onInspect(inspected===id ? null : id);}
@@ -155,6 +155,7 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
     return <section className="funding-option-effects" aria-label={`Answer effects for ${r.id}`}><h4>Answer effects</h4><p>{effectBrief(r)}</p>{delta&&delta.affected.map(c=><div className={`funding-check funding-check-${c.result}`} key={c.id}><strong>{conditionChange(c)}</strong><p>{c.message}</p><Evidence sources={c.sources}/></div>)}</section>;
   }
   function details(r) {
+    if(coverage(r.id).requirements==="research_only")return <div className="funding-inspection" aria-label={`Introduction and research for ${r.id}`}>{renderOption(r)}</div>;
     return <div className="funding-inspection" aria-label={`Requirements for ${r.id}`}>
       {effectDetails(r)}
       {renderOption(r)}
@@ -170,7 +171,7 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
   }
   return <aside ref={visualRoot} className={`panel funding-visual ${fullView ? "is-full" : ""}`} aria-label="Live funding consequences">
     <div className="funding-visual-heading"><h2>Funding possibilities</h2>
-    <div className="funding-visual-status" role="status">{value!==null&&<span className="funding-visual-counts">{[["matches","meet modelled fit conditions"],["needs_answers","need your answers"],["conflicts","conflict with current scenario"],["unimplemented","assessments not implemented"]].map(([key,label])=><span className={`funding-metric funding-outcome-${key}`} key={key}>{counts[key]} {label}<FundingHelp label={label}>{FUNDING_HELP[key]}</FundingHelp></span>)}</span>}<span className="funding-assessment-notice">{pending ? value ? "Updating—showing previous assessment" : "Updating funding assessment…" : failure ? value ? "Assessment failed—showing previous assessment" : "Assessment unavailable" : ""}</span></div>
+    <div className="funding-visual-status" role="status">{value!==null&&<span className="funding-visual-counts">{[["matches","meet modelled fit conditions"],["needs_answers","need your answers"],["conflicts","conflict with current scenario"],["unimplemented","reference options"]].map(([key,label])=><span className={`funding-metric funding-outcome-${key}`} key={key}>{counts[key]} {label}<FundingHelp label={label}>{FUNDING_HELP[key]}</FundingHelp></span>)}</span>}<span className="funding-assessment-notice">{pending ? value ? "Updating—showing previous assessment" : "Updating funding assessment…" : failure ? value ? "Assessment failed—showing previous assessment" : "Assessment unavailable" : ""}</span></div>
     {navigation}</div>
     {failure && <div role="alert"><p>{failure}</p><button type="button" onClick={onRetry}>Retry assessment</button></div>}
     <button type="button" className="funding-mobile-expand" aria-expanded={expanded} onClick={()=>setExpanded(v=>!v)}>{expanded ? "Collapse" : "Expand"} funding visual workspace</button>
@@ -232,7 +233,7 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
             <strong>{annex.route}</strong><p>{selectionSummary(annexScore)}</p><p>{pending?"Updating — showing previous assessment":failure?"Assessment failed — showing previous assessment":fundingStatus(allResults.find(r=>r.id===annex.route))}</p><small>All other funding conditions still apply.</small><div className="funding-actions"><button type="button" onClick={()=>onInspect(annex.route)}>Inspect funding option</button><button type="button" onClick={()=>graphPanel.current.scrollTo({top:0,behavior:"instant"})}>Back to funding options</button></div>
           </aside>}
           {visible.options.map((r,i)=><div key={r.id} data-option-id={r.id} className={`funding-graph-option ${workingOption===r.id?"is-working":""} ${inspected===r.id?"is-inspected":""} ${workingOption!==null&&workingOption!==r.id?"is-muted":""} ${changed.has(r.id) ? "funding-affected" : ""}`} style={{top:44+i*132,left:optionLeft,width:optionWidth}} title={`${r.id} · ${r.title}`} onClick={()=>choose(r.id)}>
-            <button type="button" className="funding-option-open" aria-expanded={inspected===r.id}><strong>{r.id} · {r.title}</strong><span className={`funding-outcome-${fundingClass(r)}`}>{fundingStatus(r)}</span><small>{coverage(r.id).requirements==="research_only" ? "Assessment not implemented" : `${coverage(r.id).unresolved_count} unresolved conditions`}</small><Changed change={changed.get(r.id)}/></button>
+            <button type="button" className="funding-option-open" aria-expanded={inspected===r.id}><strong>{r.id} · {r.title}</strong><span className={`funding-outcome-${fundingClass(r)}`}>{fundingStatus(r)}</span><small>{coverage(r.id).requirements==="research_only" ? "Automated assessment unavailable" : `${coverage(r.id).unresolved_count} unresolved conditions`}</small><Changed change={changed.get(r.id)}/></button>
             <FundingWorkingOption id={r.id} checked={workingOption===r.id} onChange={onWork} group="funding-working-graph" compact/>
           </div>)}
           {!questions.length && <p className="funding-no-connections">Choose a question or inspect an option to see its modelled dependencies.</p>}

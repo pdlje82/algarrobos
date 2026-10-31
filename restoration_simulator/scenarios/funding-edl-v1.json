@@ -3,7 +3,7 @@
   "id": "al20-edl-v1-2024-11-19",
   "title": "AL20 Local Development Strategy 2023–2027",
   "edition": "V1 · 19 November 2024",
-  "intro": "EDL means Estrategia de Desarrollo Local; EDLL adds LEADER. This library summarises the relevant content of the approved AL20 strategy. Source references are supporting evidence for a self-assessment, not certification or automatic point awards.",
+  "intro": "EDL means Estrategia de Desarrollo Local; EDLL adds LEADER. This library summarises the relevant content of the approved AL20 strategy. Source references are supporting evidence for a self-assessment, not certification or automatic point awards. NPL codes and innovation numbering follow the strategy; Women, Youth, Trade, Heritage and OT labels are library reference identifiers.",
   "source": {
     "document_id": "FUND-013",
     "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
@@ -1359,8 +1359,8 @@
       "code": "OT-C",
       "label": "Climate-change mitigation and adaptation",
       "label_es": "Cambio climático",
-      "summary": "The strategy seeks sustainable agriculture, forest-related initiatives, short supply chains, food sovereignty, reduced emissions, traditional landscapes and improved agricultural soil.",
-      "page": 478,
+      "summary": "The strategy seeks energy and water efficiency, a better emissions/sink balance, climate-adapted public spaces and proximity services, and conservation and enhancement of natural heritage.",
+      "page": 479,
       "section": "5.14",
       "classification": "cross_cutting_objective"
     }

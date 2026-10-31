@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import {DocumentLink} from "./DocumentLink.jsx";
 import {selectionChoices,selectionSummary,setSelectionChoice,clearSelectionRow,selectionNodeIndent} from "./fundingSelectionState.js";
 import {FundingLocationLookup} from "./FundingLocationLookup.jsx";
+import {FundingEdlNode} from "./FundingEdl.jsx";
 
 export function SelectionSources({sources}){
   return <ul className="funding-sources">{sources.map((s,i)=><li key={i}><DocumentLink documentId={s.document_id} page={s.page} expectedSha256={s.sha256}>{s.label}</DocumentLink><small> · {s.role}</small></li>)}</ul>;
@@ -36,6 +37,7 @@ export function FundingSelectionEditor({route,criterion,row,result,onChange,disa
         {radio?<input id={`al20-${c.id}`} type="radio" name={`al20-${route}-${criterion.id}`} checked={row.answers[c.id]===true} autoFocus={focusChoice===c.id} onChange={()=>update({...row,answers:Object.fromEntries(choices.map(x=>[x.id,x.id===c.id]))})}/>:
           <select id={`al20-${c.id}`} value={row.answers[c.id]===null?"unknown":row.answers[c.id]?"yes":"no"} autoFocus={focusChoice===c.id} onChange={e=>choose(c.id,e.target.value==="unknown"?null:e.target.value==="yes")}><option value="unknown">Unanswered</option><option value="yes">Selected</option><option value="no">Does not apply</option></select>}
         <small>{c.character.replaceAll("_"," ")}{criterion.requires[c.id]?` · Requires ${criterion.requires[c.id].join(", ")}`:""}</small>
+        <FundingEdlNode bindingId={c.id} required={/\bEDLL?\b/.test(c.label+" "+c.label_es)} row={row} onChange={update} disabled={disabled}/>
         <details><summary>Spanish wording and sources</summary><p lang="es">{c.printed_code} · {c.label_es}</p><SelectionSources sources={c.sources}/></details>
       </div>)}
       {criterion.method==="employment"&&<label>Selected jobs meet the minimum one-year / 1 UTA conditions<select aria-label="Employment duration and UTA confirmation" value={row.inputs.qualifying_uta===null?"unknown":row.inputs.qualifying_uta?"yes":"no"} onChange={e=>update({...row,inputs:{qualifying_uta:e.target.value==="unknown"?null:e.target.value==="yes"}})}><option value="unknown">Not confirmed</option><option value="yes">Confirmed for this self-assessment</option><option value="no">Does not meet the documented conditions</option></select></label>}

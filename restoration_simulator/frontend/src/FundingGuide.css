@@ -1,0 +1,9 @@
+.funding-guide{max-width:76ch;margin:1rem 0;padding:1.25rem;border:1px solid var(--border);border-radius:12px;scroll-margin-top:1rem;overflow-wrap:anywhere}
+.funding-guide h3{margin:0 0 .7rem;font-size:1.3rem}
+.funding-guide h3:focus{outline:2px solid currentColor;outline-offset:5px}
+.funding-guide h4{font-size:1rem;margin:1.2rem 0 .35rem}
+.funding-guide p{line-height:1.65;margin:.4rem 0 .8rem}
+.funding-guide-notice,.funding-guide-sources li p{font-size:.85rem}
+.funding-guide details{margin:.8rem 0}
+.funding-guide li{margin:.65rem 0}
+@media(max-width:600px){.funding-guide{padding:.8rem;max-width:100%}}

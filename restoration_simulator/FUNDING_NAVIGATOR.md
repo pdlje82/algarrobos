@@ -1,5 +1,50 @@
 # Funding Navigator
 
+## EDL information in AL20 assessments
+
+EDL means *Estrategia de Desarrollo Local* (Local Development Strategy); EDLL
+adds LEADER. The AL20 strategy defines the local needs, innovation provisions
+and other priorities referred to by the selection annex.
+
+Open **AL20 selection assessment**, choose the funding route and expand a
+criterion. Every subcriterion that refers to EDL/EDLL now includes **What the
+AL20 EDL says**: relevant activities, needs or conditions, English explanations,
+Spanish source keywords and links to the exact pages of the full strategy.
+This covers CO.1, IN.1, IG.8, IG.11, DRI.3, JR.3, PT.1 and PS.1; route 2.6 also
+shows its strategy context in the option details. The 50 prioritised needs are
+available under **Show all 50 prioritised needs**.
+
+Select relevant **supporting references**, then explicitly select/reject the
+scoring subcriterion and explain the proposed operation's connection in notes.
+References alone do not award points, multiply a criterion's points, certify
+eligibility or change another route. The annex calculation still uses the
+explicit scoring answers and the saved catalogue's combination rules/caps.
+References and notes use the existing autosave: wait for **Saved to this
+computer** before reloading, or use **Save now**. Save failures retain the draft
+and offer retry. These references are included in alternatives and exports.
+
+The strategy names **five innovative themes and twelve innovative aspects**.
+It explicitly chooses these instead of designating innovative economic sectors;
+IN.1.1 therefore explains that no sector list is designated in this edition.
+Do not turn a general opportunity into an innovative sector claim. Broader
+consultation priorities and contextual social needs are labelled accordingly;
+users must check their operation against the cited passage.
+
+Use **Explore EDL for …** inside a node to search related content, or
+**Explore AL20 EDL** at the top of Funding Navigator for all topics. Switch the
+scope to search across the library. Search matches English, Spanish keywords
+and codes; the PDF viewer searches the full strategy. Source links open the
+existing viewer at the cited page. Escape closes the PDF first, then the
+explorer, returning focus to the triggering control. Explorer search/expansion
+is transient; supporting-reference selections are saved per funding route.
+
+The source is stored as **FUND-013**, AL20 EDLL 2023–2027, V1 (19 November 2024).
+The content library is separately versioned and hash-checked. Existing saved
+scoring snapshots remain unchanged; additional catalogue citations enter an
+editing copy through the existing reviewed catalogue-update workflow. Missing
+or incompatible strategy content shows an error and retry instead of an empty
+list. See [FUNDING_EDL.md](FUNDING_EDL.md) for coverage and maintenance rules.
+
 ## AL20 annex assessment — catalogue edition 3
 
 Question 19 is **AL20 selection assessment**. Open it in Graph to expand its
