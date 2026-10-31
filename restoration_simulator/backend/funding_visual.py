@@ -5,6 +5,7 @@ inputs are declared here, rather than inferred from human-readable explanations.
 """
 from collections import defaultdict
 from copy import deepcopy
+from .funding import applicant_form
 
 COMPOSITE_INPUTS = {
     ("2.7", "net_year1"): ["net_year1", "smi_year1"],
@@ -32,10 +33,13 @@ def describe(assessment):
                 continue  # Research is explicitly unmodelled, not a failed condition.
             ordinal = counts[field]
             counts[field] += 1
+            inputs = COMPOSITE_INPUTS.get((entry["rule"], field), [field])
+            if field == "applicant_kind" and draft["version"] == 2 and field not in draft["overrides"]:
+                inputs = ["applicant_id", "applicant_kind"]
             condition = dict(
                 id=f'{result["id"]}:eligibility:{field}:{ordinal}',
                 option_id=result["id"],
-                fields=COMPOSITE_INPUTS.get((entry["rule"], field), [field]),
+                fields=inputs,
                 effect="eligibility", result=check["result"],
                 message=check["message"], sources=deepcopy(check["sources"]),
                 value=None,
@@ -71,4 +75,12 @@ def describe(assessment):
 
 
 def visualise(assessment):
-    return {"assessment": assessment, "visualisation": describe(assessment)}
+    d = assessment["draft"]
+    facts = assessment["facts"]
+    party = next((p for p in d["baseline"]["parties"] if p["id"] == facts["applicant_id"]), None)
+    inherited = applicant_form(d, facts["applicant_id"])
+    return {"assessment": assessment, "visualisation": describe(assessment),
+            "applicant_context": {"party_name": None if party is None else party["name"],
+                                  "inherited_form": inherited,
+                                  "derived": d["version"] == 2 and "applicant_kind" not in d["overrides"],
+                                  "override_conflict": "applicant_kind" in d["overrides"] and inherited is not None and facts["applicant_kind"] != inherited}}

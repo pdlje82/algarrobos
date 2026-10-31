@@ -286,8 +286,10 @@ export function demonstratorContract(value) {
 export function validateResponse(path, data) {
   object(data, "API response");
   if(path==="funding/visualise") {
-    properties(data,["assessment","visualisation"],"funding visualisation");
+    properties(data,["assessment","visualisation","applicant_context"],"funding visualisation");
     validateResponse("funding/evaluate",data.assessment);
+    properties(data.applicant_context,["party_name","inherited_form","derived","override_conflict"],"funding applicant context");
+    required((data.applicant_context.party_name===null||typeof data.applicant_context.party_name==="string")&&(data.applicant_context.inherited_form===null||typeof data.applicant_context.inherited_form==="string")&&typeof data.applicant_context.derived==="boolean"&&typeof data.applicant_context.override_conflict==="boolean","Invalid funding applicant provenance.");
     const v=data.visualisation;
     properties(v,["version","conditions","coverage"],"funding dependencies");
     required(v.version===1&&Array.isArray(v.conditions)&&Array.isArray(v.coverage),"Incompatible funding dependencies. Restart Python and reload.");
@@ -314,11 +316,17 @@ export function validateResponse(path, data) {
     required(data.version===1&&data.attachment.version===1&&Number.isInteger(data.funding_revision)&&Array.isArray(data.attachment.scenarios)&&Array.isArray(data.attachment.plans),"Incompatible funding workspace. Restart Python and reload.");
     return data;
   }
+  if(path==="funding/prepare") {
+    properties(data,["draft","notice"],"prepared funding exploration");
+    validateResponse("funding/context",data.draft);
+    required(data.draft.version===2&&typeof data.notice==="string","Incompatible funding editing policy.");
+    return data;
+  }
   if(path==="funding/context") {
     properties(data,["version","name","activity_key","baseline","overrides","selected","allocations","calendar_start","notes","bundle"],"funding context");
     properties(data.baseline,["facts","parties","target","parcel_ids","work_budget"],"funding recorded baseline");
     properties(data.bundle,["version","entries","questions","groups","source_review","official_pages"],"funding catalogue");
-    required(data.version===1&&Array.isArray(data.bundle.entries)&&Array.isArray(data.bundle.questions)&&Array.isArray(data.selected),"Incompatible funding context.");
+    required([1,2].includes(data.version)&&Array.isArray(data.bundle.entries)&&Array.isArray(data.bundle.questions)&&Array.isArray(data.selected),"Incompatible funding context.");
     return data;
   }
   if(["funding/evaluate","funding/plan-preview"].includes(path)) {

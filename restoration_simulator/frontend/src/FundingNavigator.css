@@ -54,3 +54,13 @@
 @media(max-width:1000px){.funding-layout.has-visual{grid-template-columns:minmax(260px,1fr) minmax(0,1.3fr)}}
 @media(max-width:800px){.funding-layout.has-visual{grid-template-columns:minmax(0,1fr)}.funding-visual{padding:1rem}.funding-mobile-expand{display:inline-block}.funding-visual-body:not(.is-expanded){display:none}.funding-diagram-scroll{max-height:430px}.funding-matrix table{min-width:0}.funding-matrix thead{display:none}.funding-matrix tr{display:block;border-bottom:2px solid var(--border);padding:.6rem 0}.funding-matrix td,.funding-matrix th{display:block;min-width:0!important;border:0;padding:.35rem}.funding-matrix td:nth-child(2)::before{content:"Overall fit: ";font-weight:700}.funding-matrix td:nth-child(3)::before{content:"Answer effect: ";font-weight:700}.funding-matrix td:nth-child(4)::before{content:"Unresolved conditions: ";font-weight:700}.funding-matrix td:nth-child(5)::before{content:"Call availability: ";font-weight:700}.funding-matrix .funding-inspection{max-width:100%}}
 @media(prefers-reduced-motion:reduce){.funding-workspace *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.funding-metric{display:inline-block;margin:0 .8rem .3rem 0}
+.funding-change-metrics{display:flex;flex-wrap:wrap;gap:.3rem .8rem;align-items:center}
+.funding-help{display:inline;white-space:normal;font-weight:400}
+.funding-workspace .funding-help>button{display:inline-grid;place-items:center;width:44px;height:44px;padding:0;margin:0 .15rem;vertical-align:middle;font-size:1.1rem;border-color:transparent;background:transparent}
+.funding-help-popup{position:fixed;z-index:1100;display:block;width:min(340px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;padding:.9rem;border:1px solid var(--border);border-radius:.5rem;background:var(--panel);color:var(--text);box-shadow:0 4px 18px #0004;font-size:.9rem;font-weight:400;line-height:1.5;text-align:left;white-space:normal}
+.funding-help-popup>strong,.funding-help-popup>span{display:block}.funding-help-popup>strong{margin-bottom:.4rem}
+.funding-visual.is-full .funding-diagram-scroll,.funding-visual.is-full .funding-matrix{max-height:none;overscroll-behavior:auto}
+.funding-workspace .funding-circumstance,.funding-workspace .funding-graph-option,.funding-graph-origin{height:124px}
+.demo-funding-summary{margin:.7rem 0;font-size:.9rem}.demo-funding-summary p{margin:.35rem 0}
+@media(min-width:801px){.funding-layout:has(.funding-visual.is-full)>.funding-main{position:sticky;top:1rem}}

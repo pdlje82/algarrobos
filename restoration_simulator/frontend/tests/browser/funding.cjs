@@ -103,7 +103,8 @@ async function poll(fn) {for(let i=0;i<200;i++){if(await fn())return;await new P
     await page.getByText('activity · 1 linked parcel(s)',{exact:true}).waitFor();
     await page.getByRole('button',{name:'Project',exact:true}).click();
     await page.getByRole('button',{name:'Open demonstrator planning',exact:true}).click();
-    await page.locator('.demo-editor').getByRole('button',{name:'Funding route',exact:true}).click();
+    assert.equal(await page.locator('.demo-editor').getByRole('button',{name:'Funding route',exact:true}).count(),0);
+    assert.equal(await page.locator('.demo-editor').getByRole('button',{name:'Explore funding',exact:true}).count(),1);
     assert.equal(await page.locator('.demo-editor').getByLabel('Planned funding route',{exact:true}).count(),0);
     await page.locator('.demo-editor').getByRole('button',{name:'Explore funding',exact:true}).click();
     await page.getByText('demonstrator · 1 linked parcel(s)',{exact:true}).waitFor();

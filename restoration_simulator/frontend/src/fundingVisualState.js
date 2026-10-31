@@ -32,9 +32,9 @@ export function fundingVisualReducer(state, event) {
   return {...state,status:"success",error:"",value:event.value,changes,latestFields:changes?.fields.length ? changes.fields : state.latestFields};
 }
 
-export function visualScope(results, {group,shortlistOnly,selected,page, pageSize=12}) {
+export function visualScope(results, {group,shortlistOnly,selected,page, pageSize=12,expanded=false}) {
   const scoped = results.filter(r => shortlistOnly ? selected.includes(r.id) : r.group === group);
-  return {options:scoped.slice(page*pageSize,(page+1)*pageSize), count:scoped.length, pages:Math.max(1,Math.ceil(scoped.length/pageSize))};
+  return {options:expanded ? scoped : scoped.slice(page*pageSize,(page+1)*pageSize), count:scoped.length, pages:Math.max(1,Math.ceil(scoped.length/pageSize))};
 }
 
 export function conditionText(c) {

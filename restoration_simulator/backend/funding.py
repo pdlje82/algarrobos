@@ -126,13 +126,13 @@ def baseline(project, planning, parcel_ids, target):
 
 def new_draft(project, planning, parcel_ids, target):
     c = catalogue()
-    return {"version": 1, "name": "Funding exploration", "activity_key": "demonstrator" if target == "demonstrator" else str(uuid4()), "baseline": baseline(project, planning, parcel_ids, target), "overrides": {}, "selected": [], "allocations": [], "calendar_start": None, "notes": "", "bundle": c}
+    return {"version": 2, "name": "Funding exploration", "activity_key": "demonstrator" if target == "demonstrator" else str(uuid4()), "baseline": baseline(project, planning, parcel_ids, target), "overrides": {}, "selected": [], "allocations": [], "calendar_start": None, "notes": "", "bundle": c}
 
 
 @checked
 def validate_draft(d, project):
     keys(d, set("version name activity_key baseline overrides selected allocations calendar_start notes bundle".split()), "funding draft")
-    require(type(d["version"]) is int and d["version"] == 1, "Unsupported funding draft version.")
+    require(type(d["version"]) is int and d["version"] in {1, 2}, "Unsupported funding draft version.")
     require(isinstance(d["name"], str) and 0 < len(d["name"].strip()) <= 80 and isinstance(d["notes"], str) and len(d["notes"]) <= 10000, "Enter a funding name (up to 80 characters) and valid notes.")
     require(isinstance(d["activity_key"], str) and 0 < len(d["activity_key"]) <= 80, "Invalid funding activity identity.")
     c = validate_catalogue(d["bundle"])
@@ -167,7 +167,32 @@ def validate_draft(d, project):
 
 
 def effective(d):
-    return {**d["baseline"]["facts"], **d["overrides"]}
+    facts = {**d["baseline"]["facts"], **d["overrides"]}
+    # Version 1 is frozen for saved assessments. Version 2 follows the selected
+    # party unless the user has explicitly chosen a hypothetical legal form.
+    if d["version"] == 2 and "applicant_kind" not in d["overrides"]:
+        facts["applicant_kind"] = applicant_form(d, facts["applicant_id"])
+    return facts
+
+
+def applicant_form(d, applicant_id):
+    party = next((p for p in d["baseline"]["parties"] if p["id"] == applicant_id), None)
+    question = next((q for q in d["bundle"]["questions"] if q["id"] == "applicant_kind"), None)
+    require(question is not None and question["type"] == "choice", "The applicant legal-form question is missing or incompatible.")
+    allowed = {value for value, label in question["options"]}
+    # No selected/recorded party (including a hypothetical partner) means unknown.
+    return party["kind"] if party is not None and party["kind"] in allowed else None
+
+
+@checked
+def prepare(draft, project):
+    """Explicit editing adapter; never rewrite stored alternatives or snapshots."""
+    d = deepcopy(validate_draft(draft, project))
+    notice = ""
+    if d["version"] == 1:
+        d["version"] = 2
+        notice = "Editing copy updated: inherited legal form now follows the selected applicant. Explicit legal-form overrides are retained. Saved assessment snapshots are unchanged."
+    return {"draft": d, "notice": notice}
 
 
 def assess(entry, f, c):
@@ -256,6 +281,10 @@ def evaluate(draft, project, planning=None):
         entry = next(e for e in c["entries"] if e["id"] == r["id"])
         r.update(title=entry["title"], group=entry["group"], mechanism=entry["mechanism"], availability=entry["availability"], source_strength=entry["source_strength"], maturity=entry["maturity"], checked_on=entry["checked_on"], description=entry["description"], sources=entry["sources"], source_gaps=entry["source_gaps"], related=entry["related"])
     warnings = []
+    if d["version"] == 2 and "applicant_kind" in d["overrides"]:
+        inherited = applicant_form(d, f["applicant_id"])
+        if inherited is not None and f["applicant_kind"] != inherited:
+            warnings.append("The explicit legal-form assumption differs from the selected applicant's recorded type. Review that hypothetical arrangement before adopting or executing a plan.")
     if len(d["selected"]) > 1:
         warnings.append("Combination requires review of compatibility, overlapping costs, environmental claims and each payer's conditions.")
         if "LEADER-AL20-2.7" in d["selected"]: warnings.append("2.7 cannot be combined with other aid for the same operation. Define distinct operations and obtain confirmation before relying on a combination.")
@@ -274,7 +303,9 @@ def evaluate(draft, project, planning=None):
     if stale: warnings.append("Recorded context changed. Review and explicitly refresh this exploration's baseline.")
     catalogue_changed = digest(c) != digest(catalogue())
     if catalogue_changed: warnings.append("A newer catalogue is available. Update assessment explicitly to adopt its rules and sources.")
-    differences = [{"field": q["id"], "label": q["label"], "recorded": d["baseline"]["facts"][q["id"]], "assumed": f[q["id"]], "editor": "land" if q["id"] in {"owner_id", "operator_id", "rights", "municipality", "area_m2", "rights_sufficient"} else "demonstrator" if q["id"] in {"novelty", "testable", "public_access", "dissemination", "publication_three_years", "purpose"} else "project"} for q in c["questions"] if q["id"] in d["overrides"] and f[q["id"]] != d["baseline"]["facts"][q["id"]]]
+    difference_fields = set(d["overrides"])
+    if d["version"] == 2: difference_fields.add("applicant_kind")
+    differences = [{"field": q["id"], "label": q["label"], "recorded": d["baseline"]["facts"][q["id"]], "assumed": f[q["id"]], "editor": "land" if q["id"] in {"owner_id", "operator_id", "rights", "municipality", "area_m2", "rights_sufficient"} else "demonstrator" if q["id"] in {"novelty", "testable", "public_access", "dissemination", "publication_three_years", "purpose"} else "project"} for q in c["questions"] if q["id"] in difference_fields and f[q["id"]] != d["baseline"]["facts"][q["id"]]]
     return {"draft": d, "facts": f, "results": results, "differences": differences, "stale": stale, "catalogue_changed": catalogue_changed, "catalogue_hash": digest(c), "warnings": warnings, "allocation_totals": totals, "uncovered": None if f["budget_total"] is None or any(a["amount"] is None for a in d["allocations"]) else max(0, f["budget_total"] - sum(totals[k] for k in ["available", "anticipated", "loan"])), "upfront_shortfall": None if need is None or available is None else max(0, need-available), "calendar_note": "Call window: 23 April 2026–31 December 2028, subject to local interruption and budget confirmation. Simulation years remain relative."}
 
 

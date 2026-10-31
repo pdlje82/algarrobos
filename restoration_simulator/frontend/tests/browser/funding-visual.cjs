@@ -40,7 +40,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
     await visual.getByRole('button',{name:'Matrix',exact:true}).click();
     assert.deepEqual(await visual.locator('.funding-matrix tr[data-option-id]').evaluateAll(nodes=>nodes.map(n=>n.dataset.optionId)),graphRows);
     const matrixStatuses=await visual.locator('.funding-matrix tr[data-option-id]').evaluateAll(nodes=>nodes.map(n=>({id:n.dataset.optionId,status:n.querySelector('td').textContent,count:n.querySelectorAll('td')[2].textContent})));
-    for(let i=0;i<graphStatuses.length;i++){assert(matrixStatuses[i].status.includes(graphStatuses[i].status));assert.equal(matrixStatuses[i].count,graphStatuses[i].count.startsWith('Requirements')?'Not modelled':graphStatuses[i].count.split(' ')[0]);}
+    for(let i=0;i<graphStatuses.length;i++){assert(matrixStatuses[i].status.includes(graphStatuses[i].status));assert.equal(matrixStatuses[i].count,graphStatuses[i].count.startsWith('Assessment')?'Not modelled':graphStatuses[i].count.split(' ')[0]);}
     assert.equal(await applicant.inputValue(),'individual');
     await visual.getByRole('button',{name:'Graph',exact:true}).click();
     hold=true;await applicant.selectOption('nonprofit');await poll(async()=>release!==null);
@@ -53,14 +53,14 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
     assert.equal(await applicant.inputValue(),'nonprofit');assert.equal((await visual.locator('.funding-diagram').innerText()).replace('Previous assessed answers','Assessed answers'),newest);
     await visual.getByRole('button',{name:'Retry assessment',exact:true}).click();await settled();
     assert.equal(await visual.getByText('Assessment temporarily unavailable',{exact:true}).count(),0);
-    await question.getByRole('button',{name:'Restore recorded value',exact:true}).click();await settled();assert.equal(await applicant.inputValue(),'');
+    await question.getByRole('button',{name:'Use selected applicant’s legal form',exact:true}).click();await settled();assert.equal(await applicant.inputValue(),'');
     // Family/paging and research entries stay available without invented rules.
     await visual.getByRole('button',{name:'Next options',exact:true}).click();
     assert(await visual.locator('.funding-graph-option').count()<=12);
     await visual.getByRole('button',{name:'Previous options',exact:true}).click();
     await visual.getByLabel('Funding family',{exact:true}).selectOption({index:4});
     const research=visual.locator('.funding-graph-option').first();await research.click();
-    await visual.getByText('Requirements not yet modelled. This research entry has no modelled eligibility dependencies.',{exact:true}).waitFor();
+    await visual.getByText('Assessment not implemented. Programme requirements must be verified and modelled before this option can be assessed. Answering more questions cannot resolve this gap.',{exact:true}).waitFor();
     assert.equal(await visual.locator('.funding-inspection input[type=checkbox]').isChecked(),false,'Inspecting does not shortlist');
     await visual.getByRole('button',{name:'Clear inspection',exact:true}).click();
     await page.getByRole('button',{name:'3. Explore options',exact:true}).click();await page.getByLabel('Search mechanisms',{exact:true}).fill('LEADER-AL20-2.7');

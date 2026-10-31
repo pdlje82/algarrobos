@@ -91,7 +91,8 @@ export function DemonstratorEditor({
   );
   const [section, setSection] = useState(formSections[0]);
   const planning = action.kind === "demo_plan";
-  const sections = planning ? ["Plant order list",...formSections] : formSections;
+  const navigationSections = planning ? ["Plant order list",...formSections] : formSections;
+  const sections = planning ? navigationSections.filter(s=>s!=="Funding route") : navigationSections;
   required(
     sections.includes(section),
     "The selected form section is no longer available. Reopen the decision.",
@@ -103,11 +104,12 @@ export function DemonstratorEditor({
         <>
           <p className="demo-intro">Configure the demonstration, reporting, funding and remaining budget here. Physical planting choices and plant prices are edited in the Site Designer.</p>
           <button type="button" onClick={onOpenDesigner}>Open Site Designer</button>
+          <div className="demo-funding-summary"><strong>Current funding:</strong> {inputs.funding_route === "al20_34" ? "Potential AL20 3.4" : inputs.funding_route === "self" ? "Available own funds" : "Available partner funds"}.{fundingPlans?.filter(p=>p.active&&p.activity_key==="demonstrator").map(p=><p key={p.id}>Preferred funding plan: {p.name}</p>)}</div>
           <nav
             className="demo-section-nav"
             aria-label="Demonstrator configuration sections"
           >
-            {sections.map((s) => (
+            {navigationSections.map((s) => planning&&s==="Funding route" ? <button key={s} type="button" onClick={onOpenFunding}>Explore funding</button> : (
               <button
                 key={s}
                 type="button"
@@ -130,9 +132,6 @@ export function DemonstratorEditor({
                 paid in separate stages. Land rent and maintenance are
                 additional. Edit individual plant prices in the Plant checklist.
               </p>
-            )}
-            {selected === "Funding route" && (
-              <div><p>Compare grants, business support, own funding and other arrangements in the Funding Navigator.</p><p>Existing simulation financing: {inputs.funding_route === "al20_34" ? "Potential AL20 3.4" : inputs.funding_route === "self" ? "Available own funds" : "Available partner funds"}.</p>{fundingPlans?.filter(p=>p.active&&p.activity_key==="demonstrator").map(p=><p key={p.id}>Preferred funding plan: {p.name}</p>)}<button type="button" onClick={onOpenFunding}>Explore funding</button><p>Applications, decisions and reimbursements remain separate recorded actions.</p></div>
             )}
             <Fields
               fields={action.fields

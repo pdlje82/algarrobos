@@ -102,11 +102,18 @@ API operations:
 
 - `GET /api/funding/catalogue`, `GET /api/funding`.
 - `POST /api/funding/context`: capture a recorded context and catalogue snapshot.
+- `POST /api/funding/prepare`: read-only adapter for editing older explorations.
+  Draft version 2 derives an inherited legal form from the selected applicant's
+  recorded type. An explicit legal-form override (including Unknown) takes
+  precedence. Selecting an unrecorded/hypothetical applicant yields Unknown.
+  Version-1 saved assessments retain their original evaluation semantics.
 - `POST /api/funding/evaluate`, `POST /api/funding/plan-preview`: read-only assessment.
 - `POST /api/funding/visualise`: the identical assessment plus transient, versioned
   condition dependencies and modelled/research-only coverage. Composite income
   checks explicitly include the income and SMI fields; startup bonuses are amount
-  dependencies, separate from eligibility. Metadata never enters saved snapshots.
+  dependencies, separate from eligibility. It also returns transient applicant
+  provenance and flags explicit form overrides that differ from the selected
+  party's recorded type. Metadata never enters saved snapshots.
 - `POST /api/funding/save`: draft, save/update exploration, adopt/revise plan, delete.
 
 Mutations check project, funding, design and planning revisions, use idempotent
@@ -119,6 +126,8 @@ must first be explicitly revised or unlinked. Deletion/remapping and Undo cover
 funding links alongside other planning attachments. Demonstrator removal preserves
 alternatives and marks its adopted plans inactive.
 
+The demonstrator's **Explore funding** navigation opens the navigator directly;
+its current financing and preferred plan remain visible in a compact summary.
 The navigator can explicitly transfer existing supported financing settings into
 the demonstrator planning draft, which is still separately reviewed/committed.
 Actual applicants must be existing recorded parties. Existing AL20 application,
@@ -131,12 +140,28 @@ Questions use prominent labels and only specific explanatory help. Activity,
 people/land, option browsing and budget steps share a native HTML/SVG graph and
 matrix. The family selector includes counts for the entire catalogue. One family
 or the explicit shortlist is shown at a time, with catalogue-order pages of at
-most 12 options. Inspection reveals modelled dependencies, explanations and exact
-source editions; it never selects funding. Research-only entries remain labelled
-“Requirements not yet modelled”. The matrix and graph share browsing scope,
+most 12 options in compact view. **Expand view** shows all nodes/rows in the
+current family or shortlist and removes the internal height limit, allowing page
+scrolling. **Compact view** restores paging and scroll position. Inspection
+reveals modelled dependencies, explanations and exact source editions; it never
+selects funding. Research-only entries are labelled **Assessment not implemented**
+and counted separately from **Needs your answers**. Conflicting modelled inputs
+are labelled **Conflicts with current scenario**. These are presentation labels;
+historical stored status values remain unchanged. The matrix and graph share browsing scope,
 selection and Python assessments. Selecting a circumstance focuses its existing
 question; conditions outside the current activity's question flow explain that
 limitation without changing the activity or relevance filtering.
+
+Help buttons explain the four outcome categories and the three change counters
+on hover, keyboard focus or tap. They close on Escape/outside interaction, fit
+inside phone viewports and leave the question and entered answers unchanged.
+Inherited inputs are marked as not answered here and may include planning
+defaults. The legal-form field explicitly identifies its selected-party source;
+resetting an explicit legal-form override resumes that inheritance. Parcel
+ownership never determines applicant form. Saved comparisons use the Python
+assessment's facts, including derived form, rather than reconstructing them in JS.
+Envelope 8 remains unchanged; the nested draft version preserves historical
+snapshots while opening a separately upgraded editing copy with a visible notice.
 
 Accepted responses are compared with the previous accepted response in the same
 exploration. The feedback distinguishes fit, resolved conditions and conditional
@@ -168,3 +193,6 @@ test artifacts. The user's active save is not used.
 Run `node tests/browser/funding-visual.cjs` for graph/matrix, request-race, PDF focus,
 question hierarchy, keyboard and 390px checks, followed by the existing funding and
 `planning-handoff.cjs` checks. Each workflow uses the isolated save and test servers.
+`funding-refinements.cjs` covers version-1 editing, selected-party inheritance,
+explicit overrides/reset/reload, saved comparison facts, distinct assessment
+categories, help interactions, expanded graph/matrix and direct demonstrator entry.

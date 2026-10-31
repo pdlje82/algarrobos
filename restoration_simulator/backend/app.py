@@ -292,6 +292,11 @@ def create_app(save_path=None):
         data = designer_state(req.revision)
         return funding.evaluate(req.draft, data["project"], data["planning"])
 
+    @app.post("/api/funding/prepare")
+    def funding_prepare(req: FundingEvaluationRequest):
+        data = designer_state(req.revision)
+        return funding.prepare(req.draft, data["project"])
+
     @app.post("/api/funding/visualise")
     def funding_visualise(req: FundingEvaluationRequest):
         data = designer_state(req.revision)

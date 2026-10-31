@@ -59,13 +59,16 @@ test("graph and matrix share stable catalogue order, family paging and shortlist
   assert.deepEqual(graph,matrix);assert.equal(graph.count,25);assert.equal(graph.pages,3);
   assert.deepEqual(graph.options.map(r=>r.id),Array.from({length:12},(_,i)=>String(i+12)));
   assert.deepEqual(visualScope(rows,{...args,page:0,shortlistOnly:true}).options.map(r=>r.id),["1","26"]);
+  assert.equal(visualScope(rows,{...args,expanded:true}).options.length,25);
+  assert.deepEqual(visualScope(rows,{...args,expanded:true,shortlistOnly:true}).options.map(r=>r.id),["1","26"]);
+  assert.equal(visualScope(rows,args).options[0].id,"12");
 });
 test("visual contract rejects incomplete metadata and preserves multi-input relationships",()=>{
   const catalogue=JSON.parse(readFileSync(new URL("../../scenarios/funding.json",import.meta.url)));
   const d={version:1,name:"Test",activity_key:"test",baseline:{facts:{},parties:[],target:"business",parcel_ids:[],work_budget:null},overrides:{},selected:[],allocations:[],calendar_start:null,notes:"",bundle:catalogue};
   const a={draft:d,facts:{},results:[{...catalogue.entries[0],status:"Needs information",relevant:true,finance:{basis:"Unknown",estimate:null,schedule:[],notes:[]},checks:[]}],differences:[],stale:false,catalogue_changed:false,catalogue_hash:"hash",warnings:[],allocation_totals:{},uncovered:null,upfront_shortfall:null,calendar_note:""};
   const id=a.results[0].id, c={...condition(),id:"income",option_id:id,fields:["net_year1","smi_year1"],effect:"eligibility"};
-  const value={assessment:a,visualisation:{version:1,conditions:[c],coverage:[{option_id:id,requirements:"modelled",condition_ids:["income"],unresolved_count:1,scope_fields:["activity"]}]}};
+  const value={assessment:a,applicant_context:{party_name:null,inherited_form:null,derived:true,override_conflict:false},visualisation:{version:1,conditions:[c],coverage:[{option_id:id,requirements:"modelled",condition_ids:["income"],unresolved_count:1,scope_fields:["activity"]}]}};
   assert.equal(validateResponse("funding/visualise",value),value);
   const bad=structuredClone(value);bad.visualisation.coverage=[];
   assert.throws(()=>validateResponse("funding/visualise",bad),/coverage/);

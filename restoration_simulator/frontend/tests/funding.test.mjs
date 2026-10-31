@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {effectiveFacts, overrideAnswer, resetAnswer, fundingResults, answerLabel, FUNDING_STEPS} from "../src/fundingState.js";
+import {effectiveFacts, overrideAnswer, resetAnswer, fundingResults, answerLabel, FUNDING_STEPS, fundingStatus,fundingCounts,FUNDING_HELP} from "../src/fundingState.js";
 import {validateResponse} from "../src/contracts.js";
 
 test("funding assumptions override the snapshot without altering recorded facts",()=>{
@@ -24,4 +24,17 @@ test("funding API contract errors cannot masquerade as empty results",()=>{
   assert.throws(()=>validateResponse("funding/evaluate",{results:[]}),/funding/);
   assert.equal(answerLabel({type:"number"},0,[]),"0");
   assert.match(answerLabel({type:"number"},null,[]),/Unknown/);
+});
+test("missing user answers are separate from unimplemented assessments and conflicts",()=>{
+  const rows=[
+    {status:"Needs information",checks:[{field:"municipality",result:"unknown"}]},
+    {status:"Needs information",checks:[{field:null,result:"unknown"}]},
+    {status:"Does not match these facts",checks:[{field:"applicant_kind",result:"fail"}]},
+    {status:"Possible match — eligibility unverified",checks:[{field:"purpose",result:"pass"}]},
+  ];
+  assert.deepEqual(fundingCounts(rows),{matches:1,needs_answers:1,conflicts:1,unimplemented:1});
+  assert.deepEqual(rows.slice(0,3).map(fundingStatus),["Needs your answers","Assessment not implemented","Conflicts with current scenario"]);
+  assert.match(FUNDING_HELP.resolved,/satisfied or conflicting/);
+  assert.match(FUNDING_HELP.unimplemented,/Completing more questions cannot resolve/);
+  assert.throws(()=>fundingStatus({status:"Needs information",checks:[]}),/missing/);
 });
