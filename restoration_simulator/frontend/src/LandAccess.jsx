@@ -878,7 +878,7 @@ export function LandRecords({
       {project.parcels
         .filter((p) => p.scenario_status !== "removed")
         .map((p) => (
-          <article className="parcel" key={p.id}>
+          <article className="parcel" data-parcel-id={p.id} tabIndex={-1} key={p.id}>
             <h3>
               {p.name}
               <span>{area(p.area)} total</span>

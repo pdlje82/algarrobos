@@ -18,6 +18,9 @@ from test_designer_library import site
 class FundingTests(unittest.TestCase):
     def setUp(self):
         self.project = site()
+        previous = json.loads((funding.CATALOGUE.parent / "funding-v1.json").read_text(encoding="utf-8"))
+        catalogue = patch.object(funding, "catalogue", return_value=previous)
+        catalogue.start(); self.addCleanup(catalogue.stop)
         self.draft = funding.new_draft(self.project, None, [], "business")
         # Pin the previous input contract to prove historical assessment replay.
         self.draft["version"] = 2

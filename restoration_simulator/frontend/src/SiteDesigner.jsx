@@ -38,7 +38,7 @@ function NumberEdit({ label, value, onCommit, min = 0, max = 1000000, step = "an
   return <label>{label}<input type="number" value={text} min={min} max={max} step={step} onChange={e=>{setText(e.target.value);touched.current=true;}} onBlur={()=>{ const next=text===""?null:Number(text); if(touched.current&&next!==value){touched.current=false;onCommit(next);} }} onKeyDown={e=>{if(e.key==="Enter"){e.preventDefault();e.currentTarget.blur();}}} /></label>;
 }
 
-export function SiteDesigner({ data, request, onHandoff, beforeHandoff, active }) {
+export function SiteDesigner({ data, request, onHandoff, beforeHandoff, active, openRequest=null }) {
   required(typeof active==="boolean","Site Designer needs its workspace visibility state.");
   const [workspace,setWorkspace] = useState(null), [evaluation,setEvaluation] = useState(null);
   const [error,setError] = useState(""), [operationBusy,setBusy] = useState(false), [message,setMessage] = useState("");
@@ -78,6 +78,13 @@ export function SiteDesigner({ data, request, onHandoff, beforeHandoff, active }
   const [,renderHistory]=useState(0);
   const requestBusy = useRef(false), state = useRef(null), epoch = useRef(0), modelsTrigger = useRef(null);
   const projectId = data.project.id;
+  const openedRequest=useRef(null);
+  useEffect(()=>{
+    if(!active||workspace===null||busy||openRequest===null||openedRequest.current===openRequest.token)return;
+    openedRequest.current=openRequest.token;
+    if(!workspace.library.some(r=>r.id===openRequest.designId)){setError("The source design is no longer in this library. The transferred planning snapshot is retained.");return;}
+    requestLibraryAction({operation:"load",design_id:openRequest.designId,name:null,confirm:false});
+  },[active,workspace,busy,openRequest]);
   async function load() {
     const token=++epoch.current; lastCommand.current=null;setBusy(true); setError("");
     try { const result=await request("designer"); required(result.evaluation?.draft && Array.isArray(result.fields),"Missing designer contract. Restart Python and reload.");

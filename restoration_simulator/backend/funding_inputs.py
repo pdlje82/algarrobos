@@ -1,9 +1,40 @@
 """Logical funding questions and their presentation provenance, without new rules."""
 from copy import deepcopy
+import unicodedata
 from .funding import applicant_form, applicant_label, effective, initial_applicant, legal_forms, resolved_applicant
 
 BUDGET_FIELDS = {"budget_total", "eligible_cost", "available_contribution", "cash_before_receipts"}
-LAND_FIELDS = {"owner_id", "operator_id", "rights", "rights_sufficient", "area_m2", "public_access", "permits", "related_competence"}
+LAND_FIELDS = {"owner_id", "operator_id", "rights", "rights_sufficient", "area_m2", "public_access", "heritage_public_use", "permits", "related_competence"}
+
+
+def presentation(q, d):
+    """Edition-specific help: never attach current legal guidance to an older snapshot."""
+    if d["bundle"]["version"] == 2:
+        original = next(x for x in d["bundle"]["questions"] if x["id"] == ("applicant_id" if q["id"] == "applicant_choice" else q["id"]))
+        q.update(short_label=original["short_label"], guidance=deepcopy(original["guidance"]), retired=original.get("retired", False))
+    else:
+        q.update(short_label="Applicant" if q["id"] == "applicant_choice" else q["label"], retired=False,
+                 guidance={"summary": q["help"] if "help" in q and q["help"].strip() else "This question uses the original catalogue-edition-1 wording.",
+                           "why": "Previous answers and assessments retain their original rules and source editions.", "verify": "Question-level passage guidance is not verified for this old edition. Inspect the saved option sources or review an explicit catalogue update.", "requirements": []})
+    parcels = d["baseline"]["parcel_ids"]
+    q["provenance"] = {"kind": "assumed" if q["overridden"] else "inherited", "parcel_ids": deepcopy(parcels) if q["id"] in {"owner_id", "operator_id", "rights", "municipality", "area_m2"} else [],
+                       "detail": q["origin"]}
+    if not q["overridden"] and len(parcels) == 1:
+        if q["id"] in {"owner_id", "operator_id", "rights"}:
+            q["origin"] = "Inherited captured parcel / active-agreement context—not answered here"
+        elif q["id"] == "municipality" and d["bundle"]["version"] == 2:
+            q["origin"] = "Inherited recorded parcel location—not answered here"
+        q["provenance"]["detail"] = q["origin"]
+    if q["id"] == "municipality":
+        def selection(value):
+            if value is None or value.strip().casefold() in {"", "unknown"}: return "__unknown__"
+            normal = lambda v: "".join(ch for ch in unicodedata.normalize("NFKD", v).casefold() if not unicodedata.combining(ch)).strip()
+            if normal(value) in {"outside", "outside al20"}: return "__outside__"
+            return next((name for name in d["bundle"]["municipalities"] if normal(name) == normal(value)), "__other__")
+        q.update(input_kind="municipality", municipalities=deepcopy(d["bundle"]["municipalities"]),
+                 municipality_selection=selection(q["current_value"]), municipality_initial_selection=selection(q["initial_value"]))
+    else: q["input_kind"] = q["type"]
+    return q
 
 
 def applicant_options(d):
@@ -57,7 +88,7 @@ def describe(d):
     for original in d["bundle"]["questions"]:
         if original["id"] == "applicant_kind": continue
         if original["id"] == "applicant_id":
-            questions.append(applicant)
+            questions.append(presentation(applicant, d))
             continue
         q = deepcopy(original)
         key = q["id"]
@@ -67,9 +98,9 @@ def describe(d):
         # Older catalogue snapshots may omit this optional relevance restriction.
         activities = q["activities"] if "activities" in q else None
         q.update(step=0 if key == "activity" else 4 if key in BUDGET_FIELDS else 1,
-                 relevant=key == "activity" or (activities is None or facts["activity"] in activities) and not (business_without_land and key in LAND_FIELDS),
+                 relevant=not (d["bundle"]["version"] == 2 and original.get("retired", False)) and (key == "activity" or (activities is None or facts["activity"] in activities) and not (business_without_land and key in LAND_FIELDS)),
                  current_value=value, initial_value=start, display_value=answer_text(q, value, d["baseline"]["parties"]), initial_label=answer_text(q, start, d["baseline"]["parties"]),
                  unknown=unknown, overridden=overridden,
                  origin="Cleared by you" if overridden and value is None else "Chosen by you / scenario assumption" if overridden else "Inherited context—not answered here; may include planning defaults")
-        questions.append(q)
+        questions.append(presentation(q, d))
     return {"editing_ready": ready, "questions": questions}

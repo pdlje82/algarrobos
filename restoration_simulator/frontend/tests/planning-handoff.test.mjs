@@ -15,7 +15,7 @@ test("planning order rows use the captured draft prices, not another saved alter
 });
 
 test("planning contracts reject absent revisions and incomplete handoff responses",()=>{
- const p={project_revision:2,planning_revision:1,draft:{version:1,inputs:{},source:null},saved:true,committed:false,planting:null,available:false,reason:"Locked"};
+ const p={project_revision:2,planning_revision:1,draft:{version:1,inputs:{},source:null},saved:true,committed:false,planting:null,available:false,reason:"Locked",context:{parcel:null,design:null,planning_municipality:"unknown",municipality_conflict:false,notice:"Unverified project record"}};
  assert.equal(validateResponse("demonstrator/draft",p),p);
  for(const key of ["draft","planning_revision","available","planting"]){const bad=structuredClone(p);delete bad[key];assert.throws(()=>validateResponse("demonstrator/draft",bad));}
  assert.throws(()=>validateResponse("designer/handoff-preview",{planning:p,previous:{}}),/notice/);

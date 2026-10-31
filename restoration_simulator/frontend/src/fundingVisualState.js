@@ -44,6 +44,13 @@ export function visualScope(results, {group,shortlistOnly,selected,page, pageSiz
   return {options:expanded ? scoped : scoped.slice(page*pageSize,(page+1)*pageSize), count:scoped.length, pages:Math.max(1,Math.ceil(scoped.length/pageSize))};
 }
 
+export function graphQuestions(questions,conditions,scopeIds,{focus,currentField,showAmount}){
+  if(focus)return questions.filter(q=>q.id===currentField);
+  const inScope=new Set(scopeIds),fit=new Set(),amount=new Set();
+  for(const c of conditions){if(inScope.has(c.option_id))for(const id of c.fields)(c.effect==="eligibility"?fit:amount).add(id);}
+  return [...questions.filter(q=>fit.has(q.id)),...questions.filter(q=>showAmount&&!fit.has(q.id)&&amount.has(q.id))];
+}
+
 export function conditionText(c) {
   if (c.effect === "amount") return c.result === "unknown" ? "? Amount unresolved" : c.result === "fail" ? "− No addition" : "✓ Amount condition supplied";
   return c.result === "unknown" ? "? Unresolved" : c.result === "fail" ? "× Conflicts" : "✓ Meets condition";

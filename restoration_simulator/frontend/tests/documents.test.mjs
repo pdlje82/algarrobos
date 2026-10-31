@@ -36,7 +36,8 @@ test("printed pages use verified mappings only; an explicit target wins over pre
 });
 
 test("saved edition checks and catalogue schema cannot silently substitute documents",()=>{
-  assert.equal(documentCatalogue.documents.length,27);
+  assert.equal(documentCatalogue.documents.length,28);
+  assert.equal(documentRecord("FUND-012").pages,15);
   const target=documentTarget({href:"/api/designer/sources/FOREST-004#page=1",expectedSha256:"0".repeat(64)});
   assert.match(documentFileUrl(target.id,target.expectedSha256),/expected_sha256=000/);
   const actual=documentRecord(target.id);

@@ -39,6 +39,8 @@ def validate(value, project):
                 if "maxLength" in field:
                     require(len(entry) <= field["maxLength"], f"Draft field {name} exceeds its configured text length.")
     source = value["source"]
+    parcel_id = value["inputs"]["parcel_id"]
+    require(parcel_id in {None, ""} or parcel_id in {p["id"] for p in project["parcels"]}, "Planning draft refers to a missing parcel. Review its site-design link before importing or saving.")
     if source is not None:
         keys(source, {"draft", "ruleset_hash", "origin"}, "planning design source")
         designer.validate_draft(source["draft"])
@@ -73,7 +75,7 @@ def handoff(value, project, library):
     return validate(result, project)
 
 
-def workspace(project, value, revision):
+def workspace(project, value, revision, library=None):
     require(project is not None, "Create a project before opening demonstrator planning.")
     draft = initial(project) if value is None else deepcopy(validate(value, project))
     installed = project["demonstrator"]
@@ -82,8 +84,9 @@ def workspace(project, value, revision):
     has_recorded_plants = installed is not None and not installed["legacy"] and "plant_selection" in installed["plan"]
     order = planting.resolve(selection) if selection["entries"] and (draft["source"] is not None or has_recorded_plants) else None
     status = demonstrator.availability(project, "demo_plan")
+    from .planning_context import describe
     return {"project_revision": project["revision"], "planning_revision": revision, "draft": draft, "saved": value is not None,
-            "committed": committed, "planting": order, "available": status[0] == "available", "reason": status[1]}
+            "committed": committed, "planting": order, "available": status[0] == "available", "reason": status[1], "context": describe(project, draft, library)}
 
 
 def after_parcel_deletion(value, before, after, deleted):

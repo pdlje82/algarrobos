@@ -171,10 +171,11 @@ function App() {
   const [workspace, setWorkspace] = useState("project");
   const [designerVisited, setDesignerVisited] = useState(false);
   const [fundingEntry, setFundingEntry] = useState(null);
+  const [designerEntry,setDesignerEntry]=useState(null);
   const fundingGuard = useRef(null);
   const planning=usePlanningDraft(data,api);
   const [planReview,setPlanReview]=useState(null);
-  async function openDesigner(){if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return;setDesignerVisited(true);setWorkspace("designer");}
+  async function openDesigner(options={}){if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return;if(typeof options.designId==="string")setDesignerEntry({designId:options.designId,token:crypto.randomUUID()});setDesignerVisited(true);setWorkspace("designer");}
   async function openFunding(options = {}) {
     try {
     if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return;
@@ -184,10 +185,13 @@ function App() {
     setFundingEntry({...options,token:crypto.randomUUID()}); setWorkspace("funding");
     } catch(e) {setError(e.message);}
   }
-  function fundingNavigate(target) {
+  function openParcelRecord(parcelId){
+    setWorkspace("project");requestAnimationFrame(()=>{const node=document.querySelector(`[data-parcel-id="${CSS.escape(parcelId)}"]`);if(node===null){setError("The linked parcel record is unavailable. Reload the project and review the planning link.");return;}node.scrollIntoView({block:"start"});node.focus({preventScroll:true});});
+  }
+  function fundingNavigate(target,parcelId=null) {
     setWorkspace("project");
     if(target === "demonstrator") openPlanning();
-    if(target === "land") document.querySelector(".records")?.scrollIntoView({block:"start"});
+    if(target === "land"){if(parcelId!==null)openParcelRecord(parcelId);else document.querySelector(".records")?.scrollIntoView({block:"start"});}
   }
   async function fundingSaved() {
     try {setData(await api("project"));} catch(e) {setError(e.message);}
@@ -334,7 +338,7 @@ function App() {
     setRetry(null);
     try {
       setData(await api(path, request));
-      if(["project/new","import"].includes(path)){setDesignerVisited(false);setFundingEntry(null);setWorkspace("project");}
+      if(["project/new","import"].includes(path)){setDesignerVisited(false);setDesignerEntry(null);setFundingEntry(null);setWorkspace("project");}
       setPlanReview(null);
       setSelected("");
       setHistoryIndex(null);
@@ -446,7 +450,7 @@ function App() {
       </header>
       {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" aria-pressed={workspace==="project"} onClick={()=>setWorkspace("project")}>Project</button><button type="button" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button><button type="button" aria-pressed={workspace==="funding"} onClick={()=>openFunding()}>Funding Navigator</button></nav>}
       {project!==null && fundingEntry!==null && <div hidden={workspace!=="funding"}><FundingNavigator key={project.id} active={workspace==="funding"} entry={fundingEntry} data={data} request={api} onNavigate={fundingNavigate} onSaved={fundingSaved} onSimulationFinancing={useSimulationFinancing} guardRef={fundingGuard}/></div>}
-      {project!==null && designerVisited && <div className="designer-workspace-host" hidden={workspace!=="designer"}><SiteDesigner key={project.id} active={workspace==="designer"} data={data} request={priceRequest} beforeHandoff={planning.flush} onHandoff={openPlanning} /></div>}
+      {project!==null && designerVisited && <div className="designer-workspace-host" hidden={workspace!=="designer"}><SiteDesigner key={project.id} openRequest={designerEntry} active={workspace==="designer"} data={data} request={priceRequest} beforeHandoff={planning.flush} onHandoff={openPlanning} /></div>}
       <main id="main" className="project-workspace" hidden={workspace!=="project"}>
         <div className="hero">
           <div>
@@ -901,6 +905,7 @@ function App() {
                             previewError={previewError}
                             sources={data.summary.demonstrator?.sources}
                             onOpenDesigner={openDesigner}
+                            onOpenParcel={openParcelRecord}
                             onOpenFunding={()=>openFunding({target:"demonstrator",parcelId:activeInputs.parcel_id})}
                             fundingPlans={data.funding_plans}
                             demonstrator={data.summary.demonstrator}

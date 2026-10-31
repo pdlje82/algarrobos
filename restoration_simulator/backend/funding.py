@@ -36,8 +36,8 @@ def digest(value):
 
 @checked
 def validate_catalogue(c):
-    keys(c, {"version", "checked_on", "reference", "groups", "entries", "questions", "municipalities", "rules", "official_pages", "source_review"}, "funding catalogue")
-    require(type(c["version"]) is int and c["version"] == 1, "Unsupported funding catalogue version.")
+    require(type(c["version"]) is int and c["version"] in {1, 2}, "Unsupported funding catalogue version.")
+    keys(c, {"version", "checked_on", "reference", "groups", "entries", "questions", "municipalities", "rules", "official_pages", "source_review"} | ({"territory"} if c["version"] == 2 else set()), "funding catalogue")
     date.fromisoformat(c["checked_on"])
     require(isinstance(c["entries"], list) and c["entries"], "Funding entries are missing.")
     ids = set()
@@ -58,6 +58,23 @@ def validate_catalogue(c):
         if q["type"] == "choice":
             require(isinstance(q["options"], list) and q["options"] and all(isinstance(p, list) and len(p) == 2 and all(isinstance(v, str) and v for v in p) for p in q["options"]), "Invalid funding question choices.")
             require(len({p[0] for p in q["options"]}) == len(q["options"]), "Repeated funding question choice.")
+        if c["version"] == 2:
+            require(isinstance(q["short_label"], str) and q["short_label"].strip(), "Missing short funding label.")
+            guidance = q["guidance"]
+            keys(guidance, {"summary", "why", "verify", "requirements"}, "funding question guidance")
+            require(all(isinstance(guidance[k], str) and guidance[k].strip() for k in ["summary", "why", "verify"]) and isinstance(guidance["requirements"], list), "Incomplete funding question guidance.")
+            for item in guidance["requirements"]:
+                keys(item, {"programme_ids", "explanation", "evidence", "sources", "verified_on"}, "question requirement")
+                require(item["programme_ids"] and set(item["programme_ids"]) <= ids and item["evidence"] in {"verified", "planning", "gap"} and isinstance(item["explanation"], str), "Invalid question requirement.")
+                date.fromisoformat(item["verified_on"])
+                require(item["evidence"] != "verified" or item["sources"], "Verified guidance needs supporting passages.")
+                for source in item["sources"]: validate_guidance_source(source)
+    if c["version"] == 2:
+        require(set(c["territory"]) == set(c["rules"]), "Missing programme territory rules.")
+        for rule in c["territory"].values():
+            keys(rule, {"municipalities", "outside_exception", "sources"}, "programme territory")
+            require(isinstance(rule["municipalities"], list) and rule["municipalities"] and type(rule["outside_exception"]) is bool and rule["sources"], "Invalid territory coverage.")
+            for source in rule["sources"]: validate_guidance_source(source)
     require(set(c["rules"]) == {"2.7", "1.11", "2.6", "3.4", "3.5"}, "Incomplete core funding rules.")
     r = c["rules"]["2.7"]
     require(all(type(r[k]) in (int, float) and isfinite(r[k]) and r[k] >= 0 for k in ["base", "first", "second", "bonus_cap", "cap"]), "Invalid startup financial amounts.")
@@ -67,6 +84,12 @@ def validate_catalogue(c):
         rule = c["rules"][id]
         require(type(rule["rate"]) in (int, float) and 0 <= rule["rate"] <= 1 and type(rule["cap"]) in (int, float) and isfinite(rule["cap"]) and rule["cap"] >= 0, "Invalid reimbursement rate or cap.")
     return c
+
+
+def validate_guidance_source(source):
+    keys(source, {"document_id", "page", "label", "role", "sha256", "verified_on"}, "question source edition")
+    require(isinstance(source["document_id"], str) and type(source["page"]) is int and source["page"] > 0 and isinstance(source["sha256"], str) and len(source["sha256"]) == 64, "Invalid question source page or checksum.")
+    date.fromisoformat(source["verified_on"])
 
 
 def catalogue():
@@ -85,10 +108,10 @@ def initial():
 
 
 @checked
-def baseline(project, planning, parcel_ids, target):
+def baseline(project, planning, parcel_ids, target, bundle=None):
     require(target in {"activity", "demonstrator", "business"}, "Choose a supported funding activity scope.")
     require(isinstance(parcel_ids, list) and len(set(parcel_ids)) == len(parcel_ids) and set(parcel_ids) <= {p["id"] for p in project["parcels"]}, "Choose existing funding parcels.")
-    c = catalogue()
+    c = catalogue() if bundle is None else validate_catalogue(bundle)
     facts = {q["id"]: None for q in c["questions"]}
     if len(parcel_ids) == 1:
         p = next(p for p in project["parcels"] if p["id"] == parcel_ids[0])
@@ -104,10 +127,13 @@ def baseline(project, planning, parcel_ids, target):
         facts["activity"] = "demonstration"
         plan = planning["inputs"] if planning is not None else project["demonstrator"]["plan"] if project["demonstrator"] is not None and not project["demonstrator"]["legacy"] else None
         if plan is not None:
-            facts.update(applicant_id=plan["applicant_id"], municipality=plan["municipality"], purpose=plan["purpose"])
+            facts.update(applicant_id=plan["applicant_id"], purpose=plan["purpose"])
+            if c["version"] == 1 or len(parcel_ids) != 1: facts["municipality"] = plan["municipality"]
             applicant = next(p for p in project["parties"] if p["id"] == plan["applicant_id"])
             facts["applicant_kind"] = applicant["kind"] if applicant["kind"] in {"individual", "nonprofit", "public", "company"} else None
             mappings = {"novelty": ("novelty", {"new_locally": "yes", "established": "no"}), "public_access": ("public_participation", {"open_demo": "yes", "open_days": "yes", "private": "no"}), "dissemination": ("dissemination", {"web_report": "yes", "web_workshop": "yes", "none": "no"}), "publication_three_years": ("publication_period", {"three_years": "yes"})}
+            if c["version"] == 2:
+                mappings["demonstration_participation"] = mappings.pop("public_access")
             for out, (inp, mapping) in mappings.items():
                 facts[out] = mapping[plan[inp]] if plan[inp] in mapping else None
             if type(plan["restoration_area"]) in (int, float): facts["area_m2"] = plan["restoration_area"]
@@ -126,7 +152,7 @@ def baseline(project, planning, parcel_ids, target):
 
 def new_draft(project, planning, parcel_ids, target):
     c = catalogue()
-    return {"version": 3, "applicant_choice": None, "name": "Funding exploration", "activity_key": "demonstrator" if target == "demonstrator" else str(uuid4()), "baseline": baseline(project, planning, parcel_ids, target), "overrides": {}, "selected": [], "allocations": [], "calendar_start": None, "notes": "", "bundle": c}
+    return {"version": 3, "applicant_choice": None, "name": "Funding exploration", "activity_key": "demonstrator" if target == "demonstrator" else str(uuid4()), "baseline": baseline(project, planning, parcel_ids, target, c), "overrides": {}, "selected": [], "allocations": [], "calendar_start": None, "notes": "", "bundle": c}
 
 
 @checked
@@ -243,7 +269,7 @@ def applicant_form(d, applicant_id):
 
 
 @checked
-def prepare(draft, project, applicant_choice=None, resolve=False):
+def prepare_applicant(draft, project, applicant_choice=None, resolve=False):
     """Explicit editing adapter; never rewrite stored alternatives or snapshots."""
     d = deepcopy(validate_draft(draft, project))
     if d["version"] == 3:
@@ -276,80 +302,36 @@ def prepare(draft, project, applicant_choice=None, resolve=False):
     return {"draft": d, "notice": "Editing copy updated to one applicant choice. Saved assessment snapshots and source editions are unchanged.", "applicant_review": None}
 
 
+@checked
+def prepare(draft, project, applicant_choice=None, resolve=False, adopt_current_catalogue=False, planning=None):
+    require(type(adopt_current_catalogue) is bool, "Choose whether to adopt the current catalogue explicitly.")
+    result = prepare_applicant(draft, project, applicant_choice, resolve)
+    result["catalogue_review"] = None
+    if not adopt_current_catalogue or result["applicant_review"] is not None: return result
+    d = result["draft"]
+    previous = deepcopy(d)
+    current = catalogue()
+    captured = baseline(project, planning, d["baseline"]["parcel_ids"], d["baseline"]["target"], current)
+    # These are historical answers, never interpreted as either new participation check.
+    for key in ["territory_verified", "public_access"]:
+        captured["facts"][key] = previous["baseline"]["facts"][key]
+    d.update(bundle=current, baseline=captured)
+    validate_draft(d, project)
+    old_facts, new_facts = effective(previous), effective(d)
+    differences = [{"id": q["id"], "label": q["label"], "before": old_facts[q["id"]] if q["id"] in old_facts else None, "after": new_facts[q["id"]]} for q in current["questions"] if q["id"] not in old_facts or not same_json(old_facts[q["id"]], new_facts[q["id"]])]
+    retained = [{"id": q["id"], "label": q["label"], "value": new_facts[q["id"]]} for q in current["questions"] if q.get("retired", False) and new_facts[q["id"]] is not None]
+    result["catalogue_review"] = {"from_edition": previous["bundle"]["version"], "to_edition": current["version"], "changes": differences, "retained_answers": retained,
+        "messages": ["Adopt the current recorded baseline, question definitions, rules and source editions. Explicit assumptions are retained.", "The former shared public-access answer is not copied into the new participation/public-use questions. Recorded demonstrator participation may initialise only the 3.4 question.", "Municipality coverage, operation scope and call availability are separate. Conditional outside-area exceptions still require verification."]}
+    result["notice"] = "Baseline and catalogue update prepared. Review before applying; saved assessments remain unchanged."
+    return result
+
+
 def assess(entry, f, c):
-    checks = []
-    def check(key, acceptable, message, page=None):
-        v = f[key]
-        checks.append({"field": key, "result": "unknown" if v is None else "pass" if v in acceptable else "fail", "message": message, "sources": [s for s in entry["sources"] if page is None or s["document_id"] != "FUND-008" or s["page"] == page]})
-    def y(key, message, page=None): check(key, {"yes"}, message, page)
-    r = entry["rule"]
-    if r:
-        def canonical(value):
-            return "".join(ch for ch in unicodedata.normalize("NFKD", value).casefold() if not unicodedata.combining(ch)).strip()
-        municipality = f["municipality"]
-        check("municipality", set(c["municipalities"]), "Verify membership in the official AL20 territory.")
-        if municipality is not None:
-            checks[-1]["result"] = "pass" if canonical(municipality) in {canonical(m) for m in c["municipalities"]} else "fail" if canonical(municipality) in {"outside", "outside al20"} else "unknown"
-        y("territory_verified", "Verify the exact territorial link, local interruption and budget position.")
-        if f["territory_verified"] == "no": checks[-1]["result"] = "unknown"
-        score = f["selection_score"]
-        checks.append(dict(field="selection_score", result="unknown" if score is None else "pass" if score >= c["rules"][r]["minimum_score"] else "fail", message="Verify the applicable local selection criteria and at least 60 points; no ecological impact score is inferred.", sources=[s for s in entry["sources"] if s["document_id"] == "FUND-008" and s["page"] == 38]))
-        if r == "2.7":
-            check("applicant_kind", {"individual"}, "2.7 is for an individual starting self-employment.", 112)
-            check("sector", {"general"}, "Agricultural/forestry production, exclusive agrarian trade and 1.11 support services are excluded; mixed services require GDR classification.", 111)
-            for key, msg in [("unemployed", "Unemployed when applying."), ("new_activity", "A genuinely new activity and submitted business plan."), ("no_same_reta", "No same-CNAE-group RETA registration in the preceding three years."), ("resident", "Resident in the relevant territory by commencement."), ("exclusive", "Exclusive full-time self-employment."), ("start_after_application", "Begin RETA/tax activity after applying and by three months after award notification."), ("plan_24_months", "Implement the plan within 24 months."), ("retention", "Maintain full-time self-employment until three years after final payment.")]: y(key, msg, 112 if key != "start_after_application" else 111)
-            if f["sector"] == "mixed": next(x for x in checks if x["field"] == "sector")["result"] = "unknown"
-            v = f["unemployment_percent"]
-            startup = c["rules"]["2.7"]
-            checks.append(dict(field="unemployment_percent", result="unknown" if v is None else "pass" if v >= startup["minimum_unemployment_percent"] else "fail", message="At least 50% unemployment in the preceding three months.", sources=[s for s in entry["sources"] if s["page"] == 112]))
-            check("other_aid", {"no"}, "2.7 is incompatible with other aid for the same operation.")
-            for net, benchmark, factor in [("net_year1", "smi_year1", startup["first_year_smi_factor"]), ("net_year2", "smi_year2", startup["final_smi_factor"])]:
-                n, b = f[net], f[benchmark]
-                checks.append(dict(field=net, result="unknown" if n is None or b is None else "pass" if n >= factor*b else "fail", message="Projected net income must meet " + ("half the verified annual 12-payment SMI benchmark in year one." if net == "net_year1" else "the verified annual application-year SMI benchmark in year two."), sources=[s for s in entry["sources"] if s["page"] == 112]))
-        elif r in {"3.4", "3.5"}:
-            check("applicant_kind", {"nonprofit", "public", "public_company"}, "A qualifying public/nonprofit legal entity or qualifying publicly participated enterprise is required.")
-            if f["applicant_kind"] == "university":
-                next(x for x in checks if x["field"] == "applicant_kind")["result"] = "unknown"
-                checks.append(dict(field="applicant_kind", result="unknown", message="Verify whether this research institution is an eligible public/nonprofit legal entity.", sources=entry["sources"]))
-            if f["applicant_kind"] == "public_company":
-                checks.append(dict(field="applicant_kind", result="unknown", message="Public participation enterprise must meet the additional Article 7 conditions.", sources=entry["sources"]))
-            check("purpose", {"conservation"}, "Nonproductive public-benefit purpose is required.")
-            for k, msg in [("rights_sufficient", "Rights must cover implementation and commitments."), ("permits", "Verify the required permissions."), ("public_access", "Define compliant public participation / public benefit."), ("related_competence", "Applicant must have relevant purpose or competencies."), ("not_started", "Verify application precedes binding commitments.")]: y(k, msg)
-            if f["permits"] == "no": next(x for x in checks if x["field"] == "permits")["result"] = "unknown"
-            if r == "3.4":
-                for k, msg in [("novelty", "The method must be new or unfamiliar in the ZRL."), ("testable", "A testable, transferable demonstration is required."), ("dissemination", "Publish activities and results online."), ("publication_three_years", "Keep online information for three years after final payment.")]: y(k, msg)
-            else:
-                y("heritage", "Document rural/environmental heritage value.")
-                y("forest_plan", "Check any required forest management instrument.")
-                check("land_purchase", {"no"}, "Acquisition of rural heritage assets is excluded from 3.5.", 124)
-        else:
-            check("applicant_kind", {"individual", "company"}, "A qualifying enterprise or prospective entrepreneur is required.")
-            y("sme", "Verify SME and financial capacity requirements.")
-            y("not_started", "Check application and investment start conditions.")
-            check("sector", {"agrarian_services"} if r == "1.11" else {"general"}, "1.11 covers support services to agriculture/forestry; 2.6 excludes those services. Actual mixed activity requires GDR classification.")
-            if f["sector"] == "mixed": checks[-1]["result"] = "unknown"
-    elif entry["mechanism"] == "existing_cash":
-        checks.append(dict(field="available_contribution", result="unknown" if f["available_contribution"] is None else "pass", message="Verify funds already held, their restrictions and the intended allocation. This is not a new receipt.", sources=[]))
+    if c["version"] == 1:
+        from .funding_v1 import assess as evaluate_entry
     else:
-        checks.append(dict(field=None, result="unknown", message="Research option: current programme/call, applicant conditions, economic viability and supporting source passages require verification.", sources=entry["sources"]))
-    issues = [x for x in checks if x["result"] == "fail"]
-    unknowns = [x for x in checks if x["result"] == "unknown"]
-    finance = {"basis": "Unknown / mechanism-specific", "estimate": None, "schedule": [], "notes": ["No award, receipt or payment is created by this assessment."]}
-    if entry["mechanism"] == "existing_cash":
-        finance.update(basis="User-reported funds already available", estimate=f["available_contribution"])
-    elif r == "2.7":
-        rule = c["rules"][r]
-        bonus = min(rule["bonus_cap"], sum(amount for key, amount in rule["bonuses"].items() if f[key] == "yes"))
-        unknown_bonus = [key for key in rule["bonuses"] if f[key] is None]
-        finance.update(basis="Conditional business-plan lump sum", estimate=None if issues else rule["base"] + bonus, base=rule["base"], bonus=bonus, maximum=rule["cap"], bonus_unknowns=unknown_bonus,
-            schedule=[{"label": "First instalment: commencement after award", "amount": rule["first"]}, {"label": "Final instalment: plan and income milestones verified", "amount": rule["second"] + bonus}])
-        finance["notes"].extend(["Estimate uses only the bonus conditions answered Yes; unanswered bonuses remain unconfirmed.", "Milestone preview only. First-year intermediate income and continuing commitment conditions apply. No entitlement or cash posting is inferred."])
-    elif r:
-        rule = c["rules"][r]
-        cost = f["eligible_cost"]
-        finance.update(basis="Percentage of verified eligible cost; reimbursement", estimate=None if issues or cost is None else round(min(cost*rule["rate"], rule["cap"]), 2), rate=rule["rate"], maximum=rule["cap"])
-        finance["notes"].append("Legal maximum is not an award. Confirm cost eligibility, actual call limits, cofinance, guarantees and reimbursement timing.")
-    return {"id": entry["id"], "status": "Does not match these facts" if issues else "Needs information" if unknowns else "Possible match — eligibility unverified", "relevant": f["activity"] is None or f["activity"] in entry["activities"], "checks": checks, "finance": finance}
+        from .funding_v2 import assess as evaluate_entry
+    return evaluate_entry(entry, f, c)
 
 
 @checked
@@ -381,12 +363,14 @@ def evaluate(draft, project, planning=None):
     available = f["available_contribution"]
     need = f["cash_before_receipts"]
     if totals["available"] and available is None: warnings.append("An allocation marked available is a user assumption; verify the funds and avoid counting the same contribution twice.")
-    current = baseline(project, planning, d["baseline"]["parcel_ids"], d["baseline"]["target"])
-    stale = not same_json(current["facts"], d["baseline"]["facts"]) or current["parties"] != d["baseline"]["parties"] or not same_json(current["work_budget"], d["baseline"]["work_budget"])
+    current = baseline(project, planning, d["baseline"]["parcel_ids"], d["baseline"]["target"], c)
+    compared_fields = {q["id"] for q in c["questions"] if c["version"] == 1 or not q.get("retired", False)}
+    stale = not same_json({k: current["facts"][k] for k in compared_fields}, {k: d["baseline"]["facts"][k] for k in compared_fields}) or current["parties"] != d["baseline"]["parties"] or not same_json(current["work_budget"], d["baseline"]["work_budget"])
     if stale: warnings.append("Recorded context changed. Review and explicitly refresh this exploration's baseline.")
     catalogue_changed = digest(c) != digest(catalogue())
     if catalogue_changed: warnings.append("A newer catalogue is available. Update assessment explicitly to adopt its rules and sources.")
     difference_fields = set(d["overrides"])
+    if c["version"] == 2: difference_fields -= {q["id"] for q in c["questions"] if q.get("retired", False)}
     if d["version"] == 2: difference_fields.add("applicant_kind")
     differences = [{"field": q["id"], "label": q["label"], "recorded": d["baseline"]["facts"][q["id"]], "assumed": f[q["id"]], "editor": "land" if q["id"] in {"owner_id", "operator_id", "rights", "municipality", "area_m2", "rights_sufficient"} else "demonstrator" if q["id"] in {"novelty", "testable", "public_access", "dissemination", "publication_three_years", "purpose"} else "project"} for q in c["questions"] if q["id"] in difference_fields and f[q["id"]] != d["baseline"]["facts"][q["id"]]]
     if d["version"] == 3 and resolved_applicant(d) != initial_applicant(d):

@@ -32,7 +32,7 @@ export function presentQuestion(q,draft){
   }else display=answerLabel(q,value,draft.baseline.parties);
   const unknown=applicant?value.kind==="unknown"||value.kind==="potential"&&value.legal_form===null:value===null||q.id==="municipality"&&value==="unknown";
   const pending=JSON.stringify(value)!==JSON.stringify(q.current_value)||overridden!==q.overridden;
-  return {...q,current_value:value,display_value:unknown&&!applicant?"Unknown / not decided":display,unknown,overridden,origin:pending?"Updating answer…":q.origin};
+  return {...q,assessed_value:q.current_value,current_value:value,display_value:unknown&&!applicant?"Unknown / not decided":display,unknown,overridden,origin:pending?"Updating answer…":q.origin};
 }
 export const FUNDING_HELP = {
   matches:"All modelled fit conditions are satisfied by the current recorded or hypothetical answers. Eligibility and call availability still require verification. Zero does not mean that funding is unavailable.",

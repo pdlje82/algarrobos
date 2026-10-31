@@ -297,9 +297,15 @@ export function validateResponse(path, data) {
     required(typeof data.input_context.editing_ready==="boolean"&&Array.isArray(data.input_context.questions)&&data.input_context.questions.length>0,"Missing logical funding questions.");
     const questionIds=new Set();
     for(const q of data.input_context.questions){
-      properties(q,["id","label","type","step","relevant","current_value","initial_value","display_value","initial_label","unknown","overridden","origin"],"funding question state");
+      properties(q,["id","label","short_label","type","input_kind","step","relevant","current_value","initial_value","display_value","initial_label","unknown","overridden","origin","retired","guidance","provenance"],"funding question state");
       required(typeof q.id==="string"&&!questionIds.has(q.id)&&typeof q.label==="string"&&["applicant","choice","number","party","text"].includes(q.type)&&[0,1,4].includes(q.step)&&typeof q.relevant==="boolean"&&typeof q.unknown==="boolean"&&typeof q.overridden==="boolean"&&[q.display_value,q.initial_label,q.origin].every(s=>typeof s==="string"),"Invalid logical funding question.");
       if(q.type==="applicant"){required(q.id==="applicant_choice"&&Array.isArray(q.options)&&q.options.length>0&&Array.isArray(q.other_forms),"Missing applicant choices.");for(const o of q.options)properties(o,["group","label","choice"],"applicant option");}
+      required(typeof q.short_label==="string"&&q.short_label.trim()&&typeof q.retired==="boolean","Missing compact question labels.");
+      properties(q.guidance,["summary","why","verify","requirements"],"question guidance");
+      required([q.guidance.summary,q.guidance.why,q.guidance.verify].every(t=>typeof t==="string"&&t.trim())&&Array.isArray(q.guidance.requirements),"Incomplete question guidance.");
+      for(const item of q.guidance.requirements){properties(item,["programme_ids","explanation","evidence","sources","verified_on"],"question requirement");required(Array.isArray(item.programme_ids)&&typeof item.explanation==="string"&&["verified","planning","gap"].includes(item.evidence)&&Array.isArray(item.sources)&&typeof item.verified_on==="string","Invalid question evidence.");for(const s of item.sources){properties(s,["document_id","page","label","role","sha256","verified_on"],"question citation");required(Number.isInteger(s.page)&&s.page>0&&typeof s.sha256==="string"&&s.sha256.length===64,"Invalid question source edition.");}}
+      properties(q.provenance,["kind","parcel_ids","detail"],"question provenance");required(["assumed","inherited"].includes(q.provenance.kind)&&Array.isArray(q.provenance.parcel_ids)&&typeof q.provenance.detail==="string","Invalid input provenance.");
+      if(q.input_kind==="municipality"){properties(q,["municipalities","municipality_selection","municipality_initial_selection"],"municipality input");required(Array.isArray(q.municipalities)&&q.municipalities.length>0&&q.municipalities.every(t=>typeof t==="string"),"Missing municipality catalogue.");}
       questionIds.add(q.id);
     }
     required(questionIds.has("applicant_choice")&&!questionIds.has("applicant_id")&&!questionIds.has("applicant_kind"),"Incompatible merged applicant question.");
@@ -327,17 +333,18 @@ export function validateResponse(path, data) {
     return data;
   }
   if(path==="funding/prepare") {
-    properties(data,["draft","notice","applicant_review"],"prepared funding exploration");
+    properties(data,["draft","notice","applicant_review","catalogue_review"],"prepared funding exploration");
     validateResponse("funding/context",data.draft);
     required(typeof data.notice==="string"&&(data.applicant_review===null?data.draft.version===3:[1,2].includes(data.draft.version)),"Incompatible funding editing policy.");
     if(data.applicant_review!==null)properties(data.applicant_review,["party_name","legal_form","message"],"legacy applicant review");
+    if(data.catalogue_review!==null){properties(data.catalogue_review,["from_edition","to_edition","changes","retained_answers","messages"],"catalogue update review");required(Array.isArray(data.catalogue_review.changes)&&Array.isArray(data.catalogue_review.retained_answers)&&Array.isArray(data.catalogue_review.messages),"Incomplete catalogue conversion review.");}
     return data;
   }
   if(path==="funding/context") {
     properties(data,["version","name","activity_key","baseline","overrides","selected","allocations","calendar_start","notes","bundle"],"funding context");
     properties(data.baseline,["facts","parties","target","parcel_ids","work_budget"],"funding recorded baseline");
     properties(data.bundle,["version","entries","questions","groups","source_review","official_pages"],"funding catalogue");
-    required([1,2,3].includes(data.version)&&Array.isArray(data.bundle.entries)&&Array.isArray(data.bundle.questions)&&Array.isArray(data.selected),"Incompatible funding context.");
+    required([1,2,3].includes(data.version)&&[1,2].includes(data.bundle.version)&&Array.isArray(data.bundle.entries)&&Array.isArray(data.bundle.questions)&&Array.isArray(data.selected),"Incompatible funding context.");
     if(data.version===3){properties(data,["applicant_choice"],"merged applicant choice");required(!Object.hasOwn(data.overrides,"applicant_id")&&!Object.hasOwn(data.overrides,"applicant_kind"),"Conflicting legacy applicant overrides in a new exploration.");}
     return data;
   }
@@ -350,7 +357,11 @@ export function validateResponse(path, data) {
   }
   if (path === "plant-prices") return priceDefaultsContract(data);
   if (["demonstrator/draft","designer/handoff"].includes(path)) {
-    properties(data,["project_revision","planning_revision","draft","saved","committed","planting","available","reason"],"demonstrator planning draft; restart Python and reload");
+    properties(data,["project_revision","planning_revision","draft","saved","committed","planting","available","reason","context"],"demonstrator planning draft; restart Python and reload");
+    properties(data.context,["parcel","design","planning_municipality","municipality_conflict","notice"],"planning parcel/design context");
+    required(typeof data.context.municipality_conflict==="boolean"&&typeof data.context.notice==="string","Invalid planning context.");
+    if(data.context.parcel!==null){properties(data.context.parcel,["id","name","municipality","area","owner","access"],"planning parcel record");if(data.context.parcel.access!==null)properties(data.context.parcel.access,["id","status","route","operator","start","end"],"recorded access");}
+    if(data.context.design!==null){properties(data.context.design,["id","name","current_name","status"],"transferred design source");required(["current","changed","missing"].includes(data.context.design.status),"Invalid source design status.");}
     properties(data.draft,["version","inputs","source"],"planning draft");
     object(data.draft.inputs,"planning inputs");
     required(data.draft.version===1&&Number.isInteger(data.project_revision)&&Number.isInteger(data.planning_revision)&&[data.saved,data.committed,data.available].every(v=>typeof v==="boolean"),"Invalid planning draft metadata.");

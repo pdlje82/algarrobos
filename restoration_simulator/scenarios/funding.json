@@ -1,6 +1,6 @@
 {
-  "version": 1,
-  "checked_on": "2026-10-30",
+  "version": 2,
+  "checked_on": "2026-10-31",
   "reference": "FUND-007",
   "groups": {
     "public": "Public grants and programmes",
@@ -2854,7 +2854,14 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Activity",
+      "guidance": {
+        "summary": "Choose the activity you want to explore; this filters browsing, not legal eligibility.",
+        "why": "Activities can be explored before a complete design exists.",
+        "verify": "Select the activity closest to your actual proposed operation.",
+        "requirements": []
+      }
     },
     {
       "id": "applicant_id",
@@ -2862,7 +2869,96 @@
       "type": "party",
       "options": null,
       "activities": null,
-      "help": "The applicant can differ from the landowner and operator."
+      "help": "",
+      "short_label": "Applicant",
+      "guidance": {
+        "summary": "Choose the person or organisation that would submit the application. Ownership and operator roles are separate.",
+        "why": "Different programmes accept different applicant forms. A planned organisation is still hypothetical.",
+        "verify": "Check the actual applicant, its legal form and its authority to carry out the operation.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "Public/nonprofit legal entities, public-law bodies and qualifying publicly participated enterprises are listed; an ordinary private individual is not a beneficiary.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 122,
+                "label": "Official requirement · PDF page 122",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.5"
+            ],
+            "explanation": "The listed beneficiaries are public/nonprofit legal entities, public-law bodies and qualifying publicly participated enterprises.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 124,
+                "label": "Official requirement · PDF page 124",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "This is for an individual starting a new activity through new self-employment registration.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "Qualifying enterprises and prospective entrepreneurs must meet the programme’s SME conditions.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 94,
+                "label": "Official requirement · PDF page 94",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 110,
+                "label": "Official requirement · PDF page 110",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "applicant_kind",
@@ -2895,7 +2991,14 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Applicant form",
+      "guidance": {
+        "summary": "Legacy legal-form input, now combined with the applicant choice.",
+        "why": "Recorded applicants use their recorded legal form.",
+        "verify": "Use the complete applicant choice, rather than an independent form override.",
+        "requirements": []
+      }
     },
     {
       "id": "owner_id",
@@ -2903,7 +3006,37 @@
       "type": "party",
       "options": null,
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Landowner",
+      "guidance": {
+        "summary": "The landowner may differ from the grant applicant and the operator.",
+        "why": "Owning land personally does not automatically grant a different organisation rights to use it.",
+        "verify": "Check the parcel record and any documented consent or right of use.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4",
+              "LEADER-AL20-3.5",
+              "LEADER-AL20-2.7",
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "Article 6.11 explains ownership, transferred use/enjoyment rights and express authorisation for public-domain investments.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 15,
+                "label": "Official requirement · PDF page 15",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "operator_id",
@@ -2911,7 +3044,37 @@
       "type": "party",
       "options": null,
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Operator",
+      "guidance": {
+        "summary": "The operator carries out the activity and may differ from the owner or applicant.",
+        "why": "These roles must not be treated as interchangeable.",
+        "verify": "Confirm who will implement the work and under what authority.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4",
+              "LEADER-AL20-3.5",
+              "LEADER-AL20-2.7",
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "Identify all agents involved and the mechanisms for implementing the operation in the application description.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 35,
+                "label": "Official requirement · PDF page 35",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "municipality",
@@ -2919,11 +3082,81 @@
       "type": "text",
       "options": null,
       "activities": null,
-      "help": "Municipality membership is preliminary; parcel boundaries and current local availability still require confirmation."
+      "help": "",
+      "short_label": "Municipality",
+      "guidance": {
+        "summary": "Choose the activity location. Listed municipalities are covered by the verified AL20 list; this alone does not establish eligibility.",
+        "why": "Territorial fit differs from whether a call is open or still has budget.",
+        "verify": "For another municipality, identify it without guessing coverage. Only choose confirmed outside AL20 after checking.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7",
+              "LEADER-AL20-3.4",
+              "LEADER-AL20-3.5",
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "The recognition resolution lists the 32 municipalities assigned to AL20 on PDF page 3. This is coverage evidence, not proof of eligibility or current availability.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-012",
+                "page": 3,
+                "label": "Official AL20 municipalities · PDF page 3",
+                "role": "official territory",
+                "sha256": "7a7501233f3e3d20b47f40b029be0b3ac5172c2c24720adb2ddcc79085dc8c28",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4",
+              "LEADER-AL20-3.5",
+              "LEADER-AL20-2.7",
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "Article 6.7 contains territorial-benefit rules and conditional exceptions for some operations/investments outside the area; the exceptions are not fully assessed here.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 14,
+                "label": "Official requirement · PDF page 14",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "The demonstration/study must have an unequivocal territorial link and its application/study scope cannot exceed the relevant LEADER territory.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 121,
+                "label": "Official requirement · PDF page 121",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "territory_verified",
-      "label": "Has the exact AL20 territorial link been checked?",
+      "label": "Previous general AL20 confirmation (superseded)",
       "type": "choice",
       "options": [
         [
@@ -2936,7 +3169,61 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "retired": true,
+      "short_label": "Previous territory check",
+      "guidance": {
+        "summary": "This older combined confirmation is retained for traceability.",
+        "why": "Edition 2 separates municipality, operation scope and call availability.",
+        "verify": "Review the new specific checks; this retained value no longer affects current-edition fit.",
+        "requirements": []
+      }
+    },
+    {
+      "id": "operation_scope",
+      "label": "Does the demonstration or study stay within the relevant LEADER area?",
+      "type": "choice",
+      "options": [
+        [
+          "within",
+          "Within the area"
+        ],
+        [
+          "beyond",
+          "Extends beyond it"
+        ]
+      ],
+      "activities": [
+        "demonstration",
+        "monitoring"
+      ],
+      "help": "",
+      "short_label": "Demonstration territory",
+      "guidance": {
+        "summary": "Consider the geographical scope of the demonstration or study, not where its results can be read.",
+        "why": "A listed municipality does not prove that the operation’s whole scope fits category 3.4.",
+        "verify": "Confirm whether the operation itself extends beyond AL20.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "Annex I 3.4, condition 3.c excludes operations whose territorial application/study scope exceeds the LEADER territory.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 121,
+                "label": "Official requirement · PDF page 121",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "area_m2",
@@ -2945,7 +3232,14 @@
       "options": null,
       "activities": null,
       "help": "",
-      "min": 0
+      "min": 0,
+      "short_label": "Activity area",
+      "guidance": {
+        "summary": "This is the proposed activity area, in square metres.",
+        "why": "It describes the scenario; it is not proof of eligible costs or certified credits.",
+        "verify": "Use the transferred intervention area or enter a transparent estimate.",
+        "requirements": []
+      }
     },
     {
       "id": "rights",
@@ -2982,11 +3276,41 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Land access",
+      "guidance": {
+        "summary": "Record or explore ownership, lease, stewardship or another access arrangement.",
+        "why": "The arrangement and its sufficiency for a particular applicant are separate facts.",
+        "verify": "Inspect the parcel’s recorded agreement; changes here remain funding assumptions.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4",
+              "LEADER-AL20-3.5",
+              "LEADER-AL20-2.7",
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "Article 6.11 requires a demonstrable right over land/buildings for investments, including ownership or transferred use rights.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 15,
+                "label": "Official requirement · PDF page 15",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "rights_sufficient",
-      "label": "Do the rights cover the proposed work and required commitment period?",
+      "label": "Can the applicant legally use this parcel throughout the required commitment period?",
       "type": "choice",
       "options": [
         [
@@ -2999,7 +3323,71 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Applicant’s land rights",
+      "guidance": {
+        "summary": "The applicant needs authority to use the parcel for the work and relevant obligations. Your personal ownership is not automatically a nonprofit’s right of use.",
+        "why": "Land rights are distinct from municipal, forestry and environmental permissions.",
+        "verify": "Verify the applicant’s documents, implementation period and applicable retention period. Do not assume one universal duration.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4",
+              "LEADER-AL20-3.5",
+              "LEADER-AL20-2.7",
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "Article 6.11 defines acceptable rights and when they must exist. General investment conditions in Article 10.3.g refer to five years after final payment, reduced to three for SMEs, subject to specific exceptions.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 15,
+                "label": "Official requirement · PDF page 15",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 22,
+                "label": "Official requirement · PDF page 22",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "For the exclusive demonstration-use immovable investments described in 3.4, the general Article 10.3.g retention period does not apply. Do not confuse this with the three-year online-publication obligation.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 122,
+                "label": "Official requirement · PDF page 122",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 121,
+                "label": "Official requirement · PDF page 121",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "purpose",
@@ -3016,11 +3404,63 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Economic purpose",
+      "guidance": {
+        "summary": "Distinguish a nonproductive public-benefit operation from commercial business development.",
+        "why": "The purpose of the operation matters independently of the applicant’s name or nonprofit form.",
+        "verify": "Check the operation’s intended benefits, income and economic activity.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "The activity must be nonproductive; it cannot economically benefit the beneficiary or exclusively modernise participating businesses.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 121,
+                "label": "Official requirement · PDF page 121",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.5"
+            ],
+            "explanation": "The nonproductive conditions and restrictions on economic uses apply to heritage conservation.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 123,
+                "label": "Official requirement · PDF page 123",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 124,
+                "label": "Official requirement · PDF page 124",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "public_access",
-      "label": "Public participation / public benefit arrangements are defined",
+      "label": "Previous shared public-access answer (superseded)",
       "type": "choice",
       "options": [
         [
@@ -3033,7 +3473,106 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "retired": true,
+      "short_label": "Previous public access",
+      "guidance": {
+        "summary": "This older shared answer is retained, not copied into both new questions.",
+        "why": "Demonstration participation and heritage public use have different requirements.",
+        "verify": "Answer the two programme-specific questions independently.",
+        "requirements": []
+      }
+    },
+    {
+      "id": "demonstration_participation",
+      "label": "Are the demonstration activities open to eligible interested participants?",
+      "type": "choice",
+      "options": [
+        [
+          "yes",
+          "Yes"
+        ],
+        [
+          "no",
+          "No"
+        ]
+      ],
+      "activities": [
+        "demonstration",
+        "monitoring"
+      ],
+      "help": "",
+      "short_label": "Demonstration participation",
+      "guidance": {
+        "summary": "This asks about participation in the funded activity, not unrestricted entry to the entire parcel.",
+        "why": "The demonstration must be accessible to relevant interested participants.",
+        "verify": "Define the activity, invitations and any objective, transparent selection where capacity is limited. Membership cannot be required.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "Conditions 3.a.2–3 and 3.b cover open participation, relevant participants, transparent selection and the prohibition on membership-based access.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 121,
+                "label": "Official requirement · PDF page 121",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
+    },
+    {
+      "id": "heritage_public_use",
+      "label": "Are suitable public-use or visitor arrangements defined for the heritage resource?",
+      "type": "choice",
+      "options": [
+        [
+          "yes",
+          "Yes"
+        ],
+        [
+          "no",
+          "No"
+        ]
+      ],
+      "activities": [
+        "restoration"
+      ],
+      "help": "",
+      "short_label": "Heritage public use",
+      "guidance": {
+        "summary": "Plan how people can learn about or use the supported heritage resource. This is not a blanket requirement for continuous access to the entire plot.",
+        "why": "Category 3.5 has a distinct public dissemination/use condition.",
+        "verify": "For an enclosed site, describe visiting days/hours or another suitable mechanism bringing the resource to the population.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.5"
+            ],
+            "explanation": "Condition 3.b requires public dissemination/use objectives and an opening or public-use plan for enclosed heritage resources.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 124,
+                "label": "Official requirement · PDF page 124",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "permits",
@@ -3050,7 +3589,53 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Permissions",
+      "guidance": {
+        "summary": "Check the permissions required by the actual work, even where the land is owned.",
+        "why": "Ownership does not establish planning, forestry or environmental permission.",
+        "verify": "Identify the competent authorities and application/approval stage. The grant’s documentary deadlines are separate from permission to start work.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4",
+              "LEADER-AL20-3.5",
+              "LEADER-AL20-2.7",
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "The application documentation addresses permissions; required authorisations must be documented by the applicable payment deadline.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 36,
+                "label": "Official requirement · PDF page 36",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 37,
+                "label": "Official requirement · PDF page 37",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 50,
+                "label": "Official requirement · PDF page 50",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "not_started",
@@ -3067,7 +3652,45 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Work not started",
+      "guidance": {
+        "summary": "Check timing before placing binding orders or beginning the funded operation.",
+        "why": "Starting too early can conflict with programme rules.",
+        "verify": "Review the precise operation and any exceptions with the GDR; this question is a planning check.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4",
+              "LEADER-AL20-3.5",
+              "LEADER-AL20-2.7",
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "Article 6 includes operation-start conditions; the startup-specific commencement rule is separate.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 13,
+                "label": "Official requirement · PDF page 13",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 14,
+                "label": "Official requirement · PDF page 14",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "related_competence",
@@ -3084,7 +3707,51 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Applicant competence",
+      "guidance": {
+        "summary": "The applicant’s purpose or competence must relate to the funded operation.",
+        "why": "A nonprofit label alone does not establish suitability.",
+        "verify": "Check statutes, legal powers and activities at the required date.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "Beneficiaries must be related to the subject or have the necessary competence at application.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 122,
+                "label": "Official requirement · PDF page 122",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.5"
+            ],
+            "explanation": "The beneficiary’s relevant purpose or competence is required at application.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 124,
+                "label": "Official requirement · PDF page 124",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "novelty",
@@ -3103,7 +3770,33 @@
       "activities": [
         "demonstration"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Local novelty",
+      "guidance": {
+        "summary": "The approach must be new or unfamiliar in the relevant LEADER area.",
+        "why": "Ordinary planting or selecting an app preset does not establish novelty.",
+        "verify": "Describe local practice, what is new and the comparison being tested.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "The definition covers experimenting, testing and evaluating approaches new or unknown in the LEADER area and transferable to similar circumstances.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 120,
+                "label": "Official requirement · PDF page 120",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "testable",
@@ -3122,7 +3815,33 @@
       "activities": [
         "demonstration"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Testable demonstration",
+      "guidance": {
+        "summary": "Define a method that can be tested, evaluated and applied elsewhere in similar circumstances.",
+        "why": "Demonstration support is for learning from an operation, rather than a private improvement alone.",
+        "verify": "Specify the question, comparison, monitoring and transferability.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "The demonstration definition requires experimenting, testing and evaluating transferable approaches.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 120,
+                "label": "Official requirement · PDF page 120",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "dissemination",
@@ -3141,7 +3860,33 @@
       "activities": [
         "demonstration"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Online results",
+      "guidance": {
+        "summary": "Share the activity and results online for interested actors.",
+        "why": "Participation and publication are separate obligations.",
+        "verify": "Define who publishes the methodology, activity information and emerging results, and when.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "Condition 3.a.4 requires online information from commencement and results as they are produced.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 121,
+                "label": "Official requirement · PDF page 121",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "publication_three_years",
@@ -3160,7 +3905,33 @@
       "activities": [
         "demonstration"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Publication period",
+      "guidance": {
+        "summary": "Keep the required online activity/results information available for at least three years after final payment.",
+        "why": "This period concerns publication, not a general right for visitors to enter the land.",
+        "verify": "Plan responsibility and resources for maintaining the information.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "Condition 3.a.4 defines the three-year minimum after final payment.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 121,
+                "label": "Official requirement · PDF page 121",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "heritage",
@@ -3179,7 +3950,33 @@
       "activities": [
         "restoration"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Heritage value",
+      "guidance": {
+        "summary": "Explain and document what rural/environmental heritage is being conserved.",
+        "why": "An environmental description alone is not a verified heritage assessment.",
+        "verify": "Identify the resource and conservation objective.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.5"
+            ],
+            "explanation": "The category defines conservation operations and refers to the common rural-heritage definition.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 123,
+                "label": "Official requirement · PDF page 123",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "forest_plan",
@@ -3199,7 +3996,33 @@
         "restoration",
         "production"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Forest management plan",
+      "guidance": {
+        "summary": "Check whether a forest-management instrument is required and whether the operation complies with it.",
+        "why": "This is not automatically required for every parcel.",
+        "verify": "Use Yes only if an applicable plan is in force and followed, or its non-applicability has been checked.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.5"
+            ],
+            "explanation": "Condition 3.c requires consistency with the applicable instrument, which must be in force at application.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 124,
+                "label": "Official requirement · PDF page 124",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "land_purchase",
@@ -3218,7 +4041,33 @@
       "activities": [
         "restoration"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Land purchase",
+      "guidance": {
+        "summary": "Identify any proposed purchase of land or heritage assets.",
+        "why": "A land-related operation and an eligible land-purchase expense are different things.",
+        "verify": "Review the actual cost lines; category 3.5 excludes acquisition of rural heritage assets.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.5"
+            ],
+            "explanation": "The expenditure exclusions include acquiring elements of rural heritage.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 124,
+                "label": "Official requirement · PDF page 124",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "sector",
@@ -3251,7 +4100,85 @@
         "monitoring",
         "production"
       ],
-      "help": "The actual service and customers determine classification; a technology label alone does not establish eligibility."
+      "help": "",
+      "short_label": "Business activity",
+      "guidance": {
+        "summary": "Describe the actual services, customers and operations, not just an environmental business title.",
+        "why": "Agricultural/forestry support services, general rural businesses and startup lump sums have different scope.",
+        "verify": "Mixed services require a justified classification and potentially GDR confirmation.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-1.11"
+            ],
+            "explanation": "The category covers services to agricultural/forestry sectors and describes mixed-operation classification.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 93,
+                "label": "Official requirement · PDF page 93",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 94,
+                "label": "Official requirement · PDF page 94",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "The general business category describes mixed services and GDR classification where no majority is clear.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 109,
+                "label": "Official requirement · PDF page 109",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 110,
+                "label": "Official requirement · PDF page 110",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Agricultural/forestry production/transformation, exclusive agrarian/forestry trade and 1.11 services are excluded.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 111,
+                "label": "Official requirement · PDF page 111",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "unemployed",
@@ -3271,7 +4198,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Unemployment at application",
+      "guidance": {
+        "summary": "The individual must be unemployed when applying.",
+        "why": "This is distinct from unemployment during the preceding three months.",
+        "verify": "Check employment status at the actual application date.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Beneficiary condition 5.a requires unemployment at application and at least 50% unemployment over the previous three months.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "new_activity",
@@ -3291,7 +4244,41 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "New business",
+      "guidance": {
+        "summary": "Explore a genuinely new self-employed activity implemented through a business plan.",
+        "why": "This support is not a reimbursement grant for any existing business.",
+        "verify": "Check the new activity, registration history and submitted business plan.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "The category concerns new self-employed activities through implementation of a submitted business plan.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 111,
+                "label": "Official requirement · PDF page 111",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "no_same_reta",
@@ -3311,7 +4298,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Previous RETA activity",
+      "guidance": {
+        "summary": "Check RETA history in the same CNAE activity group during the three years before application.",
+        "why": "A new business name does not necessarily mean a new activity under these rules.",
+        "verify": "Obtain registration history and confirm the applicable CNAE group.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Condition 5.b defines the prior three-year same-activity RETA restriction and CNAE grouping.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "resident",
@@ -3331,7 +4344,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Residence",
+      "guidance": {
+        "summary": "The applicant must be registered as resident in a municipality of the relevant LEADER area by business-plan commencement.",
+        "why": "Business location and the individual’s residence are separate facts.",
+        "verify": "Verify residence registration and the actual commencement date.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Condition 5.c specifies municipal residence registration when business-plan implementation begins.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "exclusive",
@@ -3351,7 +4390,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Exclusive dedication",
+      "guidance": {
+        "summary": "The beneficiary must dedicate themselves exclusively to the business-plan activities.",
+        "why": "A planned activity alongside other employment does not automatically meet this condition.",
+        "verify": "Review working arrangements and commitments with the GDR.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Condition 5.d requires exclusive dedication; the full-time job condition is separate.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "start_after_application",
@@ -3371,7 +4436,41 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Start timing",
+      "guidance": {
+        "summary": "Startup implementation begins with the relevant registrations, after applying and within the award deadline.",
+        "why": "The order of application and registration matters.",
+        "verify": "Check actual RETA/tax dates; commencement must be before three months after award notification.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Condition 3.c defines the timing and registration-based commencement.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 111,
+                "label": "Official requirement · PDF page 111",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "plan_24_months",
@@ -3391,7 +4490,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Business-plan period",
+      "guidance": {
+        "summary": "Implement the business plan within 24 months of commencement.",
+        "why": "The final income test and final payment are linked to the implemented plan.",
+        "verify": "Prepare realistic implementation milestones and income evidence.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Condition 3.d defines the implementation period and second-year income milestone.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "retention",
@@ -3411,7 +4536,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Continuing employment",
+      "guidance": {
+        "summary": "Maintain the beneficiary’s full-time self-employment from commencement until three years after final payment.",
+        "why": "Finishing the plan or receiving money does not end the commitment.",
+        "verify": "Plan continuing employment and note that a sole first payment may become the final payment.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Condition 3.f defines the job and continuing period, including the intermediate-only case.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "sme",
@@ -3431,7 +4582,42 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "SME requirements",
+      "guidance": {
+        "summary": "Check the relevant enterprise/SME requirements and financial capacity.",
+        "why": "A chosen company form alone is insufficient.",
+        "verify": "Obtain enterprise-size and linked-enterprise evidence. Financial-capacity details still require case-specific verification.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "These categories list enterprises, prospective entrepreneurs and certain group forms subject to SME conditions.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 94,
+                "label": "Official requirement · PDF page 94",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 110,
+                "label": "Official requirement · PDF page 110",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "unemployment_percent",
@@ -3444,7 +4630,33 @@
       ],
       "help": "",
       "min": 0,
-      "max": 100
+      "max": 100,
+      "short_label": "Previous unemployment",
+      "guidance": {
+        "summary": "Enter the percentage of the three months before application spent unemployed.",
+        "why": "The threshold is at least 50%, in addition to being unemployed at application.",
+        "verify": "Calculate from the relevant status history; zero is a real answer, not unknown.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Condition 5.a defines the 50% preceding-period test.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "net_year1",
@@ -3456,7 +4668,33 @@
         "monitoring"
       ],
       "help": "",
-      "min": -1000000000
+      "min": -1000000000,
+      "short_label": "Year-one net income",
+      "guidance": {
+        "summary": "Use net income and the verified annual SMI benchmark for the appropriate year.",
+        "why": "Year one tests at least half of the annual 12-payment benchmark; year two tests the full application-year benchmark.",
+        "verify": "Do not use turnover or invent a current SMI value. Supply the benchmark source separately; this source establishes the test, not the monetary SMI amount.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Conditions 3.d–e define the two income milestones and the annual benchmark basis.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "net_year2",
@@ -3468,7 +4706,33 @@
         "monitoring"
       ],
       "help": "",
-      "min": -1000000000
+      "min": -1000000000,
+      "short_label": "Year-two net income",
+      "guidance": {
+        "summary": "Use net income and the verified annual SMI benchmark for the appropriate year.",
+        "why": "Year one tests at least half of the annual 12-payment benchmark; year two tests the full application-year benchmark.",
+        "verify": "Do not use turnover or invent a current SMI value. Supply the benchmark source separately; this source establishes the test, not the monetary SMI amount.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Conditions 3.d–e define the two income milestones and the annual benchmark basis.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "smi_year1",
@@ -3479,8 +4743,34 @@
         "business",
         "monitoring"
       ],
-      "help": "Enter the verified annual 12-payment benchmark; no current statutory amount is assumed.",
-      "min": 0.01
+      "help": "",
+      "min": 0.01,
+      "short_label": "Year-one SMI benchmark",
+      "guidance": {
+        "summary": "Use net income and the verified annual SMI benchmark for the appropriate year.",
+        "why": "Year one tests at least half of the annual 12-payment benchmark; year two tests the full application-year benchmark.",
+        "verify": "Do not use turnover or invent a current SMI value. Supply the benchmark source separately; this source establishes the test, not the monetary SMI amount.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Conditions 3.d–e define the two income milestones and the annual benchmark basis.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "smi_year2",
@@ -3491,8 +4781,34 @@
         "business",
         "monitoring"
       ],
-      "help": "Verify the applicable annual SMI from the year of application.",
-      "min": 0.01
+      "help": "",
+      "min": 0.01,
+      "short_label": "Final SMI benchmark",
+      "guidance": {
+        "summary": "Use net income and the verified annual SMI benchmark for the appropriate year.",
+        "why": "Year one tests at least half of the annual 12-payment benchmark; year two tests the full application-year benchmark.",
+        "verify": "Do not use turnover or invent a current SMI value. Supply the benchmark source separately; this source establishes the test, not the monetary SMI amount.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Conditions 3.d–e define the two income milestones and the annual benchmark basis.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 112,
+                "label": "Official requirement · PDF page 112",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "bonus_location",
@@ -3512,7 +4828,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Location bonus",
+      "guidance": {
+        "summary": "Check the business registered office against the official disadvantaged-area condition.",
+        "why": "Additions affect the second instalment and share a €13,000 combined cap within the €50,000 maximum.",
+        "verify": "Do not treat every AL20 municipality as automatically disadvantaged.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Section 7 lists the conditional additions, combined cap and final-instalment payment.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 113,
+                "label": "Official requirement · PDF page 113",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "bonus_young",
@@ -3532,7 +4874,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Age bonus",
+      "guidance": {
+        "summary": "Check whether the applicant is younger than 35.",
+        "why": "Additions affect the second instalment and share a €13,000 combined cap within the €50,000 maximum.",
+        "verify": "Confirm age at the applicable assessment date; unresolved timing requires verification.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Section 7 lists the conditional additions, combined cap and final-instalment payment.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 113,
+                "label": "Official requirement · PDF page 113",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "bonus_woman",
@@ -3552,7 +4920,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Female-applicant bonus",
+      "guidance": {
+        "summary": "Check the female-applicant addition.",
+        "why": "Additions affect the second instalment and share a €13,000 combined cap within the €50,000 maximum.",
+        "verify": "This is an amount condition, not a substitute for applicant eligibility.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Section 7 lists the conditional additions, combined cap and final-instalment payment.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 113,
+                "label": "Official requirement · PDF page 113",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "bonus_job",
@@ -3572,7 +4966,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Additional-job bonus",
+      "guidance": {
+        "summary": "Plan an additional full-time job for at least 12 months during implementation.",
+        "why": "Additions affect the second instalment and share a €13,000 combined cap within the €50,000 maximum.",
+        "verify": "The beneficiary’s own job is not the additional job.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Section 7 lists the conditional additions, combined cap and final-instalment payment.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 113,
+                "label": "Official requirement · PDF page 113",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "bonus_climate",
@@ -3592,7 +5012,33 @@
         "business",
         "monitoring"
       ],
-      "help": ""
+      "help": "",
+      "short_label": "Climate bonus",
+      "guidance": {
+        "summary": "Check that qualifying climate-change selection points were actually awarded.",
+        "why": "Additions affect the second instalment and share a €13,000 combined cap within the €50,000 maximum.",
+        "verify": "An environmental activity description alone does not establish this bonus.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Section 7 lists the conditional additions, combined cap and final-instalment payment.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 113,
+                "label": "Official requirement · PDF page 113",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "other_aid",
@@ -3609,7 +5055,33 @@
         ]
       ],
       "activities": null,
-      "help": ""
+      "help": "",
+      "short_label": "Other aid",
+      "guidance": {
+        "summary": "Identify other aid for the same operation, not just the same parcel.",
+        "why": "The startup lump sum has a specific incompatibility rule.",
+        "verify": "Check all support and define distinct operations before assuming a combination is possible.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-2.7"
+            ],
+            "explanation": "Article 16.4 makes lump-sum support incompatible with any other aid for the same operation.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 31,
+                "label": "Official requirement · PDF page 31",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "budget_total",
@@ -3618,7 +5090,14 @@
       "options": null,
       "activities": null,
       "help": "",
-      "min": 0
+      "min": 0,
+      "short_label": "Total activity cost",
+      "guidance": {
+        "summary": "Enter the total estimated cost of the activity.",
+        "why": "A work estimate is not an eligible-cost assessment or a grant amount.",
+        "verify": "Keep all costs, including uncovered costs, in the originating work budget where one exists.",
+        "requirements": []
+      }
     },
     {
       "id": "eligible_cost",
@@ -3626,8 +5105,87 @@
       "type": "number",
       "options": null,
       "activities": null,
-      "help": "Unknown stays unknown. Do not assume all planting or business costs qualify.",
-      "min": 0
+      "help": "",
+      "min": 0,
+      "short_label": "Eligible cost",
+      "guidance": {
+        "summary": "Enter costs confirmed as eligible for the relevant reimbursement grant.",
+        "why": "The supported rate and cap apply to eligible costs; the 2.7 lump sum is calculated separately.",
+        "verify": "Check each cost line, programme exclusions and the application/award evidence.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4"
+            ],
+            "explanation": "Category-specific expenditure and immovable-investment restrictions apply.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 122,
+                "label": "Official requirement · PDF page 122",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.5"
+            ],
+            "explanation": "Eligible investments and exclusions are listed in section 6.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 124,
+                "label": "Official requirement · PDF page 124",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "Review the respective eligible expenditure provisions and common Article 10.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 95,
+                "label": "Official requirement · PDF page 95",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 110,
+                "label": "Official requirement · PDF page 110",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              },
+              {
+                "document_id": "FUND-008",
+                "page": 111,
+                "label": "Official requirement · PDF page 111",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     },
     {
       "id": "available_contribution",
@@ -3636,7 +5194,14 @@
       "options": null,
       "activities": null,
       "help": "",
-      "min": 0
+      "min": 0,
+      "short_label": "Available funds",
+      "guidance": {
+        "summary": "Report funds already available for this activity.",
+        "why": "This is not a new grant receipt and must not be counted twice.",
+        "verify": "Check restrictions, balances and intended allocations. Zero differs from an unknown amount.",
+        "requirements": []
+      }
     },
     {
       "id": "cash_before_receipts",
@@ -3645,7 +5210,14 @@
       "options": null,
       "activities": null,
       "help": "",
-      "min": 0
+      "min": 0,
+      "short_label": "Upfront cash",
+      "guidance": {
+        "summary": "Estimate cash needed before anticipated support is received.",
+        "why": "Reimbursement may require upfront expenditure; a preview does not create cash.",
+        "verify": "Use the activity schedule and each mechanism’s payment pattern.",
+        "requirements": []
+      }
     },
     {
       "id": "selection_score",
@@ -3653,9 +5225,61 @@
       "type": "number",
       "options": null,
       "activities": null,
-      "help": "Do not invent a score from ecological impact. Use the local criteria and supporting evidence; leave unknown until verified.",
+      "help": "",
       "min": 0,
-      "max": 100
+      "max": 100,
+      "short_label": "Selection score",
+      "guidance": {
+        "summary": "Enter a verified score using the applicable local criteria.",
+        "why": "The model does not invent a score from planting quantities or environmental labels.",
+        "verify": "Use the current AL20 criteria and verification guidance; the selection threshold is at least 60 points.",
+        "requirements": [
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4",
+              "LEADER-AL20-3.5",
+              "LEADER-AL20-2.7",
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "Article 22 requires the applicable local criteria and at least 60 points.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-008",
+                "page": 38,
+                "label": "Official requirement · PDF page 38",
+                "role": "legal rule",
+                "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          },
+          {
+            "programme_ids": [
+              "LEADER-AL20-3.4",
+              "LEADER-AL20-3.5",
+              "LEADER-AL20-2.7",
+              "LEADER-AL20-1.11",
+              "LEADER-AL20-2.6"
+            ],
+            "explanation": "The local scoring criteria require supporting evidence; consult the applicable criterion in the full guide.",
+            "evidence": "verified",
+            "sources": [
+              {
+                "document_id": "FUND-004",
+                "page": 1,
+                "label": "Official requirement · PDF page 1",
+                "role": "local territory / selection",
+                "sha256": "a85c896fa800970f7bb611ab26b215db745ed26513dc30b87e509cc9da11ec64",
+                "verified_on": "2026-10-31"
+              }
+            ],
+            "verified_on": "2026-10-31"
+          }
+        ]
+      }
     }
   ],
   "municipalities": [
@@ -3736,5 +5360,290 @@
     "territory": "https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores-al-al20.html",
     "call": "https://www.juntadeandalucia.es/boja/2026/76/1"
   },
-  "source_review": "Governing order, call, AL20 official page and current guide checked 30 October 2026. No amending order identified in targeted BOJA searches; this is not an assurance against later amendments. Local interruptions and budget remain subject to confirmation."
+  "source_review": "Edition 2: governing Order Annex I 1.11, 2.6, 2.7, 3.4 and 3.5, common Articles 6, 10, 16, 19 and 22, local AL20 documents and guidance checked on 31 October 2026. The official promoter page still lists the 13 April call and v2-4 selection guide. Targeted BOJA searches found no amending order; this is not a guarantee against later changes or local interruptions. Outside-area exceptions are not inferred from municipality alone.",
+  "territory": {
+    "3.4": {
+      "municipalities": [
+        "Abla",
+        "Alboloduy",
+        "Abrucena",
+        "Alcolea",
+        "Alhabia",
+        "Alhama de Almería",
+        "Alicún",
+        "Almócita",
+        "Alsodux",
+        "Bayárcal",
+        "Beires",
+        "Bentarique",
+        "Berja",
+        "Canjáyar",
+        "Dalías",
+        "Enix",
+        "Felix",
+        "Fiñana",
+        "Fondón",
+        "Huécija",
+        "Íllar",
+        "Instinción",
+        "Las Tres Villas",
+        "Laujar de Andarax",
+        "Nacimiento",
+        "Ohanes",
+        "Padules",
+        "Paterna del Río",
+        "Rágol",
+        "Santa Cruz de Marchena",
+        "Santa Fe de Mondújar",
+        "Terque"
+      ],
+      "outside_exception": false,
+      "sources": [
+        {
+          "document_id": "FUND-012",
+          "page": 3,
+          "label": "Official AL20 municipalities · PDF page 3",
+          "role": "official territory",
+          "sha256": "7a7501233f3e3d20b47f40b029be0b3ac5172c2c24720adb2ddcc79085dc8c28",
+          "verified_on": "2026-10-31"
+        },
+        {
+          "document_id": "FUND-008",
+          "page": 14,
+          "label": "Official requirement · PDF page 14",
+          "role": "legal rule",
+          "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+          "verified_on": "2026-10-31"
+        },
+        {
+          "document_id": "FUND-008",
+          "page": 121,
+          "label": "Official requirement · PDF page 121",
+          "role": "legal rule",
+          "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+          "verified_on": "2026-10-31"
+        }
+      ]
+    },
+    "3.5": {
+      "municipalities": [
+        "Abla",
+        "Alboloduy",
+        "Abrucena",
+        "Alcolea",
+        "Alhabia",
+        "Alhama de Almería",
+        "Alicún",
+        "Almócita",
+        "Alsodux",
+        "Bayárcal",
+        "Beires",
+        "Bentarique",
+        "Berja",
+        "Canjáyar",
+        "Dalías",
+        "Enix",
+        "Felix",
+        "Fiñana",
+        "Fondón",
+        "Huécija",
+        "Íllar",
+        "Instinción",
+        "Las Tres Villas",
+        "Laujar de Andarax",
+        "Nacimiento",
+        "Ohanes",
+        "Padules",
+        "Paterna del Río",
+        "Rágol",
+        "Santa Cruz de Marchena",
+        "Santa Fe de Mondújar",
+        "Terque"
+      ],
+      "outside_exception": true,
+      "sources": [
+        {
+          "document_id": "FUND-012",
+          "page": 3,
+          "label": "Official AL20 municipalities · PDF page 3",
+          "role": "official territory",
+          "sha256": "7a7501233f3e3d20b47f40b029be0b3ac5172c2c24720adb2ddcc79085dc8c28",
+          "verified_on": "2026-10-31"
+        },
+        {
+          "document_id": "FUND-008",
+          "page": 14,
+          "label": "Official requirement · PDF page 14",
+          "role": "legal rule",
+          "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+          "verified_on": "2026-10-31"
+        }
+      ]
+    },
+    "2.7": {
+      "municipalities": [
+        "Abla",
+        "Alboloduy",
+        "Abrucena",
+        "Alcolea",
+        "Alhabia",
+        "Alhama de Almería",
+        "Alicún",
+        "Almócita",
+        "Alsodux",
+        "Bayárcal",
+        "Beires",
+        "Bentarique",
+        "Berja",
+        "Canjáyar",
+        "Dalías",
+        "Enix",
+        "Felix",
+        "Fiñana",
+        "Fondón",
+        "Huécija",
+        "Íllar",
+        "Instinción",
+        "Las Tres Villas",
+        "Laujar de Andarax",
+        "Nacimiento",
+        "Ohanes",
+        "Padules",
+        "Paterna del Río",
+        "Rágol",
+        "Santa Cruz de Marchena",
+        "Santa Fe de Mondújar",
+        "Terque"
+      ],
+      "outside_exception": true,
+      "sources": [
+        {
+          "document_id": "FUND-012",
+          "page": 3,
+          "label": "Official AL20 municipalities · PDF page 3",
+          "role": "official territory",
+          "sha256": "7a7501233f3e3d20b47f40b029be0b3ac5172c2c24720adb2ddcc79085dc8c28",
+          "verified_on": "2026-10-31"
+        },
+        {
+          "document_id": "FUND-008",
+          "page": 14,
+          "label": "Official requirement · PDF page 14",
+          "role": "legal rule",
+          "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+          "verified_on": "2026-10-31"
+        }
+      ]
+    },
+    "1.11": {
+      "municipalities": [
+        "Abla",
+        "Alboloduy",
+        "Abrucena",
+        "Alcolea",
+        "Alhabia",
+        "Alhama de Almería",
+        "Alicún",
+        "Almócita",
+        "Alsodux",
+        "Bayárcal",
+        "Beires",
+        "Bentarique",
+        "Berja",
+        "Canjáyar",
+        "Dalías",
+        "Enix",
+        "Felix",
+        "Fiñana",
+        "Fondón",
+        "Huécija",
+        "Íllar",
+        "Instinción",
+        "Las Tres Villas",
+        "Laujar de Andarax",
+        "Nacimiento",
+        "Ohanes",
+        "Padules",
+        "Paterna del Río",
+        "Rágol",
+        "Santa Cruz de Marchena",
+        "Santa Fe de Mondújar",
+        "Terque"
+      ],
+      "outside_exception": true,
+      "sources": [
+        {
+          "document_id": "FUND-012",
+          "page": 3,
+          "label": "Official AL20 municipalities · PDF page 3",
+          "role": "official territory",
+          "sha256": "7a7501233f3e3d20b47f40b029be0b3ac5172c2c24720adb2ddcc79085dc8c28",
+          "verified_on": "2026-10-31"
+        },
+        {
+          "document_id": "FUND-008",
+          "page": 14,
+          "label": "Official requirement · PDF page 14",
+          "role": "legal rule",
+          "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+          "verified_on": "2026-10-31"
+        }
+      ]
+    },
+    "2.6": {
+      "municipalities": [
+        "Abla",
+        "Alboloduy",
+        "Abrucena",
+        "Alcolea",
+        "Alhabia",
+        "Alhama de Almería",
+        "Alicún",
+        "Almócita",
+        "Alsodux",
+        "Bayárcal",
+        "Beires",
+        "Bentarique",
+        "Berja",
+        "Canjáyar",
+        "Dalías",
+        "Enix",
+        "Felix",
+        "Fiñana",
+        "Fondón",
+        "Huécija",
+        "Íllar",
+        "Instinción",
+        "Las Tres Villas",
+        "Laujar de Andarax",
+        "Nacimiento",
+        "Ohanes",
+        "Padules",
+        "Paterna del Río",
+        "Rágol",
+        "Santa Cruz de Marchena",
+        "Santa Fe de Mondújar",
+        "Terque"
+      ],
+      "outside_exception": true,
+      "sources": [
+        {
+          "document_id": "FUND-012",
+          "page": 3,
+          "label": "Official AL20 municipalities · PDF page 3",
+          "role": "official territory",
+          "sha256": "7a7501233f3e3d20b47f40b029be0b3ac5172c2c24720adb2ddcc79085dc8c28",
+          "verified_on": "2026-10-31"
+        },
+        {
+          "document_id": "FUND-008",
+          "page": 14,
+          "label": "Official requirement · PDF page 14",
+          "role": "legal rule",
+          "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+          "verified_on": "2026-10-31"
+        }
+      ]
+    }
+  }
 }

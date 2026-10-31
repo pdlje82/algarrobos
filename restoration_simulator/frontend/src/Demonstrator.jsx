@@ -7,6 +7,7 @@ import { DESIGNER_FIELDS } from "./SiteDesigner.jsx";
 import {DocumentLink} from "./DocumentLink.jsx";
 import {DemonstratorRemoval} from "./DemonstratorRemoval.jsx";
 import {PlantOrderList} from "./PlantOrderList.jsx";
+import {DemonstratorContext} from "./DemonstratorContext.jsx";
 
 const phases = [
   ["planned", "Plan"],
@@ -83,6 +84,7 @@ export function DemonstratorEditor({
   planningDraft,
   onOpenFunding,
   fundingPlans,
+  onOpenParcel,
 }) {
   const formSections = [...new Set(action.fields.filter(f=>action.kind!=="demo_plan" || !DESIGNER_FIELDS.has(f.name)).map((f) => f.section))];
   required(
@@ -104,6 +106,7 @@ export function DemonstratorEditor({
         <>
           <p className="demo-intro">Configure the demonstration, reporting, funding and remaining budget here. Physical planting choices and plant prices are edited in the Site Designer.</p>
           <button type="button" onClick={onOpenDesigner}>Open Site Designer</button>
+          {planningDraft!==null&&<DemonstratorContext planning={planningDraft} inputs={inputs} onParcel={onOpenParcel} onDesign={onOpenDesigner}/>}
           <div className="demo-funding-summary"><strong>Current funding:</strong> {inputs.funding_route === "al20_34" ? "Potential AL20 3.4" : inputs.funding_route === "self" ? "Available own funds" : "Available partner funds"}.{fundingPlans?.filter(p=>p.active&&p.activity_key==="demonstrator").map(p=><p key={p.id}>Preferred funding plan: {p.name}</p>)}</div>
           <nav
             className="demo-section-nav"

@@ -213,3 +213,72 @@ applicant replacement, the overview and both resets, retained activity answers,
 unchanged-condition effects, sources, expanded views, phone themes, save/reload
 and the direct demonstrator entry. `test_funding_choice.py` covers the v3 contract,
 lossless/review adapters, provenance/relevance and unchanged financial rules.
+
+
+## Catalogue edition 2 — context and sourced questions
+
+Edition 2 replaces the combined AL20 confirmation with municipality coverage and
+an explicit 3.4 territorial-scope check. The search/dropdown uses the 32 AL20
+municipalities verified on PDF page 3 of FUND-012, the official 13 February 2025
+recognition resolution. Unrecognised names stay unresolved. An explicitly
+confirmed outside-area location conflicts with 3.4; other core mechanisms retain
+an explained uncertainty because Article 6.7 contains conditional territorial
+exceptions which are not fully assessed. Call/budget availability is separate.
+
+Public participation is now two independent inputs: open demonstration
+participation for 3.4, and heritage public-use/visitor arrangements for 3.5.
+Neither is represented as unrestricted entry to an entire private parcel.
+Applicant land rights and work permissions remain separate confirmations;
+ownership does not automatically satisfy either. Help distinguishes the general
+investment-retention provision from the specific 3.4 exception and publication
+obligation without applying a universal commitment period.
+
+All current questions have curated plain-language guidance and short labels.
+Programme-specific explanations identify supporting PDF pages, immutable edition
+checksums and verification dates. Generic planning inputs do not invent legal
+citations. Hover/keyboard focus displays a brief tooltip; activation opens a
+persistent modeless detail dialog with source links. The existing modal PDF
+viewer preserves the underlying detail, question and keyboard focus. Broken
+editions/pages use the existing visible failure and retry path.
+
+`POST /api/funding/prepare` accepts `adopt_current_catalogue` (default false).
+An explicit update produces an editing copy, conversion differences and retained
+answers in `catalogue_review`, without writing storage. Applying the review updates
+only the active draft; named/adopted snapshots are changed only through their
+existing explicit save/revision actions. Old catalogue evaluation is frozen in
+`funding_v1.py`; current evaluation uses `funding_v2.py`. Financial formulas are
+unchanged. Draft 3, envelope 8 and simulation schema 4 remain unchanged.
+Superseded `territory_verified` and `public_access` answers are retained in the
+previous-catalogue group and never drive edition-2 results. No shared public-access
+answer is copied into the new questions. Recorded demonstrator participation can
+initialise only the 3.4 participation answer. New parcel-linked baselines use the
+recorded parcel location; conflicting planning defaults remain visible for review.
+
+The answer overview uses compact rows with origin detail and Edit/Reset controls;
+phones disclose the actions per row. Matrix remains default. Graph defaults to all
+fit nodes across the complete selected family/shortlist, including other pages.
+Question navigation and option inspection preserve their positions. Optional
+current-question focus and amount-condition controls change presentation only.
+Previous counts and reserved update/status slots prevent assessment/blur updates
+from moving controls during clicks.
+
+The planning workspace exposes computed `context`: linked parcel, owner, active
+or inactive access record, operator, source design, planning municipality conflict
+and changed/missing-source status. The overall demonstrator summary links to the
+correct parcel record and uses existing design-library guards to open its source.
+The transferred snapshot remains authoritative until another reviewed handoff;
+changing, renaming or deleting a library source never silently rewrites it.
+Records are labelled as project simulation information, not verified legal rights.
+
+Targeted BOJA and official promoter-page checks on 31 October 2026 found no
+amending governing order; the promoter page still lists the April call and v2-4
+selection guide. This does not certify ongoing budget availability or absence of
+later/local changes. FUND-012 was added with a permanent ID, checksum, catalogue
+and audit entry; other existing sources were reused.
+
+Verification adds `test_funding_edition.py` and `funding-context.cjs` for territory,
+independent participation, immutable old snapshots, exact question citations,
+compact resets, persistent graph nodes, phone help and source-design context.
+Run these alongside the existing funding, visual, refinement and planning-handoff
+browser checks using isolated API 8013 and preview 4174. Never mutate active API
+8000 or the user's project save during these workflows.

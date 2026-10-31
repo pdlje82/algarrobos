@@ -139,6 +139,7 @@ class FundingEvaluationRequest(StrictModel):
 
 class FundingPrepareRequest(FundingEvaluationRequest):
     applicant_choice: dict[str, Any] | None = None
+    adopt_current_catalogue: StrictBool = False
 
 
 class FundingMutationRequest(Mutation):
@@ -169,7 +170,7 @@ def view(data, explanation=None):
         "designer_revision": data["designer_revision"],
         "funding_revision": data["funding_revision"],
         "funding_plans": [] if data["funding"] is None else [{"id": r["id"], "name": r["draft"]["name"], "activity_key": r["draft"]["activity_key"], "active": r["active"]} for r in data["funding"]["plans"]],
-        "planning": None if project is None else planning_draft.workspace(project, data["planning"], data["planning_revision"]),
+        "planning": None if project is None else planning_draft.workspace(project, data["planning"], data["planning_revision"], data["designer"]),
         "undo_kind": "delete" if data["undo_edit"] is not None else "action",
         "actions": list_actions(project) if project else [],
         "summary": summary(project) if project else None,
@@ -299,7 +300,7 @@ def create_app(save_path=None):
     @app.post("/api/funding/prepare")
     def funding_prepare(req: FundingPrepareRequest):
         data = designer_state(req.revision)
-        return funding.prepare(req.draft, data["project"], req.applicant_choice, resolve="applicant_choice" in req.model_fields_set)
+        return funding.prepare(req.draft, data["project"], req.applicant_choice, resolve="applicant_choice" in req.model_fields_set, adopt_current_catalogue=req.adopt_current_catalogue, planning=data["planning"])
 
     @app.post("/api/funding/visualise")
     def funding_visualise(req: FundingEvaluationRequest):
@@ -341,12 +342,12 @@ def create_app(save_path=None):
     @app.get("/api/demonstrator/draft")
     def get_planning():
         data = designer_state()
-        return planning_draft.workspace(data["project"], data["planning"], data["planning_revision"])
+        return planning_draft.workspace(data["project"], data["planning"], data["planning_revision"], data["designer"])
 
     @app.post("/api/demonstrator/draft")
     def update_planning(req: PlanningEditRequest):
         data = get_store().planning_mutation("edit", req.revision, req.planning_revision, str(req.request_id), administration=req.administration)
-        return planning_draft.workspace(data["project"], data["planning"], data["planning_revision"])
+        return planning_draft.workspace(data["project"], data["planning"], data["planning_revision"], data["designer"])
 
     @app.post("/api/designer/handoff-preview")
     def handoff_preview(req: HandoffPreviewRequest):
@@ -355,15 +356,15 @@ def create_app(save_path=None):
             raise Conflict("Design or planning draft changed. Review the transfer again.")
         proposed = planning_draft.handoff(data["planning"], data["project"], data["designer"])
         previous = planning_draft.initial(data["project"]) if data["planning"] is None else data["planning"]
-        recorded = planning_draft.workspace(data["project"], data["planning"], data["planning_revision"])["planting"]
-        return {"planning": planning_draft.workspace(data["project"], proposed, data["planning_revision"]),
+        recorded = planning_draft.workspace(data["project"], data["planning"], data["planning_revision"], data["designer"])["planting"]
+        return {"planning": planning_draft.workspace(data["project"], proposed, data["planning_revision"], data["designer"]),
                 "previous": None if recorded is None else {k: previous["inputs"][k] for k in designer.PHYSICAL},
                 "notice": "Only the physical planning draft changes. Demonstration, funding, remaining budget, timing and notes are retained. No demonstrator is created; cash, time and history stay unchanged."}
 
     @app.post("/api/designer/handoff")
     def handoff(req: HandoffRequest):
         data = get_store().planning_mutation("handoff", req.revision, req.planning_revision, str(req.request_id), design_revision=req.design_revision)
-        return planning_draft.workspace(data["project"], data["planning"], data["planning_revision"])
+        return planning_draft.workspace(data["project"], data["planning"], data["planning_revision"], data["designer"])
 
     @app.get("/api/designer/report")
     def designer_report(design_id: UUID | None = None):

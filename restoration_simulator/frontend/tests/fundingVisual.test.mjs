@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
-import {assessmentChanges,fundingVisualReducer as reduce,initialFundingVisual as initial,visualScope,conditionText} from "../src/fundingVisualState.js";
+import {assessmentChanges,fundingVisualReducer as reduce,initialFundingVisual as initial,visualScope,conditionText,graphQuestions} from "../src/fundingVisualState.js";
 import {validateResponse} from "../src/contracts.js";
 
 const condition=(result="unknown",value=null)=>({id:"A:amount:bonus",option_id:"A",fields:["bonus"],effect:"amount",result,value,message:"Addition",sources:[]});
@@ -69,7 +69,7 @@ test("visual contract rejects incomplete metadata and preserves multi-input rela
   const d={version:1,name:"Test",activity_key:"test",baseline:{facts:{},parties:[],target:"business",parcel_ids:[],work_budget:null},overrides:{},selected:[],allocations:[],calendar_start:null,notes:"",bundle:catalogue};
   const a={draft:d,facts:{},results:[{...catalogue.entries[0],status:"Needs information",relevant:true,finance:{basis:"Unknown",estimate:null,schedule:[],notes:[]},checks:[]}],differences:[],stale:false,catalogue_changed:false,catalogue_hash:"hash",warnings:[],allocation_totals:{},uncovered:null,upfront_shortfall:null,calendar_note:""};
   const id=a.results[0].id, c={...condition(),id:"income",option_id:id,fields:["net_year1","smi_year1"],effect:"eligibility"};
-  const questions=["activity","applicant_choice","net_year1","smi_year1"].map(id=>({id,label:id,type:id==="applicant_choice"?"applicant":"number",step:id==="activity"?0:1,relevant:true,current_value:null,initial_value:null,display_value:"Unknown",initial_label:"Unknown",unknown:true,overridden:false,origin:"Inherited",options:[{group:"Undecided",label:"Unknown",choice:{kind:"unknown"}}],other_forms:[]}));
+  const questions=["activity","applicant_choice","net_year1","smi_year1"].map(id=>({id,label:id,short_label:id,input_kind:"number",retired:false,guidance:{summary:"Input explanation",why:"Programme condition",verify:"Check the recorded evidence",requirements:[]},provenance:{kind:"inherited",parcel_ids:[],detail:"Inherited context"},type:id==="applicant_choice"?"applicant":"number",step:id==="activity"?0:1,relevant:true,current_value:null,initial_value:null,display_value:"Unknown",initial_label:"Unknown",unknown:true,overridden:false,origin:"Inherited",options:[{group:"Undecided",label:"Unknown",choice:{kind:"unknown"}}],other_forms:[]}));
   const value={assessment:a,input_context:{editing_ready:false,questions},applicant_context:{party_name:null,inherited_form:null,derived:true,override_conflict:false},visualisation:{version:1,conditions:[c],coverage:[{option_id:id,requirements:"modelled",condition_ids:["income"],unresolved_count:1,scope_fields:["activity"]}]}};
   assert.equal(validateResponse("funding/visualise",value),value);
   const bad=structuredClone(value);bad.visualisation.coverage=[];
@@ -91,4 +91,16 @@ test("conditions removed by an applicant change remain explainable",()=>{
   const next=response({facts:{bonus:"yes"},checks:[condition("pass",1)]});
   const changes=assessmentChanges(before,next);
   assert(changes.conditions.some(c=>c.id==="extra"&&c.removed));
+});
+
+test("persistent fit nodes cover all pages while money stays an explicit graph choice",()=>{
+  const questions=["applicant_choice","municipality","owner_id","bonus","eligible_cost"].map(id=>({id}));
+  const checks=[{option_id:"A",fields:["applicant_choice"],effect:"eligibility"},{option_id:"B",fields:["municipality"],effect:"eligibility"},{option_id:"A",fields:["bonus"],effect:"amount"},{option_id:"B",fields:["eligible_cost"],effect:"amount"}];
+  const scope=["A","B"],settings={focus:false,currentField:"applicant_choice",showAmount:false};
+  const ids=options=>graphQuestions(questions,checks,scope,options).map(q=>q.id);
+  assert.deepEqual(ids(settings),["applicant_choice","municipality"]);
+  assert.deepEqual(ids({...settings,currentField:"owner_id"}),ids(settings));
+  assert.deepEqual(ids({...settings,showAmount:true}),["applicant_choice","municipality","bonus","eligible_cost"]);
+  assert.deepEqual(ids({...settings,focus:true,currentField:"owner_id"}),["owner_id"]);
+  assert.deepEqual(graphQuestions(questions,checks,["research-only"],settings),[]);
 });

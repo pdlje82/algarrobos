@@ -86,7 +86,10 @@ class PlanningDraftTests(unittest.TestCase):
         for operation,extra in [("rename",dict(name="Renamed",confirm=False)),("delete",dict(name=None,confirm=True))]:
             r=self.client.post("/api/designer/library",json=dict(revision=self.rev,design_revision=alternative["design_revision"],operation=operation,design_id=w["active_design_id"],request_id=str(uuid4()),**extra))
             self.assertEqual(r.status_code,200,r.text);alternative=r.json()
-        self.assertEqual(self.client.get("/api/demonstrator/draft").json(),p)
+        after=self.client.get("/api/demonstrator/draft").json()
+        self.assertEqual(after["draft"],p["draft"])
+        self.assertEqual(after["context"]["design"]["status"],"missing")
+        self.assertEqual({k:v for k,v in after.items() if k!="context"},{k:v for k,v in p.items() if k!="context"})
         restored=Store(self.path).snapshot();self.assertEqual(restored["planning"],p["draft"])
         copy=Store(Path(self.folder.name)/"copy.json")
         copy.mutate("import",0,str(uuid4()),dict(save=self.client.get("/api/export").json(),confirm_replace=False))
