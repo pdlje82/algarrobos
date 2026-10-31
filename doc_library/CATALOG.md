@@ -1,6 +1,6 @@
 # Restoration and Environment Document Library
 
-Catalog updated: 30 October 2026. Inventory: 37 library entries (27 PDFs, six overview/research Markdown documents, three supplied PNG infographics and one generated planting-poster collection). Companion images and asset metadata are counted within their parent research entries. The catalog, rename log and archived overview are additional metadata/history files.
+Catalog updated: 31 October 2026. Inventory: 40 library entries (30 PDFs, six overview/research Markdown documents, three supplied PNG infographics and one generated planting-poster collection). Companion images and asset metadata are counted within their parent research entries. The catalog, rename log and archived overview are additional metadata/history files.
 
 Built for the Climate + Environment Career Transition context: understand real restoration work, develop an Almeria pilot, explore land stewardship and funding, and identify useful engineering, software and monitoring skills.
 
@@ -22,6 +22,7 @@ IDs are permanent references. Number within each group; allocate the next unused
 | COAST | COASTRUST coastal management and stewardship |
 | FOREST | Forestry and habitat improvement |
 | FUND | Finance, grants and funding programmes |
+| POLICY | Environmental legislation and draft policy |
 | LEARN | Learning syntheses and research orientation |
 
 ## Verified inventory
@@ -94,6 +95,14 @@ All entries below are stored locally. ANDARAX-002 contains a download link, not 
 | [FUND-008 - Andalusia - LEADER Governing Rules - BOJA 29 - 2026-02-03](FUND-008%20-%20Andalusia%20-%20LEADER%20Governing%20Rules%20-%20BOJA%2029%20-%202026-02-03.pdf) | Junta de Andalucia official source; retrieved 30 October 2026. Governing LEADER rules including categories 1.11, 2.6, 2.7, 3.4 and 3.5. [Official PDF](https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf) | ECON ENV PROC | FIN REG | 163 |
 | [FUND-009 - Andalusia - LEADER Call for Non-GDR Applicants - 2026-04-13](FUND-009%20-%20Andalusia%20-%20LEADER%20Call%20for%20Non-GDR%20Applicants%20-%202026-04-13.pdf) | Junta de Andalucia official source; retrieved 30 October 2026. LEADER non-GDR call and application procedure. [Official PDF](https://www.juntadeandalucia.es/eboja/2026/76/BOJA26-076-00061-5258-01_00336495.pdf) | ECON ENV PROC | FIN REG | 61 |
 | [FUND-010 - Andalusia - LEADER Selection Criteria Verification Guide - v2-4 - 2026-09](FUND-010%20-%20Andalusia%20-%20LEADER%20Selection%20Criteria%20Verification%20Guide%20-%20v2-4%20-%202026-09.pdf) | Junta de Andalucia official source; retrieved 30 October 2026. Selection-criteria verification guidance v2-4; cover dated 11 September 2026, published listing 25 September 2026. [Official PDF](https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/Guia-instrucciones-especificas-publicas_Criterios-seleccion-promotores_7119-2_LEADER_v2-4.pdf) | ECON ENV PROC | FIN REG | 231 |
+| [FUND-011 - Spain - Draft Municipal Wildfire Resilience Grant Rules - CIUDEN](FUND-011%20-%20Spain%20-%20Draft%20Municipal%20Wildfire%20Resilience%20Grant%20Rules%20-%20CIUDEN.pdf) | MITECO draft order (TED/XXX/2026 with placeholder date), naming Fundacion CIUDEN as grantor: municipal wildfire plans and preventive measures for municipalities up to 5,000 inhabitants; proposed applicants are town councils. The draft excludes post-fire environmental/forest restoration. Draft rules, not an adopted order or open call. Publication date and download URL unverified; PDF creation metadata dated 23 October 2026 is not a publication date. | ECON PLAN VEG CLIM SOC GIS PROC | FIN REG PLAN-L EXEC | 18 |
+
+### POLICY
+
+| Document | Contents and learning value | Technical tags | Lifecycle tags | Pages |
+|---|---|---|---|---|
+| [POLICY-001 - Spain - National Livestock Route Network Regulation - RD 925-2026 - 2026-10-29](POLICY-001%20-%20Spain%20-%20National%20Livestock%20Route%20Network%20Regulation%20-%20RD%20925-2026%20-%202026-10-29.pdf) | Supplied BOE extract of Real Decreto 925/2026, dated 28 October and published 29 October 2026; MITECO. National livestock-route network composition, governance, ecological connectivity, action programme, inventory/cartography and route annexes. Publication details inspected in the supplied file; download URL and external authenticity verification unconfirmed. | PLAN ECO VEG GIS SOC ENV | PLAN-L REG MON-L | 137 |
+| [POLICY-002 - Spain - Draft Mining Waste and Site Restoration Rule Amendments - RD 975-2009](POLICY-002%20-%20Spain%20-%20Draft%20Mining%20Waste%20and%20Site%20Restoration%20Rule%20Amendments%20-%20RD%20975-2009.pdf) | MITECO, Direccion General de Politica Energetica y Minas, draft amendment to RD 975/2009, visibly marked BORRADOR: ecological/geomorphological restoration, biodiversity/connectivity, land stewardship agreements, restoration-plan procedures, mining-waste management and financial guarantees. Draft proposal, not an enacted amendment. Publication date and download URL unverified; PDF creation metadata dated 21 October 2026 is not a publication date. | GEO SOIL ERO ECO VEG ENV CLIM ECON MON | DES EXEC REG MON-L | 34 |
 
 ### LEARN
 
@@ -127,6 +136,8 @@ Lifecycle tags: BASE baseline/diagnosis; PLAN-L strategic planning; DES design; 
 - Explore land stewardship: COAST-002 strategy, COAST-001 contracted activities, FUND-003 finance.
 - Use FUND-007 for the broad funding taxonomy, applicant and project conditions, source crosswalk and Funding Navigator reference fields; funding mechanisms are independent options rather than a prescribed sequence.
 - Explore degraded-land and habitat interventions: LAUJAR-001 and FOREST-001.
+- Use POLICY-001 for the supplied national livestock-route network regulation and its ecological-corridor context; compare POLICY-002 with LAUJAR-001 for proposed mining-restoration policy changes. POLICY-002 remains a draft.
+- Use FUND-011 as a draft municipal wildfire-prevention funding reference; it is not an open call and its proposed eligible measures exclude post-fire restoration.
 - For software/GIS opportunities, compare ALJIBE-001 design deliverables, ANDARAX-002 data access, COAST-002 mapping and monitoring actions, and NIJAR-001 surveillance requirements.
 
 ## Coverage gaps and document status
@@ -144,6 +155,8 @@ The older research overview lists some material that is not actually stored here
 ## Rename audit and recovery
 
 RENAME_LOG.csv records every old/new filename, original SHA-256 checksum and descriptive metadata. All 21 PDFs and both PNG infographics were checked after renaming for byte-for-byte integrity. The research overview was intentionally updated to use the new names; its original bytes are retained in catalog_history/Original research overview.md. The CSV checksum for that overview refers to its original version. To reverse naming, use the CSV mapping in reverse after checking for filename collisions. Do not overwrite a newer overview with the historical copy without reviewing edits.
+
+On 31 October 2026, three supplied PDFs were inspected (opening pages visually and relevant text passages), renamed as FUND-011 and POLICY-001/002, and added to the log with original filenames, page counts and SHA-256 checksums. All three renamed files were verified byte-for-byte unchanged. Draft status is explicit; PDF creation metadata was not treated as publication evidence. Source download URLs were not supplied or independently verified.
 
 ### Dimension reference research
 
