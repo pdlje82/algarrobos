@@ -1,5 +1,13 @@
 # Silent-fallback audit · 28 October 2026
 
+Navigator focus (1 November 2026): editable exploration drafts may contain
+optional `navigator_focus` version 1. Absence explicitly means no saved programme
+or route, rather than an inferred selection from a shortlist or scoring answers.
+Explicit null clears a choice; malformed versions, identities and programme/route
+membership fail validation. Library/read/save failures preserve the draft and use
+visible errors and explicit retry. Historical drafts without the field are not
+rewritten. This change does not claim a broader audit.
+
 Funding introductions (1 November 2026): the separate version-1 guide library
 requires exact coverage of research-only assessment options, five nonempty text
 sections and registered source references. Local PDF pages and hashes must match

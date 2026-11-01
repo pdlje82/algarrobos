@@ -1,5 +1,17 @@
 # Funding Navigator changes
 
+## 2026-11-01 — remember exploration programme and working route
+
+- Programme and working-route choices now belong to each exploration's optional,
+  versioned navigation state and participate in autosave, reload, saved
+  alternatives, duplication and export/import. Clearing a route keeps its programme.
+- Added explicit validation of saved identities and membership. Failed saves retain
+  the chosen focus and offer the existing retry; navigation does not alter scoring
+  answers, shortlisted options or historical records.
+- Verified 82 funding Python tests, 100 frontend tests, the production build and
+  isolated browser checks for focus persistence, programme navigation and saved
+  exploration resume, including distinct alternatives and failed-save retry.
+
 ## 2026-11-01 — shared delivery plans, scoring completion and pinned headers
 
 - Added route-aware delivery planning to shared concepts, with unresolved defaults,

@@ -1,5 +1,22 @@
 # Funding Navigator
 
+## Remembered programme and working route
+
+Selecting a programme or working route now autosaves that focus with the active
+exploration. Returning to Navigator, reloading, loading a saved alternative or
+duplicating it restores that exploration's choices. Clearing the working route
+keeps its programme selected. These navigation choices do not shortlist a route,
+select scoring answers or change points.
+
+Editable drafts may carry optional `navigator_focus` version 1 with explicit
+`programme_id` and `route_id` values (each may be null; a route requires its
+programme). Absence means no focus was saved; earlier choices are not inferred.
+Saved focus is validated against the exploration catalogue and registered
+programme membership, retained by export/import and catalogue review, and uses
+the existing revision-checked autosave/retry workflow. Historical records without
+this field remain unchanged. Unavailable/incompatible reference data produces a
+visible error rather than silently clearing a saved choice.
+
 ## Shared delivery planning, capped criteria and pinned headers
 
 The project concept now includes **Monitoring, participation and sharing** for

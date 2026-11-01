@@ -22,6 +22,7 @@ import {useFundingProgrammes} from "./FundingProgrammes.jsx";
 import {programmeForRoute,programmeMembers,validateProgrammeMembership,routeQuestionScope,visibleRouteQuestions,programmeConditions} from "./fundingProgrammeState.js";
 import {FundingConceptProvider,FundingConceptPanel,ItemActivities} from "./ProjectConcept.jsx";
 import {copyConcepts} from "./projectConceptState.js";
+import {fundingFocus,editFundingFocus,validateFundingFocusMembership} from "./fundingFocusState.js";
 
 function Sources({sources}) {
   return <ul className="funding-sources">{sources.map((s, i) => <li key={i}><DocumentLink documentId={s.document_id} page={s.page} expectedSha256={s.sha256}>{s.label}</DocumentLink><small> · {s.role}</small></li>)}</ul>;
@@ -63,10 +64,12 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   const [workspace, setWorkspace] = useState(null), [draft, setDraft] = useState(null);
   const [live,dispatchVisual] = useReducer(fundingVisualReducer,initialFundingVisual);
   const [visualContext,setVisualContext] = useState(0), [visualRetry,setVisualRetry] = useState(0), [inspected,setInspected] = useState(null);
-  const [workingOption,setWorkingOption] = useState(null);
+  const [legacyFocus,setLegacyFocus] = useState({version:1,programme_id:null,route_id:null});
+  const focus=draft===null||![3,4].includes(draft.version)?legacyFocus:fundingFocus(draft);
+  const workingOption=focus.route_id,programmeId=focus.programme_id;
   const [programmeGuide,setProgrammeGuide]=useState(null);
   const programmeState=useFundingProgrammes(request);
-  const [programmeId,setProgrammeId]=useState(null),[programmeDisplay,setProgrammeDisplay]=useState(null),[heldQuestionIds,setHeldQuestionIds]=useState([]),[heldMetIds,setHeldMetIds]=useState([]);
+  const [programmeDisplay,setProgrammeDisplay]=useState(null),[heldQuestionIds,setHeldQuestionIds]=useState([]),[heldMetIds,setHeldMetIds]=useState([]);
   useEffect(()=>{if(programmeState.value!==null)setProgrammeDisplay(current=>current===null?{...programmeState.value.library.defaults}:current);},[programmeState.value,programmeDisplay===null]);
   const [step, setStep] = useState(0), [questionId, setQuestionId] = useState(null), [error, setError] = useState(""), [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false), [dirty, setDirty] = useState(false), [review, setReview] = useState(null);
@@ -95,7 +98,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   const assessment = visualValue?.assessment ?? null;
   const evaluating = draft !== null && (live.context !== visualContext || live.inputKey !== visualInputKey || live.status === "pending" || live.status === "idle");
   const visualFailure = live.context === visualContext && live.inputKey === visualInputKey ? live.error : "";
-  function resetVisual() {setProgrammeGuide(null);setProgrammeId(null);setHeldQuestionIds([]);setProgrammeDisplay(programmeState.value===null?null:{...programmeState.value.library.defaults});setAnnexOpen(false);setAnnexRoute(null);setAnnexGroups({});serial.current++;dispatchVisual({type:"reset"});setVisualContext(k=>k+1);setInspected(null);setWorkingOption(null);setCatalogueReview(null);setAnswerReset(k=>k+1);setEditor(null);}
+  function resetVisual() {setProgrammeGuide(null);setLegacyFocus({version:1,programme_id:null,route_id:null});setHeldQuestionIds([]);setProgrammeDisplay(programmeState.value===null?null:{...programmeState.value.library.defaults});setAnnexOpen(false);setAnnexRoute(null);setAnnexGroups({});serial.current++;dispatchVisual({type:"reset"});setVisualContext(k=>k+1);setInspected(null);setCatalogueReview(null);setAnswerReset(k=>k+1);setEditor(null);}
   async function context(target, parcelIds) {
     return request("funding/context", {revision, planning_revision: planningRevision, design_revision: data.designer_revision, target, parcel_ids: parcelIds});
   }
@@ -228,7 +231,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   const questionStates=definitions.map(q=>presentQuestion(q,draft));
   const requested=questionStates.find(q=>q.id===questionId);
   let programmeFailure="";
-  if(programmeState.value!==null){try{validateProgrammeMembership(programmeState.value,c);}catch(e){programmeFailure=e.message;}}
+  if(programmeState.value!==null){try{validateProgrammeMembership(programmeState.value,c);validateFundingFocusMembership(programmeState.value,draft);}catch(e){programmeFailure=e.message;}}
   let programme=programmeState.value===null||programmeId===null||programmeFailure!==""?null:programmeState.value.library.programmes.find(p=>p.id===programmeId);
   if(programme===undefined){programmeFailure="The selected programme is absent from this reference edition. Clear programme focus or retry the programme list.";programme=null;}
   const effectiveProgrammeState=programmeFailure===""?programmeState:{...programmeState,value:null,error:programmeFailure};
@@ -248,15 +251,19 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   const visualStep=[0,1,2,4].includes(step);
   const activityPending=evaluating&&(assessment===null||assessment.facts.activity!==facts.activity);
   if(assessment!==null&&JSON.stringify(assessment.draft)===JSON.stringify(draft))Object.assign(facts,assessment.facts);
-  function workOnRoute(id){
+  function updateFocus(pid,rid){
+    if([3,4].includes(draft.version))edit(editFundingFocus(draft,pid,rid));
+    else setLegacyFocus({version:1,programme_id:pid,route_id:rid});
+  }
+  function workOnRoute(id,selectedProgramme=programmeId){
     if(conceptTransferPending){setError("Wait for the reviewed concept transfer to finish before changing routes.");return false;}
     if(effectiveProgrammeState.value===null){setError("Load the programme list before choosing a route. Use Retry programme list if loading failed.");return false;}
     if(id!==null){
       let p;try{p=programmeForRoute(programmeState.value,id);}catch(e){setError(e.message);return false;}
       if(!c.entries.some(e=>e.id===id)){setError("This route is absent from the saved catalogue. Review the catalogue update before selecting it.");return false;}
-      setProgrammeId(p.id);
+      selectedProgramme=p.id;
     }
-    setWorkingOption(id);setInspected(null);setEditor(null);setQuestionId(null);setAnnexOpen(false);setAnnexRoute(null);setHeldQuestionIds([]);setProgrammeDisplay({...programmeState.value.library.defaults});return true;
+    updateFocus(selectedProgramme,id);setInspected(null);setEditor(null);setQuestionId(null);setAnnexOpen(false);setAnnexRoute(null);setHeldQuestionIds([]);setProgrammeDisplay({...programmeState.value.library.defaults});return true;
   }
   function openProgrammeGuide(id,opener){
     if(effectiveProgrammeState.value===null||!effectiveProgrammeState.value.library.programmes.some(p=>p.id===id)){setError("The programme guide is unavailable. Retry the programme list.");return;}
@@ -266,14 +273,14 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   function chooseProgramme(id){
     if(conceptTransferPending){setError("Wait for the reviewed concept transfer to finish before changing exploration context.");return;}
     setProgrammeGuide(null);
-    if(id===null){setProgrammeId(null);setWorkingOption(null);setEditor(null);setQuestionId(null);setAnnexOpen(false);setAnnexRoute(null);setHeldQuestionIds([]);setProgrammeDisplay(programmeState.value===null?null:{...programmeState.value.library.defaults});return;}
+    if(id===null){updateFocus(null,null);setEditor(null);setQuestionId(null);setAnnexOpen(false);setAnnexRoute(null);setHeldQuestionIds([]);setProgrammeDisplay(programmeState.value===null?null:{...programmeState.value.library.defaults});return;}
     if(effectiveProgrammeState.value===null){setError("The programme list is unavailable. Retry loading it.");return;}
     const p=programmeState.value.library.programmes.find(p=>p.id===id);
     if(p===undefined){setError("Unknown funding programme. Retry the programme list.");return;}
     setQuery("");setRequireChanges(true);
     const members=programmeMembers(p,c);
     if(members.length===1){workOnRoute(members[0]);return;}
-    workOnRoute(null);setProgrammeId(id);
+    workOnRoute(null,id);
   }
   function holdMetGroup(scope){setHeldMetIds(scope!==null&&programmeDisplay!==null&&programmeDisplay.show_met?scope.met.filter(q=>!(annexOpen&&q.id==="selection_score")).map(q=>q.id):[]);}
   function navigateQuestion(id,trigger){

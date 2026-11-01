@@ -5,6 +5,7 @@ import {validateEdlResponse} from "./fundingEdlState.js";
 import {validateGuideResponse} from "./fundingGuideState.js";
 import {validateSelectionGuidanceResponse} from "./fundingSelectionGuidanceState.js";
 import {validateProgrammesResponse} from "./fundingProgrammeState.js";
+import {fundingFocus} from "./fundingFocusState.js";
 import {validateConceptGuide,validateConcept,validateConceptReport,validateTransfer,CONCEPT_ROUTES} from "./projectConceptState.js";
 
 export function required(value, message) {
@@ -379,6 +380,7 @@ export function validateResponse(path, data) {
     properties(data.bundle,["version","entries","questions","groups","source_review","official_pages"],"funding catalogue");
     required([1,2,3,4].includes(data.version)&&[1,2,3].includes(data.bundle.version)&&Array.isArray(data.bundle.entries)&&Array.isArray(data.bundle.questions)&&Array.isArray(data.selected),"Incompatible funding context.");
     required((data.version===4)===(data.bundle.version===3),"AL20 catalogue edition 3 requires funding draft version 4. Review the catalogue update.");
+    if(Object.hasOwn(data,"navigator_focus")){required([3,4].includes(data.version),"Saved Navigator focus requires an editable exploration.");fundingFocus(data);}
     if([3,4].includes(data.version)){properties(data,["applicant_choice"],"merged applicant choice");required(!Object.hasOwn(data.overrides,"applicant_id")&&!Object.hasOwn(data.overrides,"applicant_kind"),"Conflicting legacy applicant overrides in a new exploration.");}
     if(data.version===4){
       if(Object.hasOwn(data,"project_concepts")){

@@ -165,13 +165,24 @@ def new_draft(project, planning, parcel_ids, target):
 def validate_draft(d, project):
     require(type(d["version"]) is int and d["version"] in {1, 2, 3, 4}, "Unsupported funding draft version.")
     required = set("version name activity_key baseline overrides selected allocations calendar_start notes bundle".split())
-    keys(d, required | ({"applicant_choice"} if d["version"] in {3, 4} else set()) | ({"selection_assessments", "legacy_selection_score"} if d["version"] == 4 else set()) | ({"project_concepts"} if d["version"] == 4 and "project_concepts" in d else set()), "funding draft")
+    keys(d, required | ({"applicant_choice"} if d["version"] in {3, 4} else set()) | ({"selection_assessments", "legacy_selection_score"} if d["version"] == 4 else set()) | ({"project_concepts"} if d["version"] == 4 and "project_concepts" in d else set()) | ({"navigator_focus"} if d["version"] in {3, 4} and "navigator_focus" in d else set()), "funding draft")
     if "project_concepts" in d:
         from .project_concepts import validate_collection
         validate_collection(d["project_concepts"], project)
     require(isinstance(d["name"], str) and 0 < len(d["name"].strip()) <= 80 and isinstance(d["notes"], str) and len(d["notes"]) <= 10000, "Enter a funding name (up to 80 characters) and valid notes.")
     require(isinstance(d["activity_key"], str) and 0 < len(d["activity_key"]) <= 80, "Invalid funding activity identity.")
     c = validate_catalogue(d["bundle"])
+    if "navigator_focus" in d:
+        focus = d["navigator_focus"]
+        keys(focus, {"version", "programme_id", "route_id"}, "saved Navigator focus")
+        require(type(focus["version"]) is int and focus["version"] == 1, "Unsupported Navigator focus version. Reload a compatible exploration.")
+        pid, rid = focus["programme_id"], focus["route_id"]
+        require(pid is None or isinstance(pid, str) and pid.strip() and len(pid) <= 100, "Invalid saved Navigator programme identity.")
+        require(rid is None or isinstance(rid, str) and pid is not None and rid in {e["id"] for e in c["entries"]}, "The saved Navigator route is missing from this exploration's catalogue.")
+        if pid is not None:
+            from .funding_programmes import describe
+            programme = next((p for p in describe()["library"]["programmes"] if p["id"] == pid), None)
+            require(programme is not None and (rid is None or rid in programme["entry_ids"]), "The saved Navigator programme/route is absent or incompatible with the programme library. Restore the matching library; the exploration is retained.")
     require((d["version"] == 4) == (c["version"] == 3), "AL20 catalogue edition 3 requires funding draft version 4. Review a version-specific catalogue update.")
     if d["version"] == 4:
         funding_selection.validate_answers(d["selection_assessments"], c)
