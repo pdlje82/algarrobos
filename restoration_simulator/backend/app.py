@@ -188,6 +188,23 @@ class ConceptPlanningPreview(StrictModel):
     concept: dict[str, Any]
 
 
+class DeliveryPrepareRequest(ConceptPlanningPreview):
+    import_execution: StrictBool
+
+
+class DeliveryExecutionPreview(ConceptLinkRequest):
+    choices: dict[str, StrictStr | None]
+
+
+class DeliveryExecutionApply(DeliveryExecutionPreview):
+    request_id: UUID
+    preview_hash: StrictStr
+
+
+class DeliveryDetach(ConceptLinkRequest):
+    request_id: UUID
+
+
 def view(data, explanation=None):
     project = data["project"]
     return {
@@ -368,6 +385,32 @@ def create_app(save_path=None):
     def project_concept_guide():
         from .project_concepts import describe
         return describe()
+
+    @app.get("/api/funding/delivery-plan-guide")
+    def delivery_plan_guide():
+        from .delivery_plans import describe
+        return describe()
+
+    @app.post("/api/funding/delivery-plan/prepare")
+    def delivery_plan_prepare(req: DeliveryPrepareRequest):
+        from . import project_concepts, delivery_plans
+        data = designer_state(req.revision)
+        project_concepts.validate(req.concept, data["project"])
+        require(req.concept["id"] == str(req.concept_id), "Delivery concept identity changed.")
+        return delivery_plans.prepare(data, req.concept, req.import_execution)
+
+    @app.post("/api/demonstrator/delivery-plan-preview")
+    def delivery_execution_preview(req: DeliveryExecutionPreview):
+        from .delivery_plans import execution_preview
+        return execution_preview(concept_link(req), str(req.concept_id), req.choices)
+
+    @app.post("/api/demonstrator/delivery-plan-apply")
+    def delivery_execution_apply(req: DeliveryExecutionApply):
+        return view(get_store().project_concept_mutation("delivery_apply", req.revision, req.funding_revision, req.planning_revision, str(req.request_id), str(req.concept_id), preview_hash=req.preview_hash, choices=req.choices))
+
+    @app.post("/api/demonstrator/delivery-plan-detach")
+    def delivery_execution_detach(req: DeliveryDetach):
+        return view(get_store().project_concept_mutation("delivery_detach", req.revision, req.funding_revision, req.planning_revision, str(req.request_id), str(req.concept_id)))
 
     def concept_draft(req):
         data = designer_state(req.revision)

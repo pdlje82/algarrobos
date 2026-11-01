@@ -5647,7 +5647,7 @@
     }
   },
   "selection": {
-    "version": 1,
+    "version": 2,
     "routes": {
       "LEADER-AL20-1.11": "line1",
       "LEADER-AL20-2.6": "line2",
@@ -14079,6 +14079,7 @@
           }
         ]
       }
-    }
+    },
+    "completion_policy": "cap_or_all_answers"
   }
 }

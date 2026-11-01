@@ -1,5 +1,23 @@
 # Funding Navigator changes
 
+## 2026-11-01 — shared delivery plans, scoring completion and pinned headers
+
+- Added route-aware delivery planning to shared concepts, with unresolved defaults,
+  explicit review of existing values, combined monitoring methods and activity links.
+  Topic fields participate in two-way reconciliation and deterministic briefs.
+- Added reviewed execution previews/apply, primary-method adaptation and applied
+  snapshots. Route 3.5 never silently uses route-3.4 simulator financing.
+- Moved pending scoring confirmations directly above their dropdowns, with visible
+  proposed values, amber/red feedback, explicit atomic changes and preserved notes.
+- Added selection-library version 2 for cap-aware completion. Frozen version-1
+  calculations and saved assessments remain supported; adoption is explicitly reviewed.
+- Pinned the four graph headers independently of vertical node scrolling, while
+  retaining horizontal alignment and responsive column controls.
+- Verified with 268 Python tests, 98 frontend tests, the production build and
+  eight isolated browser workflows. Coverage includes both delivery routes,
+  failed-library/write retries, explicit execution financing, multi-method
+  monitoring, source focus, pinned expanded/compact headers and mobile themes.
+
 ## 2026-11-01 — project concepts and individual sub-node editors
 
 - Added one editor per scoring sub-node across all five AL20 routes, sibling

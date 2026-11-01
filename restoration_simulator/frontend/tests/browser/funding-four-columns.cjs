@@ -15,7 +15,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   const settled=()=>poll(async()=>!/Updating/.test(await visual.locator('.funding-visual-status').innerText()));await settled();
   await page.getByRole('button',{name:'2. People and land',exact:true}).click();
   assert.equal(await visual.getByRole('combobox',{name:'Programme or funding approach',exact:true}).count(),0);
-  assert.deepEqual(await graph.locator('.funding-layer-label').allTextContents(),['Exploration','Programme','Route requirements','Funding routes']);
+  assert.deepEqual(await visual.locator('.funding-column-headers .funding-layer-label').allTextContents(),['Exploration','Programme','Route requirements','Funding routes']);
   assert.equal(await graph.locator('[data-programme-family]').count(),6);assert.equal(await graph.locator('.funding-circumstance').count(),0);
   await poll(async()=>/Columns 1–4/.test(await range.innerText()));
   await selectProgramme(page,'LEADER-AL20');assert.equal(await graph.locator('.funding-graph-option').count(),12);

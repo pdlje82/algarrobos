@@ -80,7 +80,7 @@ def describe():
 
 @checked
 def validate(concept, project=None):
-    keys(concept, {"version", "id", "route", "guide_id", "guide_hash", "title", "purpose", "objectives", "activities", "justifications", "notes"}, "project concept")
+    keys(concept, {"version", "id", "route", "guide_id", "guide_hash", "title", "purpose", "objectives", "activities", "justifications", "notes"} | ({"delivery_plan"} if "delivery_plan" in concept else set()), "project concept")
     require(type(concept["version"]) is int and concept["version"] == 1 and concept["route"] in ROUTES, "Unsupported project concept version/route.")
     identity(concept["id"])
     data = guide()
@@ -105,6 +105,9 @@ def validate(concept, project=None):
             require(isinstance(activity[field], str) and len(activity[field]) <= data["limits"]["long_text"], "Invalid activity " + field)
         require(activity["title"].strip() and len(activity["title"]) <= data["limits"]["short_text"], "Enter an activity title within the configured limit.")
         bindings(activity["bindings"])
+    if "delivery_plan" in concept:
+        from .delivery_plans import validate as validate_delivery
+        validate_delivery(concept["delivery_plan"], concept)
     return concept
 
 
@@ -179,6 +182,13 @@ def report(concept, source, project):
     selected = [s for c in score["criteria"] for s in c["selected"]]
     supporting = references({"selection_assessments": proof["answers"]}, concept["route"])
     gaps = []
+    delivery_lines, delivery_refs = [], []
+    if "delivery_plan" in concept:
+        from .delivery_plans import review as review_delivery
+        delivery_gaps, delivery_lines, delivery_refs = review_delivery(concept["delivery_plan"], concept)
+        gaps.extend(delivery_gaps)
+    else:
+        gaps.append("Create or adopt the monitoring, participation and sharing plan.")
     if not concept["purpose"].strip(): gaps.append("Define the project purpose.")
     if not concept["activities"]: gaps.append("Include at least one proposed project activity.")
     for bid in list(dict.fromkeys(concept["objectives"] + selected)):
@@ -196,7 +206,7 @@ def report(concept, source, project):
     needs = list(dict.fromkeys(concept["objectives"] + [n for n in supporting if n.startswith("NPL")]))
     binding_ids = list(dict.fromkeys(needs + selected + [b for a in concept["activities"] for b in a["bindings"]]))
     source_ids = list(dict.fromkeys([s for b in binding_ids for s in data["bindings"][b]["sources"]] + [s for a in concept["activities"] if a["template_id"] is not None for s in data["templates"][a["template_id"]]["sources"]]))
-    citations = [data["sources"][s] for s in source_ids]
+    citations = list({(r["document_id"], r["page"], r["sha256"], r["label"], r["role"]): r for r in [data["sources"][s] for s in source_ids] + delivery_refs}.values())
     lines = ["# " + concept["title"], "", "Provisional project concept — not a grant approval or completed application.", "", "## Purpose", concept["purpose"] if concept["purpose"].strip() else "Not defined.", "", "## Context", "Route: " + concept["route"], "Applicant (recorded/provisional funding context): " + source["applicant"], "Municipality: " + (source["municipality"] if source["municipality"] is not None else "Unknown"), "Recorded site links: " + (", ".join(source["baseline"]["parcel_ids"]) if source["baseline"]["parcel_ids"] else "Not assigned"), "", "## Objectives"]
     lines += ["- " + n + " · " + data["bindings"][n]["label"] for n in concept["objectives"]]
     if not concept["objectives"]: lines.append("No objectives included yet.")
@@ -207,6 +217,7 @@ def report(concept, source, project):
             lines.append(label + ": " + (a[field] if a[field].strip() else "Not defined"))
         lines.append("Links: " + (", ".join(a["bindings"]) if a["bindings"] else "Not linked"))
     if not concept["activities"]: lines.append("No activities included yet.")
+    lines += delivery_lines
     lines += ["", "## Self-assessed scoring", f"{'Partial subtotal' if score['total'] is None else 'Calculated score'}: {score['subtotal']:g} points; threshold {score['threshold']:g}; {score['unresolved']} criteria unresolved.", "Evidence readiness is separate from the score; no supporting documents have been independently certified.", "Selected scoring claims: " + (", ".join(selected) if selected else "None"), "", "## Justifications"]
     lines += ["- " + bid + ": " + text for bid, text in concept["justifications"].items()]
     for cid, row in proof["answers"][concept["route"]]["criteria"].items():
@@ -243,7 +254,7 @@ def merge(base, navigator, demonstrator):
     fields = []
     def propose(path, b, n, d):
         removal = b is not None and (n is None or d is None)
-        if path == ["objectives"]:
+        if path == ["objectives"] or path[-1] == "activity_ids":
             removal = bool(set(b) - set(n) or set(b) - set(d))
         conflict = n != d and (n != b and d != b or removal)
         choice = None if conflict else "navigator" if d == b or n == d else "demonstrator"
@@ -253,6 +264,17 @@ def merge(base, navigator, demonstrator):
             for bid in sorted(set(base[field]) | set(navigator[field]) | set(demonstrator[field])):
                 propose([field, bid], base[field][bid] if bid in base[field] else None, navigator[field][bid] if bid in navigator[field] else None, demonstrator[field][bid] if bid in demonstrator[field] else None)
         else: propose([field], base[field], navigator[field], demonstrator[field])
+    bplan = base["delivery_plan"] if "delivery_plan" in base else None
+    nplan = navigator["delivery_plan"] if "delivery_plan" in navigator else None
+    dplan = demonstrator["delivery_plan"] if "delivery_plan" in demonstrator else None
+    if bplan is None or nplan is None or dplan is None:
+        propose(["delivery_plan"], bplan, nplan, dplan)
+    else:
+        require(bplan["library_hash"] == nplan["library_hash"] == dplan["library_hash"], "Delivery library editions differ. Review an explicit library update first.")
+        propose(["delivery_plan", "legacy_source"], bplan["legacy_source"], nplan["legacy_source"], dplan["legacy_source"])
+        for tid in bplan["topics"]:
+            for field in bplan["topics"][tid]:
+                propose(["delivery_plan", tid, field], bplan["topics"][tid][field], nplan["topics"][tid][field], dplan["topics"][tid][field])
     bacts = {a["id"]: a for a in base["activities"]}
     nacts = {a["id"]: a for a in navigator["activities"]}
     dacts = {a["id"]: a for a in demonstrator["activities"]}
@@ -302,6 +324,13 @@ def resolve_transfer(state, concept_id, expected_hash, resolutions):
             require(value is not None, "Initial transfer must include the Navigator concept.")
             merged = value
             activities = {a["id"]: deepcopy(a) for a in merged["activities"]}
+        elif path[0] == "delivery_plan":
+            if len(path) == 1:
+                if value is None:
+                    if "delivery_plan" in merged: del merged["delivery_plan"]
+                else: merged["delivery_plan"] = value
+            elif len(path) == 2: merged["delivery_plan"][path[1]] = value
+            else: merged["delivery_plan"]["topics"][path[1]][path[2]] = value
         elif path[0] == "activities":
             aid = path[1]
             if len(path) == 2:
@@ -350,6 +379,8 @@ def guard_parcel_removal(state, removed):
     if state["planning"] is not None and "project_concepts" in state["planning"]:
         for record in state["planning"]["project_concepts"]:
             if set(record["source"]["baseline"]["parcel_ids"]) & set(removed) or state["planning"]["inputs"]["parcel_id"] in removed: affected.append(record["concept"]["title"])
+    if state["planning"] is not None and "applied_delivery_plan" in state["planning"] and state["planning"]["applied_delivery_plan"]["execution_inputs"]["parcel_id"] in removed:
+        affected.append("applied delivery snapshot " + state["planning"]["applied_delivery_plan"]["concept_id"] + " (detach its tracking link first)")
     require(not affected, "Parcel removal affects project concepts: " + ", ".join(sorted(set(affected))) + ". Review and explicitly unlink/remove these concepts first; nothing was deleted.")
 
 

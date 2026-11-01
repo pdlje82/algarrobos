@@ -1,3 +1,4 @@
+import {validateDeliveryPlan} from "./deliveryPlanState.js";
 import configuration from "../../scenarios/funding-project-concept-v1.json" with {type:"json"};
 import documents from "../../scenarios/documents.json" with {type:"json"};
 import funding from "../../scenarios/funding.json" with {type:"json"};
@@ -31,10 +32,11 @@ export function validateConceptGuide(value){
 }
 
 export function validateConcept(c,guide=configuration){
-  require(keys(c,["version","id","route","guide_id","guide_hash","title","purpose","objectives","activities","justifications","notes"])&&c.version===1&&uuid(c.id)&&CONCEPT_ROUTES.includes(c.route)&&c.guide_id===guide.id&&/^[a-f0-9]{64}$/.test(c.guide_hash));
+  require(keys(c,["version","id","route","guide_id","guide_hash","title","purpose","objectives","activities","justifications","notes",...(Object.hasOwn(c,"delivery_plan")?["delivery_plan"]:[])])&&c.version===1&&uuid(c.id)&&CONCEPT_ROUTES.includes(c.route)&&c.guide_id===guide.id&&/^[a-f0-9]{64}$/.test(c.guide_hash));
   require([c.title,c.purpose,c.notes].every(v=>text(v)&&v.length<=guide.limits.long_text)&&c.title.trim()&&ids(c.objectives,Object.keys(guide.bindings).filter(id=>id.startsWith("NPL")))&&object(c.justifications)&&Object.entries(c.justifications).every(([id,v])=>Object.hasOwn(guide.bindings,id)&&text(v)&&v.length<=guide.limits.long_text));
   require(Array.isArray(c.activities)&&c.activities.length<=guide.limits.activities&&new Set(c.activities.map(a=>a.id)).size===c.activities.length);
   for(const a of c.activities)require(keys(a,[...ACTIVITY_FIELDS,"id","template_id","bindings"])&&uuid(a.id)&&ACTIVITY_FIELDS.every(k=>text(a[k])&&a[k].length<=guide.limits.long_text)&&a.title.trim()&&a.title.length<=guide.limits.short_text&&ids(a.bindings,Object.keys(guide.bindings))&&(a.template_id===null||Object.hasOwn(guide.templates,a.template_id)&&guide.templates[a.template_id].routes.includes(c.route)));
+  if(Object.hasOwn(c,"delivery_plan"))validateDeliveryPlan(c.delivery_plan,c);
   return c;
 }
 
@@ -63,5 +65,9 @@ export function includeActivity(concept,library,templateId,bindingIds,id){
 }
 
 export function copyConcepts(concepts){
-  return Object.fromEntries(Object.entries(concepts).map(([route,c])=>[route,{...structuredClone(c),id:crypto.randomUUID(),activities:c.activities.map(a=>({...structuredClone(a),id:crypto.randomUUID()}))}]));
+  return Object.fromEntries(Object.entries(concepts).map(([route,c])=>{
+    const next=structuredClone(c),mapping=new Map(c.activities.map(a=>[a.id,crypto.randomUUID()]));next.id=crypto.randomUUID();next.activities=next.activities.map(a=>({...a,id:mapping.get(a.id)}));
+    if(Object.hasOwn(next,"delivery_plan"))for(const topic of Object.values(next.delivery_plan.topics))topic.activity_ids=topic.activity_ids.map(id=>{if(!mapping.has(id))throw Error("A delivery activity link is missing. Resolve it before duplicating.");return mapping.get(id);});
+    return [route,next];
+  }));
 }

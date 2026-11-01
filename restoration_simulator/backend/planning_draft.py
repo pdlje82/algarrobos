@@ -13,11 +13,14 @@ def initial(project):
 def validate(value, project):
     if value is None:
         return None  # No planning draft has been saved yet.
-    keys(value, {"version", "inputs", "source"} | ({"project_concepts"} if "project_concepts" in value else set()), "demonstrator planning draft")
+    keys(value, {"version", "inputs", "source"} | ({"project_concepts"} if "project_concepts" in value else set()) | ({"applied_delivery_plan"} if "applied_delivery_plan" in value else set()), "demonstrator planning draft")
     if "project_concepts" in value:
         from .project_concepts import validate_planning
         validate_planning(value["project_concepts"], project)
     require(type(value["version"]) is int and value["version"] == 1, "Unsupported demonstrator planning draft version.")
+    if "applied_delivery_plan" in value:
+        from .delivery_plans import validate_applied
+        validate_applied(value["applied_delivery_plan"], project)
     fields = designer.plan_fields(project)
     keys(value["inputs"], {f["name"] for f in fields}, "demonstrator draft inputs")
     for field in fields:

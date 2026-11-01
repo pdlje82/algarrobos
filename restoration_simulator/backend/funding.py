@@ -336,7 +336,7 @@ def prepare(draft, project, applicant_choice=None, resolve=False, adopt_current_
             d.update(version=4, selection_assessments=funding_selection.empty(current), legacy_selection_score=historical)
             d["overrides"].pop("selection_score", None)
         elif digest(previous["bundle"]["selection"]) != digest(current["selection"]):
-            require(funding_selection.is_guidance_update_v1(previous["bundle"]["selection"], current["selection"]), "AL20 scoring definitions changed. A version-specific assessment migration is required before adopting this catalogue; existing selections are preserved.")
+            require(funding_selection.is_guidance_update_v1(previous["bundle"]["selection"], current["selection"]) or funding_selection.is_completion_update(previous["bundle"]["selection"], current["selection"]), "AL20 scoring definitions changed. A version-specific assessment migration is required before adopting this catalogue; existing selections are preserved.")
     d.update(bundle=current, baseline=captured)
     validate_draft(d, project)
     old_facts, new_facts = effective(previous), effective(d)
@@ -348,6 +348,13 @@ def prepare(draft, project, applicant_choice=None, resolve=False, adopt_current_
         result["catalogue_review"]["messages"].append("Replace manual AL20 scoring with separate annex assessments for all five routes. Any old manual total is retained as historical information only; no annex answers are inferred. Saved alternatives and adopted plans remain unchanged.")
     elif current["version"] == 3 and digest(previous["bundle"]["selection"]) != digest(current["selection"]):
         result["catalogue_review"]["messages"].append("Update AL20 explanatory guidance and additional source links. Point values, applicability and scoring relationships are identical; all annex selections, references and notes are retained. Criterion guidance includes official reference lookups and document links. Saved assessments remain unchanged.")
+    if previous["version"] == 4 and previous["bundle"]["selection"]["version"] == 1 and current["selection"]["version"] == 2:
+        changes = []
+        for route in current["selection"]["routes"]:
+            before = funding_selection.calculate(previous["bundle"], previous["selection_assessments"], route)
+            after = funding_selection.calculate(d["bundle"], d["selection_assessments"], route)
+            changes.append(f"{route}: {before['unresolved']} → {after['unresolved']} unresolved criteria; calculated total {before['total']} → {after['total']}. Point values and entered answers are unchanged.")
+        result["catalogue_review"]["messages"].extend(["Adopt scoring completion version 2: a valid criterion at its cap no longer requires remaining answers."] + changes)
     result["notice"] = "Baseline and catalogue update prepared. Review before applying; saved assessments remain unchanged."
     return result
 

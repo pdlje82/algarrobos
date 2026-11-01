@@ -92,6 +92,7 @@ export function DemonstratorEditor({
     "Missing demonstrator form sections.",
   );
   const [section, setSection] = useState(formSections[0]);
+  const [standalone,setStandalone]=useState(false);
   const planning = action.kind === "demo_plan";
   const navigationSections = planning ? ["Plant order list",...formSections] : formSections;
   const sections = planning ? navigationSections.filter(s=>s!=="Funding route") : navigationSections;
@@ -100,6 +101,7 @@ export function DemonstratorEditor({
     "The selected form section is no longer available. Reopen the decision.",
   );
   const selected = section;
+  const sharedPlanning=planning&&(inputs.funding_route==="al20_34"||Object.hasOwn(planningDraft.draft,"project_concepts")&&planningDraft.draft.project_concepts.length>0)&&!standalone;
   return (
     <div className="demo-editor">
       {planning && (
@@ -136,12 +138,14 @@ export function DemonstratorEditor({
                 additional. Edit individual plant prices in the Plant checklist.
               </p>
             )}
+            {planning&&selected==="Demonstration design"&&<div className="delivery-execution-context"><p>{sharedPlanning?"Monitoring, participation and sharing belong to your route-specific project concept. Changes to execution require a comparison and confirmation.":"Standalone simulation settings are recorded execution assumptions, separate from reviewed concept commitments."}</p>{sharedPlanning&&<><button type="button" onClick={()=>{const node=document.querySelector('.demonstrator-concepts');node.scrollIntoView({block:"start"});node.querySelector('h2').focus();}}>Open shared project planning</button>{["self","partner"].includes(inputs.funding_route)&&<button type="button" onClick={()=>setStandalone(true)}>Edit standalone simulation settings</button>}<details><summary>Recorded execution snapshot</summary><dl>{action.fields.filter(f=>f.section==="Demonstration design"&&!DESIGNER_FIELDS.has(f.name)).map(f=><React.Fragment key={f.name}><dt>{f.label}</dt><dd>{inputs[f.name]}</dd></React.Fragment>)}</dl></details></>}{standalone&&<button type="button" onClick={()=>setStandalone(false)}>Return to shared project planning</button>}</div>}
             <Fields
               fields={action.fields
                 .filter(
                   (f) => f.section === selected && f.type !== "plant_selection" && (!planning || !DESIGNER_FIELDS.has(f.name)),
                 )
                 .filter(f=>!planning || selected!=="Funding route")
+                .filter(f=>!planning||selected!=="Demonstration design"||!sharedPlanning&&!["novelty","publication_period"].includes(f.name))
                 .map((f) =>
                   f.type === "category"
                     ? { ...f, custom_label: "Custom option…" }
@@ -250,7 +254,7 @@ function DemonstratorPreview({ value: d, updating }) {
           confirmed.
         </p>
       )}
-      <FundingFit fit={d.fit} />
+      <details><summary>Simulator funding context — execution snapshot</summary><p>This is the existing simulator’s assessment of execution inputs. Current Navigator eligibility checks and project evidence readiness remain separate.</p><FundingFit fit={d.fit} /></details>
     </div>
   );
 }

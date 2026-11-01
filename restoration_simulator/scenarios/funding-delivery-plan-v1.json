@@ -1,0 +1,460 @@
+{
+  "version": 1,
+  "id": "al20-delivery-plan-v1",
+  "checked_on": "2026-11-01",
+  "routes": [
+    "LEADER-AL20-3.4",
+    "LEADER-AL20-3.5"
+  ],
+  "topics": {
+    "comparison": {
+      "label": "Comparison design",
+      "kind": "single",
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "options": [
+        {
+          "id": "comparison",
+          "label": "Comparable treatment and reference groups",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "before_after",
+          "label": "Before-and-after observations",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "none",
+          "label": "No comparison planned (optional for route 3.5)",
+          "routes": [
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "custom",
+          "label": "Custom design",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        }
+      ],
+      "explanation": "Record what will be tested or observed. These are planning examples, not prescribed or approved grant methods. A choice alone does not establish testability or transferability.",
+      "sources": [
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p123-route-requirements"
+      ],
+      "extra_fields": []
+    },
+    "novelty": {
+      "label": "Local novelty",
+      "kind": "single",
+      "routes": [
+        "LEADER-AL20-3.4"
+      ],
+      "options": [
+        {
+          "id": "new_locally",
+          "label": "New or unfamiliar locally — self-assessed",
+          "routes": [
+            "LEADER-AL20-3.4"
+          ]
+        },
+        {
+          "id": "established",
+          "label": "Already standard locally",
+          "routes": [
+            "LEADER-AL20-3.4"
+          ]
+        },
+        {
+          "id": "custom",
+          "label": "Requires explanation / AL20 review",
+          "routes": [
+            "LEADER-AL20-3.4"
+          ]
+        }
+      ],
+      "explanation": "For 3.4, explain local practice and what is new in the AL20 area. This does not select an innovation-scoring claim.",
+      "sources": [
+        "FUND-008-p120-route-requirements"
+      ],
+      "extra_fields": []
+    },
+    "monitoring": {
+      "label": "Baseline and follow-up",
+      "kind": "multiple",
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "options": [
+        {
+          "id": "fixed_photos",
+          "label": "Fixed photographic points",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "plant_inventory_survival",
+          "label": "Plant inventory and survival",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "vegetation_cover",
+          "label": "Vegetation cover",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "erosion_notes",
+          "label": "Erosion observations",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "infiltration",
+          "label": "Infiltration measurements",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "custom",
+          "label": "Custom monitoring method",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        }
+      ],
+      "explanation": "Combine intended methods, link the work and explain timing. Selecting a method does not collect measurements or define a complete ecological protocol.",
+      "sources": [
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p123-route-requirements"
+      ],
+      "extra_fields": []
+    },
+    "participation": {
+      "label": "Participation / public use",
+      "kind": "single",
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "options": [
+        {
+          "id": "open_demo",
+          "label": "Open demonstration sessions",
+          "routes": [
+            "LEADER-AL20-3.4"
+          ]
+        },
+        {
+          "id": "open_days",
+          "label": "Scheduled visits / open days",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "online",
+          "label": "Online information only — participation needs review",
+          "routes": [
+            "LEADER-AL20-3.4"
+          ]
+        },
+        {
+          "id": "private",
+          "label": "Private activity only",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "heritage_public_use",
+          "label": "Public-use arrangements for the heritage resource",
+          "routes": [
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "public_dissemination",
+          "label": "Public dissemination of the heritage resource",
+          "routes": [
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "custom",
+          "label": "Custom participation / public-use arrangements",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        }
+      ],
+      "explanation": "For 3.4, define access by relevant interested participants, with transparent limits and no membership requirement. For 3.5, define heritage dissemination/public use. Neither implies unrestricted access to the entire property.",
+      "sources": [
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ],
+      "extra_fields": []
+    },
+    "sharing": {
+      "label": "Results sharing",
+      "kind": "single",
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "options": [
+        {
+          "id": "web_report",
+          "label": "Public website and results report",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "web_workshop",
+          "label": "Public website and workshop",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "report_only",
+          "label": "Report only",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "none",
+          "label": "No sharing arranged",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        },
+        {
+          "id": "custom",
+          "label": "Custom sharing plan",
+          "routes": [
+            "LEADER-AL20-3.4",
+            "LEADER-AL20-3.5"
+          ]
+        }
+      ],
+      "explanation": "Describe intended outputs, who is responsible and where/when they will be shared. For 3.4, publish activity information from commencement and results as they emerge.",
+      "sources": [
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ],
+      "extra_fields": [
+        "outputs",
+        "responsible",
+        "location"
+      ]
+    },
+    "publication": {
+      "label": "Online publication commitment",
+      "kind": "single",
+      "routes": [
+        "LEADER-AL20-3.4"
+      ],
+      "options": [
+        {
+          "id": "three_years",
+          "label": "Maintain online information for at least 3 years after final payment",
+          "routes": [
+            "LEADER-AL20-3.4"
+          ]
+        },
+        {
+          "id": "not_arranged",
+          "label": "Publication commitment not arranged",
+          "routes": [
+            "LEADER-AL20-3.4"
+          ]
+        },
+        {
+          "id": "custom",
+          "label": "Custom commitment — needs review",
+          "routes": [
+            "LEADER-AL20-3.4"
+          ]
+        }
+      ],
+      "explanation": "This minimum applies to the 3.4 online information obligation. It is not a universal route-3.5 publication period. Confirm responsibility and resources before reviewing the commitment.",
+      "sources": [
+        "FUND-008-p121-route-requirements"
+      ],
+      "extra_fields": []
+    }
+  },
+  "defaults": {
+    "topics": {
+      "comparison": {
+        "reviewed": false,
+        "explanation": "",
+        "reference": "",
+        "activity_ids": [],
+        "answer": null
+      },
+      "novelty": {
+        "reviewed": false,
+        "explanation": "",
+        "reference": "",
+        "activity_ids": [],
+        "answer": null
+      },
+      "monitoring": {
+        "reviewed": false,
+        "explanation": "",
+        "reference": "",
+        "activity_ids": [],
+        "answer": []
+      },
+      "participation": {
+        "reviewed": false,
+        "explanation": "",
+        "reference": "",
+        "activity_ids": [],
+        "answer": null
+      },
+      "sharing": {
+        "reviewed": false,
+        "explanation": "",
+        "reference": "",
+        "activity_ids": [],
+        "answer": null,
+        "outputs": "",
+        "responsible": "",
+        "location": ""
+      },
+      "publication": {
+        "reviewed": false,
+        "explanation": "",
+        "reference": "",
+        "activity_ids": [],
+        "answer": null
+      }
+    }
+  },
+  "sources": {
+    "FUND-008-p120-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 120,
+      "label": "FUND-008 · PDF page 120",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p121-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 121,
+      "label": "FUND-008 · PDF page 121",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p123-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 123,
+      "label": "FUND-008 · PDF page 123",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p124-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 124,
+      "label": "FUND-008 · PDF page 124",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    }
+  },
+  "legacy_fields": {
+    "comparison": "design",
+    "novelty": "novelty",
+    "monitoring": "baseline_method",
+    "participation": "public_participation",
+    "sharing": "dissemination",
+    "publication": "publication_period"
+  },
+  "monitoring_legacy": {
+    "photo_cover": [
+      "fixed_photos",
+      "vegetation_cover",
+      "erosion_notes"
+    ],
+    "photo_survival": [
+      "fixed_photos",
+      "plant_inventory_survival"
+    ],
+    "infiltration": [
+      "fixed_photos",
+      "vegetation_cover",
+      "infiltration"
+    ]
+  },
+  "execution_mappings": {
+    "comparison": {
+      "comparison": "comparison",
+      "before_after": "before_after",
+      "none": "unknown"
+    },
+    "novelty": {
+      "new_locally": "new_locally",
+      "established": "established"
+    },
+    "participation": {
+      "open_demo": "open_demo",
+      "open_days": "open_days",
+      "online": "online",
+      "private": "private",
+      "public_dissemination": "online"
+    },
+    "sharing": {
+      "web_report": "web_report",
+      "web_workshop": "web_workshop",
+      "report_only": "report_only",
+      "none": "none"
+    },
+    "publication": {
+      "three_years": "three_years",
+      "not_arranged": "unknown"
+    }
+  },
+  "execution_financing": [
+    "self",
+    "partner"
+  ],
+  "minimum_publication_years": 3
+}

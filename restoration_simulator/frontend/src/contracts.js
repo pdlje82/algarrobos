@@ -1,3 +1,4 @@
+import {validateDeliveryLibrary,validateDeliveryPrepared,validateExecutionReview} from "./deliveryPlanState.js";
 import defaults from "../../scenarios/defaults.json" with { type: "json" };
 import {validateStatisticsResponse} from "./fundingStatisticsState.js";
 import {validateEdlResponse} from "./fundingEdlState.js";
@@ -290,6 +291,10 @@ export function demonstratorContract(value) {
 }
 
 export function validateResponse(path, data) {
+  if(path==="funding/delivery-plan-guide")return validateDeliveryLibrary(data);
+  if(path==="funding/delivery-plan/prepare")return validateDeliveryPrepared(data);
+  if(path==="demonstrator/delivery-plan-preview")return validateExecutionReview(data);
+  if(["demonstrator/delivery-plan-apply","demonstrator/delivery-plan-detach"].includes(path))return validateResponse("project",data);
   if(path==="funding/project-concept-guide")return validateConceptGuide(data);
   if(path==="funding/project-concept/create")return validateConcept(data);
   if(["funding/project-concept/preview","demonstrator/project-concept/preview"].includes(path))return validateConceptReport(data);
@@ -385,7 +390,7 @@ export function validateResponse(path, data) {
       required(data.bundle.version===3,"AL20 structured scoring requires catalogue edition 3.");
       const rules=data.bundle.selection;
       properties(rules,["version","routes","profiles"],"AL20 scoring definitions");
-      required(rules.version===1&&Object.keys(rules.routes).length===5,"Incomplete AL20 route coverage.");
+      required([1,2].includes(rules.version)&&(rules.version===1||rules.completion_policy==="cap_or_all_answers")&&Object.keys(rules.routes).length===5,"Incomplete AL20 route coverage.");
       object(data.selection_assessments,"AL20 route answers");
       required(Object.keys(data.selection_assessments).length===5,"Missing AL20 route answers.");
       for(const [route,profileId] of Object.entries(rules.routes)){
@@ -448,6 +453,7 @@ export function validateResponse(path, data) {
     if(data.context.parcel!==null){properties(data.context.parcel,["id","name","municipality","area","owner","access"],"planning parcel record");if(data.context.parcel.access!==null)properties(data.context.parcel.access,["id","status","route","operator","start","end"],"recorded access");}
     if(data.context.design!==null){properties(data.context.design,["id","name","current_name","status"],"transferred design source");required(["current","changed","missing"].includes(data.context.design.status),"Invalid source design status.");}
     properties(data.draft,["version","inputs","source"],"planning draft");
+    if(Object.hasOwn(data.draft,"applied_delivery_plan")){const applied=data.draft.applied_delivery_plan;properties(applied,["version","concept_id","route","delivery_plan","activities","execution_inputs"],"applied delivery plan");required(applied.version===1&&Array.isArray(applied.activities)&&typeof applied.concept_id==="string","Invalid applied delivery snapshot.");}
     if(Object.hasOwn(data.draft,"project_concepts")){
       required(Array.isArray(data.draft.project_concepts),"Invalid demonstrator concept collection.");
       const ids=new Set();for(const record of data.draft.project_concepts){properties(record,["concept","baseline","source"],"linked project concept");validateConcept(record.concept);validateConcept(record.baseline);required(record.concept.id===record.baseline.id&&record.concept.route===record.baseline.route&&!ids.has(record.concept.id),"Invalid demonstrator concept identity.");object(record.source,"concept source context");ids.add(record.concept.id);}
@@ -857,12 +863,18 @@ function designerDisplayContract(value,evaluation) {
 function validateSelectionResult(score,route,draft){
   properties(score,["route","profile","basis","subtotal","total","unresolved","threshold","result","criteria"],"AL20 scoring result");
   required(score.route===route&&score.profile===draft.bundle.selection.routes[route]&&typeof score.basis==="string"&&Number.isFinite(score.subtotal)&&score.subtotal>=0&&Number.isInteger(score.unresolved)&&score.unresolved>=0&&Number.isFinite(score.threshold)&&["pass","fail","unknown"].includes(score.result)&&Array.isArray(score.criteria),"Invalid AL20 scoring result.");
+  if(draft.bundle.selection.version===2)required(score.version===2,"Missing scoring completion version. Restart Python and retry.");
   const profile=draft.bundle.selection.profiles[score.profile];
   required(score.criteria.length===profile.criteria.length&&new Set(score.criteria.map(c=>c.id)).size===profile.criteria.length,"Incomplete AL20 scoring breakdown.");
+  if(draft.bundle.selection.version===2)required(score.unresolved===score.criteria.filter(c=>!c.score_complete).length,"Inconsistent scoring completion count. Retain your draft and retry the assessment.");
   required(score.unresolved===0?Number.isFinite(score.total)&&score.total===score.subtotal&&score.result!=="unknown":score.total===null&&score.result==="unknown","An incomplete AL20 assessment cannot publish a final score.");
   for(const definition of profile.criteria){
     const row=score.criteria.find(r=>r.id===definition.id);required(row!==undefined,"Missing AL20 criterion subtotal.");
     properties(row,["id","subtotal","uncapped","cap","complete","selected","issues","sources"],"AL20 criterion result");
+    if(draft.bundle.selection.version===2){
+      required(typeof row.answers_complete==="boolean"&&row.score_complete===row.complete&&["cap_reached","all_answered","calculation_complete","unresolved"].includes(row.completion_reason),"Missing criterion completion details. Restart Python and retry.");
+      required(row.completion_reason==="cap_reached"?row.complete&&row.subtotal===row.cap:row.completion_reason==="unresolved"?!row.complete:row.complete&&row.answers_complete,"Inconsistent criterion completion reason. Retain your draft and retry the assessment.");
+    }
     required(Number.isFinite(row.subtotal)&&row.subtotal>=0&&Number.isFinite(row.cap)&&row.subtotal<=row.cap&&typeof row.complete==="boolean"&&Array.isArray(row.selected)&&Array.isArray(row.issues)&&Array.isArray(row.sources)&&row.sources.length>0,"Invalid AL20 criterion result.");
   }
 }

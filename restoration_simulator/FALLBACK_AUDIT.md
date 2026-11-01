@@ -17,6 +17,20 @@ The frozen replay modules were reviewed for compatibility boundaries and preserv
 
 ## Changes
 
+Delivery planning and scoring completion (1 November 2026): the separate version-1
+delivery library declares unresolved defaults, route applicability, options,
+registered source editions and explicit execution mappings. Optional plan absence
+means not created/adopted; existing values are imported only after a visible review
+and remain unreviewed. Unknown/custom mappings block execution adaptation rather
+than selecting substitutes. Execution apply checks revisions/hash and writes an
+applied snapshot atomically; failures retain both plan and execution. The current
+scoring policy is version 2, while the original version-1 calculator is frozen and
+selected by retained source version. Missing versions/details are rejected. Points
+and qualifying inputs remain authoritative; capping never substitutes missing
+employment/calculation conditions. Header pinning changes presentation only.
+Historical scenario prefills remain frozen replay inputs, not confirmed new-plan
+commitments. No new ecological inference or simulator financing model is introduced.
+
 Project concepts (1 November 2026): explicit optional version-1 concepts and
 per-item annotations preserve absence in historical saves. Empty activity text is
 an intentional unassigned exploration value, never fabricated project detail.

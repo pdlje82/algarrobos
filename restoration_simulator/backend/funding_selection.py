@@ -30,8 +30,9 @@ def source(ref):
 
 
 def validate_rules(rules, catalogue):
-    keys(rules, {"version", "routes", "profiles"}, "AL20 scoring library")
-    require(type(rules["version"]) is int and rules["version"] == 1, "Unsupported AL20 scoring library.")
+    keys(rules, {"version", "routes", "profiles"} | ({"completion_policy"} if rules["version"] == 2 else set()), "AL20 scoring library")
+    require(type(rules["version"]) is int and rules["version"] in {1, 2}, "Unsupported AL20 scoring library.")
+    if rules["version"] == 2: require(rules["completion_policy"] == "cap_or_all_answers", "Unsupported AL20 completion policy.")
     expected = {"LEADER-AL20-" + r for r in catalogue["rules"]}
     require(isinstance(rules["routes"], dict) and set(rules["routes"]) == expected,
             "AL20 scoring must map all five supported funding routes.")
@@ -114,7 +115,7 @@ def is_guidance_update_v1(previous, current):
     All scoring definitions and existing source citations must remain identical.
     Changed/removed legal sources or scoring contracts need another migration.
     """
-    if previous["version"] != 1 or current["version"] != 1:
+    if previous["version"] not in {1, 2} or current["version"] != previous["version"]:
         return False
     comparison = deepcopy(current)
     if set(previous["profiles"]) != set(current["profiles"]):
@@ -189,54 +190,38 @@ def validate_answers(assessments, bundle):
     return assessments
 
 
+def is_completion_update(previous, current):
+    if previous["version"] != 1 or current["version"] != 2 or current["completion_policy"] != "cap_or_all_answers":
+        return False
+    comparable = deepcopy(current)
+    comparable["version"] = 1
+    del comparable["completion_policy"]
+    return is_guidance_update_v1(previous, comparable)
+
+
 def calculate(bundle, assessments, route):
-    profile = profile_for(bundle, route)
-    rows = assessments[route]["criteria"]
-    breakdown = []
-    for criterion in profile["criteria"]:
-        row = rows[criterion["id"]]
-        choices = choices_for(criterion, route)
-        method = criterion["method"]
-        issues = []
-        if method == "ratio":
-            grant, jobs = row["inputs"]["grant"], row["inputs"]["quality_jobs"]
-            complete = grant is not None and jobs is not None
-            selected = []
-            ratio = None
-            if complete and jobs > 0:
-                ratio = Decimal(str(grant)) / Decimal(str(jobs))
-                # The three strict boundaries are part of the PE.4 definitions.
-                for choice, boundary in zip(choices, criterion["parameters"]["boundaries"], strict=True):
-                    if ratio < points(boundary):
-                        selected = [choice["id"]]
-                        break
-            if not complete: issues.append("Enter the grant amount and qualifying quality jobs, or explicitly enter zero jobs.")
-        else:
-            selected = [c["id"] for c in choices if row["answers"][c["id"]] is True]
-            complete = all(v is not None for v in row["answers"].values())
-            if not complete: issues.append("Answer every applicable subcriterion, including explicit rejections.")
-            if method == "employment" and selected and row["inputs"]["qualifying_uta"] is not True:
-                complete = False
-                issues.append("Confirm the minimum one-year / 1 UTA condition. No undocumented part-time graduation is calculated; obtain GDR clarification if it is needed.")
-        applicable = not (method == "employment" and selected and row["inputs"]["qualifying_uta"] is not True)
-        raw = sum((points(c["points"]) for c in choices if applicable and c["id"] in selected), Decimal(0))
-        subtotal = min(raw, points(criterion["cap"]))
-        breakdown.append({"id": criterion["id"], "subtotal": float(subtotal), "uncapped": float(raw), "cap": float(points(criterion["cap"])),
-                          "complete": complete, "selected": selected, "issues": issues, "sources": deepcopy(criterion["sources"])})
-    unresolved = sum(not c["complete"] for c in breakdown)
-    subtotal = sum((Decimal(str(c["subtotal"])) for c in breakdown), Decimal(0))
-    threshold = bundle["rules"][route.removeprefix("LEADER-AL20-")]["minimum_score"]
-    location_basis = None
-    assessment = assessments[route]
-    if "location_lookup" in assessment and assessment["location_lookup"]["automated"]:
-        from .funding_statistics import dataset
-        metadata = assessment["location_lookup"]
-        location_basis = {"status": "provisional", "municipality": metadata["settings"]["municipality"], "year": dataset()["year"],
-                          "automated": deepcopy(metadata["automated"]), "dataset_id": metadata["dataset_id"]}
-    return {"route": route, "profile": bundle["selection"]["routes"][route], "basis": "Self-assessed; supporting references are not certified",
-            "subtotal": float(subtotal), "total": float(subtotal) if unresolved == 0 else None, "unresolved": unresolved,
-            "threshold": threshold, "result": "unknown" if unresolved else "pass" if subtotal >= Decimal(str(threshold)) else "fail",
-            "criteria": breakdown, "location_basis": location_basis}
+    from .funding_selection_v1 import calculate as original
+    result = original(bundle, assessments, route)
+    version = bundle["selection"]["version"]
+    if version == 1:
+        return result
+    require(version == 2 and bundle["selection"]["completion_policy"] == "cap_or_all_answers", "Unsupported scoring completion policy.")
+    definitions = {c["id"]: c for c in profile_for(bundle, route)["criteria"]}
+    for row in result["criteria"]:
+        definition = definitions[row["id"]]
+        answers = assessments[route]["criteria"][row["id"]]
+        answered = (all(v is not None for v in answers["inputs"].values()) if definition["method"] == "ratio" else all(v is not None for v in answers["answers"].values()))
+        maximum = Decimal(str(row["subtotal"])) == points(definition["cap"])
+        complete = row["complete"] or maximum
+        row.update(answers_complete=answered, score_complete=complete, complete=complete,
+                   completion_reason="cap_reached" if maximum else "calculation_complete" if complete and definition["method"] == "ratio" else "all_answered" if complete else "unresolved")
+        if maximum:
+            row["issues"] = [i for i in row["issues"] if i != "Answer every applicable subcriterion, including explicit rejections."]
+    result["unresolved"] = sum(not c["score_complete"] for c in result["criteria"])
+    result["total"] = result["subtotal"] if result["unresolved"] == 0 else None
+    result["result"] = "unknown" if result["unresolved"] else "pass" if result["subtotal"] >= result["threshold"] else "fail"
+    result["version"] = 2
+    return result
 
 
 def assess(entry, facts, bundle, assessments):

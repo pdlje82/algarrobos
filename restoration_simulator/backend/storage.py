@@ -466,11 +466,13 @@ class Store:
             return self.snapshot()
 
 
-    def project_concept_mutation(self, operation, revision, funding_revision, planning_revision, request_id, concept_id, concept=None, preview_hash=None, resolutions=None):
+    def project_concept_mutation(self, operation, revision, funding_revision, planning_revision, request_id, concept_id, concept=None, preview_hash=None, resolutions=None, choices=None):
         from . import project_concepts, planning_draft
         with self.lock:
             self.check()
-            fingerprint = funding.digest([operation, revision, funding_revision, planning_revision, concept_id, concept, preview_hash, resolutions])
+            fingerprint_values = [operation, revision, funding_revision, planning_revision, concept_id, concept, preview_hash, resolutions]
+            if operation in {"delivery_apply", "delivery_detach"}: fingerprint_values.append(choices)
+            fingerprint = funding.digest(fingerprint_values)
             if request_id in self.data["receipts"]:
                 require(self.data["receipts"][request_id] == fingerprint, "Request ID was reused with different project concept content.")
                 return self.snapshot()
@@ -481,6 +483,12 @@ class Store:
             if operation == "transfer":
                 candidate["funding"], candidate["planning"] = project_concepts.resolve_transfer(candidate, concept_id, preview_hash, resolutions)
                 candidate["funding_revision"] += 1
+            elif operation == "delivery_apply":
+                from .delivery_plans import apply
+                candidate["planning"] = apply(candidate, concept_id, choices, preview_hash)
+            elif operation == "delivery_detach":
+                require(candidate["planning"] is not None and "applied_delivery_plan" in candidate["planning"] and candidate["planning"]["applied_delivery_plan"]["concept_id"] == concept_id, "The applied delivery link is missing or changed. Review the current execution settings.")
+                del candidate["planning"]["applied_delivery_plan"]
             elif operation in {"edit", "unlink"}:
                 record = project_concepts.planning_record(candidate["planning"], concept_id)
                 if operation == "edit":

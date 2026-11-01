@@ -1,5 +1,76 @@
 # Funding Navigator
 
+## Shared delivery planning, capped criteria and pinned headers
+
+The project concept now includes **Monitoring, participation and sharing** for
+routes 3.4 and 3.5. Create an unresolved plan explicitly, or choose **Review
+existing planning values** and inspect both the retained execution values and
+their proposed interpretations before adopting them. Imported topics remain
+unreviewed: the app cannot distinguish a historical prefill from an intentional
+choice. Existing committed records and their replay remain unchanged.
+
+The shared plan covers comparison design, local novelty, combined baseline and
+follow-up methods, participation/public use, results sharing and online publication.
+Novelty and the three-year online-publication commitment are 3.4-specific; the
+publication topic appears within results sharing. Comparison is optional for 3.5.
+Monitoring may combine photographs, plant inventory/survival, vegetation cover,
+erosion notes, infiltration and a custom method. These are intentions, not measured
+data or complete ecological protocols. Each topic has review status, explanations,
+references and links to existing activities; sharing also records outputs,
+responsibility and publication location/timing. Editing a topic resets its review.
+
+The same plan appears in both workspaces and the deterministic brief. Reviewed
+two-way updates reconcile individual topic fields. Activity duplication remaps
+planning links; explicit activity removal shows and removes affected planning
+links and marks those topics for review. The legacy settings are shown as an
+execution snapshot rather than a second editable project plan. Existing own/partner
+simulations retain a clearly labelled standalone-settings path.
+
+In demonstrator planning, **Review execution settings** compares the reviewed
+delivery plan with current execution inputs. Nothing changes until confirmation.
+When combined monitoring cannot fit a legacy dropdown, choose a primary supported
+execution method; all monitoring intentions remain in the concept and applied
+snapshot. Unsupported custom mappings are explicit blockers. A generic heritage
+public-use intention is not silently converted into scheduled visits. A 3.5 concept
+cannot retain 3.4 simulator financing without resolution: choose supported own/
+partner funds explicitly or leave execution unchanged. No new grant mechanism is
+introduced. Applied snapshots identify later differences; detaching their tracking
+link is explicit and preserves current execution inputs/history.
+
+Related scoring selections now show an inline confirmation directly above the
+affected dropdown. The proposed value stays visible as **Awaiting confirmation**;
+points and accepted answers remain unchanged. Added prerequisites use amber;
+removals/replacements use red. Confirm the related changes together or keep the
+current answers. Previous/Next waits for this decision, while closing cancels the
+unconfirmed proposal. Notes and references entered during review are retained.
+
+Selection-library **version 2** counts a valid capped criterion as complete for
+scoring even when additional options remain unanswered. It displays **Maximum
+reached**, and unanswered siblings become **Optional for points** without changing
+their saved answer. Required employment/calculation conditions cannot be bypassed.
+Reaching 60 overall does not complete other unresolved criteria. Evidence readiness
+remains separate. Existing version-1 assessments retain their original evaluator;
+review the explicit catalogue update to adopt the new completion policy. Its
+preview shows the changed unresolved counts/totals without changing point values.
+
+The Node area has one pinned row for **Exploration**, **Programme**, **Route
+requirements** and **Funding routes**, aligned with horizontal scrolling and column
+resizing. It remains visible during compact node scrolling and expanded page
+scrolling, with existing theme colours and layering beneath editors/source viewers.
+
+`funding-delivery-plan-v1.json` is a separate validated library so the retained
+starter-library checksum does not change. Concepts optionally contain version-1
+`delivery_plan`; absence means no plan has been adopted. Planning drafts optionally
+contain `applied_delivery_plan`, preserving its delivery/activity and execution
+snapshots. Existing export envelope and concept versions remain supported.
+New services are `GET /api/funding/delivery-plan-guide`, read-only
+`POST /api/funding/delivery-plan/prepare` and
+`POST /api/demonstrator/delivery-plan-preview`, plus reviewed
+`POST /api/demonstrator/delivery-plan-apply` and explicit
+`POST /api/demonstrator/delivery-plan-detach`. Mutations use project/funding/planning
+revisions, request identities and atomic persistence; apply also validates the
+comparison hash. Failures retain drafts with explicit retry/recovery.
+
 ## Project concepts and individual scoring items
 
 Every selectable sub-node in all five AL20 assessments opens its own floating
