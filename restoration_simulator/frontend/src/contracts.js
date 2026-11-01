@@ -2,6 +2,7 @@ import defaults from "../../scenarios/defaults.json" with { type: "json" };
 import {validateStatisticsResponse} from "./fundingStatisticsState.js";
 import {validateEdlResponse} from "./fundingEdlState.js";
 import {validateGuideResponse} from "./fundingGuideState.js";
+import {validateProgrammesResponse} from "./fundingProgrammeState.js";
 
 export function required(value, message) {
   if (!value) throw new Error(message);
@@ -355,6 +356,7 @@ export function validateResponse(path, data) {
   if(path==="funding/statistics")return validateStatisticsResponse(data);
   if(path==="funding/edl")return validateEdlResponse(data);
   if(path==="funding/guides")return validateGuideResponse(data);
+  if(path==="funding/programmes")return validateProgrammesResponse(data);
   if(path==="funding/location-preview")return validateResponse("funding/context",data);
   if(path==="funding/context") {
     properties(data,["version","name","activity_key","baseline","overrides","selected","allocations","calendar_start","notes","bundle"],"funding context");

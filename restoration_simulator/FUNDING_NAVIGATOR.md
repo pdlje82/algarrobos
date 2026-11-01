@@ -1,5 +1,56 @@
 # Funding Navigator
 
+## Programme → route → requirements needing attention
+
+Choose **Programme or funding approach** above the graph. Search by programme
+name or route code; the picker groups all 99 catalogue entries under the six
+funding families. It includes programmes, programme families, mechanisms,
+historical examples and advisory approaches with explicit labels. AL20 combines
+its 12 routes, LIFE four entries, and Horizon Europe/Missions six entries. Other
+entries remain standalone approaches. Their source-cited introduction appears
+above the graph; expand **Read programme or approach guide** for the five guide
+sections, limitations, research questions and exact sources.
+
+Choose a route using its **Work** circle on the right. Only its backend-linked
+requirements appear. Single-option approaches select their sole route directly.
+An AL20 programme selection by itself asks no questions: the questionnaire starts
+after route selection. Clicking a title inspects that route without changing the
+working route; explicitly editing a requirement in its inspection selects it.
+
+Unresolved and conflicting requirements stay visible. Satisfied questions move
+into **Requirements met**, which can be expanded. The active question and its
+node positions are retained while editing; regrouping occurs after closing or
+advancing. An open annex remains available until collapsed. Previous/Next and
+question counts follow the route's displayed questions, including both inputs
+of composite conditions such as an income/SMI comparison. Your answers retains
+global answers and all five AL20 assessment summaries, including hidden answers.
+**Edit budget assumptions** in Build a funding plan opens the separate budget
+question flow; it remains available independently of the selected programme.
+
+**Other programme routes** reveals alternatives on the right. **Compare programme
+routes** displays their combined questions and aggregate connection states;
+**Route questions** restores the focused questionnaire. Search/shortlist filters
+cannot hide the working route or add unrelated questions. **Show amount questions**
+adds inputs needed for funding estimates. Own/partner existing-cash arrangements
+are displayed as financial calculations, not grant-eligibility questionnaires.
+
+Coverage labels distinguish modelled eligibility checks, amount calculations and
+reference-only routes. AL20 has five routes with modelled fit checks and seven
+guide-only routes. Selecting a guide-only route displays its researched
+introduction and sources, with no invented questions, points or eligibility
+result. Standalone guides appear once rather than being repeated in inspection.
+
+Programme/route focus, met-group expansion and comparison are session state.
+They are not saved as funding decisions. Switching focus retains all saved
+answers, notes and separate route assessments. A fresh session requests programme
+selection; source editions, draft versions and exports use their existing
+contracts. Metadata errors are explicit and retryable. A new read-only
+`GET /api/funding/programmes` supplies the validated presentation registry.
+
+Why route-first: a fresh business fixture has 34 top-level AL20 fit questions;
+individual routes use 6–18, before opening the annex. Met grouping reduces the
+remaining displayed questions further without deleting their answers.
+
 ## Funding introductions across all families
 
 All 92 research-only options have a plain-English introduction: **What is it?**,
@@ -395,7 +446,7 @@ updated relevant question set, preventing rapid navigation into obsolete questio
 
 Catalogue order, browsing filters, shortlist and source viewing are retained
 during input changes. Compact view pages up to 12 options in
-one family/shortlist. **Expand view** removes the internal height limit and shows
+the selected programme’s displayed routes. **Expand view** removes the internal height limit and shows
 all nodes in that scope using page scrolling; **Compact view** restores its
 scroll position. Click **Expand node area** above the canvas or **Expand node
 area completely** on the bar below it to reveal the full height of all displayed
@@ -479,20 +530,20 @@ initialise only the 3.4 participation answer. New parcel-linked baselines use th
 recorded parcel location; conflicting planning defaults remain visible for review.
 
 The answer overview uses compact rows with origin detail and Edit/Reset controls;
-phones disclose the actions per row. Graph opens by default and shows all
-fit nodes across the complete selected family/shortlist, including other pages.
-Question navigation and option inspection preserve their positions. Optional
-current-question focus and amount-condition controls change presentation only.
+phones disclose the actions per row. Graph shows the selected route’s
+requirements needing attention, or their programme-wide union in comparison.
+Question navigation and option inspection preserve their context. Comparison,
+met grouping and amount-question controls change presentation only.
 Circumstance nodes colour their linked Python conditions green (met), amber
-(unresolved) or red (conflicting). Mixed outcomes across programmes use a lavender
+(unresolved) or red (conflicting). Mixed outcomes across compared routes use a lavender
 surface and a segmented green/amber/red rail with labelled result counts. The
 working-option radio focuses colours and emphasised connections on one option.
 Card/title clicks only open details; they never change the working option or
 shortlist. Shortlist checkboxes are activated only through their inputs. The
 working choice survives question navigation, paging, filters and
 source viewing; the summary identifies when it is outside the displayed scope.
-Its requirements remain available in the graph. Clearing it restores the whole
-family/shortlist colour summary. This is session presentation state, reset by
+Its requirements remain available in the graph. Clearing it restores the
+programme’s route choices without a questionnaire. This is session presentation state, reset by
 loading another exploration or refreshing its context, and never saved/adopted
 into funding records. Amount-only nodes label their monetary effect explicitly.
 Clay selection outlines and changed-answer highlights retain the outcome colours.
@@ -500,7 +551,7 @@ Previous counts and reserved update/status slots prevent assessment/blur updates
 from moving controls during clicks.
 
 The People and land stop now gives the visual workspace its full width without
-a static answer panel. Select a circumstance node, **Answer questions**, or Edit
+a static answer panel. Select a circumstance node, **Answer route questions**, or Edit
 in the answer overview to open the modeless question editor. Clicking a graph node
 opens the editor below that node and the following node, keeping both nodes and
 their connection states visible. The final node uses the preceding node for context.

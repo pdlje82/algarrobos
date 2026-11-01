@@ -1,5 +1,53 @@
 # Funding Explorer guide research
 
+## Programme-level navigation and introductions · 1 November 2026
+
+The programme registry adds 80 explicit navigation parents for all 99 existing
+entries. Existing route IDs, research introductions and saved assessments are
+retained. Seventy-five standalone parents reuse their route guide directly;
+three grouped parents and two existing-cash approaches have their own overview.
+Descriptions label real programmes, programme families, mechanisms, historical
+examples and advisory support separately.
+
+| Parent | Explicit route membership | Overview sources |
+| --- | --- | --- |
+| LEADER AL20 | 3.1, 3.3, 3.4, 3.5, 3.6, 2.7, 1.11, 2.6, 1.7, 1.8, 1.9, 1.10 | Official Junta AL20 document listing; FUND-004 selection criteria; FUND-008 typologies. Five routes have modelled fit checks; seven remain guide-only. |
+| LIFE | EU-LIFE-NATURE, EU-LIFE-CLIMATE, EU-LIFE-GOVERNANCE, EU-LIFE-STRATEGIC | CINEA programme overview, existing FUND-016 work programme and official calls page. Four catalogue references are not an exhaustive list of LIFE topics. |
+| Horizon Europe and EU Missions | EU-HORIZON-NATURE-LIVINGLAB-2027, EU-HORIZON-NATURE-NETWORK-2027, EU-HORIZON-NATURE-MONITORING-2027, EU-HORIZON-CL6-BIODIV, EU-MISSION-SOIL, EU-MISSION-ADAPT | Commission programme overview and existing topic/Mission sources. Membership does not transfer one topic's conditions to another. |
+| Own/partner funds | SELF-FUNDS and PARTNER-FUNDS, each a separate approach | Existing catalogue/evaluator contribution semantics; FUND-003 general financing context. Reported contributions are assumptions, not verified receipts or grant eligibility. |
+
+Every other catalogue entry is a standalone parent; no additional programme
+relationships are inferred from similar titles or identifier prefixes. The
+machine-readable registry records the complete membership list and source IDs.
+Programme-level facts were checked against these primary publication pages on
+1 November 2026:
+
+- [Junta de Andalucía — AL20 territory, local strategy and aid annexes](https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores-al-al20.html).
+- [CINEA — LIFE programme overview](https://cinea.ec.europa.eu/programmes/life_en).
+- [European Commission — Horizon Europe programme overview](https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en).
+- [Download: European Commission — LIFE Multiannual Work Programme 2025–2027, 15 April 2025 (already stored as FUND-016)](https://cinea.ec.europa.eu/document/download/de5f9617-f5e5-4834-8477-e8aa03a85bf2_en?filename=C_2025_955_Multi-Annual+Work+Programme.PDF).
+- [Download: Junta de Andalucía — LEADER governing order, 3 February 2026 (already stored as FUND-008)](https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf).
+
+No additional PDFs were added for this registry. Existing source editions and
+download records below remain authoritative for the individual route guides.
+Overview examples are Algarrobos interpretations, not new legal eligibility
+rules or claims that a call is open. The current programme page establishes
+structure; exact route/call sources determine conditions and availability.
+
+Navigation rationale: the fresh business fixture has 34 top-level fit questions
+for AL20 as a whole, versus 6–18 for one of the five supported routes. Requiring
+a route first therefore provides the largest useful reduction. Collapsing met
+questions retains inspectable answers while prioritising unresolved/conflicting
+requirements. Guide-only routes remain discoverable without fake questionnaires.
+
+Programme-update verification: all 238 Python unittests and 83 frontend tests
+passed; the production build passed with its existing large-chunk advisory.
+Eight isolated browser workflows passed: programme navigation, annex selection,
+EDL references, population/business lookup, canvas height, editor/column geometry,
+saved-exploration recovery and introductions across all six funding families.
+They cover delayed/failed evaluations, malformed programme membership, explicit
+retry, an all-met financial input, global budget editing and phone themes.
+
 Reference edition: 2026-11-01. Research conducted 31 October–1 November 2026.
 
 All 92 research-only nodes have individually written introductions of 200–350 words, across public programmes (43), donations (13), contracts (7), ecosystem mechanisms (16), capital (7) and other support (6). The five AL20 assessments and two existing-cash arrangements retain their assessment behaviour.
@@ -296,7 +344,7 @@ FUND-003 (LIFE CUSTODIA, November 2025) supplies the exact instrument chapters f
 - **insurance**: FUND-003 - Nature Finance - Funding Instruments for Land Stewardship - 2025-11. Fundacion Global Nature / Fundacion Biodiversidad, LIFE CUSTODIA. FUND-003, PDF page 29. Checked 2026-11-01. Existing library report, November 2025, instrument 5. Conceptual financing discussion; no current product, buyer or local legal entitlement is established.
 - **compensation**: FUND-003 - Nature Finance - Funding Instruments for Land Stewardship - 2025-11. Fundacion Global Nature / Fundacion Biodiversidad, LIFE CUSTODIA. FUND-003, PDF page 28. Checked 2026-11-01. Existing library report, November 2025, instrument 4. Conceptual financing discussion; no current product, buyer or local legal entitlement is established.
 
-## Validation
+## Original route-guide verification
 
 - 69 funding backend tests and 5 document tests passed.
 - All 80 frontend unit tests passed.

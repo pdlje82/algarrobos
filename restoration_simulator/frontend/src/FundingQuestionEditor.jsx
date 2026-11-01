@@ -23,12 +23,16 @@ export function FundingQuestionEditor({question,anchor,positionLabel,onClose,chi
     if(reveal){
       let context=bounds();
       const panel=graph.panel.getBoundingClientRect();
+      // A selected route card can leave the first question just above the viewport.
+      // Reveal clipped context upwards too, before reserving space for the editor.
+      if(context.top<panel.top+16){graph.panel.scrollBy({top:context.top-panel.top-16,behavior:"instant"});context=bounds();}
+      if(context.top<16){window.scrollBy({top:context.top-16,behavior:"instant"});context=bounds();}
       const naturalHeight=root.current.querySelector(".funding-editor-header").offsetHeight+root.current.querySelector(".funding-editor-body").scrollHeight+2;
       // Scroll the diagram first, retaining both nodes. Only move the page
       // when its surrounding controls leave too little room below the graph.
-      graph.panel.scrollBy({top:Math.min(fundingEditorContextShift(context,viewport(),naturalHeight),Math.max(0,context.top-Math.max(8,panel.top+8))),behavior:"instant"});
+      graph.panel.scrollBy({top:Math.min(fundingEditorContextShift(context,viewport(),naturalHeight),Math.max(0,context.top-Math.max(16,panel.top+16))),behavior:"instant"});
       context=bounds();
-      window.scrollBy({top:Math.min(fundingEditorContextShift(context,viewport(),naturalHeight),Math.max(0,context.top-8)),behavior:"instant"});
+      window.scrollBy({top:Math.min(fundingEditorContextShift(context,viewport(),naturalHeight),Math.max(0,context.top-16)),behavior:"instant"});
     }
     return bounds();
   }

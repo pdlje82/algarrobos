@@ -11,7 +11,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   page=await browser.newPage({viewport:{width:1440,height:2560},hasTouch:true,reducedMotion:'reduce'});page.setDefaultTimeout(12000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(url);await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await page.getByRole('button',{name:'2. People and land',exact:true}).click();
   const visual=page.getByLabel('Live funding consequences',{exact:true}),graph=visual.locator('.funding-diagram-scroll'),bar=visual.locator('.funding-node-height-toggle'),expand=visual.getByRole('button',{name:'Expand node area',exact:true});
-  await graph.waitFor();await poll(async()=>/Saved to this computer/.test(await page.getByRole('status',{name:'Funding save status',exact:true}).locator('strong').innerText()));
+  await graph.waitFor();await visual.getByLabel('Programme or funding approach',{exact:true}).selectOption('LEADER-AL20');await visual.getByRole('button',{name:'Compare programme routes',exact:true}).click();await poll(async()=>/Saved to this computer/.test(await page.getByRole('status',{name:'Funding save status',exact:true}).locator('strong').innerText()));
   const savedDraft=JSON.stringify((await api('funding')).attachment.draft),initial=(await graph.boundingBox()).height;
   assert(initial<=902,'Default canvas retains its normal height cap');
   assert.equal(await visual.getByRole('separator',{name:'Resize node area height',exact:true}).count(),0,'No vertical drag control remains');
@@ -25,7 +25,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await visual.getByRole('button',{name:'Collapse node area',exact:true}).click();
   await poll(async()=>Math.abs((await graph.boundingBox()).height-initial)<3);assert.equal(await graph.evaluate(n=>n.scrollTop),200);assert(await bar.evaluate(n=>n===document.activeElement));
   await expand.focus();await page.keyboard.press('Enter');await poll(async()=>await graph.evaluate(n=>n.scrollHeight<=n.clientHeight+1));
-  await visual.getByRole('button',{name:'Focus current question',exact:true}).click();await visual.getByRole('button',{name:'All fit requirements',exact:true}).click();assert.equal(await bar.getAttribute('aria-expanded'),'true');
+  await visual.getByRole('button',{name:'Route questions',exact:true}).click();await visual.getByRole('button',{name:'Compare programme routes',exact:true}).click();assert.equal(await bar.getAttribute('aria-expanded'),'true');
   await bar.focus();await page.keyboard.press('Space');await poll(async()=>Math.abs((await graph.boundingBox()).height-initial)<3);
   // On narrow screens, click/tap toggles full height and horizontal graph scroll remains available.
   await page.setViewportSize({width:390,height:844});await visual.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();const phone=(await graph.boundingBox()).height;

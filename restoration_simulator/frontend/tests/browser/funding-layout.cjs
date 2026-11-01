@@ -17,6 +17,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await page.getByRole('button',{name:'Choose activity',exact:true}).click();await page.locator('#funding-activity').selectOption('business');await settled();await page.getByText('Exploration draft saved.',{exact:true}).waitFor();
   await page.getByRole('button',{name:'2. People and land',exact:true}).click();assert.equal(await page.locator('.funding-main').count(),0);assert.equal(await editor.count(),0);
   assert.equal(await visual.getByRole('button',{name:'Graph',exact:true}).count(),0);assert.equal(await visual.getByRole('button',{name:'Matrix',exact:true}).count(),0);await visual.evaluate(n=>n.scrollIntoView({block:'start'}));
+  await visual.getByLabel('Programme or funding approach',{exact:true}).selectOption('LEADER-AL20');await visual.locator('.funding-graph-option[data-option-id="LEADER-AL20-2.7"]').getByRole('radio',{name:'Work on LEADER-AL20-2.7',exact:true}).check();
   const graph=visual.locator('.funding-diagram-scroll'),node=visual.locator('[data-question-id="applicant_choice"]');
   const positions=()=>visual.locator('.funding-circumstance,.funding-graph-option').evaluateAll(ns=>ns.map(n=>[n.dataset.questionId||n.dataset.optionId,n.style.left,n.style.top,n.style.width]));
   async function belowPair(selected){
@@ -25,9 +26,9 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
    assert(box.y>=bottom+11,'Editor leaves both circumstance nodes and their connections above it');
    const height=page.viewportSize().height;
    assert(box.y+box.height<=height+1&&box.height>=200,'Editor stays reachable below the nodes');
-   for(const rect of geometry.pair){assert(rect.top>=Math.max(0,geometry.panel.top)-1&&rect.bottom<=Math.min(height,geometry.panel.bottom)+1,'Both context nodes remain in view');}
+   for(const rect of geometry.pair){assert(rect.top>=Math.max(0,geometry.panel.top)-1&&rect.bottom<=Math.min(height,geometry.panel.bottom)+1,'Both context nodes remain in view: '+JSON.stringify({geometry,box,height,windowY:await page.evaluate(()=>scrollY)}));}
   }
-  const initial=await positions();
+  let initial=await positions();
   await node.click();await belowPair(node);
   const next=visual.locator('.funding-circumstance').nth(1);await next.click();await belowPair(next);assert.equal(await page.locator(':focus').getAttribute('id'),'funding-municipality');
   await page.screenshot({path:'test-artifacts/funding-editor-below-two-nodes.png'});
@@ -51,6 +52,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await handle.focus();const beforeKey=await editor.boundingBox();await page.keyboard.press('ArrowRight');assert(Math.abs((await editor.boundingBox()).x-beforeKey.x-10)<2);
   grip=await handle.boundingBox();await page.mouse.move(grip.x+60,grip.y+15);await page.mouse.down();await page.mouse.move(-100,-100,{steps:8});await page.mouse.up();moved=await editor.boundingBox();assert(moved.x>=8&&moved.y>=8);
   await page.keyboard.press('Escape');assert.equal(await editor.count(),0);assert(await node.evaluate(n=>n===document.activeElement));
+  initial=await positions();
   // Both dividers resize HTML nodes and their SVG connectors without funding requests.
   let assessments=0;page.on('request',r=>{if(r.url().endsWith('/funding/visualise'))assessments++;});
   const first=graph.getByRole('separator',{name:'Resize exploration and circumstances columns',exact:true}),second=graph.getByRole('separator',{name:'Resize circumstances and funding options columns',exact:true});
@@ -60,7 +62,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   assert(Math.abs(Number(await first.getAttribute('aria-valuenow'))-firstBefore-70)<2);assert.notDeepEqual(await positions(),initial);
   const path=await graph.locator('svg path').first().getAttribute('d');assert(!path.includes('NaN'));
   await second.focus();const secondBefore=Number(await second.getAttribute('aria-valuenow'));await page.keyboard.press('Shift+ArrowLeft');assert.equal(Number(await second.getAttribute('aria-valuenow')),secondBefore-40);
-  const resized=await positions();await visual.getByRole('button',{name:'Focus current question',exact:true}).click();await visual.getByRole('button',{name:'All fit requirements',exact:true}).click();assert.deepEqual(await positions(),resized);
+  const resized=await positions();await visual.getByRole('button',{name:'Compare programme routes',exact:true}).click();await visual.getByRole('button',{name:'Route questions',exact:true}).click();assert.deepEqual(await positions(),resized);
   await second.focus();await page.keyboard.press('Home');assert.equal(await second.getAttribute('aria-valuenow'),await second.getAttribute('aria-valuemin'));await page.keyboard.press('End');assert.equal(await second.getAttribute('aria-valuenow'),await second.getAttribute('aria-valuemax'));
   await visual.getByRole('button',{name:'Reset column widths',exact:true}).click();assert.deepEqual(await positions(),initial);assert.equal(assessments,0);
   // Clicking another node re-anchors even after a manual drag. The last node
@@ -70,20 +72,21 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await page.getByRole('button',{name:'Close question editor',exact:true}).click();
   await visual.getByRole('button',{name:'Expand view',exact:true}).click();await last.click();await belowPair(last);
   await page.getByRole('button',{name:'Close question editor',exact:true}).click();await visual.getByRole('button',{name:'Compact view',exact:true}).click();
+  await graph.locator('.funding-requirements-met').click();
   const municipality=visual.locator('[data-question-id="municipality"]');await municipality.click();await belowPair(municipality);
   await page.getByRole('button',{name:'Close question editor',exact:true}).click();
-  await visual.getByRole('button',{name:'Answer questions',exact:true}).click();assert.equal(await page.locator('#funding-municipality').inputValue(),'Terque');
+  await visual.getByRole('button',{name:'Answer route questions',exact:true}).click();assert.equal(await page.locator('#funding-municipality').inputValue(),'Terque');
   await page.screenshot({path:'test-artifacts/funding-floating-editor-desktop.png'});
   for(const theme of ['light','dark']){
    await page.getByRole('button',{name:'Close question editor',exact:true}).click();await page.getByLabel('Theme',{exact:true}).selectOption(theme);await page.setViewportSize({width:390,height:844});
    assert.equal(await graph.getByRole('separator').count(),0);
-   await visual.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();await visual.getByRole('button',{name:'Answer questions',exact:true}).click();
+   await visual.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();await visual.getByRole('button',{name:'Answer route questions',exact:true}).click();
    const bounds=await editor.boundingBox();assert(bounds.x>=0&&bounds.x+bounds.width<=390&&bounds.y>=0&&bounds.y+bounds.height<=844);
    await page.locator('#funding-municipality').selectOption('Ohanes');await settled();assert.equal(await page.locator('#funding-municipality optgroup option').count(),32);
    await page.screenshot({path:`test-artifacts/funding-floating-editor-${theme}-phone.png`});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
    await page.getByRole('button',{name:'Close question editor',exact:true}).click();await visual.getByRole('button',{name:'Collapse funding visual workspace',exact:true}).click();
    // Reopen for the next iteration, keeping the graph and editor available.
-   await visual.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();await visual.getByRole('button',{name:'Answer questions',exact:true}).click();await visual.getByRole('button',{name:'Collapse funding visual workspace',exact:true}).click();
+   await visual.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();await visual.getByRole('button',{name:'Answer route questions',exact:true}).click();await visual.getByRole('button',{name:'Collapse funding visual workspace',exact:true}).click();
   }
   await page.getByRole('button',{name:'Close question editor',exact:true}).click();
   await poll(async()=>!(await api('funding')).attachment.draft.overrides.municipality.includes('Terque'));

@@ -1,5 +1,22 @@
 # Funding Navigator changes
 
+## 2026-11-01 — programme and route focused requirements
+
+- Added the source-cited programme/approach registry and read-only programmes
+  endpoint: 80 navigation parents covering all 99 catalogue entries, including
+  shared AL20, LIFE and Horizon/Mission introductions and existing-cash guides.
+- Programme selection presents its overview and routes first. Selecting a route
+  shows only its authoritative dependencies; satisfied requirements collapse
+  into Requirements met. Editing retains node order and an open annex remains
+  accessible. Previous/Next now follows the route's displayed requirements.
+- Added comparison of all programme routes, an explicit other-routes control,
+  amount questions and separate coverage labels for modelled checks, financial
+  calculations and researched descriptions. Global answers remain accessible.
+- Source viewing and inspection retain route focus; editing another route's
+  requirement selects it. Programme metadata failures are explicit/retryable.
+- No scoring rules, draft/export versions or saved snapshots are migrated.
+  Programme/route focus and display settings remain transient.
+
 ## 2026-11-01 — introductions for every research-only funding option
 
 - Added 92 individually written, source-cited introductions across all six families,

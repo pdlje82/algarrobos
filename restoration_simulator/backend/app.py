@@ -329,6 +329,11 @@ def create_app(save_path=None):
         from .funding_guides import describe
         return describe()
 
+    @app.get("/api/funding/programmes")
+    def funding_programme_library():
+        from .funding_programmes import describe
+        return describe()
+
     @app.post("/api/funding/location-preview")
     def funding_location_preview(req: FundingLocationRequest):
         from .funding_statistics import apply

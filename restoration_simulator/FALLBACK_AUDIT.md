@@ -17,6 +17,20 @@ The frozen replay modules were reviewed for compatibility boundaries and preserv
 
 ## Changes
 
+Programme graph (1 November 2026): a validated presentation registry explicitly
+assigns every current catalogue entry to one programme/approach and resolves
+source-cited introductions. Missing memberships, incompatible versions, invalid
+sources and failed reads/requests are visible errors; no inferred prefix grouping
+or replacement guide is used at runtime. A historical snapshot can omit newer
+registry members, but each entry it contains still needs an explicit membership.
+Display defaults are required from the registry, not duplicated in React.
+Existing-cash checks retain their frozen evaluator results; only the declared
+available-contribution financial check is displayed under amount questions. Any
+unexpected cash dependency requires an explicit presentation update. Met grouping
+uses accepted backend results and retains active editor membership/positions.
+Historical evaluation semantics are unchanged. This is not a repository-wide
+audit of all existing funding paths.
+
 Funding graph workspace (1 November 2026): Matrix presentation state is removed;
 Your answers receives authoritative per-route AL20 results. Missing route scores
 raise an actionable incompatibility error. Full-view scroll restoration records

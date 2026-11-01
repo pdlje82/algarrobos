@@ -58,10 +58,11 @@ export function selectionBranchConnections(rows,left,width,assessmentTop){
   }
   return edges;
 }
-export function selectionGraphLayout(questions,branch){
+export function selectionGraphLayout(questions,branch,metGroup=null){
   const tops=new Map(),rows=[];
-  let y=44;
+  let y=44,metHeaderTop=null;
   for(const q of questions){
+    if(metGroup!==null&&metHeaderTop===null&&metGroup.ids.includes(q.id)){metHeaderTop=y;y+=80;}
     tops.set(q.id,y);y+=132;
     if(q.id!=="selection_score"||!branch.open)continue;
     rows.push({kind:"route",top:y,height:132});y+=148;
@@ -78,5 +79,6 @@ export function selectionGraphLayout(questions,branch){
     }
     rows.push({kind:"total",top:y,height:112});y+=132;
   }
-  return {tops,rows,height:y+24};
+  if(metGroup!==null&&metHeaderTop===null){metHeaderTop=y;y+=80;}
+  return {tops,rows,height:y+24,metHeaderTop};
 }

@@ -8,6 +8,8 @@ import {DEFAULT_FUNDING_COLUMNS,fundingColumns,resizeFundingColumn} from "./fund
 import {FundingSelectionBranch} from "./FundingSelection.jsx";
 import {selectionGraphLayout,selectionProfile,selectionSummary,selectionBranchConnections} from "./fundingSelectionState.js";
 import {FundingWorkingOption} from "./FundingWorkingOption.jsx";
+import {FundingProgrammes} from "./FundingProgrammes.jsx";
+import {programmeMembers,routeCoverage} from "./fundingProgrammeState.js";
 
 function Evidence({sources}) {
   return <ul className="funding-sources">{sources.map((s,i)=><li key={i}><DocumentLink documentId={s.document_id} page={s.page} expectedSha256={s.sha256}>{s.label}</DocumentLink></li>)}</ul>;
@@ -19,12 +21,14 @@ function Changed({change}) {
   return <span className="funding-change-label">{labels.filter(Boolean).join(" · ")}</span>;
 }
 
-export function FundingVisualisation({annex=null,value,changes,latestFields,pending,failure,onRetry,results,catalogue,draft,currentField,onQuestion,editorOpen,canEditQuestions,onEditQuestions,navigation,inspected,onInspect,workingOption,onWork,renderOption,questions:questionStates}) {
-  const [family,setFamily]=useState(Object.keys(catalogue.groups)[0]);
+export function FundingVisualisation({annex=null,displayConditions,programmeState,programme,programmeDisplay,onProgramme,onDisplay,routeScope,groupedMetIds,displayedQuestions,value,changes,latestFields,pending,failure,onRetry,results,catalogue,draft,currentField,onQuestion,editorOpen,canEditQuestions,onEditQuestions,navigation,inspected,onInspect,workingOption,onWork,renderOption,questions:questionStates}) {
+  const family=programme===null?null:programme.family;
   const [page,setPage]=useState(0), [shortlistOnly,setShortlistOnly]=useState(false);
+  useEffect(()=>{setShortlistOnly(false);setPage(0);},[programme===null?null:programme.id]);
   const [expanded,setExpanded]=useState(false);
   const [fullView,setFullView]=useState(false);
-  const [focusCurrent,setFocusCurrent]=useState(false),[showAmount,setShowAmount]=useState(false);
+  const showAmount=programmeDisplay!==null&&programmeDisplay.show_amount;
+  const comparing=programmeDisplay!==null&&programmeDisplay.compare;
   const [diagramWidth,setDiagramWidth]=useState(800);
   const [columnSplits,setColumnSplits]=useState(DEFAULT_FUNDING_COLUMNS),[wide,setWide]=useState(()=>matchMedia("(min-width:1001px)").matches);
   const [resizing,setResizing]=useState(null),columnDrag=useRef(null);
@@ -63,25 +67,30 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
   const allResults=value?.assessment.results ?? [];
   const facts=value?.assessment.facts;
   const changed=new Map((changes?.options ?? []).map(c=>[c.id,c]));
-  const scope=visualScope(results,{group:family,shortlistOnly,selected:draft.selected,page,expanded:fullView});
-  // Filters may shorten a page. Clamp the display without changing catalogue order.
+  const memberIds=programme===null?[]:programmeMembers(programme,catalogue);
+  const allProgrammeRows=allResults.filter(r=>memberIds.includes(r.id));
+  const filteredIds=new Set(results.map(r=>r.id));
+  const programmeRows=allProgrammeRows.filter(r=>r.id===workingOption||filteredIds.has(r.id)&&(!shortlistOnly||draft.selected.includes(r.id)));
+  const onlyWorking=workingOption!==null&&!comparing&&programmeDisplay!==null&&!programmeDisplay.show_other_routes;
+  const rows=onlyWorking?programmeRows.filter(r=>r.id===workingOption):programmeRows;
+  const scope=visualScope(rows,{group:family,shortlistOnly:false,selected:draft.selected,page,expanded:fullView});
   const displayedPage=Math.min(page,scope.pages-1);
-  const visible=displayedPage===page ? scope : visualScope(results,{group:family,shortlistOnly,selected:draft.selected,page:displayedPage,expanded:fullView});
-  const counts=fundingCounts(results);
+  const visible=displayedPage===page?scope:visualScope(rows,{group:family,shortlistOnly:false,selected:draft.selected,page:displayedPage,expanded:fullView});
+  const counts=fundingCounts(allProgrammeRows);
   const option=allResults.find(r=>r.id===inspected);
   const working=allResults.find(r=>r.id===workingOption);
-  const conditions=model?.conditions ?? [];
-  const fullScope=visualScope(results,{group:family,shortlistOnly,selected:draft.selected,page:0,expanded:true});
-  const scopeIds=fullScope.options.map(r=>r.id);
-  const questions=graphQuestions(questionStates,conditions,workingOption===null?scopeIds:[...new Set([...scopeIds,workingOption])],{focus:focusCurrent,currentField,showAmount});
-  const nodeStates=new Map(questions.map(q=>[q.id,graphAnswerStatus(q.id,conditions,scopeIds,{workingOption,showAmount})]));
+  const conditions=displayConditions===null?[]:displayConditions;
+  const scopeIds=comparing?memberIds:workingOption===null?[]:[workingOption];
+  const questions=displayedQuestions;
+  const nodeStates=new Map(questions.map(q=>[q.id,graphAnswerStatus(q.id,conditions,scopeIds,{workingOption:comparing?null:workingOption,showAmount})]));
   const workingFields=new Set(conditions.filter(c=>c.option_id===workingOption&&(c.effect==="eligibility"||showAmount)).flatMap(c=>c.fields));
   if(model!==undefined&&![1,2].includes(model.version))throw Error("Unsupported funding graph response. Restart the backend and refresh the app.");
   if(model!==undefined&&draft.version===4&&(model.version!==2||!model.annex||model.annex.version!==1))throw Error("The AL20 graph response is incomplete. Restart the backend and retry assessment.");
   const annexProfile=annex!==null&&annex.route!==null?selectionProfile(draft,annex.route):null;
   const annexScore=model?.version===2&&annex!==null&&annex.route!==null?model.annex.routes[annex.route]:null;
   if(model?.version===2&&annex!==null&&annex.route!==null&&!annexScore)throw Error("The selected AL20 route assessment is missing. Retry assessment.");
-  const layout=selectionGraphLayout(questions,{open:annex!==null&&annex.open,route:annex===null?null:annex.route,profile:annexProfile,groups:annex===null?[]:annex.groups});
+  const metIds=routeScope===null?[]:routeScope.met.map(q=>q.id);
+  const layout=selectionGraphLayout(questions,{open:annex!==null&&annex.open,route:annex===null?null:annex.route,profile:annexProfile,groups:annex===null?[]:annex.groups},metIds.length===0&&groupedMetIds.length===0?null:{ids:groupedMetIds});
   const questionY=q=>layout.tops.get(q.id)+48;
   const diagramHeight=Math.max(layout.height,Math.max(1,visible.options.length)*132+48);
   function toggleNodeHeight(e){
@@ -163,39 +172,37 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
         <strong>{c.effect==="amount" ? "Amount condition" : "Fit condition"} · {conditionText(c)}</strong>
         <p>{c.message}</p>
         {c.effect==="amount" && c.value!==null && <p>Input / uncapped addition: {money(c.value)}. The overall conditional estimate remains subject to the assessment’s caps and conditions.</p>}
-        <div>{c.fields.map(id=>{const q=questionStates.find(q=>q.id===id);return <button type="button" key={id} onClick={e=>onQuestion(id,e.currentTarget)}>{q.label}: {q.display_value}</button>;})}</div>
+        <div>{c.fields.map(id=>{const q=questionStates.find(q=>q.id===id);return <button type="button" key={id} onClick={e=>onQuestion(id,e.currentTarget,r.id)}>{q.label}: {q.display_value}</button>;})}</div>
         <Evidence sources={c.sources}/>
       </div>)}
     </div>;
   }
   return <aside ref={visualRoot} className={`panel funding-visual ${fullView ? "is-full" : ""}`} aria-label="Live funding consequences">
     <div className="funding-visual-heading"><h2>Funding possibilities</h2>
-    <div className="funding-visual-status" role="status">{value!==null&&<span className="funding-visual-counts">{[["matches","meet modelled fit conditions"],["needs_answers","need your answers"],["conflicts","conflict with current scenario"],["unimplemented","reference options"]].map(([key,label])=><span className={`funding-metric funding-outcome-${key}`} key={key}>{counts[key]} {label}<FundingHelp label={label}>{FUNDING_HELP[key]}</FundingHelp></span>)}</span>}<span className="funding-assessment-notice">{pending ? value ? "Updating—showing previous assessment" : "Updating funding assessment…" : failure ? value ? "Assessment failed—showing previous assessment" : "Assessment unavailable" : ""}</span></div>
+    <div className="funding-visual-status" role="status">{value!==null&&programme!==null&&<span className="funding-visual-counts">{[["matches","meet modelled fit conditions"],["needs_answers","need your answers"],["conflicts","conflict with current scenario"],["unimplemented","reference options"]].map(([key,label])=><span className={`funding-metric funding-outcome-${key}`} key={key}>{counts[key]} {label}<FundingHelp label={label}>{FUNDING_HELP[key]}</FundingHelp></span>)}</span>}<span className="funding-assessment-notice">{pending ? value ? "Updating—showing previous assessment" : "Updating funding assessment…" : failure ? value ? "Assessment failed—showing previous assessment" : "Assessment unavailable" : ""}</span></div>
     {navigation}</div>
     {failure && <div role="alert"><p>{failure}</p><button type="button" onClick={onRetry}>Retry assessment</button></div>}
     <button type="button" className="funding-mobile-expand" aria-expanded={expanded} onClick={()=>setExpanded(v=>!v)}>{expanded ? "Collapse" : "Expand"} funding visual workspace</button>
     <div className={`funding-visual-body ${expanded ? "is-expanded" : ""}`}>
-      <div className="funding-visual-controls"><div className="funding-visual-toolbar" role="group" aria-label="Funding visual view"><button type="button" className="funding-edit-questions" disabled={!canEditQuestions} aria-haspopup="dialog" aria-controls="funding-answer-editor" aria-expanded={editorOpen} onClick={onEditQuestions}>Answer questions</button><button type="button" aria-expanded={fullView} onClick={toggleFullView}>{fullView ? "Compact view" : "Expand view"}</button><button type="button" aria-pressed={shortlistOnly} onClick={()=>{setShortlistOnly(v=>!v);setPage(0);}}>{shortlistOnly ? "Show family options" : `Focus shortlist (${draft.selected.length})`}</button></div>
-      <label className="funding-family-chooser">Funding family<select aria-label="Funding family" value={shortlistOnly ? "shortlist" : family} onChange={e=>{if(e.target.value==="shortlist"){setShortlistOnly(true);}else{setFamily(e.target.value);setShortlistOnly(false);}setPage(0);}}>{Object.entries(catalogue.groups).map(([id,label])=><option key={id} value={id}>{label} ({results.filter(r=>r.group===id).length} in scope / {catalogue.entries.filter(e=>e.group===id).length} total){results.filter(r=>r.group===id&&changed.has(r.id)).length>0?` · ${results.filter(r=>r.group===id&&changed.has(r.id)).length} affected`:""}</option>)}<option value="shortlist">Shortlist ({draft.selected.length})</option></select></label>
-      </div>
+      <FundingProgrammes state={programmeState} selected={programme===null?null:programme.id} onSelect={id=>{setPage(0);onProgramme(id);}} catalogue={catalogue} conditions={displayConditions}/>
+      <div className="funding-visual-controls"><div className="funding-visual-toolbar" role="group" aria-label="Funding graph controls"><button type="button" className="funding-edit-questions" disabled={!canEditQuestions||questions.length===0} aria-haspopup="dialog" aria-controls="funding-answer-editor" aria-expanded={editorOpen} onClick={onEditQuestions}>Answer route questions</button><button type="button" aria-expanded={fullView} onClick={toggleFullView}>{fullView?"Compact view":"Expand view"}</button><button type="button" aria-pressed={shortlistOnly} onClick={()=>{setShortlistOnly(v=>!v);setPage(0);}}>{shortlistOnly?"Show programme routes":`Focus shortlist (${draft.selected.length})`}</button></div></div>
       <div className="funding-working-summary" role="status" aria-label="Working funding option">
-        {workingOption===null?<span>Choose the circle in a funding option to work on it. Colours currently summarise this family/shortlist.</span>:<>
-          <span title={working?.title}><strong>Working option: {workingOption}</strong>. Controls answer colours.
+        {workingOption===null?<span>Choose a funding route on the right to see only its requirements. Programme introductions are available above.</span>:<>
+          <span title={working?.title}><strong>Working option: {workingOption}</strong>. {comparing?"Comparing all programme routes.":"Showing this route’s requirements."}
             {!visible.options.some(r=>r.id===workingOption)&&" It is outside the displayed page/family or current filters."}
             {value!==null&&!working&&" Its assessment is unavailable; retry the assessment or clear the working option."}</span>
           <button type="button" onClick={()=>onInspect(workingOption)}>View working option</button>
           <button type="button" onClick={()=>onWork(null)}>Clear working option</button>
         </>}
       </div>
-      <div className="funding-graph-controls"><div role="group" aria-label="Graph requirement scope"><button type="button" aria-pressed={!focusCurrent} onClick={()=>setFocusCurrent(false)}>All fit requirements</button><button type="button" aria-pressed={focusCurrent} onClick={()=>setFocusCurrent(true)}>Focus current question</button></div><label className="funding-pick"><input type="checkbox" checked={showAmount} onChange={e=>setShowAmount(e.target.checked)}/>Show amount conditions</label>{wide&&<button type="button" onClick={()=>setColumnSplits(DEFAULT_FUNDING_COLUMNS)}>Reset column widths</button>}{currentField&&!questions.some(q=>q.id===currentField)&&<span>The current question has no visible modelled fit connection.</span>}</div>
+      {programmeDisplay!==null&&programme!==null&&<div className="funding-graph-controls"><div role="group" aria-label="Graph requirement scope"><button type="button" aria-pressed={!comparing} onClick={()=>onDisplay({...programmeDisplay,compare:false})}>Route questions</button><button type="button" aria-pressed={comparing} onClick={()=>onDisplay({...programmeDisplay,compare:true})}>Compare programme routes</button></div><label className="funding-pick"><input type="checkbox" checked={showAmount} onChange={e=>onDisplay({...programmeDisplay,show_amount:e.target.checked})}/>Show amount questions</label>{wide&&<button type="button" onClick={()=>setColumnSplits(DEFAULT_FUNDING_COLUMNS)}>Reset column widths</button>}{workingOption!==null&&memberIds.length>1&&!comparing&&<button type="button" aria-expanded={programmeDisplay.show_other_routes} onClick={()=>onDisplay({...programmeDisplay,show_other_routes:!programmeDisplay.show_other_routes})}>Other programme routes ({memberIds.length-1})</button>}{routeScope!==null&&<span role="status">{routeScope.attention.length} needing attention · {routeScope.met.length} met · {routeScope.all.length} total questions</span>}</div>}
       {draft.version===4&&draft.legacy_selection_score!==null&&<p className="funding-selection-legacy">Previous manual AL20 score: {draft.legacy_selection_score} points · historical information only; not used in the annex calculation.</p>}
-      <div className="funding-scope-bar"><p>{results.length} in browsing scope · {catalogue.entries.length} catalogue entries. {shortlistOnly ? "Shortlist focus" : catalogue.groups[family]} · {fullView ? `Showing all ${scope.count} options; scroll the explorer` : `Page ${displayedPage+1} of ${scope.pages} · ${scope.count} options`}{results.filter(r=>changed.has(r.id)&&!visible.options.some(v=>v.id===r.id)).length>0&&` · ${results.filter(r=>changed.has(r.id)&&!visible.options.some(v=>v.id===r.id)).length} affected outside this page/family`}</p>
-      <div className="funding-actions">{!fullView&&<><button type="button" disabled={displayedPage===0} onClick={()=>setPage(displayedPage-1)}>Previous options</button><button type="button" disabled={displayedPage>=scope.pages-1} onClick={()=>setPage(displayedPage+1)}>Next options</button></>}{inspected && <button type="button" onClick={()=>onInspect(null)}>Clear inspection</button>}</div></div>
-      <details className="funding-view-help"><summary>How to read this view</summary><p className="funding-feedback-key">Use the circle to choose one working option for answer colours and emphasised connections. Clicking a card opens its details without changing the working option. Shortlist checkboxes are separate; only clicking the control changes a checked selection. Working on an option does not adopt a plan or create an application.</p><p>Inset outlines show the effects of your latest answer. Fit nodes cover this family/shortlist and the working option, including options on other pages. Question navigation keeps their positions. Focus current question shows only the active question.</p><p className="funding-network-explanation">All applicable requirements must be satisfied. A single connection does not establish eligibility. Amount connections affect the conditional estimate; call availability is separate. Neutral scope connections describe activity browsing only.</p></details>
-      {value && <><p className="funding-network-legend">All applicable requirements must be satisfied. ✓ Meets · × Conflicts · ? Unresolved · {workingOption===null?"Mixed: results differ across programmes. Choose a working option for its colours.":`Colours and emphasised connections: ${workingOption}.`} Call availability is separate from fit.</p>
+      <div className="funding-scope-bar"><p>{programme===null?"Choose a programme to see its routes.":`${programme.title} · ${memberIds.length} routes · ${fullView?`Showing ${scope.count} routes`:`Page ${displayedPage+1} of ${scope.pages} · ${scope.count} displayed routes`}`}</p><div className="funding-actions">{!fullView&&scope.pages>1&&<><button type="button" disabled={displayedPage===0} onClick={()=>setPage(displayedPage-1)}>Previous options</button><button type="button" disabled={displayedPage>=scope.pages-1} onClick={()=>setPage(displayedPage+1)}>Next options</button></>}{inspected&&<button type="button" onClick={()=>onInspect(null)}>Clear inspection</button>}</div></div>
+      <details className="funding-view-help"><summary>How to read this view</summary><p>Choose a programme, then use a route’s circle to work on it. Card titles open descriptions without changing your working route or shortlist. Questions come from that route’s modelled checks; satisfied requirements can be expanded below. Compare programme routes shows their combined questions and mixed results.</p><p>Sources and descriptions do not certify eligibility. Amount questions supply funding estimates. Answers are retained when you switch focus; only explicit plan actions adopt a funding plan.</p></details>
+      {value && <><p className="funding-network-legend">All applicable requirements must be satisfied. ✓ Meets · × Conflicts · ? Unresolved · {comparing?"Mixed: results differ across programme routes.":workingOption===null?"Choose a route for its requirements.":`Colours and connections: ${workingOption}.`} Call availability is separate from fit.</p>
         <div className="funding-node-area"><div className="funding-node-height-controls"><strong>Node area</strong><button type="button" aria-expanded={nodesExpanded} onClick={toggleNodeHeight}>{nodesExpanded?"Collapse node area":"Expand node area"}</button></div><div ref={graphPanel} className={`funding-diagram-scroll${resizing!==null?" is-resizing":""}`} style={nodesExpanded?{maxHeight:"none",overscrollBehavior:"auto"}:undefined} onScroll={e=>setGraphScroll(e.currentTarget.scrollTop)} tabIndex={0} aria-label="Funding graph, scroll to explore"><div className="funding-diagram" style={{width:diagramWidth,height:diagramHeight}}>
           {wide&&columns.dividers.map((left,index)=><div key={index} className="funding-column-divider" role="separator" aria-label={index===0?"Resize exploration and circumstances columns":"Resize circumstances and funding options columns"} aria-orientation="vertical" aria-valuemin={Math.round(columns.limits[index][0])} aria-valuemax={Math.round(columns.limits[index][1])} aria-valuenow={Math.round(left)} aria-valuetext={`${Math.round(left)} pixels from the graph’s left edge`} tabIndex={0} style={{left:left-9}} title="Drag to resize columns. Arrow keys move 10 pixels; Shift moves 40. Home/End reach the limits." onPointerDown={e=>startColumnResize(e,index)} onPointerMove={moveColumn} onPointerUp={endColumnResize} onPointerCancel={endColumnResize} onLostPointerCapture={()=>{columnDrag.current=null;setResizing(null);}} onKeyDown={e=>resizeColumnByKey(e,index)}><span aria-hidden="true">⋮</span></div>)}
-          <div className="funding-layer-label" style={{left:12}}>Exploration</div><div className="funding-layer-label" style={{left:circumstanceLeft}}>Circumstances / answers</div><div className="funding-layer-label" style={{left:optionLeft}}>Funding options</div>
+          <div className="funding-layer-label" style={{left:12}}>Exploration</div><div className="funding-layer-label" style={{left:circumstanceLeft}}>Route requirements</div><div className="funding-layer-label" style={{left:optionLeft}}>Funding routes</div>
           <svg aria-hidden="true" width={diagramWidth} height={diagramHeight}>
             {selectionBranchConnections(layout.rows,circumstanceLeft,circumstanceWidth,layout.tops.get("selection_score")).map(edge=><path key={`annex-${edge.key}`} className="funding-edge-neutral funding-annex-edge" d={edge.path}/>)}
             {questions.map((q,i)=><path key={`root-${q.id}`} className="funding-edge-neutral" d={`M ${originRight} 92 C ${originCurve} 92,${originCurve} ${questionY(q)},${circumstanceLeft} ${questionY(q)}`}/>)}
@@ -203,7 +210,7 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
               const links=conditions.filter(c=>c.option_id===r.id && c.fields.includes(q.id) && (c.effect==="eligibility"||showAmount));
               if(coverage(r.id).scope_fields.includes(q.id)) return <g key={`${q.id}-${r.id}-scope`}><title>{q.label} → {r.id}: Activity browsing scope only; no eligibility conclusion</title><path className="funding-edge-neutral" d={`M ${circumstanceRight} ${questionY(q)} C ${fitCurve} ${questionY(q)},${fitCurve} ${92+j*132},${optionLeft} ${92+j*132}`}/><text x={fitCurve} y={84+(i+j)*66}>scope</text></g>;
               if(!links.length) return [];
-              const active=workingOption!==null?workingOption===r.id:q.id===currentField;
+              const active=comparing?q.id===currentField:workingOption===r.id;
               const groups=["eligibility","amount"].map(effect=>({effect,checks:links.filter(c=>c.effect===effect)})).filter(group=>group.checks.length);
               return groups.map(({effect,checks})=>{
                 const status=graphLinkStatus(checks),kind=effect==="amount"?"amount":"fit",offset=groups.length>1?(effect==="amount"?5:-5):0;
@@ -211,11 +218,12 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
               });
             }))}
           </svg>
-          <div className="funding-graph-origin" style={{top:44,left:12,width:originWidth}}><strong>{draft.name}</strong><small>{pending||failure ? "Current selection · previous result" : "Current assessed answers"}</small></div>
+          <div className="funding-graph-origin" style={{top:44,left:12,width:originWidth}}><strong>{draft.name}</strong><small>{programme===null?"No programme selected":programme.title}{workingOption===null?"":` · ${workingOption}`}</small><small>{pending||failure ? "Current selection · previous result" : "Current assessed answers"}</small></div>
+          {layout.metHeaderTop!==null&&<button type="button" className="funding-requirements-met" style={{position:"absolute",top:layout.metHeaderTop,left:circumstanceLeft,width:circumstanceWidth,height:64}} aria-expanded={programmeDisplay.show_met} onClick={()=>onDisplay({...programmeDisplay,show_met:!programmeDisplay.show_met})}>Requirements met ({metIds.length}) · {programmeDisplay.show_met?"Hide":"Show"}</button>}
           {questions.map((q,i)=>{
             const state=nodeStates.get(q.id);
             return <button type="button" key={q.id} data-question-id={q.id} data-condition-status={state.status}
-              className={`funding-circumstance funding-node-${state.status} ${q.id===currentField?"is-current":""} ${workingOption!==null&&!workingFields.has(q.id)?"is-muted":""} ${changes?.fields.includes(q.id) ? "funding-affected" : ""}`}
+              className={`funding-circumstance funding-node-${state.status} ${q.id===currentField?"is-current":""} ${!comparing&&workingOption!==null&&!workingFields.has(q.id)?"is-muted":""} ${changes?.fields.includes(q.id) ? "funding-affected" : ""}`}
               style={{top:layout.tops.get(q.id),left:circumstanceLeft,width:circumstanceWidth}} title={`${q.label}\n${q.display_value}\n${q.origin}\n${state.detail}`}
               aria-expanded={q.type==="selection"?annex.open:undefined} aria-haspopup={q.type==="selection"?undefined:"dialog"} aria-controls={q.type==="selection"?"funding-annex-branch":"funding-answer-editor"} onClick={e=>q.type==="selection"&&annex.open?annex.onCollapse():onQuestion(q.id,e.currentTarget)}>
               <span className="funding-node-rail" aria-hidden="true">{Object.entries(state.counts).filter(([,count])=>count>0).map(([key,count])=><span key={key} className={`funding-node-segment-${key}`} style={{flex:count}}/>)}</span>
@@ -231,12 +239,12 @@ export function FundingVisualisation({annex=null,value,changes,latestFields,pend
             <strong>{annex.route}</strong><p>{selectionSummary(annexScore)}</p><p>{pending?"Updating — showing previous assessment":failure?"Assessment failed — showing previous assessment":fundingStatus(allResults.find(r=>r.id===annex.route))}</p><small>All other funding conditions still apply.</small><div className="funding-actions"><button type="button" onClick={()=>onInspect(annex.route)}>Inspect funding option</button><button type="button" onClick={()=>graphPanel.current.scrollTo({top:0,behavior:"instant"})}>Back to funding options</button></div>
           </aside>}
           {visible.options.map((r,i)=><div key={r.id} data-option-id={r.id} className={`funding-graph-option ${workingOption===r.id?"is-working":""} ${inspected===r.id?"is-inspected":""} ${workingOption!==null&&workingOption!==r.id?"is-muted":""} ${changed.has(r.id) ? "funding-affected" : ""}`} style={{top:44+i*132,left:optionLeft,width:optionWidth}} title={`${r.id} · ${r.title}`} onClick={()=>choose(r.id)}>
-            <button type="button" className="funding-option-open" aria-expanded={inspected===r.id}><strong>{r.id} · {r.title}</strong><span className={`funding-outcome-${fundingClass(r)}`}>{fundingStatus(r)}</span><small>{coverage(r.id).requirements==="research_only" ? "Automated assessment unavailable" : `${coverage(r.id).unresolved_count} unresolved conditions`}</small><Changed change={changed.get(r.id)}/></button>
+            <button type="button" className="funding-option-open" aria-expanded={inspected===r.id}><strong>{r.id} · {r.title}</strong><span className={`funding-outcome-${fundingClass(r)}`}>{fundingStatus(r)}</span><small>{routeCoverage(conditions,r.id).fit?`${coverage(r.id).unresolved_count} unresolved conditions · Modelled eligibility checks`:routeCoverage(conditions,r.id).amount?"Amount calculations only":"Reference guide only"}</small><Changed change={changed.get(r.id)}/></button>
             <FundingWorkingOption id={r.id} checked={workingOption===r.id} onChange={onWork} group="funding-working-graph" compact/>
           </div>)}
-          {!questions.length && <p className="funding-no-connections">Choose a question or inspect an option to see its modelled dependencies.</p>}
+          {!questions.length&&<p className="funding-no-connections" style={{left:circumstanceLeft,width:circumstanceWidth,top:layout.metHeaderTop===null?58:layout.metHeaderTop+80}}>{programmeState.value===null?"Programme metadata is loading or unavailable. Use the programme controls above.":programme===null?"Choose a programme above.":workingOption===null&&!comparing?"Choose a funding route on the right.":routeScope!==null&&routeScope.all.length>0?"All displayed requirements are met. Expand Requirements met to inspect them.":workingOption!==null&&routeCoverage(conditions,workingOption).amount?"Amount calculations are available. Open Show amount questions to supply the inputs; no eligibility questionnaire is modelled.":"Reference guide only: read the programme and route descriptions. No automated eligibility questionnaire or score is available."}</p>}
         </div></div><button type="button" className="funding-node-height-toggle" aria-expanded={nodesExpanded} aria-label={nodesExpanded?"Collapse node area completely":"Expand node area completely"} onClick={toggleNodeHeight}><span aria-hidden="true">{nodesExpanded?"▴":"▾"}</span> {nodesExpanded?"Collapse node area":"Expand node area completely"}</button></div>
-        {visible.options.length===0 && <p>No options in this scope. Adjust the browsing filters, choose another family or leave shortlist focus.</p>}
+        {programme!==null&&visible.options.length===0 && <p>No options in this scope. Adjust the browsing filters, choose another family or leave shortlist focus.</p>}
         {option && <><h3>Inspecting {option.id}</h3>{!visible.options.some(r=>r.id===option.id) && <p>This option is outside the displayed family/page or current filters. Its assessment is still available below.</p>}{details(option)}</>}
       </>}
     </div>

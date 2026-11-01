@@ -31,22 +31,23 @@ const watchdog=setTimeout(()=>{console.error('Funding guides browser timeout at 
     await page.getByRole('button',{name:'Choose activity',exact:true}).click();
     await page.getByRole('button',{name:'Close question editor',exact:true}).click();
     const visual=page.getByLabel('Live funding consequences',{exact:true});
-    const family=page.getByRole('combobox',{name:'Funding family',exact:true});
-    await visual.locator('.funding-graph-option').first().waitFor();
+    const family=page.getByRole('combobox',{name:'Programme or funding approach',exact:true});await family.waitFor();assert.equal(await family.locator('optgroup').count(),6);
     const samples={public:'LEADER-AL20-3.1',donations:'NATURE-03',contracts:'FIN-PROCUREMENT-WORKS',ecosystem:'NATURE-01',capital:'NATURE-09',support:'EU-GREEN-ASSIST-ADVISORY'};
     async function open(group,id,keyboard=false){
-      await family.selectOption(group);
+      await family.selectOption(id==='LEADER-AL20-3.1'?'LEADER-AL20':id);
       const card=visual.locator(`.funding-graph-option[data-option-id="${id}"]`);
       assert.match(await card.innerText(),/Explore this option/);
-      assert.match(await card.innerText(),/Automated assessment unavailable/);
+      assert.match(await card.innerText(),/Reference guide only/);
       const trigger=card.locator('.funding-option-open');
       await trigger.scrollIntoViewIfNeeded();
       if(keyboard){await trigger.focus();await page.keyboard.press('Enter');}else await trigger.click();
-      const guide=page.getByRole('region',{name:`Introduction to ${id}`,exact:true});
+      const standalone=id!=='LEADER-AL20-3.1';
+      if(standalone)await visual.locator('.funding-inspection').getByRole('button',{name:'Read programme or approach guide',exact:true}).click();
+      const guide=standalone?visual.locator('.funding-programme-intro'):page.getByRole('region',{name:`Introduction to ${id}`,exact:true});
       await guide.getByRole('heading',{name:'What is it?',exact:true}).waitFor();
       assert.equal(await guide.locator('section').count(),5);
-      assert.match(await guide.innerText(),/Current reference information/);
-      const heading=guide.locator('h3');
+      assert.match(await guide.innerText(),/Current reference information|Reference checked/);
+      const heading=standalone?guide.locator('details>summary').first():guide.locator('h3');
       const box=await heading.boundingBox();assert(box.y>=-1&&box.y<page.viewportSize().height,'Introduction heading is brought into view');
       assert(await heading.evaluate(n=>n===document.activeElement),'Keyboard focus moves to the introduction');
       return guide;
@@ -59,7 +60,7 @@ const watchdog=setTimeout(()=>{console.error('Funding guides browser timeout at 
     await page.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();
     const guide=await open('ecosystem','NATURE-06');
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'No page-wide overflow on mobile');
-    stage='PDF sources';console.log(stage);await guide.getByText(/^Sources and verification/).click();
+    stage='PDF sources';console.log(stage);await guide.getByRole('heading',{name:'Sources and verification',exact:true}).waitFor();
     await guide.getByRole('link',{name:/FUND-014/}).click();
     await page.getByRole('dialog').waitFor();
     assert.match(await page.getByRole('dialog').innerText(),/Roadmap towards Nature Credits/);
@@ -79,7 +80,7 @@ const watchdog=setTimeout(()=>{console.error('Funding guides browser timeout at 
     await page.getByRole('button',{name:'Choose activity',exact:true}).click();
     await page.getByRole('button',{name:'Close question editor',exact:true}).click();
     await page.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();
-    await family.selectOption('public');
+    await family.selectOption('LEADER-AL20');
     await visual.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.1"] .funding-option-open').click();
     await page.getByRole('alert').filter({hasText:'Guide library temporarily unavailable'}).waitFor();
     const afterFailure=(await request('funding')).attachment;

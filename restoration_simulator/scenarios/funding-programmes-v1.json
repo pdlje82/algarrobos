@@ -1,0 +1,1107 @@
+{
+  "version": 1,
+  "checked_on": "2026-11-01",
+  "defaults": {
+    "compare": false,
+    "show_met": false,
+    "show_amount": false,
+    "show_other_routes": false
+  },
+  "extra_sources": {
+    "programme-life": {
+      "title": "LIFE programme overview",
+      "issuer": "CINEA",
+      "url": "https://cinea.ec.europa.eu/programmes/life_en",
+      "date": null,
+      "checked_on": "2026-11-01",
+      "note": "Verified programme structure; individual call conditions and availability remain separate. Existing FUND-016 provides the stored multiannual work programme.",
+      "document_id": null,
+      "page": null,
+      "sha256": null
+    },
+    "programme-horizon": {
+      "title": "Horizon Europe programme overview",
+      "issuer": "European Commission",
+      "url": "https://research-and-innovation.ec.europa.eu/funding/funding-opportunities/funding-programmes-and-open-calls/horizon-europe_en",
+      "date": null,
+      "checked_on": "2026-11-01",
+      "note": "Verified research-and-innovation programme and Mission context; no topic-specific eligibility is inferred.",
+      "document_id": null,
+      "page": null,
+      "sha256": null
+    }
+  },
+  "programmes": [
+    {
+      "id": "LEADER-AL20",
+      "title": "LEADER AL20",
+      "kind": "programme",
+      "family": "public",
+      "entry_ids": [
+        "LEADER-AL20-3.1",
+        "LEADER-AL20-3.3",
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5",
+        "LEADER-AL20-3.6",
+        "LEADER-AL20-2.7",
+        "LEADER-AL20-1.11",
+        "LEADER-AL20-2.6",
+        "LEADER-AL20-1.7",
+        "LEADER-AL20-1.8",
+        "LEADER-AL20-1.9",
+        "LEADER-AL20-1.10"
+      ],
+      "summary": "Local development support for the Alpujarra-Sierra Nevada Almeriense area. Choose the route that describes the operation: the catalogue includes business, agriculture, forestry and nonproductive rural-development activities.",
+      "guide_id": null,
+      "introduction": {
+        "title": "LEADER AL20: local development through distinct funding routes",
+        "kind": "programme",
+        "what": "LEADER AL20 is local development support for the Alpujarra-Sierra Nevada Almeriense territory within intervention 7119.2. Its local strategy and operation typologies distinguish agricultural and forestry businesses, rural enterprise diversification, and nonproductive rural heritage and community activities. A programme identity is not a single grant with one questionnaire.",
+        "fit": "For Algarrobos, first distinguish a genuine self-employed business from a public-benefit demonstration or heritage operation. The same parcel or restoration idea can raise different questions depending on the applicant, beneficiaries and operation. The EDL explorer explains the strategy provisions cited by AL20 selection criteria.",
+        "advantages": "One programme overview brings together all twelve catalogue routes. Five routes have modelled fit checks: 1.11, 2.6, 2.7, 3.4 and 3.5. Their structured annex assessments calculate self-assessed points using the saved source edition. Seven other routes have researched introductions to support further investigation.",
+        "limitations": "Different routes have different applicant conditions, eligible activities, financial assumptions and selection profiles. A match to one route does not establish another route’s eligibility. The programme page, local strategy and annexes must be read together. Guide-only routes do not acquire automated checks merely by being grouped here.",
+        "next_steps": "Read the route introductions and select the operation to investigate. Resolve its unknown or conflicting requirements, review the applicable selection annex and supporting evidence, then check current availability with the GDR. Retain separate assessments when comparing routes.",
+        "availability": "Check the exact route, current call and terms; a programme overview does not establish an open opportunity.",
+        "checked_on": "2026-11-01",
+        "source_ids": [
+          "leader-territory",
+          "leader-selection",
+          "leader31"
+        ],
+        "unresolved": [
+          "Confirm the specific route, applicant, operation and current availability before relying on this reference."
+        ],
+        "related": []
+      }
+    },
+    {
+      "id": "EU-LIFE",
+      "title": "LIFE",
+      "kind": "programme",
+      "family": "public",
+      "entry_ids": [
+        "EU-LIFE-NATURE",
+        "EU-LIFE-CLIMATE",
+        "EU-LIFE-GOVERNANCE",
+        "EU-LIFE-STRATEGIC"
+      ],
+      "summary": "The European Union programme for environment and climate action. This catalogue groups nature and biodiversity, climate adaptation, governance and strategic-project references; the individual topic determines the application conditions.",
+      "guide_id": null,
+      "introduction": {
+        "title": "LIFE: environment and climate action",
+        "kind": "programme",
+        "what": "LIFE supports environment and climate action. Its programme structure includes Nature and Biodiversity, Circular Economy and Quality of Life, Climate Change Mitigation and Adaptation, and Clean Energy Transition. This catalogue currently provides four route descriptions; these are navigation references, not an exhaustive list of LIFE topics.",
+        "fit": "An Algarrobos restoration, demonstration, community-governance or climate-adaptation idea can be investigated against the relevant route and exact call. A useful first step is identifying the intended public benefit, partners and practical contribution before discussing a funding amount.",
+        "advantages": "The umbrella introduction makes the relationship between route descriptions visible and connects them to the existing multiannual work programme. Route guides distinguish practical nature projects, adaptation, governance and larger strategic approaches so that a small local idea can be placed in its proper context.",
+        "limitations": "No LIFE eligibility questionnaire is implemented here. A suitable theme is not an eligibility determination. The work programme describes the framework; individual calls determine application conditions, deadlines and financial terms. Do not treat one route’s conditions or dates as universal across LIFE.",
+        "next_steps": "Read the relevant route guide and the cited work programme, identify the exact call and applicant arrangement, and then verify scope, partnership, costs and dates. Record remaining research questions rather than entering a fabricated assessment score.",
+        "availability": "Check the exact route, current call and terms; a programme overview does not establish an open opportunity.",
+        "checked_on": "2026-11-01",
+        "source_ids": [
+          "programme-life",
+          "life-nature",
+          "life-calls"
+        ],
+        "unresolved": [
+          "Confirm the specific route, applicant, operation and current availability before relying on this reference."
+        ],
+        "related": []
+      }
+    },
+    {
+      "id": "EU-HORIZON",
+      "title": "Horizon Europe and EU Missions",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "EU-HORIZON-NATURE-LIVINGLAB-2027",
+        "EU-HORIZON-NATURE-NETWORK-2027",
+        "EU-HORIZON-NATURE-MONITORING-2027",
+        "EU-HORIZON-CL6-BIODIV",
+        "EU-MISSION-SOIL",
+        "EU-MISSION-ADAPT"
+      ],
+      "summary": "European research and innovation funding, including the catalogue’s restoration, biodiversity, soil and adaptation references. Select a topic or Mission reference to investigate its distinct research objectives and participation conditions.",
+      "guide_id": null,
+      "introduction": {
+        "title": "Horizon Europe: research, innovation and Missions",
+        "kind": "programme_family",
+        "what": "Horizon Europe is the European Union’s research and innovation funding programme. Its structure includes thematic research and EU Missions. The six entries grouped here cover selected restoration and biodiversity topics, Cluster 6, the Soil Mission and the Adaptation Mission; they are not six interchangeable grants.",
+        "fit": "Algarrobos could investigate a role as a practical site, demonstrator, monitoring contributor or local partner where the actual research topic supports that role. A local restoration activity needs a clear connection to the topic’s research objectives and the proposed collaboration.",
+        "advantages": "A shared introduction helps distinguish a specific topic from a broader Mission or programme family. The route guides preserve separate research aims, source references and questions to verify, making it easier to discuss a possible contribution with a research partnership.",
+        "limitations": "No automated Horizon eligibility or funding calculation is implemented here. Programme membership does not establish that a topic is open or that an individual site can apply directly. Topic scope, action type, expected outcomes, applicant arrangements and dates require their own verification.",
+        "next_steps": "Start with the relevant route guide and official topic or Mission information. Identify an appropriate collaboration and describe the proposed site contribution. Check the exact work programme and application documents before developing a proposal or assuming an amount.",
+        "availability": "Check the exact route, current call and terms; a programme overview does not establish an open opportunity.",
+        "checked_on": "2026-11-01",
+        "source_ids": [
+          "programme-horizon",
+          "horizon-cluster6",
+          "soil-mission",
+          "adaptation-mission"
+        ],
+        "unresolved": [
+          "Confirm the specific route, applicant, operation and current availability before relying on this reference."
+        ],
+        "related": []
+      }
+    },
+    {
+      "id": "ES-AND-PEPAC-FOREST-PREVENTION",
+      "title": "Andalusian forest-fire prevention investment",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-AND-PEPAC-FOREST-PREVENTION"
+      ],
+      "summary": "Andalusia’s nonproductive forestry framework includes intervention 6881.2 for preventing forest damage, particularly wildfire. PEPAC is Spain’s strategic plan for the Common Agricultural Policy. The December 2025 order provides rules for this intervention and environmental forestry work; a regulation alone is not an open funding offer.",
+      "guide_id": "ES-AND-PEPAC-FOREST-PREVENTION",
+      "introduction": null
+    },
+    {
+      "id": "ES-AND-PEPAC-FOREST-ENVIRONMENT",
+      "title": "Andalusian environmental forestry investment",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-AND-PEPAC-FOREST-ENVIRONMENT"
+      ],
+      "summary": "Intervention 6881.4 concerns eligible forestry work with environmental objectives under Andalusia’s Common Agricultural Policy framework. The December 2025 rules sit alongside forest-damage prevention support. This is a specific land-management instrument, not a general payment for every parcel described as natural or nonproductive.",
+      "guide_id": "ES-AND-PEPAC-FOREST-ENVIRONMENT",
+      "introduction": null
+    },
+    {
+      "id": "ES-CAP-DIRECT-ECO",
+      "title": "Agricultural area payments and eco-schemes",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-CAP-DIRECT-ECO"
+      ],
+      "summary": "The Common Agricultural Policy, or CAP, includes income support and voluntary eco-schemes for eligible farming practices. These are agricultural payment arrangements rather than general restoration-project grants. Eligibility depends on the farmer, claimed land, practice and campaign rules administered through the relevant Spanish systems.",
+      "guide_id": "ES-CAP-DIRECT-ECO",
+      "introduction": null
+    },
+    {
+      "id": "ES-CAP-AGROENVIRONMENT-ORGANIC",
+      "title": "Agroenvironmental and organic farming support",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-CAP-AGROENVIRONMENT-ORGANIC"
+      ],
+      "summary": "Agroenvironmental and climate measures support specified agricultural management commitments, sometimes over several years. Organic farming support may help with conversion or continued eligible management. These arrangements compensate or incentivise defined practices under the applicable regional programme, rather than funding any activity described as ecological.",
+      "guide_id": "ES-CAP-AGROENVIRONMENT-ORGANIC",
+      "introduction": null
+    },
+    {
+      "id": "ES-CAP-EIP-AGRI-7161",
+      "title": "EIP-AGRI collaborative innovation groups",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-CAP-EIP-AGRI-7161"
+      ],
+      "summary": "The European Innovation Partnership for Agricultural Productivity and Sustainability, usually EIP-AGRI, brings practitioners and researchers together through Operational Groups. Andalusian intervention 7161 supports eligible collaboration around practical agricultural or forestry problems. The joint project, not merely an individual site or organisation, is the central unit.",
+      "guide_id": "ES-CAP-EIP-AGRI-7161",
+      "introduction": null
+    },
+    {
+      "id": "ES-FB-RENATURALISATION-BASES",
+      "title": "National renaturalisation rules: a framework to watch",
+      "kind": "legal_framework",
+      "family": "public",
+      "entry_ids": [
+        "ES-FB-RENATURALISATION-BASES"
+      ],
+      "summary": "Order TED/870/2025 establishes a framework for Fundación Biodiversidad support for renaturalisation and ecological restoration in agricultural and forest settings. It defines possibilities for later competitive calls. A legal basis explains how support may operate; it does not itself invite every eligible-looking landholder to apply.",
+      "guide_id": "ES-FB-RENATURALISATION-BASES",
+      "introduction": null
+    },
+    {
+      "id": "ES-FB-DONANA-2025",
+      "title": "Doñana renaturalisation: a historical precedent",
+      "kind": "historical",
+      "family": "public",
+      "entry_ids": [
+        "ES-FB-DONANA-2025"
+      ],
+      "summary": "This was a specific Fundación Biodiversidad call for renaturalisation and ecological restoration in the Doñana influence area under the national renaturalisation framework. Its defined territory, land-use conditions and selection process are integral to the scheme. It is not a general restoration grant available throughout Andalusia.",
+      "guide_id": "ES-FB-DONANA-2025",
+      "introduction": null
+    },
+    {
+      "id": "ES-FB-BIODIVERSITY-FORESTS",
+      "title": "Other Fundación Biodiversidad opportunities",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-FB-BIODIVERSITY-FORESTS"
+      ],
+      "summary": "Fundación Biodiversidad manages different competitive programmes concerning biodiversity, restoration, forest bioeconomy and related environmental objectives. Their rules and funding sources vary. This node is a place to investigate the programme family, not a single grant with one set of applicants, costs and deadlines.",
+      "guide_id": "ES-FB-BIODIVERSITY-FORESTS",
+      "introduction": null
+    },
+    {
+      "id": "ES-FB-EMPLEAVERDE",
+      "title": "Empleaverde+: skills and green employment",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-FB-EMPLEAVERDE"
+      ],
+      "summary": "Empleaverde+ supports eligible skills and employment initiatives connected with the ecological transition. It is associated with Fundación Biodiversidad and European Social Fund Plus support. The programme’s purpose is people’s learning and employment outcomes, rather than simply paying for land, plants or conservation equipment.",
+      "guide_id": "ES-FB-EMPLEAVERDE",
+      "introduction": null
+    },
+    {
+      "id": "ES-MITECO-PRTR-RESTORATION",
+      "title": "Recovery-plan restoration programmes and contracts",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-MITECO-PRTR-RESTORATION"
+      ],
+      "summary": "Spain’s Recovery, Transformation and Resilience Plan channels NextGenerationEU investment through specific programmes, grants and public contracts. Restoration work can form part of those investments, but there is no single unrestricted application covering any environmental project. The administering body and instrument determine the rules.",
+      "guide_id": "ES-MITECO-PRTR-RESTORATION",
+      "introduction": null
+    },
+    {
+      "id": "ES-JA-FOREST-REHABILITATION-OTHER",
+      "title": "Other regional forest and habitat programmes",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-JA-FOREST-REHABILITATION-OTHER"
+      ],
+      "summary": "Regional authorities can support forest recovery and habitat investment through distinct programmes, public works or calls. Prevention, post-damage recovery and environmental management are different purposes. This node keeps those possibilities visible without merging them into a generic grant for any planting or rural parcel.",
+      "guide_id": "ES-JA-FOREST-REHABILITATION-OTHER",
+      "introduction": null
+    },
+    {
+      "id": "ES-FEDER-REGIONAL",
+      "title": "Regional development funding for green infrastructure",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-FEDER-REGIONAL"
+      ],
+      "summary": "FEDER is the Spanish abbreviation for the European Regional Development Fund. It supports eligible regional investment through defined programmes and managing authorities. Green infrastructure and resilience may be included, but programme documents are not themselves applications for unrestricted conservation funding.",
+      "guide_id": "ES-FEDER-REGIONAL",
+      "introduction": null
+    },
+    {
+      "id": "ES-LOCAL-MUNICIPAL",
+      "title": "Municipal environmental and community budgets",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-LOCAL-MUNICIPAL"
+      ],
+      "summary": "Local authorities may finance environmental activities through their own programmes, grants, procurement or participatory-budget processes. Each route has different legal and administrative requirements. A municipality’s support for the idea is useful context but is not itself an award or permission to spend public money.",
+      "guide_id": "ES-LOCAL-MUNICIPAL",
+      "introduction": null
+    },
+    {
+      "id": "ES-PARK-NATURA2000-RURAL",
+      "title": "Protected-area and park-related support",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-PARK-NATURA2000-RURAL"
+      ],
+      "summary": "Some programmes support conservation, local activity or communities associated with protected areas. Natura 2000 is the European network of protected sites; national and regional parks have their own frameworks. A designation can bring obligations and planning context, but it is not automatically a standing funding offer.",
+      "guide_id": "ES-PARK-NATURA2000-RURAL",
+      "introduction": null
+    },
+    {
+      "id": "ES-WATER-CATCHMENT",
+      "title": "Water-authority projects and river-restoration contracts",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-WATER-CATCHMENT"
+      ],
+      "summary": "Water and river authorities commission or support defined catchment, river and flood-risk work under their legal responsibilities. Routes can include public works, technical services and partnerships. The authority responsible for the exact basin and land must be identified before a funding role is assumed.",
+      "guide_id": "ES-WATER-CATCHMENT",
+      "introduction": null
+    },
+    {
+      "id": "ES-CARBON-REGISTRY",
+      "title": "Spain’s carbon-absorption project registry",
+      "kind": "legal_framework",
+      "family": "public",
+      "entry_ids": [
+        "ES-CARBON-REGISTRY"
+      ],
+      "summary": "MITECO, Spain’s Ministry for the Ecological Transition and Demographic Challenge, registers qualifying carbon-absorption projects under a defined national framework. Registration concerns eligible projects, evidence and recorded units. It does not mean the ministry buys the project’s carbon or pays for planting.",
+      "guide_id": "ES-CARBON-REGISTRY",
+      "introduction": null
+    },
+    {
+      "id": "EU-INTERREG-EUROMED",
+      "title": "Interreg Euro-MED cooperation projects",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "EU-INTERREG-EUROMED"
+      ],
+      "summary": "Interreg Euro-MED supports cooperation across eligible Mediterranean territories. Projects need the required partnership and a shared transnational purpose. A local pilot can contribute, but a parcel or organisation cannot qualify solely by being in the Mediterranean or proposing environmental work.",
+      "guide_id": "EU-INTERREG-EUROMED",
+      "introduction": null
+    },
+    {
+      "id": "EU-INTERREG-SUDOE",
+      "title": "Interreg SUDOE cooperation",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "EU-INTERREG-SUDOE"
+      ],
+      "summary": "Interreg SUDOE supports transnational cooperation in eligible southwestern European territories. The programme has its own objectives, partner rules and calls, distinct from Euro-MED. Funding concerns a shared project and transferable results rather than a general grant for every rural conservation site.",
+      "guide_id": "EU-INTERREG-SUDOE",
+      "introduction": null
+    },
+    {
+      "id": "EU-INTERREG-EUROPE",
+      "title": "Interreg Europe policy cooperation",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "EU-INTERREG-EUROPE"
+      ],
+      "summary": "Interreg Europe concerns cooperation that improves regional public policies and policy instruments. It focuses on learning, exchange and institutional change rather than acting as a general fund for physical restoration on private land. Public authorities and the policies they influence are central to the project logic.",
+      "guide_id": "EU-INTERREG-EUROPE",
+      "introduction": null
+    },
+    {
+      "id": "EU-INTERREG-NEXT-MED",
+      "title": "Interreg NEXT MED partnerships",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "EU-INTERREG-NEXT-MED"
+      ],
+      "summary": "Interreg NEXT MED supports cooperation involving eligible Mediterranean territories on both EU and partner-country sides. Each call sets its objectives and partnership conditions. It differs from Euro-MED in geography and programme design, so participation cannot be assumed from the shared Mediterranean name.",
+      "guide_id": "EU-INTERREG-NEXT-MED",
+      "introduction": null
+    },
+    {
+      "id": "EU-BIODIVERSA",
+      "title": "Biodiversa+ transnational biodiversity research",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "EU-BIODIVERSA"
+      ],
+      "summary": "Biodiversa+ organises transnational biodiversity research calls with participating national and regional funding organisations. A joint proposal links research teams, while each funder’s rules determine whether a particular partner and cost can receive support. This is not a uniform grant available to every organisation in an eligible country.",
+      "guide_id": "EU-BIODIVERSA",
+      "introduction": null
+    },
+    {
+      "id": "EU-PRIMA",
+      "title": "PRIMA Mediterranean water and farming research",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "EU-PRIMA"
+      ],
+      "summary": "PRIMA is the Partnership for Research and Innovation in the Mediterranean Area. It supports specific research topics concerning water, farming systems and agri-food value chains. Different sections can use different funding arrangements, including national agencies, so there is no single applicant or payment rule for the whole programme.",
+      "guide_id": "EU-PRIMA",
+      "introduction": null
+    },
+    {
+      "id": "EU-ERASMUS-EDUCATION",
+      "title": "Erasmus+ education and vocational partnerships",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "EU-ERASMUS-EDUCATION"
+      ],
+      "summary": "Erasmus+ supports education, training, youth and cooperation through distinct actions. A partnership grant concerns learning and organisational cooperation, not simply environmental expenditure. The programme guide and relevant national or European call determine who can coordinate, participate and receive support.",
+      "guide_id": "EU-ERASMUS-EDUCATION",
+      "introduction": null
+    },
+    {
+      "id": "EU-CERV-SOLIDARITY",
+      "title": "Civic participation and European volunteering",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "EU-CERV-SOLIDARITY"
+      ],
+      "summary": "This catalogue node groups two different avenues for community participation. CERV means Citizens, Equality, Rights and Values and concerns civic and democratic objectives. The European Solidarity Corps supports eligible solidarity and volunteering activities. Their rules, participants and application processes must be considered separately.",
+      "guide_id": "EU-CERV-SOLIDARITY",
+      "introduction": null
+    },
+    {
+      "id": "EU-INNOVATION-SME",
+      "title": "European innovation support for real ventures",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "EU-INNOVATION-SME"
+      ],
+      "summary": "European innovation support includes programmes and accelerators for ventures developing genuinely innovative products or technologies. EIC is the European Innovation Council; EIT communities offer other opportunities with their own rules. Grants, investment, advice and training are different instruments and must not be treated as equivalent cash awards.",
+      "guide_id": "EU-INNOVATION-SME",
+      "introduction": null
+    },
+    {
+      "id": "ES-CDTI-ENISA-TECH",
+      "title": "Spanish innovation finance: CDTI and ENISA",
+      "kind": "programme_family",
+      "family": "public",
+      "entry_ids": [
+        "ES-CDTI-ENISA-TECH"
+      ],
+      "summary": "CDTI and ENISA provide different kinds of support for eligible innovative businesses in Spain. CDTI instruments can concern research and technological development; ENISA uses participative loans under its financing arrangements. A participative loan remains debt even when part of its interest relates to business performance.",
+      "guide_id": "ES-CDTI-ENISA-TECH",
+      "introduction": null
+    },
+    {
+      "id": "EU-GREEN-ASSIST-ADVISORY",
+      "title": "Green Assist investment-readiness advice",
+      "kind": "advisory",
+      "family": "support",
+      "entry_ids": [
+        "EU-GREEN-ASSIST-ADVISORY"
+      ],
+      "summary": "Green Assist provides advisory support intended to help eligible environmental projects become ready for investment. The Water Resilience Investment Accelerator announced in October 2026 is a related targeted initiative. Advice may address project development and financing, rather than paying for implementation works or land purchase.",
+      "guide_id": "EU-GREEN-ASSIST-ADVISORY",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-01",
+      "title": "Payments for ecosystem services",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-01"
+      ],
+      "summary": "A beneficiary of an ecosystem service pays a landholder or manager to maintain or improve it. The service could concern soil retention, water quality or habitat management. A direct agreement can define activities and payments without creating a tradable environmental certificate.",
+      "guide_id": "NATURE-01",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-02",
+      "title": "Payments for verified restoration results",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-02"
+      ],
+      "summary": "A funder pays against specified restoration results rather than simply reimbursing activities. Milestones could concern habitat condition, plant establishment or another defensible indicator. The contract determines how results are measured, verified and translated into payments, including any minimum or partial payment.",
+      "guide_id": "NATURE-02",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-03",
+      "title": "Digital memberships linked to conservation results",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "NATURE-03"
+      ],
+      "summary": "Supporters make recurring contributions and receive regular information about conservation work, often through a website or digital membership platform. The connection with results is a reporting commitment, not automatically a promise of ownership, investment return or a quantified environmental credit.",
+      "guide_id": "NATURE-03",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-04",
+      "title": "Environmental compensation arrangements",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-04"
+      ],
+      "summary": "A developer or other responsible party finances measures connected with an environmental impact under a specific legal or voluntary arrangement. Compensation is different from a general gift: it concerns a defined loss, an assessment process and conditions on what can count toward addressing that loss.",
+      "guide_id": "NATURE-04",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-05",
+      "title": "Environmental insurance arrangements",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-05"
+      ],
+      "summary": "Insurance transfers specified risks to an insurer in exchange for a premium. Environmental cover may concern defined liabilities, damage or recovery costs. The policy wording, exclusions, insured party and claims process determine the protection; the environmental label does not make all ecological losses insurable.",
+      "guide_id": "NATURE-05",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-06",
+      "title": "Biodiversity and nature credits",
+      "kind": "emerging",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-06"
+      ],
+      "summary": "A nature-credit arrangement aims to finance independently documented benefits for biodiversity through units defined by a particular method. A baseline, management actions, verification and buyer agreement are needed. The European Commission’s July 2025 roadmap describes development of this market, rather than an automatic payment system.",
+      "guide_id": "NATURE-06",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-07",
+      "title": "Voluntary carbon-market credits",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-07"
+      ],
+      "summary": "A carbon project quantifies additional climate benefits under a specified method, obtains the required validation or verification and sells eligible units. Standards differ in eligible activities, accounting, timing and permitted claims. A planted tree or modelled carbon estimate is not by itself a saleable credit.",
+      "guide_id": "NATURE-07",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-08",
+      "title": "Water-benefit credits",
+      "kind": "emerging",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-08"
+      ],
+      "summary": "A water-benefit arrangement attempts to quantify and finance a specified improvement in water quantity, quality or catchment function. Some programmes describe these benefits as credits. The method and buyer determine whether a unit exists and what claim it supports; different water outcomes cannot be treated as interchangeable.",
+      "guide_id": "NATURE-08",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-09",
+      "title": "Environmental investment funds",
+      "kind": "mechanism",
+      "family": "capital",
+      "entry_ids": [
+        "NATURE-09"
+      ],
+      "summary": "An environmental investment fund pools capital and invests in assets or businesses expected to generate financial returns alongside environmental objectives. It may provide debt, equity or a combination. The fund’s mandate determines eligible sectors, geography, transaction size, return expectations and investment period.",
+      "guide_id": "NATURE-09",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-10",
+      "title": "Impact investment funds",
+      "kind": "mechanism",
+      "family": "capital",
+      "entry_ids": [
+        "NATURE-10"
+      ],
+      "summary": "Impact investors seek both a financial return and intentional, measurable social or environmental benefits. Funding may be equity or debt, with reporting tied to the investor’s objectives. Demonstrating a worthwhile ecological purpose is necessary context but does not replace a credible business model.",
+      "guide_id": "NATURE-10",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-11",
+      "title": "Certified products supporting stewardship",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-11"
+      ],
+      "summary": "A producer sells goods whose origin or management meets a named certification or assurance standard. Certification may help buyers recognise a particular attribute, but the sale remains a commercial transaction. Different labels address different features and do not all establish ecological restoration or biodiversity gain.",
+      "guide_id": "NATURE-11",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-12",
+      "title": "Voluntary contributions from local beneficiaries",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "NATURE-12"
+      ],
+      "summary": "People or businesses that benefit from a healthy landscape contribute voluntarily toward its care. They might value reduced erosion, attractive surroundings or community access. The contribution can be a donation, cost-sharing agreement or contract, depending on what the payer receives and how responsibilities are defined.",
+      "guide_id": "NATURE-12",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-13",
+      "title": "Community assets contributed to conservation",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-13"
+      ],
+      "summary": "Land, buildings, equipment or usable rights can be contributed to strengthen a community conservation initiative. A transfer may be permanent or time-limited and can carry restrictions. The asset’s practical value depends on whether the recipient can lawfully use, maintain and, where relevant, transfer it.",
+      "guide_id": "NATURE-13",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-14",
+      "title": "Income from nature visits and learning",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-14"
+      ],
+      "summary": "A provider earns income from guided visits, interpretation, courses or other nature-related experiences. The customer pays for a service, rather than donating without a return. Cultural or wellbeing themes can be part of an activity, but medical claims require appropriate evidence and qualifications.",
+      "guide_id": "NATURE-14",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-15",
+      "title": "Philanthropy and environmental crowdfunding",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "NATURE-15"
+      ],
+      "summary": "Philanthropy includes individual donations, foundation grants, major gifts and other voluntary support for public benefit. Environmental crowdfunding brings many such contributions together. This node describes the wider fundraising approach; the catalogue’s donation, foundation and campaign nodes explain more specific ways to organise it.",
+      "guide_id": "NATURE-15",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-16",
+      "title": "Voluntary environmental add-ons to purchases",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "NATURE-16"
+      ],
+      "summary": "A business offers customers an optional contribution alongside a booking, product or service. Proceeds support a defined conservation purpose under an agreement with the recipient. The arrangement must explain whether the customer makes a donation or buys something, and how collected money reaches the project.",
+      "guide_id": "NATURE-16",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-17",
+      "title": "Climate-resilience outcome credits",
+      "kind": "emerging",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-17"
+      ],
+      "summary": "Some proposed financing arrangements reward independently demonstrated reductions in climate-related risk. The benefit might concern erosion, flood exposure or resilience of an ecosystem. Calling it a credit requires a method that defines a unit and a buyer who accepts the associated claim.",
+      "guide_id": "NATURE-17",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-18",
+      "title": "Ecological guarantees and financial security",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-18"
+      ],
+      "summary": "A guarantee, reserve or other security arrangement provides assurance that money or remedial action will be available if specified obligations fail. It is linked to a particular contract or risk. The trigger, provider, beneficiary and enforceable wording determine what protection actually exists.",
+      "guide_id": "NATURE-18",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-19",
+      "title": "Green loans",
+      "kind": "mechanism",
+      "family": "capital",
+      "entry_ids": [
+        "NATURE-19"
+      ],
+      "summary": "A green loan finances investments meeting a lender’s environmental criteria. It remains debt, with repayment, interest and any reporting or security requirements set by the agreement. Concessionary terms may exist in particular products, but the green label alone does not establish a lower cost or public subsidy.",
+      "guide_id": "NATURE-19",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-20",
+      "title": "Ownership investment with conservation commitments",
+      "kind": "mechanism",
+      "family": "capital",
+      "entry_ids": [
+        "NATURE-20"
+      ],
+      "summary": "An investor acquires an interest in a company or asset structure that includes conservation objectives. The investment can support operations or land management, but ownership rights, returns and exit remain central. Community ownership and commercial equity can involve very different legal and financial arrangements.",
+      "guide_id": "NATURE-20",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-21",
+      "title": "Public fiscal mechanisms supporting conservation",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-21"
+      ],
+      "summary": "A public authority uses a lawful tax, incentive or allocation mechanism to direct resources toward conservation. The design can reward eligible behaviour or dedicate specified revenue. It depends on legislation and public administration, rather than a project deciding for itself that a conservation activity deserves tax relief.",
+      "guide_id": "NATURE-21",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-22",
+      "title": "Green, social and sustainability bonds",
+      "kind": "mechanism",
+      "family": "capital",
+      "entry_ids": [
+        "NATURE-22"
+      ],
+      "summary": "A bond issuer borrows money from investors through a debt security. A green or sustainability framework specifies eligible uses or related commitments and reporting. Investors still expect repayment under the bond’s terms. A project might receive financing within a larger portfolio without itself issuing a bond.",
+      "guide_id": "NATURE-22",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-23",
+      "title": "Lawful user charges",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-23"
+      ],
+      "summary": "An authorised body charges for use of a facility, service or resource under the applicable legal framework. Proceeds may support upkeep or conservation where permitted. A compulsory public charge differs from a voluntary donation, and a private admission price differs from a municipal tax or fee.",
+      "guide_id": "NATURE-23",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-24",
+      "title": "Conservation funding from land-value uplift",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-24"
+      ],
+      "summary": "Land-value capture directs part of an increase in property value associated with public planning or investment toward public purposes. It requires a lawful mechanism for valuation, collection and allocation. The idea is different from a voluntary neighbour contribution or selling land that has appreciated in value.",
+      "guide_id": "NATURE-24",
+      "introduction": null
+    },
+    {
+      "id": "NATURE-25",
+      "title": "Business districts pooling improvement funds",
+      "kind": "mechanism",
+      "family": "ecosystem",
+      "entry_ids": [
+        "NATURE-25"
+      ],
+      "summary": "A defined group of businesses pools contributions for shared improvements, potentially including planting, visitor amenities or green infrastructure. In some jurisdictions formal business improvement districts have specific powers. An international example does not establish that the same legal structure or compulsory levy exists locally.",
+      "guide_id": "NATURE-25",
+      "introduction": null
+    },
+    {
+      "id": "FIN-DONATIONS-INDIVIDUAL",
+      "title": "One-off donations",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "FIN-DONATIONS-INDIVIDUAL"
+      ],
+      "summary": "Individuals give money to a conservation organisation or an agreed project without receiving an ownership stake or a commercial product. The recipient accepts responsibility for using the gift as promised. A donation can be unrestricted or limited to a particular purpose.",
+      "guide_id": "FIN-DONATIONS-INDIVIDUAL",
+      "introduction": null
+    },
+    {
+      "id": "FIN-CROWDFUND-DONATION",
+      "title": "Donation crowdfunding",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "FIN-CROWDFUND-DONATION"
+      ],
+      "summary": "A public campaign gathers many donations around a defined conservation purpose, often through an online platform. The platform provides collection tools and visibility; it does not itself award the campaign target. Donations may be conditional on reaching a stated minimum.",
+      "guide_id": "FIN-CROWDFUND-DONATION",
+      "introduction": null
+    },
+    {
+      "id": "FIN-CROWDFUND-REWARD",
+      "title": "Reward crowdfunding and advance sales",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "FIN-CROWDFUND-REWARD"
+      ],
+      "summary": "Supporters pay in advance for a promised reward, experience or product. Unlike a pure donation, this creates a delivery obligation. Depending on the arrangement, it can resemble a sale, with costs and consumer obligations that need to be planned before launch.",
+      "guide_id": "FIN-CROWDFUND-REWARD",
+      "introduction": null
+    },
+    {
+      "id": "FIN-MEMBERSHIP",
+      "title": "Memberships and recurring supporters",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "FIN-MEMBERSHIP"
+      ],
+      "summary": "People make regular contributions to sustain an organisation or a conservation purpose. Formal association membership can include participation and voting rights; a recurring supporter plan may be a different arrangement. Its terms should explain which relationship the contributor is entering.",
+      "guide_id": "FIN-MEMBERSHIP",
+      "introduction": null
+    },
+    {
+      "id": "FIN-FOUNDATION-GRANTS-PRIVATE",
+      "title": "Private foundation grants",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "FIN-FOUNDATION-GRANTS-PRIVATE"
+      ],
+      "summary": "A philanthropic foundation awards support from its own resources for purposes such as biodiversity, community development, education or research. Each foundation decides its geographical focus, eligible recipients, application process and reporting requirements. Some accept proposals; others work only through invitations.",
+      "guide_id": "FIN-FOUNDATION-GRANTS-PRIVATE",
+      "introduction": null
+    },
+    {
+      "id": "FIN-CORPORATE-GIFT",
+      "title": "Corporate charitable contributions",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "FIN-CORPORATE-GIFT"
+      ],
+      "summary": "A company gives money, equipment or other resources for a public-benefit purpose. A genuine charitable contribution differs from buying advertising or ecological credits. The agreement should identify the recipient, restrictions and the acknowledgement the company may receive in return.",
+      "guide_id": "FIN-CORPORATE-GIFT",
+      "introduction": null
+    },
+    {
+      "id": "FIN-SPONSORSHIP",
+      "title": "Corporate sponsorship",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "FIN-SPONSORSHIP"
+      ],
+      "summary": "A business pays for an association with a project, event or communication activity. It may receive agreed visibility, reporting or other promotional benefits. This is a commercial relationship whose obligations differ from a donation without a substantial return to the donor.",
+      "guide_id": "FIN-SPONSORSHIP",
+      "introduction": null
+    },
+    {
+      "id": "FIN-CSR-SUPPLYCHAIN",
+      "title": "Business supply-chain stewardship",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "FIN-CSR-SUPPLYCHAIN"
+      ],
+      "summary": "A company supports conservation because water, soils, biodiversity or landscape resilience matter to its operations or suppliers. Support may take the form of a donation, a management contract or a shared project. The legal arrangement determines what the payer actually receives.",
+      "guide_id": "FIN-CSR-SUPPLYCHAIN",
+      "introduction": null
+    },
+    {
+      "id": "FIN-LAND-DONATION",
+      "title": "Donated land and conservation bequests",
+      "kind": "mechanism",
+      "family": "donations",
+      "entry_ids": [
+        "FIN-LAND-DONATION"
+      ],
+      "summary": "An owner transfers land or another asset to an organisation, during life or through an inheritance arrangement. Conditions may require conservation or restrict later disposal. A land gift changes ownership and responsibilities; it is not simply another source of spendable project cash.",
+      "guide_id": "FIN-LAND-DONATION",
+      "introduction": null
+    },
+    {
+      "id": "FIN-CUSTODY-NOCASH",
+      "title": "Land stewardship agreements",
+      "kind": "mechanism",
+      "family": "support",
+      "entry_ids": [
+        "FIN-CUSTODY-NOCASH"
+      ],
+      "summary": "Custodia del territorio is a land-stewardship approach in which landholders and conservation organisations agree how to protect or manage a place. The owner can retain ownership. Agreements can provide access, management cooperation or other rights without creating a grant or a cash receipt.",
+      "guide_id": "FIN-CUSTODY-NOCASH",
+      "introduction": null
+    },
+    {
+      "id": "FIN-LEASE-USUFRUCT",
+      "title": "Long-term land-use rights",
+      "kind": "mechanism",
+      "family": "support",
+      "entry_ids": [
+        "FIN-LEASE-USUFRUCT"
+      ],
+      "summary": "A lease, usufruct or other recognised agreement allows an organisation to use land without purchasing full ownership. The rights, duration and costs depend on the chosen instrument. This node concerns enabling access and control; it does not represent new money arriving in the project.",
+      "guide_id": "FIN-LEASE-USUFRUCT",
+      "introduction": null
+    },
+    {
+      "id": "FIN-PUBLIC-LAND-USE",
+      "title": "Access to municipal or other public land",
+      "kind": "mechanism",
+      "family": "support",
+      "entry_ids": [
+        "FIN-PUBLIC-LAND-USE"
+      ],
+      "summary": "A municipality or another public owner may authorise compatible use of land through a legally appropriate arrangement. Conditions depend on the property’s legal status and the public purpose. Public land cannot be treated as freely available merely because a conservation proposal sounds beneficial.",
+      "guide_id": "FIN-PUBLIC-LAND-USE",
+      "introduction": null
+    },
+    {
+      "id": "FIN-PROCUREMENT-WORKS",
+      "title": "Public restoration works contracts",
+      "kind": "mechanism",
+      "family": "contracts",
+      "entry_ids": [
+        "FIN-PROCUREMENT-WORKS"
+      ],
+      "summary": "A public authority purchases defined works, such as river rehabilitation, erosion control or habitat restoration. The winning contractor earns revenue by meeting the contract. This is a supplier relationship with delivery obligations, rather than a subsidy for improving the contractor’s own land.",
+      "guide_id": "FIN-PROCUREMENT-WORKS",
+      "introduction": null
+    },
+    {
+      "id": "FIN-PROCUREMENT-ENGINEERING",
+      "title": "Public planning, mapping and engineering services",
+      "kind": "mechanism",
+      "family": "contracts",
+      "entry_ids": [
+        "FIN-PROCUREMENT-ENGINEERING"
+      ],
+      "summary": "A public client buys professional services such as field surveys, project design, environmental documentation, mapping or construction oversight. GIS means geographic information systems: tools for organising and analysing spatial data. The service provider is paid for accepted deliverables and professional responsibilities.",
+      "guide_id": "FIN-PROCUREMENT-ENGINEERING",
+      "introduction": null
+    },
+    {
+      "id": "FIN-PROCUREMENT-PLANTS",
+      "title": "Native plant and seed supply contracts",
+      "kind": "mechanism",
+      "family": "contracts",
+      "entry_ids": [
+        "FIN-PROCUREMENT-PLANTS"
+      ],
+      "summary": "A public buyer or restoration contractor pays for plants, seeds or other specified reproductive material. The supplier must meet requirements for species, origin, stock quality, health, quantity and delivery. Income comes from a sale, not from a grant for planting on the supplier’s own parcel.",
+      "guide_id": "FIN-PROCUREMENT-PLANTS",
+      "introduction": null
+    },
+    {
+      "id": "FIN-PROCUREMENT-STEWARDSHIP",
+      "title": "Paid stewardship services",
+      "kind": "mechanism",
+      "family": "contracts",
+      "entry_ids": [
+        "FIN-PROCUREMENT-STEWARDSHIP"
+      ],
+      "summary": "An authority or institution contracts for activities supporting land stewardship: coordination, participation, habitat follow-up, maintenance or reporting. Payment is for an agreed service. The existence of a stewardship agreement alone does not mean somebody has budgeted to pay its manager.",
+      "guide_id": "FIN-PROCUREMENT-STEWARDSHIP",
+      "introduction": null
+    },
+    {
+      "id": "FIN-COMMERCIAL-RESTORATION",
+      "title": "Private restoration and maintenance services",
+      "kind": "mechanism",
+      "family": "contracts",
+      "entry_ids": [
+        "FIN-COMMERCIAL-RESTORATION"
+      ],
+      "summary": "A business sells practical restoration, design support or maintenance to landowners, farms, conservation organisations or other clients. The buyer pays an agreed price for defined work. Any environmental obligation or grant held by the customer is separate from the supplier’s own business income.",
+      "guide_id": "FIN-COMMERCIAL-RESTORATION",
+      "introduction": null
+    },
+    {
+      "id": "FIN-COMMERCIAL-DATA",
+      "title": "Monitoring, mapping and environmental data services",
+      "kind": "mechanism",
+      "family": "contracts",
+      "entry_ids": [
+        "FIN-COMMERCIAL-DATA"
+      ],
+      "summary": "A provider sells field observations, maps, analysis, reporting or software that helps another organisation manage environmental work. Services may use remote sensing, meaning observations from satellites or aircraft, alongside ground measurements. A subscription is viable only when ongoing customer value justifies ongoing payment.",
+      "guide_id": "FIN-COMMERCIAL-DATA",
+      "introduction": null
+    },
+    {
+      "id": "FIN-REGENERATIVE-PRODUCTION",
+      "title": "Income from lawful farm and forest products",
+      "kind": "mechanism",
+      "family": "contracts",
+      "entry_ids": [
+        "FIN-REGENERATIVE-PRODUCTION"
+      ],
+      "summary": "A farm, agroforestry operation or forest enterprise earns money by selling lawful products. Conservation-compatible production can contribute to stewardship costs, but the sale must stand on its own agricultural and commercial merits. A tree’s presence does not automatically create harvest income or a certified premium.",
+      "guide_id": "FIN-REGENERATIVE-PRODUCTION",
+      "introduction": null
+    },
+    {
+      "id": "FIN-DEBT-LOAN",
+      "title": "Loans and bridge finance",
+      "kind": "mechanism",
+      "family": "capital",
+      "entry_ids": [
+        "FIN-DEBT-LOAN"
+      ],
+      "summary": "A lender provides money that must be repaid under agreed terms. Bridge finance covers a timing gap, such as expenditure before a confirmed reimbursement. A revolving facility allows repeated borrowing within limits. Interest, fees, security and repayment dates determine its real cost.",
+      "guide_id": "FIN-DEBT-LOAN",
+      "introduction": null
+    },
+    {
+      "id": "FIN-IMPACT-EQUITY",
+      "title": "Investment in a conservation-related business",
+      "kind": "mechanism",
+      "family": "capital",
+      "entry_ids": [
+        "FIN-IMPACT-EQUITY"
+      ],
+      "summary": "An investor contributes capital in exchange for an ownership interest in a company and expects a financial return. Impact investors also seek credible social or environmental results. Equity is different from a loan: voting, profit distribution, dilution and eventual sale of the investment become important.",
+      "guide_id": "FIN-IMPACT-EQUITY",
+      "introduction": null
+    },
+    {
+      "id": "FIN-LOCAL-HUMAN-CAPITAL",
+      "title": "Volunteers, training and donated resources",
+      "kind": "mechanism",
+      "family": "support",
+      "entry_ids": [
+        "FIN-LOCAL-HUMAN-CAPITAL"
+      ],
+      "summary": "People and institutions contribute time, expertise, materials or equipment instead of unrestricted money. Examples include supervised volunteers, university fieldwork, donated tools and a municipality’s staff time. These resources can make work possible, but their usefulness depends on competence, timing and actual project needs.",
+      "guide_id": "FIN-LOCAL-HUMAN-CAPITAL",
+      "introduction": null
+    },
+    {
+      "id": "FIN-TAX-INCENTIVES",
+      "title": "Tax incentives linked to conservation giving",
+      "kind": "mechanism",
+      "family": "support",
+      "entry_ids": [
+        "FIN-TAX-INCENTIVES"
+      ],
+      "summary": "Tax rules can encourage giving or reduce the net cost of qualifying activities. They are not an independent grant paid to a restoration site. In Spain, Law 49/2002 sets a conditional regime for eligible nonprofit organisations and incentives for certain charitable contributions.",
+      "guide_id": "FIN-TAX-INCENTIVES",
+      "introduction": null
+    },
+    {
+      "id": "SELF-FUNDS",
+      "title": "Own funds already available",
+      "kind": "mechanism",
+      "family": "support",
+      "entry_ids": [
+        "SELF-FUNDS"
+      ],
+      "summary": "This approach records own money already available as an activity contribution. It is a planning arrangement rather than a public grant or an application for new funding.",
+      "guide_id": null,
+      "introduction": {
+        "title": "Own funds already available",
+        "kind": "mechanism",
+        "what": "This approach records own money already available as an activity contribution. It is a planning arrangement rather than a public grant or an application for new funding.",
+        "fit": "Use it to distinguish money already available for Algarrobos from hoped-for grants, donations or future receipts. Record the contribution explicitly in the exploration and review the funding plan before transferring assumptions into planning.",
+        "advantages": "The existing amount calculation can include a stated available contribution in the plan. No eligibility questionnaire is needed for this arrangement. Keeping an explicit contribution helps show what still needs financing.",
+        "limitations": "The reported amount is an assumption, not bank verification, a cash receipt or a partner agreement. Do not count the same money twice or treat a planned contribution as already received. This view cannot certify that the funds are available.",
+        "next_steps": "Identify the contributor, confirm the amount and actual arrangement outside the app, then open Amount questions to record the contribution. Review other allocations and possible overlap before using a plan.",
+        "availability": "Check the exact route, current call and terms; a programme overview does not establish an open opportunity.",
+        "checked_on": "2026-11-01",
+        "source_ids": [
+          "stewardship"
+        ],
+        "unresolved": [
+          "Confirm the specific route, applicant, operation and current availability before relying on this reference."
+        ],
+        "related": []
+      }
+    },
+    {
+      "id": "PARTNER-FUNDS",
+      "title": "Partner funds already available",
+      "kind": "mechanism",
+      "family": "support",
+      "entry_ids": [
+        "PARTNER-FUNDS"
+      ],
+      "summary": "This approach records partner money already available as an activity contribution. It is a planning arrangement rather than a public grant or an application for new funding.",
+      "guide_id": null,
+      "introduction": {
+        "title": "Partner funds already available",
+        "kind": "mechanism",
+        "what": "This approach records partner money already available as an activity contribution. It is a planning arrangement rather than a public grant or an application for new funding.",
+        "fit": "Use it to distinguish money already available for Algarrobos from hoped-for grants, donations or future receipts. Record the contribution explicitly in the exploration and review the funding plan before transferring assumptions into planning.",
+        "advantages": "The existing amount calculation can include a stated available contribution in the plan. No eligibility questionnaire is needed for this arrangement. Keeping an explicit contribution helps show what still needs financing.",
+        "limitations": "The reported amount is an assumption, not bank verification, a cash receipt or a partner agreement. Do not count the same money twice or treat a planned contribution as already received. This view cannot certify that the funds are available.",
+        "next_steps": "Identify the contributor, confirm the amount and actual arrangement outside the app, then open Amount questions to record the contribution. Review other allocations and possible overlap before using a plan.",
+        "availability": "Check the exact route, current call and terms; a programme overview does not establish an open opportunity.",
+        "checked_on": "2026-11-01",
+        "source_ids": [
+          "stewardship"
+        ],
+        "unresolved": [
+          "Confirm the specific route, applicant, operation and current availability before relying on this reference."
+        ],
+        "related": []
+      }
+    }
+  ]
+}

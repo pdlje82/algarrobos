@@ -1,5 +1,13 @@
 # Browser checks
 
+Start with `node tests/browser/funding-programmes.cjs` for the programme-first
+graph: 99 explicit memberships, shared introductions, route-only dependencies,
+met-group/editor stability, comparison, composite inputs, other-route editing,
+source PDFs/focus, calculation-only approaches, reload/retry, keyboard, resizing
+and phone themes. Then run `funding-selection.cjs`, `funding-edl.cjs` and
+`funding-statistics.cjs` for the route-aware annex regressions. These scripts
+replace the isolated fixture and must run sequentially against API 8013.
+
 Run `node tests/browser/funding-guides.cjs` for introductions across all six
 families, keyboard focus and scrolling, mobile reading, a newly registered PDF,
 unchanged project/draft state and failed guide loading with explicit retry.
