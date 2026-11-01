@@ -188,6 +188,68 @@ the local table says 2023 while the later guide refers to the latest figures.
 Confirm the applicable year with AL20. Uncertainty can remain an unanswered
 selection; using the 2025 lookup is an explicit provisional scenario assumption.
 
+### FUND-010 content and application evidence review (1 November 2026)
+
+The supplied guide was already stored and registered as **FUND-010**,
+[LEADER Selection Criteria Verification Guide, v2-4](../doc_library/FUND-010%20-%20Andalusia%20-%20LEADER%20Selection%20Criteria%20Verification%20Guide%20-%20v2-4%20-%202026-09.pdf).
+The upload, canonical file and official download have the same SHA-256
+`1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326`.
+The 231-page PDF is version 2, public version 4; the cover's drafting date is
+11 September 2026. The
+[Junta publication page](https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores.html)
+lists it as 25 September 2026. The
+[direct official PDF download](https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/Guia-instrucciones-especificas-publicas_Criterios-seleccion-promotores_7119-2_LEADER_v2-4.pdf)
+was verified against the local edition on 1 November 2026. It is already in the
+library, not a document awaiting addition.
+
+The guide explains how to interpret and verify the promoter selection criteria
+in Annex II of the Order of 3 February 2026, Intervention 7119.2. It covers
+territory, operation quality, economic factors, demography, climate, employment,
+training, gender equality, inclusion, youth, innovation, rural heritage,
+applicant profile and public services. Criterion sections specify supporting
+documents, definitions and control methods, often distinguishing **CadmSA**
+(administrative control of the aid application), **CadmSP** (administrative
+control of the payment application) and subsequent controls. PDF pp. 5-6 explain
+scope and scoring combinations; seven annexes supply population, masculinised
+sectors, depopulation, ageing, business counts, agricultural area and
+exclusive/cumulative relationships (Annex VII, PDF pp. 218-231).
+
+For AL20, combine the guide's verification methods with **FUND-004** for local
+selection and points, **FUND-008/009** for governing rules and the call, and
+**FUND-013** for strategy evidence. A regional criterion is not automatically
+selected locally, and a score does not establish applicant or expense
+eligibility. The guide itself calls itself orientative (PDF p. 5).
+
+**Already implemented:** five route assessments (1.11, 2.6, 2.7, 3.4, 3.5),
+three local scoring profiles, source-linked exclusive/cumulative calculations,
+population/business lookups, and strategy references/notes for EDL-dependent
+answers. These are self-assessments. Strategy references are not certificates
+from the GDR, and existing notes do not constitute a staged evidence checklist.
+
+**Proposed next use:** attach a source-backed evidence checklist to each
+selected subcriterion, retaining separate application, payment and later-control
+requirements. Let users record the responsible person, document reference,
+planned action and outstanding evidence. Keep self-assessed points and evidence
+readiness separate; missing proof must remain visibly unresolved. Produce an
+application-preparation export with criterion codes, source pages, project
+explanations and missing documents. This review does not implement those features
+or change scoring, saved assessments or catalogue editions.
+
+| Example | Guide evidence and app implication |
+|---|---|
+| Rural/environmental heritage, **PT.1**, relevant to the current 3.4/3.5 profile | PDF pp. 104-105 distinguish project/memorandum requirements from completion certificates, reception records, photographs and dissemination evidence. A restoration proposal could use these to plan its application and delivery record, subject to the particular subcriterion and route conditions. |
+| Innovation, **IN.1** | PDF pp. 103-104 require justification from the instructing GDR against the applicable strategy. The app can link the claimed innovative theme/aspect and flag the GDR justification as outstanding; a sensor or novel planting design alone does not establish this criterion. |
+| Strategy needs, **CO.1** | PDF pp. 16-17 connect the operation to prioritised needs and the assessment process. Existing EDL references can support a draft explanation; an application's own note must not be presented as the authority's confirmation. |
+| Population/business criteria, **AT.3/RD.5** | Preserve the current explicit lookup and provenance. PDF pp. 10-11 require the relevant settlement population, not an invented settlement list or an unnoticed municipality substitution. Existing year/benchmark discrepancies remain documented below. |
+| Environmental actions, **CC.8**, and water savings, **CC.4** | PDF pp. 40-46 and 52-56 are useful contextual evidence examples, but neither criterion appears in the app's current AL20 profiles; do not add their points. CC.8.2 specifically requires publicly owned parcels and maintenance commitments (PDF pp. 53-54), so it cannot be assumed to cover planting on a private finca. |
+
+For an illustrative dryland restoration demonstrator, a useful preparation pack
+could therefore link the selected PT.1/IN.1/CO.1 claims to a baseline and intended
+outcomes, the relevant AL20 strategy passages, technical documents required by
+the claimed subcriterion, and planned delivery evidence. This is a product
+recommendation, not confirmation that a specific site, applicant or project is
+eligible or that every listed criterion can be combined.
+
 ### Population and business lookup
 
 Open AT.3 or RD.5 in the graph editor. **Population and business lookup** starts
