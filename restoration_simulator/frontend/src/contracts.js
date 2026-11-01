@@ -325,7 +325,7 @@ export function validateResponse(path, data) {
     for(const q of data.input_context.questions){
       properties(q,["id","label","short_label","type","input_kind","step","relevant","current_value","initial_value","display_value","initial_label","unknown","overridden","origin","retired","guidance","provenance"],"funding question state");
       required(typeof q.id==="string"&&!questionIds.has(q.id)&&typeof q.label==="string"&&["applicant","choice","number","party","text","selection"].includes(q.type)&&[0,1,4].includes(q.step)&&typeof q.relevant==="boolean"&&typeof q.unknown==="boolean"&&typeof q.overridden==="boolean"&&[q.display_value,q.initial_label,q.origin].every(s=>typeof s==="string"),"Invalid logical funding question.");
-      if(q.type==="applicant"){required(q.id==="applicant_choice"&&Array.isArray(q.options)&&q.options.length>0&&Array.isArray(q.other_forms),"Missing applicant choices.");for(const o of q.options)properties(o,["group","label","choice"],"applicant option");}
+      if(q.type==="applicant"){properties(q,["forms"],"applicant type options");required(Array.isArray(q.forms)&&q.forms.length>0&&q.forms.every(p=>Array.isArray(p)&&p.length===2&&p.every(v=>typeof v==="string"&&v.length>0)),"Applicant type options are incomplete. Restart Python and retry.");required(q.id==="applicant_choice"&&Array.isArray(q.options)&&q.options.length>0&&Array.isArray(q.other_forms),"Missing applicant choices.");for(const o of q.options)properties(o,["group","label","choice"],"applicant option");}
       required(typeof q.short_label==="string"&&q.short_label.trim()&&typeof q.retired==="boolean","Missing compact question labels.");
       properties(q.guidance,["summary","why","verify","requirements"],"question guidance");
       required([q.guidance.summary,q.guidance.why,q.guidance.verify].every(t=>typeof t==="string"&&t.trim())&&Array.isArray(q.guidance.requirements),"Incomplete question guidance.");
@@ -355,9 +355,21 @@ export function validateResponse(path, data) {
   if (["funding", "funding/save"].includes(path)) {
     properties(data,["version","project_revision","funding_revision","attachment","legacy"],"funding workspace");
     properties(data.attachment,["version","draft","scenarios","plans"],"funding attachment");
-    required(data.version===1&&data.attachment.version===1&&Number.isInteger(data.funding_revision)&&Array.isArray(data.attachment.scenarios)&&Array.isArray(data.attachment.plans),"Incompatible funding workspace. Restart Python and reload.");
+    required(data.version===1&&[1,2].includes(data.attachment.version)&&Number.isInteger(data.funding_revision)&&Array.isArray(data.attachment.scenarios)&&Array.isArray(data.attachment.plans),"Incompatible funding workspace. Restart Python and reload.");
     if(data.attachment.draft!==null)validateResponse("funding/context",data.attachment.draft);
+    if(data.attachment.version===2){properties(data.attachment,["active_version_id"],"active funding version");const id=data.attachment.active_version_id;required(id===null?data.attachment.draft===null:typeof id==="string"&&data.attachment.scenarios.some(r=>r.id===id&&JSON.stringify(r.draft)===JSON.stringify(data.attachment.draft)),"Active funding version and draft disagree. Retain your edits and reload versions.");}
     for(const record of [...data.attachment.scenarios,...data.attachment.plans])validateResponse("funding/context",record.draft);
+    return data;
+  }
+  if(path==="funding/workspace-preview"){
+    properties(data,["version","version_id","draft","catalogue_review","messages","preview_hash"],"funding workspace preview");
+    required(data.version===1&&typeof data.version_id==="string"&&typeof data.preview_hash==="string"&&data.preview_hash.length===64&&Array.isArray(data.messages),"Invalid workspace update comparison.");validateResponse("funding/context",data.draft);return data;
+  }
+  if(path==="funding/overview"){
+    properties(data,["version","route","title","name","score","criteria","edl","details","delivery","markdown","sources","checks","concept"],"project overview");
+    required(data.version===1&&typeof data.route==="string"&&typeof data.markdown==="string"&&Array.isArray(data.criteria)&&Array.isArray(data.details)&&Array.isArray(data.sources)&&Array.isArray(data.edl)&&Array.isArray(data.delivery)&&Array.isArray(data.checks),"Invalid project overview. Keep your draft and retry.");
+    if(data.score!==null)required(Number.isFinite(data.score.subtotal)&&Number.isFinite(data.score.threshold)&&Number.isInteger(data.score.unresolved),"Invalid overview score.");
+    for(const c of data.criteria){properties(c,["id","label","method","subtotal","cap","uncapped","items","calculation_included","notes","reference"],"overview criterion");required(Array.isArray(c.items)&&typeof c.calculation_included==="boolean"&&Number.isFinite(c.subtotal)&&c.subtotal<=c.cap,"Invalid overview criterion.");for(const item of c.items){properties(item,["id","label","points","selected","notes","reference","edl","activities","sources","details"],"overview item");required(typeof item.selected==="boolean"&&Array.isArray(item.edl)&&Array.isArray(item.activities)&&Array.isArray(item.sources),"Invalid overview item.");}}
     return data;
   }
   if(path==="funding/prepare") {
@@ -392,7 +404,8 @@ export function validateResponse(path, data) {
       required(data.bundle.version===3,"AL20 structured scoring requires catalogue edition 3.");
       const rules=data.bundle.selection;
       properties(rules,["version","routes","profiles"],"AL20 scoring definitions");
-      required([1,2].includes(rules.version)&&(rules.version===1||rules.completion_policy==="cap_or_all_answers")&&Object.keys(rules.routes).length===5,"Incomplete AL20 route coverage.");
+      required([1,2,3].includes(rules.version)&&(rules.version===1||rules.completion_policy===(rules.version===2?"cap_or_all_answers":"selected_items_only"))&&Object.keys(rules.routes).length===5,"Incomplete AL20 route coverage.");
+      if(rules.version===3)required(rules.defaults?.selected===false&&rules.defaults?.include_calculation===false,"Missing authoritative selection defaults.");
       object(data.selection_assessments,"AL20 route answers");
       required(Object.keys(data.selection_assessments).length===5,"Missing AL20 route answers.");
       for(const [route,profileId] of Object.entries(rules.routes)){
@@ -413,6 +426,7 @@ export function validateResponse(path, data) {
           required(["sum","ratio","employment"].includes(criterion.method)&&Array.isArray(criterion.choices)&&criterion.choices.length>0&&Array.isArray(criterion.exclusive_groups)&&Array.isArray(criterion.sources)&&criterion.sources.length>0,"Incomplete AL20 criterion definitions.");
           properties(answer.criteria,[criterion.id],"AL20 criterion answers");
           properties(answer.criteria[criterion.id],["answers","inputs","reference","notes"],"AL20 criterion answer");
+          if(rules.version===3&&criterion.method==="ratio")required(typeof answer.criteria[criterion.id].calculation_included==="boolean","Missing calculation inclusion choice.");
           const row=answer.criteria[criterion.id],choiceIds=criterion.method==="ratio"?[]:criterion.choices.filter(c=>c.routes.includes(route)).map(c=>c.id),inputIds=criterion.method==="ratio"?["grant","quality_jobs"]:criterion.method==="employment"?["qualifying_uta"]:[];
           object(row.answers,"AL20 item answers");object(row.inputs,"AL20 shared calculation inputs");
           required(Object.keys(row.answers).length===choiceIds.length&&choiceIds.every(id=>Object.hasOwn(row.answers,id)&&[true,false,null].includes(row.answers[id])),"Missing or invalid individual scoring answers. Retain your draft and reload the saved assessment.");
@@ -865,14 +879,15 @@ function designerDisplayContract(value,evaluation) {
 function validateSelectionResult(score,route,draft){
   properties(score,["route","profile","basis","subtotal","total","unresolved","threshold","result","criteria"],"AL20 scoring result");
   required(score.route===route&&score.profile===draft.bundle.selection.routes[route]&&typeof score.basis==="string"&&Number.isFinite(score.subtotal)&&score.subtotal>=0&&Number.isInteger(score.unresolved)&&score.unresolved>=0&&Number.isFinite(score.threshold)&&["pass","fail","unknown"].includes(score.result)&&Array.isArray(score.criteria),"Invalid AL20 scoring result.");
-  if(draft.bundle.selection.version===2)required(score.version===2,"Missing scoring completion version. Restart Python and retry.");
+  if(draft.bundle.selection.version>=2)required(score.version===draft.bundle.selection.version,"Missing scoring completion version. Restart Python and retry.");
   const profile=draft.bundle.selection.profiles[score.profile];
   required(score.criteria.length===profile.criteria.length&&new Set(score.criteria.map(c=>c.id)).size===profile.criteria.length,"Incomplete AL20 scoring breakdown.");
-  if(draft.bundle.selection.version===2)required(score.unresolved===score.criteria.filter(c=>!c.score_complete).length,"Inconsistent scoring completion count. Retain your draft and retry the assessment.");
+  if(draft.bundle.selection.version>=2)required(score.unresolved===score.criteria.filter(c=>!c.score_complete).length,"Inconsistent scoring completion count. Retain your draft and retry the assessment.");
   required(score.unresolved===0?Number.isFinite(score.total)&&score.total===score.subtotal&&score.result!=="unknown":score.total===null&&score.result==="unknown","An incomplete AL20 assessment cannot publish a final score.");
   for(const definition of profile.criteria){
     const row=score.criteria.find(r=>r.id===definition.id);required(row!==undefined,"Missing AL20 criterion subtotal.");
     properties(row,["id","subtotal","uncapped","cap","complete","selected","issues","sources"],"AL20 criterion result");
+    if(draft.bundle.selection.version===3){required(typeof row.answers_complete==="boolean"&&row.score_complete===row.complete&&["cap_reached","not_selected","calculation_complete","selected_items","inputs_required"].includes(row.completion_reason),"Missing selected-items scoring details.");required(row.completion_reason==="inputs_required"?!row.complete:row.complete,"Inconsistent selected-items completion.");}
     if(draft.bundle.selection.version===2){
       required(typeof row.answers_complete==="boolean"&&row.score_complete===row.complete&&["cap_reached","all_answered","calculation_complete","unresolved"].includes(row.completion_reason),"Missing criterion completion details. Restart Python and retry.");
       required(row.completion_reason==="cap_reached"?row.complete&&row.subtotal===row.cap:row.completion_reason==="unresolved"?!row.complete:row.complete&&row.answers_complete,"Inconsistent criterion completion reason. Retain your draft and retry the assessment.");

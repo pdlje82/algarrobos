@@ -1,6 +1,7 @@
 // Editing and geometry only. Scores and applicability come from Python/the snapshot.
 export function selectionSummary(score){
   if(!score||!Number.isFinite(score.subtotal)||!Number.isInteger(score.unresolved)||score.unresolved<0)throw Error("The AL20 scoring response is incompatible. Restart the backend and refresh the app.");
+  if(score.version===3)return `${score.subtotal} points · threshold ${score.threshold}`+(score.unresolved?` · ${score.unresolved} criteria need inputs`:"");
   const provisional=Object.hasOwn(score,"location_basis")&&score.location_basis!==null?" · provisional location data":"";
   return (score.total===null?`Partial subtotal: ${score.subtotal} points · ${score.unresolved} criteria unresolved`:`Calculated score: ${score.total} points · self-assessed`)+provisional;
 }

@@ -127,7 +127,9 @@ def references(draft, route):
 
 def source_context(draft, route):
     from . import funding
-    return {"project_id": draft["baseline"]["project_id"], "activity_key": draft["activity_key"], "baseline": deepcopy(draft["baseline"]), "applicant": funding.applicant_label(funding.resolved_applicant(draft), draft), "municipality": funding.effective(draft)["municipality"],
+    applicant = funding.resolved_applicant(draft)
+    label = funding.applicant_label(applicant, draft) if applicant["kind"] == "recorded" else "Not entered" if applicant["kind"] == "unknown" or applicant["legal_form"] is None else funding.legal_forms(draft)[applicant["legal_form"]]
+    return {"project_id": draft["baseline"]["project_id"], "activity_key": draft["activity_key"], "baseline": deepcopy(draft["baseline"]), "applicant": label, "municipality": funding.effective(draft)["municipality"],
             "scoring": {"selection": deepcopy(draft["bundle"]["selection"]), "rules": {r: {"minimum_score": v["minimum_score"]} for r, v in draft["bundle"]["rules"].items()}, "answers": deepcopy(draft["selection_assessments"]), "catalogue_hash": digest(draft["bundle"])}}
 
 
@@ -207,7 +209,7 @@ def report(concept, source, project):
     binding_ids = list(dict.fromkeys(needs + selected + [b for a in concept["activities"] for b in a["bindings"]]))
     source_ids = list(dict.fromkeys([s for b in binding_ids for s in data["bindings"][b]["sources"]] + [s for a in concept["activities"] if a["template_id"] is not None for s in data["templates"][a["template_id"]]["sources"]]))
     citations = list({(r["document_id"], r["page"], r["sha256"], r["label"], r["role"]): r for r in [data["sources"][s] for s in source_ids] + delivery_refs}.values())
-    lines = ["# " + concept["title"], "", "Provisional project concept — not a grant approval or completed application.", "", "## Purpose", concept["purpose"] if concept["purpose"].strip() else "Not defined.", "", "## Context", "Route: " + concept["route"], "Applicant (recorded/provisional funding context): " + source["applicant"], "Municipality: " + (source["municipality"] if source["municipality"] is not None else "Unknown"), "Recorded site links: " + (", ".join(source["baseline"]["parcel_ids"]) if source["baseline"]["parcel_ids"] else "Not assigned"), "", "## Objectives"]
+    lines = ["# " + concept["title"], "", "Project concept for funding exploration.", "", "## Purpose", concept["purpose"] if concept["purpose"].strip() else "Not defined.", "", "## Context", "Route: " + concept["route"], "Applicant: " + source["applicant"], "Municipality: " + (source["municipality"] if source["municipality"] is not None else "Unknown"), "Recorded site links: " + (", ".join(source["baseline"]["parcel_ids"]) if source["baseline"]["parcel_ids"] else "Not assigned"), "", "## Objectives"]
     lines += ["- " + n + " · " + data["bindings"][n]["label"] for n in concept["objectives"]]
     if not concept["objectives"]: lines.append("No objectives included yet.")
     lines += ["", "## Proposed activities"]
@@ -218,7 +220,9 @@ def report(concept, source, project):
         lines.append("Links: " + (", ".join(a["bindings"]) if a["bindings"] else "Not linked"))
     if not concept["activities"]: lines.append("No activities included yet.")
     lines += delivery_lines
-    lines += ["", "## Self-assessed scoring", f"{'Partial subtotal' if score['total'] is None else 'Calculated score'}: {score['subtotal']:g} points; threshold {score['threshold']:g}; {score['unresolved']} criteria unresolved.", "Evidence readiness is separate from the score; no supporting documents have been independently certified.", "Selected scoring claims: " + (", ".join(selected) if selected else "None"), "", "## Justifications"]
+    from .funding_overview import scoring as scoring_overview
+    lines += ["", scoring_overview({"selection": proof["selection"], "rules": proof["rules"]}, proof["answers"], concept["route"], concept)["markdown"]]
+    lines += ["", "## Supporting notes and explanations"]
     lines += ["- " + bid + ": " + text for bid, text in concept["justifications"].items()]
     for cid, row in proof["answers"][concept["route"]]["criteria"].items():
         if row["notes"] or row["reference"]: lines.append("- Shared " + cid + " context: " + row["notes"] + " Reference: " + row["reference"])
@@ -226,7 +230,7 @@ def report(concept, source, project):
             for bid, note in row["choice_context"]["items"].items():
                 if note["notes"] or note["reference"]: lines.append("- " + bid + ": " + note["notes"] + " Reference: " + note["reference"])
     lines += ["", "## Questions and remaining detail"] + ["- " + g for g in gaps]
-    lines += ["", "## Assumptions and notes", concept["notes"] if concept["notes"].strip() else "No additional notes recorded.", "Physical design, quantities, budget, legal eligibility and application evidence require separate review.", "", "## Sources"]
+    lines += ["", "## Context and notes", concept["notes"] if concept["notes"].strip() else "No additional notes recorded.", "Physical design, quantities, budget, legal eligibility and application evidence require separate review.", "", "## Sources"]
     for ref in citations:
         require(ref["document_id"] in data["publications"], "A concept source has no configured official download.")
         url = data["publications"][ref["document_id"]]["download_url"]

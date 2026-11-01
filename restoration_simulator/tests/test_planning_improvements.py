@@ -13,6 +13,9 @@ R34, R35 = concept_tests.R34, concept_tests.R35
 
 class CompletionTests(unittest.TestCase):
     def setUp(self):
+        # Keep the original completion-policy contract frozen at edition 2.
+        c=funding.catalogue();c["selection"].update(version=2,completion_policy="cap_or_all_answers");del c["selection"]["defaults"]
+        catalogue=patch.object(funding,"catalogue",side_effect=lambda:deepcopy(c));catalogue.start();self.addCleanup(catalogue.stop)
         self.project=site();self.draft=funding.new_draft(self.project,None,[],"activity")
 
     def test_every_route_can_complete_a_valid_cap_without_rejecting_other_options(self):
@@ -113,7 +116,8 @@ class DeliveryAPITests(unittest.TestCase):
         self.save();self.transfer()
         report=self.post("demonstrator/project-concept/preview",dict(revision=self.state["revision"],concept_id=self.concept["id"],concept=self.concept))
         self.assertIn("Monitoring, participation and sharing",report["markdown"])
-        self.assertTrue(any("review" in g.lower() for g in report["gaps"]))
+        self.assertFalse(any(g.startswith("Delivery plan: review ") for g in report["gaps"]))
+        self.assertTrue(any("define" in g.lower() or "link" in g.lower() for g in report["gaps"]))
 
     def test_plan_merges_by_field_and_rejects_dangling_activity_links(self):
         self.ready();d=deepcopy(self.concept);d["delivery_plan"]["topics"]["monitoring"]["explanation"]="Demo monitoring";self.edit(d)

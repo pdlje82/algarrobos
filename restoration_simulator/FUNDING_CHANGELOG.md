@@ -1,5 +1,24 @@
 # Funding Navigator changes
 
+## 2026-11-01 — simplified Navigator, selected-items scoring and project versions
+
+- Replaced the six-step workflow with four areas and a visible version/programme/
+  route header. Added a directly editable overview before a concept or shortlist
+  exists, and exposed activities/delivery planning directly.
+- Added selected-items scoring edition 3, explicit calculation inclusion and
+  reviewed upgrades, retaining frozen editions 1 and 2 and their point arithmetic.
+  Checkbox proposals share atomic prerequisite/replacement handling across views.
+- Added attachment edition 2 with explicit active identity, autosaved named versions,
+  independent duplication, comparison without a shortlist and revision-safe recovery.
+  Transfers synchronise the active named copy atomically; adopted history stays intact.
+- Reused overview content in briefs/Markdown/print and retained page-specific sources,
+  notes, EDL references and linked activities. Removed confidence badges and separate
+  topic-review ticks; execution changes retain a comparison and confirmation.
+- Verified 281 Python tests, 105 frontend tests, the production build and three
+  isolated browser workflows: an exported AL20 Alhama copy, all five scoring routes
+  plus a non-AL20 route, and original editing-format review. Coverage includes
+  cross-window version recovery, failed reads/writes, source focus and phone themes.
+
 ## 2026-11-01 — remember exploration programme and working route
 
 - Programme and working-route choices now belong to each exploration's optional,

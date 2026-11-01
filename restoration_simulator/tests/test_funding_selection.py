@@ -14,6 +14,12 @@ import test_funding as persistence_fixtures
 class SelectionTests(unittest.TestCase):
     def setUp(self):
         self.project = site()
+        # These established assertions freeze edition-2 completion semantics.
+        c = funding.catalogue()
+        c["selection"].update(version=2, completion_policy="cap_or_all_answers")
+        del c["selection"]["defaults"]
+        catalogue = patch.object(funding, "catalogue", side_effect=lambda: deepcopy(c))
+        catalogue.start(); self.addCleanup(catalogue.stop)
         self.draft = funding.new_draft(self.project, None, [], "business")
 
     def score(self, route="3.4", draft=None):

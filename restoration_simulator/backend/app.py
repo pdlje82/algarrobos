@@ -154,9 +154,18 @@ class FundingMutationRequest(Mutation):
     funding_revision: StrictInt
     planning_revision: StrictInt
     design_revision: StrictInt
-    operation: Literal["draft", "save", "adopt", "delete"]
+    operation: Literal["draft", "save", "adopt", "delete", "upgrade_workspace", "activate", "duplicate", "create_version"]
     draft: dict[str, Any] | None = None
     record_id: UUID | None = None
+    preview_hash: StrictStr | None = None
+
+
+class FundingOverviewRequest(FundingEvaluationRequest):
+    route: StrictStr
+
+
+class FundingWorkspacePreviewRequest(FundingEvaluationRequest):
+    version_id: UUID
 
 
 class ConceptDraftRequest(FundingEvaluationRequest):
@@ -356,6 +365,18 @@ def create_app(save_path=None):
         data = designer_state(req.revision)
         return funding.prepare(req.draft, data["project"], req.applicant_choice, resolve="applicant_choice" in req.model_fields_set, adopt_current_catalogue=req.adopt_current_catalogue, planning=data["planning"])
 
+    @app.post("/api/funding/overview")
+    def funding_overview(req: FundingOverviewRequest):
+        from .funding_overview import describe
+        data = designer_state(req.revision)
+        return describe(req.draft, data["project"], req.route, data["planning"])
+
+    @app.post("/api/funding/workspace-preview")
+    def funding_workspace_preview(req: FundingWorkspacePreviewRequest):
+        from .funding_versions import preview
+        data = designer_state(req.revision)
+        return preview(data["funding"], data["project"], data["planning"], req.draft, str(req.version_id))
+
     @app.post("/api/funding/visualise")
     def funding_visualise(req: FundingEvaluationRequest):
         data = designer_state(req.revision)
@@ -471,7 +492,7 @@ def create_app(save_path=None):
 
     @app.post("/api/funding/save")
     def funding_save(req: FundingMutationRequest):
-        data = get_store().funding_mutation(req.operation, req.revision, req.funding_revision, req.planning_revision, req.design_revision, str(req.request_id), draft=req.draft, record_id=None if req.record_id is None else str(req.record_id))
+        data = get_store().funding_mutation(req.operation, req.revision, req.funding_revision, req.planning_revision, req.design_revision, str(req.request_id), draft=req.draft, record_id=None if req.record_id is None else str(req.record_id), preview_hash=req.preview_hash)
         return funding.workspace(data["project"], data["funding"], data["funding_revision"])
 
     @app.post("/api/designer/preview")

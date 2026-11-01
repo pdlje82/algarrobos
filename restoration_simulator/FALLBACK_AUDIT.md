@@ -1,5 +1,21 @@
 # Silent-fallback audit · 28 October 2026
 
+Navigator versions/overview (1 November 2026): attachment edition 2 requires a
+validated active version identity and matching named/working drafts. Creation,
+activation, duplication and adoption are explicit operations using revisions,
+idempotent request identities and atomic persistence. Historical edition-1
+attachments remain readable; reviewed conversion creates a distinct current
+version rather than matching names or inventing identities during reads.
+Selection edition 3 intentionally treats retained false/null answers as no selected
+claim; it does not repair their stored values. New selections/calculation inclusion
+come from validated catalogue defaults. Included calculations and selected job
+claims must provide their required inputs. Frozen scoring editions are unchanged.
+Overview/reference failures are visible with retry; no empty project, zero score,
+replacement library or silently retargeted version substitutes for a failed read.
+Optional concept/annotation/EDL absence retains its existing documented meaning.
+This change does not claim an audit of the entire repository or older unrelated
+presentation helpers.
+
 Navigator focus (1 November 2026): editable exploration drafts may contain
 optional `navigator_focus` version 1. Absence explicitly means no saved programme
 or route, rather than an inferred selection from a shortlist or scoring answers.

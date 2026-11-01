@@ -19,7 +19,7 @@ test("options across activities remain browsable with explicit search, family an
   assert.equal(fundingResults(rows,{requireChanges:true,query:"habitat"})[0].id,"B");
   assert.deepEqual(fundingResults(rows,{requireChanges:true,group:"public"}).map(r=>r.id),["A","B"]);
   assert.deepEqual(fundingResults(rows,{query:"unmatched"}),[]);
-  assert.equal(FUNDING_STEPS.length,6);
+  assert.deepEqual(FUNDING_STEPS,["Explore and score","Project overview","Activities and delivery","Budget and review"]);
 });
 test("funding API contract errors cannot masquerade as empty results",()=>{
   assert.throws(()=>validateResponse("funding",{}),/funding/);
@@ -42,10 +42,10 @@ test("missing user answers are separate from unimplemented assessments and confl
 });
 test("one applicant edit, unknown and restore replace the complete choice",()=>{
   const initial={kind:"recorded",party_id:"individual"};
-  const q={id:"applicant_choice",type:"applicant",initial_value:initial,current_value:initial,overridden:false,origin:"Inherited",other_forms:[["company","Company"]],options:[{label:"Individual",choice:initial},{label:"New nonprofit",choice:{kind:"planned",legal_form:"nonprofit"}},{label:"Unknown",choice:{kind:"unknown"}}]};
+  const q={id:"applicant_choice",type:"applicant",initial_value:initial,current_value:initial,overridden:false,origin:"Inherited",other_forms:[["company","Company"]],forms:[["company","Company"],["nonprofit","Nonprofit"]],options:[{label:"Individual",choice:initial},{label:"New nonprofit",choice:{kind:"planned",legal_form:"nonprofit"}},{label:"Unknown",choice:{kind:"unknown"}}]};
   const d={version:3,applicant_choice:null,baseline:{facts:{applicant_id:"individual",applicant_kind:"individual"},parties:[]},overrides:{}};
   const next=overrideAnswer(d,"applicant_choice",{kind:"planned",legal_form:"nonprofit"});
-  assert.equal(presentQuestion(q,next).display_value,"New nonprofit");
+  assert.equal(presentQuestion(q,next).display_value,"Applicant type · Nonprofit");
   assert.equal(next.overrides.applicant_kind,undefined);assert.equal(d.applicant_choice,null);
   const cleared=overrideAnswer(next,"applicant_choice",{kind:"unknown"});
   assert.equal(presentQuestion(q,cleared).unknown,true);

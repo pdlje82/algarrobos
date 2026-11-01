@@ -118,7 +118,7 @@ def prepare(state, concept, import_execution):
             target["answer"] = ["custom"] if tid == "monitoring" else "custom"
             target["explanation"] = "Retained execution value requiring review: " + value
     validate(plan, concept)
-    return {"version": 1, "plan": plan, "retained_settings": retained, "origin": origin, "notice": "All six original values are retained. Imported interpretations are unreviewed; no deliberate choice or grant eligibility is inferred. Route-3.4-only settings are not asserted for 3.5."}
+    return {"version": 1, "plan": plan, "retained_settings": retained, "origin": origin, "notice": "The six original settings are retained. Review their mapping to delivery choices below. Route-3.4-only settings remain source context for 3.5."}
 
 
 def review(plan, concept):
@@ -130,20 +130,19 @@ def review(plan, concept):
         defined = value["answer"] is not None and value["answer"] != []
         optional = tid == "comparison" and concept["route"].endswith("3.5") and not defined
         if not optional and not defined: gaps.append("Delivery plan: define " + topic["label"] + ".")
-        if not optional and not value["reviewed"]: gaps.append("Delivery plan: review " + topic["label"] + ".")
         if defined and not value["activity_ids"] and not value["explanation"].strip(): gaps.append(topic["label"] + ": link activities or explain the planned arrangements.")
         answers = value["answer"] if isinstance(value["answer"], list) else [value["answer"]]
         if "custom" in answers and not value["explanation"].strip(): gaps.append(topic["label"] + ": explain the custom method/arrangement.")
         labels = {o["id"]: o["label"] for o in topic["options"]}
         description = ", ".join(labels[a] for a in answers if a is not None) if defined else "Not defined" + (" (optional for 3.5)" if optional else "")
-        lines += ["", "### " + topic["label"], description, "Review status: " + ("Reviewed as a project intention" if value["reviewed"] else "Unreviewed"), "Explanation: " + (value["explanation"] if value["explanation"].strip() else "Not defined"), "Reference: " + (value["reference"] if value["reference"].strip() else "Not defined")]
+        lines += ["", "### " + topic["label"], description, "Explanation: " + (value["explanation"] if value["explanation"].strip() else "Not defined"), "Reference: " + (value["reference"] if value["reference"].strip() else "Not defined")]
         names = {a["id"]: a["title"] for a in concept["activities"]}
         lines.append("Activities: " + (", ".join(names[a] for a in value["activity_ids"]) if value["activity_ids"] else "Not linked"))
         for key in topic["extra_fields"]:
             if not value[key].strip(): gaps.append("Results sharing: define " + key + ".")
             lines.append(key.capitalize() + ": " + (value[key] if value[key].strip() else "Not defined"))
         refs.extend(data["sources"][sid] for sid in topic["sources"])
-    lines += ["", "Reviewed intentions do not certify evidence, eligibility or ecological outcomes."]
+    lines += ["", "Execution updates require comparison and confirmation."]
     return gaps, lines, refs
 
 
@@ -162,7 +161,6 @@ def execution_preview(state, concept_id, choices):
         if concept["route"] not in topic["routes"]: continue
         value = plan["topics"][tid]
         if tid == "comparison" and concept["route"].endswith("3.5") and value["answer"] is None: continue
-        if not value["reviewed"]: blockers.append("Review " + topic["label"] + " before applying execution settings.")
         if tid == "monitoring":
             exact = [code for code, methods in data["monitoring_legacy"].items() if set(methods) == set(value["answer"])]
             primary = choices["primary_monitoring"]
@@ -192,6 +190,8 @@ def apply(state, concept_id, choices, preview_hash):
     from .project_concepts import planning_record
     result = deepcopy(state["planning"])
     record = planning_record(result, concept_id)
+    for tid, topic in library()["topics"].items():
+        if record["concept"]["route"] in topic["routes"]: record["concept"]["delivery_plan"]["topics"][tid]["reviewed"] = True
     result["inputs"] = preview["proposed_inputs"]
     result["applied_delivery_plan"] = {"version": 1, "concept_id": concept_id, "route": record["concept"]["route"], "delivery_plan": deepcopy(record["concept"]["delivery_plan"]), "activities": deepcopy(record["concept"]["activities"]), "execution_inputs": deepcopy(result["inputs"])}
     return result

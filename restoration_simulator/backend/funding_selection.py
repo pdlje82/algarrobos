@@ -30,9 +30,13 @@ def source(ref):
 
 
 def validate_rules(rules, catalogue):
-    keys(rules, {"version", "routes", "profiles"} | ({"completion_policy"} if rules["version"] == 2 else set()), "AL20 scoring library")
-    require(type(rules["version"]) is int and rules["version"] in {1, 2}, "Unsupported AL20 scoring library.")
+    keys(rules, {"version", "routes", "profiles"} | ({"completion_policy"} if rules["version"] in {2, 3} else set()) | ({"defaults"} if rules["version"] == 3 else set()), "AL20 scoring library")
+    require(type(rules["version"]) is int and rules["version"] in {1, 2, 3}, "Unsupported AL20 scoring library.")
     if rules["version"] == 2: require(rules["completion_policy"] == "cap_or_all_answers", "Unsupported AL20 completion policy.")
+    if rules["version"] == 3:
+        require(rules["completion_policy"] == "selected_items_only", "Unsupported AL20 selection policy.")
+        keys(rules["defaults"], {"selected", "include_calculation"}, "AL20 selection defaults")
+        require(all(v is False for v in rules["defaults"].values()), "New scoring items and calculations must start unselected.")
     expected = {"LEADER-AL20-" + r for r in catalogue["rules"]}
     require(isinstance(rules["routes"], dict) and set(rules["routes"]) == expected,
             "AL20 scoring must map all five supported funding routes.")
@@ -115,7 +119,7 @@ def is_guidance_update_v1(previous, current):
     All scoring definitions and existing source citations must remain identical.
     Changed/removed legal sources or scoring contracts need another migration.
     """
-    if previous["version"] not in {1, 2} or current["version"] != previous["version"]:
+    if previous["version"] not in {1, 2, 3} or current["version"] != previous["version"]:
         return False
     comparison = deepcopy(current)
     if set(previous["profiles"]) != set(current["profiles"]):
@@ -139,9 +143,12 @@ def empty(bundle):
         rows = {}
         for criterion in profile_for(bundle, route)["criteria"]:
             method = criterion["method"]
-            rows[criterion["id"]] = {"answers": {} if method == "ratio" else {c["id"]: None for c in choices_for(criterion, route)},
+            initial_answer = bundle["selection"]["defaults"]["selected"] if bundle["selection"]["version"] == 3 else None
+            rows[criterion["id"]] = {"answers": {} if method == "ratio" else {c["id"]: initial_answer for c in choices_for(criterion, route)},
                                       "inputs": {"grant": None, "quality_jobs": None} if method == "ratio" else {"qualifying_uta": None} if method == "employment" else {},
                                       "reference": "", "notes": ""}
+            if method == "ratio" and bundle["selection"]["version"] == 3:
+                rows[criterion["id"]]["calculation_included"] = bundle["selection"]["defaults"]["include_calculation"]
         assessments[route] = {"criteria": rows}
     return assessments
 
@@ -157,7 +164,9 @@ def validate_answers(assessments, bundle):
         for criterion in profile["criteria"]:
             cid = criterion["id"]
             row = rows[cid]
-            keys(row, {"answers", "inputs", "reference", "notes"} | ({"edl_evidence"} if "edl_evidence" in row else set()) | ({"choice_context"} if "choice_context" in row else set()), "AL20 answer " + cid)
+            keys(row, {"answers", "inputs", "reference", "notes"} | ({"edl_evidence"} if "edl_evidence" in row else set()) | ({"choice_context"} if "choice_context" in row else set()) | ({"calculation_included"} if criterion["method"] == "ratio" and bundle["selection"]["version"] == 3 else set()), "AL20 answer " + cid)
+            if criterion["method"] == "ratio" and bundle["selection"]["version"] == 3:
+                require(type(row["calculation_included"]) is bool, "Choose whether to include this scoring calculation.")
             if "choice_context" in row:
                 metadata = row["choice_context"]
                 keys(metadata, {"version", "items"}, "AL20 sub-node annotations")
@@ -191,6 +200,13 @@ def validate_answers(assessments, bundle):
 
 
 def is_completion_update(previous, current):
+    if previous["version"] in {1, 2} and current["version"] == 3 and current["completion_policy"] == "selected_items_only":
+        comparable = deepcopy(current)
+        comparable["version"] = previous["version"]
+        del comparable["defaults"]
+        if previous["version"] == 1: del comparable["completion_policy"]
+        else: comparable["completion_policy"] = previous["completion_policy"]
+        return is_guidance_update_v1(previous, comparable)
     if previous["version"] != 1 or current["version"] != 2 or current["completion_policy"] != "cap_or_all_answers":
         return False
     comparable = deepcopy(current)
@@ -200,27 +216,33 @@ def is_completion_update(previous, current):
 
 
 def calculate(bundle, assessments, route):
+    version = bundle["selection"]["version"]
+    if version in {1, 2}:
+        from .funding_selection_v2 import calculate as historical
+        return historical(bundle, assessments, route)
+    require(version == 3 and bundle["selection"]["completion_policy"] == "selected_items_only", "Unsupported scoring selection policy.")
     from .funding_selection_v1 import calculate as original
     result = original(bundle, assessments, route)
-    version = bundle["selection"]["version"]
-    if version == 1:
-        return result
-    require(version == 2 and bundle["selection"]["completion_policy"] == "cap_or_all_answers", "Unsupported scoring completion policy.")
     definitions = {c["id"]: c for c in profile_for(bundle, route)["criteria"]}
     for row in result["criteria"]:
         definition = definitions[row["id"]]
         answers = assessments[route]["criteria"][row["id"]]
-        answered = (all(v is not None for v in answers["inputs"].values()) if definition["method"] == "ratio" else all(v is not None for v in answers["answers"].values()))
+        if definition["method"] == "ratio" and not answers["calculation_included"]:
+            row.update(subtotal=0.0, uncapped=0.0, selected=[], issues=[])
+        included = answers["calculation_included"] if definition["method"] == "ratio" else bool(row["selected"])
+        answered = not included or all(v is not None for v in answers["inputs"].values())
         maximum = Decimal(str(row["subtotal"])) == points(definition["cap"])
-        complete = row["complete"] or maximum
+        complete = answered
         row.update(answers_complete=answered, score_complete=complete, complete=complete,
-                   completion_reason="cap_reached" if maximum else "calculation_complete" if complete and definition["method"] == "ratio" else "all_answered" if complete else "unresolved")
-        if maximum:
-            row["issues"] = [i for i in row["issues"] if i != "Answer every applicable subcriterion, including explicit rejections."]
+                   completion_reason="cap_reached" if maximum else "not_selected" if not included else "calculation_complete" if complete and definition["method"] == "ratio" else "selected_items" if complete else "inputs_required")
+        row["issues"] = [i for i in row["issues"] if i != "Answer every applicable subcriterion, including explicit rejections."]
+        if definition["method"] == "employment" and included and answers["inputs"]["qualifying_uta"] is False:
+            row["issues"] = ["Selected jobs do not meet the minimum one-year / 1 UTA condition; no points are included for these jobs."]
     result["unresolved"] = sum(not c["score_complete"] for c in result["criteria"])
+    result["subtotal"] = float(sum((Decimal(str(c["subtotal"])) for c in result["criteria"]), Decimal(0)))
     result["total"] = result["subtotal"] if result["unresolved"] == 0 else None
     result["result"] = "unknown" if result["unresolved"] else "pass" if result["subtotal"] >= result["threshold"] else "fail"
-    result["version"] = 2
+    result.update(version=3, basis="Exploration score")
     return result
 
 
@@ -234,9 +256,11 @@ def assess(entry, facts, bundle, assessments):
     check = next(c for c in result["checks"] if c["field"] == "selection_score")
     check.update(result=score["result"], message=(f"Self-assessed AL20 score: {score['total']:g} points; threshold {score['threshold']:g}." if score["total"] is not None else f"Partial subtotal: {score['subtotal']:g} points · {score['unresolved']} criteria unresolved. Complete the annex assessment."),
                  sources=list({(s["document_id"], s["page"], s["sha256"]): s for c in score["criteria"] for s in c["sources"]}.values()))
+    if score.get("version") == 3:
+        check["message"] = f"Score: {score['subtotal']:g} points; threshold {score['threshold']:g}." + (f" {score['unresolved']} criteria need inputs." if score["unresolved"] else "")
     if score["location_basis"] is not None:
         from .funding_statistics import dataset
-        check["message"] += " Includes provisional 2025 location assumptions; the applicable official reference year requires confirmation."
+        check["message"] += (" Uses the 2025 location reference; review the applicable official year in its sources." if score.get("version") == 3 else " Includes provisional 2025 location assumptions; the applicable official reference year requires confirmation.")
         check["sources"].extend(dataset()["sources"])
     result["selection_assessment"] = score
     return result

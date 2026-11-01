@@ -348,6 +348,12 @@ def prepare(draft, project, applicant_choice=None, resolve=False, adopt_current_
             d["overrides"].pop("selection_score", None)
         elif digest(previous["bundle"]["selection"]) != digest(current["selection"]):
             require(funding_selection.is_guidance_update_v1(previous["bundle"]["selection"], current["selection"]) or funding_selection.is_completion_update(previous["bundle"]["selection"], current["selection"]), "AL20 scoring definitions changed. A version-specific assessment migration is required before adopting this catalogue; existing selections are preserved.")
+            if previous["bundle"]["selection"]["version"] < 3 and current["selection"]["version"] == 3:
+                for route in current["selection"]["routes"]:
+                    for criterion in funding_selection.profile_for({"selection": current["selection"]}, route)["criteria"]:
+                        if criterion["method"] == "ratio":
+                            row = d["selection_assessments"][route]["criteria"][criterion["id"]]
+                            row["calculation_included"] = any(v is not None for v in row["inputs"].values())
     d.update(bundle=current, baseline=captured)
     validate_draft(d, project)
     old_facts, new_facts = effective(previous), effective(d)
@@ -367,6 +373,12 @@ def prepare(draft, project, applicant_choice=None, resolve=False, adopt_current_
             changes.append(f"{route}: {before['unresolved']} → {after['unresolved']} unresolved criteria; calculated total {before['total']} → {after['total']}. Point values and entered answers are unchanged.")
         result["catalogue_review"]["messages"].extend(["Adopt scoring completion version 2: a valid criterion at its cap no longer requires remaining answers."] + changes)
     result["notice"] = "Baseline and catalogue update prepared. Review before applying; saved assessments remain unchanged."
+    if previous["version"] == 4 and previous["bundle"]["selection"]["version"] < 3 and current["selection"]["version"] == 3:
+        result["catalogue_review"]["messages"].append("Use selected-items scoring: unticked items contribute zero without separate rejection answers. Existing point values, selections, notes and references are retained. Existing calculations with entered inputs are proposed as included; empty calculations are excluded.")
+        for route in current["selection"]["routes"]:
+            before = funding_selection.calculate(previous["bundle"], previous["selection_assessments"], route)
+            after = funding_selection.calculate(d["bundle"], d["selection_assessments"], route)
+            result["catalogue_review"]["messages"].append(f"{route}: subtotal {before['subtotal']:g} → {after['subtotal']:g}; criteria needing answers/inputs {before['unresolved']} → {after['unresolved']}.")
     return result
 
 
@@ -438,8 +450,8 @@ def evaluate(draft, project, planning=None):
 def validate_attachment(value, project):
     if value is None: return None
     require(project is not None, "Funding workspace requires a project.")
-    keys(value, {"version", "draft", "scenarios", "plans"}, "funding attachment")
-    require(type(value["version"]) is int and value["version"] == 1 and isinstance(value["scenarios"], list) and isinstance(value["plans"], list), "Invalid funding workspace.")
+    keys(value, {"version", "draft", "scenarios", "plans"} | ({"active_version_id"} if value["version"] == 2 else set()), "funding attachment")
+    require(type(value["version"]) is int and value["version"] in {1, 2} and isinstance(value["scenarios"], list) and isinstance(value["plans"], list), "Invalid funding workspace.")
     if value["draft"] is not None: validate_draft(value["draft"], project)
     for collection in [value["scenarios"], value["plans"]]:
         ids = set()
@@ -462,12 +474,22 @@ def validate_attachment(value, project):
                 require(entry["id"] in lookup and all(k in lookup[entry["id"]] and same_json(lookup[entry["id"]][k], v) for k, v in expected.items()), "Saved funding result disagrees with its source-rule snapshot: " + entry["id"])
             require(isinstance(r["assessment"]["warnings"], list) and all(isinstance(w, str) for w in r["assessment"]["warnings"]), "Invalid saved funding warnings.")
     active = [r["draft"]["activity_key"] for r in value["plans"] if r["active"]]
+    if value["version"] == 2:
+        vid = value["active_version_id"]
+        if vid is None: require(value["draft"] is None, "A funding draft has no active version. Restore a compatible workspace.")
+        else:
+            identity(vid)
+            selected = next((r for r in value["scenarios"] if r["id"] == vid), None)
+            require(selected is not None and same_json(selected["draft"], value["draft"]), "Active funding version and draft disagree. Restore the last confirmed save.")
     require(len(active) == len(set(active)), "Only one active funding plan is allowed per activity.")
     return value
 
 
 @checked
-def operate(value, project, planning, operation, draft, record_id):
+def operate(value, project, planning, operation, draft, record_id, preview_hash=None, version_id=None):
+    if operation in {"upgrade_workspace", "activate", "duplicate", "create_version"} or value is not None and value["version"] == 2:
+        from .funding_versions import operate as version_operation
+        return version_operation(value, project, planning, operation, draft, record_id, preview_hash, version_id)
     v = initial() if value is None else deepcopy(validate_attachment(value, project))
     if operation in {"draft", "save", "adopt"}:
         assessment = evaluate(draft, project, planning)
@@ -519,6 +541,8 @@ def after_delete(value, before, after, parcel_ids):
     v["scenarios"] = [r for r in v["scenarios"] if retained(r["draft"])]
     v["plans"] = [r for r in v["plans"] if retained(r["draft"])]
     if v["draft"] is not None and not retained(v["draft"]): v["draft"] = None
+    if v["version"] == 2 and v["active_version_id"] not in {r["id"] for r in v["scenarios"]}:
+        v["active_version_id"] = None
     for d in ([v["draft"]] if v["draft"] is not None else []) + [r["draft"] for r in v["scenarios"]+v["plans"]]:
         d["baseline"]["parcel_ids"] = [mapping[p] for p in d["baseline"]["parcel_ids"]]
     for r in v["scenarios"]+v["plans"]: r["assessment"]["draft"] = deepcopy(r["draft"])

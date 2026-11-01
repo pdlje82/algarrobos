@@ -1,0 +1,59 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs/promises');
+const {selectProgramme}=require('./funding-programme-helper.cjs');
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE);
+const root=process.env.DESIGNER_TEST_API,url=process.env.DESIGNER_APP_URL;
+assert(root&&url&&new URL(root).port==='8013','Use the isolated backend');
+async function api(path,body){const r=await fetch(root+path,body===undefined?{}:{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw Error(await r.text());return r.json();}
+async function poll(fn){for(let i=0;i<400;i++){if(await fn())return;await new Promise(r=>setTimeout(r,50));}throw Error('Navigator version state timed out');}
+(async()=>{
+ const original=JSON.parse(await fs.readFile('../test-artifacts/alhama-source-before-versions.json','utf8'));
+ let state=await api('project');await api('import',{revision:state.revision,request_id:crypto.randomUUID(),save:original,confirm_replace:true});
+ const sourceProject=JSON.stringify((await api('project')).project),r34='LEADER-AL20-3.4';
+ const browser=await chromium.launch({channel:'msedge',headless:true});let page;
+ try{
+  page=await browser.newPage({viewport:{width:1500,height:1000},reducedMotion:'reduce'});page.setDefaultTimeout(15000);const errors=[];page.on('pageerror',e=>{errors.push(e.message);console.error(e.stack);});
+  const area=name=>page.locator('.funding-steps').getByRole('button',{name,exact:true}),overview=page.getByRole('region',{name:'Project overview',exact:true}),graph=page.locator('.funding-diagram-scroll');
+  const saved=()=>poll(async()=>/Saved to this computer/.test(await page.getByRole('status',{name:'Funding save status',exact:true}).locator('strong').innerText()));
+  const open=async()=>{await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await area('Explore and score').waitFor();};
+  await page.goto(url);await open();assert.equal(await page.locator('.funding-steps button').count(),4);
+  await area('Explore and score').click();await selectProgramme(page,'LEADER-AL20');await graph.getByRole('radio',{name:`Work on ${r34}`,exact:true}).check();await saved();
+  await page.getByRole('button',{name:'Review workspace update',exact:true}).click();const review=page.getByRole('region',{name:'Workspace update review',exact:true});await review.waitFor();
+  assert.equal((await api('funding')).attachment.version,1,'Preview cannot upgrade the stored exploration');
+  await review.getByRole('button',{name:'Use autosaved versions and selected-items scoring',exact:true}).click();await poll(async()=>(await api('funding')).attachment.version===2);
+  await overview.waitFor();await overview.getByText('JR.3 · Positive action for rural youth',{exact:true}).waitFor();await saved();
+  let fw=(await api('funding')).attachment,firstId=fw.active_version_id;
+  assert.equal(fw.draft.bundle.selection.version,3);assert.equal(Object.hasOwn(fw.draft,'project_concepts'),false);
+  assert.deepEqual(fw.draft.selection_assessments[r34],original.funding.draft.selection_assessments[r34]);
+  assert.match(await overview.locator('[data-overview-criterion="JR.3"]').innerText(),/6 selected points → 4 included/);
+  await overview.getByRole('button',{name:'All items',exact:true}).click();await overview.getByRole('checkbox',{name:'Selected JR.3.5',exact:true}).uncheck();await saved();
+  assert.equal((await api('funding')).attachment.draft.selection_assessments[r34].criteria['JR.3'].answers['JR.3.5'],false);
+  await overview.getByRole('checkbox',{name:'Selected AT.3.1',exact:true}).check();
+  if(await overview.getByRole('group',{name:'Related scoring changes',exact:true}).count())await overview.getByRole('button',{name:'Confirm selection and related changes',exact:true}).click();
+  await overview.getByRole('checkbox',{name:'Selected AT.3.2',exact:true}).check();const warning=overview.getByRole('group',{name:'Related scoring changes',exact:true});await warning.waitFor();
+  const box=await warning.boundingBox(),input=await overview.getByRole('checkbox',{name:'Selected AT.3.2',exact:true}).boundingBox();assert(box.y+box.height<=input.y+2);assert(await overview.getByRole('checkbox',{name:'Selected AT.3.2',exact:true}).isChecked());
+  await warning.getByRole('button',{name:'Keep current answers',exact:true}).click();assert(!await overview.getByRole('checkbox',{name:'Selected AT.3.2',exact:true}).isChecked());await saved();
+  await overview.getByRole('checkbox',{name:'Selected AT.3.2',exact:true}).check();await warning.waitFor();await overview.locator('[data-overview-item="AT.3.2"]').getByRole('button',{name:/^Open AT\.3\.2/}).click();await page.locator('#funding-answer-editor').getByLabel('Item notes (optional)',{exact:true}).fill('Keep the notes written during a related-selection proposal.');await page.getByRole('button',{name:'Close question editor',exact:true}).click();await warning.getByRole('button',{name:'Confirm selection and related changes',exact:true}).click();await saved();
+  assert.equal((await api('funding')).attachment.draft.selection_assessments[r34].criteria['AT.3'].choice_context.items['AT.3.2'].notes,'Keep the notes written during a related-selection proposal.');
+  await overview.locator('[data-overview-item="JR.3.4"]').getByRole('button',{name:/^Open JR\.3\.4/}).click();const editor=page.locator('#funding-answer-editor');await editor.getByLabel('Item notes (optional)',{exact:true}).fill('Overview selections preserved for a restoration activity.');await page.getByRole('button',{name:'Close question editor',exact:true}).click();await saved();
+  await area('Activities and delivery').click();await page.getByRole('button',{name:`Create project concept for ${r34}`,exact:true}).click();await page.getByRole('button',{name:'Create activity manually',exact:true}).click();await page.getByLabel('Activity title',{exact:true}).fill('Restoration field demonstration');await page.getByLabel('Intended outcome',{exact:true}).fill('Document restoration methods and share results.');
+  await page.getByRole('button',{name:'Start delivery plan',exact:true}).click();await page.locator('[data-delivery-topic="comparison"]').waitFor();assert.equal(await page.getByText(/I have reviewed this as a project intention/).count(),0);await saved();
+  const firstConcept=(await api('funding')).attachment.draft.project_concepts[r34];
+  await page.getByRole('button',{name:'Duplicate version',exact:true}).first().click();await poll(async()=>(await api('funding')).attachment.active_version_id!==firstId);await overview.waitFor();await saved();
+  fw=(await api('funding')).attachment;const secondId=fw.active_version_id;assert.notEqual(fw.draft.project_concepts[r34].id,firstConcept.id);assert.notEqual(fw.draft.project_concepts[r34].activities[0].id,firstConcept.activities[0].id);
+  await page.getByLabel('Version name',{exact:true}).fill('AL20 Alhama — alternative');await saved();
+  await page.getByLabel('Open version',{exact:true}).selectOption(firstId);await poll(async()=>(await api('funding')).attachment.active_version_id===firstId);await overview.waitFor();await saved();assert.equal(await page.getByLabel('Version name',{exact:true}).inputValue(),'AL20 Alhama');
+  await page.reload();await open();await overview.waitFor();assert.equal(await page.getByLabel('Open version',{exact:true}).inputValue(),firstId);assert.equal(await area('Project overview').getAttribute('aria-current'),'page');
+  await page.getByRole('button',{name:'Compare versions',exact:true}).click();const comparison=page.getByRole('region',{name:'Compare versions',exact:true});await comparison.getByLabel('Compare version 2',{exact:true}).selectOption(secondId);await comparison.getByText(/^Restoration field demonstration/).first().waitFor();await comparison.getByRole('button',{name:'Close comparison',exact:true}).click();
+  let fail=true;await page.route('**/api/funding/save',request=>{if(fail){fail=false;return request.fulfill({status:503,contentType:'application/json',body:JSON.stringify({detail:'Version test save unavailable'})});}return request.continue();});
+  await page.getByLabel('Version name',{exact:true}).fill('AL20 Alhama — retry');await page.getByText(/Version test save unavailable/).waitFor();assert.equal(await page.getByLabel('Version name',{exact:true}).inputValue(),'AL20 Alhama — retry');await page.getByRole('button',{name:'Retry failed save',exact:true}).click();await saved();
+  await area('Explore and score').click();const shortlist=graph.getByRole('checkbox',{name:`Shortlist ${r34}`,exact:true});await shortlist.check();await saved();assert((await api('funding')).attachment.draft.selected.includes(r34));
+  await area('Budget and review').click();await page.getByRole('heading',{name:'Proposed allocations',exact:true}).waitFor();await area('Project overview').click();await overview.getByText('Readable overview and export',{exact:true}).click();const md=await overview.locator('.funding-overview-markdown').innerText();assert.match(md,/JR\.3\.4/);assert.match(md,/Overview selections preserved/);
+  const beforeReadFailure=(await api('funding')).attachment.draft;let failOverview=true;await page.route('**/api/funding/overview',request=>{if(failOverview){failOverview=false;return request.fulfill({status:503,contentType:'application/json',body:JSON.stringify({detail:'Overview test unavailable'})});}return request.continue();});await area('Budget and review').click();await area('Project overview').click();await overview.getByText(/Overview test unavailable/).waitFor();assert.deepEqual((await api('funding')).attachment.draft,beforeReadFailure);await overview.getByRole('button',{name:'Retry overview',exact:true}).click();await overview.locator('[data-overview-criterion="JR.3"]').waitFor();
+  const externalState=await api('project'),externalWorkspace=await api('funding');await api('funding/save',{revision:externalState.revision,funding_revision:externalWorkspace.funding_revision,planning_revision:externalState.planning.planning_revision,design_revision:externalState.designer_revision,request_id:crypto.randomUUID(),operation:'activate',record_id:secondId});
+  await page.getByLabel('Version name',{exact:true}).fill('AL20 Alhama — recovered');await page.getByText(/Project, funding or planning changed/).waitFor();await page.getByRole('button',{name:'Refresh save revisions and keep draft',exact:true}).click();const recovery=page.getByRole('region',{name:'Review newer saved exploration',exact:true});await recovery.getByRole('button',{name:'Keep my draft in its original version',exact:true}).click();await saved();const recovered=(await api('funding')).attachment;assert.equal(recovered.active_version_id,firstId);assert.equal(recovered.draft.name,'AL20 Alhama — recovered');assert.equal(recovered.scenarios.find(r=>r.id===secondId).draft.name,'AL20 Alhama — alternative');
+  for(const theme of ['dark','light']){await page.evaluate(theme=>document.documentElement.dataset.theme=theme,theme);await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:`test-artifacts/navigator-overview-${theme}-phone.png`});}
+  assert.equal(JSON.stringify((await api('project')).project),sourceProject);assert.deepEqual((await api('export')).funding.plans,original.funding.plans);assert.deepEqual(errors,[]);
+  console.log('Navigator versions: isolated AL20 Alhama copy, reviewed migration, direct binary scoring/caps, inline confirmation, notes, activities/delivery, independent autosaved versions, comparison, reload, save retry, graph shortlist, budget, Markdown and phone themes passed.');
+ }catch(e){if(page)await page.screenshot({path:'test-artifacts/navigator-versions-failure.png'});throw e;}finally{await Promise.race([browser.close(),new Promise(r=>setTimeout(r,3000))]);}
+})().then(()=>process.exit(0)).catch(e=>{console.error(e);process.exit(1);});

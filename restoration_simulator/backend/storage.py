@@ -380,6 +380,12 @@ class Store:
                     prior = candidate["funding_undo"]
                     live = candidate["funding"]
                     if prior is not None and live is not None:
+                        require(not (prior["version"] == 2 and live["version"] == 1), "Undo cannot downgrade an autosaved-version workspace. Retain your versions and review the earlier project state explicitly.")
+                        if prior["version"] == 1 and live["version"] == 2:
+                            # Preserve the explicitly reviewed workspace upgrade during project Undo.
+                            # Its stable active identity comes from the confirmed live workspace.
+                            prior.update(version=2, active_version_id=live["active_version_id"])
+                            if live["active_version_id"] is None: prior["draft"] = None
                         if self.data["undo_edit"]["kind"] == "delete_parcels":
                             _, _, _, maps = parcel_removal.rebuild(candidate["project"], self.data["undo_edit"]["parcel_ids"], with_mapping=True)
                             inverse = {v:k for k,v in maps["parcel_id"].items()}
@@ -397,6 +403,10 @@ class Store:
                             if r["draft"]["activity_key"] in newer_keys: r["active"] = False
                         prior["plans"].extend(r for r in live["plans"] if r["id"] not in prior_plans)
                         if live["draft"] is not None: prior["draft"] = live["draft"]
+                        if prior["version"] == 2 and live["active_version_id"] is not None:
+                            prior["active_version_id"] = live["active_version_id"]
+                            latest = {r["id"]: r for r in live["scenarios"]}
+                            prior["scenarios"] = [deepcopy(latest[r["id"]]) if r["id"] in latest else r for r in prior["scenarios"]]
                     candidate["funding"] = prior if prior is not None else live
                 elif candidate["funding"] is not None:
                     missing = [p["id"] for p in current["parcels"] if p["id"] not in {q["id"] for q in candidate["project"]["parcels"]}]
@@ -445,10 +455,12 @@ class Store:
             exported["funding_undo"] = None
         return exported
 
-    def funding_mutation(self, operation, revision, funding_revision, planning_revision, design_revision, request_id, draft=None, record_id=None):
+    def funding_mutation(self, operation, revision, funding_revision, planning_revision, design_revision, request_id, draft=None, record_id=None, preview_hash=None):
         with self.lock:
             self.check()
-            fingerprint = funding.digest([operation, revision, funding_revision, planning_revision, design_revision, draft, record_id])
+            fingerprint_data = [operation, revision, funding_revision, planning_revision, design_revision, draft, record_id]
+            if operation == "upgrade_workspace": fingerprint_data.append(preview_hash)
+            fingerprint = funding.digest(fingerprint_data)
             if request_id in self.data["receipts"]:
                 require(self.data["receipts"][request_id] == fingerprint, "Request ID was reused with different funding content.")
                 return self.snapshot()
@@ -456,7 +468,7 @@ class Store:
                 raise Conflict("Project, funding or planning changed. Reload saved context; your entered exploration is retained.")
             require(self.data["project"] is not None, "Create a project before saving funding explorations.")
             candidate = deepcopy(self.data)
-            candidate["funding"] = funding.operate(candidate["funding"], candidate["project"], candidate["planning"], operation, draft, record_id)
+            candidate["funding"] = funding.operate(candidate["funding"], candidate["project"], candidate["planning"], operation, draft, record_id, preview_hash, request_id if operation in {"duplicate", "create_version"} else None)
             from .project_concepts import ensure_sources_retained
             ensure_sources_retained(candidate["funding"], candidate["planning"])
             candidate["funding_revision"] += 1
@@ -500,6 +512,8 @@ class Store:
                     candidate["planning"]["project_concepts"] = [r for r in candidate["planning"]["project_concepts"] if r["concept"]["id"] != concept_id]
             else:
                 raise Invalid("Unsupported project concept editing operation.")
+            from .funding_versions import sync
+            if operation == "transfer": sync(candidate["funding"], candidate["project"], candidate["planning"])
             funding.validate_attachment(candidate["funding"], candidate["project"])
             planning_draft.validate(candidate["planning"], candidate["project"])
             candidate["planning_revision"] += 1

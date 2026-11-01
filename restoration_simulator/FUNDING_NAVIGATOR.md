@@ -1,5 +1,92 @@
 # Funding Navigator
 
+## Four areas, project overview and autosaved versions
+
+The current interface has **Explore and score**, **Project overview**, **Activities
+and delivery**, and **Budget and review**. The version name, programme, working
+route and save status are visible above these areas. Activity/site setup and
+**Project context** replace the former Activity and People and Land pages.
+Returning to a version with an explicitly selected programme and route opens its
+overview; a version without that focus opens the graph. Shortlisting is a separate,
+labelled checkbox on each graph route card, used for optional funding contributions.
+
+**Project overview** is available before creating a concept or reaching the score
+threshold. It groups selected items by criterion, shows full item titles, nominal
+points, capped contributions, notes, EDL links, activities and details to add.
+Choose **All items** to add selections. Checkboxes use the same prerequisite and
+replacement confirmation as individual graph editors. Reading guidance, opening
+the overview and linking EDL needs never select items or create activities.
+The readable overview, print view, Markdown and concept brief use the same backend
+scoring-overview builder. Strategy references are listed separately from grant points.
+
+Selection-library **version 3** uses `selected_items_only`. Unticked items contribute
+zero without explicit rejection answers. Its authoritative defaults create false
+selections and excluded calculations. Calculation criteria carry the required
+`calculation_included` boolean: turning it off retains the entered inputs and adds
+zero; turning it on requires its calculation inputs. Selected employment items
+retain their qualification rules. The subtotal is always visible, while missing
+inputs for included items prevent a completed result. The version-1 and version-2
+evaluators remain frozen in their dedicated modules.
+
+Each named version autosaves. Use the header picker to open one, **Duplicate
+version** to explore independently, and **Compare versions** to compare two versions
+of the same or different routes without shortlisting. Duplication preserves content
+and remaps concept/activity identities and delivery links. Comparison uses each
+version's own scoring edition. Adopted plan history remains immutable; revising a
+plan creates a new editing version. Switching waits for pending edits to save.
+Failed or stale saves retain the draft; recovery returns it to its original version
+when another window has changed the active version.
+
+Existing workspaces require **Review workspace update**, followed by confirmation.
+The preview preserves old alternatives and imports the working draft as a distinct
+active version; matching titles are never used to identify records. Existing
+unselected null answers remain stored unchanged and mean not selected under the
+reviewed version-3 policy. Existing calculation inputs are shown in the preview:
+calculations with any entered input are included, and empty calculations are
+excluded. Older editing formats have a separate explicit applicant-format review.
+Opening a historical version does not automatically rewrite it.
+
+**Activities and delivery** directly exposes the route-3.4/3.5 concept editor,
+activity starters and monitoring/sharing plan. No concept is created merely to
+display the overview. Six individual review ticks have been replaced by the
+execution comparison and confirmation; existing review flags remain audit metadata
+and are recorded when execution settings are applied. **Current simulator settings**
+in demonstrator planning displays retained execution values rather than another
+editable planning form. Transfer and two-way reconciliation remain explicit.
+
+### Current interfaces and compatibility
+
+- `POST /api/funding/overview` accepts `revision`, the current `draft`, and `route`.
+  It is read-only and returns grouped scoring items, points, notes, EDL references,
+  activity/delivery summaries, source links, details to add and deterministic Markdown.
+- `POST /api/funding/workspace-preview` accepts `revision`, `draft`, and a new
+  `version_id`. Its comparison hash is required when confirming `upgrade_workspace`
+  through the existing funding-save service.
+- Funding-attachment version 2 adds `active_version_id`. It identifies a saved
+  scenario; its draft and the active working draft must agree. Null explicitly
+  means no active version and requires a null draft. Version-1 attachments remain
+  readable without inferred identities or upgrades.
+- Logical applicant questions expose the complete `forms` list from the version's
+  catalogue. The neutral applicant-type picker includes nonprofit and public-body
+  forms; source identities and earlier applicant choices remain retained.
+- Funding-save operations add `activate`, `duplicate`, `create_version` and
+  `upgrade_workspace`. The request UUID is the new identity for create/duplicate,
+  making retries traceable. Existing revision checks, receipts and atomic writes
+  remain authoritative. Confirmed concept synchronisation updates the active named
+  version in the same write. The outer export envelope and concept editions remain
+  compatible.
+
+Confidence badges and assumption counts are removed from the current presentation.
+Blank inputs use **Not entered**; original provenance remains in expandable source
+context. Official restrictions and documentation requirements remain available.
+Missing configuration, malformed responses, missing version records and failed I/O
+produce visible errors and explicit retry, retaining the draft.
+
+The isolated usability workflows are `navigator-versions.cjs` (an exported copy of
+AL20 Alhama) and `navigator-graph.cjs` (all five AL20 assessments and another programme).
+`navigator-legacy.cjs` additionally checks reviewed editing-format conversion.
+Their API guard requires port 8013. They must never mutate the live port-8000 project.
+
 ## Remembered programme and working route
 
 Selecting a programme or working route now autosaves that focus with the active
@@ -23,8 +110,8 @@ The project concept now includes **Monitoring, participation and sharing** for
 routes 3.4 and 3.5. Create an unresolved plan explicitly, or choose **Review
 existing planning values** and inspect both the retained execution values and
 their proposed interpretations before adopting them. Imported topics remain
-unreviewed: the app cannot distinguish a historical prefill from an intentional
-choice. Existing committed records and their replay remain unchanged.
+retained with their original audit metadata. Applying them now uses one execution
+comparison and confirmation. Existing committed records and replay remain unchanged.
 
 The shared plan covers comparison design, local novelty, combined baseline and
 follow-up methods, participation/public use, results sharing and online publication.
@@ -32,9 +119,10 @@ Novelty and the three-year online-publication commitment are 3.4-specific; the
 publication topic appears within results sharing. Comparison is optional for 3.5.
 Monitoring may combine photographs, plant inventory/survival, vegetation cover,
 erosion notes, infiltration and a custom method. These are intentions, not measured
-data or complete ecological protocols. Each topic has review status, explanations,
+data or complete ecological protocols. Each topic has explanations,
 references and links to existing activities; sharing also records outputs,
-responsibility and publication location/timing. Editing a topic resets its review.
+responsibility and publication location/timing. Earlier topic-review flags remain
+audit metadata rather than separate editing requirements.
 
 The same plan appears in both workspaces and the deterministic brief. Reviewed
 two-way updates reconcile individual topic fields. Activity duplication remaps
@@ -61,14 +149,14 @@ removals/replacements use red. Confirm the related changes together or keep the
 current answers. Previous/Next waits for this decision, while closing cancels the
 unconfirmed proposal. Notes and references entered during review are retained.
 
-Selection-library **version 2** counts a valid capped criterion as complete for
+Historical selection-library **version 2** counts a valid capped criterion as complete for
 scoring even when additional options remain unanswered. It displays **Maximum
 reached**, and unanswered siblings become **Optional for points** without changing
 their saved answer. Required employment/calculation conditions cannot be bypassed.
 Reaching 60 overall does not complete other unresolved criteria. Evidence readiness
 remains separate. Existing version-1 assessments retain their original evaluator;
-review the explicit catalogue update to adopt the new completion policy. Its
-preview shows the changed unresolved counts/totals without changing point values.
+the current explicit upgrade adopts version 3 as described above. Its preview
+shows the resulting completion/count changes without altering point values.
 
 The Node area has one pinned row for **Exploration**, **Programme**, **Route
 requirements** and **Funding routes**, aligned with horizontal scrolling and column

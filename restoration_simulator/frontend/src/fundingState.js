@@ -1,5 +1,5 @@
 import {edlHasEvidence} from "./fundingEdlState.js";
-export const FUNDING_STEPS = ["Activity", "People and land", "Explore options", "Compare alternatives", "Build a funding plan", "Review and use"];
+export const FUNDING_STEPS = ["Explore and score", "Project overview", "Activities and delivery", "Budget and review"];
 // Opening a context resumes its draft; changing context needs an explicit choice
 // so that the next autosave cannot overwrite unrelated work.
 export function fundingEntryAction(draft,entry){
@@ -51,25 +51,30 @@ export function presentQuestion(q,draft){
   const value=applicant?(draft.applicant_choice===null?q.initial_value:draft.applicant_choice):(overridden?draft.overrides[q.id]:draft.baseline.facts[q.id]);
   let display;
   if(applicant){
+    if(value.kind!=="recorded"){
+      if(value.kind==="unknown"||value.legal_form===null)display="Not entered";
+      else{if(!Array.isArray(q.forms))throw Error("Applicant type options are missing. Restart Python and reload project context.");const form=q.forms.find(([id])=>id===value.legal_form);if(form===undefined)throw Error("The selected applicant type is missing from this version.");display=`Applicant type · ${form[1]}`;}
+    }else{
     const match=q.options.find(o=>applicantKey(o.choice)===applicantKey(value));
     if(match)display=match.label;
-    else {const form=q.other_forms.find(([id])=>id===value.legal_form);if(!form)throw Error("Applicant option is missing from the question model.");display=`Potential applicant · ${form[1]}`;}
+    else throw Error("Applicant option is missing from the question model.");
+    }
   }else display=answerLabel(q,value,draft.baseline.parties);
   const unknown=applicant?value.kind==="unknown"||value.kind==="potential"&&value.legal_form===null:value===null||q.id==="municipality"&&value==="unknown";
   const pending=JSON.stringify(value)!==JSON.stringify(q.current_value)||overridden!==q.overridden;
   return {...q,assessed_value:q.current_value,current_value:value,display_value:unknown&&!applicant?"Unknown / not decided":display,unknown,overridden,origin:pending?"Updating answer…":q.origin};
 }
 export const FUNDING_HELP = {
-  matches:"All modelled fit conditions are satisfied by the current recorded or hypothetical answers. Eligibility and call availability still require verification. Zero does not mean that funding is unavailable.",
-  needs_answers:"This option has modelled requirements, but some remain unknown. Answer the relevant questions or obtain the missing evidence. Inherited values may come from planning defaults; they are not necessarily answers you entered here.",
+  matches:"The inputs in this version meet the modelled requirements. Official rules and call availability are available in the source information.",
+  needs_answers:"Add the inputs listed for this route to calculate its result. Original values and their sources remain in Project context.",
   unimplemented:"Explore the introduction, practical examples, limitations and sources for this option. Automated assessment is unavailable; completing more questions cannot resolve this. Eligibility and financial terms need separate verification.",
-  conflicts:"At least one modelled condition conflicts with the current scenario, including inherited values and hypothetical assumptions. Inspect the conditions for the reason. This is not an official rejection.",
+  conflicts:"At least one requirement needs a change in this version. Open the route to see the relevant inputs.",
   fit_changes:"Options whose overall assessment changed since the previous successful assessment, for example from needing answers to meeting the modelled conditions.",
   resolved:"Previously unknown conditions now have a definite result: satisfied or conflicting. Resolved does not necessarily mean eligible. Other unknowns can leave the overall fit unchanged.",
   amount_changes:"Conditional funding estimates or previewed payment schedules changed, for example through a bonus or an eligible-cost answer. These are not awards or received cash. An amount condition can change without changing the estimate when a cap applies.",
 };
 export function statusLabel(status) {
-  const labels={"Needs information":"Needs your answers","Does not match these facts":"Conflicts with current scenario","Possible match — eligibility unverified":"Meets modelled fit conditions — eligibility unverified"};
+  const labels={"Needs information":"Needs your answers","Does not match these facts":"Conflicts with current scenario","Possible match — eligibility unverified":"Modelled requirements met"};
   if(!Object.hasOwn(labels,status))throw Error(`Unsupported funding status: ${status}`);
   return labels[status];
 }
@@ -99,3 +104,5 @@ export function answerLabel(question, value, parties) {
   if (question.type === "party") return parties.find(p => p.id === value)?.name ?? String(value);
   return String(value);
 }
+
+export function fundingLanding(draft){return Object.hasOwn(draft,"navigator_focus")&&draft.navigator_focus.programme_id!==null&&draft.navigator_focus.route_id!==null?1:0;}

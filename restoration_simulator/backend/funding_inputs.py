@@ -75,6 +75,7 @@ def describe(d):
     inherited = ready and d["applicant_choice"] is None
     unknown = selected["kind"] == "unknown" or selected["kind"] in {"planned", "potential"} and selected["legal_form"] is None
     applicant = {"id": "applicant_choice", "label": "Who would apply for the funding?", "type": "applicant", "options": applicant_options(d),
+                 "forms": [[k, v] for k, v in legal_forms(d).items()],
                  "other_forms": [[k, v] for k, v in legal_forms(d).items() if k not in {"nonprofit", "public"}],
                  "help": "Choose the applicant that would submit the application. It can differ from the landowner and operator. Recorded parties use their recorded legal form.",
                  "step": 1, "relevant": True, "current_value": selected, "initial_value": initial,
