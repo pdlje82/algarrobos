@@ -3,6 +3,8 @@ import {DocumentLink} from "./DocumentLink.jsx";
 import {selectionChoices,selectionSummary,setSelectionChoice,clearSelectionRow,selectionNodeIndent} from "./fundingSelectionState.js";
 import {FundingLocationLookup} from "./FundingLocationLookup.jsx";
 import {FundingEdlNode} from "./FundingEdl.jsx";
+import {FundingSelectionNodeGuidance,FundingSelectionRouteGuidance} from "./FundingSelectionGuidance.jsx";
+import {SELECTION_GUIDANCE_ROUTES} from "./fundingSelectionGuidanceState.js";
 
 export function SelectionSources({sources}){
   return <ul className="funding-sources">{sources.map((s,i)=><li key={i}><DocumentLink documentId={s.document_id} page={s.page} expectedSha256={s.sha256}>{s.label}</DocumentLink><small> · {s.role}</small></li>)}</ul>;
@@ -16,6 +18,7 @@ function SelectionGuidance({text}){
 export function FundingSelectionEditor({route,criterion,row,result,onChange,disabled,focusChoice,assessment,municipality,request,onLookup,onManual}){
   const [error,setError]=useState("");
   const choices=selectionChoices(criterion,route);
+  const enriched=SELECTION_GUIDANCE_ROUTES.includes(route);
   const radio=criterion.method==="sum"&&criterion.exclusive_groups.some(g=>g.length===choices.length&&choices.every(c=>g.includes(c.id)));
   function update(next){setError("");onChange(next);}
   function choose(id,value){try{update(setSelectionChoice(row,criterion,id,value));}catch(e){setError(e.message);}}
@@ -25,10 +28,10 @@ export function FundingSelectionEditor({route,criterion,row,result,onChange,disa
   }
   return <div className="funding-selection-editor">
     <p className="eyebrow">{route} · Self-assessed</p><h3>{criterion.id} · {criterion.label}</h3>
+    <FundingSelectionRouteGuidance route={route}/>
     {["AT.3","RD.5"].includes(criterion.id)&&<FundingLocationLookup criterion={criterion.id} assessment={assessment} municipality={municipality} request={request} onApply={onLookup} onManual={onManual} disabled={disabled}/>}
-    <SelectionGuidance text={criterion.guidance}/><p>Criterion subtotal: {result.subtotal} / {result.cap} points{result.complete?" · Complete":" · Incomplete"}{result.uncapped>result.cap?` · Uncapped selections: ${result.uncapped}`:""}</p>
-    {criterion.limitations.map(text=><p className="reason" key={text}>{text}</p>)}
-    <SelectionSources sources={criterion.sources}/>
+    <p>Criterion subtotal: {result.subtotal} / {result.cap} points{result.complete?" · Complete":" · Incomplete"}{result.uncapped>result.cap?` · Uncapped selections: ${result.uncapped}`:""}</p>
+    {enriched?<details><summary>Criterion overview, limitations and sources</summary><SelectionGuidance text={criterion.guidance}/>{criterion.limitations.map(text=><p className="reason" key={text}>{text}</p>)}<SelectionSources sources={criterion.sources}/></details>:<><SelectionGuidance text={criterion.guidance}/>{criterion.limitations.map(text=><p className="reason" key={text}>{text}</p>)}<SelectionSources sources={criterion.sources}/></>}
     {error&&<p role="alert">{error}</p>}
     {criterion.method==="ratio"?<fieldset disabled={disabled}><legend>Grant per qualifying quality job</legend><label>Explicit grant amount (€)<input type="number" min="0" max="1000000000000" step="any" value={row.inputs.grant===null?"":row.inputs.grant} onChange={e=>numeric("grant",e.target.value)}/></label><label>Qualifying quality jobs (one year / 1 UTA each)<input type="number" min="0" max="1000000000000" step="1" value={row.inputs.quality_jobs===null?"":row.inputs.quality_jobs} onChange={e=>numeric("quality_jobs",e.target.value)}/></label><p>Use zero jobs to explicitly record that no quality jobs are claimed. The backend selects the applicable strict ratio band.</p>{choices.map(c=><p key={c.id}>{c.id} · {c.label} · {c.points} points</p>)}</fieldset>:
       <fieldset disabled={disabled}><legend>{radio?"Choose one alternative":"Select, reject or leave each subcriterion unanswered"}</legend>
@@ -37,6 +40,7 @@ export function FundingSelectionEditor({route,criterion,row,result,onChange,disa
         {radio?<input id={`al20-${c.id}`} type="radio" name={`al20-${route}-${criterion.id}`} checked={row.answers[c.id]===true} autoFocus={focusChoice===c.id} onChange={()=>update({...row,answers:Object.fromEntries(choices.map(x=>[x.id,x.id===c.id]))})}/>:
           <select id={`al20-${c.id}`} value={row.answers[c.id]===null?"unknown":row.answers[c.id]?"yes":"no"} autoFocus={focusChoice===c.id} onChange={e=>choose(c.id,e.target.value==="unknown"?null:e.target.value==="yes")}><option value="unknown">Unanswered</option><option value="yes">Selected</option><option value="no">Does not apply</option></select>}
         <small>{c.character.replaceAll("_"," ")}{criterion.requires[c.id]?` · Requires ${criterion.requires[c.id].join(", ")}`:""}</small>
+        <FundingSelectionNodeGuidance route={route} choice={c} criterion={criterion} focused={focusChoice===c.id}/>
         <FundingEdlNode bindingId={c.id} required={/\bEDLL?\b/.test(c.label+" "+c.label_es)} row={row} onChange={update} disabled={disabled}/>
         <details><summary>Spanish wording and sources</summary><p lang="es">{c.printed_code} · {c.label_es}</p><SelectionSources sources={c.sources}/></details>
       </div>)}

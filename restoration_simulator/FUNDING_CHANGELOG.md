@@ -1,5 +1,24 @@
 # Funding Navigator changes
 
+## 2026-11-01 — restoration guidance for every 3.4/3.5 scoring sub-node
+
+- Enriched all 45 subcriteria in the shared 14-criterion profile with official
+  explanations, restoration relevance, recommendations, staged evidence and
+  explicit AL20 questions. Added 45 shared recommendations and two route-specific
+  recommendations, filtered by the selected assessment route.
+- Added a validated, dated reference library and read-only selection-guidance
+  endpoint, independent of scoring snapshots. The existing editor opens the
+  selected sub-node's guidance and retains EDL references, sources and controls.
+- Reviewed all five official source downloads against the unchanged local PDFs;
+  preserved population discrepancies, absent innovative sectors and legal
+  interpretation questions. Added direct publication/download links.
+- Loading failures have visible retry. Reading guidance never changes scores,
+  answers, notes, EDL selections or saved versions. Other routes retain their
+  existing presentation; activity combinations toward 60 points remain future work.
+- Verified with 244 Python tests, 89 frontend tests, the production build and
+  four isolated browser workflows (guidance, scoring, EDL and statistics), including
+  PDF focus restoration, failure/retry, keyboard disclosures and mobile themes.
+
 ## 2026-11-01 — four-column programme graph
 
 - Programme selection is now a graph column with expandable family nodes, search,

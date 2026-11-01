@@ -1,0 +1,5 @@
+.funding-selection-route-guidance,.funding-selection-node-guidance{grid-column:1/-1;min-width:0;overflow-wrap:anywhere;border-left:3px solid var(--green);background:var(--panel);padding:.6rem .75rem;margin:.4rem 0}
+.funding-selection-route-guidance p,.funding-selection-node-guidance p{line-height:1.5;margin:.5rem 0}.funding-selection-node-guidance h4,.funding-selection-route-guidance h4{font-size:.9rem;margin:.85rem 0 .25rem}
+.funding-selection-guidance-sources{display:flex;flex-wrap:wrap;gap:.3rem .7rem;font-size:.78rem;margin:.3rem 0 .65rem}.funding-selection-guidance-date,.funding-selection-guidance-points{font-size:.8rem;color:var(--muted)}
+.funding-selection-node-guidance summary,.funding-selection-route-guidance summary{cursor:pointer;line-height:1.5;min-height:28px}.funding-selection-node-guidance section>ul{padding-left:1.2rem}.funding-selection-node-guidance section>details{border-top:1px solid var(--border);padding-top:.4rem;margin-top:.6rem}
+.funding-selection-node-guidance button,.funding-selection-route-guidance button{min-height:44px;max-width:100%;white-space:normal}

@@ -13,6 +13,7 @@ import {FundingQuestionEditor} from "./FundingQuestionEditor.jsx";
 import {FundingWorkingOption} from "./FundingWorkingOption.jsx";
 import {fundingVisualReducer, initialFundingVisual} from "./fundingVisualState.js";
 import {FundingSelectionEditor} from "./FundingSelection.jsx";
+import {FundingSelectionGuidanceProvider} from "./FundingSelectionGuidance.jsx";
 import {selectionProfile,selectionSummary,editSelectionRow,clearSelectionRow} from "./fundingSelectionState.js";
 import "./FundingNavigator.css";
 import {FundingEdlProvider,FundingEdlNode,FundingEdlOpenButton} from "./FundingEdl.jsx";
@@ -340,7 +341,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
     const names=ids.map(id=>{const parcel=data.project.parcels.find(p=>p.id===id);if(parcel===undefined)throw Error("The funding entry refers to a missing parcel. Reload the project.");return parcel.name;});
     return `${labels[target]} · ${names.length===0?"no linked parcels":names.join(", ")}`;
   }
-  return <FundingGuideProvider request={request}><FundingEdlProvider request={request}><section className="funding-workspace" aria-labelledby="funding-title">
+  return <FundingGuideProvider request={request}><FundingEdlProvider request={request}><FundingSelectionGuidanceProvider request={request}><section className="funding-workspace" aria-labelledby="funding-title">
     <header className="panel"><p className="eyebrow">Explore · learn · compare</p><h1 id="funding-title">Funding Navigator</h1><p>Explore arrangements for land, activities and businesses. Save alternatives, then choose a funding plan.</p>
       <FundingEdlOpenButton/>
       <details><summary>Start a separate exploration</summary><label>Activity scope<select value={scope} onChange={e => setScope(e.target.value)}><option value="activity">Parcel / other activity</option><option value="demonstrator">Current demonstrator planning</option><option value="business">Start a self-employed rural business</option></select></label><fieldset><legend>Linked parcels (optional)</legend>{data.project.parcels.map(p => <label className="funding-pick" key={p.id}><input type="checkbox" checked={parcels.includes(p.id)} onChange={e => setParcels(e.target.checked ? [...parcels,p.id] : parcels.filter(id => id !== p.id))}/>{p.name}</label>)}</fieldset><button type="button" disabled={busy || dirty} onClick={start}>Start separate exploration</button></details>
@@ -391,5 +392,5 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
       {draft.baseline.target === "demonstrator" && <details><summary>Configure existing simulation financing</summary><p>These actions transfer only financing settings into the demonstrator planning draft for its separate review. They do not create receipts or execute unsupported mechanisms.</p>{draft.selected.includes("LEADER-AL20-3.4") && <button disabled={busy||!current} onClick={()=>onSimulationFinancing("al20_34",facts)}>Use potential AL20 3.4 in planning draft</button>}<button disabled={busy||!current} onClick={()=>onSimulationFinancing("self",facts)}>Use funds already in project cash</button><button disabled={busy||!current} onClick={()=>onSimulationFinancing("partner",facts)}>Use partner funds already in project cash</button></details>}
       <details><summary>Source review and coverage</summary><p>{c.source_review}</p><a href={c.official_pages.territory} target="_blank" rel="noreferrer">Official AL20 territory and local documents</a></details>
     </details></aside>
-  </section></FundingEdlProvider></FundingGuideProvider>;
+  </section></FundingSelectionGuidanceProvider></FundingEdlProvider></FundingGuideProvider>;
 }

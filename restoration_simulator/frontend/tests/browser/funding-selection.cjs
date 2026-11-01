@@ -26,8 +26,8 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   const optionPositions=await options();
   const group=id=>graph.locator(`.funding-annex-group[data-annex-criterion="${id}"]`);
   const editor=page.getByRole('dialog',{name:'Edit AL20 criterion',exact:true});
-  async function openCriterion(id){if(await group(id).getAttribute('aria-expanded')!=='true')await group(id).click();await graph.locator(`.funding-annex-choice[data-annex-criterion="${id}"]`).first().click();await editor.waitFor();}
-  async function close(){await page.getByRole('button',{name:'Close question editor',exact:true}).click();await settled();}
+  async function openCriterion(id){if(await group(id).getAttribute('aria-expanded')!=='true')await group(id).click();await graph.locator(`.funding-annex-choice[data-annex-criterion="${id}"]`).first().click();await editor.waitFor();const overview=editor.getByText('Criterion overview, limitations and sources',{exact:true});if(await overview.count())await overview.click();}
+  async function close(){await page.getByRole('button',{name:'Close question editor',exact:true}).click();await settled();await poll(async()=>await page.getByRole('status',{name:'Funding save status',exact:true}).locator('strong').innerText()==='Saved to this computer');}
   async function checkHierarchy(){
    const nodes=[parent,graph.locator('.funding-annex-route'),group('AT.3'),graph.locator('.funding-annex-choice[data-annex-criterion="AT.3"]').first()];
    const boxes=[];for(const node of nodes)boxes.push(await node.evaluate(n=>({left:parseFloat(n.style.left),width:parseFloat(n.style.width)})));

@@ -226,14 +226,16 @@ population/business lookups, and strategy references/notes for EDL-dependent
 answers. These are self-assessments. Strategy references are not certificates
 from the GDR, and existing notes do not constitute a staged evidence checklist.
 
-**Proposed next use:** attach a source-backed evidence checklist to each
+**Further proposed use:** attach a source-backed evidence checklist to each
 selected subcriterion, retaining separate application, payment and later-control
 requirements. Let users record the responsible person, document reference,
 planned action and outstanding evidence. Keep self-assessed points and evidence
 readiness separate; missing proof must remain visibly unresolved. Produce an
 application-preparation export with criterion codes, source pages, project
-explanations and missing documents. This review does not implement those features
-or change scoring, saved assessments or catalogue editions.
+explanations and missing documents. The node guidance described below provides
+the official requirements and evidence instructions; an editable evidence
+checklist and preparation export remain future work. Scoring, saved assessments
+and catalogue editions are unchanged.
 
 | Example | Guide evidence and app implication |
 |---|---|
@@ -249,6 +251,68 @@ outcomes, the relevant AL20 strategy passages, technical documents required by
 the claimed subcriterion, and planned delivery evidence. This is a product
 recommendation, not confirmation that a specific site, applicant or project is
 eligible or that every listed criterion can be combined.
+
+### Restoration guidance inside scoring nodes (routes 3.4 and 3.5)
+
+Each of the **45 subcriteria across 14 criteria** has official explanations,
+restoration relevance, practical illustrative recommendations, application and
+payment evidence, later-control guidance and questions to confirm with AL20.
+Open a scoring sub-node in the graph: **Requirements and restoration
+recommendations** opens for that choice; the other choices remain expandable.
+Evidence and original Spanish wording have their own disclosures. Existing EDL
+references remain alongside this guidance and retain their separate selections.
+
+Recommendations use the route selected in **AL20 assessment route**, not an
+inferred applicant or site classification. The library stores 45 shared
+recommendations once and two additional route-specific recommendations for
+relevant needs, innovation and heritage nodes: 3.4 demonstration design versus
+3.5 heritage recovery. The official route conditions explain the overarching
+requirements and exclusions, including 3.5's exclusion of standalone events.
+Factual criteria explain how to verify the facts; limited-fit criteria such as
+business creation or proximity services explain why a restoration activity must
+not be relabelled to claim points. IN.1.1 explicitly records the absent EDL
+sector designation. No new guidance is shown for the other three scoring routes.
+
+This is **current dated reference information**, served separately from saved
+assessment snapshots by `GET /api/funding/selection-guidance`. The authoritative
+content is `scenarios/funding-selection-guidance-v1.json`. It contains no point
+values: displayed points, criterion caps and combination constraints come from
+the existing assessment. Reading guidance never selects answers, awards points,
+adds evidence annotations or changes notes. There is no automatic project
+recommendation or path-to-60 calculation in this release.
+
+Every content section and recommendation identifies source pages and PDF
+editions. All five official PDF downloads were rechecked byte-for-byte against
+the registered local copies on **1 November 2026**; no PDF was added or changed:
+
+- [AL20 selected scoring criteria — Junta de Andalucia, signed 2026 (FUND-004), direct PDF](https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/03/Listado%20criterios%20AL20.pdf).
+- [LEADER governing rules — Junta de Andalucia, Order of 3 February 2026 (FUND-008), direct PDF](https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf).
+- [Non-GDR applicant call — Junta de Andalucia, Resolution of 13 April 2026 (FUND-009), direct PDF](https://www.juntadeandalucia.es/eboja/2026/76/BOJA26-076-00061-5258-01_00336495.pdf).
+- [Verification guide — Junta de Andalucia, v2-4, drafted 11 September/listed 25 September 2026 (FUND-010), direct PDF](https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/Guia-instrucciones-especificas-publicas_Criterios-seleccion-promotores_7119-2_LEADER_v2-4.pdf).
+- [AL20 EDLL 2023-2027 — ADR Alpujarra, V1, 19 November 2024 (FUND-013), direct PDF](https://drive.google.com/uc?export=download&id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK).
+
+The [official AL20 listing](https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores-al-al20.html)
+links the local criteria and strategy; the
+[promoter listing](https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores.html)
+links the April call and September guide. The original
+[governing-order publication](https://www.juntadeandalucia.es/boja/2026/29/1)
+supports the reviewed route text. Publication/download links, editions and review
+notes are available inside **Source editions and official downloads**.
+
+Known population discrepancies remain explicit: local 2023 wording versus the
+2025 annex, and the guide narrative's Andalusia median of 2,497 versus its annex's
+2,256. JR.3.2 also flags the guide's older dual-training legal references for
+confirmation. The app does not resolve these conflicts by choosing favourable
+values. Missing or incompatible content produces an error and **Retry selection
+guidance**; existing scoring answers, notes and strategy references are retained.
+
+Maintenance: retain stable subcriterion IDs and explicit recommendation route
+lists; review sources before publishing a new dated edition. Backend and frontend
+validation require complete coverage, applicable recommendations and valid
+source IDs/pages/checksums. This reference library is not persisted into drafts,
+so it needs no save migration. Evidence state continues to use its existing
+contracts. The broader fallback audit is not extended into a repository-wide
+compliance claim by this work.
 
 ### Population and business lookup
 

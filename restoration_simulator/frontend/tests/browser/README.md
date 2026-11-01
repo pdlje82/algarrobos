@@ -1,5 +1,12 @@
 # Browser checks
 
+Run `node tests/browser/funding-selection-guidance.cjs` for 3.4/3.5 shared and
+route-specific recommendations, evidence/source links, nested PDF focus,
+unchanged assessment on reading, saved notes/EDL references across route changes
+and reload, visible guidance failure/retry, and mobile themes. It uses the
+isolated API/app below and replaces only its isolated fixture. Then run
+`funding-selection.cjs` and `funding-edl.cjs` sequentially for regressions.
+
 Start with `node tests/browser/funding-programmes.cjs` for the programme-first
 graph: 99 explicit memberships, shared introductions, route-only dependencies,
 met-group/editor stability, comparison, composite inputs, other-route editing,
