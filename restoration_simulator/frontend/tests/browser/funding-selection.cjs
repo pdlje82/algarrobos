@@ -1,3 +1,4 @@
+const {selectProgramme}=require('./funding-programme-helper.cjs');
 const assert=require('node:assert/strict');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE);
 const root=process.env.DESIGNER_TEST_API,url=process.env.DESIGNER_APP_URL;
@@ -16,7 +17,7 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   const settled=()=>poll(async()=>!/Updating/.test(await visual.locator('.funding-visual-status').innerText()));await settled();
   await page.getByRole('button',{name:'Choose activity',exact:true}).click();await page.locator('#funding-activity').selectOption('business');await settled();
   await page.getByRole('button',{name:'2. People and land',exact:true}).click();
-  await page.getByLabel('Programme or funding approach',{exact:true}).selectOption('LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();
+  await selectProgramme(page,'LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();
   const parent=graph.locator('.funding-circumstance[data-question-id="selection_score"]');await parent.click();
   assert.equal(await page.locator('#funding-selection_score').count(),0);
   const route=page.getByLabel('AL20 assessment route',{exact:true});await route.selectOption('LEADER-AL20-3.4');await settled();
@@ -99,7 +100,7 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   }
   await page.setViewportSize({width:1500,height:1000});await poll(async()=>(await api('funding')).attachment.draft.selection_assessments['LEADER-AL20-3.4'].criteria['AT.3'].notes.includes('Keep this note'));
   const saved=(await api('funding')).attachment.draft.selection_assessments;
-  await page.reload();await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await settled();await page.getByRole('button',{name:'2. People and land',exact:true}).click();await page.getByLabel('Programme or funding approach',{exact:true}).selectOption('LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-requirements-met').click();await parent.click();await route.selectOption('LEADER-AL20-3.4');
+  await page.reload();await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await settled();await page.getByRole('button',{name:'2. People and land',exact:true}).click();await selectProgramme(page,'LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-requirements-met').click();await parent.click();await route.selectOption('LEADER-AL20-3.4');
   assert.match(await graph.locator('.funding-annex-total').innerText(),/Calculated score: 63 points/);assert.deepEqual((await api('funding')).attachment.draft.selection_assessments,saved);
   await page.getByRole('button',{name:'6. Review and use',exact:true}).click();
   const reviewRow=page.locator('.funding-main .funding-check').filter({hasText:'AL20 selection assessment · LEADER-AL20-3.4'});

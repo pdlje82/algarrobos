@@ -8,6 +8,7 @@ import {ApplicantPicker,FundingAnswers} from "./FundingAnswers.jsx";
 import {FundingQuestionHelp} from "./FundingQuestionHelp.jsx";
 import {FundingMunicipality} from "./FundingMunicipality.jsx";
 import {FundingVisualisation} from "./FundingVisualisation.jsx";
+import {revealFundingColumn} from "./fundingLayout.js";
 import {FundingQuestionEditor} from "./FundingQuestionEditor.jsx";
 import {FundingWorkingOption} from "./FundingWorkingOption.jsx";
 import {fundingVisualReducer, initialFundingVisual} from "./fundingVisualState.js";
@@ -25,9 +26,9 @@ function Sources({sources}) {
 function Text({value}) {
   return <div className="funding-research">{value.split("\n").filter(line => line.trim()).map((line, i) => <p key={i}>{line.replace(/^[-*]\s*/, "").replace(/\*\*/g, "").split(/(https:\/\/[^\s]+)/g).map((part,j)=>part.startsWith("https://")?<DocumentLink key={j} href={part} target="_blank" rel="noreferrer">{part}</DocumentLink>:part)}</p>)}</div>;
 }
-function Option({result:r, selected, disabled=false, onSelect,working,onWork,workingGroup,programmeStandalone=false}) {
+function Option({result:r, selected, disabled=false, onSelect,working,onWork,workingGroup,programmeStandalone=false,onReadProgramme}) {
   if(fundingClass(r)==="unimplemented")return <article className="funding-option">
-    {programmeStandalone?<button type="button" onClick={()=>{const guide=document.querySelector(".funding-programme-intro details");if(guide===null)throw Error("The programme reference guide is unavailable. Retry the programme list.");guide.open=true;guide.scrollIntoView({block:"start"});guide.querySelector("summary").focus({preventScroll:true});}}>Read programme or approach guide</button>:<FundingGuide id={r.id}/>}
+    {programmeStandalone?<button type="button" onClick={onReadProgramme}>Read programme or approach guide</button>:<FundingGuide id={r.id}/>}
     <div className="funding-pick"><input type="checkbox" aria-label={`Shortlist ${r.id}`} checked={selected} disabled={disabled} onChange={onSelect}/><strong>{r.id} · {r.title}</strong></div>
     <FundingWorkingOption id={r.id} checked={working} onChange={onWork} group={workingGroup}/>
     <details><summary>Original research and saved assessment context</summary>
@@ -60,6 +61,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   const [live,dispatchVisual] = useReducer(fundingVisualReducer,initialFundingVisual);
   const [visualContext,setVisualContext] = useState(0), [visualRetry,setVisualRetry] = useState(0), [inspected,setInspected] = useState(null);
   const [workingOption,setWorkingOption] = useState(null);
+  const [programmeGuide,setProgrammeGuide]=useState(null);
   const programmeState=useFundingProgrammes(request);
   const [programmeId,setProgrammeId]=useState(null),[programmeDisplay,setProgrammeDisplay]=useState(null),[heldQuestionIds,setHeldQuestionIds]=useState([]),[heldMetIds,setHeldMetIds]=useState([]);
   useEffect(()=>{if(programmeState.value!==null)setProgrammeDisplay(current=>current===null?{...programmeState.value.library.defaults}:current);},[programmeState.value,programmeDisplay===null]);
@@ -87,7 +89,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   const assessment = visualValue?.assessment ?? null;
   const evaluating = draft !== null && (live.context !== visualContext || live.inputKey !== visualInputKey || live.status === "pending" || live.status === "idle");
   const visualFailure = live.context === visualContext && live.inputKey === visualInputKey ? live.error : "";
-  function resetVisual() {setProgrammeId(null);setHeldQuestionIds([]);setProgrammeDisplay(programmeState.value===null?null:{...programmeState.value.library.defaults});setAnnexOpen(false);setAnnexRoute(null);setAnnexGroups({});serial.current++;dispatchVisual({type:"reset"});setVisualContext(k=>k+1);setInspected(null);setWorkingOption(null);setCatalogueReview(null);setAnswerReset(k=>k+1);setEditor(null);}
+  function resetVisual() {setProgrammeGuide(null);setProgrammeId(null);setHeldQuestionIds([]);setProgrammeDisplay(programmeState.value===null?null:{...programmeState.value.library.defaults});setAnnexOpen(false);setAnnexRoute(null);setAnnexGroups({});serial.current++;dispatchVisual({type:"reset"});setVisualContext(k=>k+1);setInspected(null);setWorkingOption(null);setCatalogueReview(null);setAnswerReset(k=>k+1);setEditor(null);}
   async function context(target, parcelIds) {
     return request("funding/context", {revision, planning_revision: planningRevision, design_revision: data.designer_revision, target, parcel_ids: parcelIds});
   }
@@ -225,7 +227,13 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
     }
     setWorkingOption(id);setInspected(null);setEditor(null);setQuestionId(null);setAnnexOpen(false);setAnnexRoute(null);setHeldQuestionIds([]);setProgrammeDisplay({...programmeState.value.library.defaults});return true;
   }
+  function openProgrammeGuide(id,opener){
+    if(effectiveProgrammeState.value===null||!effectiveProgrammeState.value.library.programmes.some(p=>p.id===id)){setError("The programme guide is unavailable. Retry the programme list.");return;}
+    setProgrammeGuide({id,opener});
+  }
+  function closeProgrammeGuide(){const opener=programmeGuide.opener;setProgrammeGuide(null);requestAnimationFrame(()=>{if(opener.isConnected){const column=opener.closest("[data-graph-column]");if(column!==null)revealFundingColumn(opener,column.dataset.graphColumn);opener.scrollIntoView({block:"nearest",inline:"nearest"});opener.focus({preventScroll:true});}});}
   function chooseProgramme(id){
+    setProgrammeGuide(null);
     if(id===null){setProgrammeId(null);setWorkingOption(null);setEditor(null);setQuestionId(null);setAnnexOpen(false);setAnnexRoute(null);setHeldQuestionIds([]);setProgrammeDisplay(programmeState.value===null?null:{...programmeState.value.library.defaults});return;}
     if(effectiveProgrammeState.value===null){setError("The programme list is unavailable. Retry loading it.");return;}
     const p=programmeState.value.library.programmes.find(p=>p.id===id);
@@ -255,6 +263,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
     holdMetGroup(editingScope);setHeldQuestionIds(editingScope===null?[]:[...new Set([...(routeId===null?graphQuestionList:editingScope.attention).map(q=>q.id),logical])]);
     const opener=trigger===null?document.activeElement:trigger;
     editorOpener.current=opener;
+    if(editingScope!==null&&editingScope.all.some(q=>q.id===logical))revealFundingColumn(opener,"requirements");
     const bounds=opener.getBoundingClientRect();
     const anchor={left:bounds.left,right:bounds.right,top:bounds.top,bottom:bounds.bottom};
     if(opener.matches(".funding-circumstance")){
@@ -262,7 +271,8 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
     }
     setQuestionId(logical);setEditor({anchor,flow});
   }
-  function closeEditor(){setEditor(null);requestAnimationFrame(()=>{const trigger=editorOpener.current;if(trigger?.isConnected&&trigger.getClientRects().length)trigger.focus({preventScroll:true});else (document.querySelector(".funding-requirements-met")||document.querySelector(".funding-edit-questions"))?.focus({preventScroll:true});});}
+  function closeEditor(){setEditor(null);requestAnimationFrame(()=>{const opener=editorOpener.current;const trigger=opener?.isConnected&&opener.getClientRects().length?opener:document.querySelector(".funding-requirements-met")||document.querySelector(".funding-edit-questions");if(trigger!==null){const column=trigger.closest("[data-graph-column]");if(column!==null)revealFundingColumn(trigger,column.dataset.graphColumn);trigger.focus({preventScroll:true});}});}
+
   function navigateStep(next){setEditor(null);setStep(next);setQuestionId(null);}
   function changeAnswer(id,value,delay=0){edit(overrideAnswer(draft,id,value),delay);}
   function clearAnswer(id){if(id==="selection_score"&&draft.version===4){
@@ -286,6 +296,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
   function openCriterion(id,trigger,choice=null){
     setHeldQuestionIds(graphQuestionList.map(q=>q.id));holdMetGroup(routeScope);
     if(scoringRoute===null)throw Error("Choose an AL20 scoring route first.");
+    revealFundingColumn(trigger,"requirements");
     editorOpener.current=trigger;
     const bounds=trigger.getBoundingClientRect(),anchor={left:bounds.left,right:bounds.right,top:bounds.top,bottom:bounds.bottom};
     anchor.graph={panel:trigger.closest(".funding-diagram-scroll"),node:trigger};
@@ -369,7 +380,7 @@ export function FundingNavigator({data, active, entry, request, onNavigate, onSa
         {review && <section className="funding-review" aria-label="Funding plan review"><h3>Confirm preferred plan</h3><p>{draft.name} · {draft.selected.join(", ")}</p><p>{review.differences.length} scenario overrides. {review.results.filter(r => draft.selected.includes(r.id)).reduce((n,r) => n+r.checks.filter(c => c.result !== "pass").length,0)} conditions require changes or verification.</p><p>Using this plan changes planning records only. Existing AL20 application and payment actions remain separate. Other mechanisms, including 2.7, are planning previews.</p><button disabled={busy || review.stale || review.catalogue_changed} onClick={() => save("adopt")}>Use this funding plan</button><button onClick={() => setReview(null)}>Keep exploring</button></section>}
       </>}
       {!visualStep&&stageNavigation()}
-    </main>}<div hidden={!visualStep} className="funding-visual-column"><FundingVisualisation annex={draft.version===4?annex:null} displayConditions={displayConditions} programmeState={effectiveProgrammeState} programme={programme} programmeDisplay={programmeDisplay} onProgramme={chooseProgramme} onDisplay={setProgrammeDisplay} routeScope={routeScope} groupedMetIds={editor!==null?heldMetIds:programmeDisplay!==null&&programmeDisplay.show_met&&routeScope!==null?routeScope.met.filter(q=>!(annexOpen&&q.id==="selection_score")).map(q=>q.id):[]} displayedQuestions={graphQuestionList} value={visualValue} latestFields={live.context===visualContext ? live.latestFields : []} changes={live.context===visualContext ? live.changes : null} pending={evaluating} failure={visualFailure} onRetry={()=>setVisualRetry(k=>k+1)} results={filtered} catalogue={c} draft={draft} currentField={q?.id ?? null} questions={questionStates} onQuestion={focusQuestion} editorOpen={editor!==null} canEditQuestions={!readOnly&&graphQuestionList.length>0} onEditQuestions={e=>focusQuestion(graphQuestionList.some(x=>x.id===q?.id)?q.id:graphQuestionList[0].id,e.currentTarget)} navigation={step===1?stageNavigation():null} inspected={inspected} onInspect={setInspected} workingOption={workingOption} onWork={workOnRoute} renderOption={r=><Option result={r} selected={draft.selected.includes(r.id)} disabled={readOnly} onSelect={()=>selectOption(r.id)} working={workingOption===r.id} onWork={workOnRoute} programmeStandalone={programme!==null&&programmeRoutes.length===1} workingGroup="funding-working-details"/>}/></div></div>
+    </main>}<div hidden={!visualStep} className="funding-visual-column"><FundingVisualisation key={visualContext} guideProgramme={programmeGuide===null||effectiveProgrammeState.value===null?null:effectiveProgrammeState.value.library.programmes.find(p=>p.id===programmeGuide.id)} onProgrammeGuide={openProgrammeGuide} onCloseProgrammeGuide={closeProgrammeGuide} annex={draft.version===4?annex:null} displayConditions={displayConditions} programmeState={effectiveProgrammeState} programme={programme} programmeDisplay={programmeDisplay} onProgramme={chooseProgramme} onDisplay={setProgrammeDisplay} routeScope={routeScope} groupedMetIds={editor!==null?heldMetIds:programmeDisplay!==null&&programmeDisplay.show_met&&routeScope!==null?routeScope.met.filter(q=>!(annexOpen&&q.id==="selection_score")).map(q=>q.id):[]} displayedQuestions={graphQuestionList} value={visualValue} latestFields={live.context===visualContext ? live.latestFields : []} changes={live.context===visualContext ? live.changes : null} pending={evaluating} failure={visualFailure} onRetry={()=>setVisualRetry(k=>k+1)} results={filtered} catalogue={c} draft={draft} currentField={q?.id ?? null} questions={questionStates} onQuestion={focusQuestion} editorOpen={editor!==null} canEditQuestions={!readOnly&&graphQuestionList.length>0} onEditQuestions={e=>focusQuestion(graphQuestionList.some(x=>x.id===q?.id)?q.id:graphQuestionList[0].id,e.currentTarget)} navigation={step===1?stageNavigation():null} inspected={inspected} onInspect={setInspected} workingOption={workingOption} onWork={workOnRoute} renderOption={r=><Option result={r} selected={draft.selected.includes(r.id)} disabled={readOnly} onSelect={()=>selectOption(r.id)} working={workingOption===r.id} onWork={workOnRoute} onReadProgramme={e=>openProgrammeGuide(programme.id,e.currentTarget)} programmeStandalone={programme!==null&&programmeRoutes.length===1} workingGroup="funding-working-details"/>}/></div></div>
     {active&&!readOnly&&editor!==null&&q!==undefined&&<FundingQuestionEditor question={q} anchor={editor.anchor} onClose={closeEditor} title={editor.criterion?"Edit AL20 criterion":"Edit funding answer"} focusTarget={editor.choice?`al20-${editor.choice}`:null} positionLabel={editor.criterion?`${editor.route} · ${editor.criterion}`:`${editor.flow==="budget"?"Budget assumptions":workingOption===null?"Exploration context":`Route ${workingOption}`} · ${questionIndex<0?"Outside current route; retained in Your answers":`Question ${questionIndex+1} of ${questions.length}`}`}>
       {editor.criterion?<FundingSelectionEditor key={`${editor.route}-${editor.criterion}`} route={editor.route} assessment={draft.selection_assessments[editor.route]} municipality={visualValue.input_context.questions.find(q=>q.id==="municipality").municipality_selection} request={request} onLookup={applyLocationLookup} onManual={manualLocationCriterion} criterion={selectionProfile(draft,editor.route).criteria.find(c=>c.id===editor.criterion)} row={draft.selection_assessments[editor.route].criteria[editor.criterion]} result={visualValue.visualisation.annex.routes[editor.route].criteria.find(c=>c.id===editor.criterion)} disabled={busy||readOnly} focusChoice={editor.choice} onChange={row=>edit(editSelectionRow(draft,editor.route,editor.criterion,row),150)}/>:answer(q,true)}
     </FundingQuestionEditor>}

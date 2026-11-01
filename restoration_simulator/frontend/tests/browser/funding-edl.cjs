@@ -1,3 +1,4 @@
+const {selectProgramme}=require('./funding-programme-helper.cjs');
 const assert=require('node:assert/strict');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE);
 const root=process.env.DESIGNER_TEST_API,url=process.env.DESIGNER_APP_URL;
@@ -15,7 +16,7 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   const visual=page.getByLabel('Live funding consequences',{exact:true}),graph=visual.locator('.funding-diagram-scroll');
   const settled=()=>poll(async()=>!/Updating/.test(await visual.locator('.funding-visual-status').innerText()));await settled();
   await page.getByRole('button',{name:'Choose activity',exact:true}).click();await page.locator('#funding-activity').selectOption('business');await settled();
-  await page.getByRole('button',{name:'2. People and land',exact:true}).click();await page.getByLabel('Programme or funding approach',{exact:true}).selectOption('LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-circumstance[data-question-id="selection_score"]').click();
+  await page.getByRole('button',{name:'2. People and land',exact:true}).click();await selectProgramme(page,'LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-circumstance[data-question-id="selection_score"]').click();
   const route=page.getByLabel('AL20 assessment route',{exact:true});await route.selectOption('LEADER-AL20-3.4');await settled();
   const editor=page.getByRole('dialog',{name:'Edit AL20 criterion',exact:true});
   const region=id=>editor.getByRole('region',{name:`EDL information for ${id}`,exact:true});
@@ -51,7 +52,7 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   const saved=await row('IN.1');
   // A failed library fetch is visible and retryable; saved answers stay intact.
   let fail=true;await page.route('**/api/funding/edl',r=>fail?(fail=false,r.fulfill({status:503,contentType:'application/json',body:JSON.stringify({detail:'EDL fixture unavailable'})})):r.continue());
-  await page.reload();await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await settled();await page.getByRole('button',{name:'2. People and land',exact:true}).click();await page.getByLabel('Programme or funding approach',{exact:true}).selectOption('LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-circumstance[data-question-id="selection_score"]').click();await route.selectOption('LEADER-AL20-3.4');await open('IN.1','IN.1.2');
+  await page.reload();await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await settled();await page.getByRole('button',{name:'2. People and land',exact:true}).click();await selectProgramme(page,'LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-circumstance[data-question-id="selection_score"]').click();await route.selectOption('LEADER-AL20-3.4');await open('IN.1','IN.1.2');
   await editor.getByRole('alert').filter({hasText:'EDL fixture unavailable'}).first().waitFor();assert.deepEqual(await row('IN.1'),saved);
   await editor.getByRole('button',{name:'Retry EDL content',exact:true}).first().click();await region('IN.1.2').waitFor();
   assert(await region('IN.1.2').locator('[data-edl-item="IN-T3"] input').isChecked());assert.equal(await editor.getByLabel('Assessment notes (optional)',{exact:true}).inputValue(),saved.notes);

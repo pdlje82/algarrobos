@@ -1,3 +1,4 @@
+const {selectProgramme}=require('./funding-programme-helper.cjs');
 const assert=require('node:assert/strict');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE);
 const root=process.env.DESIGNER_TEST_API,url=process.env.DESIGNER_APP_URL;
@@ -11,7 +12,7 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   page=await browser.newPage({viewport:{width:1440,height:2560},hasTouch:true,reducedMotion:'reduce'});page.setDefaultTimeout(12000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(url);await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await page.getByRole('button',{name:'2. People and land',exact:true}).click();
   const visual=page.getByLabel('Live funding consequences',{exact:true}),graph=visual.locator('.funding-diagram-scroll'),bar=visual.locator('.funding-node-height-toggle'),expand=visual.getByRole('button',{name:'Expand node area',exact:true});
-  await graph.waitFor();await visual.getByLabel('Programme or funding approach',{exact:true}).selectOption('LEADER-AL20');await visual.getByRole('button',{name:'Compare programme routes',exact:true}).click();await poll(async()=>/Saved to this computer/.test(await page.getByRole('status',{name:'Funding save status',exact:true}).locator('strong').innerText()));
+  await graph.waitFor();await selectProgramme(page,'LEADER-AL20');await visual.getByRole('button',{name:'Compare programme routes',exact:true}).click();await poll(async()=>/Saved to this computer/.test(await page.getByRole('status',{name:'Funding save status',exact:true}).locator('strong').innerText()));
   const savedDraft=JSON.stringify((await api('funding')).attachment.draft),initial=(await graph.boundingBox()).height;
   assert(initial<=902,'Default canvas retains its normal height cap');
   assert.equal(await visual.getByRole('separator',{name:'Resize node area height',exact:true}).count(),0,'No vertical drag control remains');

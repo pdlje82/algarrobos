@@ -1,3 +1,4 @@
+const {selectProgramme}=require('./funding-programme-helper.cjs');
 const assert=require('node:assert/strict');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE);
 const root=process.env.DESIGNER_TEST_API,url=process.env.DESIGNER_APP_URL;
@@ -31,10 +32,10 @@ const watchdog=setTimeout(()=>{console.error('Funding guides browser timeout at 
     await page.getByRole('button',{name:'Choose activity',exact:true}).click();
     await page.getByRole('button',{name:'Close question editor',exact:true}).click();
     const visual=page.getByLabel('Live funding consequences',{exact:true});
-    const family=page.getByRole('combobox',{name:'Programme or funding approach',exact:true});await family.waitFor();assert.equal(await family.locator('optgroup').count(),6);
+    await visual.getByRole('searchbox',{name:'Find a programme or approach',exact:true}).waitFor();assert.equal(await visual.locator('[data-programme-family]').count(),6);
     const samples={public:'LEADER-AL20-3.1',donations:'NATURE-03',contracts:'FIN-PROCUREMENT-WORKS',ecosystem:'NATURE-01',capital:'NATURE-09',support:'EU-GREEN-ASSIST-ADVISORY'};
     async function open(group,id,keyboard=false){
-      await family.selectOption(id==='LEADER-AL20-3.1'?'LEADER-AL20':id);
+      await selectProgramme(page,id==='LEADER-AL20-3.1'?'LEADER-AL20':id);
       const card=visual.locator(`.funding-graph-option[data-option-id="${id}"]`);
       assert.match(await card.innerText(),/Explore this option/);
       assert.match(await card.innerText(),/Reference guide only/);
@@ -47,7 +48,7 @@ const watchdog=setTimeout(()=>{console.error('Funding guides browser timeout at 
       await guide.getByRole('heading',{name:'What is it?',exact:true}).waitFor();
       assert.equal(await guide.locator('section').count(),5);
       assert.match(await guide.innerText(),/Current reference information|Reference checked/);
-      const heading=standalone?guide.locator('details>summary').first():guide.locator('h3');
+      const heading=guide.locator('h3');
       const box=await heading.boundingBox();assert(box.y>=-1&&box.y<page.viewportSize().height,'Introduction heading is brought into view');
       assert(await heading.evaluate(n=>n===document.activeElement),'Keyboard focus moves to the introduction');
       return guide;
@@ -80,7 +81,7 @@ const watchdog=setTimeout(()=>{console.error('Funding guides browser timeout at 
     await page.getByRole('button',{name:'Choose activity',exact:true}).click();
     await page.getByRole('button',{name:'Close question editor',exact:true}).click();
     await page.getByRole('button',{name:'Expand funding visual workspace',exact:true}).click();
-    await family.selectOption('LEADER-AL20');
+    await selectProgramme(page,'LEADER-AL20');
     await visual.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.1"] .funding-option-open').click();
     await page.getByRole('alert').filter({hasText:'Guide library temporarily unavailable'}).waitFor();
     const afterFailure=(await request('funding')).attachment;

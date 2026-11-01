@@ -1,5 +1,21 @@
 # Funding Navigator changes
 
+## 2026-11-01 — four-column programme graph
+
+- Programme selection is now a graph column with expandable family nodes, search,
+  a pinned selection and Other programmes. Separate Read guide actions open the
+  existing source-cited introductions without changing the working route.
+- Added Auto / 3 columns / 4 columns, stepwise Previous/Next navigation and
+  canvas-only Left/Right keys. Narrow screens retain readable one/two-column
+  windows; status reports the actual range. All four columns remain on one canvas.
+- Real connection intersections produce off-screen arrow badges with destination,
+  count and status. Edge fades and hidden-column labels make partial views clear.
+- Three adjacent-pair resize boundaries, vertical-scroll preservation, editor
+  return control and guide/PDF focus restoration retain the graph workflow.
+- No backend scoring, persistence versions or saved assessments changed.
+- Verified with 238 Python tests, 85 frontend tests, the production build and nine
+  isolated browser workflows, including four-column navigation down to 320 px.
+
 ## 2026-11-01 — programme and route focused requirements
 
 - Added the source-cited programme/approach registry and read-only programmes

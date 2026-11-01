@@ -1,5 +1,5 @@
 import React,{useEffect,useLayoutEffect,useRef,useState} from "react";
-import {constrainFundingEditor,placeFundingEditor,fundingEditorContextShift} from "./fundingLayout.js";
+import {revealFundingColumn,constrainFundingEditor,placeFundingEditor,fundingEditorContextShift} from "./fundingLayout.js";
 
 // A modeless editor: the graph remains interactive, including while editing an answer.
 export function FundingQuestionEditor({question,anchor,positionLabel,onClose,children,title="Edit funding answer",focusTarget=null}){
@@ -92,8 +92,10 @@ export function FundingQuestionEditor({question,anchor,positionLabel,onClose,chi
     setPosition(constrain({left:bounds.left+(e.key==="ArrowLeft"?-amount:e.key==="ArrowRight"?amount:0),top:bounds.top+(e.key==="ArrowUp"?-amount:e.key==="ArrowDown"?amount:0)}));
   }
   const Handle=wide?"button":"div";
+  const editedNode=anchor.graph===undefined?null:question.type==="selection"?anchor.graph.node:anchor.graph.panel.querySelector(`[data-question-id="${question.id}"]`);
   return <section ref={root} id="funding-answer-editor" className={`funding-question-editor${dragging?" is-dragging":""}`} role="dialog" aria-modal="false" aria-labelledby="funding-answer-editor-title" tabIndex={-1} style={position===null?{visibility:"hidden"}:position}>
     <header className="funding-editor-header"><Handle type={wide?"button":undefined} className="funding-editor-handle" aria-label={wide?"Move question editor":undefined} onPointerDown={start} onPointerMove={move} onPointerUp={end} onPointerCancel={end} onLostPointerCapture={()=>{drag.current=null;setDragging(false);}} onKeyDown={moveByKey}><strong id="funding-answer-editor-title">{title}</strong><small>{positionLabel}</small><span className="funding-editor-move-hint">Drag here to move · arrow keys also work</span></Handle><button type="button" className="funding-editor-close" aria-label="Close question editor" onClick={onClose}>×</button></header>
+    {editedNode?.isConnected&&<button type="button" className="funding-editor-reveal" onClick={()=>{revealFundingColumn(editedNode,"requirements");editedNode.scrollIntoView({block:"nearest",inline:"nearest"});}}>Show edited requirement</button>}
     <div className="funding-editor-body">{children}</div>
   </section>;
 }

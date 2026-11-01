@@ -17,6 +17,17 @@ The frozen replay modules were reviewed for compatibility boundaries and preserv
 
 ## Changes
 
+Four-column presentation (1 November 2026): programme nodes use the validated
+registry; loading/failure renders explicitly in the Programme column with retry.
+Unknown column IDs, unsupported view preferences, malformed divider geometry and
+invalid viewport bounds fail explicitly. Responsive reflow is an intentional
+presentation operation: it constrains widths and reports the actual column count;
+it does not substitute funding data. A hidden canvas retains its last measured
+geometry until visible; an explicit presentation seed is used before measurement.
+Continuation markers are computed from the same SVG curves as the visible edges.
+No additional data sources or scoring/save contracts are introduced. This change
+is scoped to graph presentation; no broader fallback audit is claimed.
+
 Programme graph (1 November 2026): a validated presentation registry explicitly
 assigns every current catalogue entry to one programme/approach and resolves
 source-cited introductions. Missing memberships, incompatible versions, invalid

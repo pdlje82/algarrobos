@@ -351,3 +351,18 @@ FUND-003 (LIFE CUSTODIA, November 2025) supplies the exact instrument chapters f
 - Production build passed (existing large-chunk advisory remains).
 - Browser assertions covered all six families, keyboard focus, mobile layout, the cited new PDF and exact page, unchanged project/draft state, and explicit failed-load retry.
 - All seven new PDF download endpoints returned the original registered bytes; catalogue and rename-log entries were checked for unique IDs.
+
+
+## Four-column navigation revision — 1 November 2026
+
+Programme/approach selection now lives in a graph node column between Exploration
+and Route requirements; Funding routes remains the fourth column. Six expandable
+family groups and a node search use the same explicit memberships and guides
+above. Read guide opens the programme introduction without changing assessment
+focus. There are no new programme-level claims or source editions in this revision.
+
+Auto / 3 / 4-column windows, previous/next arrows and real edge continuation
+markers keep the four-column hierarchy readable on narrower displays. Route-first
+dependencies and Requirements met grouping remain the question-reduction policy.
+All navigation state stays transient; the read-only registry and existing scoring
+and save contracts remain authoritative and unchanged.

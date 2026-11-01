@@ -2,14 +2,37 @@
 
 ## Programme → route → requirements needing attention
 
-Choose **Programme or funding approach** above the graph. Search by programme
-name or route code; the picker groups all 99 catalogue entries under the six
-funding families. It includes programmes, programme families, mechanisms,
-historical examples and advisory approaches with explicit labels. AL20 combines
-its 12 routes, LIFE four entries, and Horizon Europe/Missions six entries. Other
-entries remain standalone approaches. Their source-cited introduction appears
-above the graph; expand **Read programme or approach guide** for the five guide
-sections, limitations, research questions and exact sources.
+The graph has four columns: **Exploration → Programme → Route requirements →
+Funding routes**. Choose a programme node in the second column. Expand one of
+the six funding families, or use **Find a programme or approach** to filter the
+nodes by name or route code. The selected programme stays at the top; **Other
+programmes** reopens the family browser. There is no programme dropdown.
+
+The registry includes all 99 catalogue entries as programmes, programme families,
+mechanisms, historical examples and advisory approaches with explicit labels.
+AL20 combines its 12 routes, LIFE four entries, and Horizon Europe/Missions six
+entries. Other entries remain standalone approaches. Each node has a separate
+**Read guide** action. Its source-cited introduction opens below the graph with
+the five guide sections, limitations, research questions and exact sources.
+Reading another programme's guide does not change the working programme/route.
+Closing returns focus to the guide's opener; PDF sources retain their page links.
+
+**Column view** offers **Auto**, **3 columns** and **4 columns**. All four columns
+remain on one canvas. **Previous columns / Next columns** moves one column at a
+time, keeping vertical scroll. The displayed range reports the actual window;
+narrow screens show two or one readable columns, with an explicit fit message
+when a requested count cannot fit. Focus the canvas itself to use Left/Right
+arrows; inputs, family controls and resize separators keep their own keys.
+Off-screen column labels and edge fades show that more graph exists. Arrow
+badges appear only where actual SVG connections cross the viewport, with their
+status, count and destination; clicking one reveals the connected column.
+
+Resize any adjacent pair currently visible together. **Reset column widths**
+restores the initial proportions. Narrower viewports reflow custom widths to
+keep all visible columns readable. The floating editor stays open while panning;
+**Show edited requirement** returns to its node. **Expand node area** still
+removes the vertical height limit for portrait screens. Column view, panning,
+widths and family expansion are transient and do not save funding decisions.
 
 Choose a route using its **Work** circle on the right. Only its backend-linked
 requirements appear. Single-option approaches select their sole route directly.
@@ -128,7 +151,7 @@ list. See [FUNDING_EDL.md](FUNDING_EDL.md) for coverage and maintenance rules.
 Question 19 is **AL20 selection assessment**. Open it in Graph to expand its
 branch, select a funding route and expand criterion groups. Clicking a
 subcriterion opens the existing floating editor. Funding options remain in their
-column; expanding the annex creates space in the circumstances column. Collapse
+column; expanding the annex creates space in the Route requirements column. Collapse
 and route switching preserve answers. Your answers lists all five route scores
 with a direct **Open in graph** action for each route.
 Each expanded level is indented: assessment → route → criterion group →
@@ -563,10 +586,11 @@ questions with the editor's buttons. Escape/Close returns focus to the
 trigger; question help and PDF viewing remain nested interactions. Phones use a
 viewport-contained editor with scrollable content.
 
-Desktop graph columns have two draggable, keyboard-accessible separators. Minimum
-column widths preserve readable nodes; **Reset column widths** restores the initial
-layout. Widths survive view changes within the workspace, while phones use the
-fixed scrollable layout. Editor positions and column widths are presentation state
+The four graph columns have three draggable, keyboard-accessible separators.
+Only separators between two fully visible adjacent columns are offered. Minimum
+widths preserve readable nodes; **Reset column widths** restores the initial
+layout. Widths survive view changes within the workspace and reflow for narrower
+windows; phones show one scrollable column at a time. Editor positions and column widths are presentation state
 and never enter funding snapshots, project records or simulation history.
 `funding-layout.test.mjs` and the isolated `funding-layout.cjs` browser workflow
 cover geometry limits, movement, focus, source PDFs and phone themes.

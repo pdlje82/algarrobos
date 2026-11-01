@@ -1,3 +1,4 @@
+const {selectProgramme}=require('./funding-programme-helper.cjs');
 const assert=require('node:assert/strict');
 const {chromium}=require(process.env.PLAYWRIGHT_MODULE);
 const root=process.env.DESIGNER_TEST_API,url=process.env.DESIGNER_APP_URL;
@@ -17,9 +18,9 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   await page.getByRole('button',{name:'Choose activity',exact:true}).click();await page.locator('#funding-activity').selectOption('business');await settled();await page.getByText('Exploration draft saved.',{exact:true}).waitFor();
   await page.getByRole('button',{name:'2. People and land',exact:true}).click();assert.equal(await page.locator('.funding-main').count(),0);assert.equal(await editor.count(),0);
   assert.equal(await visual.getByRole('button',{name:'Graph',exact:true}).count(),0);assert.equal(await visual.getByRole('button',{name:'Matrix',exact:true}).count(),0);await visual.evaluate(n=>n.scrollIntoView({block:'start'}));
-  await visual.getByLabel('Programme or funding approach',{exact:true}).selectOption('LEADER-AL20');await visual.locator('.funding-graph-option[data-option-id="LEADER-AL20-2.7"]').getByRole('radio',{name:'Work on LEADER-AL20-2.7',exact:true}).check();
+  await selectProgramme(page,'LEADER-AL20');await visual.locator('.funding-graph-option[data-option-id="LEADER-AL20-2.7"]').getByRole('radio',{name:'Work on LEADER-AL20-2.7',exact:true}).check();
   const graph=visual.locator('.funding-diagram-scroll'),node=visual.locator('[data-question-id="applicant_choice"]');
-  const positions=()=>visual.locator('.funding-circumstance,.funding-graph-option').evaluateAll(ns=>ns.map(n=>[n.dataset.questionId||n.dataset.optionId,n.style.left,n.style.top,n.style.width]));
+  const positions=()=>visual.locator('.funding-circumstance,.funding-graph-option,.funding-programme-node').evaluateAll(ns=>ns.map(n=>[n.dataset.questionId||n.dataset.optionId||n.dataset.programmeId,n.style.left,n.style.top,n.style.width]));
   async function belowPair(selected){
    const geometry=await selected.evaluate(n=>{const nodes=[...n.closest('.funding-diagram-scroll').querySelectorAll('.funding-circumstance')],index=nodes.indexOf(n),pair=nodes.slice(index===nodes.length-1?Math.max(0,index-1):index,index+2),panel=n.closest('.funding-diagram-scroll').getBoundingClientRect();return {pair:pair.map(n=>{const r=n.getBoundingClientRect();return {top:r.top,bottom:r.bottom};}),panel:{top:panel.top,bottom:panel.bottom}};});
    const box=await editor.boundingBox(),bottom=Math.max(...geometry.pair.map(r=>r.bottom));
@@ -55,11 +56,11 @@ async function poll(fn){for(let i=0;i<250;i++){if(await fn())return;await new Pr
   initial=await positions();
   // Both dividers resize HTML nodes and their SVG connectors without funding requests.
   let assessments=0;page.on('request',r=>{if(r.url().endsWith('/funding/visualise'))assessments++;});
-  const first=graph.getByRole('separator',{name:'Resize exploration and circumstances columns',exact:true}),second=graph.getByRole('separator',{name:'Resize circumstances and funding options columns',exact:true});
+  const first=graph.getByRole('separator',{name:'Resize Exploration and Programme columns',exact:true}),second=graph.getByRole('separator',{name:'Resize Route requirements and Funding routes columns',exact:true});
   await graph.evaluate(n=>{n.scrollTop=0;});const pane=await graph.boundingBox();
-  const firstBefore=Number(await first.getAttribute('aria-valuenow')),firstBox=await first.boundingBox();
-  await page.mouse.move(firstBox.x+9,pane.y+20);await page.mouse.down();await page.mouse.move(firstBox.x+79,pane.y+20,{steps:8});await page.mouse.up();
-  assert(Math.abs(Number(await first.getAttribute('aria-valuenow'))-firstBefore-70)<2);assert.notDeepEqual(await positions(),initial);
+  const firstBefore=Number(await first.getAttribute('aria-valuenow')),firstBox=await first.boundingBox(),delta=Math.min(70,Number(await first.getAttribute('aria-valuemax'))-firstBefore-1);
+  await page.mouse.move(firstBox.x+9,pane.y+20);await page.mouse.down();await page.mouse.move(firstBox.x+9+delta,pane.y+20,{steps:8});await page.mouse.up();
+  assert(Math.abs(Number(await first.getAttribute('aria-valuenow'))-firstBefore-delta)<2);assert.notDeepEqual(await positions(),initial);
   const path=await graph.locator('svg path').first().getAttribute('d');assert(!path.includes('NaN'));
   await second.focus();const secondBefore=Number(await second.getAttribute('aria-valuenow'));await page.keyboard.press('Shift+ArrowLeft');assert.equal(Number(await second.getAttribute('aria-valuenow')),secondBefore-40);
   const resized=await positions();await visual.getByRole('button',{name:'Compare programme routes',exact:true}).click();await visual.getByRole('button',{name:'Route questions',exact:true}).click();assert.deepEqual(await positions(),resized);

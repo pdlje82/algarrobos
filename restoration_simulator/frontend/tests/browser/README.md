@@ -110,3 +110,13 @@ activation, independent card inspection and shortlisting, working-option colours
 and connections, hidden/paged options, graph navigation, keyboard/touch at 390/320 px,
 PDF focus, exploration resets and absence of saved/adopted or simulation effects
 from working-option changes. Use the same isolated API/app settings.
+
+
+Run `node tests/browser/funding-four-columns.cjs` against the isolated API on 8013
+and a production preview on 4174 (`vite preview --config tests/browser/vite.config.mjs
+--host 127.0.0.1 --port 4174 --strictPort`). It checks programme family/search nodes,
+Read guide and PDF focus, Auto/3/4 views, real continuation arrows, canvas-only
+keyboard panning, resize/editor behavior, widths down to 320 px and unchanged
+funding/project/planning records after navigation. `funding-programme-helper.cjs`
+selects programmes through their graph nodes in the related browser regressions.
+Build before running these tests and run mutation fixtures sequentially.
