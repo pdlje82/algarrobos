@@ -4,6 +4,7 @@ import {validateEdlResponse} from "./fundingEdlState.js";
 import {validateGuideResponse} from "./fundingGuideState.js";
 import {validateSelectionGuidanceResponse} from "./fundingSelectionGuidanceState.js";
 import {validateProgrammesResponse} from "./fundingProgrammeState.js";
+import {validateConceptGuide,validateConcept,validateConceptReport,validateTransfer,CONCEPT_ROUTES} from "./projectConceptState.js";
 
 export function required(value, message) {
   if (!value) throw new Error(message);
@@ -289,6 +290,11 @@ export function demonstratorContract(value) {
 }
 
 export function validateResponse(path, data) {
+  if(path==="funding/project-concept-guide")return validateConceptGuide(data);
+  if(path==="funding/project-concept/create")return validateConcept(data);
+  if(["funding/project-concept/preview","demonstrator/project-concept/preview"].includes(path))return validateConceptReport(data);
+  if(path==="funding/project-concept/transfer-preview")return validateTransfer(data);
+  if(["funding/project-concept/transfer","demonstrator/project-concept"].includes(path))return validateResponse("project",data);
   object(data, "API response");
   if(path==="funding/visualise") {
     properties(data,["assessment","visualisation","applicant_context","input_context"],"funding visualisation");
@@ -344,6 +350,8 @@ export function validateResponse(path, data) {
     properties(data,["version","project_revision","funding_revision","attachment","legacy"],"funding workspace");
     properties(data.attachment,["version","draft","scenarios","plans"],"funding attachment");
     required(data.version===1&&data.attachment.version===1&&Number.isInteger(data.funding_revision)&&Array.isArray(data.attachment.scenarios)&&Array.isArray(data.attachment.plans),"Incompatible funding workspace. Restart Python and reload.");
+    if(data.attachment.draft!==null)validateResponse("funding/context",data.attachment.draft);
+    for(const record of [...data.attachment.scenarios,...data.attachment.plans])validateResponse("funding/context",record.draft);
     return data;
   }
   if(path==="funding/prepare") {
@@ -368,6 +376,10 @@ export function validateResponse(path, data) {
     required((data.version===4)===(data.bundle.version===3),"AL20 catalogue edition 3 requires funding draft version 4. Review the catalogue update.");
     if([3,4].includes(data.version)){properties(data,["applicant_choice"],"merged applicant choice");required(!Object.hasOwn(data.overrides,"applicant_id")&&!Object.hasOwn(data.overrides,"applicant_kind"),"Conflicting legacy applicant overrides in a new exploration.");}
     if(data.version===4){
+      if(Object.hasOwn(data,"project_concepts")){
+        object(data.project_concepts,"route project concepts");
+        for(const [route,concept] of Object.entries(data.project_concepts)){required(CONCEPT_ROUTES.includes(route)&&concept.route===route,"Incompatible project concept route.");validateConcept(concept);}
+      }
       properties(data,["selection_assessments","legacy_selection_score"],"AL20 draft");
       properties(data.bundle,["selection"],"AL20 catalogue");
       required(data.bundle.version===3,"AL20 structured scoring requires catalogue edition 3.");
@@ -394,6 +406,17 @@ export function validateResponse(path, data) {
           required(["sum","ratio","employment"].includes(criterion.method)&&Array.isArray(criterion.choices)&&criterion.choices.length>0&&Array.isArray(criterion.exclusive_groups)&&Array.isArray(criterion.sources)&&criterion.sources.length>0,"Incomplete AL20 criterion definitions.");
           properties(answer.criteria,[criterion.id],"AL20 criterion answers");
           properties(answer.criteria[criterion.id],["answers","inputs","reference","notes"],"AL20 criterion answer");
+          const row=answer.criteria[criterion.id],choiceIds=criterion.method==="ratio"?[]:criterion.choices.filter(c=>c.routes.includes(route)).map(c=>c.id),inputIds=criterion.method==="ratio"?["grant","quality_jobs"]:criterion.method==="employment"?["qualifying_uta"]:[];
+          object(row.answers,"AL20 item answers");object(row.inputs,"AL20 shared calculation inputs");
+          required(Object.keys(row.answers).length===choiceIds.length&&choiceIds.every(id=>Object.hasOwn(row.answers,id)&&[true,false,null].includes(row.answers[id])),"Missing or invalid individual scoring answers. Retain your draft and reload the saved assessment.");
+          required(Object.keys(row.inputs).length===inputIds.length&&inputIds.every(id=>Object.hasOwn(row.inputs,id)&&(id==="qualifying_uta"?[true,false,null].includes(row.inputs[id]):row.inputs[id]===null||typeof row.inputs[id]==="number"&&Number.isFinite(row.inputs[id])&&row.inputs[id]>=0)),"Missing or invalid shared scoring inputs. Retain your draft and reload the saved assessment.");
+          required(typeof row.notes==="string"&&row.notes.length<=4000&&typeof row.reference==="string"&&row.reference.length<=2000,"Invalid shared scoring context.");
+          if(Object.hasOwn(answer.criteria[criterion.id],"choice_context")){
+            const context=answer.criteria[criterion.id].choice_context;
+            properties(context,["version","items"],"individual scoring annotations");object(context.items,"individual scoring annotations");
+            required(context.version===1,"Unsupported individual scoring annotations.");
+            for(const [id,note] of Object.entries(context.items))required(criterion.choices.some(c=>c.id===id&&c.routes.includes(route))&&Object.keys(note).sort().join(",")==="notes,reference"&&typeof note.notes==="string"&&typeof note.reference==="string","Invalid individual scoring annotation.");
+          }
           if(Object.hasOwn(answer.criteria[criterion.id],"edl_evidence")){
             const evidence=answer.criteria[criterion.id].edl_evidence;
             properties(evidence,["version","library_id","library_hash","selections"],"EDL supporting references");
@@ -425,6 +448,10 @@ export function validateResponse(path, data) {
     if(data.context.parcel!==null){properties(data.context.parcel,["id","name","municipality","area","owner","access"],"planning parcel record");if(data.context.parcel.access!==null)properties(data.context.parcel.access,["id","status","route","operator","start","end"],"recorded access");}
     if(data.context.design!==null){properties(data.context.design,["id","name","current_name","status"],"transferred design source");required(["current","changed","missing"].includes(data.context.design.status),"Invalid source design status.");}
     properties(data.draft,["version","inputs","source"],"planning draft");
+    if(Object.hasOwn(data.draft,"project_concepts")){
+      required(Array.isArray(data.draft.project_concepts),"Invalid demonstrator concept collection.");
+      const ids=new Set();for(const record of data.draft.project_concepts){properties(record,["concept","baseline","source"],"linked project concept");validateConcept(record.concept);validateConcept(record.baseline);required(record.concept.id===record.baseline.id&&record.concept.route===record.baseline.route&&!ids.has(record.concept.id),"Invalid demonstrator concept identity.");object(record.source,"concept source context");ids.add(record.concept.id);}
+    }
     object(data.draft.inputs,"planning inputs");
     required(data.draft.version===1&&Number.isInteger(data.project_revision)&&Number.isInteger(data.planning_revision)&&[data.saved,data.committed,data.available].every(v=>typeof v==="boolean"),"Invalid planning draft metadata.");
     if(data.draft.source!==null){properties(data.draft.source,["draft","origin","ruleset_hash"],"planning design snapshot");properties(data.draft.source.origin,["id","name"],"planning design identity");}

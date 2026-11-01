@@ -33,6 +33,34 @@ export function setSelectionChoice(row,criterion,id,value){
 export function clearSelectionRow(row,value){
   return {...row,answers:Object.fromEntries(Object.keys(row.answers).map(k=>[k,value])),inputs:Object.fromEntries(Object.keys(row.inputs).map(k=>[k,value===false?(k==="qualifying_uta"?false:0):null]))};
 }
+
+export function proposeSelectionChoice(row,criterion,id,value){
+  if(!Object.hasOwn(row.answers,id)||![true,false,null].includes(value))throw Error("Invalid AL20 subcriterion selection.");
+  const answers={...row.answers,[id]:value},visiting=new Set();
+  function include(key){
+    if(visiting.has(key))throw Error("The scoring prerequisites contain a cycle. Review the catalogue.");
+    visiting.add(key);answers[key]=true;
+    if(Object.hasOwn(criterion.requires,key))for(const parent of criterion.requires[key])include(parent);
+    visiting.delete(key);
+  }
+  if(value===true){
+    include(id);
+    for(const group of criterion.exclusive_groups)if(group.includes(id))for(const other of group)if(other!==id&&answers[other]===true)answers[other]=false;
+  }
+  let changed=true;
+  while(changed){changed=false;for(const [child,parents] of Object.entries(criterion.requires))if(answers[child]===true&&parents.some(parent=>answers[parent]!==true)){answers[child]=false;changed=true;}}
+  if(answers[id]!==value)throw Error("This choice conflicts with its required selections. Review the related items first.");
+  const next=setSelectionChoice({...row,answers},criterion,id,value);
+  return {row:next,related:Object.keys(answers).filter(key=>key!==id&&answers[key]!==row.answers[key])};
+}
+
+export function editChoiceContext(row,id,field,value){
+  if(!Object.hasOwn(row.answers,id)||!["reference","notes"].includes(field)||typeof value!=="string")throw Error("Invalid sub-node annotation.");
+  const previous=Object.hasOwn(row,"choice_context")?row.choice_context:{version:1,items:{}};
+  if(previous.version!==1)throw Error("Unsupported sub-node notes version. Retain your draft and reload.");
+  const item=Object.hasOwn(previous.items,id)?previous.items[id]:{reference:"",notes:""};
+  return {...row,choice_context:{...previous,items:{...previous.items,[id]:{...item,[field]:value}}}};
+}
 export function selectionNodeIndent(kind,width){
   const levels={route:1,group:2,choice:3,calculation:3,total:2};
   if(!Object.hasOwn(levels,kind)||!Number.isFinite(width)||width<=160)throw Error("Invalid AL20 branch geometry. Refresh the funding graph.");

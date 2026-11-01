@@ -25,7 +25,7 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   const options=()=>graph.locator('.funding-graph-option').evaluateAll(ns=>ns.map(n=>[n.dataset.optionId,n.style.top]));
   const optionPositions=await options();
   const group=id=>graph.locator(`.funding-annex-group[data-annex-criterion="${id}"]`);
-  const editor=page.getByRole('dialog',{name:'Edit AL20 criterion',exact:true});
+  const editor=page.locator('#funding-answer-editor');
   async function openCriterion(id){if(await group(id).getAttribute('aria-expanded')!=='true')await group(id).click();await graph.locator(`.funding-annex-choice[data-annex-criterion="${id}"]`).first().click();await editor.waitFor();const overview=editor.getByText('Criterion overview, limitations and sources',{exact:true});if(await overview.count())await overview.click();}
   async function close(){await page.getByRole('button',{name:'Close question editor',exact:true}).click();await settled();await poll(async()=>await page.getByRole('status',{name:'Funding save status',exact:true}).locator('strong').innerText()==='Saved to this computer');}
   async function checkHierarchy(){
@@ -45,8 +45,8 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   const andalusiaSource=editor.getByRole('link',{name:'FUND-010 · Andalusian population median · PDF page 126',exact:true});
   await andalusiaSource.click();await page.locator('dialog.document-viewer').waitFor();await poll(async()=>!await page.getByLabel('PDF page',{exact:true}).isDisabled());assert.equal(await page.getByLabel('PDF page',{exact:true}).inputValue(),'126');
   await page.keyboard.press('Escape');assert(await andalusiaSource.evaluate(n=>document.activeElement===n));
-  await editor.locator('[id="al20-AT.3.1"]').check();
-  await editor.getByLabel('Supporting reference (optional)',{exact:true}).fill('Assumed settlement population comparison');
+  await editor.locator('[id="al20-AT.3.1"]').selectOption('yes');
+  await editor.getByLabel('Item supporting reference (optional)',{exact:true}).fill('Assumed settlement population comparison');
   await settled();await poll(async()=>/Partial subtotal: 10 points/.test(await graph.locator('.funding-annex-total').innerText()));
   await editor.locator('.funding-selection-choice').first().getByText('Spanish wording and sources',{exact:true}).click();
   const source=editor.locator('.funding-selection-choice').first().getByRole('link',{name:'FUND-004 · PDF page 16',exact:true});await source.click();
@@ -65,26 +65,26 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
     assert.equal(await editor.getByRole('link',{name:priorities,exact:true}).getAttribute('href'),priorities);
     assert.match(await editor.innerText(),/they are not the CO.1 grant-selection points/);
    }
-   await editor.getByRole('button',{name:'None of these applies',exact:true}).click();await close();}
+   await close();const tools=page.getByText('Criterion-wide assessment tools · LEADER-AL20-3.4',{exact:true});if(!await tools.evaluate(n=>n.parentElement.open))await tools.click();await page.getByLabel('Criterion',{exact:true}).selectOption(id);await page.getByRole('button',{name:'None applies to this criterion…',exact:true}).click();await page.getByRole('button',{name:'Confirm criterion-wide change',exact:true}).click();}
   await poll(async()=>/Calculated score: 0 points/.test(await graph.locator('.funding-annex-total').innerText()));
   const positives={'AT.3':['AT.3.1'],'CO.1':['CO.1.3'],'RD.5':['RD.5.1'],'CC.2':['CC.2.1'],'PT.1':['PT.1.1'],'IN.1':['IN.1.1','IN.1.2','IN.1.3']};
   for(const [id,choices] of Object.entries(positives)){
    await openCriterion(id);
-   for(const choice of choices){const input=editor.locator(`[id="al20-${choice}"]`);if(await input.getAttribute('type')==='radio')await input.check();else await input.selectOption('yes');}
+   for(const choice of choices){await graph.locator(`.funding-annex-choice[data-annex-choice="${choice}"]`).click();await editor.locator(`[id="al20-${choice}"]`).selectOption('yes');}
    await close();
   }
   await poll(async()=>/Calculated score: 63 points/.test(await graph.locator('.funding-annex-total').innerText()));assert.deepEqual(await options(),optionPositions);
   await page.screenshot({path:'test-artifacts/funding-selection-desktop.png'});
   for(const short of ['1.11','2.6','2.7','3.5']){
    await route.selectOption('LEADER-AL20-'+short);assert.match(await graph.locator('.funding-annex-total').innerText(),/Partial subtotal: 0 points/);
-   await openCriterion('AT.3');await editor.locator('[id="al20-AT.3.2"]').check();await close();
+   await openCriterion('AT.3');await editor.getByRole('button',{name:'Next item',exact:true}).click();await editor.locator('[id="al20-AT.3.2"]').selectOption('yes');await close();
    await poll(async()=>/Partial subtotal: 8 points/.test(await graph.locator('.funding-annex-total').innerText()));
   }
   await route.selectOption('LEADER-AL20-3.4');assert.match(await graph.locator('.funding-annex-total').innerText(),/Calculated score: 63 points/);
   // Failed autosave keeps the draft and retries the same mutation explicitly.
   let fail=true;await page.route('**/api/funding/save',r=>fail?(fail=false,r.fulfill({status:503,contentType:'application/json',body:JSON.stringify({detail:'Annex test save unavailable'})})):r.continue());
-  await openCriterion('AT.3');await editor.getByLabel('Assessment notes (optional)',{exact:true}).fill('Keep this note across failed save and restart');
-  await page.getByText(/Annex test save unavailable/).waitFor();assert.equal(await editor.getByLabel('Assessment notes (optional)',{exact:true}).inputValue(),'Keep this note across failed save and restart');
+  await openCriterion('AT.3');await editor.getByLabel('Item notes (optional)',{exact:true}).fill('Keep this note across failed save and restart');
+  await page.getByText(/Annex test save unavailable/).waitFor();assert.equal(await editor.getByLabel('Item notes (optional)',{exact:true}).inputValue(),'Keep this note across failed save and restart');
   await page.getByRole('button',{name:'Retry failed save',exact:true}).click();await poll(async()=>!(await page.getByRole('button',{name:'Retry failed save',exact:true}).count()));await close();
   await page.locator('.funding-answers>summary').click();const summary=page.getByRole('region',{name:'AL20 selection assessments',exact:true});assert.equal(await summary.locator('[data-selection-route]').count(),5);assert.equal(await visual.getByRole('button',{name:'Matrix',exact:true}).count(),0);assert.match(await summary.innerText(),/Calculated score: 63 points/);
   await summary.locator('p').filter({hasText:'LEADER-AL20-3.5'}).getByRole('button',{name:'Open in graph',exact:true}).click();assert.equal(await route.inputValue(),'LEADER-AL20-3.5');
@@ -98,7 +98,7 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
    await summary.locator('[data-selection-route="LEADER-AL20-3.4"]').getByRole('button',{name:'Open in graph',exact:true}).click();assert.equal(await route.inputValue(),'LEADER-AL20-3.4');
    await summary.scrollIntoViewIfNeeded();await page.screenshot({path:`test-artifacts/funding-route-summary-${theme}-phone.png`});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   }
-  await page.setViewportSize({width:1500,height:1000});await poll(async()=>(await api('funding')).attachment.draft.selection_assessments['LEADER-AL20-3.4'].criteria['AT.3'].notes.includes('Keep this note'));
+  await page.setViewportSize({width:1500,height:1000});await poll(async()=>(await api('funding')).attachment.draft.selection_assessments['LEADER-AL20-3.4'].criteria['AT.3'].choice_context.items['AT.3.1'].notes.includes('Keep this note'));
   const saved=(await api('funding')).attachment.draft.selection_assessments;
   await page.reload();await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await settled();await page.getByRole('button',{name:'2. People and land',exact:true}).click();await selectProgramme(page,'LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-requirements-met').click();await parent.click();await route.selectOption('LEADER-AL20-3.4');
   assert.match(await graph.locator('.funding-annex-total').innerText(),/Calculated score: 63 points/);assert.deepEqual((await api('funding')).attachment.draft.selection_assessments,saved);

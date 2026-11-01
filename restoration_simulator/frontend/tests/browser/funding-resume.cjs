@@ -8,7 +8,7 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
 (async()=>{
  let p=await api('project');p=await api('project/new',{revision:p.revision,request_id:crypto.randomUUID(),confirm_replace:true,name:'Funding resume fixture'});
  const form=await api('land/form',{revision:p.revision,route_id:'existing',parcel_id:'new'}),inputs=Object.fromEntries(form.fields.map(f=>[f.name,f.default]));
- Object.assign(inputs,{route_id:'existing',parcel_id:'new',parcel_name:'Resume parcel',parcel_area:4500,covered_area:4500,location:'Alhama de Almería'});
+ Object.assign(inputs,{route_id:'existing',parcel_id:'new',parcel_name:'Resume parcel',parcel_area:4500,covered_area:4500,location:'Alhama de AlmerÃ­a'});
  p=await api('commit',{revision:p.revision,request_id:crypto.randomUUID(),action_id:'establish_access',inputs});const parcelId=p.project.parcels[0].id;
  let w=await api('designer'),design=w.evaluation.draft;
  for(const command of [{kind:'plant',id:'carob',enabled:true},{kind:'patch',section:'physical',values:{parcel_id:parcelId}}])design=(await api('designer/preview',{revision:p.revision,draft:design,command})).draft;
@@ -24,11 +24,11 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   page=await browser.newPage({viewport:{width:1500,height:1000},reducedMotion:'reduce'});page.setDefaultTimeout(15000);const errors=[];page.on('pageerror',e=>{errors.push(e.message);console.error(e.stack);});
   const status=page.getByRole('status',{name:'Funding save status',exact:true}),saveIndicator=status.locator('strong');
   async function openDemo(){await page.getByRole('button',{name:'Open demonstrator planning',exact:true}).click();await page.locator('.demo-editor').getByRole('button',{name:'Explore funding',exact:true}).click();await page.getByRole('heading',{name:'Funding Navigator',exact:true}).waitFor();await poll(async()=>/Saved to this computer/.test(await saveIndicator.innerText()));}
-  async function openCO1(){await page.getByRole('button',{name:'2. People and land',exact:true}).click();const graph=page.locator('.funding-diagram-scroll');await selectProgramme(page,'LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-circumstance[data-question-id="selection_score"]').click();await page.getByLabel('AL20 assessment route',{exact:true}).selectOption(route);await graph.locator('.funding-annex-group[data-annex-criterion="CO.1"]').click();await graph.locator('.funding-annex-choice[data-annex-criterion="CO.1"]').first().click();}
-  const editor=page.getByRole('dialog',{name:'Edit AL20 criterion',exact:true}),notes=editor.getByLabel('Assessment notes (optional)',{exact:true});
+  async function openCO1(){await page.getByRole('button',{name:'2. People and land',exact:true}).click();const graph=page.locator('.funding-diagram-scroll');await selectProgramme(page,'LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-circumstance[data-question-id="selection_score"]').click();await page.getByLabel('AL20 assessment route',{exact:true}).selectOption(route);await graph.locator('.funding-annex-group[data-annex-criterion="CO.1"]').click();await graph.locator('.funding-annex-choice[data-annex-choice="CO.1.2"]').first().click();await editor.getByText('Shared criterion context · CO.1',{exact:true}).click();}
+  const editor=page.locator('#funding-answer-editor'),notes=editor.getByLabel('Shared criterion notes',{exact:true});
   await page.goto(url);await openDemo();assert.equal(await page.getByRole('region',{name:'Funding context review',exact:true}).count(),0);
   assert.deepEqual((await api('funding')).attachment.draft,d,'Opening the same direct context must not replace saved answers');
-  await openCO1();assert(await editor.locator('[id="al20-CO.1.2"]').isChecked());assert.equal(await notes.inputValue(),row.notes);
+  await openCO1();assert.equal(await editor.locator('[id="al20-CO.1.2"]').inputValue(),'yes');assert.equal(await notes.inputValue(),row.notes);
   let saveStarted=0,failNext=false,holdLatest=false,releaseLatest=null;
   await page.route('**/api/funding/save',async request=>{
    const body=request.request().postDataJSON();saveStarted=Date.now();
@@ -39,8 +39,8 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   const editAt=Date.now();await notes.fill('Autosaved demonstrator notes');assert.match(await saveIndicator.innerText(),/Unsaved changes/);
   await poll(async()=>/Saved to this computer/.test(await saveIndicator.innerText()));assert(saveStarted-editAt>=1000,'Autosave waits for the idle interval');
   assert.equal((await api('funding')).attachment.draft.selection_assessments[route].criteria['CO.1'].notes,'Autosaved demonstrator notes');
-  await page.reload();await openDemo();await openCO1();assert.equal(await notes.inputValue(),'Autosaved demonstrator notes');assert(await editor.locator('[id="al20-CO.1.2"]').isChecked());
-  await editor.getByLabel('Supporting reference (optional)',{exact:true}).fill('Manually saved reference');await page.getByRole('button',{name:'Save now',exact:true}).click();await poll(async()=>/Saved to this computer/.test(await saveIndicator.innerText()));
+  await page.reload();await openDemo();await openCO1();assert.equal(await notes.inputValue(),'Autosaved demonstrator notes');assert.equal(await editor.locator('[id="al20-CO.1.2"]').inputValue(),'yes');
+  await editor.getByLabel('Shared supporting reference',{exact:true}).fill('Manually saved reference');await page.getByRole('button',{name:'Save now',exact:true}).click();await poll(async()=>/Saved to this computer/.test(await saveIndicator.innerText()));
   assert.equal((await api('funding')).attachment.draft.selection_assessments[route].criteria['CO.1'].reference,'Manually saved reference');
   failNext=true;await notes.fill('Older notes in failed request');await page.getByText(/Resume test save unavailable/).waitFor();
   await notes.fill('Latest notes entered after failure');holdLatest=true;await page.getByRole('button',{name:'Retry failed save',exact:true}).click();

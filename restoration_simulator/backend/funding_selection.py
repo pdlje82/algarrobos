@@ -156,7 +156,14 @@ def validate_answers(assessments, bundle):
         for criterion in profile["criteria"]:
             cid = criterion["id"]
             row = rows[cid]
-            keys(row, {"answers", "inputs", "reference", "notes"} | ({"edl_evidence"} if "edl_evidence" in row else set()), "AL20 answer " + cid)
+            keys(row, {"answers", "inputs", "reference", "notes"} | ({"edl_evidence"} if "edl_evidence" in row else set()) | ({"choice_context"} if "choice_context" in row else set()), "AL20 answer " + cid)
+            if "choice_context" in row:
+                metadata = row["choice_context"]
+                keys(metadata, {"version", "items"}, "AL20 sub-node annotations")
+                require(type(metadata["version"]) is int and metadata["version"] == 1 and isinstance(metadata["items"], dict) and set(metadata["items"]) <= {c["id"] for c in choices_for(criterion, route)}, "Unsupported or unrelated AL20 sub-node annotation.")
+                for item in metadata["items"].values():
+                    keys(item, {"reference", "notes"}, "AL20 sub-node notes")
+                    require(isinstance(item["reference"], str) and len(item["reference"]) <= 2000 and isinstance(item["notes"], str) and len(item["notes"]) <= 4000, "Invalid AL20 sub-node notes/reference.")
             from .funding_edl import validate_evidence
             validate_evidence(row, criterion, route)
             for key, limit in [("reference", 2000), ("notes", 4000)]:

@@ -129,6 +129,9 @@ def validate_export(payload):
     else:
         result.update(funding=None, funding_revision=0, funding_undo=None)
     result["format_version"] = 8
+    from .project_concepts import ensure_sources_retained
+    ensure_sources_retained(result["funding"], result["planning"])
+    ensure_sources_retained(result["funding_undo"], result["planning_undo"])
     return result
 
 
@@ -136,6 +139,8 @@ def clean_removed(data):
     """Upgrade earlier soft deletions without retaining them in project history."""
     cleaned, ids = parcel_removal.cleanup(data["project"])
     if ids:
+        from .project_concepts import guard_parcel_removal
+        guard_parcel_removal(data, ids)
         data["undo"] = deepcopy(data["project"])
         data["undo_edit"] = dict(kind="delete_parcels", parcel_ids=ids)
         data["revision"] += 1
@@ -346,6 +351,8 @@ class Store:
                 candidate["project"] = parcel_removal.delete(
                     current, [body["parcel_id"]]
                 )
+                from .project_concepts import guard_parcel_edit
+                guard_parcel_edit(self.data, [body["parcel_id"]])
                 candidate["funding"] = funding.after_delete(candidate["funding"], current, candidate["project"], [body["parcel_id"]])
                 candidate["funding_revision"] += 1
                 candidate["undo"] = deepcopy(current)
@@ -362,6 +369,12 @@ class Store:
             elif operation == "undo":
                 require(candidate["undo"] is not None, "No saved action to undo.")
                 candidate["project"] = deepcopy(candidate["undo"])
+                from .project_concepts import guard_parcel_removal
+                guard_parcel_removal(self.data, {p["id"] for p in current["parcels"]} - {p["id"] for p in candidate["project"]["parcels"]})
+                if self.data["undo_edit"] is not None and self.data["undo_edit"]["kind"] == "delete_parcels":
+                    from .project_concepts import ensure_sources_retained
+                    ensure_sources_retained(candidate["funding"], candidate["planning"])
+                    require(candidate["planning"] is None or not candidate["planning"].get("project_concepts"), "Deletion Undo would replace later demonstrator concepts. Explicitly unlink these copies first.")
                 if self.data["undo_edit"] is not None:
                     # Reconcile restored links while preserving later unrelated exploration edits.
                     prior = candidate["funding_undo"]
@@ -444,12 +457,48 @@ class Store:
             require(self.data["project"] is not None, "Create a project before saving funding explorations.")
             candidate = deepcopy(self.data)
             candidate["funding"] = funding.operate(candidate["funding"], candidate["project"], candidate["planning"], operation, draft, record_id)
+            from .project_concepts import ensure_sources_retained
+            ensure_sources_retained(candidate["funding"], candidate["planning"])
             candidate["funding_revision"] += 1
             candidate["receipts"][request_id] = fingerprint
             self.write(candidate)
             self.data = candidate
             return self.snapshot()
 
+
+    def project_concept_mutation(self, operation, revision, funding_revision, planning_revision, request_id, concept_id, concept=None, preview_hash=None, resolutions=None):
+        from . import project_concepts, planning_draft
+        with self.lock:
+            self.check()
+            fingerprint = funding.digest([operation, revision, funding_revision, planning_revision, concept_id, concept, preview_hash, resolutions])
+            if request_id in self.data["receipts"]:
+                require(self.data["receipts"][request_id] == fingerprint, "Request ID was reused with different project concept content.")
+                return self.snapshot()
+            if revision != self.data["revision"] or funding_revision != self.data["funding_revision"] or planning_revision != self.data["planning_revision"]:
+                raise Conflict("Project, funding or planning changed. Retain your concept edits, reload the context and review again.")
+            require(self.data["project"] is not None, "Create a project before editing project concepts.")
+            candidate = deepcopy(self.data)
+            if operation == "transfer":
+                candidate["funding"], candidate["planning"] = project_concepts.resolve_transfer(candidate, concept_id, preview_hash, resolutions)
+                candidate["funding_revision"] += 1
+            elif operation in {"edit", "unlink"}:
+                record = project_concepts.planning_record(candidate["planning"], concept_id)
+                if operation == "edit":
+                    project_concepts.validate(concept, candidate["project"])
+                    require(concept["id"] == concept_id and concept["route"] == record["concept"]["route"], "Editing cannot replace a concept identity or route. Explicitly transfer a different concept.")
+                    record["concept"] = deepcopy(concept)
+                else:
+                    require(concept is None, "Unlink explicitly without submitting replacement content.")
+                    candidate["planning"]["project_concepts"] = [r for r in candidate["planning"]["project_concepts"] if r["concept"]["id"] != concept_id]
+            else:
+                raise Invalid("Unsupported project concept editing operation.")
+            funding.validate_attachment(candidate["funding"], candidate["project"])
+            planning_draft.validate(candidate["planning"], candidate["project"])
+            candidate["planning_revision"] += 1
+            candidate["receipts"][request_id] = fingerprint
+            self.write(candidate)
+            self.data = candidate
+            return self.snapshot()
 
     def _designer_mutation(self, operation, payload, revision, design_revision, request_id, transform):
         from .designer_library import validate

@@ -1,5 +1,43 @@
 # Funding Navigator changes
 
+## 2026-11-01 — project concepts and individual sub-node editors
+
+- Added one editor per scoring sub-node across all five AL20 routes, sibling
+  navigation, independent annotations, retained shared context and explicit
+  atomic review for related answer changes. Moved group reset controls outside
+  item editors; calculations and point definitions are unchanged.
+- Added separate 3.4/3.5 concepts, explicit starter inclusion, manual activities,
+  reusable need/criterion links, evidence tasks and gap review. All 95 bindings
+  have validated, source-cited instructions in a versioned central library.
+- Added the same deterministic brief, Markdown download and print view to both
+  workspaces. Unknown details and NPL15/NPL18 mapping questions remain visible;
+  activities and notes cannot award points.
+- Added reviewed initial transfer and three-way updates to both linked copies,
+  stable identities/baselines, explicit conflicts/removals, revision checks,
+  idempotent requests, atomic writes, visible failures and retained drafts.
+  Planning content remains independent of simulator quantities and financing.
+- Added validated optional concept/annotation fields without upgrading old
+  saves or rewriting adopted history; export/import retains the new content.
+- Verified with 257 Python tests, 94 frontend tests, the production build and
+  six isolated browser workflows: concepts, scoring, guidance, EDL, statistics
+  and resume. Checks include delayed transfer responses with newer edits,
+  stale comparisons, write failures, retry, source-viewer focus and mobile use.
+  The older general `funding.cjs` browser script still targets the retired
+  “Answer questions” control and needs a separate programme-graph update;
+  it is not included in those six passing workflows.
+
+## 2026-11-01 — collapse all information for a scoring choice
+
+- Added an Information disclosure for each scoring choice, grouping its guidance,
+  EDL references, combination information and Spanish wording/sources. Label,
+  points and answer control remain visible when collapsed.
+- The choice opened from the graph expands initially; other choices start
+  collapsed. Manual expansion/collapse is independent of scoring answers and
+  retains references and notes. This presentation state is not saved.
+- Verified with 89 frontend tests, the production build and three isolated
+  browser workflows covering collapse/reopen, keyboard and mobile use, EDL
+  reference retention and the complete 63-point scoring example.
+
 ## 2026-11-01 — restoration guidance for every 3.4/3.5 scoring sub-node
 
 - Enriched all 45 subcriteria in the shared 14-criterion profile with official

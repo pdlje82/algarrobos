@@ -3,3 +3,4 @@
 .funding-selection-guidance-sources{display:flex;flex-wrap:wrap;gap:.3rem .7rem;font-size:.78rem;margin:.3rem 0 .65rem}.funding-selection-guidance-date,.funding-selection-guidance-points{font-size:.8rem;color:var(--muted)}
 .funding-selection-node-guidance summary,.funding-selection-route-guidance summary{cursor:pointer;line-height:1.5;min-height:28px}.funding-selection-node-guidance section>ul{padding-left:1.2rem}.funding-selection-node-guidance section>details{border-top:1px solid var(--border);padding-top:.4rem;margin-top:.6rem}
 .funding-selection-node-guidance button,.funding-selection-route-guidance button{min-height:44px;max-width:100%;white-space:normal}
+.funding-choice-information>summary{cursor:pointer;min-height:32px;padding:.3rem 0;line-height:1.5}.funding-choice-information>small{display:block;margin:.4rem 0}.funding-choice-information>summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}

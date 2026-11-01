@@ -20,6 +20,7 @@ import { usePreview } from "./usePreview.js";
 import {usePlanningDraft} from "./usePlanningDraft.js";
 import {DemonstratorReview} from "./DemonstratorReview.jsx";
 import {FundingNavigator} from "./FundingNavigator.jsx";
+import {DemonstratorConcepts} from "./ProjectConcept.jsx";
 
 async function api(path, body) {
   let response;
@@ -173,11 +174,13 @@ function App() {
   const [fundingEntry, setFundingEntry] = useState(null);
   const [designerEntry,setDesignerEntry]=useState(null);
   const fundingGuard = useRef(null);
+  const conceptGuard = useRef(null);
   const planning=usePlanningDraft(data,api);
   const [planReview,setPlanReview]=useState(null);
-  async function openDesigner(options={}){if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return;if(typeof options.designId==="string")setDesignerEntry({designId:options.designId,token:crypto.randomUUID()});setDesignerVisited(true);setWorkspace("designer");}
+  async function openDesigner(options={}){if(conceptGuard.current?.dirty&&!(await conceptGuard.current.flush()))return;if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return;if(typeof options.designId==="string")setDesignerEntry({designId:options.designId,token:crypto.randomUUID()});setDesignerVisited(true);setWorkspace("designer");}
   async function openFunding(options = {}) {
     try {
+    if(conceptGuard.current?.dirty&&!(await conceptGuard.current.flush()))return;
     if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return;
     if (planning.value !== null && !(await planning.flush())) return;
     const latest = await api("project"); setData(latest);
@@ -196,6 +199,11 @@ function App() {
   }
   async function fundingSaved() {
     try {setData(await api("project"));} catch(e) {setError(e.message);}
+  }
+  async function beforeConceptSave(){
+    if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return false;
+    if(planning.value!==null&&!(await planning.flush()))return false;
+    return true;
   }
   async function useSimulationFinancing(route, facts) {
     if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return;
@@ -315,6 +323,7 @@ function App() {
 
   async function mutate(path, body, existingRequest) {
     if (pending.current) return {ok:false,error:"Another save is in progress. Wait for it to finish, then retry."};
+    if(conceptGuard.current?.dirty&&!(await conceptGuard.current.flush()))return {ok:false,error:"Save or resolve concept edits before changing the project."};
     if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return {ok:false,error:"Save or resolve the funding draft before changing the project."};
     if(project!==null&&!(await planning.flush())){
       const message="Finish saving or resolve the planning draft error before changing the project.";
@@ -451,7 +460,7 @@ function App() {
         </div>
       </header>
       {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" data-workspace="project" aria-pressed={workspace==="project"} onClick={async()=>{if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return;setWorkspace("project");}}>Project</button><button type="button" data-workspace="designer" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button><button type="button" data-workspace="funding" aria-pressed={workspace==="funding"} onClick={()=>openFunding()}>Funding Navigator</button></nav>}
-      {project!==null && fundingEntry!==null && <div hidden={workspace!=="funding"}><FundingNavigator key={project.id} active={workspace==="funding"} entry={fundingEntry} data={data} request={api} onNavigate={fundingNavigate} onSaved={fundingSaved} onSimulationFinancing={useSimulationFinancing} guardRef={fundingGuard}/></div>}
+      {project!==null && fundingEntry!==null && <div hidden={workspace!=="funding"}><FundingNavigator key={project.id} active={workspace==="funding"} entry={fundingEntry} data={data} request={api} onNavigate={fundingNavigate} onSaved={fundingSaved} onSimulationFinancing={useSimulationFinancing} guardRef={fundingGuard} beforeConceptTransfer={async()=>planning.value===null||await planning.flush()!==false}/></div>}
       {project!==null && designerVisited && <div className="designer-workspace-host" hidden={workspace!=="designer"}><SiteDesigner key={project.id} openRequest={designerEntry} active={workspace==="designer"} data={data} request={priceRequest} beforeHandoff={planning.flush} onHandoff={openPlanning} /></div>}
       <main id="main" className="project-workspace" hidden={workspace!=="project"}>
         <div className="hero">
@@ -856,6 +865,7 @@ function App() {
                 <h2 id="preview-heading">
                   {action ? action.title : "Explore a decision"}
                 </h2>
+                <DemonstratorConcepts key={project.id} data={data} request={api} onSaved={setData} beforeSave={beforeConceptSave} guardRef={conceptGuard} visible={action?.kind==="demo_plan"}/>
                 {!action ? (
                   <p className="muted">
                     Select any decision to inspect it. Previewing never spends

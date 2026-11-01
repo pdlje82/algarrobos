@@ -1,5 +1,95 @@
 # Funding Navigator
 
+## Project concepts and individual scoring items
+
+Every selectable sub-node in all five AL20 assessments opens its own floating
+editor. The answer, item notes, supporting reference, Information disclosure,
+EDL selections and sources belong to that item. **Previous item / Next item**
+navigates siblings without changing answers; closing returns focus to the
+original graph node. Earlier criterion notes remain editable under **Shared
+criterion context**. Caps, exclusions and general guidance are collapsed.
+Employment confirmations are criterion-wide; ratio nodes retain their calculation
+editor. An exclusion or prerequisite change shows the affected items and requires
+confirmation before applying all answer changes together. Criterion-wide zero/reset
+controls live outside the individual editor under **Criterion-wide assessment tools**.
+
+Select assessment route **3.4 or 3.5**, then expand **Project concept**. It is
+available before or after reaching 60 points. Explicit creation brings previously
+selected EDL needs into a starting objective list; the review and brief retain
+selected claims, references and shared/item notes as context. NPL3, NPL4 and NPL8
+are suggestions, with no preselection unless already chosen as EDL references.
+Each route retains a separate concept. Duplicating an exploration explicitly
+creates fresh concept and activity identities; loading an alternative retains its
+identity. Adopted funding-plan snapshots are never rewritten by concept updates.
+
+Set a title, purpose and context/assumption notes. Recorded/provisional applicant
+and site context comes from the funding exploration; use the existing funding
+questions and reviewed baseline refresh to change those facts. Include curated
+starters with **Include activity**, or create an activity manually. One activity
+can support several needs/claims; link an existing activity instead of duplicating
+it. Activities have descriptions, intended outcomes, responsible organisations,
+timing, evidence plans and supporting references. Empty text explicitly means
+unassigned during exploration. Population, grant history and similar factual
+criteria have evidence tasks instead of invented point-earning activities.
+
+The item editor’s **Activities linked to this item** section offers the same
+starters, links and justification field. Deselecting a scoring answer never removes
+an activity: the review flags the inactive link. Unlinking or deleting work requires
+an explicit action. Score completeness, concept gaps and evidence readiness have
+separate labels. NPL15/NPL18 retain an AL20 confirmation question about the line-3
+mapping; priority ranks are not grant-selection points.
+
+**Readable project brief** uses a deterministic server-generated Markdown document
+in either workspace, with print view, Markdown download and page-specific sources.
+Missing details remain visible. No external AI service or invented narrative is
+used. This is an exploratory project concept, not a completed application.
+
+**Review transfer / update both copies** first compares the Navigator proposal
+against an absent demonstrator copy. Confirming creates an independently editable
+copy under **Project concept and activities** in demonstrator planning. Subsequent
+edits stay local. The next review compares both copies with their last agreed
+baseline, suggests straightforward changes and requires choices for conflicts or
+removals (including edited-versus-deleted activities). Confirmation writes the
+agreed concept to both workspaces atomically. Matching titles do not merge identities.
+Different routes or funding alternatives retain separate copies. To remove a linked
+source, explicitly unlink its demonstrator copy first, or retain a named alternative.
+Parcel removal/Undo that would discard linked concepts is blocked with affected
+titles until the links are resolved. Concept transfer does not change planting,
+prices, simulation history or financing; in particular it never enables an
+unsupported route-3.5 simulation mechanism.
+
+Concepts and annotations autosave with visible status. Failed requests retain the
+draft and offer retry; stale transfer comparisons must be refreshed and reviewed.
+The demonstrator editor offers explicit revision refresh while keeping its draft.
+Keep the owning exploration active when synchronising; missing origins cause a
+clear error rather than selecting another concept.
+
+### Reference and save contracts
+
+`scenarios/funding-project-concept-v1.json` centrally defines defaults, limits,
+UI timing, route applicability, source editions and 95 explicit bindings (45
+subcriteria plus 50 prioritised needs). Every binding provides starters, an
+evidence-only explanation or manual-entry instructions. Route-specific restoration
+advice is retained for 3.4 demonstration versus 3.5 heritage recovery.
+
+Funding draft v4 optionally contains `project_concepts`, keyed by route. Planning
+draft v1 optionally contains a `project_concepts` list of `{concept, baseline,
+source}` records. Concepts are version 1, bound to a library checksum, with UUIDs
+for the concept and each activity. Criterion rows optionally contain
+`choice_context: {version: 1, items: {subcriterion_id: {notes, reference}}}`.
+Absence means nothing has been created; an empty collection means it was explicitly
+cleared. Historical saves and scoring snapshots acquire no inferred fields.
+Export envelope v8 preserves these validated optional fields. Unknown versions,
+missing bindings/sources, incompatible editions and malformed records are rejected.
+
+Read-only reference/draft services: `GET /api/funding/project-concept-guide`,
+`POST /api/funding/project-concept/create`, `/preview`, `/transfer-preview`, and
+`POST /api/demonstrator/project-concept/preview`. Reviewed mutation:
+`POST /api/funding/project-concept/transfer`; local edit/unlink:
+`POST /api/demonstrator/project-concept`. Mutations require project, funding and
+planning revisions plus a request identity; transfer additionally checks the
+comparison hash. Storage receipts make identical retries idempotent.
+
 ## Programme → route → requirements needing attention
 
 The graph has four columns: **Exploration → Programme → Route requirements →
@@ -261,6 +351,11 @@ Open a scoring sub-node in the graph: **Requirements and restoration
 recommendations** opens for that choice; the other choices remain expandable.
 Evidence and original Spanish wording have their own disclosures. Existing EDL
 references remain alongside this guidance and retain their separate selections.
+Each choice also has an **Information** disclosure that collapses all its
+guidance, EDL references and sources together. Its label, points and answer
+control stay visible. Only the choice opened from the graph expands initially;
+collapsing information never changes an answer or clears supporting references.
+Disclosure state is temporary within the editor, not part of a saved assessment.
 
 Recommendations use the route selected in **AL20 assessment route**, not an
 inferred applicant or site classification. The library stores 45 shared

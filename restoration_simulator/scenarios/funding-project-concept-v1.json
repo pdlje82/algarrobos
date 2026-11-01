@@ -1,0 +1,3010 @@
+{
+  "version": 1,
+  "id": "al20-project-concept-v1",
+  "checked_on": "2026-11-01",
+  "defaults": {
+    "title": "Restoration project concept",
+    "purpose": "",
+    "notes": "",
+    "activity": {
+      "title": "Proposed activity",
+      "description": "",
+      "outcome": "",
+      "responsible": "",
+      "timing": "",
+      "evidence": "",
+      "reference": ""
+    }
+  },
+  "limits": {
+    "activities": 100,
+    "short_text": 200,
+    "long_text": 10000
+  },
+  "sources": {
+    "FUND-008-p120-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 120,
+      "label": "FUND-008 Â· PDF page 120",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p121-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 121,
+      "label": "FUND-008 Â· PDF page 121",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p122-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 122,
+      "label": "FUND-008 Â· PDF page 122",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p123-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 123,
+      "label": "FUND-008 Â· PDF page 123",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p124-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 124,
+      "label": "FUND-008 Â· PDF page 124",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p47-record-retention": {
+      "document_id": "FUND-008",
+      "page": 47,
+      "label": "FUND-008 Â· PDF page 47",
+      "role": "record retention",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-004-p16-local-scoring": {
+      "document_id": "FUND-004",
+      "page": 16,
+      "label": "FUND-004 Â· PDF page 16",
+      "role": "local scoring",
+      "sha256": "a85c896fa800970f7bb611ab26b215db745ed26513dc30b87e509cc9da11ec64",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p218-combination-rule": {
+      "document_id": "FUND-010",
+      "page": 218,
+      "label": "FUND-010 Â· PDF page 218",
+      "role": "combination rule",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p10-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 10,
+      "label": "FUND-010 Â· PDF page 10",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p11-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 11,
+      "label": "FUND-010 Â· PDF page 11",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p219-combination-rule": {
+      "document_id": "FUND-010",
+      "page": 219,
+      "label": "FUND-010 Â· PDF page 219",
+      "role": "combination rule",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p16-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 16,
+      "label": "FUND-010 Â· PDF page 16",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p17-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 17,
+      "label": "FUND-010 Â· PDF page 17",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p395-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 395,
+      "label": "FUND-013 Â· PDF page 395",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p396-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 396,
+      "label": "FUND-013 Â· PDF page 396",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p397-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 397,
+      "label": "FUND-013 Â· PDF page 397",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p222-combination-rule": {
+      "document_id": "FUND-010",
+      "page": 222,
+      "label": "FUND-010 Â· PDF page 222",
+      "role": "combination rule",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p30-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 30,
+      "label": "FUND-010 Â· PDF page 30",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p31-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 31,
+      "label": "FUND-010 Â· PDF page 31",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p34-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 34,
+      "label": "FUND-010 Â· PDF page 34",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-004-p17-local-scoring": {
+      "document_id": "FUND-004",
+      "page": 17,
+      "label": "FUND-004 Â· PDF page 17",
+      "role": "local scoring",
+      "sha256": "a85c896fa800970f7bb611ab26b215db745ed26513dc30b87e509cc9da11ec64",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p223-combination-rule": {
+      "document_id": "FUND-010",
+      "page": 223,
+      "label": "FUND-010 Â· PDF page 223",
+      "role": "combination rule",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p50-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 50,
+      "label": "FUND-010 Â· PDF page 50",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p51-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 51,
+      "label": "FUND-010 Â· PDF page 51",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p52-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 52,
+      "label": "FUND-010 Â· PDF page 52",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p228-combination-rule": {
+      "document_id": "FUND-010",
+      "page": 228,
+      "label": "FUND-010 Â· PDF page 228",
+      "role": "combination rule",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p81-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 81,
+      "label": "FUND-010 Â· PDF page 81",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p82-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 82,
+      "label": "FUND-010 Â· PDF page 82",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p186-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 186,
+      "label": "FUND-013 Â· PDF page 186",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p187-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 187,
+      "label": "FUND-013 Â· PDF page 187",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p275-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 275,
+      "label": "FUND-013 Â· PDF page 275",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p276-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 276,
+      "label": "FUND-013 Â· PDF page 276",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p332-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 332,
+      "label": "FUND-013 Â· PDF page 332",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p333-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 333,
+      "label": "FUND-013 Â· PDF page 333",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p473-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 473,
+      "label": "FUND-013 Â· PDF page 473",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p85-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 85,
+      "label": "FUND-010 Â· PDF page 85",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p86-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 86,
+      "label": "FUND-010 Â· PDF page 86",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p87-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 87,
+      "label": "FUND-010 Â· PDF page 87",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-004-p18-local-scoring": {
+      "document_id": "FUND-004",
+      "page": 18,
+      "label": "FUND-004 Â· PDF page 18",
+      "role": "local scoring",
+      "sha256": "a85c896fa800970f7bb611ab26b215db745ed26513dc30b87e509cc9da11ec64",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p229-combination-rule": {
+      "document_id": "FUND-010",
+      "page": 229,
+      "label": "FUND-010 Â· PDF page 229",
+      "role": "combination rule",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p92-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 92,
+      "label": "FUND-010 Â· PDF page 92",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p93-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 93,
+      "label": "FUND-010 Â· PDF page 93",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p94-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 94,
+      "label": "FUND-010 Â· PDF page 94",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p191-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 191,
+      "label": "FUND-013 Â· PDF page 191",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p230-combination-rule": {
+      "document_id": "FUND-010",
+      "page": 230,
+      "label": "FUND-010 Â· PDF page 230",
+      "role": "combination rule",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p98-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 98,
+      "label": "FUND-010 Â· PDF page 98",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p99-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 99,
+      "label": "FUND-010 Â· PDF page 99",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p100-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 100,
+      "label": "FUND-010 Â· PDF page 100",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p101-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 101,
+      "label": "FUND-010 Â· PDF page 101",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-004-p19-local-scoring": {
+      "document_id": "FUND-004",
+      "page": 19,
+      "label": "FUND-004 Â· PDF page 19",
+      "role": "local scoring",
+      "sha256": "a85c896fa800970f7bb611ab26b215db745ed26513dc30b87e509cc9da11ec64",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p476-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 476,
+      "label": "FUND-013 Â· PDF page 476",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p103-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 103,
+      "label": "FUND-010 Â· PDF page 103",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p104-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 104,
+      "label": "FUND-010 Â· PDF page 104",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p383-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 383,
+      "label": "FUND-013 Â· PDF page 383",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p398-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 398,
+      "label": "FUND-013 Â· PDF page 398",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p399-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 399,
+      "label": "FUND-013 Â· PDF page 399",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p400-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 400,
+      "label": "FUND-013 Â· PDF page 400",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p401-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 401,
+      "label": "FUND-013 Â· PDF page 401",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p105-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 105,
+      "label": "FUND-010 Â· PDF page 105",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p283-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 283,
+      "label": "FUND-013 Â· PDF page 283",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p372-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 372,
+      "label": "FUND-013 Â· PDF page 372",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p336-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 336,
+      "label": "FUND-013 Â· PDF page 336",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p231-combination-rule": {
+      "document_id": "FUND-010",
+      "page": 231,
+      "label": "FUND-010 Â· PDF page 231",
+      "role": "combination rule",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p106-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 106,
+      "label": "FUND-010 Â· PDF page 106",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p393-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 393,
+      "label": "FUND-013 Â· PDF page 393",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p472-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 472,
+      "label": "FUND-013 Â· PDF page 472",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p475-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 475,
+      "label": "FUND-013 Â· PDF page 475",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p478-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 478,
+      "label": "FUND-013 Â· PDF page 478",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p479-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 479,
+      "label": "FUND-013 Â· PDF page 479",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-013-p527-strategy-evidence": {
+      "document_id": "FUND-013",
+      "page": 527,
+      "label": "FUND-013 Â· PDF page 527",
+      "role": "strategy evidence",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-004-p20-local-scoring": {
+      "document_id": "FUND-004",
+      "page": 20,
+      "label": "FUND-004 Â· PDF page 20",
+      "role": "local scoring",
+      "sha256": "a85c896fa800970f7bb611ab26b215db745ed26513dc30b87e509cc9da11ec64",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p107-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 107,
+      "label": "FUND-010 Â· PDF page 107",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p108-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 108,
+      "label": "FUND-010 Â· PDF page 108",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p109-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 109,
+      "label": "FUND-010 Â· PDF page 109",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p110-verification-evidence": {
+      "document_id": "FUND-010",
+      "page": 110,
+      "label": "FUND-010 Â· PDF page 110",
+      "role": "verification evidence",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p113-population-benchmark": {
+      "document_id": "FUND-010",
+      "page": 113,
+      "label": "FUND-010 Â· PDF page 113",
+      "role": "population benchmark",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p126-population-benchmark": {
+      "document_id": "FUND-010",
+      "page": 126,
+      "label": "FUND-010 Â· PDF page 126",
+      "role": "population benchmark",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p181-business-benchmark": {
+      "document_id": "FUND-010",
+      "page": 181,
+      "label": "FUND-010 Â· PDF page 181",
+      "role": "business benchmark",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p182-business-benchmark": {
+      "document_id": "FUND-010",
+      "page": 182,
+      "label": "FUND-010 Â· PDF page 182",
+      "role": "business benchmark",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-010-p139-sector-classification": {
+      "document_id": "FUND-010",
+      "page": 139,
+      "label": "FUND-010 Â· PDF page 139",
+      "role": "sector classification",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "verified_on": "2026-11-01"
+    },
+    "EDL-395": {
+      "document_id": "FUND-013",
+      "page": 395,
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "label": "AL20 strategy Â· PDF page 395",
+      "role": "strategy need",
+      "verified_on": "2026-11-01"
+    },
+    "EDL-396": {
+      "document_id": "FUND-013",
+      "page": 396,
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "label": "AL20 strategy Â· PDF page 396",
+      "role": "strategy need",
+      "verified_on": "2026-11-01"
+    },
+    "EDL-397": {
+      "document_id": "FUND-013",
+      "page": 397,
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "label": "AL20 strategy Â· PDF page 397",
+      "role": "strategy need",
+      "verified_on": "2026-11-01"
+    },
+    "EDL-419": {
+      "document_id": "FUND-013",
+      "page": 419,
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "label": "AL20 line 3 needs Â· PDF page 419",
+      "role": "line 3 mapping",
+      "verified_on": "2026-11-01"
+    },
+    "EDL-420": {
+      "document_id": "FUND-013",
+      "page": 420,
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "label": "AL20 line 3 needs Â· PDF page 420",
+      "role": "line 3 mapping",
+      "verified_on": "2026-11-01"
+    },
+    "EDL-421": {
+      "document_id": "FUND-013",
+      "page": 421,
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "label": "AL20 line 3 needs Â· PDF page 421",
+      "role": "line 3 mapping",
+      "verified_on": "2026-11-01"
+    }
+  },
+  "bindings": {
+    "NPL1": {
+      "label": "Water-cycle management and consumption control",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL2": {
+      "label": "Sustainable farming, including regenerative, agroecological and biodynamic approaches",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL3": {
+      "label": "Conservation, enhancement and dissemination of natural and cultural rural heritage",
+      "kind": "starter",
+      "template_ids": [
+        "restoration"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL4": {
+      "label": "Soil regeneration and reduced erosion and aridity",
+      "kind": "starter",
+      "template_ids": [
+        "soil"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL5": {
+      "label": "Economic activity making better use of protected-area resources",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL6": {
+      "label": "Employment opportunities and market gaps, especially for young people and women",
+      "kind": "starter",
+      "template_ids": [
+        "employment"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL7": {
+      "label": "Attract professionals able to work in the territory",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL8": {
+      "label": "Climate-change mitigation and adaptation",
+      "kind": "starter",
+      "template_ids": [
+        "climate"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL9": {
+      "label": "Public or private care services for older people",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL10": {
+      "label": "Sustainable livestock farming",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL11": {
+      "label": "Better promotion of agri-food products",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL12": {
+      "label": "Public or private local circular-economy initiatives",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL13": {
+      "label": "Development of the agri-food industry",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL14": {
+      "label": "Access to basic health and education services",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL15": {
+      "label": "Skills and qualifications for employed and unemployed people",
+      "kind": "starter",
+      "template_ids": [
+        "skills"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-395",
+        "EDL-419",
+        "EDL-420",
+        "EDL-421"
+      ],
+      "confirmation": "This need is territory-wide but is not listed in the line-3 needs in section 5.3. Confirm its use for 3.4/3.5 with AL20."
+    },
+    "NPL16": {
+      "label": "Local strategies against depopulation, supporting actual residents and attracting newcomers",
+      "kind": "starter",
+      "template_ids": [
+        "depopulation"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL17": {
+      "label": "Services helping families reconcile work and care responsibilities",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL18": {
+      "label": "Tourism based on cultural and heritage resources",
+      "kind": "starter",
+      "template_ids": [
+        "tourism"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-395",
+        "EDL-419",
+        "EDL-420",
+        "EDL-421"
+      ],
+      "confirmation": "This need is territory-wide but is not listed in the line-3 needs in section 5.3. Confirm its use for 3.4/3.5 with AL20."
+    },
+    "NPL19": {
+      "label": "Young people participating in local forums, through associations or other channels",
+      "kind": "starter",
+      "template_ids": [
+        "youth"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL20": {
+      "label": "Food-sovereignty systems",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL21": {
+      "label": "Support associations and networks between them",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-395"
+      ],
+      "confirmation": null
+    },
+    "NPL22": {
+      "label": "Make womenâ€™s and young peopleâ€™s entrepreneurial initiatives visible",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL23": {
+      "label": "Services improving life for people with disabilities and their families",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL24": {
+      "label": "Public or private local renewable-energy initiatives",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL25": {
+      "label": "Generational renewal in businesses, associations and public institutions",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL26": {
+      "label": "Hospitality services for residents, beyond tourism alone",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL27": {
+      "label": "Better leisure provision for young people",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL28": {
+      "label": "Public or private local bioeconomy initiatives",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL29": {
+      "label": "Awareness of the benefits of belonging to protected natural areas",
+      "kind": "starter",
+      "template_ids": [
+        "protected"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL30": {
+      "label": "Tolerance towards diversity",
+      "kind": "starter",
+      "template_ids": [
+        "diversity"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL31": {
+      "label": "Access to basic utilities and services: water, electricity, waste, sanitation, telecoms and public-space services",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL32": {
+      "label": "Visible entrepreneurial examples encouraging young people to start initiatives",
+      "kind": "starter",
+      "template_ids": [
+        "initiative"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL33": {
+      "label": "Renewal and modernisation of womenâ€™s associations",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL34": {
+      "label": "Access to gender-violence prevention and victim-support services",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL35": {
+      "label": "Innovative access to services in small municipalities, including mobile and multi-service models",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL36": {
+      "label": "Better local retail provision",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL37": {
+      "label": "Visible participation of women in public and private life",
+      "kind": "starter",
+      "template_ids": [
+        "women"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL38": {
+      "label": "More attractive and accessible urban settlements",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL39": {
+      "label": "Stable cooperation between municipalities and public-sector bodies",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL40": {
+      "label": "Better leisure and cultural services",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL41": {
+      "label": "Lasting participation in local public management, including co-management, land stewardship, food sovereignty and participatory budgets",
+      "kind": "starter",
+      "template_ids": [
+        "stewardship"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL42": {
+      "label": "More public and private tourism services",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL43": {
+      "label": "Education, awareness and training for equality",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL44": {
+      "label": "Non-agri-food industry and its supporting activities",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-396"
+      ],
+      "confirmation": null
+    },
+    "NPL45": {
+      "label": "Local e-commerce initiatives",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-397"
+      ],
+      "confirmation": null
+    },
+    "NPL46": {
+      "label": "Coworking and alternative workplaces or customer-service premises",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-397"
+      ],
+      "confirmation": null
+    },
+    "NPL47": {
+      "label": "More public or private tourist accommodation",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-397"
+      ],
+      "confirmation": null
+    },
+    "NPL48": {
+      "label": "Other local proximity services, such as hairdressing, veterinary services and hardware shops",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-397"
+      ],
+      "confirmation": null
+    },
+    "NPL49": {
+      "label": "Construction-related trades and services",
+      "kind": "manual",
+      "template_ids": [],
+      "explanation": "No curated starter is supplied for this need in this edition. Write and justify your own relevant activity; the app does not infer a match.",
+      "sources": [
+        "EDL-397"
+      ],
+      "confirmation": null
+    },
+    "NPL50": {
+      "label": "Volunteering",
+      "kind": "starter",
+      "template_ids": [
+        "volunteers"
+      ],
+      "explanation": "Consider this only where an actual project activity addresses the strategy need.",
+      "sources": [
+        "EDL-397"
+      ],
+      "confirmation": null
+    },
+    "AT.3.1": {
+      "label": "Settlement population below the median of the ZRL municipalities (INE 2023)",
+      "kind": "evidence_only",
+      "template_ids": [],
+      "explanation": "The operation settlement must have fewer inhabitants than the AL20 municipality-population median. The local table specifies INE 2023; the later guide refers to latest published data. This is an alternative to AT.3.2, not an extra population award.",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p218-combination-rule",
+        "FUND-010-p10-verification-evidence",
+        "FUND-010-p11-verification-evidence",
+        "FUND-010-p113-population-benchmark",
+        "FUND-010-p126-population-benchmark"
+      ],
+      "confirmation": "Confirm the applicable reference year: FUND-004 says 2023, while the later guide and current lookup use 2025. Do not mix years or treat equality as below the benchmark."
+    },
+    "AT.3.2": {
+      "label": "Settlement population below the median of Andalusian municipalities (INE 2023)",
+      "kind": "evidence_only",
+      "template_ids": [],
+      "explanation": "The operation settlement must have fewer inhabitants than the Andalusia-wide municipality-population median. This is the alternative population band; it cannot be added to AT.3.1. Confirm the applicable year and published benchmark.",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p218-combination-rule",
+        "FUND-010-p10-verification-evidence",
+        "FUND-010-p11-verification-evidence",
+        "FUND-010-p113-population-benchmark",
+        "FUND-010-p126-population-benchmark"
+      ],
+      "confirmation": "The guide narrative mentions 2,497 inhabitants while its 2025 annex and the app lookup use 2,256. Ask AL20 to confirm the applicable year and benchmark rather than choosing the more favourable value."
+    },
+    "CO.1.1": {
+      "label": "Addresses one need prioritised in the EDLL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-CO.1.1-3.4",
+        "claim-CO.1.1-3.5"
+      ],
+      "explanation": "The operation must address one distinct prioritised needs identified in the applicable AL20 EDLL. Select the corresponding count alternative; strategy priority rankings are not selection points.",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p219-combination-rule",
+        "FUND-010-p16-verification-evidence",
+        "FUND-010-p17-verification-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence",
+        "FUND-013-p397-strategy-evidence"
+      ],
+      "confirmation": "Have AL20 confirm the selected NPL needs, the applicable strategy edition and whether the proposed activities actually address each need. Selecting a supporting EDL reference in the app is not official confirmation."
+    },
+    "CO.1.2": {
+      "label": "Addresses two needs prioritised in the EDLL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-CO.1.2-3.4",
+        "claim-CO.1.2-3.5"
+      ],
+      "explanation": "The operation must address two distinct prioritised needs identified in the applicable AL20 EDLL. Select the corresponding count alternative; strategy priority rankings are not selection points.",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p219-combination-rule",
+        "FUND-010-p16-verification-evidence",
+        "FUND-010-p17-verification-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence",
+        "FUND-013-p397-strategy-evidence"
+      ],
+      "confirmation": "Have AL20 confirm the selected NPL needs, the applicable strategy edition and whether the proposed activities actually address each need. Selecting a supporting EDL reference in the app is not official confirmation."
+    },
+    "CO.1.3": {
+      "label": "Addresses three or more needs prioritised in the EDLL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-CO.1.3-3.4",
+        "claim-CO.1.3-3.5"
+      ],
+      "explanation": "The operation must address three or more distinct prioritised needs identified in the applicable AL20 EDLL. Select the corresponding count alternative; strategy priority rankings are not selection points.",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p219-combination-rule",
+        "FUND-010-p16-verification-evidence",
+        "FUND-010-p17-verification-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence",
+        "FUND-013-p397-strategy-evidence"
+      ],
+      "confirmation": "Have AL20 confirm the selected NPL needs, the applicable strategy edition and whether the proposed activities actually address each need. Selecting a supporting EDL reference in the app is not official confirmation."
+    },
+    "RD.5.1": {
+      "label": "Supports municipalities with fewer businesses than the ZRL mean",
+      "kind": "evidence_only",
+      "template_ids": [],
+      "explanation": "The operation must support a municipality with fewer businesses than the ZRL mean specified in the local AL20 table. This uses business counts, not inhabitants or the business median.",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p222-combination-rule",
+        "FUND-010-p30-verification-evidence",
+        "FUND-010-p31-verification-evidence",
+        "FUND-010-p181-business-benchmark",
+        "FUND-010-p182-business-benchmark"
+      ],
+      "confirmation": "Confirm the applicable statistical edition and explain which municipality the operation supports; do not treat a location lookup as a certificate of territorial benefit."
+    },
+    "CC.2.1": {
+      "label": "Acquisition and commissioning of the energy equipment listed in the annex",
+      "kind": "starter",
+      "template_ids": [
+        "claim-CC.2.1"
+      ],
+      "explanation": "Acquire and commission qualifying renewable-energy equipment within the operation. The guide requires a description of the technology and energy source, followed by proof of actual acquisition and its characteristics.",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p222-combination-rule",
+        "FUND-010-p34-verification-evidence"
+      ],
+      "confirmation": "The printed list also mentions blue hydrogen and liquefied natural gas. Do not reinterpret these as automatically renewable; request AL20 clarification for the specific technology and expense."
+    },
+    "CC.7.1": {
+      "label": "Collective transport vehicles powered by green energy",
+      "kind": "starter",
+      "template_ids": [
+        "claim-CC.7.1"
+      ],
+      "explanation": "Acquire a collective passenger-transport vehicle using qualifying green energy. The vehicle must actually be acquired; ordinary private car use is not the same activity.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p223-combination-rule",
+        "FUND-010-p50-verification-evidence",
+        "FUND-010-p51-verification-evidence",
+        "FUND-010-p52-verification-evidence"
+      ],
+      "confirmation": "Ask AL20 whether the proposed vehicle and its use qualify under both this criterion and the selected route's eligible costs."
+    },
+    "CC.7.2": {
+      "label": "Installation of electric vehicle charging points",
+      "kind": "starter",
+      "template_ids": [
+        "claim-CC.7.2"
+      ],
+      "explanation": "Install an electric-vehicle charging point. Scoring concerns an actual installation with technical and conformity evidence, not a general intention to encourage sustainable travel.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p223-combination-rule",
+        "FUND-010-p50-verification-evidence",
+        "FUND-010-p51-verification-evidence",
+        "FUND-010-p52-verification-evidence"
+      ],
+      "confirmation": "Confirm that the installation belongs within the funded operation and that its expenditure is permitted; a scoring criterion does not itself authorise the purchase."
+    },
+    "CC.7.3": {
+      "label": "Municipal pedestrianisation, cycle facilities, park-and-ride, shared vehicle use or other sustainable mobility plan measures",
+      "kind": "starter",
+      "template_ids": [
+        "claim-CC.7.3"
+      ],
+      "explanation": "Municipal measures such as pedestrianisation, cycle lanes, bicycle parking, park-and-ride facilities or high-occupancy-vehicle measures must fall within a sustainable-mobility plan.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p223-combination-rule",
+        "FUND-010-p50-verification-evidence",
+        "FUND-010-p51-verification-evidence",
+        "FUND-010-p52-verification-evidence"
+      ],
+      "confirmation": "Confirm the municipal role, plan coverage and route classification before claiming a mobility measure for a restoration site."
+    },
+    "IG.8.1": {
+      "label": "Infrastructure and spaces for women",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.8.1"
+      ],
+      "explanation": "Create infrastructure or spaces for women's use, with an activity programme responding to women's demands established in the EDL participatory process.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p81-verification-evidence",
+        "FUND-010-p82-verification-evidence"
+      ],
+      "confirmation": "Confirm the identified demand and whether the proposed space is an eligible component of 3.4 or 3.5 rather than a separate infrastructure project."
+    },
+    "IG.8.2": {
+      "label": "Activities explicitly demanded by women in the EDL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.8.2"
+      ],
+      "explanation": "Implement activities clearly demanded by women in the applicable EDL. The programme must identify the actual strategy need being addressed.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p81-verification-evidence",
+        "FUND-010-p82-verification-evidence",
+        "FUND-013-p186-strategy-evidence",
+        "FUND-013-p187-strategy-evidence",
+        "FUND-013-p275-strategy-evidence",
+        "FUND-013-p276-strategy-evidence",
+        "FUND-013-p332-strategy-evidence",
+        "FUND-013-p333-strategy-evidence",
+        "FUND-013-p473-strategy-evidence"
+      ],
+      "confirmation": "Ask AL20 to confirm that the specific demand is documented and that the activity fits the selected route."
+    },
+    "IG.8.3": {
+      "label": "Sociocultural activities supporting women's creativity",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.8.3"
+      ],
+      "explanation": "Deliver sociocultural activities fostering women's creativity, designed to break gender roles and stereotypes rather than perpetuate them.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p81-verification-evidence",
+        "FUND-010-p82-verification-evidence"
+      ],
+      "confirmation": "Confirm the substantive gender approach and ensure the activity is a compatible project component, particularly under 3.5's exclusion of standalone events."
+    },
+    "IG.8.4": {
+      "label": "Sports activities with a gender perspective",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.8.4"
+      ],
+      "explanation": "Design sporting activities with a gender perspective, linked in the guide to women's demands in the EDL and supported by an explicit programme.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p81-verification-evidence",
+        "FUND-010-p82-verification-evidence"
+      ],
+      "confirmation": "Have AL20 confirm the gender approach, EDL demand and compatibility of the sporting activity with this restoration route."
+    },
+    "IG.11.1": {
+      "label": "Creation of rural women's associations or federations",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.11.1"
+      ],
+      "explanation": "Create an association or federation of rural women. This concerns the actual creation of that organisation, not simply collaboration with women or an existing mixed association.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence"
+      ],
+      "confirmation": "Ask AL20 how association creation relates to the restoration operation and eligible applicant status."
+    },
+    "IG.11.2": {
+      "label": "Maintenance or equipment of rural women's associations",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.11.2"
+      ],
+      "explanation": "Maintain or equip an association of rural women. The proposed assets or works must serve that association; an unrelated project purchase does not demonstrate this condition.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence"
+      ],
+      "confirmation": "Confirm whether maintenance/equipment support is eligible within this operation; scoring does not override the route's cost rules."
+    },
+    "IG.11.3": {
+      "label": "Activities by rural women's associations",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.11.3"
+      ],
+      "explanation": "Activities must be carried out by a rural women's association and linked to reducing gender inequalities. Inviting an association to an event is not the same as that association delivering it.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence"
+      ],
+      "confirmation": "Confirm the association's role and equality objective with AL20 rather than treating attendance as delivery."
+    },
+    "IG.11.4": {
+      "label": "Creation or membership of rural women's association networks",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.11.4"
+      ],
+      "explanation": "Create or join a network of rural women's associations. The guide checks the legal or organisational steps establishing the network or membership.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence"
+      ],
+      "confirmation": "Confirm which organisation must create/join the network and what evidence AL20 will accept."
+    },
+    "IG.11.5": {
+      "label": "Promotion of association, especially among young women and women with disabilities",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.11.5"
+      ],
+      "explanation": "Disseminate the value of association membership, especially to groups such as young women or women with disabilities. The activity must actually explain and promote association-building.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence"
+      ],
+      "confirmation": "Check the association-building content and compatibility with the selected route; a generic project launch is not enough."
+    },
+    "IG.11.6": {
+      "label": "Women's participation in sectors where they are underrepresented",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.11.6"
+      ],
+      "explanation": "Promote women's participation in a sector where they are underrepresented. The guide refers to the official SDR list of masculinised sectors based on IECA data.",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence",
+        "FUND-010-p139-sector-classification"
+      ],
+      "confirmation": "Confirm the sector classification and the measures AL20 considers sufficient; a gender-balanced photograph or team is not itself the specified action."
+    },
+    "IG.11.7": {
+      "label": "Meetings, workshops, forums or webinars on women's interests explicitly identified in the EDL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IG.11.7"
+      ],
+      "explanation": "Organise meetings, workshops, forums or webinars on subjects of interest to women that are recorded in the EDL. Establish a direct connection between the documented subject and the activity.",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence",
+        "FUND-013-p186-strategy-evidence",
+        "FUND-013-p187-strategy-evidence",
+        "FUND-013-p275-strategy-evidence",
+        "FUND-013-p276-strategy-evidence",
+        "FUND-013-p332-strategy-evidence",
+        "FUND-013-p333-strategy-evidence",
+        "FUND-013-p473-strategy-evidence"
+      ],
+      "confirmation": "Ask AL20 to confirm the EDL topic and obtain the GDR justification; selecting a strategy reference is not a substitute."
+    },
+    "DRI.3.1": {
+      "label": "Facilities and processes adapted to disability, exceeding applicable statutory minimum requirements",
+      "kind": "starter",
+      "template_ids": [
+        "claim-DRI.3.1"
+      ],
+      "explanation": "The promoter's facilities and processes must be adapted for people with disabilities, already or through the operation, beyond the minimum required by applicable sector legislation. Compliance with mandatory minimums alone is insufficient.",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p229-combination-rule",
+        "FUND-010-p92-verification-evidence",
+        "FUND-010-p93-verification-evidence",
+        "FUND-010-p94-verification-evidence"
+      ],
+      "confirmation": "Confirm the applicable accessibility rules and the improvement beyond their minimum; the app does not certify legal compliance."
+    },
+    "DRI.3.2": {
+      "label": "Staff trained in supporting vulnerable people at risk of social exclusion",
+      "kind": "starter",
+      "template_ids": [
+        "claim-DRI.3.2"
+      ],
+      "explanation": "Staff directly involved in the operation must have, or receive through it, training in assisting vulnerable groups at risk of social exclusion.",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p229-combination-rule",
+        "FUND-010-p92-verification-evidence",
+        "FUND-010-p93-verification-evidence",
+        "FUND-010-p94-verification-evidence"
+      ],
+      "confirmation": "Confirm whether the proposed course content and staff roles satisfy AL20's interpretation."
+    },
+    "DRI.3.3": {
+      "label": "Addresses needs of people at risk of social exclusion explicitly identified in the EDL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-DRI.3.3"
+      ],
+      "explanation": "The operation must respond to at least one specific EDL-identified need concerning people at risk of social exclusion. General public benefit is not the same as a specified inclusion need.",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p229-combination-rule",
+        "FUND-010-p92-verification-evidence",
+        "FUND-010-p93-verification-evidence",
+        "FUND-010-p94-verification-evidence",
+        "FUND-013-p191-strategy-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence"
+      ],
+      "confirmation": "Have AL20 confirm the identified population/need and the GDR justification."
+    },
+    "JR.3.1": {
+      "label": "Courses improving young people's skills and employability",
+      "kind": "starter",
+      "template_ids": [
+        "claim-JR.3.1"
+      ],
+      "explanation": "Deliver courses for young people that improve their skills and employability. The course must have defined content and participants; informal volunteering is not automatically a course.",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ],
+      "confirmation": "Confirm the applicable youth definition and that the course is compatible with the chosen route; 3.5 does not fund a standalone training operation."
+    },
+    "JR.3.2": {
+      "label": "Promoter participates in dual vocational training or official youth placements",
+      "kind": "starter",
+      "template_ids": [
+        "claim-JR.3.2"
+      ],
+      "explanation": "The promoting entity participates in dual vocational training or has an official placement agreement for young people. An informal offer to host volunteers does not establish an official placement.",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ],
+      "confirmation": "The guide cites an older dual-training legal framework. Confirm the currently applicable agreement requirements and payment-stage proof; the app does not validate a placement contract."
+    },
+    "JR.3.3": {
+      "label": "Return of young people within 12 months of graduation to rural life and employment in the ZRL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-JR.3.3"
+      ],
+      "explanation": "The operation must bring recently graduated young people back to the rural area and into paid employment or self-employment within the ZRL. The printed criterion limits the time since relevant qualification to twelve months.",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ],
+      "confirmation": "Ask AL20 which records establish return, the youth age requirement and the twelve-month qualification period. Check employment costs and duration separately."
+    },
+    "JR.3.4": {
+      "label": "Awareness or training on young people's contribution to local development",
+      "kind": "starter",
+      "template_ids": [
+        "claim-JR.3.4"
+      ],
+      "explanation": "Provide awareness or training on how young people can contribute to local development. The activity must clearly identify its purpose, audience and content.",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ],
+      "confirmation": "Confirm the intended audience and the distinct activity being claimed; training subjects or attendance alone do not prove the specific local-development purpose."
+    },
+    "JR.3.5": {
+      "label": "Leisure for rural young people",
+      "kind": "starter",
+      "template_ids": [
+        "claim-JR.3.5"
+      ],
+      "explanation": "Promote leisure and free-time opportunities for rural youth. Identify the actual activity being assessed; a normal works task is not automatically a leisure programme.",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ],
+      "confirmation": "Ask AL20 whether the activity is a compatible component; a standalone leisure event must not be treated as eligible heritage recovery under 3.5."
+    },
+    "JR.3.6": {
+      "label": "Youth association, participation, engagement and quality of life",
+      "kind": "starter",
+      "template_ids": [
+        "claim-JR.3.6"
+      ],
+      "explanation": "Promote youth association-building, social participation and community involvement, or improve rural young people's situation and quality of life through a clearly identified action.",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ],
+      "confirmation": "Confirm the specific participation action and distinguish it from ordinary attendance or temporary volunteer numbers."
+    },
+    "JR.3.7": {
+      "label": "Businesses diversifying into products or services for young people",
+      "kind": "starter",
+      "template_ids": [
+        "claim-JR.3.7"
+      ],
+      "explanation": "Create or support a business that diversifies its activity to offer products or services for young people. The offering must be of demonstrated interest to the youth audience.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ],
+      "confirmation": "Resolve the tension between this business-oriented criterion and the selected route's nonproductive requirements. The guide allows substantiated youth-interest evidence beyond the EDL, but this does not override route exclusions."
+    },
+    "JR.3.8": {
+      "label": "Addresses youth needs explicitly identified in the EDL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-JR.3.8"
+      ],
+      "explanation": "The operation must address a specific youth need identified in the applicable EDL. Clearly establish the link between the need and the proposed action.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence",
+        "FUND-013-p187-strategy-evidence",
+        "FUND-013-p276-strategy-evidence",
+        "FUND-013-p333-strategy-evidence",
+        "FUND-013-p476-strategy-evidence"
+      ],
+      "confirmation": "Ask AL20 to confirm the strategy need, youth definition, required GDR justification and delivery evidence."
+    },
+    "IN.1.1": {
+      "label": "Belongs to a sector explicitly considered innovative in the EDL",
+      "kind": "evidence_only",
+      "template_ids": [],
+      "explanation": "The operation must belong to an economic sector designated innovative in the applicable EDL. The reviewed AL20 strategy uses innovative themes and aspects instead and does not designate innovative economic sectors.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p103-verification-evidence",
+        "FUND-010-p104-verification-evidence",
+        "FUND-013-p383-strategy-evidence",
+        "FUND-013-p398-strategy-evidence"
+      ],
+      "confirmation": "How, if at all, can AL20 apply this printed subcriterion when the reviewed EDL does not designate innovative sectors? Obtain written clarification before claiming it."
+    },
+    "IN.1.2": {
+      "label": "Addresses a theme explicitly considered innovative in the EDL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IN.1.2-3.4",
+        "claim-IN.1.2-3.5"
+      ],
+      "explanation": "The operation must address a theme designated innovative in the applicable EDL. AL20's reviewed strategy identifies five themes; novelty claimed by the applicant is not enough.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p103-verification-evidence",
+        "FUND-010-p104-verification-evidence",
+        "FUND-013-p398-strategy-evidence"
+      ],
+      "confirmation": "Confirm the designated theme, applicable EDL edition and GDR justification. A selected EDL reference or a sensor purchase is not certification."
+    },
+    "IN.1.3": {
+      "label": "Integrates an aspect explicitly considered innovative in the EDL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-IN.1.3-3.4",
+        "claim-IN.1.3-3.5"
+      ],
+      "explanation": "The operation must incorporate an aspect designated innovative in the applicable EDL. The reviewed AL20 strategy identifies twelve aspects, some with specific local conditions.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p103-verification-evidence",
+        "FUND-010-p104-verification-evidence",
+        "FUND-013-p399-strategy-evidence",
+        "FUND-013-p400-strategy-evidence",
+        "FUND-013-p401-strategy-evidence"
+      ],
+      "confirmation": "Have AL20 confirm the chosen aspect and any territory-specific limitation; broad claims of innovation are insufficient."
+    },
+    "PT.1.1": {
+      "label": "Physical works, training or outreach enhancing natural, monumental, architectural or artistic heritage for subsequent use",
+      "kind": "starter",
+      "template_ids": [
+        "claim-PT.1.1-3.4",
+        "claim-PT.1.1-3.5"
+      ],
+      "explanation": "Bring an infrastructure, facility or natural, monumental, architectural or artistic heritage element into value for subsequent use through physical interventions, training, dissemination or awareness actions.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p104-verification-evidence",
+        "FUND-010-p105-verification-evidence"
+      ],
+      "confirmation": "Confirm the heritage classification, subsequent use, land rights and eligibility of the actual intervention with AL20. Scoring under PT.1.1 does not override the selected route's exclusions."
+    },
+    "PT.1.2": {
+      "label": "Promotion, dissemination or conservation of traditional crafts, work or gastronomy identified in the EDL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-PT.1.2-3.4",
+        "claim-PT.1.2-3.5"
+      ],
+      "explanation": "Promote, disseminate or conserve traditional local trades, practices or gastronomic specialities contemplated in the EDL. A generic heritage activity without the specified traditional subject is insufficient.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p104-verification-evidence",
+        "FUND-010-p105-verification-evidence",
+        "FUND-013-p283-strategy-evidence",
+        "FUND-013-p372-strategy-evidence"
+      ],
+      "confirmation": "Confirm that the practice is contemplated in the applicable EDL and that the operation fits the route; a standalone cultural event is excluded by 3.5."
+    },
+    "PT.1.3": {
+      "label": "Other rural heritage action explicitly identified as of interest in the EDL",
+      "kind": "starter",
+      "template_ids": [
+        "claim-PT.1.3-3.4",
+        "claim-PT.1.3-3.5"
+      ],
+      "explanation": "Carry out another rural-heritage action identified in the EDL as of possible interest. The action must be objectively supported by the applicable strategy.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p104-verification-evidence",
+        "FUND-010-p105-verification-evidence",
+        "FUND-013-p336-strategy-evidence",
+        "FUND-013-p395-strategy-evidence"
+      ],
+      "confirmation": "Have AL20 confirm the EDL-identified action and route fit; the heritage interest must be documented rather than inferred."
+    },
+    "PS.1.1": {
+      "label": "Membership of a first- or second-degree cooperative structure",
+      "kind": "evidence_only",
+      "template_ids": [],
+      "explanation": "The promoter must be an active member of a first- or second-degree cooperative structure. The guide specifies that its territorial scope is the ZRL.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p231-combination-rule",
+        "FUND-010-p105-verification-evidence",
+        "FUND-010-p106-verification-evidence"
+      ],
+      "confirmation": "Confirm qualifying cooperative structure, active status, territorial scope and any timing condition. Membership does not change nonprofit/applicant eligibility by itself."
+    },
+    "PS.1.2": {
+      "label": "Membership of an organisation whose objectives include an EDL cross-cutting objective",
+      "kind": "evidence_only",
+      "template_ids": [],
+      "explanation": "The promoter must be an active member of an organisation whose stated purposes include an EDL cross-cutting objective. Membership and the correspondence of objectives must both be demonstrated.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p231-combination-rule",
+        "FUND-010-p105-verification-evidence",
+        "FUND-010-p106-verification-evidence",
+        "FUND-013-p393-strategy-evidence",
+        "FUND-013-p472-strategy-evidence",
+        "FUND-013-p473-strategy-evidence",
+        "FUND-013-p475-strategy-evidence",
+        "FUND-013-p476-strategy-evidence",
+        "FUND-013-p478-strategy-evidence",
+        "FUND-013-p479-strategy-evidence",
+        "FUND-013-p527-strategy-evidence"
+      ],
+      "confirmation": "Ask AL20 to confirm the membership, purposes and GDR report; neither a partnership promise nor selection of an EDL reference proves this condition."
+    },
+    "PS.1.3": {
+      "label": "Membership of an organisation promoting rural and endogenous development in the ZRL",
+      "kind": "evidence_only",
+      "template_ids": [],
+      "explanation": "The promoter must be an active member of an organisation whose purposes include promoting rural development or endogenous development in the ZRL.",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p231-combination-rule",
+        "FUND-010-p105-verification-evidence",
+        "FUND-010-p106-verification-evidence"
+      ],
+      "confirmation": "Confirm qualifying active membership and the GDR interpretation of the organisation's purposes; check the criterion cap before combining membership claims."
+    },
+    "PS.3.1": {
+      "label": "Applicant has never received support under an earlier LEADER call",
+      "kind": "evidence_only",
+      "template_ids": [],
+      "explanation": "The applicant must never have been a beneficiary in previous LEADER calls. This concerns the actual natural or legal person applying, not whether this restoration project is new.",
+      "sources": [
+        "FUND-004-p20-local-scoring",
+        "FUND-010-p231-combination-rule",
+        "FUND-010-p107-verification-evidence",
+        "FUND-010-p108-verification-evidence"
+      ],
+      "confirmation": "Have AL20 confirm the applicant's history across programming periods and how it will obtain the official verification."
+    },
+    "SP.1.1": {
+      "label": "Creation of new local services for the general population",
+      "kind": "starter",
+      "template_ids": [
+        "claim-SP.1.1"
+      ],
+      "explanation": "Create a new quality proximity service for the population. The guide describes person-oriented support for autonomy, remaining in one's usual environment and social integration; a new visitor attraction is not automatically such a service.",
+      "sources": [
+        "FUND-004-p20-local-scoring",
+        "FUND-010-p231-combination-rule",
+        "FUND-010-p108-verification-evidence",
+        "FUND-010-p109-verification-evidence",
+        "FUND-010-p110-verification-evidence"
+      ],
+      "confirmation": "Confirm the meaning of proximity service for this proposal and its compatibility with 3.4/3.5; do not assume a nature trail or workshop qualifies."
+    },
+    "SP.1.2": {
+      "label": "Improvement of existing local services",
+      "kind": "starter",
+      "template_ids": [
+        "claim-SP.1.2"
+      ],
+      "explanation": "Improve an existing quality proximity service, demonstrating the initial situation and the improvement. This is an alternative to creating a new service under SP.1.1.",
+      "sources": [
+        "FUND-004-p20-local-scoring",
+        "FUND-010-p231-combination-rule",
+        "FUND-010-p108-verification-evidence",
+        "FUND-010-p109-verification-evidence",
+        "FUND-010-p110-verification-evidence"
+      ],
+      "confirmation": "Confirm that the existing service and proposed improvement meet the criterion and the chosen route's purpose."
+    },
+    "SP.1.3": {
+      "label": "Promotion of local services for dependent people",
+      "kind": "starter",
+      "template_ids": [
+        "claim-SP.1.3"
+      ],
+      "explanation": "Promote proximity services for dependent people. Identify the specific service and promotion action; general accessibility alone is not identical to this condition.",
+      "sources": [
+        "FUND-004-p20-local-scoring",
+        "FUND-010-p231-combination-rule",
+        "FUND-010-p108-verification-evidence",
+        "FUND-010-p109-verification-evidence",
+        "FUND-010-p110-verification-evidence"
+      ],
+      "confirmation": "Ask AL20 which service and promotion measures qualify and whether they are eligible components of the restoration operation."
+    }
+  },
+  "templates": {
+    "restoration": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Recover environmental heritage",
+      "description": "Describe the degraded natural heritage resource, the proposed restoration work, intended public benefit and how the results will be shared.",
+      "outcome": "A documented improvement in the condition and public value of the identified heritage resource.",
+      "sources": [
+        "EDL-395"
+      ]
+    },
+    "soil": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Regenerate soil and address erosion",
+      "description": "Identify erosion and soil-cover problems and plan suitable restoration measures, baseline observations and follow-up.",
+      "outcome": "Evidence of delivered soil-protection measures and a plan to monitor their effects.",
+      "sources": [
+        "EDL-395"
+      ]
+    },
+    "employment": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Develop a credible local employment pathway",
+      "description": "Identify actual labour-market needs, partners, participants and a realistic employment or skills-to-work pathway.",
+      "outcome": "An evidenced contribution to labour-market integration without inventing jobs.",
+      "sources": [
+        "EDL-395"
+      ]
+    },
+    "climate": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Plan and monitor climate-resilient restoration",
+      "description": "Explain the local climate pressures and how the proposed restoration contributes to adaptation; define observations to evaluate the approach.",
+      "outcome": "A restoration approach with a documented adaptation purpose and monitoring plan.",
+      "sources": [
+        "EDL-395"
+      ]
+    },
+    "skills": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Provide structured restoration skills learning",
+      "description": "Define intended skills, trainer, participants, learning programme and completion evidence; confirm fit with aid line 3.",
+      "outcome": "Documented learning outcomes and participation, subject to AL20 route confirmation.",
+      "sources": [
+        "EDL-395"
+      ]
+    },
+    "depopulation": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Connect the project to a resident-focused local strategy",
+      "description": "Identify the relevant local strategy and partners and explain the durable opportunities the project would provide for actual residents.",
+      "outcome": "A credible contribution to a specific local strategy rather than a general depopulation claim.",
+      "sources": [
+        "EDL-395"
+      ]
+    },
+    "tourism": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Develop heritage interpretation for visitors",
+      "description": "Identify a genuine heritage visitor offer and its public benefit; confirm the line-3 mapping and compatibility with a nonproductive restoration operation.",
+      "outcome": "A defined interpretation/visitor component, subject to AL20 classification.",
+      "sources": [
+        "EDL-395"
+      ]
+    },
+    "youth": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Give young people a role in project decisions",
+      "description": "Work with a local youth group to define a forum, decisions they can influence and how their proposals will be considered.",
+      "outcome": "Meaningful youth participation in decisions rather than attendance alone.",
+      "sources": [
+        "EDL-395"
+      ]
+    },
+    "protected": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Explain the benefits of protected natural areas",
+      "description": "Identify the relevant protected-area context and design an awareness activity that explains the benefits to local people.",
+      "outcome": "An evidenced awareness action with a meaningful territorial connection.",
+      "sources": [
+        "EDL-396"
+      ]
+    },
+    "diversity": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Design inclusive intercultural participation",
+      "description": "Describe an intentional activity encouraging tolerance and cooperation across different local groups, its facilitation and intended outcomes.",
+      "outcome": "A substantive inclusion action, beyond merely offering open attendance.",
+      "sources": [
+        "EDL-396"
+      ]
+    },
+    "initiative": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Share local initiative role models with young people",
+      "description": "Identify credible local initiatives and design an activity making their experience visible to young people without converting the restoration grant into commercial business aid.",
+      "outcome": "An evidenced youth initiative awareness action with a clear restoration-route connection.",
+      "sources": [
+        "EDL-396"
+      ]
+    },
+    "women": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Make womenâ€™s participation and leadership visible",
+      "description": "Define genuine leadership, decision-making or presentation roles for women, with the participants and intended contribution.",
+      "outcome": "Visible and substantive participation documented through project delivery.",
+      "sources": [
+        "EDL-396"
+      ]
+    },
+    "stewardship": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Develop lasting local stewardship participation",
+      "description": "Explore a durable co-management or land-stewardship arrangement linked to local public participation; identify partners, responsibilities and duration.",
+      "outcome": "A documented long-term participation arrangement, subject to partner agreement.",
+      "sources": [
+        "EDL-396"
+      ]
+    },
+    "volunteers": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Organise supported restoration volunteering",
+      "description": "Define volunteer tasks, coordination, participation arrangements and how this contributes to the restoration operation.",
+      "outcome": "A substantive, documented volunteer programme connected to restoration.",
+      "sources": [
+        "EDL-397"
+      ]
+    },
+    "claim-CC.2.1": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Acquisition and commissioning of the energy equipment listed in the annex",
+      "description": "Consider renewable equipment only where the restoration operation genuinely needs it. Specify the equipment, energy source, intended use, commissioning and maintenance responsibilities, and confirm that the purchase is an eligible cost for the selected route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p222-combination-rule",
+        "FUND-010-p34-verification-evidence"
+      ]
+    },
+    "claim-CC.7.1": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Collective transport vehicles powered by green energy",
+      "description": "Only investigate collective transport if participant access makes it necessary. Document the vehicle, energy technology, users and operating plan; do not add a vehicle merely to improve the score.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p223-combination-rule",
+        "FUND-010-p50-verification-evidence",
+        "FUND-010-p51-verification-evidence",
+        "FUND-010-p52-verification-evidence"
+      ]
+    },
+    "claim-CC.7.2": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Installation of electric vehicle charging points",
+      "description": "If the site needs public or operational charging, check the installation location, connection requirements, technical feasibility, permissions and who will operate it. First confirm compatibility with the restoration route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p223-combination-rule",
+        "FUND-010-p50-verification-evidence",
+        "FUND-010-p51-verification-evidence",
+        "FUND-010-p52-verification-evidence"
+      ]
+    },
+    "claim-CC.7.3": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Municipal pedestrianisation, cycle facilities, park-and-ride, shared vehicle use or other sustainable mobility plan measures",
+      "description": "Use this only if a municipality is delivering a genuine plan-backed access measure connected to the operation. Identify the plan action and ask AL20 whether it belongs in this route or another municipal operation.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p223-combination-rule",
+        "FUND-010-p50-verification-evidence",
+        "FUND-010-p51-verification-evidence",
+        "FUND-010-p52-verification-evidence"
+      ]
+    },
+    "claim-IG.8.1": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Infrastructure and spaces for women",
+      "description": "Work with local women to define the space, intended activities and barriers it addresses. Link the design to documented EDL demands and arrange its use and upkeep; keep the component within the selected route's purpose.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p81-verification-evidence",
+        "FUND-010-p82-verification-evidence"
+      ]
+    },
+    "claim-IG.8.2": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Activities explicitly demanded by women in the EDL",
+      "description": "Use the existing women's-priority EDL references to identify a relevant demand, then co-design a specific programme, accessible times and participation arrangements. Explain the connection in the assessment notes.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p81-verification-evidence",
+        "FUND-010-p82-verification-evidence",
+        "FUND-013-p186-strategy-evidence",
+        "FUND-013-p187-strategy-evidence",
+        "FUND-013-p275-strategy-evidence",
+        "FUND-013-p276-strategy-evidence",
+        "FUND-013-p332-strategy-evidence",
+        "FUND-013-p333-strategy-evidence",
+        "FUND-013-p473-strategy-evidence"
+      ]
+    },
+    "claim-IG.8.3": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Sociocultural activities supporting women's creativity",
+      "description": "Consider women-led landscape photography, oral-history or creative interpretation with a clear equality objective. Specify the participants, creative outputs and approach to challenging stereotypes.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p81-verification-evidence",
+        "FUND-010-p82-verification-evidence"
+      ]
+    },
+    "claim-IG.8.4": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Sports activities with a gender perspective",
+      "description": "Only consider this if a genuine women-demanded sporting activity belongs in the operation. Explain how its design addresses participation barriers and relates to the site, rather than relabelling normal restoration work as sport.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p81-verification-evidence",
+        "FUND-010-p82-verification-evidence"
+      ]
+    },
+    "claim-IG.11.1": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Creation of rural women's associations or federations",
+      "description": "If local women want an enduring organisation, establish its purposes, founding members and governance, then obtain registration. Check whether creation of the association is part of an eligible operation; do not assume changing the promoter's name is enough.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence"
+      ]
+    },
+    "claim-IG.11.2": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Maintenance or equipment of rural women's associations",
+      "description": "Describe the association's actual needs and its restoration-related role before proposing equipment. Record use, responsibility and delivery, and ask whether the purchase is compatible with the chosen route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence"
+      ]
+    },
+    "claim-IG.11.3": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Activities by rural women's associations",
+      "description": "Agree a substantive delivery role with a rural women's association. Describe its programme, equality objective, responsibilities and outputs, keeping the action connected to the restoration operation.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence"
+      ]
+    },
+    "claim-IG.11.4": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Creation or membership of rural women's association networks",
+      "description": "If a network would support the project beyond one event, agree its purpose and membership, complete the required approvals and retain the relevant agreement. Avoid creating a nominal network just for points.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence"
+      ]
+    },
+    "claim-IG.11.5": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Promotion of association, especially among young women and women with disabilities",
+      "description": "Consider a practical session explaining why and how to join or establish relevant rural associations, with accessible materials and a clear target audience. Retain the programme and actual dissemination outputs.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence"
+      ]
+    },
+    "claim-IG.11.6": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Women's participation in sectors where they are underrepresented",
+      "description": "Identify the actual sector and verify it against the official annex. If it qualifies, develop a substantive action supporting women's participation, such as mentoring or access to relevant technical roles, and record the measures delivered.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p17-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence",
+        "FUND-010-p139-sector-classification"
+      ]
+    },
+    "claim-IG.11.7": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Meetings, workshops, forums or webinars on women's interests explicitly identified in the EDL",
+      "description": "Use the existing EDL references to select a documented topic, agree content with participating women and describe how the event contributes to the restoration project. Plan evidence of content and delivery from the outset.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p228-combination-rule",
+        "FUND-010-p85-verification-evidence",
+        "FUND-010-p86-verification-evidence",
+        "FUND-010-p87-verification-evidence",
+        "FUND-013-p186-strategy-evidence",
+        "FUND-013-p187-strategy-evidence",
+        "FUND-013-p275-strategy-evidence",
+        "FUND-013-p276-strategy-evidence",
+        "FUND-013-p332-strategy-evidence",
+        "FUND-013-p333-strategy-evidence",
+        "FUND-013-p473-strategy-evidence"
+      ]
+    },
+    "claim-DRI.3.1": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Facilities and processes adapted to disability, exceeding applicable statutory minimum requirements",
+      "description": "Have a competent professional assess relevant barriers and the legal baseline. Consider suitable improvements such as accessible interpretation, audio description or sensory adaptations, and document precisely what exceeds the minimum.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p229-combination-rule",
+        "FUND-010-p92-verification-evidence",
+        "FUND-010-p93-verification-evidence",
+        "FUND-010-p94-verification-evidence"
+      ]
+    },
+    "claim-DRI.3.2": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Staff trained in supporting vulnerable people at risk of social exclusion",
+      "description": "Identify the staff who will directly work with participants, assess the relevant support skills and arrange suitable training before delivery. Retain named attendance and completion evidence.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p229-combination-rule",
+        "FUND-010-p92-verification-evidence",
+        "FUND-010-p93-verification-evidence",
+        "FUND-010-p94-verification-evidence"
+      ]
+    },
+    "claim-DRI.3.3": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Addresses needs of people at risk of social exclusion explicitly identified in the EDL",
+      "description": "Use the inclusion-related EDL references to identify a specific need and work with a relevant local organisation to design the response. Describe the users, accessibility/support arrangements and intended result without assuming all volunteers are a vulnerable group.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p229-combination-rule",
+        "FUND-010-p92-verification-evidence",
+        "FUND-010-p93-verification-evidence",
+        "FUND-010-p94-verification-evidence",
+        "FUND-013-p191-strategy-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence"
+      ]
+    },
+    "claim-JR.3.1": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Courses improving young people's skills and employability",
+      "description": "Develop a course with a competent provider: define learning outcomes, practical content, audience, trainer and delivery schedule. Explain how the skills can be used, and retain completion evidence.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ]
+    },
+    "claim-JR.3.2": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Promoter participates in dual vocational training or official youth placements",
+      "description": "Contact a relevant education provider, define supervision, learning tasks and responsibilities, and obtain a valid official agreement. Verify current placement requirements with the provider and AL20.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ]
+    },
+    "claim-JR.3.3": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Return of young people within 12 months of graduation to rural life and employment in the ZRL",
+      "description": "If a real position is needed, document the graduate's qualification date, return to the territory and employment arrangement. Confirm the detailed return/age tests before relying on the criterion; do not invent employment to increase the score.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ]
+    },
+    "claim-JR.3.4": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Awareness or training on young people's contribution to local development",
+      "description": "Design a session around actual opportunities for youth contribution to the restored site or demonstration. Include concrete participation routes and responsibilities rather than delivering a generic planting talk.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ]
+    },
+    "claim-JR.3.5": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Leisure for rural young people",
+      "description": "Develop a genuine youth-designed leisure activity connected to the resource, with clear access, supervision and delivery arrangements. Describe the activity explicitly and distinguish it from paid work or volunteer labour.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ]
+    },
+    "claim-JR.3.6": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Youth association, participation, engagement and quality of life",
+      "description": "Give a youth group a substantive role in planning, decisions or ongoing stewardship. Define its responsibilities, support and outputs, and document how the action improves participation.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p18-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ]
+    },
+    "claim-JR.3.7": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Businesses diversifying into products or services for young people",
+      "description": "Do not add a commercial activity merely to claim these points. If a genuine youth-serving business component is proposed, seek written AL20 classification of the operation and eligible route before including it in the assessment.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence"
+      ]
+    },
+    "claim-JR.3.8": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Addresses youth needs explicitly identified in the EDL",
+      "description": "Use the existing youth-related EDL references to select a genuinely relevant need. Explain who benefits, the proposed response and how it will be delivered; do not assume any environmental activity meets youth needs.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p98-verification-evidence",
+        "FUND-010-p99-verification-evidence",
+        "FUND-010-p100-verification-evidence",
+        "FUND-010-p101-verification-evidence",
+        "FUND-013-p187-strategy-evidence",
+        "FUND-013-p276-strategy-evidence",
+        "FUND-013-p333-strategy-evidence",
+        "FUND-013-p476-strategy-evidence"
+      ]
+    },
+    "claim-SP.1.1": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Creation of new local services for the general population",
+      "description": "Only explore this if the project genuinely delivers a new qualifying service. Identify users, the unmet need, service operator and ongoing delivery; ask AL20 whether it is a proximity service and which route should fund it.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p20-local-scoring",
+        "FUND-010-p231-combination-rule",
+        "FUND-010-p108-verification-evidence",
+        "FUND-010-p109-verification-evidence",
+        "FUND-010-p110-verification-evidence"
+      ]
+    },
+    "claim-SP.1.2": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Improvement of existing local services",
+      "description": "If there is a genuine existing service, describe its present users and limitations, the proposed improvement and who will deliver it. Seek AL20 classification before counting an environmental amenity as a proximity-service improvement.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p20-local-scoring",
+        "FUND-010-p231-combination-rule",
+        "FUND-010-p108-verification-evidence",
+        "FUND-010-p109-verification-evidence",
+        "FUND-010-p110-verification-evidence"
+      ]
+    },
+    "claim-SP.1.3": {
+      "routes": [
+        "LEADER-AL20-3.4",
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Promotion of local services for dependent people",
+      "description": "Consult a relevant service provider about a real need, then define the promotion activity, audience and delivery evidence. Keep claims limited to the activity actually planned, with separate AL20 confirmation of route fit.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p20-local-scoring",
+        "FUND-010-p231-combination-rule",
+        "FUND-010-p108-verification-evidence",
+        "FUND-010-p109-verification-evidence",
+        "FUND-010-p110-verification-evidence"
+      ]
+    },
+    "claim-CO.1.1-3.4": {
+      "routes": [
+        "LEADER-AL20-3.4"
+      ],
+      "title": "Addresses one need prioritised in the EDLL",
+      "description": "Use the existing EDL references to identify one relevant NPL needs in the LEADER-addressable list. For each, write a short link from the published need to an activity, intended result and delivery evidence. Do not count one need repeatedly or claim unrelated social objectives.\n\nFor 3.4, frame the restoration component as a documented comparison or trial: explain what is new in AL20, what will be evaluated, who can participate and how others will use the results. Choose measures the project can actually deliver; equipment or planting alone does not establish a demonstration.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p219-combination-rule",
+        "FUND-010-p16-verification-evidence",
+        "FUND-010-p17-verification-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence",
+        "FUND-013-p397-strategy-evidence",
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p122-route-requirements"
+      ]
+    },
+    "claim-CO.1.1-3.5": {
+      "routes": [
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Addresses one need prioritised in the EDLL",
+      "description": "Use the existing EDL references to identify one relevant NPL needs in the LEADER-addressable list. For each, write a short link from the published need to an activity, intended result and delivery evidence. Do not count one need repeatedly or claim unrelated social objectives.\n\nFor 3.5, connect the proposed component to an identified environmental or rural heritage asset, its conservation needs and a public-use or dissemination plan. Keep workshops and outreach ancillary to an eligible recovery operation; a standalone event or report is excluded by this route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p219-combination-rule",
+        "FUND-010-p16-verification-evidence",
+        "FUND-010-p17-verification-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence",
+        "FUND-013-p397-strategy-evidence",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    },
+    "claim-CO.1.2-3.4": {
+      "routes": [
+        "LEADER-AL20-3.4"
+      ],
+      "title": "Addresses two needs prioritised in the EDLL",
+      "description": "Use the existing EDL references to identify two relevant NPL needs in the LEADER-addressable list. For each, write a short link from the published need to an activity, intended result and delivery evidence. Do not count one need repeatedly or claim unrelated social objectives.\n\nFor 3.4, frame the restoration component as a documented comparison or trial: explain what is new in AL20, what will be evaluated, who can participate and how others will use the results. Choose measures the project can actually deliver; equipment or planting alone does not establish a demonstration.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p219-combination-rule",
+        "FUND-010-p16-verification-evidence",
+        "FUND-010-p17-verification-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence",
+        "FUND-013-p397-strategy-evidence",
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p122-route-requirements"
+      ]
+    },
+    "claim-CO.1.2-3.5": {
+      "routes": [
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Addresses two needs prioritised in the EDLL",
+      "description": "Use the existing EDL references to identify two relevant NPL needs in the LEADER-addressable list. For each, write a short link from the published need to an activity, intended result and delivery evidence. Do not count one need repeatedly or claim unrelated social objectives.\n\nFor 3.5, connect the proposed component to an identified environmental or rural heritage asset, its conservation needs and a public-use or dissemination plan. Keep workshops and outreach ancillary to an eligible recovery operation; a standalone event or report is excluded by this route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p219-combination-rule",
+        "FUND-010-p16-verification-evidence",
+        "FUND-010-p17-verification-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence",
+        "FUND-013-p397-strategy-evidence",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    },
+    "claim-CO.1.3-3.4": {
+      "routes": [
+        "LEADER-AL20-3.4"
+      ],
+      "title": "Addresses three or more needs prioritised in the EDLL",
+      "description": "Use the existing EDL references to identify three or more relevant NPL needs in the LEADER-addressable list. For each, write a short link from the published need to an activity, intended result and delivery evidence. Do not count one need repeatedly or claim unrelated social objectives.\n\nFor 3.4, frame the restoration component as a documented comparison or trial: explain what is new in AL20, what will be evaluated, who can participate and how others will use the results. Choose measures the project can actually deliver; equipment or planting alone does not establish a demonstration.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p219-combination-rule",
+        "FUND-010-p16-verification-evidence",
+        "FUND-010-p17-verification-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence",
+        "FUND-013-p397-strategy-evidence",
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p122-route-requirements"
+      ]
+    },
+    "claim-CO.1.3-3.5": {
+      "routes": [
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Addresses three or more needs prioritised in the EDLL",
+      "description": "Use the existing EDL references to identify three or more relevant NPL needs in the LEADER-addressable list. For each, write a short link from the published need to an activity, intended result and delivery evidence. Do not count one need repeatedly or claim unrelated social objectives.\n\nFor 3.5, connect the proposed component to an identified environmental or rural heritage asset, its conservation needs and a public-use or dissemination plan. Keep workshops and outreach ancillary to an eligible recovery operation; a standalone event or report is excluded by this route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p16-local-scoring",
+        "FUND-010-p219-combination-rule",
+        "FUND-010-p16-verification-evidence",
+        "FUND-010-p17-verification-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-013-p396-strategy-evidence",
+        "FUND-013-p397-strategy-evidence",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    },
+    "claim-IN.1.2-3.4": {
+      "routes": [
+        "LEADER-AL20-3.4"
+      ],
+      "title": "Addresses a theme explicitly considered innovative in the EDL",
+      "description": "Use the existing five-theme EDL list, choose the theme the operation genuinely addresses and write a short explanation supported by planned activities and outputs. Request the GDR's justification; do not claim every theme because the project is environmental.\n\nFor 3.4, frame the restoration component as a documented comparison or trial: explain what is new in AL20, what will be evaluated, who can participate and how others will use the results. Choose measures the project can actually deliver; equipment or planting alone does not establish a demonstration.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p103-verification-evidence",
+        "FUND-010-p104-verification-evidence",
+        "FUND-013-p398-strategy-evidence",
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p122-route-requirements"
+      ]
+    },
+    "claim-IN.1.2-3.5": {
+      "routes": [
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Addresses a theme explicitly considered innovative in the EDL",
+      "description": "Use the existing five-theme EDL list, choose the theme the operation genuinely addresses and write a short explanation supported by planned activities and outputs. Request the GDR's justification; do not claim every theme because the project is environmental.\n\nFor 3.5, connect the proposed component to an identified environmental or rural heritage asset, its conservation needs and a public-use or dissemination plan. Keep workshops and outreach ancillary to an eligible recovery operation; a standalone event or report is excluded by this route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p103-verification-evidence",
+        "FUND-010-p104-verification-evidence",
+        "FUND-013-p398-strategy-evidence",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    },
+    "claim-IN.1.3-3.4": {
+      "routes": [
+        "LEADER-AL20-3.4"
+      ],
+      "title": "Integrates an aspect explicitly considered innovative in the EDL",
+      "description": "Use the existing twelve-aspect EDL list and check each relevant aspect's restrictions. Explain the concrete design choice that implements it and retain the project description and intended outputs for GDR review.\n\nFor 3.4, frame the restoration component as a documented comparison or trial: explain what is new in AL20, what will be evaluated, who can participate and how others will use the results. Choose measures the project can actually deliver; equipment or planting alone does not establish a demonstration.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p103-verification-evidence",
+        "FUND-010-p104-verification-evidence",
+        "FUND-013-p399-strategy-evidence",
+        "FUND-013-p400-strategy-evidence",
+        "FUND-013-p401-strategy-evidence",
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p122-route-requirements"
+      ]
+    },
+    "claim-IN.1.3-3.5": {
+      "routes": [
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Integrates an aspect explicitly considered innovative in the EDL",
+      "description": "Use the existing twelve-aspect EDL list and check each relevant aspect's restrictions. Explain the concrete design choice that implements it and retain the project description and intended outputs for GDR review.\n\nFor 3.5, connect the proposed component to an identified environmental or rural heritage asset, its conservation needs and a public-use or dissemination plan. Keep workshops and outreach ancillary to an eligible recovery operation; a standalone event or report is excluded by this route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p103-verification-evidence",
+        "FUND-010-p104-verification-evidence",
+        "FUND-013-p399-strategy-evidence",
+        "FUND-013-p400-strategy-evidence",
+        "FUND-013-p401-strategy-evidence",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    },
+    "claim-PT.1.1-3.4": {
+      "routes": [
+        "LEADER-AL20-3.4"
+      ],
+      "title": "Physical works, training or outreach enhancing natural, monumental, architectural or artistic heritage for subsequent use",
+      "description": "Describe the degraded resource, baseline condition, intended recovery and subsequent use. Prepare the relevant technical project or activity memorandum and a realistic public-use/dissemination plan; connect each claimed benefit to the works or activities.\n\nFor 3.4, frame the restoration component as a documented comparison or trial: explain what is new in AL20, what will be evaluated, who can participate and how others will use the results. Choose measures the project can actually deliver; equipment or planting alone does not establish a demonstration.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p104-verification-evidence",
+        "FUND-010-p105-verification-evidence",
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p122-route-requirements"
+      ]
+    },
+    "claim-PT.1.1-3.5": {
+      "routes": [
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Physical works, training or outreach enhancing natural, monumental, architectural or artistic heritage for subsequent use",
+      "description": "Describe the degraded resource, baseline condition, intended recovery and subsequent use. Prepare the relevant technical project or activity memorandum and a realistic public-use/dissemination plan; connect each claimed benefit to the works or activities.\n\nFor 3.5, connect the proposed component to an identified environmental or rural heritage asset, its conservation needs and a public-use or dissemination plan. Keep workshops and outreach ancillary to an eligible recovery operation; a standalone event or report is excluded by this route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p104-verification-evidence",
+        "FUND-010-p105-verification-evidence",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    },
+    "claim-PT.1.2-3.4": {
+      "routes": [
+        "LEADER-AL20-3.4"
+      ],
+      "title": "Promotion, dissemination or conservation of traditional crafts, work or gastronomy identified in the EDL",
+      "description": "Identify the actual practice, its EDL reference and knowledgeable local practitioners. Design a preservation or transmission action with clear content and outputs, keeping it subordinate to the selected route's purpose where necessary.\n\nFor 3.4, frame the restoration component as a documented comparison or trial: explain what is new in AL20, what will be evaluated, who can participate and how others will use the results. Choose measures the project can actually deliver; equipment or planting alone does not establish a demonstration.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p104-verification-evidence",
+        "FUND-010-p105-verification-evidence",
+        "FUND-013-p283-strategy-evidence",
+        "FUND-013-p372-strategy-evidence",
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p122-route-requirements"
+      ]
+    },
+    "claim-PT.1.2-3.5": {
+      "routes": [
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Promotion, dissemination or conservation of traditional crafts, work or gastronomy identified in the EDL",
+      "description": "Identify the actual practice, its EDL reference and knowledgeable local practitioners. Design a preservation or transmission action with clear content and outputs, keeping it subordinate to the selected route's purpose where necessary.\n\nFor 3.5, connect the proposed component to an identified environmental or rural heritage asset, its conservation needs and a public-use or dissemination plan. Keep workshops and outreach ancillary to an eligible recovery operation; a standalone event or report is excluded by this route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p104-verification-evidence",
+        "FUND-010-p105-verification-evidence",
+        "FUND-013-p283-strategy-evidence",
+        "FUND-013-p372-strategy-evidence",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    },
+    "claim-PT.1.3-3.4": {
+      "routes": [
+        "LEADER-AL20-3.4"
+      ],
+      "title": "Other rural heritage action explicitly identified as of interest in the EDL",
+      "description": "Use the existing heritage EDL references to identify the action, then explain the resource, need, proposed intervention and intended use. Document the precise strategy passage and obtain GDR confirmation.\n\nFor 3.4, frame the restoration component as a documented comparison or trial: explain what is new in AL20, what will be evaluated, who can participate and how others will use the results. Choose measures the project can actually deliver; equipment or planting alone does not establish a demonstration.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p104-verification-evidence",
+        "FUND-010-p105-verification-evidence",
+        "FUND-013-p336-strategy-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p122-route-requirements"
+      ]
+    },
+    "claim-PT.1.3-3.5": {
+      "routes": [
+        "LEADER-AL20-3.5"
+      ],
+      "title": "Other rural heritage action explicitly identified as of interest in the EDL",
+      "description": "Use the existing heritage EDL references to identify the action, then explain the resource, need, proposed intervention and intended use. Document the precise strategy passage and obtain GDR confirmation.\n\nFor 3.5, connect the proposed component to an identified environmental or rural heritage asset, its conservation needs and a public-use or dissemination plan. Keep workshops and outreach ancillary to an eligible recovery operation; a standalone event or report is excluded by this route.",
+      "outcome": "",
+      "sources": [
+        "FUND-004-p19-local-scoring",
+        "FUND-010-p230-combination-rule",
+        "FUND-010-p104-verification-evidence",
+        "FUND-010-p105-verification-evidence",
+        "FUND-013-p336-strategy-evidence",
+        "FUND-013-p395-strategy-evidence",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    }
+  },
+  "core_suggestions": [
+    "NPL3",
+    "NPL4",
+    "NPL8"
+  ],
+  "publications": {
+    "FUND-004": {
+      "title": "FUND-004 - Alpujarra Sierra Nevada Almeriense - LEADER AL20 Selection Criteria - 2026",
+      "edition": "Signed AL20 local selection criteria, 2026",
+      "publication_url": "https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores-al-al20.html",
+      "download_url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/03/Listado%20criterios%20AL20.pdf",
+      "sha256": "a85c896fa800970f7bb611ab26b215db745ed26513dc30b87e509cc9da11ec64",
+      "review_note": "Official download verified byte-for-byte against the registered local PDF on 1 November 2026. Cite this edition and PDF page positions; later changes require a new source review."
+    },
+    "FUND-008": {
+      "title": "FUND-008 - Andalusia - LEADER Governing Rules - BOJA 29 - 2026-02-03",
+      "edition": "Order of 3 February 2026; BOJA 29, 12 February 2026",
+      "publication_url": "https://www.juntadeandalucia.es/boja/2026/29/1",
+      "download_url": "https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "review_note": "Official download verified byte-for-byte against the registered local PDF on 1 November 2026. Cite this edition and PDF page positions; later changes require a new source review."
+    },
+    "FUND-009": {
+      "title": "FUND-009 - Andalusia - LEADER Call for Non-GDR Applicants - 2026-04-13",
+      "edition": "Resolution of 13 April 2026; BOJA 76, 22 April 2026",
+      "publication_url": "https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores.html",
+      "download_url": "https://www.juntadeandalucia.es/eboja/2026/76/BOJA26-076-00061-5258-01_00336495.pdf",
+      "sha256": "ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e",
+      "review_note": "Official download verified byte-for-byte against the registered local PDF on 1 November 2026. Cite this edition and PDF page positions; later changes require a new source review."
+    },
+    "FUND-010": {
+      "title": "FUND-010 - Andalusia - LEADER Selection Criteria Verification Guide - v2-4 - 2026-09",
+      "edition": "Version 2, public version 4; drafted 11 September 2026, listed 25 September 2026",
+      "publication_url": "https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores.html",
+      "download_url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/Guia-instrucciones-especificas-publicas_Criterios-seleccion-promotores_7119-2_LEADER_v2-4.pdf",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "review_note": "Official download verified byte-for-byte against the registered local PDF on 1 November 2026. Cite this edition and PDF page positions; later changes require a new source review."
+    },
+    "FUND-013": {
+      "title": "FUND-013 - Alpujarra Sierra Nevada Almeriense - EDLL 2023-2027 - v1",
+      "edition": "EDLL 2023-2027, V1, 19 November 2024",
+      "publication_url": "https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores-al-al20.html",
+      "download_url": "https://drive.google.com/uc?export=download&id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "review_note": "Official download verified byte-for-byte against the registered local PDF on 1 November 2026. Cite this edition and PDF page positions; later changes require a new source review."
+    }
+  },
+  "ui": {
+    "preview_delay_ms": 400,
+    "autosave_delay_ms": 1200
+  }
+}

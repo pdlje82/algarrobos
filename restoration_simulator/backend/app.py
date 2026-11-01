@@ -12,6 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, Strict
 
 from .engine import (
     Invalid,
+    require,
     land_catalog,
     land_form,
     list_actions,
@@ -156,6 +157,35 @@ class FundingMutationRequest(Mutation):
     operation: Literal["draft", "save", "adopt", "delete"]
     draft: dict[str, Any] | None = None
     record_id: UUID | None = None
+
+
+class ConceptDraftRequest(FundingEvaluationRequest):
+    route: StrictStr
+
+
+class ConceptLinkRequest(StrictModel):
+    revision: StrictInt
+    funding_revision: StrictInt
+    planning_revision: StrictInt
+    concept_id: UUID
+
+
+class ConceptTransferRequest(ConceptLinkRequest):
+    request_id: UUID
+    preview_hash: StrictStr
+    resolutions: dict[str, Literal["navigator", "demonstrator"]]
+
+
+class ConceptPlanningRequest(ConceptLinkRequest):
+    request_id: UUID
+    operation: Literal["edit", "unlink"]
+    concept: dict[str, Any] | None
+
+
+class ConceptPlanningPreview(StrictModel):
+    revision: StrictInt
+    concept_id: UUID
+    concept: dict[str, Any]
 
 
 def view(data, explanation=None):
@@ -334,6 +364,57 @@ def create_app(save_path=None):
         from .funding_selection_guidance import describe
         return describe()
 
+    @app.get("/api/funding/project-concept-guide")
+    def project_concept_guide():
+        from .project_concepts import describe
+        return describe()
+
+    def concept_draft(req):
+        data = designer_state(req.revision)
+        funding.validate_draft(req.draft, data["project"])
+        return data
+
+    @app.post("/api/funding/project-concept/create")
+    def project_concept_create(req: ConceptDraftRequest):
+        concept_draft(req)
+        from .project_concepts import new
+        return new(req.draft, req.route)
+
+    @app.post("/api/funding/project-concept/preview")
+    def project_concept_preview(req: ConceptDraftRequest):
+        data = concept_draft(req)
+        from .project_concepts import report, source_context
+        require("project_concepts" in req.draft and req.route in req.draft["project_concepts"], "Create this route's project concept first.")
+        return report(req.draft["project_concepts"][req.route], source_context(req.draft, req.route), data["project"])
+
+    def concept_link(req):
+        data = designer_state(req.revision)
+        if req.funding_revision != data["funding_revision"] or req.planning_revision != data["planning_revision"]:
+            raise Conflict("Funding or planning changed. Review the concept update again.")
+        return data
+
+    @app.post("/api/funding/project-concept/transfer-preview")
+    def project_concept_transfer_preview(req: ConceptLinkRequest):
+        from .project_concepts import transfer_preview
+        return transfer_preview(concept_link(req), str(req.concept_id))
+
+    @app.post("/api/funding/project-concept/transfer")
+    def project_concept_transfer(req: ConceptTransferRequest):
+        return view(get_store().project_concept_mutation("transfer", req.revision, req.funding_revision, req.planning_revision, str(req.request_id), str(req.concept_id), preview_hash=req.preview_hash, resolutions=req.resolutions))
+
+    @app.post("/api/demonstrator/project-concept")
+    def project_concept_planning(req: ConceptPlanningRequest):
+        return view(get_store().project_concept_mutation(req.operation, req.revision, req.funding_revision, req.planning_revision, str(req.request_id), str(req.concept_id), concept=req.concept))
+
+    @app.post("/api/demonstrator/project-concept/preview")
+    def project_concept_planning_preview(req: ConceptPlanningPreview):
+        from .project_concepts import planning_record, report, validate
+        data = designer_state(req.revision)
+        record = planning_record(data["planning"], str(req.concept_id))
+        validate(req.concept, data["project"])
+        require(req.concept["id"] == str(req.concept_id) and req.concept["route"] == record["concept"]["route"], "Concept identity/route mismatch.")
+        return report(req.concept, record["source"], data["project"])
+
     @app.get("/api/funding/programmes")
     def funding_programme_library():
         from .funding_programmes import describe
@@ -477,6 +558,8 @@ def create_app(save_path=None):
             raise Conflict("This view is out of date. Reload the saved project.")
         if data["project"] is None:
             raise Invalid("Create a project first.")
+        from .project_concepts import guard_parcel_edit
+        guard_parcel_edit(data, [req.parcel_id])
         result = {
             "revision": data["revision"],
             **removal_plan(data["project"], req.parcel_id),

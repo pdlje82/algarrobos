@@ -165,7 +165,10 @@ def new_draft(project, planning, parcel_ids, target):
 def validate_draft(d, project):
     require(type(d["version"]) is int and d["version"] in {1, 2, 3, 4}, "Unsupported funding draft version.")
     required = set("version name activity_key baseline overrides selected allocations calendar_start notes bundle".split())
-    keys(d, required | ({"applicant_choice"} if d["version"] in {3, 4} else set()) | ({"selection_assessments", "legacy_selection_score"} if d["version"] == 4 else set()), "funding draft")
+    keys(d, required | ({"applicant_choice"} if d["version"] in {3, 4} else set()) | ({"selection_assessments", "legacy_selection_score"} if d["version"] == 4 else set()) | ({"project_concepts"} if d["version"] == 4 and "project_concepts" in d else set()), "funding draft")
+    if "project_concepts" in d:
+        from .project_concepts import validate_collection
+        validate_collection(d["project_concepts"], project)
     require(isinstance(d["name"], str) and 0 < len(d["name"].strip()) <= 80 and isinstance(d["notes"], str) and len(d["notes"]) <= 10000, "Enter a funding name (up to 80 characters) and valid notes.")
     require(isinstance(d["activity_key"], str) and 0 < len(d["activity_key"]) <= 80, "Invalid funding activity identity.")
     c = validate_catalogue(d["bundle"])

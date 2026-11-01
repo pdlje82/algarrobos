@@ -18,17 +18,18 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   await page.getByRole('button',{name:'Choose activity',exact:true}).click();await page.locator('#funding-activity').selectOption('business');await settled();
   await page.getByRole('button',{name:'2. People and land',exact:true}).click();await selectProgramme(page,'LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-circumstance[data-question-id="selection_score"]').click();
   const route=page.getByLabel('AL20 assessment route',{exact:true});await route.selectOption('LEADER-AL20-3.4');await settled();
-  const editor=page.getByRole('dialog',{name:'Edit AL20 criterion',exact:true});
+  const editor=page.locator('#funding-answer-editor');
   const region=id=>editor.getByRole('region',{name:`EDL information for ${id}`,exact:true});
   async function open(id,choice){const group=graph.locator(`.funding-annex-group[data-annex-criterion="${id}"]`);if(await group.getAttribute('aria-expanded')!=='true')await group.click();await graph.locator(`.funding-annex-choice[data-annex-choice="${choice}"]`).click();await editor.waitFor();}
   async function close(){await page.getByRole('button',{name:'Close question editor',exact:true}).click();await settled();}
   const draft=async()=> (await api('funding')).attachment.draft;
   const row=async(id,option='LEADER-AL20-3.4')=>(await draft()).selection_assessments[option].criteria[id];
   await open('IN.1','IN.1.2');
+  await editor.getByRole('button',{name:'Previous item',exact:true}).click();
   assert.match(await region('IN.1.1').innerText(),/does not designate|no.*sector/i);assert.equal(await region('IN.1.1').getByRole('checkbox').count(),0);
-  assert.equal(await region('IN.1.2').getByRole('checkbox').count(),5);assert.equal(await region('IN.1.3').getByRole('checkbox').count(),12);
+  await editor.getByRole('button',{name:'Next item',exact:true}).click();assert.equal(await region('IN.1.2').getByRole('checkbox').count(),5);await editor.getByRole('button',{name:'Next item',exact:true}).click();assert.equal(await region('IN.1.3').getByRole('checkbox').count(),12);await editor.getByRole('button',{name:'Previous item',exact:true}).click();
   for(const id of ['IN-T1','IN-T3'])await region('IN.1.2').locator(`[data-edl-item="${id}"] input`).check();
-  await editor.getByLabel('Assessment notes (optional)',{exact:true}).fill('Explain the proposed senior cohousing connection.');
+  await editor.getByLabel('Item notes (optional)',{exact:true}).fill('Explain the proposed senior cohousing connection.');
   await poll(async()=>{const saved=await draft();return saved!==null&&Object.hasOwn(saved.selection_assessments['LEADER-AL20-3.4'].criteria['IN.1'],'edl_evidence');});
   assert.equal((await row('IN.1')).answers['IN.1.2'],null);assert.match(await graph.locator('.funding-annex-total').innerText(),/Partial subtotal: 0 points/);
   await editor.locator('[id="al20-IN.1.2"]').selectOption('yes');await settled();
@@ -55,7 +56,7 @@ async function poll(fn){for(let i=0;i<300;i++){if(await fn())return;await new Pr
   await page.reload();await page.getByRole('button',{name:'Funding Navigator',exact:true}).click();await settled();await page.getByRole('button',{name:'2. People and land',exact:true}).click();await selectProgramme(page,'LEADER-AL20');await graph.locator('.funding-graph-option[data-option-id="LEADER-AL20-3.4"]').getByRole('radio',{name:'Work on LEADER-AL20-3.4',exact:true}).check();await graph.locator('.funding-circumstance[data-question-id="selection_score"]').click();await route.selectOption('LEADER-AL20-3.4');await open('IN.1','IN.1.2');
   await editor.getByRole('alert').filter({hasText:'EDL fixture unavailable'}).first().waitFor();assert.deepEqual(await row('IN.1'),saved);
   await editor.getByRole('button',{name:'Retry EDL content',exact:true}).first().click();await region('IN.1.2').waitFor();
-  assert(await region('IN.1.2').locator('[data-edl-item="IN-T3"] input').isChecked());assert.equal(await editor.getByLabel('Assessment notes (optional)',{exact:true}).inputValue(),saved.notes);
+  assert(await region('IN.1.2').locator('[data-edl-item="IN-T3"] input').isChecked());assert.equal(await editor.getByLabel('Item notes (optional)',{exact:true}).inputValue(),saved.choice_context.items['IN.1.2'].notes);
   for(const theme of ['light','dark']){
    await page.getByLabel('Theme',{exact:true}).selectOption(theme);await page.setViewportSize({width:390,height:844});
    await region('IN.1.2').getByRole('button',{name:'Explore EDL for IN.1.2',exact:true}).click();await explorer.waitFor();

@@ -17,6 +17,20 @@ The frozen replay modules were reviewed for compatibility boundaries and preserv
 
 ## Changes
 
+Project concepts (1 November 2026): explicit optional version-1 concepts and
+per-item annotations preserve absence in historical saves. Empty activity text is
+an intentional unassigned exploration value, never fabricated project detail.
+The central library requires coverage of 45 scoring items plus 50 needs, explicit
+starter/task/manual classifications, route applicability and registered source
+editions/pages. Missing/invalid reference information and requests fail visibly
+with retry. Preview failures do not display a substitute brief. Three-way review
+requires explicit resolutions for conflicts/removals; mutations check revisions,
+comparison hashes and request identities before publishing one atomic write.
+Missing funding origins and parcel deletion/Undo that would lose linked concepts
+are blocked with a resolution instruction. Activities are retained on answer
+deselection. Existing physical planning, frozen replay evaluators and simulation
+funding defaults are unchanged; this is not a new repository-wide fallback audit.
+
 Four-column presentation (1 November 2026): programme nodes use the validated
 registry; loading/failure renders explicitly in the Programme column with retry.
 Unknown column IDs, unsupported view preferences, malformed divider geometry and
