@@ -37,13 +37,13 @@ export function FundingOverview({draft,route,request,revision,versionId,onChange
  {o!==null&&<><h3>{o.title}</h3>{o.score!==null?<><div className="funding-overview-score"><strong>{o.score.subtotal} / {o.score.threshold} points</strong><span>{o.score.unresolved?`${o.score.unresolved} criteria need inputs`:o.score.subtotal>=o.score.threshold?"Score threshold reached":"Score below threshold"}</span></div>{!binary&&<p>This version retains scoring edition {draft.bundle.selection.version}. Review its update to use selected/not selected scoring.</p>}
  <div className="funding-actions"><button type="button" aria-pressed={!all} onClick={()=>setAll(false)}>Selected items</button><button type="button" aria-pressed={all} onClick={()=>setAll(true)}>All items</button></div>
  {o.criteria.map(c=>{const definition=selectionProfile(draft,route).criteria.find(d=>d.id===c.id),row=draft.selection_assessments[route].criteria[c.id];
-  const items=c.items.filter(i=>all||row.answers[i.id]===true),included=c.method==="ratio"?(Object.hasOwn(row,"calculation_included")?row.calculation_included:c.calculation_included):items.length>0;
+  const items=c.items.filter(i=>all||row.answers[i.id]===true||i.edl.length>0),included=c.method==="ratio"?(Object.hasOwn(row,"calculation_included")?row.calculation_included:c.calculation_included):items.length>0;
   if(!all&&!included)return null;
   return <section className="funding-overview-criterion" data-overview-criterion={c.id} key={c.id}><h3>{c.id} · {c.label}</h3><p><strong>{c.uncapped} selected points → {c.subtotal} included</strong> · {c.cap}-point maximum</p>
    {c.method==="ratio"?<><label className="funding-pick"><input type="checkbox" aria-label={`Include calculation ${c.id}`} checked={included} disabled={disabled||!binary} onChange={e=>changed(c,{...row,calculation_included:e.target.checked})}/>Include this calculation</label>{included&&c.items.filter(i=>i.selected).map(i=><p key={i.id}>{i.id} · {i.label} · {i.points} points</p>)}<button type="button" onClick={e=>onItem(c.id,e.currentTarget,null)}>Calculation inputs and sources</button></>:items.map(item=><article data-overview-item={item.id} className="funding-overview-item" key={item.id}><div><strong>{item.id} · {item.label}</strong><span> · {item.points} points before the criterion cap</span></div>
     <ScoringChoice row={row} criterion={definition} item={item} onChange={next=>changed(c,next)} disabled={disabled||!binary}/>
     {item.notes&&<p className="funding-overview-notes">{item.notes}</p>}{item.reference&&<p>Reference: {item.reference}</p>}
-    {item.edl.length>0&&<p>EDL links: {item.edl.map((r,index)=><React.Fragment key={r.id}>{index>0?", ":""}<a href={`#overview-edl-${r.id}`}>{r.id}</a></React.Fragment>)}</p>}
+    {item.edl.length>0&&<details className="funding-overview-edl" open><summary>Selected EDL references ({item.edl.length})</summary><p>Supporting references selected for {item.id}. These are separate from scoring points.</p><ul>{item.edl.map(r=><li key={r.id} data-overview-edl={r.id}><strong>{r.id} · {r.label}</strong><p>{r.summary}</p><DocumentLink documentId={r.document_id} page={r.page} expectedSha256={r.sha256}>{r.document_id} · page {r.page}</DocumentLink></li>)}</ul></details>}
     {item.activities.length>0&&<p>Activities: {item.activities.map(a=>a.title).join("; ")}</p>}
     <button type="button" onClick={e=>onItem(c.id,e.currentTarget,item.id)}>Open {item.id} · notes, activities and details</button>
     <details><summary>Official explanation and recommendations · {item.id}</summary><FundingSelectionNodeGuidance route={route} choice={item} criterion={definition} focused={false}/><p lang="es">{item.label_es}</p><SelectionSources sources={item.sources}/></details>
@@ -51,7 +51,7 @@ export function FundingOverview({draft,route,request,revision,versionId,onChange
    {c.issues.map(issue=><p key={issue}>{issue}</p>)}
   </section>;
  })}
- {!all&&!o.criteria.some(c=>c.items.some(i=>i.selected)||c.calculation_included)&&<p>No scoring items selected. Choose All items or use the graph to add selections.</p>}
+ {!all&&!o.criteria.some(c=>c.items.some(i=>i.selected||i.edl.length>0)||c.calculation_included)&&<p>No scoring items or EDL references selected. Choose All items or use the graph to add selections.</p>}
  </>:<><p>This route has no AL20 scoring assessment.</p><ul>{o.checks.map((c,i)=><li key={i}>{c.message}</li>)}</ul></>}
  {o.concept!==null&&o.concept.activities.length>0&&<section><h3>Activities</h3><ul>{o.concept.activities.map(a=><li key={a.id}>{a.title}{a.outcome?" · "+a.outcome:""}</li>)}</ul></section>}
  {o.edl.length>0&&<section><h3>Selected EDL needs and references</h3><p>Strategy references are separate from grant-selection points.</p><ul>{o.edl.map(r=><li id={`overview-edl-${r.id}`} key={r.id}><DocumentLink documentId={r.document_id} page={r.page} expectedSha256={r.sha256}>{r.id} · {r.label}</DocumentLink></li>)}</ul></section>}

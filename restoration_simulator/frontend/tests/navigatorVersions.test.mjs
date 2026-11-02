@@ -36,3 +36,13 @@ test("an incomplete or incompatible overview is an error rather than an empty pr
  assert.throws(()=>validateResponse('funding/overview',{}),/project overview/);
  assert.throws(()=>validateResponse('funding/workspace-preview',{version:1}),/workspace preview/);
 });
+
+test("overview references require full text and valid source details in every item",()=>{
+ const ref={id:'NPL3',label:'Selected need',summary:'Complete supporting explanation.',document_id:'FUND-013',page:393,sha256:'a'.repeat(64)};
+ const overview={version:1,route:'LEADER-AL20-3.4',title:'Route',name:'Version',score:null,criteria:[{id:'CO.1',label:'Needs',method:'sum',subtotal:0,cap:10,uncapped:0,calculation_included:false,notes:'',reference:'',items:[{id:'CO.1.3',label:'Need selection',points:3,selected:false,notes:'',reference:'',edl:[ref],activities:[],sources:[],details:[]}]}],edl:[ref],details:[],delivery:[],markdown:'Overview',sources:[],checks:[],concept:null};
+ assert.equal(validateResponse('funding/overview',overview),overview);
+ for(const scope of ['item','global'])for(const mutate of [r=>delete r.summary,r=>r.summary='',r=>r.page=0,r=>r.sha256='invalid',r=>r.label=null]){
+  const bad=structuredClone(overview),r=scope==='item'?bad.criteria[0].items[0].edl[0]:bad.edl[0];mutate(r);
+  assert.throws(()=>validateResponse('funding/overview',bad),/overview EDL reference/);
+ }
+});

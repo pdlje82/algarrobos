@@ -1,5 +1,26 @@
 # Silent-fallback audit · 28 October 2026
 
+Overview EDL selections (2 November 2026): per-subnode references require full
+titles, explanations and valid document/page/hash details at the response boundary.
+Missing or malformed content produces an explicit overview error and retry,
+retaining the draft. Optional absence of saved EDL metadata still means no recorded
+references. References retained on unscored items remain visible and exported;
+reading/collapsing does not change selections or points. Existing optional item
+notes, shared context, concepts and historical calculation-inclusion adapters keep
+their documented meanings. No broader presentation or fallback audit is claimed.
+
+Location decisions (1 November 2026): optional metadata v2 stores independent
+criterion inputs and nullable previous answers. Null explicitly means v1 did not
+record a before value; it is never reconstructed. Explicit apply/manual detach
+converts v1 records, retaining unresolved population history. Reads do not migrate.
+Required statistics/hash, scoring definitions and sources are validated; failures
+are actionable, with inputs retained and explicit retry. An unconfirmed AT.3 basis
+is a visible per-criterion error, never a successful zero-point population result.
+RD.5 deliberately uses municipality-only inputs and remains independently usable.
+New comparisons use the immutable dataset and registered catalogue points; no JS
+scoring math or substitute source is added. Frozen evaluators remain unchanged.
+This scope does not audit unrelated historical or presentation paths.
+
 Navigator versions/overview (1 November 2026): attachment edition 2 requires a
 validated active version identity and matching named/working drafts. Creation,
 activation, duplication and adoption are explicit operations using revisions,

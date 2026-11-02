@@ -30,7 +30,7 @@ def scoring(bundle, assessments, route, concept=None):
             for rid in refs:
                 item = next((i for i in edl["items"] if i["id"] == rid), None)
                 require(item is not None, "An overview EDL reference is missing: " + rid)
-                ref = {"id": rid, "label": item["label"], "page": item["page"], "document_id": edl["source"]["document_id"], "sha256": edl["source"]["sha256"]}
+                ref = {"id": rid, "label": item["label"], "summary": item["summary"], "page": item["page"], "document_id": edl["source"]["document_id"], "sha256": edl["source"]["sha256"]}
                 resolved_refs.append(ref)
                 references[rid] = ref
             linked = [{"id": a["id"], "title": a["title"]} for a in activities if choice["id"] in a["bindings"]]
@@ -51,15 +51,19 @@ def scoring(bundle, assessments, route, concept=None):
     lines = ["## Scoring overview", f"Score: {score['subtotal']:g} points; threshold {score['threshold']:g}."]
     if score["unresolved"]: lines.append(f"{score['unresolved']} criteria need inputs under this scoring edition.")
     for criterion in criteria:
-        selected = [i for i in criterion["items"] if i["selected"]]
-        if not selected and not criterion["calculation_included"]: continue
+        visible_items = [i for i in criterion["items"] if i["selected"] or i["edl"]]
+        if not visible_items and not criterion["calculation_included"]: continue
         lines += ["", "### " + criterion["id"] + " · " + criterion["label"], f"{criterion['uncapped']:g} selected points → {criterion['subtotal']:g} included; maximum {criterion['cap']:g}."]
-        for item in selected:
-            lines.append(f"- {item['id']} · {item['label']} ({item['points']} points)")
+        for item in visible_items:
+            status = f"{item['points']} points" if item["selected"] else "Not selected for scoring"
+            lines.append(f"- {item['id']} · {item['label']} ({status})")
             if item["notes"]: lines.append("  Notes: " + item["notes"])
             if item["reference"]: lines.append("  Reference: " + item["reference"])
             if item["activities"]: lines.append("  Activities: " + ", ".join(a["title"] for a in item["activities"]))
-            if item["edl"]: lines.append("  EDL: " + ", ".join(r["id"] for r in item["edl"]))
+            if item["edl"]:
+                lines.append("  Selected EDL supporting references (separate from scoring points):")
+                for ref in item["edl"]:
+                    lines += [f"  - {ref['id']} · {ref['label']} ({ref['document_id']}, page {ref['page']})", "    " + ref["summary"]]
         if criterion["notes"]: lines.append("Shared notes: " + criterion["notes"])
         if criterion["reference"]: lines.append("Shared reference: " + criterion["reference"])
     if references:

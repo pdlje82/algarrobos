@@ -1,5 +1,11 @@
 # Browser checks
 
+Run `node tests/browser/overview-edl.cjs` with the isolated settings below for
+complete selected reference text inside every overview subnode, all 50 needs,
+unscored references, collapse/keyboard controls, PDF-page focus, Markdown,
+edits/reload, malformed overview response/retry and phone themes. It creates
+a fresh fixture only on API 8013; run mutation scripts sequentially.
+
 Run `node tests/browser/funding-selection-guidance.cjs` for 3.4/3.5 shared and
 route-specific recommendations, evidence/source links, nested PDF focus,
 unchanged assessment on reading, saved notes/EDL references across route changes

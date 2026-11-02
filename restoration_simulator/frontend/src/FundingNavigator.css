@@ -1,7 +1,7 @@
 .funding-workspace{margin:1rem auto;padding:0 1rem;color:var(--text)}
 .funding-workspace h1{font-size:clamp(2rem,4vw,3.1rem)}
 .funding-steps{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0}
-.funding-steps button[aria-current=step]{outline:3px solid currentColor;outline-offset:2px}
+.funding-steps button[aria-current=page]{outline:3px solid currentColor;outline-offset:2px}
 .funding-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:.8rem;align-items:start}
 .funding-main,.funding-context,.funding-visual-column,.funding-visual{min-width:0}.funding-context{margin-top:1rem}
 .funding-layout>.funding-main{margin:0;width:100%;max-width:none}
@@ -158,7 +158,7 @@
 .funding-graph-option .funding-working-control{grid-column:1;grid-row:1;display:flex;flex-direction:column;align-items:center;gap:0;align-self:start;color:var(--muted);font-size:.68rem}
 .funding-workspace>header.panel{background:linear-gradient(110deg,var(--water-bg),var(--panel) 75%)}
 .funding-workspace>header h1,.funding-visual h2{color:var(--water)}
-.funding-steps button[aria-current=step]{background:var(--selected-bg);color:var(--assumption-text);outline-color:var(--focus)}
+.funding-steps button[aria-current=page]{background:var(--selected-bg);color:var(--assumption-text);outline-color:var(--focus)}
 .funding-metric{padding:.15rem .5rem;border-radius:1rem;background:var(--research-bg)}
 .funding-metric.funding-outcome-matches{background:var(--positive-bg)}
 .funding-metric.funding-outcome-needs_answers{background:var(--needs-answers-bg)}
@@ -220,4 +220,6 @@
 .funding-column-divider>span{top:44px}
 .funding-version-header{display:grid;grid-template-columns:minmax(180px,1fr) minmax(180px,1fr);gap:12px;align-items:end}.funding-version-header .funding-actions,.funding-version-header>p{grid-column:1/-1}.funding-version-header label{min-width:0}.funding-version-header input,.funding-version-header select{width:100%}.funding-project-overview h2:focus{outline:2px solid var(--accent);outline-offset:4px}.funding-overview-score{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:16px 0}.funding-overview-score strong{font-size:1.5rem}.funding-overview-criterion{border-top:1px solid var(--border);padding:18px 0}.funding-overview-item{padding:16px;margin:12px 0;border:1px solid var(--border);border-radius:8px;overflow-wrap:anywhere;background:var(--panel)}.funding-overview-item>.scoring-choice-control{margin:10px 0}.funding-overview-notes{white-space:pre-wrap}.funding-overview-markdown{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}.funding-version-columns{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}.funding-version-columns>section{min-width:0;padding:12px;border:1px solid var(--border)}.funding-version-columns select{max-width:100%}.funding-route-shortlist{position:absolute;right:8px;bottom:4px;font-size:.78rem;background:var(--panel);padding:2px 4px;z-index:2}.funding-route-shortlist input{width:auto}.funding-answer-origin summary{font-size:.8rem}.funding-project-overview .funding-answer-proposal{margin-top:10px}.scoring-choice-control input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}@media(max-width:700px){.funding-version-header,.funding-version-columns{grid-template-columns:minmax(0,1fr)}.funding-version-header .funding-actions{display:flex;flex-wrap:wrap}.funding-overview-item{padding:12px}.funding-version-columns>section{padding:8px}}
 
+.funding-overview-edl{min-width:0;border-left:3px solid var(--water);background:var(--water-bg);padding:12px;margin:12px 0}.funding-overview-edl>summary{font-weight:600}.funding-overview-edl>ul{list-style:none;padding:0;margin:0}.funding-overview-edl li{border-top:1px solid var(--border);padding:12px 0}.funding-overview-edl li:last-child{padding-bottom:0}.funding-overview-edl p{line-height:1.5;margin:8px 0}
 .funding-workspace>header{padding:16px 20px}.funding-workspace>header>h1{margin:4px 0;font-size:2rem}.funding-workspace>header>p{margin:6px 0 12px}.funding-version-header{gap:8px}.funding-version-header>p{margin:0}.funding-setup{margin-top:8px}.funding-setup>summary{font-size:.9rem}.funding-project-overview>h2{margin-top:0}
+.funding-location-decision,.funding-location-applied{margin:.8rem 0;padding:.65rem;border:1px solid var(--border);border-radius:.4rem;overflow-wrap:anywhere}.funding-location-comparisons{padding-left:1.2rem}.funding-location-changes{width:100%;table-layout:fixed;border-collapse:collapse;font-size:.85rem}.funding-location-changes caption{text-align:left;font-weight:600}.funding-location-changes th,.funding-location-changes td{padding:.35rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--border);overflow-wrap:anywhere}.funding-location-lookup select,.funding-location-lookup input{max-width:100%;min-width:0}.funding-location-notice{font-weight:600}.funding-location-both{border-top:1px solid var(--border);margin:.7rem 0;padding-top:.4rem}

@@ -1,3 +1,4 @@
+import {detachLocationCriterion} from "./fundingStatisticsState.js";
 // Editing and geometry only. Scores and applicability come from Python/the snapshot.
 export function selectionSummary(score){
   if(!score||!Number.isFinite(score.subtotal)||!Number.isInteger(score.unresolved)||score.unresolved<0)throw Error("The AL20 scoring response is incompatible. Restart the backend and refresh the app.");
@@ -15,7 +16,7 @@ export function editSelectionRow(draft,route,id,row){
   if(!Object.hasOwn(draft.selection_assessments[route].criteria,id))throw Error("The AL20 criterion is missing from this assessment.");
   const assessment=draft.selection_assessments[route];
   const next={...assessment,criteria:{...assessment.criteria,[id]:row}};
-  if(Object.hasOwn(assessment,"location_lookup")&&JSON.stringify(row.answers)!==JSON.stringify(assessment.criteria[id].answers))next.location_lookup={...assessment.location_lookup,automated:assessment.location_lookup.automated.filter(cid=>cid!==id)};
+  if(Object.hasOwn(assessment,"location_lookup")&&assessment.location_lookup.automated.includes(id)&&JSON.stringify(row.answers)!==JSON.stringify(assessment.criteria[id].answers))next.location_lookup=detachLocationCriterion(assessment,id).location_lookup;
   return {...draft,selection_assessments:{...draft.selection_assessments,[route]:next}};
 }
 export function setSelectionChoice(row,criterion,id,value){

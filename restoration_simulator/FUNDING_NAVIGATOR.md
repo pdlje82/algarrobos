@@ -12,7 +12,13 @@ labelled checkbox on each graph route card, used for optional funding contributi
 
 **Project overview** is available before creating a concept or reaching the score
 threshold. It groups selected items by criterion, shows full item titles, nominal
-points, capped contributions, notes, EDL links, activities and details to add.
+points, capped contributions, notes, activities and details to add. Each subnode
+shows all its selected EDL references in an initially expanded, collapsible blue
+section, with their full titles, explanations and source-page links. The count
+remains visible when collapsed. Items with supporting references remain in the
+overview even when not selected for scoring; their unticked score control makes
+that distinction explicit. Repeated references remain attached to every subnode
+where they were selected, including in the readable overview, print and Markdown.
 Choose **All items** to add selections. Checkboxes use the same prerequisite and
 replacement confirmation as individual graph editors. Reading guidance, opening
 the overview and linking EDL needs never select items or create activities.
@@ -85,6 +91,9 @@ produce visible errors and explicit retry, retaining the draft.
 The isolated usability workflows are `navigator-versions.cjs` (an exported copy of
 AL20 Alhama) and `navigator-graph.cjs` (all five AL20 assessments and another programme).
 `navigator-legacy.cjs` additionally checks reviewed editing-format conversion.
+`overview-edl.cjs` checks every EDL-bound subnode, all 50 needs, independent
+unscored references, collapse/keyboard controls, source pages, edits/reload,
+invalid response/retry and phone themes using a fresh isolated fixture.
 Their API guard requires port 8013. They must never mutate the live port-8000 project.
 
 ## Remembered programme and working route
@@ -587,43 +596,60 @@ compliance claim by this work.
 
 ### Population and business lookup
 
-Open AT.3 or RD.5 in the graph editor. **Population and business lookup** starts
-with the existing municipality choice where it matches the database. Choose a
-municipality, then **Set AT.3 and RD.5 from this location**. The lookup calculates
-both criteria for the current route and autosaves their selections and setup.
-Changing that lookup municipality recalculates the criteria still in automatic
-mode. Other routes retain their own setup and answers. Notes/references survive.
+Open an individual AT.3 or RD.5 item from the graph or project overview.
+The comparison appears above its selection control. **Changing inputs previews
+only**: it never changes answers, even if a previous lookup was applied.
+The preview shows municipality, basis, reference year, numeric inequalities,
+exclusive-band reasoning, current/proposed answers, criterion points and resulting
+route subtotal. Exact source pages include both published figures and the rule.
 
-AT.3 initially leaves the settlement population unconfirmed. Enter the actual
-núcleo name and its 2025 population, or explicitly choose the municipality total
-as a provisional proxy. The guide does not provide settlement counts, so the app
-does not fabricate a list of núcleos. A different source year needs manual answers.
-After entering settlement details, apply the lookup. A population below 539
-selects AT.3.1; otherwise one below 2256 selects AT.3.2; equality does not qualify.
-Only one alternative is selected. Published criterion points remain unchanged.
+Use **Apply business comparison to RD.5** or **Apply population comparison to AT.3**
+to change that criterion alone. Expand the related comparison for an explicit
+**Apply both criteria** action. Neither opening the panel nor applying one
+criterion changes its sibling, another route, notes, references or activities.
+An incomplete population basis blocks AT.3, while RD.5 remains usable.
 
-RD.5 uses **businesses < 60**, the published ZRL average, not its median of 21.5.
-Using it asserts that the operation supports the selected municipality; location
-alone does not certify that support. Manual editing of a selection switches only
-that criterion to manual. **Use manual answers** also detaches its automatic
-relationship while retaining the current answers. Reapplying the two-criterion
-lookup explicitly replaces both selections. Provisional lookup labels appear in
-the graph and score; these do not resolve the official reference-year discrepancy.
+AT.3 starts with an unresolved population basis. Enter the actual núcleo name and
+its 2025 population, or explicitly use the municipality total. A municipality can
+contain several settlements; the guide does not supply their counts. A different
+source year needs manual answers. Population below 539 selects AT.3.1; otherwise
+population below 2256 selects AT.3.2. Equality does not qualify. Only the strongest
+satisfied band is selected; the points come from the selected scoring edition.
 
-`scenarios/funding-al20-statistics-v1.json` is the immutable, versioned database
-of all 32 municipalities, their published population/business counts, and separate
-population/business means and medians. It cites FUND-010 pp. 113, 126, 181–182,
-including the stored document hash. All values are labelled 2025. Its published
-rounded means are preserved as printed, rather than replaced with recalculations.
-The full table and source links are inspectable from each lookup editor.
+RD.5 uses **municipal businesses < 60**, the published ZRL mean, rather than its
+median of 21.5. Alhama de Almería has 284 businesses: **284 < 60 → No**, so
+RD.5.1 is not selected and contributes 0/15 on routes 3.4 and 3.5. Population does
+not enter this decision. The operation must also support the municipality;
+statistical location alone does not certify this official condition.
 
-Funding draft v4 has an explicit optional `selection_assessments[route].location_lookup`
-v1 contract: absence means manual/historical assessment; no fields are repaired or
-inferred during loading. Opting in stores the dataset ID/hash, settings and list
-of automated criteria. Backend validation recomputes automatic selections and
-rejects inconsistent answers or missing/incompatible data. Dataset editions must
-remain available unchanged for replay. Ordinary loading and catalogue updates
-never opt in, alter saved alternatives or change historical manual scores.
+**Last applied result** retains each criterion's applied inputs and comparison.
+Manual selection edits detach only that criterion while preserving its trace;
+**Use manual selections** explicitly detaches without altering current answers.
+Later input previews do not overwrite that record. The reference-year disclosure
+retains the difference between the guide's 2025 tables and the criteria's 2023
+reference, which needs confirmation. Applying the lookup does not resolve it.
+
+`scenarios/funding-al20-statistics-v1.json` remains the immutable database of all
+32 municipalities. FUND-010 pp. 113, 126, 181–182 supply counts and benchmarks;
+published rounded means are preserved. Rules and page-specific source links are
+available beside the comparison, with the full table in a separate disclosure.
+
+Draft v4's optional `selection_assessments[route].location_lookup` now accepts
+version 2: dataset ID/hash, per-criterion `items` with `settings` and
+`before_answers`, plus `automated` identifying selections still following their
+last applied result. Absence means no recorded lookup. Version 1 remains readable
+unchanged. An explicit apply or manual-detach action converts its recorded
+criteria; `before_answers: null` honestly retains its unrecorded previous answers.
+An older unresolved AT.3 record remains intact. Loading never infers a history,
+upgrades scoring, rewrites alternatives or changes saved point arithmetic.
+
+`POST /api/funding/location-decision-preview` is read-only.
+`POST /api/funding/location-apply` returns a validated draft candidate after checking
+the comparison hash against current selections and score. Existing autosave performs
+the revision-checked atomic write. Failure preserves inputs/answers and offers retry.
+The legacy `location-preview` API remains available for version-1 records but rejects
+replacement of version-2 history. Both frozen scoring editions retain their existing
+calculators; the facade carries the new source metadata separately from arithmetic.
 
 CO.1 links to the [official EDLL version-1 publication page (ADR Alpujarra,
 2023–2027 strategy)](https://alpujarraalmeria.es/edll-version-1/), the

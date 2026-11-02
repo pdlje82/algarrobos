@@ -216,6 +216,17 @@ def is_completion_update(previous, current):
 
 
 def calculate(bundle, assessments, route):
+    # New location decisions keep separate municipalities. Historical calculators
+    # still evaluate the same answers, without interpreting a new metadata shape.
+    if "location_lookup" in assessments[route] and assessments[route]["location_lookup"]["version"] == 2:
+        metadata = assessments[route]["location_lookup"]
+        scoring_input = deepcopy(assessments)
+        del scoring_input[route]["location_lookup"]
+        result = calculate(bundle, scoring_input, route)
+        if metadata["automated"]:
+            from .funding_statistics import dataset
+            result["location_basis"] = {"version": 2, "status": "provisional", "year": dataset()["year"], "dataset_id": metadata["dataset_id"], "automated": deepcopy(metadata["automated"]), "locations": {cid: metadata["items"][cid]["settings"]["municipality"] for cid in metadata["automated"]}}
+        return result
     version = bundle["selection"]["version"]
     if version in {1, 2}:
         from .funding_selection_v2 import calculate as historical

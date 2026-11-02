@@ -1,54 +1,36 @@
-import React,{useEffect,useState} from "react";
+import React,{useEffect,useRef,useState} from "react";
 import {SelectionSources} from "./FundingSelection.jsx";
-import {validateStatisticsResponse} from "./fundingStatisticsState.js";
+import {Alert} from "./Alert.jsx";
+import {validateStatisticsResponse,validateLocationDecision,initialLocationSettings} from "./fundingStatisticsState.js";
 
-export function FundingLocationLookup({criterion,assessment,municipality,request,onApply,onManual,disabled}){
-  const [loaded,setLoaded]=useState(null),[settings,setSettings]=useState(null),[error,setError]=useState(""),[loading,setLoading]=useState(false),[reload,setReload]=useState(0);
-  const stored=Object.hasOwn(assessment,"location_lookup")?assessment.location_lookup:null;
-  useEffect(()=>{
-    let current=true;setLoading(true);setError("");
-    (async()=>{try{
-      const value=validateStatisticsResponse(await request("funding/statistics"));
-      const initial=stored===null?{...value.dataset.defaults,municipality:value.dataset.municipalities.some(row=>row.name===municipality)?municipality:null}:stored.settings;
-      if(current){setLoaded(value);setSettings(previous=>previous===null?initial:previous);}
-    }catch(e){if(current)setError(`Population/business lookup unavailable: ${e.message}`);}finally{if(current)setLoading(false);}})();
-    return()=>{current=false;};
-  },[reload]);
-  const automated=stored===null?[]:stored.automated;
-  async function apply(next,criteria){
-    setLoading(true);setError("");
-    try{await onApply(next,criteria,loaded.dataset_hash);}catch(e){setError(e.message);}finally{setLoading(false);}
-  }
-  function change(next){setSettings(next);if(automated.length&&next.municipality!==null)apply(next,automated);}
-  function manual(){onManual(criterion);}
-  const busy=disabled||loading;
-  return <section className="funding-location-lookup" aria-label="AL20 population and business lookup">
-    <h4>Population and business lookup</h4>
-    {error&&<p role="alert">{error}<button type="button" disabled={loading} onClick={()=>setReload(n=>n+1)}>Reload statistics</button></p>}
-    {loaded===null||settings===null?<p role="status">{loading?"Loading published municipality figures…":"The lookup has not loaded. Manual choices remain available."}</p>:<>
-      <p>Published {loaded.dataset.year} guide tables · provisional self-assessment. The local criteria refer to 2023; confirm the applicable year before relying on this score.</p>
-      {stored!==null&&stored.settings.municipality!==municipality&&loaded.dataset.municipalities.some(row=>row.name===municipality)&&<p className="reason">This route’s lookup uses {stored.settings.municipality}; the activity municipality is {municipality}. Change the lookup municipality below if this assessment should follow the activity location.</p>}
-      <label>Lookup municipality<select aria-label="Lookup municipality" value={settings.municipality===null?"":settings.municipality} disabled={busy} onChange={e=>change({...settings,municipality:e.target.value===""?null:e.target.value})}><option value="">Choose an AL20 municipality</option>{loaded.dataset.municipalities.map(row=><option key={row.name} value={row.name}>{row.name}</option>)}</select></label>
-      {settings.municipality!==null&&<MunicipalityFigures data={loaded.dataset} municipality={settings.municipality}/>}
-      <label>Population basis for AT.3<select aria-label="Population basis for AT.3" value={settings.population_mode} disabled={busy} onChange={e=>{const mode=e.target.value;const next={...settings,population_mode:mode,settlement_name:mode==="settlement"?"":null,population:null,population_year:mode==="settlement"?loaded.dataset.year:null};setSettings(next);if(mode!=="settlement"&&automated.length&&next.municipality!==null)apply(next,automated);}}><option value="unconfirmed">Settlement population not confirmed — leave AT.3 unanswered</option><option value="municipality_proxy">Use municipality total as a provisional settlement proxy</option><option value="settlement">Enter the actual settlement (núcleo) population</option></select></label>
-      {settings.population_mode==="settlement"&&<>
-        <label>Settlement name<input maxLength={300} value={settings.settlement_name} disabled={busy} onChange={e=>setSettings({...settings,settlement_name:e.target.value})}/></label>
-        <label>Settlement population ({loaded.dataset.year})<input type="number" min="0" step="1" value={settings.population===null?"":settings.population} disabled={busy} onChange={e=>setSettings({...settings,population:e.target.value===""?null:Number(e.target.value)})}/></label>
-        <p>The guide does not list individual settlements. Check the actual núcleo in the INE Nomenclátor, using the same reference year.</p>
-      </>}
-      {settings.population_mode==="municipality_proxy"&&<p className="reason">A municipality total may include several settlements. This proxy is an explicit assumption, not a verified núcleo count.</p>}
-      <p>AT.3 uses population medians: AL20 {loaded.dataset.benchmarks.population_zrl_median}; Andalusia {loaded.dataset.benchmarks.population_andalusia_median}. RD.5 uses the business average {loaded.dataset.benchmarks.businesses_zrl_mean}, not the business median {loaded.dataset.benchmarks.businesses_zrl_median}.</p>
-      <p role="status">{automated.includes(criterion)?`${criterion} is set from this location. Changing the lookup recalculates it.`:`${criterion} uses manual answers.`} Changing this route does not change another route.</p>
-      <div className="funding-actions"><button type="button" disabled={busy||settings.municipality===null} onClick={()=>apply(settings,["AT.3","RD.5"])}>Set AT.3 and RD.5 from this location</button><button type="button" disabled={busy||!automated.includes(criterion)} onClick={manual}>Use manual answers for {criterion}</button></div>
-      <p>The lookup replaces these two criteria’s selections for this route. Notes and references are retained. Editing a choice switches that criterion to manual.</p>
-      {stored!==null&&JSON.stringify(settings)!==JSON.stringify(stored.settings)&&<p role="status">Lookup settings have not been applied. Complete the inputs and use “Set AT.3 and RD.5 from this location”.</p>}
-      <details><summary>All 32 municipalities, sources and limitations</summary>{loaded.dataset.limitations.map(t=><p key={t}>{t}</p>)}<SelectionSources sources={loaded.dataset.sources}/><div className="funding-statistics-table"><table><thead><tr><th>Municipality</th><th>Population</th><th>Businesses</th></tr></thead><tbody>{loaded.dataset.municipalities.map(r=><tr key={r.name}><th scope="row">{r.name}</th><td>{r.population}</td><td>{r.businesses}</td></tr>)}</tbody></table></div></details>
-    </>}
-  </section>;
+const selection=value=>value===null?"Unanswered":value===true?"Selected":"Not selected";
+function Reason({decision}){
+ return <><p><strong>{decision.municipality}</strong> · {decision.basis} · reference year {decision.year}</p><ul className="funding-location-comparisons">{decision.comparisons.map((c,i)=><li key={i}>{c.label}: <strong>{c.left} {c.operator} {c.right} → {c.result?"Yes":"No"}</strong></li>)}</ul><p>{decision.explanation}</p><p><strong>{decision.outcome}</strong></p><details><summary>Exact source pages for this decision</summary><SelectionSources sources={decision.sources}/></details></>;
 }
-
-function MunicipalityFigures({data,municipality}){
-  const row=data.municipalities.find(r=>r.name===municipality);
-  if(row===undefined)throw Error("The selected AL20 municipality is missing from the statistics dataset. Reload the lookup.");
-  return <p>{row.name}: {row.population} inhabitants · {row.businesses} businesses ({data.year}).</p>;
+function Decision({value,onApply,disabled,primary}){
+ return <section className="funding-location-decision" aria-label={`${value.id} location preview`}><h4>{value.id} · {primary?"Preview before applying":"Related criterion preview"}</h4>{!value.ready?<p role="status">{value.error}</p>:<><Reason decision={value.proposal}/><table className="funding-location-changes"><caption>Selection changes if applied</caption><thead><tr><th>Item</th><th>Current</th><th>Proposed</th></tr></thead><tbody>{value.choices.map(c=><tr key={c.id}><th scope="row">{c.id} · {c.label}</th><td>{selection(value.before_answers[c.id])}</td><td>{selection(value.proposal.answers[c.id])}</td></tr>)}</tbody></table><p><strong>Criterion points: {value.before_points} → {value.proposal.points}</strong> · change {value.points_delta>0?"+":""}{value.points_delta}. Route subtotal after applying: {value.after_score} points.</p><button type="button" disabled={disabled} onClick={onApply}>{value.id==="RD.5"?"Apply business comparison to RD.5":"Apply population comparison to AT.3"}</button></>}</section>;
+}
+export function FundingLocationLookup({criterion,assessment,municipality,request,onReview,onApply,onManual,disabled}){
+ const [loaded,setLoaded]=useState(null),[settings,setSettings]=useState(null),[loadError,setLoadError]=useState(""),[loadAttempt,setLoadAttempt]=useState(0),[review,setReview]=useState({value:null,error:"",pending:false}),[reviewAttempt,setReviewAttempt]=useState(0),[applying,setApplying]=useState(false),[applyError,setApplyError]=useState(""),[notice,setNotice]=useState(""),[related,setRelated]=useState(false);
+ const latestReview=useRef(onReview);latestReview.current=onReview;
+ const applied=Object.hasOwn(assessment,"location_lookup")?assessment.location_lookup:null;
+ const scoringContext=JSON.stringify({criteria:Object.fromEntries(Object.entries(assessment.criteria).map(([id,row])=>[id,{answers:row.answers,inputs:row.inputs}])),lookup:applied});
+ useEffect(()=>{let alive=true;setLoadError("");(async()=>{try{const value=validateStatisticsResponse(await request("funding/statistics"));if(alive){setLoaded(value);setSettings(previous=>previous===null?initialLocationSettings(value.dataset,assessment,criterion,municipality):previous);}}catch(e){if(alive)setLoadError(e.message);}})();return()=>{alive=false;};},[request,loadAttempt]);
+ const input=JSON.stringify(settings),datasetHash=loaded===null?null:loaded.dataset_hash;
+ useEffect(()=>{let alive=true;if(settings===null||datasetHash===null)return;setReview({value:null,error:"",pending:true});const timer=setTimeout(async()=>{try{const value=validateLocationDecision(await latestReview.current(JSON.parse(input),datasetHash));if(alive)setReview({value,error:"",pending:false});}catch(e){if(alive)setReview({value:null,error:e.message,pending:false});}},180);return()=>{alive=false;clearTimeout(timer);};},[input,datasetHash,scoringContext,reviewAttempt]);
+ function change(next){setSettings(next);setReview({value:null,error:"",pending:true});setNotice("");setApplyError("");}
+ function populationMode(mode){const next={...loaded.dataset.defaults,municipality:settings.municipality,population_mode:mode};if(mode==="settlement"){next.settlement_name="";next.population_year=loaded.dataset.year;}change(next);}
+ async function apply(ids){const key=ids.length===2?"both":ids[0];if(review.value===null||review.value.hashes[key]===null){setApplyError("Wait for a valid comparison before applying.");return;}const reviewed=review.value;setApplying(true);setApplyError("");try{await onApply(settings,ids,loaded.dataset_hash,reviewed.hashes[key]);setNotice("Applied " + ids.join(" and ") + ". " + ids.map(id=>reviewed.decisions[id].proposal.outcome).join("; ") + ". Notes, references and other criteria are retained.");}catch(e){setApplyError(e.message);}finally{setApplying(false);}}
+ const busy=disabled||applying,other=criterion==="RD.5"?"AT.3":"RD.5",value=review.value;
+ function population(){return <div className="funding-population-inputs"><label>Population basis for AT.3<select aria-label="Population basis for AT.3" value={settings.population_mode} disabled={busy} onChange={e=>populationMode(e.target.value)}><option value="unconfirmed">Choose a population basis</option><option value="municipality_proxy">Use municipality total for the settlement comparison</option><option value="settlement">Enter the actual settlement (núcleo) population</option></select></label>{settings.population_mode==="settlement"&&<><label>Settlement name<input aria-label="Settlement name" maxLength={300} value={settings.settlement_name} disabled={busy} onChange={e=>change({...settings,settlement_name:e.target.value})}/></label><label>Settlement population ({loaded.dataset.year})<input aria-label={`Settlement population (${loaded.dataset.year})`} type="number" min="0" step="1" value={settings.population===null?"":settings.population} disabled={busy} onChange={e=>change({...settings,population:e.target.value===""?null:Number(e.target.value)})}/></label></>}{settings.population_mode==="municipality_proxy"&&<p>A municipality can contain several settlements. This comparison uses the whole municipality; enter the actual núcleo population if that is the appropriate project location.</p>}</div>;}
+ return <section className="funding-location-lookup" aria-label="AL20 population and business lookup"><h4>{criterion==="RD.5"?"Business comparison for RD.5":"Population comparison for AT.3"}</h4><p>Changing inputs updates the preview only. Selections change when you press Apply.</p>{loadError&&<Alert variant="error" title="Statistics unavailable">{loadError}<button type="button" onClick={()=>setLoadAttempt(n=>n+1)}>Reload statistics</button></Alert>}{loaded===null||settings===null?<p role="status">{loadError?"Statistics have not loaded. Use Reload statistics to retry.":"Loading published municipality figures…"}</p>:<>
+ <label>Lookup municipality<select aria-label="Lookup municipality" value={settings.municipality===null?"":settings.municipality} disabled={busy} onChange={e=>change({...settings,municipality:e.target.value===""?null:e.target.value})}><option value="">Choose an AL20 municipality</option>{loaded.dataset.municipalities.map(row=><option key={row.name} value={row.name}>{row.name}</option>)}</select></label>{criterion==="AT.3"&&population()}
+ {review.pending&&<p role="status">Updating comparison preview. Current selections are unchanged.</p>}{review.error&&<Alert variant="error" title="Comparison unavailable">{review.error}<p>Your inputs and selections are retained.</p><button type="button" onClick={()=>setReviewAttempt(n=>n+1)}>Retry comparison preview</button></Alert>}
+ {value!==null&&<Decision value={value.decisions[criterion]} primary disabled={busy||review.pending} onApply={()=>apply([criterion])}/>}
+ <details open={related} onToggle={e=>setRelated(e.currentTarget.open)}><summary>{criterion==="RD.5"?"Also review AT.3 population":"Also review RD.5 businesses"}</summary>{criterion==="RD.5"&&population()}{value!==null&&<Decision value={value.decisions[other]} disabled={busy||review.pending} onApply={()=>apply([other])}/>}</details>
+ {related&&value!==null&&<div className="funding-location-both"><p>Apply both previews to this route: subtotal {value.before_score} → {value.both_after_score===null?"complete both inputs first":value.both_after_score} points.</p><button type="button" disabled={busy||review.pending||value.hashes.both===null} onClick={()=>apply(["AT.3","RD.5"])}>Apply both criteria</button></div>}
+ {applyError&&<Alert variant="error" title="Location selections retained">{applyError}<button type="button" disabled={busy} onClick={()=>setReviewAttempt(n=>n+1)}>Refresh comparison before retry</button></Alert>}{notice&&<p role="status" className="funding-location-notice">{notice}</p>}
+ {value!==null&&<section className="funding-location-applied" aria-label={`Last applied ${criterion} decision`}><h4>Last applied result · {criterion}</h4>{value.decisions[criterion].last_applied===null?<p>No applied location decision is recorded for this item.</p>:<><p>{value.decisions[criterion].active?"The current selections use this calculation.":"The selections are now manual. The last location calculation is retained below."}</p>{value.decisions[criterion].last_applied.legacy_no_population?<p>{value.decisions[criterion].last_applied.outcome}</p>:<><Reason decision={value.decisions[criterion].last_applied}/><p>{value.decisions[criterion].last_applied.before_points===null?"The earlier lookup did not record the previous selections.":`Points when applied: ${value.decisions[criterion].last_applied.before_points} → ${value.decisions[criterion].last_applied.points}`}</p></>}</>}{value.decisions[criterion].active&&<button type="button" disabled={busy} onClick={()=>onManual(criterion)}>Use manual selections for {criterion}</button>}</section>}
+ <details><summary>Reference year and source limitations · {loaded.dataset.year} tables</summary>{loaded.dataset.limitations.map(t=><p key={t}>{t}</p>)}<SelectionSources sources={loaded.dataset.sources}/></details><details><summary>All 32 municipality figures</summary><div className="funding-statistics-table"><table><thead><tr><th>Municipality</th><th>Population</th><th>Businesses</th></tr></thead><tbody>{loaded.dataset.municipalities.map(r=><tr key={r.name}><th scope="row">{r.name}</th><td>{r.population}</td><td>{r.businesses}</td></tr>)}</tbody></table></div></details>
+ </>}</section>;
 }

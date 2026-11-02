@@ -150,6 +150,17 @@ class FundingLocationRequest(FundingEvaluationRequest):
     dataset_hash: StrictStr
 
 
+class FundingLocationDecisionRequest(FundingEvaluationRequest):
+    route: StrictStr
+    settings: dict[str, Any]
+    dataset_hash: StrictStr
+
+
+class FundingLocationApplyRequest(FundingLocationDecisionRequest):
+    criteria: list[StrictStr]
+    preview_hash: StrictStr
+
+
 class FundingMutationRequest(Mutation):
     funding_revision: StrictInt
     planning_revision: StrictInt
@@ -489,6 +500,18 @@ def create_app(save_path=None):
         from .funding_statistics import apply
         data = designer_state(req.revision)
         return apply(req.draft, data["project"], req.route, req.settings, req.automated, req.dataset_hash)
+
+    @app.post("/api/funding/location-decision-preview")
+    def funding_location_decision_preview(req: FundingLocationDecisionRequest):
+        from .funding_location_decisions import preview
+        data = designer_state(req.revision)
+        return preview(req.draft, data["project"], req.route, req.settings, req.dataset_hash)
+
+    @app.post("/api/funding/location-apply")
+    def funding_location_apply(req: FundingLocationApplyRequest):
+        from .funding_location_decisions import apply
+        data = designer_state(req.revision)
+        return apply(req.draft, data["project"], req.route, req.settings, req.criteria, req.dataset_hash, req.preview_hash)
 
     @app.post("/api/funding/save")
     def funding_save(req: FundingMutationRequest):

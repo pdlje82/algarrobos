@@ -15,7 +15,7 @@ export function SelectionRoute({routes,route,onRoute,disabled}){
 function SelectionGuidance({text}){
   return text.split("\n\n").map((paragraph,index)=><p key={index}>{paragraph.split(/(https:\/\/[^\s]+)/g).map((part,i)=>part.startsWith("https://")?<DocumentLink key={i} href={part} target="_blank" rel="noreferrer">{part}</DocumentLink>:part)}</p>);
 }
-export function FundingSelectionEditor({route,criterion,row,result,onChange,disabled,focusChoice,assessment,municipality,request,onLookup,onManual,onItem,activityPanel,scoringVersion}){
+export function FundingSelectionEditor({route,criterion,row,result,onChange,disabled,focusChoice,assessment,municipality,request,onLookup,onLookupReview,onManual,onItem,activityPanel,scoringVersion}){
   const [error,setError]=useState("");
   const [pending,setPending]=useState(false);
   const choices=selectionChoices(criterion,route);
@@ -32,7 +32,6 @@ export function FundingSelectionEditor({route,criterion,row,result,onChange,disa
     <p className="eyebrow">{route}</p><h3>{item===null?criterion.id:item.id} · {item===null?criterion.label:item.label}</h3>
     {item!==null&&<nav className="funding-actions" aria-label="Scoring item navigation"><button type="button" disabled={pending||choices[0].id===item.id} onClick={()=>onItem(choices[choices.indexOf(item)-1].id)}>Previous item</button><button type="button" disabled={pending||choices[choices.length-1].id===item.id} onClick={()=>onItem(choices[choices.indexOf(item)+1].id)}>Next item</button></nav>}
     <FundingSelectionRouteGuidance route={route}/>
-    {["AT.3","RD.5"].includes(criterion.id)&&<FundingLocationLookup criterion={criterion.id} assessment={assessment} municipality={municipality} request={request} onApply={onLookup} onManual={onManual} disabled={disabled}/>}
     <p>{maximum?"Maximum reached":"Criterion subtotal"} · {result.subtotal}/{result.cap} points{maximum?" · Maximum included":result.complete?"":" · Needs inputs"}{result.uncapped>result.cap?` · Uncapped selections: ${result.uncapped}`:""}</p>
     {maximum&&<p>Additional options are optional and cannot increase this criterion’s score. Evidence readiness is separate.</p>}
     <details><summary>Criterion overview, limitations and sources</summary><SelectionGuidance text={criterion.guidance}/>{criterion.limitations.map(text=><p className="reason" key={text}>{text}</p>)}<SelectionSources sources={criterion.sources}/></details>
@@ -41,6 +40,7 @@ export function FundingSelectionEditor({route,criterion,row,result,onChange,disa
       <fieldset disabled={disabled}><legend>Answer this item</legend>
       {[item].map(c=><div className="funding-selection-choice" key={c.id}>
         <label htmlFor={`al20-${c.id}`}>{c.id} · {c.label} <strong>({c.points} points)</strong></label>
+        {["AT.3","RD.5"].includes(criterion.id)&&<FundingLocationLookup criterion={criterion.id} assessment={assessment} municipality={municipality} request={request} onReview={onLookupReview} onApply={onLookup} onManual={onManual} disabled={disabled}/>}
         <ScoringChoice inputId={`editor-al20-${c.id}`} key={c.id} row={row} criterion={criterion} item={c} onChange={update} disabled={disabled||scoringVersion<3} onPending={setPending}/>
         <details className="funding-choice-information" data-choice-information={c.id} open={focusChoice===c.id?true:undefined}>
           <summary>Information · {c.id}</summary>
@@ -76,7 +76,7 @@ export function FundingSelectionBranch({rows,left,width,route,routes,score,answe
       aria-expanded={r.kind==="group"?rows.some(x=>x.criterion?.id===r.criterion.id&&x.kind!=="group"):undefined}
       aria-haspopup={r.kind==="group"?undefined:"dialog"} onClick={e=>r.kind==="group"?onGroup(r.criterion.id):onCriterion(r.criterion.id,e.currentTarget,choice===null?null:choice.id)}>
       <strong>{choice?`${choice.id} · ${choice.label}`:r.kind==="calculation"?"Enter grant and qualifying jobs":`${r.criterion.id} · ${r.criterion.label}`}</strong>
-      <span>{choice?`${value===null?(binary?"Not selected":optional?"Unanswered · Optional for points":"? Unanswered"):value?"✓ Selected":"Not selected"} · ${choice.points} points`:`${result.subtotal} / ${result.cap} points · ${optional?"Maximum reached":result.complete?"Current selection":"Needs inputs"}`}{Object.hasOwn(answers,"location_lookup")&&answers.location_lookup.automated.includes(r.criterion.id)?" · Provisional lookup":""}</span>
+      <span>{choice?`${value===null?(binary?"Not selected":optional?"Unanswered · Optional for points":"? Unanswered"):value?"✓ Selected":"Not selected"} · ${choice.points} points`:`${result.subtotal} / ${result.cap} points · ${optional?"Maximum reached":result.complete?"Current selection":"Needs inputs"}`}{Object.hasOwn(answers,"location_lookup")&&answers.location_lookup.automated.includes(r.criterion.id)?" · From location comparison":""}</span>
     </button>;
   });
 }

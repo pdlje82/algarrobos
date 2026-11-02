@@ -1,6 +1,6 @@
 import {validateDeliveryLibrary,validateDeliveryPrepared,validateExecutionReview} from "./deliveryPlanState.js";
 import defaults from "../../scenarios/defaults.json" with { type: "json" };
-import {validateStatisticsResponse} from "./fundingStatisticsState.js";
+import {validateStatisticsResponse,validateLocationMetadata,validateLocationDecision} from "./fundingStatisticsState.js";
 import {validateEdlResponse} from "./fundingEdlState.js";
 import {validateGuideResponse} from "./fundingGuideState.js";
 import {validateSelectionGuidanceResponse} from "./fundingSelectionGuidanceState.js";
@@ -369,7 +369,16 @@ export function validateResponse(path, data) {
     properties(data,["version","route","title","name","score","criteria","edl","details","delivery","markdown","sources","checks","concept"],"project overview");
     required(data.version===1&&typeof data.route==="string"&&typeof data.markdown==="string"&&Array.isArray(data.criteria)&&Array.isArray(data.details)&&Array.isArray(data.sources)&&Array.isArray(data.edl)&&Array.isArray(data.delivery)&&Array.isArray(data.checks),"Invalid project overview. Keep your draft and retry.");
     if(data.score!==null)required(Number.isFinite(data.score.subtotal)&&Number.isFinite(data.score.threshold)&&Number.isInteger(data.score.unresolved),"Invalid overview score.");
-    for(const c of data.criteria){properties(c,["id","label","method","subtotal","cap","uncapped","items","calculation_included","notes","reference"],"overview criterion");required(Array.isArray(c.items)&&typeof c.calculation_included==="boolean"&&Number.isFinite(c.subtotal)&&c.subtotal<=c.cap,"Invalid overview criterion.");for(const item of c.items){properties(item,["id","label","points","selected","notes","reference","edl","activities","sources","details"],"overview item");required(typeof item.selected==="boolean"&&Array.isArray(item.edl)&&Array.isArray(item.activities)&&Array.isArray(item.sources),"Invalid overview item.");}}
+    function references(refs){
+      const ids=new Set();
+      for(const ref of refs){
+        properties(ref,["id","label","summary","document_id","page","sha256"],"overview EDL reference");
+        required(["id","label","summary","document_id"].every(k=>typeof ref[k]==="string"&&ref[k].trim()!=="")&&Number.isInteger(ref.page)&&ref.page>0&&typeof ref.sha256==="string"&&/^[a-f0-9]{64}$/.test(ref.sha256)&&!ids.has(ref.id),"Invalid overview EDL reference. Keep your draft, restart Python and retry the overview.");
+        ids.add(ref.id);
+      }
+    }
+    references(data.edl);
+    for(const c of data.criteria){properties(c,["id","label","method","subtotal","cap","uncapped","items","calculation_included","notes","reference"],"overview criterion");required(Array.isArray(c.items)&&typeof c.calculation_included==="boolean"&&Number.isFinite(c.subtotal)&&c.subtotal<=c.cap,"Invalid overview criterion.");for(const item of c.items){properties(item,["id","label","points","selected","notes","reference","edl","activities","sources","details"],"overview item");required(typeof item.selected==="boolean"&&Array.isArray(item.edl)&&Array.isArray(item.activities)&&Array.isArray(item.sources),"Invalid overview item.");references(item.edl);}}
     return data;
   }
   if(path==="funding/prepare") {
@@ -385,7 +394,8 @@ export function validateResponse(path, data) {
   if(path==="funding/guides")return validateGuideResponse(data);
   if(path==="funding/selection-guidance")return validateSelectionGuidanceResponse(data);
   if(path==="funding/programmes")return validateProgrammesResponse(data);
-  if(path==="funding/location-preview")return validateResponse("funding/context",data);
+  if(["funding/location-preview","funding/location-apply"].includes(path))return validateResponse("funding/context",data);
+  if(path==="funding/location-decision-preview")return validateLocationDecision(data);
   if(path==="funding/context") {
     properties(data,["version","name","activity_key","baseline","overrides","selected","allocations","calendar_start","notes","bundle"],"funding context");
     properties(data.baseline,["facts","parties","target","parcel_ids","work_budget"],"funding recorded baseline");
@@ -416,10 +426,7 @@ export function validateResponse(path, data) {
         required(Array.isArray(profile.criteria)&&profile.criteria.length>0,"Missing AL20 criteria.");
         const answer=data.selection_assessments[route];properties(answer,["criteria"],"AL20 assessment");
         if(Object.hasOwn(answer,"location_lookup")){
-          const lookup=answer.location_lookup;
-          properties(lookup,["version","dataset_id","dataset_hash","settings","automated"],"AL20 location lookup");
-          properties(lookup.settings,["municipality","population_mode","settlement_name","population","population_year"],"AL20 location settings");
-          required(lookup.version===1&&typeof lookup.dataset_id==="string"&&typeof lookup.dataset_hash==="string"&&lookup.dataset_hash.length===64&&Array.isArray(lookup.automated)&&lookup.automated.every(cid=>["AT.3","RD.5"].includes(cid)),"Unsupported AL20 location lookup. Restart Python and reload.");
+          validateLocationMetadata(answer.location_lookup);
         }
         for(const criterion of profile.criteria){
           properties(criterion,["id","label","label_es","cap","method","choices","exclusive_groups","requires","guidance","limitations","sources","parameters"],"AL20 criterion");

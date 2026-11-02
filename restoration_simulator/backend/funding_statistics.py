@@ -2,8 +2,9 @@
 
 The immutable dataset is separate from scoring definitions. Applying a lookup is
 an editing command. Saved manual answers are never converted on read or upgrade.
-The optional assessment.location_lookup v1 field is absent for manual/older
-assessments; absence means no automatic relationship. Historical snapshots stay
+The optional assessment.location_lookup field is absent for manual/older
+assessments; absence means no recorded lookup. V1 keeps a shared location;
+v2 retains independent per-criterion inputs and previous answers. Historical snapshots stay
 valid. Every supported dataset edition must remain available for saved lookups.
 """
 from copy import deepcopy
@@ -80,13 +81,26 @@ def validate_assessment(assessment, bundle):
         return  # Explicit optional contract: absent means manual historical input.
     from .funding import digest
     metadata = assessment["location_lookup"]
-    keys(metadata, {"version", "dataset_id", "dataset_hash", "settings", "automated"}, "AL20 saved location lookup")
-    require(type(metadata["version"]) is int and metadata["version"] == 1, "Unsupported saved AL20 location lookup. Keep this save and install its matching evaluator.")
+    keys(metadata, {"version", "dataset_id", "dataset_hash", "automated"} | ({"settings"} if metadata["version"] == 1 else {"items"}), "AL20 saved location lookup")
+    require(type(metadata["version"]) is int and metadata["version"] in {1, 2}, "Unsupported saved AL20 location lookup. Keep this save and install its matching evaluator.")
     data = dataset()
     require(metadata["dataset_id"] == data["id"] and metadata["dataset_hash"] == digest(data), "The saved AL20 statistics edition differs. Restore its immutable dataset before reopening; no answers have been replaced.")
-    result = lookup(data, metadata["settings"])
     automatic = metadata["automated"]
     require(isinstance(automatic, list) and len(set(automatic)) == len(automatic) and set(automatic) <= CRITERIA, "Invalid automatic AL20 criterion list.")
+    if metadata["version"] == 2:
+        require(isinstance(metadata["items"], dict) and set(metadata["items"]) <= CRITERIA and set(automatic) <= set(metadata["items"]), "Missing per-criterion location decision.")
+        for cid, item in metadata["items"].items():
+            keys(item, {"settings", "before_answers"}, "saved " + cid + " decision")
+            result = lookup(data, item["settings"])
+            if item["before_answers"] is not None:
+                keys(item["before_answers"], set(result["answers"][cid]), "previous " + cid + " answers")
+                require(all(v is None or type(v) is bool for v in item["before_answers"].values()), "Invalid previous location selections.")
+                require(cid != "AT.3" or sum(v is True for v in item["before_answers"].values()) <= 1, "Previous population alternatives conflict.")
+            require(cid != "AT.3" or result["population_used"] is not None or item["before_answers"] is None, "A new population decision needs its applied population basis.")
+            require(cid != "RD.5" or item["settings"]["population_mode"] == "unconfirmed", "The business decision must retain municipality-only inputs.")
+            if cid in automatic: require(same_json(assessment["criteria"][cid]["answers"], result["answers"][cid]), "Automatic " + cid + " answers differ from its saved location. Use manual selections or review the lookup again.")
+        return
+    result = lookup(data, metadata["settings"])
     for cid in automatic:
         require(same_json(assessment["criteria"][cid]["answers"], result["answers"][cid]), "Automatic " + cid + " answers differ from the saved location. Switch this criterion to manual or recalculate the lookup.")
 
@@ -110,6 +124,7 @@ def apply(draft, project, route, settings, automated, expected_dataset_hash):
         if cid == "AT.3":
             require(Decimal(criterion["choices"][0]["points"]) >= Decimal(criterion["choices"][1]["points"]) and any(set(g) == set(result["answers"][cid]) for g in criterion["exclusive_groups"]), "The saved AT.3 alternatives are incompatible with this lookup.")
     assessment = d["selection_assessments"][route]
+    require("location_lookup" not in assessment or assessment["location_lookup"]["version"] == 1, "Use the reviewed location-apply service for per-criterion decisions; the legacy action cannot replace their history.")
     assessment["location_lookup"] = {"version": 1, "dataset_id": data["id"], "dataset_hash": digest(data), "settings": deepcopy(settings), "automated": list(automated)}
     for cid in automated:
         assessment["criteria"][cid]["answers"] = result["answers"][cid]

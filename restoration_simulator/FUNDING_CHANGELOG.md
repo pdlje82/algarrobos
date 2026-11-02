@@ -1,5 +1,32 @@
 # Funding Navigator changes
 
+## 2026-11-02 — complete supporting selections inside overview subnodes
+
+- Show every selected EDL reference inside its corresponding subnode, with full
+  titles, explanations, source-page links and an expanded, collapsible list/count.
+- Keep supporting selections visible on unscored items and repeat shared references
+  under each relevant subnode in the readable overview, Markdown and print output.
+- Validate full reference text and source details; incomplete responses fail visibly
+  with retry and preserve the saved draft. Scoring and saved evidence are unchanged.
+- Verified 292 backend tests, 107 frontend tests, the production build and an
+  isolated desktop/phone browser workflow covering all bound subnodes, all 50
+  needs, source focus, edits/reload, exports and malformed-response retry.
+
+## 2026-11-01 — transparent, explicitly applied location comparisons
+
+- Split RD.5 business and AT.3 population actions. Input changes now preview only;
+  applying both is explicit. Numeric rules, exclusive bands, before/after answers,
+  points and source pages appear above the selection control.
+- Added per-criterion applied inputs/history, independent locations, manual-override
+  labels and source-year details. Older lookups remain readable without inferred
+  previous answers, scoring upgrades or historical calculator changes.
+- Added read-only decision preview and candidate-apply services with stale-comparison
+  checks. Autosave retains atomic revisions; failed requests keep the draft and retry.
+- Verified the full 288-test Python suite, eight focused location/history tests,
+  106 frontend tests, production build and an isolated Alhama browser workflow,
+  including PDF-page focus, phone themes and failed preview/application recovery.
+  Refreshed the local API and verified the live save remained byte-for-byte unchanged.
+
 ## 2026-11-01 — simplified Navigator, selected-items scoring and project versions
 
 - Replaced the six-step workflow with four areas and a visible version/programme/
