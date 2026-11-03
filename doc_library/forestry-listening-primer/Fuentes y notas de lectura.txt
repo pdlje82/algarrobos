@@ -1,0 +1,86 @@
+FUENTES DE LA GUÍA FORESTAL DE AL20
+Elaborada el 2 de noviembre de 2026
+
+ALCANCE
+
+Segunda guía original de escucha en español sobre la EDLL Alpujarra Sierra Nevada Almeriense 2023-2027 V1. «Línea forestal» se interpreta, por continuidad con la guía anterior, como la parte forestal de la línea 1 de AL20. No es una guía general de todas las ayudas forestales andaluzas.
+
+El foco son 1.8, explotaciones forestales; 1.10, transformación/comercialización forestal; y 1.11, servicios agrarios/forestales. La agricultura se limita a la clasificación de plantaciones de algarrobo, agroforestería y forestación de terrenos agrarios. Las referencias a 3.4, 3.5 y 2.7 explican límites entre vías, sin repetir íntegramente la primera guía.
+
+La conexión con Algarroba se construye a partir de sus documentos locales: acceso al terreno, separación entre propiedad/titularidad/operación, diagnóstico, diseño, piloto, mantenimiento, observación, tesorería y expansión después de evaluar. Las propuestas de servicios, ejemplos de presupuestos y recomendaciones son elaboración explicativa, no proyectos cuya elegibilidad haya sido confirmada. Las cifras del simulador no se usan como datos de campo, precios, plazos jurídicos o previsiones.
+
+El TXT contiene solo narración. El EPUB reproduce el mismo texto con capítulos navegables. La bibliografía se mantiene fuera de la lectura. Duración estimada por palabras, sin locución generada ni cronometrada; voz y velocidad pueden modificarla. No se han subido archivos a cuentas externas.
+
+Todos los PDF relacionados YA ESTABAN ALMACENADOS en doc_library. No se han incorporado nuevas versiones oficiales ni modificado los PDF. Las páginas son posiciones del PDF, contando desde uno.
+
+ESTRATEGIA
+
+FUND-013 - Alpujarra Sierra Nevada Almeriense - EDLL 2023-2027 - v1.pdf
+ADR/GDR Alpujarra Sierra Nevada Almeriense. 544 páginas. V1 identificada en la publicación oficial con fecha 19 de noviembre de 2024.
+
+- Páginas 404 a 408: objetivo general de línea 1 y objetivo específico OE1.2, mejorar valor añadido forestal. Indicadores de empleo, economía rural, género, juventud y clima. La página 407 estima un 10 por ciento del presupuesto para OE1.2 como metodología de cálculo de indicadores, no como reserva vinculante ni límite de ayuda por proyecto.
+- Página 408: necesidades transversales y condiciones. La referencia a regeneración de suelos indica que debe considerarse auxiliar de la cadena de valor de la empresa, no su objeto principal.
+- Páginas 428 a 436: tipologías de línea 1 y criterios de selección. Se seleccionan 1.7 a 1.11; no se seleccionan las tipologías independientes 1.1 a 1.6. Página 429: todas las operaciones seleccionadas son productivas.
+- Páginas 429 a 435: máximos de CO.1 de 15 puntos; AT.8 y RD.5 de 10 cada uno; empleo, tamaño, cooperación, igualdad, juventud e innovación. Contraste con FUND-004.
+- Páginas 395 a 401: necesidades y definiciones de innovación. Ausencia de sectores económicos designados como innovadores; definiciones y restricciones de temáticas y aspectos integrados.
+- Páginas 475 y 478: trabajos forestales como oportunidad juvenil; recursos forestales, espacios protegidos y clima.
+- Páginas 527 a 528: presupuesto compartido de línea 1 de 330.052,59 euros en el cuadro financiero. La página 404 muestra 330.052,60 euros; la guía usa «aproximadamente trescientos treinta mil» y no resuelve implícitamente esa diferencia de un céntimo. No es saldo disponible en noviembre de 2026.
+
+Publicación oficial consultada el 2 de noviembre de 2026:
+https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores-al-al20.html
+
+Enlace de descarga registrado en el catálogo, procedente de esa publicación; no se ha repetido la descarga para esta guía:
+[EDLL Alpujarra Sierra Nevada Almeriense 2023-2027 V1 — ADR/GDR — 19 de noviembre de 2024](https://drive.google.com/uc?export=download&id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK)
+
+BASES REGULADORAS
+
+FUND-008 - Andalusia - LEADER Governing Rules - BOJA 29 - 2026-02-03.pdf
+Junta de Andalucía. Orden de 3 de febrero de 2026, publicada en BOJA 29 de 12 de febrero de 2026. 163 páginas.
+
+- Tipología 1.8, páginas 85 a 88: explotación forestal, productos y aprovechamientos, finalidad productiva, beneficiarias, titularidad por propiedad o cesión, REAFA, instrumento forestal cuando sea exigible, exclusiones de funcionamiento normal e infraestructuras de regadío. Reembolso, 65 por ciento, máximo 200.000 euros por operación, minimis.
+- Tipología 1.10, páginas 90 a 93: transformación y comercialización de productos forestales; diferencias respecto de preparación y primera venta en la propia explotación; productos mixtos y volumen de negocio predominante; límites sobre transformación industrial de madera; beneficiarias y registros cuando sean exigibles. Reembolso, 65 por ciento, máximo 200.000 euros, minimis.
+- Tipología 1.11, páginas 93 a 95: servicios al sector; creación y modernización de actividad; beneficiarias empresariales; actividad mixta; gastos de personal e inversión bajo condiciones generales; exclusión de funcionamiento sin mejora. Reembolso, 65 por ciento, máximo 200.000 euros, minimis.
+- Artículo 11, página 25: temporalidad de gastos y actuaciones sobre terreno, excepciones y actas; IVA recuperable; funcionamiento normal; infraestructuras de regadío; exclusión de forestación incoherente con objetivos ambientales, climáticos y gestión forestal sostenible. Se evita presentar como subvencionable cualquier gasto de agua o plantación por analogía.
+- Artículo 6.6: operaciones integrales y prohibición de mezclar carácter productivo y no productivo dentro de una misma operación. Las actividades reales y las reglas de gastos determinan clasificación; no se presume compatibilidad entre ayudas.
+- Tipología 2.7, página 111: excluye servicios de apoyo al sector agrario y forestal incluidos en 1.11.
+- Tipologías 3.4 y 3.5, páginas 120 a 124: frontera con demostración y conservación no productivas. La demostración 3.4 excluye finalidad de competitividad productiva; no sustituye automáticamente una tipología 1.5 no seleccionada localmente.
+- Preámbulo y procedimiento: concurrencia no competitiva. No se calcula ranking, puntuación, umbral ni elegibilidad de un expediente.
+
+Publicación oficial consultada el 2 de noviembre de 2026:
+https://www.juntadeandalucia.es/boja/2026/29/1
+
+PDF firmado enlazado por esa publicación y ya almacenado como FUND-008; no se ha repetido su descarga:
+[Bases LEADER Intervención 7119.2 — Junta de Andalucía — Orden de 3 de febrero de 2026](https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf)
+
+CRITERIOS LOCALES
+
+FUND-004 - Alpujarra Sierra Nevada Almeriense - LEADER AL20 Selection Criteria - 2026.pdf
+20 páginas; firma visible de 16 de febrero de 2026. Tablas inspeccionadas visualmente por su capa de texto incompleta. Página 1: selección 1.7 a 1.11 y carácter productivo. Páginas 2 a 7: criterios de línea 1. Se contrastaron AT.8, CO.1, RD.5, innovación, cooperación y tamaño; los máximos narrados no se suman como puntuación de un proyecto.
+
+Enlace ofrecido por la publicación oficial AL20, sin repetir descarga ni afirmar una nueva verificación de sus bytes:
+[Criterios de selección AL20 — GDR Alpujarra Sierra Nevada Almeriense — firma de 16 de febrero de 2026](https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/03/Listado%20criterios%20AL20.pdf)
+
+CONTEXTO TÉCNICO DEL ALGARROBO
+
+FOREST-002 - Andalusia - Carob Cultivation and Restoration Handbook - 2026.pdf
+Soluciones innovadoras para consolidar el algarrobo como cultivo de alto valor en Andalucía. Rafael M. Navarro Cerrillo y Guillermo Palacios Rodríguez, editores. UCOPress / Universidad de Córdoba, 2026. 168 páginas. eISBN 9788499279497. DOI 10.21071/000069.
+
+- Páginas 91 a 92: formaciones naturales, diversidad de contextos, conservación y limitaciones.
+- Página 93: antecedentes históricos de forestación de tierras agrarias. No se presentan esos programas históricos como ayudas actualmente abiertas.
+- Páginas 94 a 96: problemas de establecimiento y necesidad de adaptar diseño, procedencia/calidad de planta, suelo, clima y mantenimiento. La guía no convierte sus recomendaciones en dosis de riego, densidades, profundidades de preparación o reglas universales para Almería.
+- Página 97: separación entre modelos de producción y modelos MR1, recuperación protectora, MR2, recolección de agua, y MR3, diversificación del paisaje agrícola. Modelos ecológicos/productivos y clasificación jurídica de ayudas se mantienen separados.
+
+Página de publicación identificada en el catálogo, no enlace de descarga PDF; no se ha verificado de nuevo su régimen de acceso:
+[Manual del algarrobo — UCOPress y Universidad de Córdoba — 2026 — página de publicación DOI](https://doi.org/10.21071/000069)
+
+DOCUMENTACIÓN LOCAL DE ALGARROBA
+
+README.md: finalidad del simulador; acceso al terreno; demostrador, observación y evaluación; separación entre áreas, derechos y mantenimiento; carácter hipotético de resultados y supuestos.
+restoration_simulator/FUNDING_NAVIGATOR.md, apartado Verified core and wider research: ayudas no certificadas; clasificación por clientes/servicios reales; separar recibos previstos, tesorería, préstamos y aportaciones; ausencia de ingresos de carbono inferidos.
+restoration_simulator/design_rules/README.md: el diseñador es una distribución hipotética, no un modelo de idoneidad ecológica. Sus valores geométricos no se trasladan como instrucciones de campo.
+
+LÍMITES
+
+El ejemplo de 40.000 euros admisibles, 26.000 de ayuda y 14.000 a cubrir es aritmética del 65 por ciento, no una previsión de concesión, calendario, impuestos o costes forestales. La parte restante no se presume cubierta por otra subvención.
+
+No se determina si una finca concreta es forestal o agrícola, si un vivero o servicio concreto pertenece a 1.8/1.11, si el solicitante reúne requisitos ni si existe convocatoria o presupuesto disponible. La futura solicitud exige revisar convocatoria aplicable, modificaciones, registros, permisos, evidencias, gastos, compromisos y acumulación. No se establece una secuencia obligatoria entre demonstración, conservación y negocio.

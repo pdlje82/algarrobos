@@ -1,0 +1,82 @@
+FUENTES Y NOTAS DE LA GUÍA SOBRE AL20
+Elaborada el 2 de noviembre de 2026
+
+ALCANCE Y USO
+
+Síntesis original en español de la EDLL Alpujarra Sierra Nevada Almeriense 2023-2027 V1, centrada en su estrategia territorial y las tipologías 3.4 y 3.5. Las condiciones jurídicas y económicas se toman de las bases y los anexos locales, no se atribuyen a la EDLL.
+
+El TXT principal solo contiene narración: sin tablas, bibliografía intercalada, números de página, enlaces ni instrucciones escénicas. El EPUB reproduce íntegramente el mismo texto con capítulos navegables. Las cifras de las tipologías se escriben con palabras para facilitar su lectura en voz alta.
+
+Duración calculada por número de palabras. No se ha generado ni cronometrado una locución. La voz, las pausas y la velocidad de ElevenReader pueden cambiar la duración. Los ejemplos de tratamientos comparables, indicadores, colaboración y fichas de proyecto son recomendaciones explicativas, no protocolos obligatorios ni actuaciones cuya elegibilidad esté confirmada.
+
+Todos los PDF relacionados YA ESTABAN ALMACENADOS en doc_library. No se han añadido nuevas versiones ni modificado sus contenidos. Las páginas son posiciones del PDF, contando desde uno.
+
+FUENTE PRINCIPAL
+
+FUND-013 - Alpujarra Sierra Nevada Almeriense - EDLL 2023-2027 - v1.pdf
+ADR / GDR Alpujarra Sierra Nevada Almeriense. 544 páginas. La publicación oficial identifica V1 con fecha de 19 de noviembre de 2024.
+
+Trazabilidad de la narración:
+- Introducción y partes primera y segunda: índice, páginas 1 a 5; municipios, página 3; participación, páginas 36 a 48, especialmente 37; estructura del diagnóstico, página 49; fortalezas y oportunidades, páginas 369 a 373.
+- Parte tercera: páginas 382 a 397. Método de priorización en 393; cincuenta necesidades abordables en 395 a 397; lista no abordable en 397. Agua NPL1, agricultura NPL2, patrimonio NPL3, suelo NPL4, clima NPL8, participación/custodia NPL41 y voluntariado NPL50.
+- Parte cuarta: arquitectura del plan, páginas 402 a 403; objetivos de línea 3, páginas 416 a 420; tipologías y naturaleza no productiva, página 445; lógica de intervención, páginas 492 a 495. Página 494 relaciona OE3.3, NPL3, NPL4 y NPL8 con las tipologías 3.4 y 3.5.
+- Parte octava: criterios de línea 3, páginas 446 a 450, contrastados con FUND-004.
+- Parte novena: ausencia de sectores designados, páginas 383 y 398; cinco temáticas y doce aspectos integrados, páginas 398 a 401. Carbono y certificación regenerativa en 399; huellas y agricultura de precisión en 400; restricciones territoriales de aspectos 11 y 12 en 400 y 401.
+- Parte décima: igualdad, páginas 471 a 474; juventud, 475 a 477; clima, 478 a 480. Contenidos de línea 3 en 473, 476 y 479. Gestión, seguimiento y evaluación, páginas 503 a 525.
+- Partes cuarta y décima: plan financiero, páginas 526 a 528. Página 528: total de 2.160.030,07 euros; línea 3 de 710.649,89 euros y 32,90 por ciento; mínimos globales de igualdad, juventud y clima.
+- Parte undécima: interpretación y recomendaciones basadas en la lógica de intervención y las bases. No es una lista literal de requisitos de la EDLL.
+
+Publicación oficial AL20, consultada el 2 de noviembre de 2026:
+https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores-al-al20.html
+
+Descarga procedente de la publicación oficial, registrada en CATALOG.md; no se ha repetido para esta guía:
+[EDLL Alpujarra Sierra Nevada Almeriense 2023-2027 V1 — ADR/GDR — 19 de noviembre de 2024](https://drive.google.com/uc?export=download&id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK)
+
+BASES REGULADORAS
+
+FUND-008 - Andalusia - LEADER Governing Rules - BOJA 29 - 2026-02-03.pdf
+Junta de Andalucía. Orden de 3 de febrero de 2026, publicada en BOJA 29 de 12 de febrero de 2026. 163 páginas.
+
+- Artículo 3.5, página 9: patrimonio rural y formas de acreditación.
+- Tipología 3.4, páginas 120 a 122: objeto demostrativo, novedad local, transferibilidad, exclusión de competitividad productiva, apertura de participación, selección transparente cuando hay límites, difusión en internet durante un mínimo de tres años desde el pago final, carácter finalista, beneficiarias y gastos. Reembolso; cien por cien del gasto subvencionable; máximo 28.000 euros por operación.
+- Tipología 3.5, páginas 123 a 124: objeto patrimonial; exclusión de estudios y actividades puntuales; límites frente a producción agraria y forestal; difusión o uso público y plan para recintos cerrados; instrumento forestal cuando sea exigible; beneficiarias y gastos; exclusión de compra de elementos patrimoniales. Reembolso; cien por cien; máximo 200.000 euros por operación.
+- Preámbulo y procedimiento de solicitantes que no son GDR: concurrencia no competitiva. Los criterios no se interpretan como un ranking competitivo.
+
+Publicación oficial consultada el 2 de noviembre de 2026:
+https://www.juntadeandalucia.es/boja/2026/29/1
+
+PDF firmado enlazado por la publicación, ya almacenado como FUND-008. No se ha repetido su descarga:
+[Bases LEADER Intervención 7119.2 — Junta de Andalucía — Orden de 3 de febrero de 2026](https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf)
+
+ANEXOS LOCALES
+
+FUND-004 - Alpujarra Sierra Nevada Almeriense - LEADER AL20 Selection Criteria - 2026.pdf
+20 páginas. Firma visible de 16 de febrero de 2026. Tablas inspeccionadas visualmente porque la capa de texto es incompleta.
+- Página 15: tipologías de línea 3 seleccionadas y naturaleza no productiva.
+- Páginas 16 a 20: matriz de criterios. CO.1: máximo 15, con 10 por una necesidad, 12 por dos, 15 por tres o más. RD.5 máximo 15; PT.1 máximo 15; PS.1 máximo 12; IN.1 máximo 5. La guía no suma subcriterios ni calcula puntuaciones de un proyecto.
+
+Enlace ofrecido por la publicación oficial AL20; la apertura automatizada agotó el tiempo de espera y se utilizó el PDF local. No se presenta como una descarga nuevamente verificada:
+[Criterios de selección AL20 — GDR Alpujarra Sierra Nevada Almeriense — firma de 16 de febrero de 2026](https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/03/Listado%20criterios%20AL20.pdf)
+
+FUND-005 - Alpujarra Sierra Nevada Almeriense - LEADER AL20 Eligible Activities and Budgets - 2026.pdf
+Una página. Firma visible de 16 de febrero de 2026. Tabla inspeccionada visualmente: confirma 3.4 y 3.5 seleccionadas. Sus presupuestos son por línea, no techos individuales por operación.
+
+Descarga PDF verificada mediante la publicación oficial el 2 de noviembre de 2026; ya almacenada en la biblioteca:
+[Líneas tipologías e importes AL20 — GDR Alpujarra Sierra Nevada Almeriense — firma de 16 de febrero de 2026](https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/03/Tipolog%C3%ADas%20e%20importes%20AL20.pdf)
+
+MATICES Y LÍMITES
+
+La asignación de la EDLL V1 no se presenta como saldo disponible en noviembre de 2026. Las puntuaciones de prioridad no se convierten en puntos de selección. Los mínimos financieros globales no se convierten en porcentajes obligatorios por proyecto.
+
+NPNL4, gestión y protección del medio natural, figura en la lista no abordable; NPL3, patrimonio, NPL4, suelo, y NPL8, clima, en la abordable. La guía reconoce la necesidad de aclarar el encaje concreto. El carbono aparece en un aspecto innovador y en una necesidad no abordable: no se presupone financiación de créditos ni compatibilidad con toda operación no productiva.
+
+La novedad demostrativa y las categorías de innovación para puntos son pruebas diferentes. La contribución ambiental general no acredita automáticamente criterios concretos sobre energía o movilidad.
+
+Una solicitud requiere comprobar convocatoria aplicable, modificaciones, puntuación mínima, calendario, disponibilidad presupuestaria, gastos, permisos, disponibilidad del terreno y evidencias. Esta guía no confirma apertura de convocatoria ni determina admisibilidad de una entidad o finca concreta.
+
+ELEVENREADER
+
+La ayuda oficial confirma importación de EPUB y TXT. Se han elegido para evitar la lectura de tablas, bibliografía o números de página. Ayuda consultada el 2 de noviembre de 2026:
+https://elevenlabs.io/docs/help-center/product/mobile-apps/elevenreader/how-do-i-add-content-to-elevenreader
+
+No se han subido archivos a ninguna cuenta externa ni se ha generado audio.
