@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-03",
+  "main_report_local_images": 32,
+  "new_drone_source_pictures": 12,
+  "new_drone_concept_figures": 8,
+  "ebook_chapters": 16,
+  "ebook_total_embedded_images": 72,
+  "prior_52_illustrations_byte_identical": true,
+  "prior_40_picture_source_records_retained": true,
+  "unique_picture_identifiers": true,
+  "local_markdown_references_checked": 162,
+  "local_markdown_references": "passed",
+  "source_report_sha256": "e8a420a4ab784cdb01e0f5cd6a4ef2c6ddd705f84b35e09667f062125a266ae3",
+  "epub_bytes": 8944003,
+  "elevenreader_import_and_playback": "not tested"
+}

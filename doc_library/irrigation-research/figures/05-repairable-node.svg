@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>A repairable electronic plant or island node</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">05  A repairable electronic plant or island node</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Functional architecture only: select ratings and protection before wiring hardware.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<rect x="65" y="185" width="270" height="110" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="83" y="218" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#b77420">Solar + charger</text>
+<text x="83" y="247" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Replaceable battery</text>
+<text x="83" y="275" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Low-voltage cutoff</text>
+<rect x="450" y="185" width="355" height="110" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="468" y="218" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Low-power controller</text>
+<text x="468" y="247" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Clock + watchdog + local rules</text>
+<text x="468" y="275" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Local event log + device identity</text>
+<rect x="965" y="185" width="320" height="110" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="983" y="218" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#39785b">LoRa radio + antenna</text>
+<text x="983" y="247" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">EU868 hardware variant</text>
+<text x="983" y="275" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Survey real coverage</text>
+<line x1="335" y1="240" x2="450" y2="240" stroke="#b77420" stroke-width="3"/>
+<polygon points="450,240 438.2941876694152,245.654551943446 438.2941876694152,234.345448056554" fill="#b77420"/>
+<line x1="805" y1="240" x2="965" y2="240" stroke="#39785b" stroke-width="3"/>
+<polygon points="965,240 953.2941876694152,245.654551943446 953.2941876694152,234.345448056554" fill="#39785b"/>
+<rect x="70" y="415" width="320" height="131" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="88" y="448" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Replaceable probes</text>
+<text x="88" y="477" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Soil water status + temperature</text>
+<text x="88" y="505" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Compatible analogue or bus</text>
+<text x="88" y="533" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">input</text>
+<rect x="480" y="415" width="320" height="125" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="498" y="448" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#b77420">Valve driver</text>
+<text x="498" y="477" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Polarity pulse for latch valve</text>
+<text x="498" y="505" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">OR rated motor-valve interface</text>
+<rect x="965" y="415" width="320" height="131" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="983" y="448" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Waterproof connectors</text>
+<text x="983" y="477" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Separate wet probe,</text>
+<text x="983" y="505" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">electronics,</text>
+<text x="983" y="533" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">power module and valve module</text>
+<line x1="390" y1="470" x2="440" y2="470" stroke="#137fa7" stroke-width="3"/>
+<polygon points="440,470 428.2941876694152,475.654551943446 428.2941876694152,464.345448056554" fill="#137fa7"/>
+<line x1="440" y1="470" x2="440" y2="320" stroke="#137fa7" stroke-width="3"/>
+<line x1="440" y1="320" x2="580" y2="320" stroke="#137fa7" stroke-width="3"/>
+<polygon points="580,320 568.2941876694152,325.654551943446 568.2941876694152,314.345448056554" fill="#137fa7"/>
+<line x1="580" y1="320" x2="580" y2="295" stroke="#137fa7" stroke-width="3"/>
+<line x1="640" y1="295" x2="640" y2="415" stroke="#b77420" stroke-width="3"/>
+<polygon points="640,415 634.345448056554,403.2941876694152 645.654551943446,403.2941876694152" fill="#b77420"/>
+<rect x="475" y="640" width="365" height="103" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="493" y="673" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#a7443c">Valve + position / flow check</text>
+<text x="493" y="702" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Command sent does not prove water</text>
+<text x="493" y="730" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">delivered.</text>
+<line x1="640" y1="540" x2="640" y2="640" stroke="#b77420" stroke-width="3"/>
+<polygon points="640,640 634.345448056554,628.2941876694152 645.654551943446,628.2941876694152" fill="#b77420"/>
+<text x="65" y="630" font-family="sans-serif" font-size="23" font-weight="normal" text-anchor="start" fill="#19343e">One node: several nearby probes</text>
+<text x="65" y="662" font-family="sans-serif" font-size="23" font-weight="normal" text-anchor="start" fill="#19343e">and valves within one island.</text>
+<text x="65" y="694" font-family="sans-serif" font-size="23" font-weight="normal" text-anchor="start" fill="#19343e">Fewer radios and batteries to service.</text>
+<text x="965" y="640" font-family="sans-serif" font-size="23" font-weight="normal" text-anchor="start" fill="#19343e">Do not bury the radio.</text>
+<text x="965" y="672" font-family="sans-serif" font-size="23" font-weight="normal" text-anchor="start" fill="#19343e">Do not pot the whole unit.</text>
+<text x="965" y="704" font-family="sans-serif" font-size="23" font-weight="normal" text-anchor="start" fill="#19343e">Keep service screws accessible.</text>
+</svg>

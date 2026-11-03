@@ -1,0 +1,819 @@
+{
+  "date": "2026-11-03",
+  "chapters": 16,
+  "original_figures_embedded": 12,
+  "drone_figures_embedded": 8,
+  "concept_figures_embedded": 20,
+  "product_component_pictures_embedded": 52,
+  "total_embedded_illustrations": 72,
+  "word_count": 7702,
+  "estimated_minutes_at_130_to_160_wpm": [
+    48,
+    59
+  ],
+  "zip_integrity": "passed",
+  "xml_and_resource_references": "passed",
+  "spine_order": "passed",
+  "narration_round_trip": "passed",
+  "image_bytes_match_packaged_assets": "passed",
+  "original_concept_diagram_bytes_unchanged": "passed",
+  "chapter_and_figure_navigation": "passed",
+  "source_report_sha256": "e8a420a4ab784cdb01e0f5cd6a4ef2c6ddd705f84b35e09667f062125a266ae3",
+  "manuscript_sha256": "c47c163d67906a994fa02c04acfaf7c8004bff8a3c287d5beed321726e6997db",
+  "epub_sha256": "634a0ce7e184bc6f38fc46828fc2ad8cf416fd52f2b2efcd4540be3735bdc85b",
+  "elevenreader_import_and_playback": "not tested",
+  "illustrations": [
+    {
+      "number": 1,
+      "kind": "concept",
+      "chapter": 1,
+      "file": "01-control-levels.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "367cd4dd27560441b552bac2588b53ed0cc466d72cfbf968d646ef64ada169e1"
+    },
+    {
+      "number": "photo-p01",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p01-agronic.jpg",
+      "pixels": [
+        1429,
+        1250
+      ],
+      "sha256": "f229c3ceae75843a1e6b9cffae9de1c2defe4ebf09c918f9a5216b2661c1d7f6"
+    },
+    {
+      "number": "photo-p02",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p02-agrobee.jpg",
+      "pixels": [
+        1600,
+        1067
+      ],
+      "sha256": "2c80f91bf0a99dd8316066af400c767f93b847e18dc01d931bb258aa2a3c715e"
+    },
+    {
+      "number": "photo-p03",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p03-wise.jpg",
+      "pixels": [
+        1600,
+        1068
+      ],
+      "sha256": "613c5dd23d35a6306a4f9a8a7d4094a21937f8223eb9db59b5e05d7f755db29d"
+    },
+    {
+      "number": "photo-p04",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p04-edagro.jpg",
+      "pixels": [
+        1600,
+        1066
+      ],
+      "sha256": "2619cc66ac24c1c98da6aaa820e1a74d7b64320b096c8ee81ceb28f50d96f5c2"
+    },
+    {
+      "number": "photo-p05",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p05-uc511.jpg",
+      "pixels": [
+        1600,
+        583
+      ],
+      "sha256": "52b24557ef91a9d090d9f51119908506e9d9652ce02ffcc82b219df74900741d"
+    },
+    {
+      "number": "photo-p06",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p06-dragino.jpg",
+      "pixels": [
+        1600,
+        838
+      ],
+      "sha256": "f7029302585909088141490d2ac3fa374f8d547f78e0646b1a651451dc52684e"
+    },
+    {
+      "number": "photo-p07",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p07-opensprinkler.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "ca33d3376f1ec59eec8394e263e786d95a79cdb500dbb3da4b0419d7f908111e"
+    },
+    {
+      "number": "photo-p08",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p08-irrigatia.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "92e83ac72a2064cb2fe2dbea209778f93652cb57f454de0cc55283c4096b92bf"
+    },
+    {
+      "number": "photo-p09",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p09-blumat.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "ba14ddc16028c41cd6489a3f0cea89ab6df91f43b3cb5816952ee0b3d6683850"
+    },
+    {
+      "number": "photo-p10",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p10-plantcontrol.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "e95fa79fe01e9bbcc14cc4d3a84e1803a2083a0a0a3eae368cdcf842ead65a22"
+    },
+    {
+      "number": "photo-p11",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p11-openirr.jpg",
+      "pixels": [
+        1600,
+        1067
+      ],
+      "sha256": "7aadfbbd6dd4c48cf21d08d4dd8d265098d444d6900aff1108f6dedac9713fe6"
+    },
+    {
+      "number": "photo-p13",
+      "kind": "reference",
+      "chapter": 3,
+      "file": "p13-catwan-layout.png",
+      "pixels": [
+        1600,
+        1250
+      ],
+      "sha256": "0151b5f7a8162d76b3fcf7ae7526dc0aa6236b742f66a2d9ea206eb6b88e407e"
+    },
+    {
+      "number": 2,
+      "kind": "concept",
+      "chapter": 4,
+      "file": "02-landscape-water-cells.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "001f09e2559faf87b93cd144d318f32a0d16137098da8797e094975101c1d6ec"
+    },
+    {
+      "number": "photo-p14",
+      "kind": "reference",
+      "chapter": 4,
+      "file": "p14-tank.jpg",
+      "pixels": [
+        1034,
+        1250
+      ],
+      "sha256": "7497758248cf98bbd80cbcf937c44f810a5bfedff6c7c144121effc65c7be537"
+    },
+    {
+      "number": "photo-p15",
+      "kind": "reference",
+      "chapter": 4,
+      "file": "p15-pump.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "8f573a1cf46545a55175840c4859c1d7c6c258a5d85e51efce5de500076747ed"
+    },
+    {
+      "number": "photo-p16",
+      "kind": "reference",
+      "chapter": 4,
+      "file": "p16-filter.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "13a05ba8eb6819763d706e2a0b10e6d51f60ea7926942d05ca188c71a1d46769"
+    },
+    {
+      "number": "photo-p18",
+      "kind": "reference",
+      "chapter": 4,
+      "file": "p18-valve.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "d8c216fdba2a8bc7b0eff16c4c8c38f8bc5174dee27b5bce13cf45b2a69d91be"
+    },
+    {
+      "number": "photo-p20",
+      "kind": "reference",
+      "chapter": 4,
+      "file": "p20-fittings.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "c8437ed2ab9c8f2d8de091fe2d34dbe63ed9f7489e8b704298ffe5f2304aca36"
+    },
+    {
+      "number": "photo-p37",
+      "kind": "reference",
+      "chapter": 4,
+      "file": "p37-manual-tap.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "fba325acc18f824eb3b3b6f35ea09034c44504dce0246dea545caa141bb2905d"
+    },
+    {
+      "number": "photo-p40",
+      "kind": "reference",
+      "chapter": 4,
+      "file": "p40-tubing.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "8f6afc0d8eb6163adcbe6b51a233d75088bb4f1ac5a6563dcb31b90c1d47d40e"
+    },
+    {
+      "number": 3,
+      "kind": "concept",
+      "chapter": 4,
+      "file": "03-tank-station-hydraulics.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "e011db5c529fa6a9c6e99bf3ca17679e1f3c2cccb708a669c317d77c574bdab3"
+    },
+    {
+      "number": 4,
+      "kind": "concept",
+      "chapter": 4,
+      "file": "04-gravity-pressure-budget.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "78715414add7fff26b3f8473843d016bb31e05c3be32967040b601c05f419c7f"
+    },
+    {
+      "number": "photo-p21",
+      "kind": "reference",
+      "chapter": 4,
+      "file": "p21-dripper.jpg",
+      "pixels": [
+        1600,
+        1131
+      ],
+      "sha256": "506f6ef4197e07ad3f07f31cbc55718f2116daafda3b76b80c097e0ac80ff620"
+    },
+    {
+      "number": "photo-p35",
+      "kind": "reference",
+      "chapter": 4,
+      "file": "p35-ball-valve.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "5cd2cda164e70b47ad92403ab7fda7d98ab8017be2b39d0f0fb6b31c328519fc"
+    },
+    {
+      "number": "photo-p19",
+      "kind": "reference",
+      "chapter": 4,
+      "file": "p19-solenoid.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "0e4f7b1b8e40835de7a287e3f7449294587037641cd0be711ec2fd650eda1b77"
+    },
+    {
+      "number": "photo-p23",
+      "kind": "reference",
+      "chapter": 5,
+      "file": "p23-tensiometer.jpg",
+      "pixels": [
+        1550,
+        1250
+      ],
+      "sha256": "d9de528440f2f40d6b4b1177c2d23e0aa049b0722ac92120e660ea027feaccc2"
+    },
+    {
+      "number": "photo-p24",
+      "kind": "reference",
+      "chapter": 5,
+      "file": "p24-watermark.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "5476c47808e1c75a4605bd79360f7cb56fee3b3897417f845f4605032f37b049"
+    },
+    {
+      "number": "photo-p25",
+      "kind": "reference",
+      "chapter": 5,
+      "file": "p25-temperature.jpg",
+      "pixels": [
+        1600,
+        1200
+      ],
+      "sha256": "ee508413b31d451127fdc8b8b99ae45af887410f31abf186fbefeabc7f7488f7"
+    },
+    {
+      "number": "photo-p34",
+      "kind": "reference",
+      "chapter": 5,
+      "file": "p34-level.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "58c8a991a8ccebc611c7fdf9a6c0ee657c61e6059376d811bd2c31bf93f4c7e9"
+    },
+    {
+      "number": 5,
+      "kind": "concept",
+      "chapter": 5,
+      "file": "05-repairable-node.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "04432b4c007481ad541a49ecea8227a3fc9cb7994c84354853ce092fcd3f4f9e"
+    },
+    {
+      "number": "photo-p12",
+      "kind": "reference",
+      "chapter": 5,
+      "file": "p12-openirr-components.jpg",
+      "pixels": [
+        1600,
+        654
+      ],
+      "sha256": "927385d3dbdb47c1e57a451fb746873ab84166161457d97f38b482695bf5ed71"
+    },
+    {
+      "number": "photo-p22",
+      "kind": "reference",
+      "chapter": 5,
+      "file": "p22-vh400.jpg",
+      "pixels": [
+        220,
+        1250
+      ],
+      "sha256": "df2f8e2b9b7165bc114afd7abe9fc8af327fcad8bf1493493aa9309a81b622ad"
+    },
+    {
+      "number": "photo-p39",
+      "kind": "reference",
+      "chapter": 5,
+      "file": "p39-budget-probe.jpg",
+      "pixels": [
+        1600,
+        1067
+      ],
+      "sha256": "589bbcac867f91704568749bdc04cd15ee7e478873682253816696e986d6063a"
+    },
+    {
+      "number": 6,
+      "kind": "concept",
+      "chapter": 5,
+      "file": "06-sensor-placement.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "c216fddea6338560a6cfd75ac30884c38f68cb20a89d7997ca0b8fec3b1eda80"
+    },
+    {
+      "number": 7,
+      "kind": "concept",
+      "chapter": 6,
+      "file": "07-passive-per-plant.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "3a8c3993ba2eca3e02e1c770444f601e38f68d5167bc6ddc30098f014d5e75d3"
+    },
+    {
+      "number": "photo-p26",
+      "kind": "reference",
+      "chapter": 6,
+      "file": "p26-waterboxx.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "472e2d7d19b25c3c46a9a2cb82c1238d5767f457a322495ff1a28b0977dd2d79"
+    },
+    {
+      "number": "photo-p27",
+      "kind": "reference",
+      "chapter": 6,
+      "file": "p27-cocoon.jpg",
+      "pixels": [
+        1600,
+        948
+      ],
+      "sha256": "92d9b6529c4749142a626a1ecf288ef1eb426571baf85c1895b9d2e8e069a274"
+    },
+    {
+      "number": "photo-p28",
+      "kind": "reference",
+      "chapter": 6,
+      "file": "p28-olla.jpg",
+      "pixels": [
+        1600,
+        1067
+      ],
+      "sha256": "b1d342e4ced1a405115749262ded684b68328c78aaa9c652487e381cd208d1bf"
+    },
+    {
+      "number": "photo-p38",
+      "kind": "reference",
+      "chapter": 6,
+      "file": "p38-root-delivery.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "c0052bba0aa905b60b2be73b58d6d540c49dbec3706f88a02026ec7ad3275c24"
+    },
+    {
+      "number": "photo-p29",
+      "kind": "reference",
+      "chapter": 6,
+      "file": "p29-fog-guard.jpg",
+      "pixels": [
+        921,
+        1250
+      ],
+      "sha256": "31305fd6d22fb4f3f8d777b3462a4640b669afd75ea3b71597985fce21c681cd"
+    },
+    {
+      "number": "photo-p30",
+      "kind": "reference",
+      "chapter": 7,
+      "file": "p30-gateway.jpg",
+      "pixels": [
+        1600,
+        582
+      ],
+      "sha256": "2e1687e61c605aebab47613668709f3e7bb7815e2a2994facedb6b20bffa4346"
+    },
+    {
+      "number": 8,
+      "kind": "concept",
+      "chapter": 7,
+      "file": "08-wireless-and-local-control.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "d8d8bbea353db71a6f1e7f3d23328ce85937b54d8cd5c11eb65aecaf7460b442"
+    },
+    {
+      "number": "photo-p17",
+      "kind": "reference",
+      "chapter": 8,
+      "file": "p17-flowmeter.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "1efe2515c54f6244b00cc2bb883695e20ea99a373da63b999619de41482e69aa"
+    },
+    {
+      "number": 9,
+      "kind": "concept",
+      "chapter": 8,
+      "file": "09-control-state-diagram.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "b2042b7fe8a41330310b9e477c1a1753c13467979c00ecaf4887eea0a1bc3831"
+    },
+    {
+      "number": 10,
+      "kind": "concept",
+      "chapter": 9,
+      "file": "10-water-and-energy-budgets.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "a9c0b1814c1f246b11d25b34e82c0c6aba12b6f98b53cbc6323f39965e1bdae1"
+    },
+    {
+      "number": "photo-p33",
+      "kind": "reference",
+      "chapter": 9,
+      "file": "p33-battery.jpg",
+      "pixels": [
+        1600,
+        668
+      ],
+      "sha256": "9f9fc6b29c33fe57beaf7195b172f6f87350a2ad2054714e0c4eb444afffb4c3"
+    },
+    {
+      "number": "photo-p31",
+      "kind": "reference",
+      "chapter": 9,
+      "file": "p31-solar.jpg",
+      "pixels": [
+        1125,
+        1250
+      ],
+      "sha256": "f17c2ef359705b21b88bf26a449b9335b270abec900625ef9cda64c13710dd22"
+    },
+    {
+      "number": "photo-p32",
+      "kind": "reference",
+      "chapter": 9,
+      "file": "p32-charge.jpg",
+      "pixels": [
+        1370,
+        1250
+      ],
+      "sha256": "c988c4930f51241d1ffbb04d4ffa1a9a098f8a230130f009600fb67b5be4e0e4"
+    },
+    {
+      "number": 11,
+      "kind": "concept",
+      "chapter": 10,
+      "file": "11-repair-and-local-assembly.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "ac157ccd8c9a72f1243f1cd9917fa0f8e9731b3ca13e05996577186db5f9423b"
+    },
+    {
+      "number": "photo-p41",
+      "kind": "reference",
+      "chapter": 10,
+      "file": "p41-battery-pack.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "d5752d62362dded76b0bb9152a5f5a130b9fa45e0d8f0ee0167755f7023b2fe5"
+    },
+    {
+      "number": 12,
+      "kind": "concept",
+      "chapter": 11,
+      "file": "12-comparison-trial.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "a7d2ffda603be0fdc02e0a39e6bb55fd361825ce3ea8698fc5e40acdc91df7a7"
+    },
+    {
+      "number": 13,
+      "kind": "concept",
+      "chapter": 13,
+      "file": "13-drone-roles.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "b67ccd38c9312c2dfc3a67e011656fc34c537014c657ce943720c262bdc15d69"
+    },
+    {
+      "number": "photo-p42",
+      "kind": "reference",
+      "chapter": 13,
+      "file": "p42-mavic-aircraft.jpg",
+      "pixels": [
+        1600,
+        900
+      ],
+      "sha256": "41780ef2c43f98f4f6ec86b2a16ae78923b7068e2b18b45db8890ea7f7ad6e5e"
+    },
+    {
+      "number": "photo-p44",
+      "kind": "reference",
+      "chapter": 13,
+      "file": "p44-mavic-rgb.jpg",
+      "pixels": [
+        1542,
+        1250
+      ],
+      "sha256": "1c32025a18f275dc2039f046d26e28ea24de4ae510d056cf308ac203c238668d"
+    },
+    {
+      "number": "photo-p43",
+      "kind": "reference",
+      "chapter": 13,
+      "file": "p43-mavic-array.jpg",
+      "pixels": [
+        1600,
+        640
+      ],
+      "sha256": "b8d736a79cc5525e950b0ec8d3a1ad3b80e0c180acab9ab98f6ce3a08744830a"
+    },
+    {
+      "number": 14,
+      "kind": "concept",
+      "chapter": 13,
+      "file": "14-drone-image-resolution.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "70a43aa65791892ecf96bda87811dc9dd78fa7aded588dbcaabd5a0ed7f19619"
+    },
+    {
+      "number": "photo-p45",
+      "kind": "reference",
+      "chapter": 14,
+      "file": "p45-altum-pt.jpg",
+      "pixels": [
+        1250,
+        1250
+      ],
+      "sha256": "68bda781ae274d96b22fa8ec7e4b3f11760439f8121188a536762d59d3948280"
+    },
+    {
+      "number": "photo-p46",
+      "kind": "reference",
+      "chapter": 14,
+      "file": "p46-reflectance-calibration.jpg",
+      "pixels": [
+        1600,
+        800
+      ],
+      "sha256": "ee2cb1bbcbbac5bad9a1c69640c9a0ffeba20c318f7bb2e3513b24505c097030"
+    },
+    {
+      "number": "photo-p53",
+      "kind": "reference",
+      "chapter": 14,
+      "file": "p53-matrice-series.jpg",
+      "pixels": [
+        1600,
+        400
+      ],
+      "sha256": "afefe18cef111a8935ff4994406d8a3c64177a8e3ce36c648c94cdfcb6904b43"
+    },
+    {
+      "number": 15,
+      "kind": "concept",
+      "chapter": 14,
+      "file": "15-drone-moisture-depth.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "8a4e24c8dfc6a92699a685e12df018bb426e09a6bf6ff5871c284654278cebf1"
+    },
+    {
+      "number": "photo-p47",
+      "kind": "reference",
+      "chapter": 14,
+      "file": "p47-gpr-research.jpg",
+      "pixels": [
+        1600,
+        1010
+      ],
+      "sha256": "ef85dbdd441a3747a944c2ce6270fcf4a0d9679fb86f26a5d3a6809907179a20"
+    },
+    {
+      "number": 16,
+      "kind": "concept",
+      "chapter": 14,
+      "file": "16-drone-ground-fusion.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "38045eca5a7444d99d27f85692775e4f5f1f24982239a32159aaf1d6284a9362"
+    },
+    {
+      "number": "photo-p48",
+      "kind": "reference",
+      "chapter": 15,
+      "file": "p48-agras-t50.jpg",
+      "pixels": [
+        1600,
+        900
+      ],
+      "sha256": "391997137902b5b30e7977f9e7efb1470035e1e1cc19437a521e7ab5d1e9a8b5"
+    },
+    {
+      "number": "photo-p49",
+      "kind": "reference",
+      "chapter": 15,
+      "file": "p49-agras-t100.jpg",
+      "pixels": [
+        1600,
+        900
+      ],
+      "sha256": "0125bfe26c6bb8225faaaf70db2babfe520e8fae4dcad3a334fcd5cbe0ec16c4"
+    },
+    {
+      "number": 17,
+      "kind": "concept",
+      "chapter": 15,
+      "file": "17-drone-water-loads.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "7058b9aac78d52ecbfb9e01595cfcf754790aea518d44c31480a202b14000f98"
+    },
+    {
+      "number": "photo-p50",
+      "kind": "reference",
+      "chapter": 15,
+      "file": "p50-hose-prototype.jpg",
+      "pixels": [
+        1600,
+        898
+      ],
+      "sha256": "4f28840cf4df6a1ab4cf1c58f76b1871d4f8372efb13d9b539c78adacd1c423d"
+    },
+    {
+      "number": "photo-p51",
+      "kind": "reference",
+      "chapter": 15,
+      "file": "p51-hose-field.jpg",
+      "pixels": [
+        1600,
+        901
+      ],
+      "sha256": "cfad276c49824382467193b81e5b6d2e108770fa81c2af1d1c58c8a2a685ef89"
+    },
+    {
+      "number": "photo-p52",
+      "kind": "reference",
+      "chapter": 15,
+      "file": "p52-hose-ground-support.jpg",
+      "pixels": [
+        1600,
+        901
+      ],
+      "sha256": "38ee9c287671348558d9071755815096d867f2b18612708552d13823d0d22fc7"
+    },
+    {
+      "number": 18,
+      "kind": "concept",
+      "chapter": 15,
+      "file": "18-drone-spray-versus-root.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "2fafe8282e973dda4508a1e8d68b6da12cf0de91a75de2fde8dd2157dee56006"
+    },
+    {
+      "number": 19,
+      "kind": "concept",
+      "chapter": 16,
+      "file": "19-drone-validation-trial.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "ae656588f7243d3d71a9a2fc61d62f1785817368152ee3e5aab67bedfb631796"
+    },
+    {
+      "number": 20,
+      "kind": "concept",
+      "chapter": 16,
+      "file": "20-drone-demonstrator-gates.png",
+      "pixels": [
+        1820,
+        1105
+      ],
+      "sha256": "8ccaac3c1460467200bad19c42b9b255b1b0db41e785d806313751f4113346f8"
+    }
+  ]
+}

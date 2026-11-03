@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>Where the soil sensor actually measures</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">06  Where the soil sensor actually measures</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Installation concept: nursery substrate, native soil and the wetting bulb differ.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<rect x="65" y="410" width="1270" height="330" rx="0" fill="#ede2cd" stroke="#ceb790" stroke-width="2"/>
+<line x1="65" y1="410" x2="1335" y2="410" stroke="#8c7755" stroke-width="4"/>
+<ellipse cx="655" cy="525" rx="230" ry="155" fill="#d3e5ed" stroke="#137fa7" stroke-width="2" stroke-dasharray="8 7"/>
+<rect x="555" y="410" width="155" height="165" rx="2" fill="#c3a882" stroke="#806b4d" stroke-width="2"/>
+<line x1="635" y1="405" x2="635" y2="360" stroke="#39785b" stroke-width="5"/>
+<circle cx="622" cy="358" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="649" cy="351" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="270" y1="390" x2="760" y2="390" stroke="#137fa7" stroke-width="6"/>
+<line x1="760" y1="390" x2="760" y2="435" stroke="#137fa7" stroke-width="3"/>
+<polygon points="760,435 754.345448056554,423.2941876694152 765.654551943446,423.2941876694152" fill="#137fa7"/>
+<circle cx="620" cy="475" r="10" fill="#b77420" stroke="#39785b" stroke-width="2"/>
+<circle cx="820" cy="535" r="10" fill="#137fa7" stroke="#39785b" stroke-width="2"/>
+<circle cx="780" cy="665" r="10" fill="#a7443c" stroke="#39785b" stroke-width="2"/>
+<text x="95" y="225" font-family="sans-serif" font-size="25" font-weight="bold" text-anchor="start" fill="#b77420">S1  Root-ball observation</text>
+<text x="95" y="265" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">Check the original nursery plug;</text>
+<text x="95" y="296" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">wet soil beside it can conceal a dry plug.</text>
+<line x1="365" y1="290" x2="620" y2="475" stroke="#b77420" stroke-width="2"/>
+<text x="840" y="205" font-family="sans-serif" font-size="25" font-weight="bold" text-anchor="start" fill="#137fa7">S2  Representative active roots</text>
+<text x="840" y="245" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">Good soil contact; avoid air gaps</text>
+<text x="840" y="276" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">and the saturated point at the outlet.</text>
+<line x1="980" y1="285" x2="820" y2="535" stroke="#137fa7" stroke-width="2"/>
+<text x="930" y="605" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#a7443c">S3  Optional deeper check</text>
+<text x="930" y="645" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Watch water movement below roots;</text>
+<text x="930" y="675" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">it does not directly measure drainage.</text>
+<line x1="920" y1="635" x2="790" y2="665" stroke="#a7443c" stroke-width="2"/>
+<text x="95" y="780" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">No universal depth, distance or threshold is specified. Verify wetting shape and stock dimensions on site.</text>
+</svg>

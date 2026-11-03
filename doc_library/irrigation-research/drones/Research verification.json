@@ -1,0 +1,153 @@
+{
+  "sources": [
+    {
+      "id": "mavic",
+      "url": "https://enterprise.dji.com/mavic-3-m",
+      "resolved_url": "https://enterprise.dji.com/mavic-3-m",
+      "bytes": 881658,
+      "sha256": "40b29c1cf66a961683de85b6e6d47874e185d7a3e14f10cdb886b675f0f82045",
+      "title": "DJI Mavic 3 Multispectral Edition - See More, Work Smarter - DJI"
+    },
+    {
+      "id": "t50",
+      "url": "https://ag.dji.com/t50",
+      "resolved_url": "https://ag.dji.com/t50",
+      "bytes": 917892,
+      "sha256": "0054cd74a03672e274e350a7498574ccae8b1bb25db0918cfc656745753c1d51",
+      "title": "DJI AGRAS T50 - Ready, Steady, Go.  - DJI Agricultural Drones"
+    },
+    {
+      "id": "t100",
+      "url": "https://ag.dji.com/t100",
+      "resolved_url": "https://ag.dji.com/t100",
+      "bytes": 1347014,
+      "sha256": "480e47f082c626f09255f91d5f0d77f80d0e7e05e674e0583f97ae931b93b0aa",
+      "title": "DJI AGRAS T100 - Big Drone, Big Jobs. - DJI"
+    },
+    {
+      "id": "miwa",
+      "url": "https://medcraveonline.com/IRATJ/experiments-on-watering-citrus-fruits-with-a-wire-supplied-drone-using-rtk-gnss.html",
+      "resolved_url": "https://medcraveonline.com/IRATJ/experiments-on-watering-citrus-fruits-with-a-wire-supplied-drone-using-rtk-gnss.html",
+      "bytes": 135407,
+      "sha256": "25b0e5220bcdc6b11f67ed323d9209eb40e2f88058e95a863ac79c276dbcc531",
+      "title": "Experiments on watering citrus fruits with a wire supplied drone using RTK-GNSS - MedCrave online"
+    },
+    {
+      "id": "monash",
+      "url": "https://smart.eng.monash.edu/index.html",
+      "resolved_url": "https://smart.eng.monash.edu/index.html",
+      "bytes": 14927,
+      "sha256": "78d75e891d3ea1ca7b221777baa204bac2c9f45e02b57968e6dd321fb96d9e8f",
+      "title": "SMART Irrigation — UAV Soil Moisture Mapping"
+    },
+    {
+      "id": "robot",
+      "url": "https://github.com/thedaisylab/UAV-soil-moisture-robot",
+      "resolved_url": "https://github.com/thedaisylab/UAV-soil-moisture-robot",
+      "bytes": 246080,
+      "sha256": "5fca54d27631535e8864ca9a653c19715ac9a21aabeebe867582b638bbef63f8",
+      "title": "GitHub - thedaisylab/UAV-soil-moisture-robot: This repository contains the original data from the field trial and the programs used to get the data and operate the robot. · GitHub"
+    },
+    {
+      "id": "gpr",
+      "url": "https://sites.uclouvain.be/gprlouvain/",
+      "resolved_url": "https://sites.uclouvain.be/gprlouvain/",
+      "bytes": 92280,
+      "sha256": "ecb6d8bd96d91bde2f67a5b43c436017dcb1f5c8372710abf1882dc8c0b679bd",
+      "title": "GPRLouvain | Ground-Penetrating Radar Research at UCLouvain"
+    },
+    {
+      "id": "forest_pdf",
+      "url": "https://fgr.nz/wp-content/uploads/2024/06/PSP-T018_UAVSurvival_Report_Multispectral_vs-RGB_final-1.pdf",
+      "resolved_url": "https://fgr.nz/wp-content/uploads/2024/06/PSP-T018_UAVSurvival_Report_Multispectral_vs-RGB_final-1.pdf",
+      "bytes": 571574,
+      "sha256": "8d6a87c7a0be73c84767a7a5270cb7332b3481d12ea20d8d3875ecafa56c8e5d",
+      "pages": 11
+    },
+    {
+      "id": "miwa_pdf",
+      "url": "https://medcraveonline.com/IRATJ/IRATJ-10-00280.pdf",
+      "resolved_url": "https://medcraveonline.com/IRATJ/IRATJ-10-00280.pdf",
+      "bytes": 979904,
+      "sha256": "0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4",
+      "pages": 4
+    },
+    {
+      "id": "gpr_pdf",
+      "url": "https://orbi.uliege.be/bitstream/2268/336849/1/_Henrion%20SRS%202025.pdf",
+      "resolved_url": "https://orbi.uliege.be/bitstream/2268/336849/1/_Henrion%20SRS%202025.pdf",
+      "bytes": 11940826,
+      "sha256": "bc6a958975a131f0bd3198e5f819ba729fb29a383564d4cb9fbdf495f2e98818",
+      "pages": 17
+    },
+    {
+      "id": "t50_pdf",
+      "url": "https://dl.djicdn.com/downloads/t50_t25/20250109/T50_T25_User_Manual_v1.0_EN.pdf",
+      "resolved_url": "https://dl.djicdn.com/downloads/t50_t25/20250109/T50_T25_User_Manual_v1.0_EN.pdf",
+      "bytes": 57154670,
+      "sha256": "b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688",
+      "pages": 107
+    },
+    {
+      "id": "greenscatter_pdf",
+      "url": "https://arxiv.org/pdf/2604.09363",
+      "resolved_url": "https://arxiv.org/pdf/2604.09363",
+      "bytes": 9081306,
+      "sha256": "0c0c0fe2b4d5d3da877547e70b4963320c418c1b9a1cebba6ddefe66d6145d83",
+      "pages": 14
+    }
+  ],
+  "failures": [
+    {
+      "id": "altum",
+      "url": "https://ageagle.com/drone-sensors/altum-pt/",
+      "error": "403 Client Error: Forbidden for url: https://eaglenxt.com/drone-sensors/altum-pt/"
+    },
+    {
+      "id": "ferry",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8914728/",
+      "error": "403 Client Error: Forbidden for url: https://pmc.ncbi.nlm.nih.gov/articles/PMC8914728/"
+    },
+    {
+      "id": "ifapa",
+      "url": "https://www.juntadeandalucia.es/agriculturaypesca/ifapa/web/noticias/el-dron-aliado-imprescindible-en-la-investigacion-andaluza",
+      "error": "403 Client Error: Forbidden for url: https://www.juntadeandalucia.es/agriculturaypesca/ifapa/web/noticias/el-dron-aliado-imprescindible-en-la-investigacion-andaluza"
+    },
+    {
+      "id": "ortho_pdf",
+      "url": "https://www.toolsforforesters.co.nz/__data/assets/pdf_file/0005/124925/UAV-Survival_RGB_ortho-plot.pdf",
+      "error": "403 Client Error: Forbidden for url: https://www.toolsforforesters.co.nz/__data/assets/pdf_file/0005/124925/UAV-Survival_RGB_ortho-plot.pdf"
+    },
+    {
+      "id": "ifapa_pdf",
+      "url": "https://www.mapa.gob.es/dam/mapa/contenido/desarrollo-rural/temas/gestion-sostenible-de-regadios/documentos/ponencia2.pdf",
+      "error": "HTTPSConnectionPool(host='www.mapa.gob.es', port=443): Max retries exceeded with url: /dam/mapa/contenido/desarrollo-rural/temas/gestion-sostenible-de-regadios/documentos/ponencia2.pdf (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: self-signed certificate in certificate chain (_ssl.c:1010)')))"
+    }
+  ],
+  "date": "2026-11-03",
+  "subsequent_verification": [
+    {
+      "url": "https://www.toolsforforesters.co.nz/__data/assets/pdf_file/0005/124925/UAV-Survival_RGB_ortho-plot.pdf",
+      "method": "Research browser opened PDF",
+      "pages": 10
+    },
+    {
+      "url": "https://www.mapa.gob.es/dam/mapa/contenido/desarrollo-rural/temas/gestion-sostenible-de-regadios/documentos/ponencia2.pdf",
+      "method": "Research browser opened PDF",
+      "pages": 33
+    },
+    {
+      "url": "https://www.seguridadaerea.gob.es/sites/default/files/UAS-OPR-P01-DT16_Ed.03_UAS.geoghaphical.zones.pdf",
+      "method": "Research browser opened PDF",
+      "pages": 36
+    },
+    {
+      "url": "https://eaglenxt.com/products/sensors/micasense-series/altum-pt/",
+      "method": "Explicitly updated canonical manufacturer path; HTTP 200, research browser and automated read"
+    },
+    {
+      "url": "https://www.easa.europa.eu/en/print/pdf/node/116450/215572",
+      "method": "Indexed text/date readable; later direct request HTTP 429; not claimed a confirmed direct PDF download"
+    }
+  ]
+}

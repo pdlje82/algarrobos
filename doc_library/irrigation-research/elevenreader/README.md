@@ -1,0 +1,19 @@
+# Illustrated irrigation listening edition
+
+Prepared 3 November 2026 as an adaptation of LEARN-016. This is the same research topic in a narration-friendly form, retaining the technical comparisons, uncertainty, example budgets and proposed experiment. Sources and bibliographic details remain in companions rather than interrupting the spoken reading.
+
+- [EPUB for ElevenReader](Irrigation%20for%20a%20Native%20Restoration%20Park.epub): sixteen chapters, 7,702 words including short picture captions, approximately 48–59 minutes at 130–160 words per minute. All twenty high-resolution concept diagrams and fifty-two captioned equipment/component/research reference pictures are embedded inside the EPUB, at the corresponding passages. They do not need an external image connection.
+- [Browser read-along edition](Irrigation%20-%20Read%20Along.html): the same narration and all seventy-two pictures and diagrams in one self-contained file. Select any picture or diagram to enlarge it, then scroll within the enlarged image if needed. Escape or Close dismisses the image.
+- [Illustrated Markdown manuscript](Irrigation%20-%20Illustrated%20Listening%20Edition.md): editable prose with links to the original package's figures.
+- [Plain narration](Irrigation%20-%20Narration.txt): the spoken text without image placeholders or citations.
+- [Picture credits and coverage](Picture%20credits%20and%20coverage.md): source, identity, component role and rights for all fifty-two reference pictures. Credits are also accessible inside the EPUB outside its narrated spine.
+- [Sources and production notes](Sources%20and%20production%20notes.md): chapter mapping, direct document downloads, format decisions and checks.
+- [Package checks](Publication%20checks.json) and [browser checks](Browser%20checks.json): retained verification results.
+
+Import the EPUB using ElevenReader's file-upload option. EPUB support is documented by the [ElevenReader Team, updated 30 October 2026](https://elevenreader.io/blog/epub-text-to-speech). Direct import, narration, image retention and word highlighting inside ElevenReader have not been tested for this file. The browser copy provides a separate way to follow the complete illustrated text; it is not synchronised with ElevenReader playback.
+
+No audio track was generated. Voice choice and playback speed are selected in ElevenReader. Technical diagram labels remain inside images, while nearby prose explains their important content without requiring the reader to interpret the drawing.
+
+The report now includes section 13 on drones, with twelve additional source pictures and eight additional figures. The original twelve concept-diagram files are unchanged. The earlier diagram-only and 52-image editions are archived alongside this version. This is a companion edition under the existing LEARN-016 catalogue entry, not a new source document or a new field study. No project setting, species watering rule, funding score or field installation is adopted by producing the edition.
+
+To rebuild from the retained prepared assets, run `python doc_library/irrigation-research/elevenreader/build_epub.py` from the repository root. It validates the chapter sequence, complete text, manifest, resource references, navigation and unchanged original image bytes before replacing the EPUB. The explicit chapter/figure/picture contract is in `Edition contract.json`. Drone source evidence and downloads are in [the drone guide](../drones/README.md). Acquisition and preparation are recorded in `collect_photos.py`, `build_special_pictures.py`, `prepare_book_images.py` and `Photo manifest.json`; do not replace a verified asset silently when a source changes. Optional browser checks use `node doc_library/irrigation-research/elevenreader/check_read_along.mjs`, with Node 22 or newer and the configured Chrome executable. This browser check creates temporary screenshots and does not use a personal browser profile.

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>Gravity pressure is a height budget</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">04  Gravity pressure is a height budget</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Physics illustration: static pressure is reduced by pipe, filter and valve losses.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<line x1="100" y1="680" x2="1300" y2="680" stroke="#947952" stroke-width="4"/>
+<rect x="130" y="210" width="210" height="230" rx="9" fill="#e5f2f8" stroke="#137fa7" stroke-width="2"/>
+<line x1="145" y1="280" x2="325" y2="280" stroke="#137fa7" stroke-width="4"/>
+<line x1="160" y1="440" x2="160" y2="680" stroke="#19343e" stroke-width="6"/>
+<line x1="310" y1="440" x2="310" y2="680" stroke="#19343e" stroke-width="6"/>
+<line x1="340" y1="410" x2="420" y2="410" stroke="#137fa7" stroke-width="6"/>
+<line x1="420" y1="410" x2="420" y2="650" stroke="#137fa7" stroke-width="6"/>
+<line x1="420" y1="650" x2="1050" y2="650" stroke="#137fa7" stroke-width="6"/>
+<line x1="1050" y1="680" x2="1050" y2="635" stroke="#39785b" stroke-width="5"/>
+<circle cx="1037" cy="633" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="1064" cy="626" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="80" y1="280" x2="80" y2="650" stroke="#b77420" stroke-width="3"/>
+<polygon points="80,650 74.345448056554,638.2941876694152 85.654551943446,638.2941876694152" fill="#b77420"/>
+<line x1="80" y1="650" x2="80" y2="280" stroke="#b77420" stroke-width="3"/>
+<polygon points="80,280 85.654551943446,291.7058123305848 74.345448056554,291.7058123305848" fill="#b77420"/>
+<text x="465" y="240" font-family="sans-serif" font-size="30" font-weight="bold" text-anchor="start" fill="#137fa7">1 m of water head = about 0.098 bar</text>
+<text x="465" y="295" font-family="sans-serif" font-size="25" font-weight="normal" text-anchor="start" fill="#19343e">2 m gives only about 0.20 bar before losses.</text>
+<text x="465" y="343" font-family="sans-serif" font-size="25" font-weight="normal" text-anchor="start" fill="#19343e">0.5 bar requires about 5.1 m before losses.</text>
+<text x="465" y="405" font-family="sans-serif" font-size="24" font-weight="normal" text-anchor="start" fill="#19343e">Measure from the LOWEST operating water level</text>
+<text x="465" y="438" font-family="sans-serif" font-size="24" font-weight="normal" text-anchor="start" fill="#19343e">to the HIGHEST emitter, not from the tank outlet.</text>
+<rect x="520" y="485" width="720" height="105" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="538" y="518" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">A ground tank is not a pressure source</text>
+<text x="538" y="547" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Use verified gravity components, elevation, or a sized pump.</text>
+<text x="130" y="750" font-family="sans-serif" font-size="23" font-weight="normal" text-anchor="start" fill="#a7443c">Raised tanks carry large loads: use a designed support or safe natural elevation.</text>
+</svg>

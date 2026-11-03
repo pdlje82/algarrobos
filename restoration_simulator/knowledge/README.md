@@ -1,0 +1,191 @@
+# Shared citation metadata
+
+`citations-v1.json` owns 14 citation uses across four registered document editions
+and four consumers. The original five FUND-008 uses and their 14 checked mirrors
+in three funding libraries remain unchanged. The connected pilot reuses two of
+those uses and adds nine handbook, strategy and published-call uses, giving it
+11 source records. The registry now checks 25 mirrors in total. Other evidence
+retains its existing authority.
+
+The registry connects an exact document edition to a PDF passage, a citation use
+and its consumers. Edition IDs are `document_id@sha256`; passage IDs append
+`:pdf:page`. The app's existing [PDF registry](../scenarios/documents.json) still
+owns filenames, titles, page limits, aliases and printed-page mappings. The shared
+registry references it rather than maintaining another document catalogue.
+
+## Contract and ownership
+
+Schema 1 requires `version`, `editions`, `passages`, `citations` and `consumers`.
+Each edition has `document_id` and `sha256`; each passage has `edition_id`,
+`page_basis` and `page`; each citation use has `passage_id`, `role` and `verified_on`.
+Each consumer has an ordered `citation_ids` list. Unknown fields, unsupported
+versions, duplicate keys/memberships, invalid dates/pages, unresolved references
+and unreferenced records fail validation. Only explicit PDF page positions are
+supported in this first schema. A verification date belongs to its citation use,
+not to every use of that page.
+
+The backend's fixed consumer dispatch maps these IDs to source files:
+
+| Consumer ID | Existing feature library |
+| --- | --- |
+| `selection_guidance` | `scenarios/funding-selection-guidance-v1.json` |
+| `project_concept` | `scenarios/funding-project-concept-v1.json` |
+| `delivery_plan` | `scenarios/funding-delivery-plan-v1.json` |
+| `knowledge_pilot` | `knowledge/connected-pilot-v1.json` |
+
+Restart any already-running Python backend after applying a consumer-registration
+change so its registered dispatch and registry agree. A process using an older
+registration rejects the expanded registry explicitly.
+
+For registered uses, `document_id`, `sha256`, `page`, `role` and `verified_on` in
+the feature source records are generated mirrors. Their `label` fields remain
+feature-owned editorial text. Every live loader validates its mirrors against
+the shared registry after the existing full-library validation. Mismatches are
+errors with source ID/field context; loading never repairs a file or substitutes
+the inline record for failed shared data. Each load reads the required registry;
+there is no stale successful cache used as recovery.
+
+## Read-only commands
+
+Activate the existing `restoration-simulator` Conda environment and run these
+commands from `restoration_simulator`:
+
+```powershell
+python -m backend.knowledge_citations --check
+python -m backend.knowledge_citations --project selection_guidance
+python -m backend.knowledge_citations --project project_concept
+python -m backend.knowledge_citations --project delivery_plan
+python -m backend.knowledge_citations --project knowledge_pilot
+```
+
+`--check` validates all four sets of mirrors and verifies each original PDF
+edition's bytes once through the existing document service. It reports success
+only after every check passes. Ordinary library loads check registered metadata;
+the viewer also verifies original bytes when opening a document.
+
+`--project` emits a JSON source map for the selected consumer's registered shared
+IDs. It retains that consumer's exact labels and generates metadata from the
+validated registry. It deliberately permits different old metadata values so a
+reviewer can preview the changes needed after a canonical edit. Identities,
+six-field record shape and nonempty labels must still be present. This explicit
+preview does not make a failing normal load successful.
+
+Neither command writes any files. Success returns exit 0, expected configuration
+or document failures return 1, and invalid usage returns 2. Errors go to stderr;
+failed operations emit no success text or partial JSON to stdout.
+
+## Reviewed update procedure
+
+1. Identify and review the unchanged original document edition and passages.
+   Register actual document additions through the [library workflow](../../doc_library/CATALOG.md).
+2. Edit canonical citation metadata in this registry. New consumer integrations
+   require an explicit backend registration and tests, rather than executable
+   configuration or an inferred file path.
+3. Run `--project` for every affected consumer. Review its JSON and explicitly
+   update only the registered mirrored metadata in the same repository change.
+   Retain feature labels and all unregistered sources unless a separate editorial
+   or content change has been authorised.
+4. Run `--check`, the targeted citation tests and affected domain/compatibility
+   tests. Publish only when the canonical metadata and all declared mirrors agree.
+5. Before changing a resolved library hash, provide a separate retained-edition
+   and migration/adoption plan. Existing concepts and delivery records require
+   exact library hashes; even a label correction can change them.
+
+## Compatibility and remaining work
+
+This initial extraction preserves all three feature JSON files, their labels,
+library hashes, public responses and saved formats. In particular, the existing
+concept-label encoding defect remains unchanged. No scoring rule, scientific
+assumption, plant choice, quantity, price or project observation is altered.
+
+The other 75 shared guidance/concept citations, six concept-only EDL uses,
+publication metadata, guide/statistical sources, core funding citations, Designer
+evidence and research prose remain outside shared metadata ownership, apart from
+the explicitly registered pilot passage uses. General support for older
+source/guide editions and the visual graph explorer remain later work.
+See the [implementation plan](../KNOWLEDGE_MILESTONE_2_PLAN.md) and
+[ownership audit](../KNOWLEDGE_OWNERSHIP_AUDIT.md) for these boundaries.
+
+## Connected knowledge pilot
+
+`connected-pilot-v1.json` contains 12 curated claims, 11 typed entities, nine
+explicit relationships, two unresolved issues and 19 registered source/feature
+bindings. It connects AL20 3.4, carob, MR2 and their evidence. Its claim categories
+distinguish official requirements, strategy content, technical guidance, project
+assumptions and bounded research gaps. Each claim retains its applicability,
+review status/date and limitations.
+
+Programme, route, call, approach, palette and vegetation-series types remain
+distinct. The published call is explicitly `not_assessed` for current availability.
+The example activity and its links are labelled project illustrations; they are
+not saved project records, selected scoring answers or eligibility findings.
+The two stock-size descriptions remain separate claims with an unresolved
+`source_tension`; there is no inferred preferred container or stock default.
+The water gap is restricted to the inspected local case passages and does not
+imply zero irrigation or a literature-wide absence of evidence.
+
+Designer values are resolved by registered adapters from the current central
+rule bundle. The claim text does not maintain another numerical density or
+geometry default. Each returned configuration value is labelled a project
+assumption with its current ruleset ID. Saved designs may retain different
+snapshots; the pilot does not read or change them. Source adapters select stable
+domain records; no arbitrary file paths or executable handlers come from data.
+
+Run the read-only query commands from `restoration_simulator`:
+
+```powershell
+python -m backend.knowledge_graph --check
+python -m backend.knowledge_graph --search Johannisbrotbaum --type species
+python -m backend.knowledge_graph --entity species:carob
+python -m backend.knowledge_graph --impact-claim claim:mr2-runoff-capture
+python -m backend.knowledge_graph --issues
+python -m backend.knowledge_graph --issues --for-entity species:carob
+```
+
+`--impact-passage` takes the exact edition-qualified passage ID returned in
+query evidence, for example
+`FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:134`.
+It rejects passages outside the registered pilot rather than presenting an empty
+result as complete impact analysis.
+
+The matching Python functions are `find_entities(text, entity_type=None)`,
+`entity_details(entity_id)`, `impact(target_kind, target_id)` and
+`issues(entity_id=None)`. An absent type filter searches all registered entity
+types; an absent issue filter requests all pilot issues. Search uses Unicode
+NFKC normalisation and case folding. It returns all matching candidates and an
+explicit ambiguity flag. A valid search with no matches returns an empty list;
+an unknown identity, invalid query or failed data load is an error.
+
+All outputs include response version 1, dataset ID/hash, review date and explicit
+`registered-pilot-only` coverage with exclusions. The hash includes the dataset,
+validated citation registry and resolved authoritative bindings. Results are
+deterministic for the same inputs; a changed current binding changes the hash.
+All files are read afresh for each query. The resolver reuses validated source
+snapshots only within that single load, never after a later read fails.
+
+Impact output separates `citation_validation_dependency` from `review_required`.
+The former lists consumers that actually validate a passage's citation metadata.
+The latter follows a manually curated claim-to-feature binding and provides its
+explanation/path. Existing features do not consume these new claims automatically.
+No impact result selects rules, adopts evidence or updates a project.
+
+The pilot validates closed schema fields, reference identities, endpoint types,
+structural programme/palette memberships, configuration bindings, review states
+and coverage declarations. All unresolved claims require explicit issue records;
+unreferenced sources/bindings are rejected. The check additionally verifies original
+PDF bytes. Commands emit deterministic UTF-8 JSON only after success, use exit
+statuses 0/1/2 as above, and never write application or project state. Feature
+integration and graph visualisation remain Milestones 4 and 5.
+
+To curate this bounded pilot, first resolve an existing native identity and review
+the exact local source edition/passages. Update citation metadata and its explicit
+projection using the procedure above. Edit contextual claims and relationships
+with a real review date, limitations and unresolved issues where appropriate.
+Register any new adapter or relationship type in Python with validation and tests;
+data cannot invent an executable binding. Configuration assumptions continue to
+reference their owners. Review the declared feature targets, run both checks and
+the relevant regression tests, and inspect the diff before accepting the update.
+Changing a claim does not adopt it into a feature or a saved design.
+
+The [Milestone 3 implementation record](../KNOWLEDGE_MILESTONE_3.md) contains the
+curated source contexts, verification results and remaining coverage gaps.

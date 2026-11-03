@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>A landscape made of serviceable water cells</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">02  A landscape made of serviceable water cells</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Original layout hypothesis: three tanks, dispersed plants and vegetation islands.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<path d="M70 230 Q450 130 1320 270 M70 380 Q520 260 1320 410 M70 530 Q550 420 1320 560 M70 680 Q600 590 1320 720" fill="none" stroke="#dbd4c4" stroke-width="3"/>
+<line x1="190" y1="250" x2="430" y2="245" stroke="#137fa7" stroke-width="4"/>
+<ellipse cx="430" cy="245" rx="113" ry="72" fill="#edf4e7" stroke="#8da87e" stroke-width="2"/>
+<line x1="383" y1="250" x2="383" y2="205" stroke="#39785b" stroke-width="5"/>
+<circle cx="370" cy="203" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="397" cy="196" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="445" y1="265" x2="445" y2="220" stroke="#39785b" stroke-width="5"/>
+<circle cx="432" cy="218" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="459" cy="211" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="490" y1="240" x2="490" y2="195" stroke="#39785b" stroke-width="5"/>
+<circle cx="477" cy="193" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="504" cy="186" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="190" y1="250" x2="410" y2="470" stroke="#137fa7" stroke-width="4"/>
+<ellipse cx="410" cy="470" rx="113" ry="72" fill="#edf4e7" stroke="#8da87e" stroke-width="2"/>
+<line x1="363" y1="475" x2="363" y2="430" stroke="#39785b" stroke-width="5"/>
+<circle cx="350" cy="428" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="377" cy="421" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="425" y1="490" x2="425" y2="445" stroke="#39785b" stroke-width="5"/>
+<circle cx="412" cy="443" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="439" cy="436" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="470" y1="465" x2="470" y2="420" stroke="#39785b" stroke-width="5"/>
+<circle cx="457" cy="418" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="484" cy="411" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<rect x="125" y="205" width="200" height="92" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="143" y="238" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">TANK A</text>
+<text x="143" y="267" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Solar + control</text>
+<line x1="720" y1="300" x2="940" y2="215" stroke="#137fa7" stroke-width="4"/>
+<ellipse cx="940" cy="215" rx="113" ry="72" fill="#edf4e7" stroke="#8da87e" stroke-width="2"/>
+<line x1="893" y1="220" x2="893" y2="175" stroke="#39785b" stroke-width="5"/>
+<circle cx="880" cy="173" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="907" cy="166" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="955" y1="235" x2="955" y2="190" stroke="#39785b" stroke-width="5"/>
+<circle cx="942" cy="188" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="969" cy="181" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="1000" y1="210" x2="1000" y2="165" stroke="#39785b" stroke-width="5"/>
+<circle cx="987" cy="163" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="1014" cy="156" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="720" y1="300" x2="1000" y2="430" stroke="#137fa7" stroke-width="4"/>
+<ellipse cx="1000" cy="430" rx="113" ry="72" fill="#edf4e7" stroke="#8da87e" stroke-width="2"/>
+<line x1="953" y1="435" x2="953" y2="390" stroke="#39785b" stroke-width="5"/>
+<circle cx="940" cy="388" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="967" cy="381" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="1015" y1="450" x2="1015" y2="405" stroke="#39785b" stroke-width="5"/>
+<circle cx="1002" cy="403" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="1029" cy="396" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="1060" y1="425" x2="1060" y2="380" stroke="#39785b" stroke-width="5"/>
+<circle cx="1047" cy="378" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="1074" cy="371" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<rect x="655" y="255" width="200" height="92" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="673" y="288" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">TANK B</text>
+<text x="673" y="317" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Solar + control</text>
+<line x1="670" y1="620" x2="340" y2="680" stroke="#137fa7" stroke-width="4"/>
+<ellipse cx="340" cy="680" rx="113" ry="72" fill="#edf4e7" stroke="#8da87e" stroke-width="2"/>
+<line x1="293" y1="685" x2="293" y2="640" stroke="#39785b" stroke-width="5"/>
+<circle cx="280" cy="638" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="307" cy="631" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="355" y1="700" x2="355" y2="655" stroke="#39785b" stroke-width="5"/>
+<circle cx="342" cy="653" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="369" cy="646" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="400" y1="675" x2="400" y2="630" stroke="#39785b" stroke-width="5"/>
+<circle cx="387" cy="628" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="414" cy="621" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="670" y1="620" x2="1020" y2="665" stroke="#137fa7" stroke-width="4"/>
+<ellipse cx="1020" cy="665" rx="113" ry="72" fill="#edf4e7" stroke="#8da87e" stroke-width="2"/>
+<line x1="973" y1="670" x2="973" y2="625" stroke="#39785b" stroke-width="5"/>
+<circle cx="960" cy="623" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="987" cy="616" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="1035" y1="685" x2="1035" y2="640" stroke="#39785b" stroke-width="5"/>
+<circle cx="1022" cy="638" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="1049" cy="631" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="1080" y1="660" x2="1080" y2="615" stroke="#39785b" stroke-width="5"/>
+<circle cx="1067" cy="613" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="1094" cy="606" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<rect x="605" y="575" width="200" height="92" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="623" y="608" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">TANK C</text>
+<text x="623" y="637" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Solar + control</text>
+<rect x="1100" y="145" width="235" height="90" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="1118" y="178" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Shared gateway</text>
+<text x="1118" y="207" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Local data + upload</text>
+<text x="65" y="775" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Tank positions follow refill access and hydraulic head. Cell size needs a terrain and pipe survey.</text>
+</svg>

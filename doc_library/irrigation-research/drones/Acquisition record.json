@@ -1,0 +1,404 @@
+{
+  "date": "2026-11-03",
+  "pictures": [
+    {
+      "id": "p42",
+      "slug": "mavic-aircraft",
+      "title": "DJI Mavic 3 Multispectral aircraft",
+      "owner": "DJI",
+      "source_page": "https://enterprise.dji.com/mavic-3-m",
+      "image_url": "https://www-cdn.djiits.com/dps/2a7e1f4709de32c45cc399eb856d35b7.jpg",
+      "retrieved": "2026-11-03",
+      "chapter": 13,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "RGB mapping",
+        "multispectral aircraft"
+      ],
+      "kind": "manufacturer reference picture",
+      "rights": "Copyright retained by source owner; no open reuse licence established. Reference illustration, not an endorsement or a compatible-kit specification.",
+      "file": "p42-mavic-aircraft.png",
+      "original_file": "photos/originals/p42.jpg",
+      "pixels": [
+        2560,
+        1440
+      ],
+      "source_sha256": "ad8d351db6bf94c43580711b3488d166228405130f807bd82b6af2d353947021",
+      "sha256": "b22b062f5d5cb4e62351cfbb3d887ca68cb3a83ae6aa4bbea340eceed7396800",
+      "status": "verified image",
+      "ebook_file": "photos/ebook/p42-mavic-aircraft.jpg",
+      "ebook_pixels": [
+        1600,
+        900
+      ],
+      "ebook_sha256": "41780ef2c43f98f4f6ec86b2a16ae78923b7068e2b18b45db8890ea7f7ad6e5e",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p43",
+      "slug": "mavic-array",
+      "title": "DJI Mavic 3M four-band multispectral camera array",
+      "owner": "DJI",
+      "source_page": "https://enterprise.dji.com/mavic-3-m",
+      "image_url": "https://www-cdn.djiits.com/dps/cabbd43d21303c57d7ff08d6b82518d1.jpg",
+      "retrieved": "2026-11-03",
+      "chapter": 13,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "green red red-edge NIR",
+        "multispectral camera"
+      ],
+      "kind": "manufacturer reference picture",
+      "rights": "Copyright retained by source owner; no open reuse licence established. Reference illustration, not an endorsement or a compatible-kit specification.",
+      "file": "p43-mavic-array.png",
+      "original_file": "photos/originals/p43.jpg",
+      "pixels": [
+        2400,
+        960
+      ],
+      "source_sha256": "30d985195164c108cb66cb069dc2654ec73629f00c8b312455a65937cbbb3212",
+      "sha256": "40b67d6b21ef83f761c08ec733889760710869c353ca41b11ef778e1973421f7",
+      "status": "verified image",
+      "ebook_file": "photos/ebook/p43-mavic-array.jpg",
+      "ebook_pixels": [
+        1600,
+        640
+      ],
+      "ebook_sha256": "b8d736a79cc5525e950b0ec8d3a1ad3b80e0c180acab9ab98f6ce3a08744830a",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p44",
+      "slug": "mavic-rgb",
+      "title": "DJI Mavic 3M RGB camera",
+      "owner": "DJI",
+      "source_page": "https://enterprise.dji.com/mavic-3-m",
+      "image_url": "https://www-cdn.djiits.com/dps/42acadf5debd972503d4819a94801e01.jpg",
+      "retrieved": "2026-11-03",
+      "chapter": 13,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "visible-light survey camera"
+      ],
+      "kind": "manufacturer reference picture",
+      "rights": "Copyright retained by source owner; no open reuse licence established. Reference illustration, not an endorsement or a compatible-kit specification.",
+      "file": "p44-mavic-rgb.png",
+      "original_file": "photos/originals/p44.jpg",
+      "pixels": [
+        1184,
+        960
+      ],
+      "source_sha256": "741bbd9a06fcd351da9c2ff9d53f926608e4c632ec58b631ca29fbffd7ba3605",
+      "sha256": "c8fd735d6fc7c0be4240a4d729ec0c410df1c110019a763f9fd299d9b75031a2",
+      "status": "verified image",
+      "ebook_file": "photos/ebook/p44-mavic-rgb.jpg",
+      "ebook_pixels": [
+        1542,
+        1250
+      ],
+      "ebook_sha256": "1c32025a18f275dc2039f046d26e28ea24de4ae510d056cf308ac203c238668d",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p45",
+      "slug": "altum-pt",
+      "title": "MicaSense Altum-PT multispectral and thermal payload",
+      "owner": "EagleNXT / MicaSense",
+      "source_page": "https://eaglenxt.com/products/sensors/micasense-series/altum-pt/",
+      "image_url": "https://eaglenxt.com/wp-content/uploads/altum-pt-side-header.png",
+      "retrieved": "2026-11-03",
+      "chapter": 14,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "thermal camera",
+        "multispectral payload"
+      ],
+      "kind": "manufacturer reference picture",
+      "rights": "Copyright retained by source owner; no open reuse licence established. Reference illustration, not an endorsement or a compatible-kit specification.",
+      "file": "p45-altum-pt.png",
+      "original_file": "photos/originals/p45.png",
+      "pixels": [
+        800,
+        800
+      ],
+      "source_sha256": "4edd95c9593d12262f79622ddf1af980bf389236f1acd0a99b82deb44a09e362",
+      "sha256": "1bf9f20d84adbf4555bf182fd5c5da92d99553bd293b01e530d8e8521a0b7b2a",
+      "status": "verified image",
+      "ebook_file": "photos/ebook/p45-altum-pt.jpg",
+      "ebook_pixels": [
+        1250,
+        1250
+      ],
+      "ebook_sha256": "68bda781ae274d96b22fa8ec7e4b3f11760439f8121188a536762d59d3948280",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p46",
+      "slug": "reflectance-calibration",
+      "title": "MicaSense reflectance-calibration example",
+      "owner": "EagleNXT / MicaSense",
+      "source_page": "https://eaglenxt.com/products/sensors/micasense-series/altum-pt/",
+      "image_url": "https://eaglenxt.com/wp-content/uploads/calibrated-multispectral.jpg",
+      "retrieved": "2026-11-03",
+      "chapter": 14,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "radiometric calibration example",
+        "effects on mapped reflectance"
+      ],
+      "kind": "manufacturer reference picture",
+      "rights": "Copyright retained by source owner; no open reuse licence established. Reference illustration, not an endorsement or a compatible-kit specification.",
+      "file": "p46-reflectance-calibration.png",
+      "original_file": "photos/originals/p46.jpg",
+      "pixels": [
+        1200,
+        600
+      ],
+      "source_sha256": "1c40c0fa1080a9c7671187001c1a74b6f3cd280eececb31056638b968f237dc3",
+      "sha256": "fdd39f1e9c01f3ea9596fb8a39431047c38c0ee4a1de39987061ad36a9ea7c19",
+      "status": "verified image",
+      "ebook_file": "photos/ebook/p46-reflectance-calibration.jpg",
+      "ebook_pixels": [
+        1600,
+        800
+      ],
+      "ebook_sha256": "ee2cb1bbcbbac5bad9a1c69640c9a0ffeba20c318f7bb2e3513b24505c097030",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p47",
+      "slug": "gpr-research",
+      "title": "Research drone carrying the GPR antenna, Henrion and colleagues",
+      "owner": "Henrion et al., 2025",
+      "source_page": "https://orbi.uliege.be/bitstream/2268/336849/1/_Henrion%20SRS%202025.pdf",
+      "image_url": "https://orbi.uliege.be/bitstream/2268/336849/1/_Henrion%20SRS%202025.pdf",
+      "retrieved": "2026-11-03",
+      "chapter": 14,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "ground-penetrating radar",
+        "specialist soil-moisture mapping"
+      ],
+      "kind": "research photograph",
+      "rights": "Henrion et al. 2025, CC BY-NC-ND 4.0 as stated in the article. Unaltered embedded photograph from Figure 1(b); image format conversion only. Non-commercial research reference.",
+      "file": "p47-gpr-research.png",
+      "original_file": "photos/originals/p47.jpeg",
+      "pixels": [
+        1033,
+        652
+      ],
+      "source_sha256": "23a2e8868730fb5fe94828c2f4377a1168fa2a7e8758f5c8d7f7d1cfa10f8cbb",
+      "sha256": "fcafe87fea2044d4a715379cd3bf12f01c6667028803e1e7215bc8a2516c0a9d",
+      "status": "verified image",
+      "source_pdf_page": 3,
+      "source_pdf_figure": "Figure 1(b), embedded photograph xref 71",
+      "source_pdf_sha256": "bc6a958975a131f0bd3198e5f819ba729fb29a383564d4cb9fbdf495f2e98818",
+      "ebook_file": "photos/ebook/p47-gpr-research.jpg",
+      "ebook_pixels": [
+        1600,
+        1010
+      ],
+      "ebook_sha256": "ef85dbdd441a3747a944c2ce6270fcf4a0d9679fb86f26a5d3a6809907179a20",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p48",
+      "slug": "agras-t50",
+      "title": "DJI Agras T50 spraying in an orchard",
+      "owner": "DJI",
+      "source_page": "https://ag.dji.com/t50",
+      "image_url": "https://www-cdn.djiits.com/dps/658fefcf9bdb6b567ab349ba7b89d751.jpg",
+      "retrieved": "2026-11-03",
+      "chapter": 15,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "40-litre spray drone",
+        "spraying versus irrigation"
+      ],
+      "kind": "manufacturer reference picture",
+      "rights": "Copyright retained by source owner; no open reuse licence established. Reference illustration, not an endorsement or a compatible-kit specification.",
+      "file": "p48-agras-t50.png",
+      "original_file": "photos/originals/p48.jpg",
+      "pixels": [
+        2560,
+        1440
+      ],
+      "source_sha256": "40e473de697d6cae4744de52ca5ec70bcda12005b320a3f1c3b634ea258a3178",
+      "sha256": "4eb62adeb5cc6d9d7adac6d010103640da505a76f64bc0d7c31038aa3c8951e3",
+      "status": "verified image",
+      "ebook_file": "photos/ebook/p48-agras-t50.jpg",
+      "ebook_pixels": [
+        1600,
+        900
+      ],
+      "ebook_sha256": "391997137902b5b30e7977f9e7efb1470035e1e1cc19437a521e7ab5d1e9a8b5",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p49",
+      "slug": "agras-t100",
+      "title": "DJI Agras T100 agricultural spray aircraft",
+      "owner": "DJI",
+      "source_page": "https://ag.dji.com/t100",
+      "image_url": "https://www-cdn.djiits.com/dps/9a31b79a8183383e1ed81232b6e3df3d.jpg",
+      "retrieved": "2026-11-03",
+      "chapter": 15,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "100-litre spray drone"
+      ],
+      "kind": "manufacturer reference picture",
+      "rights": "Copyright retained by source owner; no open reuse licence established. Reference illustration, not an endorsement or a compatible-kit specification.",
+      "file": "p49-agras-t100.png",
+      "original_file": "photos/originals/p49.jpg",
+      "pixels": [
+        2560,
+        1440
+      ],
+      "source_sha256": "fe86bdd9d21ff39a3c56920129bba7850e19d89b0a2dbfc7907c0310caf47e4c",
+      "sha256": "68f4aaf66a88734ef8b3f820bf7956905a6afe86261036a797568f3aaa625333",
+      "status": "verified image",
+      "ebook_file": "photos/ebook/p49-agras-t100.jpg",
+      "ebook_pixels": [
+        1600,
+        900
+      ],
+      "ebook_sha256": "0125bfe26c6bb8225faaaf70db2babfe520e8fae4dcad3a334fcd5cbe0ec16c4",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p50",
+      "slug": "hose-prototype",
+      "title": "Miwa and colleagues: hose-fed water-spraying prototype",
+      "owner": "Miwa, Hishida, Nishikawa and Shiromaru, 2024",
+      "source_page": "https://medcraveonline.com/IRATJ/experiments-on-watering-citrus-fruits-with-a-wire-supplied-drone-using-rtk-gnss.html",
+      "image_url": "https://medcraveonline.com/IRATJ/images/IRATJ-10-00280-g001.png",
+      "retrieved": "2026-11-03",
+      "chapter": 15,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "tethered water supply",
+        "research prototype"
+      ],
+      "kind": "research photograph",
+      "rights": "Source PDF states Creative Commons attribution with a non-commercial restriction; website also displays BY-NC. Authors credited; no commercial reuse permission inferred.",
+      "file": "p50-hose-prototype.png",
+      "original_file": "photos/originals/p50.png",
+      "pixels": [
+        326,
+        183
+      ],
+      "source_sha256": "7833481c937e1c61e7bb9659c693818e5d24a6f5d1368567e8834b07b5ba920d",
+      "sha256": "18279e46d6837de0daf5112f915c341875790d434180e7c33ea537e01f8039dd",
+      "status": "verified image",
+      "source_figure": "Figure 1",
+      "ebook_file": "photos/ebook/p50-hose-prototype.jpg",
+      "ebook_pixels": [
+        1600,
+        898
+      ],
+      "ebook_sha256": "4f28840cf4df6a1ab4cf1c58f76b1871d4f8372efb13d9b539c78adacd1c423d",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p51",
+      "slug": "hose-field",
+      "title": "Miwa and colleagues: citrus-orchard spraying field test",
+      "owner": "Miwa, Hishida, Nishikawa and Shiromaru, 2024",
+      "source_page": "https://medcraveonline.com/IRATJ/experiments-on-watering-citrus-fruits-with-a-wire-supplied-drone-using-rtk-gnss.html",
+      "image_url": "https://medcraveonline.com/IRATJ/images/IRATJ-10-00280-g006.png",
+      "retrieved": "2026-11-03",
+      "chapter": 15,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "hose-fed flight experiment"
+      ],
+      "kind": "research photograph",
+      "rights": "Source PDF states Creative Commons attribution with a non-commercial restriction; website also displays BY-NC. Authors credited; no commercial reuse permission inferred.",
+      "file": "p51-hose-field.png",
+      "original_file": "photos/originals/p51.png",
+      "pixels": [
+        437,
+        246
+      ],
+      "source_sha256": "b6ac53bfec2c788f55aa296dc0e32f168e79a975e03276e36b3e940f1693416f",
+      "sha256": "419197bb4309703128ad0cd9c75a43c0898fb3b90be5cf67326bac05db8c7825",
+      "status": "verified image",
+      "source_figure": "Figure 6",
+      "ebook_file": "photos/ebook/p51-hose-field.jpg",
+      "ebook_pixels": [
+        1600,
+        901
+      ],
+      "ebook_sha256": "cfad276c49824382467193b81e5b6d2e108770fa81c2af1d1c58c8a2a685ef89",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p52",
+      "slug": "hose-ground-support",
+      "title": "Miwa and colleagues: ground support during spraying",
+      "owner": "Miwa, Hishida, Nishikawa and Shiromaru, 2024",
+      "source_page": "https://medcraveonline.com/IRATJ/experiments-on-watering-citrus-fruits-with-a-wire-supplied-drone-using-rtk-gnss.html",
+      "image_url": "https://medcraveonline.com/IRATJ/images/IRATJ-10-00280-g009.png",
+      "retrieved": "2026-11-03",
+      "chapter": 15,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "hose management",
+        "ground vehicle support"
+      ],
+      "kind": "research photograph",
+      "rights": "Source PDF states Creative Commons attribution with a non-commercial restriction; website also displays BY-NC. Authors credited; no commercial reuse permission inferred.",
+      "file": "p52-hose-ground-support.png",
+      "original_file": "photos/originals/p52.png",
+      "pixels": [
+        405,
+        228
+      ],
+      "source_sha256": "90132142c82356fe2b6298e48ef66b2d62c0aef8732bc19d6b52eb159adf7e43",
+      "sha256": "5a7beeb29ad6c23708667e90588d2ee5af1f41cb0bdb12a9b9959d975b340b81",
+      "status": "verified image",
+      "source_figure": "Figure 9",
+      "ebook_file": "photos/ebook/p52-hose-ground-support.jpg",
+      "ebook_pixels": [
+        1600,
+        901
+      ],
+      "ebook_sha256": "38ee9c287671348558d9071755815096d867f2b18612708552d13823d0d22fc7",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    },
+    {
+      "id": "p53",
+      "slug": "matrice-series",
+      "title": "DJI Matrice 4 series: compact enterprise aircraft examples",
+      "owner": "DJI",
+      "source_page": "https://enterprise.dji.com/matrice-4-series",
+      "image_url": "https://www-cdn.djiits.com/dps/f384d2286ea002458baa31f8f8805953.jpg",
+      "retrieved": "2026-11-03",
+      "chapter": 14,
+      "after_starts": "Explicitly placed in drone chapter",
+      "covers": [
+        "Matrice 4E and 4T family",
+        "integrated-camera alternative"
+      ],
+      "kind": "manufacturer reference picture",
+      "rights": "Copyright retained by source owner; no open reuse licence established. Reference illustration, not an endorsement or a compatible-kit specification.",
+      "file": "p53-matrice-series.png",
+      "original_file": "photos/originals/p53.jpg",
+      "pixels": [
+        5120,
+        1280
+      ],
+      "source_sha256": "799f72b9f7f0845f8a56920d2f43cf2f57178e8b52823f0688981d6638fee13f",
+      "sha256": "d60cdae83ce29e06e221dfb8fcebfe0572b32aa024ae8ee1af159ddc22cae75e",
+      "status": "verified image",
+      "ebook_file": "photos/ebook/p53-matrice-series.jpg",
+      "ebook_pixels": [
+        1600,
+        400
+      ],
+      "ebook_sha256": "afefe18cef111a8935ff4994406d8a3c64177a8e3ce36c648c94cdfcb6904b43",
+      "ebook_preparation": "Proportional fit within 1600 by 1250 pixels; alpha on white; JPEG quality 88; no cropping."
+    }
+  ]
+}

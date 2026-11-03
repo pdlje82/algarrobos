@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>Local autonomy and wireless supervision</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">08  Local autonomy and wireless supervision</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">LoRa is the radio; LoRaWAN adds a network protocol and server. Cloud use is optional.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<rect x="65" y="185" width="360" height="115" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="83" y="218" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Tank A controller</text>
+<text x="83" y="247" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Local water budget + timeout</text>
+<line x1="425" y1="240" x2="630" y2="420" stroke="#39785b" stroke-width="3" stroke-dasharray="9 7"/>
+<polygon points="630,420 617.4729017416148,416.52554907578735 624.9346617541975,408.02743350590146" fill="#39785b"/>
+<rect x="65" y="365" width="360" height="115" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="83" y="398" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Tank B controller</text>
+<text x="83" y="427" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Local water budget + timeout</text>
+<line x1="425" y1="420" x2="630" y2="420" stroke="#39785b" stroke-width="3" stroke-dasharray="9 7"/>
+<polygon points="630,420 618.2941876694152,425.654551943446 618.2941876694152,414.345448056554" fill="#39785b"/>
+<rect x="65" y="545" width="360" height="115" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="83" y="578" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Tank C controller</text>
+<text x="83" y="607" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Local water budget + timeout</text>
+<line x1="425" y1="600" x2="630" y2="420" stroke="#39785b" stroke-width="3" stroke-dasharray="9 7"/>
+<polygon points="630,420 624.9346617541975,431.97256649409854 617.4729017416148,423.47445092421265" fill="#39785b"/>
+<rect x="630" y="345" width="290" height="155" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="648" y="378" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#39785b">Shared radio gateway</text>
+<text x="648" y="407" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Local network server</text>
+<text x="648" y="435" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">+ data store + dashboard</text>
+<text x="648" y="463" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Aerial clear of tanks</text>
+<rect x="1070" y="190" width="260" height="110" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="1088" y="223" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Operator on site</text>
+<text x="1088" y="252" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Local Wi-Fi access</text>
+<text x="1088" y="280" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">No internet required</text>
+<rect x="1070" y="535" width="260" height="120" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="1088" y="568" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Optional internet</text>
+<text x="1088" y="597" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">4G / fixed connection</text>
+<text x="1088" y="625" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Remote alarms + export</text>
+<line x1="920" y1="375" x2="1070" y2="245" stroke="#39785b" stroke-width="3" stroke-dasharray="9 7"/>
+<polygon points="1070,245 1064.8573841654234,256.9395771440182 1057.450706667758,248.39341080055803" fill="#39785b"/>
+<line x1="920" y1="465" x2="1070" y2="590" stroke="#39785b" stroke-width="3" stroke-dasharray="9 7"/>
+<polygon points="1070,590 1057.3873899313849,586.8500686901034 1064.627301813958,578.1621744310156" fill="#39785b"/>
+<rect x="510" y="650" width="510" height="103" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="528" y="683" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#a7443c">A lost radio link must not strand an open valve</text>
+<text x="528" y="712" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Closure, volume caps and fault handling execute</text>
+<text x="528" y="740" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">locally.</text>
+<text x="65" y="765" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">Class A downlinks wait for receive windows. Do not rely on a later cloud CLOSE command.</text>
+</svg>

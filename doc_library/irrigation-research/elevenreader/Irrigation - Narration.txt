@@ -1,0 +1,451 @@
+Irrigation for a Native Restoration Park
+
+An illustrated listening edition, including drone technology, prepared for the Algarrobos project on 3 November 2026.
+
+Chapter one. What irrigation should achieve
+
+Imagine a restoration park in Almería. Young native trees and shrubs are scattered across the land, sometimes alone and sometimes in vegetation islands. Several water tanks serve different parts of the site. An operator refills them, while solar-powered equipment helps deliver water and monitor what happens.
+
+The objective is to help these plants establish, using a limited and accountable amount of water. Eventually, suitable plants in suitable microsites should become less dependent on irrigation. The system must also be affordable to maintain, easy to inspect and possible to repair locally.
+
+This is a different objective from greenhouse production. A greenhouse system often maintains the conditions needed for a crop yield. A restoration system needs a defensible establishment target and a plan for reducing support. Keeping every root zone permanently moist is not an appropriate automatic goal.
+
+There is already a large market for irrigation controllers, soil sensors, solar pumps and wireless valves. The interesting question is how to combine them for dispersed native planting. A useful demonstrator could compare several approaches and show which level of technology actually improves survival, water use or operator workload.
+
+The first illustration separates three choices. A sector valve waters a group of plants. Electronic individual control gives each plant an addressable valve. Passive individual control lets a mechanical moisture sensor operate its own valve. Sensing, valve control and measurement of delivered water are separate decisions. Having one does not automatically provide the other two.
+
+The practical recommendation is to start with serviceable tank stations and small irrigation sectors. Add individual control where it has a clear purpose, and compare electronic and passive versions on a limited subset before expanding.
+
+All the illustrations are concepts, not surveyed layouts or construction instructions. The example quantities and costs are planning assumptions. No species-specific watering dose, moisture threshold or final equipment rating has been established for this parcel.
+
+Chapter two. Common practice and the Almería experience
+
+For a very small pilot, measured watering by an operator can be a sensible baseline. It requires little permanent equipment, but travel and labour can become expensive. Unless each visit and dose is recorded, consistency is difficult to assess.
+
+For connected planting islands and park beds, surface drip is a practical option. A pipe serves several emitters, with plants grouped into sectors that have compatible needs. This reduces the number of valves and controllers, although tubing needs protection and leaks need inspection. Nearby plants should not be grouped together simply because they are nearby. Their nursery stock, soil and wetting requirements must also be compatible.
+
+Weather-adjusted control can change irrigation in response to conditions. Soil-sensor control can respond to measurements in a representative root zone. Neither approach eliminates the need to inspect plants. Weather alone cannot tell us whether a newly planted nursery plug is drying out, and one soil probe cannot describe every microsite.
+
+Individual valves are useful in research plots, for valuable specimens or where conditions vary strongly. They also multiply the connections and devices that somebody must maintain. Other approaches include local reservoirs, wicks, porous pots and buried delivery devices. These may avoid long pipe runs, but refill effort, blockage, material quality and retrieval remain important.
+
+The research does not establish the market share of these methods. In particular, it does not show that a wireless sensor and powered valve beside every native seedling is normal practice in Almería.
+
+Almería nevertheless offers a strong irrigation knowledge and service ecosystem. Cajamar has documented greenhouse drip systems, wireless measurement and sensor-triggered automation. Its guidance stresses representative probe placement and replication because a sensor observes a small volume of soil. Those lessons are useful. Greenhouse depths, thresholds and schedules must still be checked before being transferred to restoration.
+
+Wise Agrotecnología advertises wireless field measurements, solar autonomous equipment, soil analysis and sensor-based irrigation activation. Edagro, in El Ejido, offers soil-tension and conductivity monitoring. These descriptions identify relevant local services; they do not prove that a particular package is suitable or economical for this project.
+
+Potential technical partners include Cajamar's Las Palmerillas experimental station, the University of Almería and the IFAPA centre at La Mojonera. Their documented work makes them relevant people to approach for calibration, trial design or commissioning. No partnership or support agreement has been made.
+
+Finally, an adult native plant's drought tolerance does not tell us how much water a newly planted nursery specimen needs. Establishment conditions, the root ball, the season and the microsite matter. Minimum local doses remain unresolved. Agree plant-health and emergency intervention criteria before selecting a control threshold.
+
+Chapter three. The technology available today
+
+It helps to compare complete systems rather than isolated sensors. A sensor may be inexpensive while the enclosure, battery, valve, pipework, gateway, installation and maintenance make the total expensive.
+
+One commercial route is a Spanish agricultural controller such as Progrés Agrónic, combined with AgroBee radio modules. These products can control sectors, pumps and other irrigation equipment, and read sensors and meters. Some radio modules use solar power with batteries or supercapacitors, depending on the model. They provide a useful commercial benchmark. A system that uses LoRa radio modulation is not necessarily compatible with an open LoRaWAN network.
+
+Progrés Agrónic 2500 irrigation controller
+
+Progrés AgroBee-L radio module
+
+Wise is a local sensing and integration route worth quoting. Ask how its measurements connect to the actual valve controller, what continues operating without internet and whether records can be exported. Edagro is another local service lead, although full valve automation, interfaces and repair terms need a specific offer.
+
+Wise WiKit autonomous measuring station
+
+Edagro field monitoring example
+
+Milesight offers wireless valve controllers in its U C five hundred series. The models reviewed have two latching-solenoid outputs, digital or pulse inputs and local rules. The solar version provides a commercial comparison for one or two sectors. Exact variants matter. The standard outputs specify two-wire, twelve-volt latching solenoids; an arbitrary nine-volt valve cannot be assumed compatible. Special pressure-input variants do not turn every controller into a universal soil-probe reader.
+
+Milesight UC51x valve-controller hardware and interfaces
+
+Dragino offers wireless probes that measure soil water content, temperature and electrical conductivity. Battery and solar variants exist, including a European radio version. This is a sensing component rather than the plant valve itself. Check calibration and access for maintenance.
+
+Dragino SE01 soil-sensor family; manufacturer documentation image
+
+OpenSprinkler is an open-source controller with eight base zones, expansion, local access and a flow-sensor input. Separate electrical versions support different valve types. The manufacturer displayed a family price of one hundred and thirty to two hundred US dollars when checked. That is not a delivered Spanish installation price, and the controller is not a complete wireless per-plant system.
+
+OpenSprinkler controller; historical AC model shown
+
+Irrigatia offers solar tank-fed pumping kits with level sensing and garden drip accessories. These are useful simple benchmarks for accessible clusters. Their sunlight-responsive approach does not establish individual soil feedback or remote monitoring. Their advertised irrigation units are a supplier sizing concept, not the water requirement of a native tree.
+
+Irrigatia SOL-C120 solar tank kit
+
+Tropf-Blumat offers a different route: an individual ceramic moisture sensor operates a mechanical drip valve without electricity. We will examine this in more detail because it challenges the assumption that individual intelligence requires an electronic device at every plant.
+
+Tropf-Blumat ceramic sensor, valve head, tube and tee
+
+PlantCare documents monitoring and automatic irrigation for urban green space, including wired and radio valve modules and alarms. This is a useful precedent for parks and trees. The brochure is an architecture reference rather than a current quotation or proof that every tree's dose is separately metered.
+
+PlantCare PlantControl CX controller
+
+There are also open research designs. The USDA researcher Andrew Bierer published Open Irr, which can read up to sixteen Watermark soil probes and manage four irrigation groups per node. Schematics and firmware are available. Its published hardware cost of roughly two hundred and fifty US dollars is historical context, not a current kit price. The original American radio frequency and the logic-level outputs require adaptation for a European installation and actual valves.
+
+Open Irr assembled node with enclosure, battery cradle and probes
+
+Electronic Cats publishes the CatWAN Farmer hardware project, including solar charging and support for commercial Watermark probes and experimental gypsum probes. It offers a useful grassroots starting point. Published features do not establish current stock, production support or reliable long-term operation at this site.
+
+CatWAN Farmer published PCB layout; source-derived view, not a photograph
+
+A fair request to suppliers would be to quote a complete independently operating tank area: water measurement, leak isolation, three control sectors, soil commissioning, exportable records, spare parts and five-year operating costs. Compare that with a locally assembled offer with the same responsibilities and a named maintainer.
+
+Chapter four. Tanks, planting islands and hydraulic pressure
+
+The next drawing shows a possible landscape arrangement. Three tanks each serve nearby vegetation islands. A shared gateway collects information. This is a layout hypothesis. The positions must follow terrain and refill access, and the drawing does not specify plant density or pipe lengths.
+
+Each tank area would have a safe refill point, manual isolation, filtration, pressure provision where necessary, water measurement, a controller and an energy system. Several sectors or short individual branches could serve the plants. The size of the service area depends on elevation, pipe routes, water demand and maintenance access, rather than plant count alone.
+
+SCHÜTZ ECOBULK MX 1000 IBC; new container example
+
+Irrigatia replaceable Tank Series internal pump; kit-specific example
+
+Rain Bird RBY pressure-regulating filter and serviceable strainer
+
+There are three ways to achieve individual control. A valve can sit beside each plant, creating many exposed devices. Alternatively, several individual valves can sit together in a small manifold, sharing a controller, battery and radio, with a separate tube to each nearby plant. The third option is a passive valve at each plant, with electronic monitoring at the common supply.
+
+Hunter PGV-101G sector valve; electrical variant must be specified
+
+The manifold approach is particularly worth considering. Individual control does not require an individual wireless node. But narrow tubes have friction, filling and drainage effects. Their routes and service access still need design.
+
+Rain Bird XF dripline tees, elbows and joining fittings
+
+Irrigatia manual inline valve for isolation and controlled flushing
+
+Irrigatia polyethylene feed-tube roll
+
+The hydraulic drawing shows a proposed pumped arrangement. Water passes through isolation, a pump, filtration and measurement before reaching the controlled outlets. A separately effective master isolation path limits a leak or stuck valve. The exact locations of filters, regulators, pressure relief and air devices follow the chosen hydraulic design.
+
+A ground-level tank is not automatically a suitable pressure source. Each metre of vertical water head provides about zero point zero nine eight bar of static pressure. Two metres therefore gives only about zero point two bar before losses. A component needing half a bar requires roughly five point one metres of head before pipe, filter and valve losses are counted.
+
+Measure this height from the lowest operating water surface to the highest or most difficult emitter. The tank outlet height alone is not enough. The next illustration makes this pressure budget visible.
+
+The Netafim dripper sheet reviewed contains variant-specific operating ranges, including half a bar to four bar and zero point seven to four bar. Pressure compensation does not mean operation at any pressure. Anti-drain versions have additional opening and closing characteristics.
+
+Netafim PCJ on-line drip emitter; model-specific pressure requirement
+
+Possible solutions are verified low-pressure gravity components, safe natural elevation or a properly sized pump. Obtain valve curves for the actual pressure and the smallest active flow. Some solenoid valves need differential pressure and minimum flow. A motorised ball valve may be an alternative, but its energy use and failure position need definition.
+
+U.S. Solid motorised ball valve; generic alternative to a solenoid valve
+
+A latching solenoid saves holding power, yet it may stay open after electricity fails. It is not inherently fail-closed. Also check siphoning on sloping pipes, access for flushing, sediment and algae, and the water's tendency to form mineral deposits. Filter selection follows the actual water quality and emitter requirements. A full large tank is a heavy load, so elevated supports require proper design.
+
+Hunter DC-latching solenoid; not automatically compatible with twelve-volt outputs
+
+Chapter five. Sensors and locally assembled electronics
+
+Choose the physical quantity before choosing a probe. Volumetric water content estimates how much water is present per volume of soil. Its interpretation depends on soil, density, salinity, temperature and installation. An uncalibrated percentage can look precise without being useful.
+
+Matric tension describes how strongly the soil holds water. It does not include the osmotic effect of salty water. Electrical conductivity helps interpret salts and some sensor behaviour, but bulk-soil conductivity is not automatically the same as the conductivity of the irrigation water or soil solution. Soil temperature is a useful companion measurement rather than a watering prescription.
+
+IRROMETER SR water-filled tensiometer with pressure gauge
+
+IRROMETER WATERMARK 200SS granular-matrix sensor
+
+Encapsulated DS18B20 temperature probe; example supplied by Adafruit
+
+Tank level tells us inventory and supports refill warnings. It needs the tank's shape and a calibration. It cannot allocate water between plants. Flow and pressure help establish whether the hydraulic system behaves as expected, provided the meters work accurately at the smallest active flow.
+
+Milesight EM500-SWL submersible level probe; example sensor and radio package
+
+Plant condition, survival and growth remain necessary observations. Soil numbers do not replace the biological objective.
+
+The node drawing shows a locally serviceable arrangement: replaceable power, a low-power controller, a radio, detachable probes and a properly rated valve driver. It is a functional diagram, not an electrical wiring instruction.
+
+A practical grassroots approach is to assemble the electronics, software and service system locally while initially using a characterised commercial probe as a reference. Test homemade probes alongside it. This separates the ability to build a circuit from the harder question of whether the measurement reliably supports a plant's watering decision.
+
+Candidate components include low-power radio modules, protected power conversion, accessible batteries, standard connectors and locally assembled boards. A shared node can serve several nearby probes and valves. This reduces the number of radios and power systems needing service.
+
+Open Irr components: controller, clock, memory, sensor terminals and power
+
+Commercial sealed capacitive probes, such as the Vegetronix model reviewed, provide one comparison. Very cheap exposed resistive boards are better treated as short bench or teaching devices until field durability has been demonstrated. Corrosion, cable seals, condensation and temperature all matter.
+
+Vegetronix VH400 sealed analogue moisture probe
+
+DFRobot SEN0193 capacitive soil sensor board; prototype example requiring protection
+
+A laboratory study by Nandi and Shrestha compared low-cost and more expensive sensors across three soil textures. Adding an external analogue-to-digital converter improved the tested inexpensive measurements. This does not establish years of outdoor durability or performance in this parcel's stony, calcareous or saline conditions. Better digitisation cannot fix a bad seal or the wrong position.
+
+DIY gypsum probes and locally made ceramic devices could become educational manufacturing experiments. They need reproducible materials, wetting and drying tests, calibration and fault detection before they become the sole automatic trigger for valuable plants.
+
+Installation can matter more than another decimal place. The next illustration distinguishes the original nursery plug, the surrounding native soil and the wetting bulb. Wet ground beside a plug can conceal a dry plug. A probe should have firm contact with relevant rooting material, without air gaps, and should not represent the whole plant using only the saturated point beside an emitter.
+
+A deeper probe can show water movement below the main rooting area. It does not directly measure drainage or plant uptake. No universal depth or distance is specified here.
+
+During commissioning, observe a measured watering event around actual stock, compare probe changes with direct checks and repeat during drying. Record raw outputs, units, calibration, temperature, position and uncertainty. Keep a reference set of better-characterised probes.
+
+Interpret faults explicitly. IRROMETER explains that an apparent constantly wet reading can be a short circuit, while an extremely dry reading can indicate an open wire or poor soil contact. An electrical fault must not become an automatic drought signal that empties the tank.
+
+Chapter six. Individual control without batteries
+
+The particularly interesting alternative is a mechanical sensor and valve at each plant. In Tropf-Blumat, a water-filled ceramic cone responds to soil moisture and operates a valve controlling a separate drip tube. Water reaches the plant through that tube, not through the sensing cone.
+
+The two-panel drawing shows the principle. Dry soil leads to an open valve and dripping. Moist soil leads to a closed valve. Each plant can respond independently without its own battery or radio.
+
+The manufacturer documents replaceable parts and tank operation with a minimum half-metre head, recommending at least one metre. These are instructions for that particular system, not generic requirements for all gravity irrigation.
+
+This approach could work with monitored tanks. Measure inventory and branch flow, and use independent soil probes on a sample of plants to evaluate performance. A shared meter will not establish every plant's individual dose.
+
+There are still maintenance tasks. Each cone needs commissioning, suitable contact and clean supply water. If the system runs dry, sensors may stop working correctly until serviced. The intended restoration regime also needs testing: a device designed to maintain garden moisture may deliver more frequent support than a native-establishment plan intends.
+
+Other local delivery methods deserve consideration. Groasis markets a reusable Waterboxx reservoir. Evaluate retrieval, cleaning, breakage and labour locally rather than assuming the advertised reuse life will be achieved.
+
+Groasis Waterboxx reusable reservoir
+
+The LIFE NIEBLAS manual documents biodegradable Cocoon reservoirs. It describes an initial twenty-litre fill, possible further irrigation during the first year and no reuse because the device degrades. Its historical price was seven to eight euros per unit before shipping and handling. That is not a current Almería quotation. The manual also reports additional water in its project summary, so claims of no irrigation cannot be treated as a universal promise.
+
+Cocoon reservoir around a seedling; LIFE NIEBLAS field example
+
+Porous pots and wicks could support local pottery or repair workshops. Test seepage consistency, mineral blockage and refill time, as well as whether retrieval damages roots. Buried or deep delivery devices need checks that water actually reaches the small nursery root ball; deeper is not automatically better.
+
+GrowOya porous clay watering pot; generic olla example
+
+Rain Bird Root Watering System; buried delivery hardware example, not a planting-depth recommendation
+
+Fog harvesting is relevant to some restoration projects, but this parcel needs an actual fog-resource assessment before it becomes a supply assumption. Solar pumping and intelligent valves redistribute available water. They do not create it.
+
+LIFE NIEBLAS individual fog-collection and plant-protection guard
+
+Chapter seven. Wireless supervision with local autonomy
+
+Use short wired connections within a tank station or planting island where practical. Use radio between dispersed stations and a shared supervisor. This avoids requiring a complete wireless device at every shrub.
+
+LoRa is a plausible low-data-rate radio technology. LoRaWAN adds a network protocol and server. Use appropriate European hardware and regional settings, then survey coverage with the actual terrain, tanks, vegetation and final antenna positions. A maximum range in a brochure is not a hillside coverage guarantee.
+
+Wi-Fi is useful near a building. Cellular connections at every plant create a different subscription and energy model. Bluetooth is useful for service access or compact spaces but should not be assumed to cover a large dispersed site.
+
+The communications drawing places autonomous tank controllers on one side and a shared gateway on the other. An operator can access local records. Internet and remote alarms are an additional connection rather than the mechanism that must keep every valve safe.
+
+Milesight UG65 LoRaWAN gateway; protected indoor station example
+
+A sleeping LoRaWAN Class A device only receives downlinks in windows following an uplink. It cannot be assumed to respond immediately to a remote command. Dose limits and closure therefore belong locally. A later cloud message must not be the only thing that closes an outlet.
+
+An open local network also needs a network server, application and storage, not just a gateway antenna. ChirpStack offers components for that arrangement. Integrating and maintaining them remains work; it is not a complete irrigation product.
+
+Begin intelligence with understandable rules: calibrated thresholds, hysteresis, maximum dose and runtime, minimum soak intervals and a water allocation for each tank. Weather forecasts can advise or defer a planned event when the agreed plant-health rules permit. They must not conceal a missing measurement. Predictive models, refill routing and automated fault diagnosis can be evaluated after useful records exist.
+
+The dashboard should connect each plant or island to its species, establishment cohort, valve and tank. Show soil quantity, units, time, calibration and quality. Show usable inventory, consumption, refill history and an uncertain service forecast. Keep valve commands separate from confirmation. Include pressure, flow, battery condition, last radio contact and required operator actions.
+
+Record plant condition, deaths, rescue watering and changes to the agreed protocol. Distinguish actual branch litres from inferred plant allocations. This distinction is essential for an honest demonstrator.
+
+Chapter eight. Proving delivery and handling failures
+
+A tank meter measures water leaving the tank. It does not prove how much each root ball received. The reading may include leaks, flushing and pipe filling. If several plant valves open together, dividing the total among them is an estimate.
+
+Hunter HC flow meter and accessible valve box; minimum flow still needs checking
+
+Sequential watering may improve allocation, but only after checking pipe drainage, filling volume, leaks and meter resolution. A dripper delivering two litres an hour may operate below the accurate range of a domestic water meter. Size the meter for the minimum active branch flow as well as the maximum pump flow.
+
+Combine branch measurement, pressure, occasional collection or weighing of emitter output and plant observation. A command to open is not evidence of successful watering. Conversely, no rise in one probe does not prove zero flow; the probe might miss the wetting front.
+
+The control diagram follows a complete event. Validate the required inputs, decide whether watering is needed, open and verify delivery, limit the dose, close, verify that flow has stopped, and allow soaking before reassessment. A separate fault state isolates the affected branch or tank and tells the operator what needs attention.
+
+Missing, implausible or stale sensor data should invalidate the affected measurement and prevent automatic starts under that rule. A low tank or failed level measurement should stop or inhibit the relevant pump and prompt inspection or refill.
+
+An open command without the expected pressure or flow should produce a timed hydraulic fault. Flow after all outlets should be closed should trigger independent isolation and a possible leak or stuck-valve alarm.
+
+Low energy and controller restarts need an engineered closure and reserve-energy strategy. Latching valves cannot be assumed closed just because power has disappeared. Lost radio or internet should appear as stale supervision while the documented local protections continue to operate.
+
+If delivered volume is uncertain, preserve that uncertainty. Do not substitute zero, or describe a requested dose as measured delivery. Keep the event history so the operator can understand what happened.
+
+Shutting down protects water and equipment, but plants can still be harmed if nobody responds. Define response times and an explicitly activated, logged rescue-watering procedure. A silent change from failed sensing to a timer programme would hide the problem. Recovery should be visible, deliberate and reviewable.
+
+Chapter nine. Water storage and solar energy
+
+Water and electrical energy need separate budgets. Consider a purely illustrative tank area with forty plants. Suppose each event delivers five litres to each plant. That requires two hundred litres per event. This is an arithmetic example, not a recommendation for these species.
+
+Suppose a nominal thousand-litre tank provides nine hundred usable litres after a combined reserve and unusable allowance of one hundred litres. Dividing nine hundred by two hundred gives four and a half event volumes. Four complete events leave one hundred litres above the designated reserve. A fifth full event needs a refill.
+
+At one event per week, the nominal allowance represents about thirty-one and a half days before the reserve. At two events per week, it represents about fifteen point eight days. Flushing, leaks and increased demand shorten the interval. Refill must be scheduled before the reserve is reached. Three such tank areas would need six hundred litres for one event across the site.
+
+The sizing illustration places water inventory on the left and electrical energy on the right. Notice that the tank's refill interval and the solar panel's capacity solve different problems.
+
+Refill logistics may dominate operating cost. Include the water source, transfer pump, driving time, hose access, road condition and availability during heatwaves. A predicted empty date needs uncertainty rather than false precision.
+
+Pump energy depends on volume, total head and efficiency. In another illustrative calculation, moving two hundred litres through fifteen metres of total dynamic head at thirty per cent overall pump and motor efficiency requires about twenty-seven watt-hours per event. This excludes idle losses and control equipment.
+
+Total head includes elevation, the pressure needed at the emitters and friction. The selected pump must provide the required pressure and flow together. A maximum-flow label measured at zero head is insufficient.
+
+Always-on electronics can dominate the energy budget. An assumed five-watt gateway running for twenty-four hours consumes one hundred and twenty watt-hours a day. That is much more than one weekly pumping event in this example.
+
+Suppose the complete electrical load is one hundred and thirty watt-hours a day. With three design peak-sun-hours and an overall solar-system yield of sixty-five per cent, the calculated minimum panel is about sixty-seven watts. A possible hundred-watt selection still needs a seasonal, shading, temperature and battery review. Those solar inputs are assumptions, not measurements from this parcel.
+
+Three days of that load requires three hundred and ninety usable watt-hours of battery energy. At an assumed eighty per cent usable fraction, the nominal battery must provide at least four hundred and eighty-seven point five watt-hours before further ageing and design margins.
+
+Victron Lithium SuperPack NG battery; example, not the calculated project selection
+
+Low-power plant nodes may need much less energy than the gateway. Sharing infrastructure, or sometimes using replaceable long-life batteries, can reduce the material burden of putting a small solar panel everywhere. If solar-only operation is a project requirement, specify it and price the entire power chain.
+
+Victron BlueSolar photovoltaic panel; illustrative size
+
+Victron SmartSolar charge controller; illustrative device
+
+Chapter ten. Cost, local work and repairability
+
+The following figures are unquoted planning allowances in euros. They are not supplier prices, validated market ranges or a grant-ready budget. Exact quantities and specifications still need definition. Taxes, shipping, trenching, water and custom engineering are excluded unless specifically allowed for.
+
+A reusable tank, base, plumbing and level arrangement might be assigned two hundred to seven hundred euros per tank area. Pumping, filtration, isolation, pressure and flow equipment might be assigned two hundred and fifty to nine hundred euros. A controller, solar supply, battery, enclosure and sector drivers might be assigned another two hundred and fifty to eight hundred euros.
+
+A robust replaceable soil probe is allowed forty to one hundred and eighty euros. A locally assembled electronic plant node, including probe and valve, is allowed ninety to two hundred and fifty euros, excluding development, installation and validation. A passive plant mechanism with immediate fittings is allowed fifteen to forty euros, excluding the common water supply and pipes.
+
+A shared gateway, local server and communications arrangement is allowed three hundred and fifty to a thousand euros. Outdoor mounting and its solar supply may add more. Pipe routes, installation, protection, commissioning and training need a site-specific quotation.
+
+These allowances show why component counts matter. For two hundred plants, an assumed hundred-and-fifty-euro electronic assembly at each plant uses thirty thousand euros before shared equipment and installation. An alternative assumption of ten island control assemblies at three hundred euros each, plus thirty probes at eighty euros each, gives five thousand four hundred euros for those components. Two hundred passive mechanisms at twenty-five euros each give five thousand euros for that line.
+
+These are unequal, partial scopes. They cannot establish a winning system until equivalent hydraulics, installation and service are included. They demonstrate the importance of sharing complete field nodes.
+
+For the proposed forty-eight-plant comparison, an initial discussion envelope of eight thousand to eighteen thousand euros could cover three areas. Allow three thousand to six thousand for installed tank, hydraulic and energy infrastructure. Allow fifteen hundred to four thousand for comparison controls, probes and records. Allow thirty-five hundred to eight thousand for design, calibration, commissioning, training, field monitoring and contingency. Repeated visits, civil works and product development could exceed that envelope.
+
+Local work can include irrigation installation, refilling, repairs, mounting, board assembly, firmware, soil calibration, ceramic experiments, plant inspection and interpretation for visitors. Standard fittings and service kits can be sought through regional suppliers. Imported chips and qualified probes remain likely, so locally assembled and maintained is a more defensible description than wholly locally sourced.
+
+The repair drawing separates the housing, power cassette, electronics, wet probe, valve service kit and bench tools. The aim is to replace a failed part while retaining durable modules.
+
+Use accessible screws, gaskets, connectors and batteries. Specify charging temperatures and protect equipment from sun and condensation. An enclosure's original waterproof rating does not automatically survive unqualified cable glands. Sealing a replaceable wet probe may make sense; permanently encapsulating an entire controller makes repair harder.
+
+Irrigatia replaceable rechargeable battery pack; kit-specific service part
+
+A reused industrial tank needs known safe previous contents and verified suitability. Looking clean is insufficient. After a cohort establishes, reusable controllers and radios could move to another area. Record device identity, calibration, repairs and failures, and budget collection of pipes, guards and damaged electronics.
+
+Compare five-year total cost, including capital, development, subscriptions, water transport, inspections, cleaning, replacements and retrieval. Include paid and volunteer hours. Report cost per surviving established plant, litres and recovered hardware, with any reuse value stated defensibly. Saving water while losing more plants is not automatically success.
+
+Chapter eleven. A demonstrator that can answer useful questions
+
+Begin with a wet bench and small outdoor commissioning phase. Build one tank area before expanding planting. Test valves at the real minimum pressure and flow. Check meters and level readings against measured containers. Observe wetting around actual nursery stock and test radio coverage in the final positions.
+
+Deliberately test a dry tank, blocked branch, leak, detached probe, stale reading, lost network, weak battery and restart with an open latching valve. Record what stops the water, what is detected and what needs a human response. Demonstrate a repair using parts that will actually be available.
+
+A later forty-eight-plant comparison could use four spatial blocks. Each block contains three separate four-plant treatment units. One unit receives representative-probe sector drip. One receives electronic individual control. One receives passive individual control with independent monitoring. Randomise their positions within each block.
+
+The trial drawing uses letters for treatments and rows for different microsites. The colours are only a visual aid. Each row contains all three methods so that one technology is not placed only in the best part of the site.
+
+There are four independent units per treatment. The plants sharing a sector valve are subsamples rather than separate sector replicates. Keep species, stock and preparation comparable. If several species are included, balance them deliberately and limit species-specific claims.
+
+Provide separately controlled and measured downstream branches. Avoid confusing a treatment effect with a tank effect. A shared tank is a common dependency, not extra replication. Check pressure differences and prevent runoff from one unit entering another.
+
+This is a feasibility pilot. It can reveal gross failures, service burden and operational differences. It cannot establish subtle survival differences, universal species rules or long-term drought independence. A larger study should use the observed variability and effect sizes to determine sample size.
+
+An earlier twelve-plant mulch proposal should not simply acquire three irrigation treatments and then be presented as answering both questions. It can support initial hydraulic learning. The technology comparison needs its own replication or a deliberately staged later phase.
+
+Before planting, agree a water cap, rescue criterion, acceptable losses, service response, observations and planned irrigation reduction with the nursery and site practitioner. There is no justified universal deadline for stopping support after a fixed number of summers. Follow at least a complete dry season and a later tapering review; establishment may take longer to assess.
+
+Measure survival, condition, meaningful growth, water at the stated measurement boundary, refill visits, energy, uptime, alarms, missed watering, leaks, repairs and labour. Keep inferred plant doses separate from measured branch volumes. Publish rainfall, denominators, protocol changes and rescue events.
+
+The LIFE NIEBLAS manual provides a useful monitoring precedent through identified plants and comparisons distributed across site variation. Its methods do not set a compulsory sample size or survival target for this parcel.
+
+Chapter twelve. Novelty, funding and the decisions ahead
+
+Solar valves, wireless probes, passive individual control and open-source irrigation already exist. A proposal should recognise that foundation. The interesting innovation is a specific, tested improvement in native establishment and maintenance.
+
+One question is the minimum useful sensing density. How many probes and independently controlled outlets are needed before extra equipment stops paying for itself? Another is whether a tank area can be temporary and movable, serving the next cohort after the first meets a defined establishment criterion.
+
+A third question is whether passive individual control, audited with shared telemetry, can meet the water and survival objectives with less maintenance. A fourth concerns local repair: can a trained team replace a probe, battery or valve part quickly with documented spares? Further questions concern transparent allocation during shortages and how visitors can learn from actual water records, uncertainty and repairs.
+
+These are project hypotheses. Whether they count as novelty under a particular funding programme or within the local territory requires comparison with existing practice and the programme's own conditions. This research does not establish patent novelty, grant points or eligibility.
+
+For the existing local LEADER discussion, irrigation could become a work package inside a complete native-vegetation demonstrator. Define the objectives, deliverables, participants, public benefit, costs, maintenance and evaluation. Existing funding assessments and saved project assumptions remain separate.
+
+A park proposal and a commercial sensor-development project may have different beneficiaries, eligible costs and public-use requirements. Collaborative agricultural innovation and environmental demonstration programmes are possible routes to investigate, but a restoration park cannot be assumed eligible as an agricultural project. Fix the applicant, land rights, operating responsibility and demonstration scope, then check the live call.
+
+A useful work-package description would be to demonstrate a repairable, solar-powered establishment-irrigation service for dispersed native trees and shrubs. Compare sector drip, electronic individual control and passive individual control under recorded water budgets. Publish the installation concepts, calibration and maintenance procedures, outcomes and equipment reuse plan, supported by local training and public interpretation.
+
+Before purchasing, survey planting positions, elevations and refill access. Confirm species, actual nursery stock, soil depth, texture, stoniness, infiltration and water retention. Establish a reliable water source and volume, water quality, and the permitted use of the supply and installation.
+
+Name the routine and emergency operator. Survey communications. Select exact compatible valves, probes and controllers. Obtain a repair and spare-parts route. Finalise the trial objective and the programme's requirements before turning discussion allowances into an application budget.
+
+The strongest next step is a single well-measured, repairable tank installation followed by a fair comparison. It should establish which combination of shared infrastructure, individual control and human attention makes sense for these native plants on this land.
+
+Chapter thirteen. Seeing the restoration site from a drone
+
+A drone can add a view of the whole site to the measurements around individual plants. Three jobs need separating. One is to survey plants and changes in the landscape. Another is to obtain information about plant stress or soil water. The third is to transport water. The equipment, evidence and economics differ substantially between these jobs.
+
+For this demonstrator, start with a plant register and repeatable ordinary colour photography. Give each planting a stable identity linked to its species, date, location and irrigation equipment. Use successive surveys to flag changes for inspection and to document vegetation islands, disturbed basins and erosion. These are proposed deliverables to agree with an operator.
+
+DJI Mavic 3 Multispectral aircraft
+
+The Mavic 3 Multispectral is a commercial example of a survey aircraft with both ordinary colour and spectral cameras. It illustrates a category of equipment, rather than a purchase decision. An ordinary colour camera is a useful baseline against which to judge the extra value of more specialised sensors.
+
+DJI Mavic 3M RGB camera
+
+Small plants are a difficult target. New Zealand forestry studies found that automated seedling detection could miss many plants and that adding spectral bands did not necessarily outperform finer colour imagery for detection. Those plantation results do not predict accuracy in Almería. They show why a convincing map needs independent field checks.
+
+Record alive, dead, missing and unknown separately. A seedling hidden by another plant should remain unknown until inspected. Evaluate missed plants and false detections by species, size, shade and ground cover. A high overall score can conceal poor performance on the smallest plants that matter most.
+
+RTK positioning helps locate observations, but does not make a blurred or tiny plant identifiable. Image detail, survey position and ecological interpretation are three different quality questions. Request the original photographs, the corrected map, its coordinate system and date, and the plant table with confidence information.
+
+DJI Mavic 3M four-band multispectral camera array
+
+Spectral cameras observe selected wavelengths of reflected light. Their vegetation indices can help describe changes in a canopy, but they do not directly report the water dose a plant needs. Species, season, soil background and canopy size need consideration. For this project, test whether spectral information improves a decision beyond the colour survey and ground records.
+
+Chapter fourteen. What airborne moisture measurements really mean
+
+Thermal images describe surface temperature. They can help locate patterns associated with plant water stress, but they cannot directly see the moisture around a root ball. In sparse vegetation, hot bare soil may dominate a small plant's apparent temperature. Weather, shade, recent irrigation and acquisition time also affect interpretation.
+
+MicaSense Altum-PT multispectral and thermal payload
+
+The Altum-PT is an example of a combined spectral and thermal payload. The manufacturer's stated thermal resolution at a sixty-metre flight height corresponds to seventeen centimetres on the ground per pixel. An illustrative twenty-centimetre crown would occupy barely more than one pixel across. Enlarging the picture would not separate that crown from its background.
+
+MicaSense reflectance-calibration example
+
+Repeatable observations need a calibration and acquisition procedure. For our trial, record weather and illumination, isolate plant canopies where possible, and compare suspected stress with field observations. A brightly coloured temperature map is evidence to examine, rather than an instruction to open a valve.
+
+DJI Matrice 4 series: compact enterprise aircraft examples
+
+Integrated enterprise aircraft offer another route. The pictured Matrice family includes different camera variants; the thermal-equipped variant must be specified explicitly. A family photograph does not establish that every aircraft has the same sensors or that its output supports a particular irrigation diagnosis.
+
+There are also microwave instruments that retrieve soil-water information. Passive radiometers observe microwave emission; active radar measures a transmitted signal's response. Both require an appropriate retrieval model, calibration and a defined footprint. Their measurement depth depends on the instrument and ground conditions, rather than on a universal drone specification.
+
+Monash's research project describes maps of the top five centimetres of soil using airborne L-band radiometry. It separately proposes modelling deeper water status. A predicted deeper value remains a model result. Nor does a map cell several metres wide resolve each small planting basin.
+
+Research drone carrying the GPR antenna, Henrion and colleagues
+
+A Belgian peatland study demonstrates that radar can provide information from a deeper modelled layer in a particular setting. It also reports much weaker spatial agreement than temporal agreement with ground probes. That limitation matters: matching seasonal drying does not guarantee an accurate moisture value at every individual plant. Mineral soils, stones and salinity in our site would require their own validation.
+
+New through-canopy radar research is worth following, including a 2026 preprint tested in corn and soybean. It is a research lead, with no established accuracy for our native planting. It should not be represented as an inexpensive replacement for every root-zone probe.
+
+Another research robot lands and physically inserts a moisture probe, takes readings and retracts it. That makes a direct point measurement rather than an aerial image. Landing, probe insertion and soil contact must all succeed. Hard stones and slopes make this a separate robotics challenge.
+
+A simpler role for an aircraft is to collect digital records from sensors already installed in the ground. Field studies have demonstrated this kind of data ferry. The aircraft is a messenger; the buried probe is still making the moisture measurement. Choose the radio and legal frequency configuration explicitly rather than copying a foreign field experiment unchanged.
+
+Test a fixed elevated gateway first. A visiting aircraft is useful only if it solves a real communications problem or shares an economical survey visit. It cannot report an immediate leak while it is absent. Local dose limits, tank reserve protection and dry-run protection must continue to work between flights.
+
+Chapter fifteen. Could the drone deliver the water?
+
+Yes, aircraft can carry and discharge water. The important questions are how much reaches the root zone, how many loads are needed and what the complete operation costs. Agricultural spraying is an established equipment category, but spraying a canopy and replenishing a planting basin are different delivery tasks.
+
+DJI Agras T50 spraying in an orchard
+
+DJI Agras T100 agricultural spray aircraft
+
+The pictured T50 and T100 illustrate forty-litre and one-hundred-litre spray-tank examples. They are not quoted or selected Spanish installations. Use the report's earlier illustrative five litres per plant solely to understand the payload arithmetic.
+
+Forty plants at five litres each require two hundred litres. That means at least five forty-litre loads or two one-hundred-litre loads. At the same illustrative dose, one thousand plants require five thousand litres: at least one hundred and twenty-five smaller loads or fifty larger ones. None of these figures includes reserve, losses, refill work, battery service or travel. A load is not a guaranteed safe sortie.
+
+Spraying area per hour is also a poor irrigation metric. One thousand litres spread over a hectare is only a tenth of a millimetre of water. For restoration, measure litres retained in the intended basin and the resulting wetting, rather than just the area crossed by a spray plume.
+
+Charging a heavy aircraft requires a separate energy budget from the small solar equipment at a tank. Account for the actual flights, battery reserve, charging power, conversion losses and any storage. The report gives an explicit solar arithmetic example, but does not claim measured energy per delivered load.
+
+Ground-fed hoses avoid carrying the entire supply in the air. A Japanese citrus experiment used ground water and power, reaction-force control and ground assistance for the hose. Its published results assessed spray adhesion, rather than root irrigation or seedling survival. It demonstrates water spraying and the supporting equipment needed.
+
+Miwa and colleagues: hose-fed water-spraying prototype
+
+Miwa and colleagues: citrus-orchard spraying field test
+
+Miwa and colleagues: ground support during spraying
+
+For our project, a metered stream or short drop hose aimed into a basin is a possible engineering experiment. It is not a validated product recommendation. Start on a bench: measure the dose, basin interception, infiltration and runoff. Before flight, assess hose forces and snagging, rotor downwash, obstacles and disturbance to young plants and mulch.
+
+Routine tank-and-pipe delivery is the first comparison wherever routing is practical. An aircraft might have a useful niche for inaccessible plants or urgent spot support. Test that claim against a person with a backpack, a vehicle with a hose and temporary lateral pipes. This desk study does not establish a cost advantage.
+
+Chapter sixteen. A drone work package that earns its place
+
+Andalusia has relevant sensing experience. IFAPA has investigated thermal irrigation evaluation with research and industry partners, and national irrigation training material includes drone methods. That supports looking for a regional operator or research partner. It does not show that drone root-watering is common in Almería parks.
+
+Begin with a shared or contracted survey service. Pair observations with the existing irrigation trial, retaining the same independent treatment units. Repeated flights and multiple pictures do not create extra independent irrigation replicates.
+
+The first test is a stable plant register and repeated colour imagery. The next test asks whether thermal or spectral sensing identifies useful problems beyond colour imagery and the existing probes. Check suspected faults and some apparently healthy plants. Report false alarms, missed stress, unclassifiable plants, operator time and the cost per useful finding. Hold back blocks or dates from model training to test transfer.
+
+Water delivery belongs in a separate gated experiment. Record tank withdrawal, the retained basin dose, runoff, labour, refill and charging time, and energy from the charging supply. Compare practical ground delivery under the same target task. A successful nozzle demonstration is not yet evidence of improved establishment survival.
+
+Flight planning also differs between imaging and releasing water. The European open category includes restrictions on dropping material, as well as aircraft, height, visibility and proximity conditions. Obtain the applicable Spanish operational assessment for any water-release experiment. Check the actual site and dates in ENAIRE Drones, with relevant land-manager, environmental and public-access conditions. This report is not a site flight clearance.
+
+Useful local development includes serviceable ground sensors, mounts, enclosures, test rigs, plant identities, map joins and transparent decision software. Keep raw images and open data exports with dates, coordinate systems and confidence. Ask about replacement batteries, parts, calibration, firmware support and repair responsibility before buying aircraft.
+
+The funding question is whether periodic aerial evidence improves a repairable establishment-irrigation service for native plants. Measure that improvement. Calling the system intelligent or adding a drone does not establish novelty. The system should continue watering within its agreed bounds even when weather prevents a flight or an image is unusable.

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>Tank station hydraulic assembly</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">03  Tank station hydraulic assembly</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Proposed pumped cell: physical protection and measurement precede automation.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<rect x="70" y="205" width="190" height="230" rx="9" fill="#e5f2f8" stroke="#137fa7" stroke-width="2"/>
+<line x1="85" y1="280" x2="245" y2="280" stroke="#137fa7" stroke-width="3"/>
+<text x="92" y="245" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="start" fill="#137fa7">REFILLABLE</text>
+<text x="92" y="275" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="start" fill="#137fa7">TANK</text>
+<text x="92" y="380" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Level probe</text>
+<text x="92" y="412" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Low-level trip</text>
+<rect x="315" y="270" width="185" height="130" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="333" y="303" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Isolation</text>
+<text x="333" y="332" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Manual shutoff</text>
+<line x1="260" y1="335" x2="315" y2="335" stroke="#137fa7" stroke-width="3"/>
+<polygon points="315,335 303.2941876694152,340.654551943446 303.2941876694152,329.345448056554" fill="#137fa7"/>
+<rect x="535" y="270" width="185" height="130" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="553" y="303" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Pump</text>
+<text x="553" y="332" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Dry-run cutout</text>
+<line x1="480" y1="335" x2="535" y2="335" stroke="#137fa7" stroke-width="3"/>
+<polygon points="535,335 523.2941876694152,340.654551943446 523.2941876694152,329.345448056554" fill="#137fa7"/>
+<rect x="755" y="270" width="185" height="130" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="773" y="303" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Filter</text>
+<text x="773" y="332" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Service + flush</text>
+<line x1="700" y1="335" x2="755" y2="335" stroke="#137fa7" stroke-width="3"/>
+<polygon points="755,335 743.2941876694152,340.654551943446 743.2941876694152,329.345448056554" fill="#137fa7"/>
+<rect x="975" y="270" width="185" height="130" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="993" y="303" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Flow meter</text>
+<text x="993" y="332" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Sized for low</text>
+<text x="993" y="360" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">flow</text>
+<line x1="920" y1="335" x2="975" y2="335" stroke="#137fa7" stroke-width="3"/>
+<polygon points="975,335 963.2941876694152,340.654551943446 963.2941876694152,329.345448056554" fill="#137fa7"/>
+<rect x="975" y="495" width="270" height="115" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="993" y="528" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#a7443c">Master isolation</text>
+<text x="993" y="557" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Independent shutoff</text>
+<text x="993" y="585" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">+ pressure observation</text>
+<line x1="1160" y1="335" x2="1260" y2="335" stroke="#137fa7" stroke-width="3"/>
+<polygon points="1260,335 1248.2941876694151,340.654551943446 1248.2941876694151,329.345448056554" fill="#137fa7"/>
+<line x1="1260" y1="335" x2="1260" y2="465" stroke="#137fa7" stroke-width="3"/>
+<line x1="1260" y1="465" x2="1110" y2="465" stroke="#137fa7" stroke-width="3"/>
+<polygon points="1110,465 1121.7058123305849,459.345448056554 1121.7058123305849,470.654551943446" fill="#137fa7"/>
+<line x1="1110" y1="465" x2="1110" y2="495" stroke="#137fa7" stroke-width="3"/>
+<rect x="530" y="515" width="260" height="103" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="548" y="548" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Zone / plant valves</text>
+<text x="548" y="577" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Matched to pressure +</text>
+<text x="548" y="605" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">flow</text>
+<line x1="975" y1="550" x2="790" y2="550" stroke="#137fa7" stroke-width="3"/>
+<polygon points="790,550 801.7058123305848,544.345448056554 801.7058123305848,555.654551943446" fill="#137fa7"/>
+<line x1="530" y1="565" x2="375" y2="565" stroke="#137fa7" stroke-width="3"/>
+<line x1="375" y1="565" x2="375" y2="670" stroke="#137fa7" stroke-width="3"/>
+<polygon points="375,670 369.345448056554,658.2941876694152 380.654551943446,658.2941876694152" fill="#137fa7"/>
+<line x1="375" y1="735" x2="375" y2="690" stroke="#39785b" stroke-width="5"/>
+<circle cx="362" cy="688" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="389" cy="681" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<text x="375" y="765" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="middle" fill="#19343e">Drippers + accessible flush ends</text>
+<rect x="65" y="510" width="250" height="131" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="83" y="543" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Design checks</text>
+<text x="83" y="572" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Anti-siphon / backflow</text>
+<text x="83" y="600" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Air release where</text>
+<text x="83" y="628" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">needed</text>
+<text x="555" y="720" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">Actual filter, regulator, relief and air-device placement</text>
+<text x="555" y="751" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">follows the selected pump and hydraulic design.</text>
+</svg>

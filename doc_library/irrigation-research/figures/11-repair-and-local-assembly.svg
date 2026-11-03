@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>Repair modules instead of discarding whole devices</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">11  Repair modules instead of discarding whole devices</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Proposed local assembly: retain durable electronics and replace the failed part.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<rect x="70" y="180" width="360" height="160" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="88" y="213" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Housing</text>
+<text x="88" y="242" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Gasket, screws, glands</text>
+<text x="88" y="270" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">UV shield + asset label</text>
+<rect x="520" y="180" width="360" height="160" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="538" y="213" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#b77420">Power cassette</text>
+<text x="538" y="242" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Battery + fuse + charger</text>
+<text x="538" y="270" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Test separately</text>
+<rect x="970" y="180" width="360" height="160" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="988" y="213" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#39785b">Electronics</text>
+<text x="988" y="242" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Radio + controller</text>
+<text x="988" y="270" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Open firmware + connectors</text>
+<rect x="70" y="465" width="360" height="160" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="88" y="498" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Wet probe</text>
+<text x="88" y="527" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Detachable calibrated probe</text>
+<text x="88" y="555" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Record serial + calibration</text>
+<rect x="520" y="465" width="360" height="160" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="538" y="498" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Valve service kit</text>
+<text x="538" y="527" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Seal, diaphragm or actuator</text>
+<text x="538" y="555" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Manual isolation for repair</text>
+<rect x="970" y="465" width="360" height="160" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="988" y="498" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Bench test tools</text>
+<text x="988" y="527" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Known-wet / known-dry check</text>
+<text x="988" y="555" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Current + leak + flow checks</text>
+<line x1="430" y1="260" x2="520" y2="260" stroke="#b77420" stroke-width="3"/>
+<polygon points="520,260 508.2941876694152,265.654551943446 508.2941876694152,254.345448056554" fill="#b77420"/>
+<line x1="880" y1="260" x2="970" y2="260" stroke="#39785b" stroke-width="3"/>
+<polygon points="970,260 958.2941876694152,265.654551943446 958.2941876694152,254.345448056554" fill="#39785b"/>
+<line x1="250" y1="465" x2="250" y2="340" stroke="#137fa7" stroke-width="3"/>
+<polygon points="250,340 255.654551943446,351.7058123305848 244.345448056554,351.7058123305848" fill="#137fa7"/>
+<line x1="700" y1="465" x2="700" y2="340" stroke="#137fa7" stroke-width="3"/>
+<polygon points="700,340 705.654551943446,351.7058123305848 694.345448056554,351.7058123305848" fill="#137fa7"/>
+<text x="75" y="720" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">Local work: pipe assembly, installation, calibration, PCB assembly, repair training and documentation.</text>
+<text x="75" y="760" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">Imported semiconductors and qualified probes remain likely. Recycled tanks require known safe provenance.</text>
+</svg>

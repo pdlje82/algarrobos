@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>Connect aerial observations to local irrigation</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">16  Connect aerial observations to local irrigation</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Proposed architecture: retain acquisition time, uncertainty, plant ID and measurement depth.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<rect x="70" y="180" width="370" height="120" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="88" y="213" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">Periodic drone flight</text>
+<text x="88" y="242" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">RGB / spectral / thermal</text>
+<text x="88" y="270" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Map candidates for inspection</text>
+<rect x="70" y="385" width="370" height="120" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="88" y="418" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#39785b">Fixed soil + tank sensors</text>
+<text x="88" y="447" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Continuous moisture / flow</text>
+<text x="88" y="475" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Local records + fault trips</text>
+<rect x="540" y="270" width="350" height="140" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="558" y="303" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Join by place and time</text>
+<text x="558" y="332" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Plant IDs + sensor locations</text>
+<text x="558" y="360" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Weather + calibration + quality</text>
+<text x="558" y="388" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Reject stale or invalid input</text>
+<line x1="440" y1="240" x2="540" y2="305" stroke="#137fa7" stroke-width="3"/>
+<polygon points="540,305 527.1036714407932,303.3614916255978 533.2670013148227,293.87944566555245" fill="#137fa7"/>
+<line x1="440" y1="445" x2="540" y2="375" stroke="#137fa7" stroke-width="3"/>
+<polygon points="540,375 533.6528974969923,386.34523203007825 527.1675522693668,377.08045313347037" fill="#137fa7"/>
+<rect x="990" y="270" width="340" height="140" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="1008" y="303" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#b77420">Reviewed action queue</text>
+<text x="1008" y="332" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Inspect plant / emitter</text>
+<text x="1008" y="360" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Propose a bounded change</text>
+<text x="1008" y="388" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Record reason + outcome</text>
+<line x1="890" y1="340" x2="990" y2="340" stroke="#137fa7" stroke-width="3"/>
+<polygon points="990,340 978.2941876694152,345.654551943446 978.2941876694152,334.345448056554" fill="#137fa7"/>
+<rect x="540" y="570" width="350" height="125" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="558" y="603" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#39785b">Tank-cell controller</text>
+<text x="558" y="632" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Local volume / time limits</text>
+<text x="558" y="660" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Independent low-level stop</text>
+<line x1="1160" y1="410" x2="1160" y2="630" stroke="#b77420" stroke-width="3"/>
+<polygon points="1160,630 1154.345448056554,618.2941876694152 1165.654551943446,618.2941876694152" fill="#b77420"/>
+<line x1="1160" y1="630" x2="890" y2="630" stroke="#b77420" stroke-width="3"/>
+<polygon points="890,630 901.7058123305848,624.345448056554 901.7058123305848,635.654551943446" fill="#b77420"/>
+<rect x="70" y="600" width="370" height="95" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="88" y="633" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">Optional data ferry</text>
+<text x="88" y="662" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Bulk upload on survey flights</text>
+<line x1="440" y1="650" x2="540" y2="650" stroke="#137fa7" stroke-width="3" stroke-dasharray="9 7"/>
+<polygon points="540,650 528.2941876694152,655.654551943446 528.2941876694152,644.345448056554" fill="#137fa7"/>
+<text x="65" y="760" font-family="sans-serif" font-size="23" font-weight="bold" text-anchor="start" fill="#39785b">A missed flight delays the survey. Essential watering and tank protection must still function.</text>
+</svg>

@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "editions": {
+    "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399": {
+      "document_id": "FUND-008",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399"
+    },
+    "FUND-009@ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e": {
+      "document_id": "FUND-009",
+      "sha256": "ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e"
+    },
+    "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8": {
+      "document_id": "FOREST-002",
+      "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8"
+    },
+    "FUND-013@1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796": {
+      "document_id": "FUND-013",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796"
+    }
+  },
+  "passages": {
+    "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399:pdf:120": {
+      "edition_id": "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "page_basis": "pdf",
+      "page": 120
+    },
+    "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399:pdf:121": {
+      "edition_id": "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "page_basis": "pdf",
+      "page": 121
+    },
+    "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399:pdf:122": {
+      "edition_id": "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "page_basis": "pdf",
+      "page": 122
+    },
+    "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399:pdf:123": {
+      "edition_id": "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "page_basis": "pdf",
+      "page": 123
+    },
+    "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399:pdf:124": {
+      "edition_id": "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "page_basis": "pdf",
+      "page": 124
+    },
+    "FUND-009@ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e:pdf:1": {
+      "edition_id": "FUND-009@ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e",
+      "page_basis": "pdf",
+      "page": 1
+    },
+    "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:131": {
+      "edition_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "page_basis": "pdf",
+      "page": 131
+    },
+    "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:132": {
+      "edition_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "page_basis": "pdf",
+      "page": 132
+    },
+    "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:133": {
+      "edition_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "page_basis": "pdf",
+      "page": 133
+    },
+    "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:134": {
+      "edition_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "page_basis": "pdf",
+      "page": 134
+    },
+    "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:135": {
+      "edition_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "page_basis": "pdf",
+      "page": 135
+    },
+    "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:136": {
+      "edition_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "page_basis": "pdf",
+      "page": 136
+    },
+    "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:137": {
+      "edition_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "page_basis": "pdf",
+      "page": 137
+    },
+    "FUND-013@1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796:pdf:395": {
+      "edition_id": "FUND-013@1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "page_basis": "pdf",
+      "page": 395
+    }
+  },
+  "citations": {
+    "FUND-008-p120-route-requirements": {
+      "passage_id": "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399:pdf:120",
+      "role": "route requirements",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p121-route-requirements": {
+      "passage_id": "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399:pdf:121",
+      "role": "route requirements",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p122-route-requirements": {
+      "passage_id": "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399:pdf:122",
+      "role": "route requirements",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p123-route-requirements": {
+      "passage_id": "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399:pdf:123",
+      "role": "route requirements",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p124-route-requirements": {
+      "passage_id": "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399:pdf:124",
+      "role": "route requirements",
+      "verified_on": "2026-11-01"
+    },
+    "pilot:FUND-009:p1:call-context": {
+      "passage_id": "FUND-009@ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e:pdf:1",
+      "role": "published call context; current availability not assessed",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p131:mr2-guidance": {
+      "passage_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:131",
+      "role": "MR2 handbook guidance and case context",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p132:mr2-guidance": {
+      "passage_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:132",
+      "role": "MR2 handbook guidance and case context",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p133:mr2-guidance": {
+      "passage_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:133",
+      "role": "MR2 handbook guidance and case context",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p134:mr2-guidance": {
+      "passage_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:134",
+      "role": "MR2 handbook guidance and case context",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p135:mr2-guidance": {
+      "passage_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:135",
+      "role": "MR2 handbook guidance and case context",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p136:mr2-guidance": {
+      "passage_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:136",
+      "role": "MR2 handbook guidance and case context",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p137:mr2-guidance": {
+      "passage_id": "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8:pdf:137",
+      "role": "MR2 handbook guidance and case context",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FUND-013:p395:strategy-need": {
+      "passage_id": "FUND-013@1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796:pdf:395",
+      "role": "prioritised strategy need; not grant points",
+      "verified_on": "2026-11-03"
+    }
+  },
+  "consumers": {
+    "selection_guidance": {
+      "citation_ids": [
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p122-route-requirements",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    },
+    "project_concept": {
+      "citation_ids": [
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p122-route-requirements",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    },
+    "delivery_plan": {
+      "citation_ids": [
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "FUND-008-p123-route-requirements",
+        "FUND-008-p124-route-requirements"
+      ]
+    },
+    "knowledge_pilot": {
+      "citation_ids": [
+        "pilot:FUND-009:p1:call-context",
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements",
+        "pilot:FOREST-002:p131:mr2-guidance",
+        "pilot:FOREST-002:p132:mr2-guidance",
+        "pilot:FOREST-002:p133:mr2-guidance",
+        "pilot:FOREST-002:p134:mr2-guidance",
+        "pilot:FOREST-002:p135:mr2-guidance",
+        "pilot:FOREST-002:p136:mr2-guidance",
+        "pilot:FOREST-002:p137:mr2-guidance",
+        "pilot:FUND-013:p395:strategy-need"
+      ]
+    }
+  }
+}

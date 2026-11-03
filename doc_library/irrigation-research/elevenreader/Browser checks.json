@@ -1,0 +1,108 @@
+{
+  "chapters": 16,
+  "imageCount": 72,
+  "captionedReferencePictures": 52,
+  "allImagesLoaded": true,
+  "horizontalOverflow": false,
+  "dialogOpened": true,
+  "enlargedImage": true,
+  "dialogClosed": true,
+  "desktop": {
+    "width": 1280,
+    "overflow": false,
+    "target": {
+      "x": 140.5,
+      "y": 0.328125,
+      "width": 984,
+      "height": 597.421875,
+      "top": 0.328125,
+      "right": 1124.5,
+      "bottom": 597.75,
+      "left": 140.5
+    }
+  },
+  "products": {
+    "width": 1280,
+    "overflow": false,
+    "target": {
+      "x": 140.5,
+      "y": -0.390625,
+      "width": 984,
+      "height": 531.1875,
+      "top": -0.390625,
+      "right": 1124.5,
+      "bottom": 530.796875,
+      "left": 140.5
+    }
+  },
+  "mobile": {
+    "width": 390,
+    "overflow": false,
+    "target": {
+      "x": 16,
+      "y": -0.140625,
+      "width": 358,
+      "height": 309.09375,
+      "top": -0.140625,
+      "right": 374,
+      "bottom": 308.953125,
+      "left": 16
+    }
+  },
+  "passive": {
+    "width": 390,
+    "overflow": false,
+    "target": {
+      "x": 16,
+      "y": -0.03125,
+      "width": 358,
+      "height": 285.15625,
+      "top": -0.03125,
+      "right": 374,
+      "bottom": 285.125,
+      "left": 16
+    }
+  },
+  "droneSurvey": {
+    "width": 1280,
+    "overflow": false,
+    "target": {
+      "x": 140.5,
+      "y": 0.21875,
+      "width": 984,
+      "height": 531.1875,
+      "top": 0.21875,
+      "right": 1124.5,
+      "bottom": 531.40625,
+      "left": 140.5
+    }
+  },
+  "droneWater": {
+    "width": 390,
+    "overflow": false,
+    "target": {
+      "x": 16,
+      "y": -0.0625,
+      "width": 358,
+      "height": 217.34375,
+      "top": -0.0625,
+      "right": 374,
+      "bottom": 217.28125,
+      "left": 16
+    }
+  },
+  "droneResearch": {
+    "width": 390,
+    "overflow": false,
+    "target": {
+      "x": 16,
+      "y": -0.21875,
+      "width": 358,
+      "height": 275.09375,
+      "top": -0.21875,
+      "right": 374,
+      "bottom": 274.875,
+      "left": 16
+    }
+  }
+}

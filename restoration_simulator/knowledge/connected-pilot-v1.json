@@ -1,0 +1,745 @@
+{
+  "version": 1,
+  "id": "algarroba-connected-pilot-v1",
+  "reviewed_on": "2026-11-03",
+  "sources": {
+    "pilot:FUND-009:p1:call-context": {
+      "document_id": "FUND-009",
+      "page": 1,
+      "label": "FUND-009 - PDF page 1",
+      "role": "published call context; current availability not assessed",
+      "sha256": "ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e",
+      "verified_on": "2026-11-03"
+    },
+    "FUND-008-p120-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 120,
+      "label": "FUND-008 - PDF page 120",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "FUND-008-p121-route-requirements": {
+      "document_id": "FUND-008",
+      "page": 121,
+      "label": "FUND-008 - PDF page 121",
+      "role": "route requirements",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "verified_on": "2026-11-01"
+    },
+    "pilot:FOREST-002:p131:mr2-guidance": {
+      "document_id": "FOREST-002",
+      "page": 131,
+      "label": "FOREST-002 - PDF page 131",
+      "role": "MR2 handbook guidance and case context",
+      "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p132:mr2-guidance": {
+      "document_id": "FOREST-002",
+      "page": 132,
+      "label": "FOREST-002 - PDF page 132",
+      "role": "MR2 handbook guidance and case context",
+      "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p133:mr2-guidance": {
+      "document_id": "FOREST-002",
+      "page": 133,
+      "label": "FOREST-002 - PDF page 133",
+      "role": "MR2 handbook guidance and case context",
+      "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p134:mr2-guidance": {
+      "document_id": "FOREST-002",
+      "page": 134,
+      "label": "FOREST-002 - PDF page 134",
+      "role": "MR2 handbook guidance and case context",
+      "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p135:mr2-guidance": {
+      "document_id": "FOREST-002",
+      "page": 135,
+      "label": "FOREST-002 - PDF page 135",
+      "role": "MR2 handbook guidance and case context",
+      "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p136:mr2-guidance": {
+      "document_id": "FOREST-002",
+      "page": 136,
+      "label": "FOREST-002 - PDF page 136",
+      "role": "MR2 handbook guidance and case context",
+      "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FOREST-002:p137:mr2-guidance": {
+      "document_id": "FOREST-002",
+      "page": 137,
+      "label": "FOREST-002 - PDF page 137",
+      "role": "MR2 handbook guidance and case context",
+      "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "verified_on": "2026-11-03"
+    },
+    "pilot:FUND-013:p395:strategy-need": {
+      "document_id": "FUND-013",
+      "page": 395,
+      "label": "FUND-013 - PDF page 395",
+      "role": "prioritised strategy need; not grant points",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "verified_on": "2026-11-03"
+    }
+  },
+  "entities": {
+    "programme:LEADER-AL20": {
+      "type": "programme",
+      "native_id": "LEADER-AL20",
+      "binding_id": "programme-al20",
+      "aliases": [],
+      "availability": "not_assessed",
+      "citation_ids": [],
+      "limitations": [
+        "Programme membership does not establish eligibility."
+      ]
+    },
+    "route:LEADER-AL20-3.4": {
+      "type": "funding_route",
+      "native_id": "LEADER-AL20-3.4",
+      "binding_id": "route-34",
+      "aliases": [],
+      "availability": "not_assessed",
+      "citation_ids": [
+        "FUND-008-p120-route-requirements",
+        "FUND-008-p121-route-requirements"
+      ],
+      "limitations": [
+        "Self-assessment and current call confirmation remain separate."
+      ]
+    },
+    "call:FUND-009": {
+      "type": "funding_call",
+      "native_id": "FUND-009",
+      "binding_id": "call-2026",
+      "aliases": [],
+      "availability": "not_assessed",
+      "citation_ids": [
+        "pilot:FUND-009:p1:call-context"
+      ],
+      "limitations": [
+        "Published call context only; no current availability determination."
+      ]
+    },
+    "species:carob": {
+      "type": "species",
+      "native_id": "carob",
+      "binding_id": "plant-carob",
+      "aliases": [],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Species identity does not establish site suitability."
+      ]
+    },
+    "approach:mr2": {
+      "type": "restoration_approach",
+      "native_id": "mr2",
+      "binding_id": "approach-mr2",
+      "aliases": [
+        "MR2",
+        "Oasification",
+        "Oasificacion"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "pilot:FOREST-002:p131:mr2-guidance",
+        "pilot:FOREST-002:p132:mr2-guidance"
+      ],
+      "limitations": [
+        "Reference approach, not a parcel prescription."
+      ]
+    },
+    "palette:mr2_mix": {
+      "type": "planting_palette",
+      "native_id": "mr2_mix",
+      "binding_id": "palette-mr2",
+      "aliases": [],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Starter/optional project palette, distinct from a reference vegetation series."
+      ]
+    },
+    "treatment:stone": {
+      "type": "treatment",
+      "native_id": "stone",
+      "binding_id": "stone",
+      "aliases": [],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "pilot:FOREST-002:p134:mr2-guidance"
+      ],
+      "limitations": [
+        "Material identity and cited guidance do not quantify a water benefit."
+      ]
+    },
+    "need:NPL3": {
+      "type": "strategy_need",
+      "native_id": "NPL3",
+      "binding_id": "need-npl3",
+      "aliases": [],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "pilot:FUND-013:p395:strategy-need"
+      ],
+      "limitations": [
+        "Supporting strategy references do not award points."
+      ]
+    },
+    "rule:density_scenarios": {
+      "type": "designer_rule",
+      "native_id": "density_scenarios",
+      "binding_id": "rule-density",
+      "aliases": [],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Current illustrative policy; not handbook-derived optimum density."
+      ]
+    },
+    "rule:layout": {
+      "type": "designer_rule",
+      "native_id": "layout",
+      "binding_id": "rule-layout",
+      "aliases": [],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Drawing geometry is an editable project assumption."
+      ]
+    },
+    "example_activity:carob-mr2-demonstrator": {
+      "type": "example_activity",
+      "native_id": "carob-mr2-demonstrator",
+      "binding_id": "example-demo",
+      "aliases": [],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Illustration only; not a saved activity, hypothesis validation or funding assessment."
+      ]
+    }
+  },
+  "claims": {
+    "claim:al20-34-novel-demonstration": {
+      "subject_ids": [
+        "route:LEADER-AL20-3.4"
+      ],
+      "statement": "Route 3.4 demonstrations test and evaluate technologies, processes, methods or approaches new or unknown in the relevant LEADER area.",
+      "evidence_kind": "official_requirement",
+      "context": "FUND-008 Annex I typology 3.4 definition; general route conditions still apply.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "No local novelty, applicant eligibility or award is established for an actual project."
+      ],
+      "citation_ids": [
+        "FUND-008-p120-route-requirements"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "guide-34",
+        "delivery-novelty"
+      ]
+    },
+    "claim:al20-34-results-publication": {
+      "subject_ids": [
+        "route:LEADER-AL20-3.4"
+      ],
+      "statement": "Information about the demonstration and its results must be published online and retained for at least three years after final payment.",
+      "evidence_kind": "official_requirement",
+      "context": "FUND-008 typology 3.4 publicity obligations; information starts with the activity and results are added as available.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "The claim records the inspected edition, not current call availability."
+      ],
+      "citation_ids": [
+        "FUND-008-p121-route-requirements"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "guide-34",
+        "delivery-publication"
+      ]
+    },
+    "claim:npl3-heritage-need": {
+      "subject_ids": [
+        "need:NPL3",
+        "route:LEADER-AL20-3.4"
+      ],
+      "statement": "NPL3 addresses conservation, enhancement and dissemination of the territory's natural and cultural rural heritage.",
+      "evidence_kind": "official_strategy",
+      "context": "FUND-013 section 4.3 prioritised needs addressable through LEADER; the strategy ranking is not a selection-point value.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "An activity must actually address the need; linking it does not select a criterion or certify delivery."
+      ],
+      "citation_ids": [
+        "pilot:FUND-013:p395:strategy-need"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "need-npl3",
+        "concept-restoration"
+      ]
+    },
+    "claim:mr2-runoff-capture": {
+      "subject_ids": [
+        "approach:mr2",
+        "species:carob"
+      ],
+      "statement": "MR2 describes collecting suitable local runoff around scattered planting groups in dry landscapes.",
+      "evidence_kind": "guidance",
+      "context": "FOREST-002 MR2/oasification discussion; receiving soil, terrain and safe overflow require site assessment.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "Annual rainfall alone does not determine suitability, usable runoff or survival."
+      ],
+      "citation_ids": [
+        "pilot:FOREST-002:p131:mr2-guidance",
+        "pilot:FOREST-002:p132:mr2-guidance"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "approach-mr2",
+        "model-mr2"
+      ]
+    },
+    "claim:mr2-preparation-depth": {
+      "subject_ids": [
+        "approach:mr2",
+        "species:carob"
+      ],
+      "statement": "The MR2 preparation discussion describes 60 x 60 x 60 cm holes; this preparation envelope does not specify root-collar burial depth.",
+      "evidence_kind": "guidance",
+      "context": "FOREST-002 page 134 soil-preparation narrative; preparation geometry and plant installation depth are different measurements.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "This is handbook guidance with site restrictions, not a generated excavation or planting prescription."
+      ],
+      "citation_ids": [
+        "pilot:FOREST-002:p134:mr2-guidance"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "model-mr2"
+      ]
+    },
+    "claim:mr2-stone-mulch": {
+      "subject_ids": [
+        "approach:mr2",
+        "treatment:stone"
+      ],
+      "statement": "The MR2 establishment discussion describes a microcatchment and stone mulch around the established plant.",
+      "evidence_kind": "guidance",
+      "context": "FOREST-002 page 134; material-specific protective establishment context.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "No material cost, irrigation saving or comparison with organic mulch is inferred."
+      ],
+      "citation_ids": [
+        "pilot:FOREST-002:p134:mr2-guidance"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "rule-stone",
+        "model-mr2"
+      ]
+    },
+    "claim:mr2-density-area-basis": {
+      "subject_ids": [
+        "approach:mr2",
+        "species:carob"
+      ],
+      "statement": "The MR2 discussion gives low whole-area tree densities below 100 stems/ha alongside approximately 6 x 6 m spacing within groups.",
+      "evidence_kind": "guidance",
+      "context": "FOREST-002 page 132; whole landscape area and local grouped planting area must be distinguished.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "These figures must not be treated as the same uniform hectare-wide grid or substituted for Designer assumptions."
+      ],
+      "citation_ids": [
+        "pilot:FOREST-002:p132:mr2-guidance",
+        "pilot:FOREST-002:p134:mr2-guidance"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "model-mr2",
+        "rule-density"
+      ]
+    },
+    "claim:mr2-stock-narrative": {
+      "subject_ids": [
+        "approach:mr2",
+        "species:carob"
+      ],
+      "statement": "The MR2 narrative permits ordinary forestry stock above 200 cm3 and describes larger stock above 1000 cm3 as preferable.",
+      "evidence_kind": "guidance",
+      "context": "FOREST-002 page 133 narrative on stock format; separate from the following summary table.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "A qualified narrative preference; preserve its context alongside the table rather than choosing a stock default."
+      ],
+      "citation_ids": [
+        "pilot:FOREST-002:p133:mr2-guidance"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "model-mr2"
+      ]
+    },
+    "claim:mr2-stock-table": {
+      "subject_ids": [
+        "approach:mr2",
+        "species:carob"
+      ],
+      "statement": "The MR2 summary table lists one-year stock in 200-300 cm3 forestry containers.",
+      "evidence_kind": "guidance",
+      "context": "FOREST-002 page 134 table 5.19; the table lists a smaller stock format than the narrative preference.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "This source tension is unresolved; the table does not silently override the narrative."
+      ],
+      "citation_ids": [
+        "pilot:FOREST-002:p134:mr2-guidance"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "model-mr2"
+      ]
+    },
+    "claim:designer-carob-density-assumption": {
+      "subject_ids": [
+        "species:carob",
+        "rule:density_scenarios"
+      ],
+      "statement": "The current Designer starts carob from an illustrative project density assumption.",
+      "evidence_kind": "project_assumption",
+      "context": "Current repository default, resolved from the central rule bundle on each query; saved designs may retain different bundles.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "No numerical default is copied into this claim and no handbook optimum is implied."
+      ],
+      "citation_ids": [],
+      "configuration_ids": [
+        "density-value"
+      ],
+      "review_targets": [
+        "rule-density"
+      ]
+    },
+    "claim:designer-mr2-layout-assumption": {
+      "subject_ids": [
+        "approach:mr2",
+        "rule:layout"
+      ],
+      "statement": "The Designer's exact MR2 drawing geometry is an illustrative project assumption.",
+      "evidence_kind": "project_assumption",
+      "context": "Current centres and donor/island/overflow drawing parameters are resolved from the central rule bundle.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "Coordinates are not engineered catchment dimensions, treatment effects or permitted earthworks."
+      ],
+      "citation_ids": [],
+      "configuration_ids": [
+        "geometry-value"
+      ],
+      "review_targets": [
+        "rule-layout"
+      ]
+    },
+    "claim:mr2-establishment-water-gap": {
+      "subject_ids": [
+        "approach:mr2",
+        "species:carob"
+      ],
+      "statement": "The inspected Mojacar and Nijar case passages do not document original seedling establishment-water volumes.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded to FOREST-002 pages 135-137 and the existing MR2 reference context; Nijar includes a naturalised population.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "This is not a literature-wide absence claim, a verified zero-water seedling protocol or an inferred irrigation dose."
+      ],
+      "citation_ids": [
+        "pilot:FOREST-002:p135:mr2-guidance",
+        "pilot:FOREST-002:p136:mr2-guidance",
+        "pilot:FOREST-002:p137:mr2-guidance"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "model-mr2"
+      ]
+    }
+  },
+  "relations": {
+    "relation:al20-route-34": {
+      "type": "programme_contains_route",
+      "source": "programme:LEADER-AL20",
+      "target": "route:LEADER-AL20-3.4",
+      "claim_ids": [],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Explicit current programme entry membership.",
+      "limitations": []
+    },
+    "relation:call-al20-context": {
+      "type": "call_context_for",
+      "source": "call:FUND-009",
+      "target": "programme:LEADER-AL20",
+      "claim_ids": [],
+      "citation_ids": [
+        "pilot:FUND-009:p1:call-context"
+      ],
+      "basis": "source_reference",
+      "context": "Published regional call context already cited by the AL20 route.",
+      "limitations": [
+        "Current availability and local budget remain not assessed."
+      ]
+    },
+    "relation:mr2-palette": {
+      "type": "approach_has_palette",
+      "source": "approach:mr2",
+      "target": "palette:mr2_mix",
+      "claim_ids": [],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "The existing mr2_mix record explicitly names rule mr2.",
+      "limitations": []
+    },
+    "relation:palette-carob": {
+      "type": "palette_starter_species",
+      "source": "palette:mr2_mix",
+      "target": "species:carob",
+      "claim_ids": [],
+      "citation_ids": [],
+      "basis": "project_assumption",
+      "context": "The existing project palette lists carob as starter.",
+      "limitations": [
+        "Palette membership is not a plant compatibility finding."
+      ]
+    },
+    "relation:mr2-stone": {
+      "type": "approach_treatment_guidance",
+      "source": "approach:mr2",
+      "target": "treatment:stone",
+      "claim_ids": [
+        "claim:mr2-stone-mulch"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Source-qualified treatment description; no automatic treatment adoption.",
+      "limitations": []
+    },
+    "relation:example-method": {
+      "type": "example_uses_approach",
+      "source": "example_activity:carob-mr2-demonstrator",
+      "target": "approach:mr2",
+      "claim_ids": [],
+      "citation_ids": [],
+      "basis": "project_assumption",
+      "context": "Curated illustrative activity association from the Milestone 1 audit.",
+      "limitations": [
+        "Not an actual project, site prescription, selected criterion or eligibility result."
+      ]
+    },
+    "relation:example-species": {
+      "type": "example_mentions_species",
+      "source": "example_activity:carob-mr2-demonstrator",
+      "target": "species:carob",
+      "claim_ids": [],
+      "citation_ids": [],
+      "basis": "project_assumption",
+      "context": "Curated illustrative activity association from the Milestone 1 audit.",
+      "limitations": [
+        "Not an actual project, site prescription, selected criterion or eligibility result."
+      ]
+    },
+    "relation:example-route": {
+      "type": "example_considers_route",
+      "source": "example_activity:carob-mr2-demonstrator",
+      "target": "route:LEADER-AL20-3.4",
+      "claim_ids": [],
+      "citation_ids": [],
+      "basis": "project_assumption",
+      "context": "Curated illustrative activity association from the Milestone 1 audit.",
+      "limitations": [
+        "Not an actual project, site prescription, selected criterion or eligibility result."
+      ]
+    },
+    "relation:example-need": {
+      "type": "example_may_address_need",
+      "source": "example_activity:carob-mr2-demonstrator",
+      "target": "need:NPL3",
+      "claim_ids": [],
+      "citation_ids": [],
+      "basis": "project_assumption",
+      "context": "Curated illustrative activity association from the Milestone 1 audit.",
+      "limitations": [
+        "Not an actual project, site prescription, selected criterion or eligibility result."
+      ]
+    }
+  },
+  "issues": {
+    "issue:mr2-stock-source-tension": {
+      "type": "source_tension",
+      "claim_ids": [
+        "claim:mr2-stock-narrative",
+        "claim:mr2-stock-table"
+      ],
+      "status": "unresolved",
+      "explanation": "The narrative prefers larger stock while table 5.19 lists smaller stock. Preserve both qualified contexts; neither is automatically adopted.",
+      "limitations": [
+        "This is a source tension, not proof that the two passages are logically incompatible."
+      ]
+    },
+    "issue:mr2-water-evidence-gap": {
+      "type": "evidence_gap",
+      "claim_ids": [
+        "claim:mr2-establishment-water-gap"
+      ],
+      "status": "unresolved",
+      "explanation": "Original seedling establishment-water volumes are not documented in the selected case passages.",
+      "limitations": [
+        "Absence is bounded to the inspected passages and does not imply zero irrigation."
+      ]
+    }
+  },
+  "bindings": {
+    "programme-al20": {
+      "adapter": "programme",
+      "native_id": "LEADER-AL20",
+      "explanation": "Existing programme grouping; not a unified eligibility questionnaire."
+    },
+    "route-34": {
+      "adapter": "funding_route",
+      "native_id": "LEADER-AL20-3.4",
+      "explanation": "Existing route and modelled funding assumptions; no award determination."
+    },
+    "call-2026": {
+      "adapter": "funding_call",
+      "native_id": "FUND-009",
+      "explanation": "Registered publication of the call; opening dates, interruptions and budget not rechecked."
+    },
+    "plant-carob": {
+      "adapter": "species",
+      "native_id": "carob",
+      "explanation": "Existing taxonomic identity and current presentation names."
+    },
+    "approach-mr2": {
+      "adapter": "restoration_approach",
+      "native_id": "mr2",
+      "explanation": "Existing source-qualified Designer approach; also a review target for method evidence."
+    },
+    "palette-mr2": {
+      "adapter": "planting_palette",
+      "native_id": "mr2_mix",
+      "explanation": "Existing starter/optional palette; not a universal vegetation series or compatibility finding."
+    },
+    "stone": {
+      "adapter": "treatment",
+      "native_id": "stone",
+      "explanation": "Stable stone-mulch material identity; no substitution with organic mulch."
+    },
+    "need-npl3": {
+      "adapter": "strategy_need",
+      "native_id": "NPL3",
+      "explanation": "Existing strategy need; ranking is independent of selection points."
+    },
+    "rule-density": {
+      "adapter": "designer_rule",
+      "native_id": "density_scenarios",
+      "explanation": "Review the current density policy if its stated basis changes; do not alter saved designs automatically."
+    },
+    "rule-layout": {
+      "adapter": "designer_rule",
+      "native_id": "layout",
+      "explanation": "Review illustrative layout policy separately from scientific source guidance."
+    },
+    "rule-stone": {
+      "adapter": "designer_rule",
+      "native_id": "stone_mulch",
+      "explanation": "Review source-qualified stone-mulch guidance without inferring water savings."
+    },
+    "density-value": {
+      "adapter": "carob_density",
+      "native_id": "carob",
+      "explanation": "Current authoritative carob density; saved designs may retain earlier bundles."
+    },
+    "geometry-value": {
+      "adapter": "mr2_geometry",
+      "native_id": "mr2",
+      "explanation": "Current authoritative MR2 drawing geometry; not engineered catchment dimensions."
+    },
+    "model-mr2": {
+      "adapter": "reference_model",
+      "native_id": "mr2",
+      "explanation": "Manual review target for the existing educational MR2 reference, not a runtime consumer of these claims."
+    },
+    "guide-34": {
+      "adapter": "route_guidance",
+      "native_id": "LEADER-AL20-3.4",
+      "explanation": "Manual review target for current route advice; scoring definitions remain separate."
+    },
+    "delivery-novelty": {
+      "adapter": "delivery_topic",
+      "native_id": "novelty",
+      "explanation": "Manual review target for novelty intentions, not automatic selection or approval."
+    },
+    "delivery-publication": {
+      "adapter": "delivery_topic",
+      "native_id": "publication",
+      "explanation": "Manual review target for publication intentions and required duration."
+    },
+    "concept-restoration": {
+      "adapter": "concept_template",
+      "native_id": "restoration",
+      "explanation": "Manual review target for the restoration starter and its interpretation of the strategy need."
+    },
+    "example-demo": {
+      "adapter": "illustration",
+      "native_id": "carob-mr2-demonstrator",
+      "explanation": "Curated project illustration derived from the Milestone 1 audit; not a saved project activity.",
+      "label": "Illustrative carob rainfall-capture comparison",
+      "aliases": [
+        "MR2 comparison example"
+      ],
+      "description": "An illustrative comparison of site-assessed runoff-capture treatment and a reference treatment, with carob observations and public sharing. No site suitability, novelty or eligibility is established."
+    }
+  },
+  "coverage": {
+    "mode": "registered-pilot-only",
+    "root_entities": [
+      "route:LEADER-AL20-3.4",
+      "species:carob",
+      "approach:mr2"
+    ],
+    "excluded": [
+      "Unindexed research prose and other funding/ecological subjects",
+      "Unregistered feature dependencies and project activities",
+      "Current call availability and real grant eligibility",
+      "Saved-project rule editions and historical source retrieval"
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>Spraying leaves and watering roots are different</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">18  Spraying leaves and watering roots are different</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Concept comparison; the pictured research prototypes validate spraying, not seedling establishment.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<rect x="65" y="155" width="600" height="65" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="83" y="188" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">CARRIED SPRAY</text>
+<rect x="735" y="155" width="600" height="65" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="753" y="188" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">HOSE-FED APPLICATION</text>
+<line x1="340" y1="285" x2="275.0" y2="255.1" stroke="#19343e" stroke-width="5"/>
+<ellipse cx="275.0" cy="255.1" rx="35.1" ry="10.4" fill="#d4e5e8" stroke="#19343e" stroke-width="2"/>
+<line x1="340" y1="285" x2="405.0" y2="255.1" stroke="#19343e" stroke-width="5"/>
+<ellipse cx="405.0" cy="255.1" rx="35.1" ry="10.4" fill="#d4e5e8" stroke="#19343e" stroke-width="2"/>
+<line x1="340" y1="285" x2="275.0" y2="314.9" stroke="#19343e" stroke-width="5"/>
+<ellipse cx="275.0" cy="314.9" rx="35.1" ry="10.4" fill="#d4e5e8" stroke="#19343e" stroke-width="2"/>
+<line x1="340" y1="285" x2="405.0" y2="314.9" stroke="#19343e" stroke-width="5"/>
+<ellipse cx="405.0" cy="314.9" rx="35.1" ry="10.4" fill="#d4e5e8" stroke="#19343e" stroke-width="2"/>
+<rect x="314.0" y="261.6" width="52.0" height="46.800000000000004" rx="9" fill="#d4e5e8" stroke="#19343e" stroke-width="2"/>
+<path d="M310 325 L165 510 L515 510 L370 325" fill="#d9ebf2" fill-opacity=".65" stroke="#137fa7" stroke-dasharray="8 6"/>
+<line x1="340" y1="525" x2="340" y2="480" stroke="#39785b" stroke-width="5"/>
+<circle cx="327" cy="478" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="354" cy="471" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="80" y1="530" x2="650" y2="530" stroke="#39785b" stroke-width="4"/>
+<rect x="270" y="548" width="140" height="85" rx="9" fill="#ede2cd" stroke="#a98a57" stroke-width="2"/>
+<text x="80" y="682" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Test litres retained in the planting basin,</text>
+<text x="80" y="712" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">infiltration and runoff; leaf wetting is insufficient.</text>
+<line x1="1110" y1="290" x2="1045.0" y2="260.1" stroke="#19343e" stroke-width="5"/>
+<ellipse cx="1045.0" cy="260.1" rx="35.1" ry="10.4" fill="#d4e5e8" stroke="#19343e" stroke-width="2"/>
+<line x1="1110" y1="290" x2="1175.0" y2="260.1" stroke="#19343e" stroke-width="5"/>
+<ellipse cx="1175.0" cy="260.1" rx="35.1" ry="10.4" fill="#d4e5e8" stroke="#19343e" stroke-width="2"/>
+<line x1="1110" y1="290" x2="1045.0" y2="319.9" stroke="#19343e" stroke-width="5"/>
+<ellipse cx="1045.0" cy="319.9" rx="35.1" ry="10.4" fill="#d4e5e8" stroke="#19343e" stroke-width="2"/>
+<line x1="1110" y1="290" x2="1175.0" y2="319.9" stroke="#19343e" stroke-width="5"/>
+<ellipse cx="1175.0" cy="319.9" rx="35.1" ry="10.4" fill="#d4e5e8" stroke="#19343e" stroke-width="2"/>
+<rect x="1084.0" y="266.6" width="52.0" height="46.800000000000004" rx="9" fill="#d4e5e8" stroke="#19343e" stroke-width="2"/>
+<rect x="760" y="440" width="195" height="115" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="778" y="473" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">GROUND</text>
+<text x="778" y="502" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Tank + pump</text>
+<text x="778" y="530" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Power supply</text>
+<path d="M950 475 Q1010 440 1055 335" fill="none" stroke="#137fa7" stroke-width="7"/>
+<line x1="1110" y1="330" x2="1190" y2="475" stroke="#137fa7" stroke-width="3"/>
+<polygon points="1190,475 1179.3941877878708,467.4822378781283 1189.296186777574,462.01906602174023" fill="#137fa7"/>
+<line x1="1210" y1="535" x2="1210" y2="490" stroke="#39785b" stroke-width="5"/>
+<circle cx="1197" cy="488" r="17" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<circle cx="1224" cy="481" r="20" fill="#dceadd" stroke="#39785b" stroke-width="2"/>
+<line x1="750" y1="540" x2="1330" y2="540" stroke="#39785b" stroke-width="4"/>
+<text x="760" y="650" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Hose weight, snagging, nozzle reaction,</text>
+<text x="760" y="680" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">route clearance and a ground crew remain.</text>
+<text x="65" y="765" font-family="sans-serif" font-size="22" font-weight="bold" text-anchor="start" fill="#b77420">A short drop hose / basin spout is a proposed R&amp;D option, not a validated off-the-shelf solution here.</text>
+</svg>

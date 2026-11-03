@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>Water payload turns into repeated loads</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">17  Water payload turns into repeated loads</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Arithmetic only: 5 L per plant is inherited from the report example, not an ecological dose.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<text x="70" y="190" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">EXAMPLE EVENT</text>
+<text x="70" y="236" font-family="sans-serif" font-size="30" font-weight="bold" text-anchor="start" fill="#137fa7">40 plants × 5 L = 200 L</text>
+<text x="70" y="330" font-family="sans-serif" font-size="24" font-weight="normal" text-anchor="start" fill="#19343e">T50 reference: 40 L spray tank</text>
+<rect x="650" y="292" width="98" height="65" rx="9" fill="#d9ebf2" stroke="#137fa7" stroke-width="2"/>
+<text x="699" y="334" font-family="sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#137fa7">40 L</text>
+<rect x="768" y="292" width="98" height="65" rx="9" fill="#d9ebf2" stroke="#137fa7" stroke-width="2"/>
+<text x="817" y="334" font-family="sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#137fa7">40 L</text>
+<rect x="886" y="292" width="98" height="65" rx="9" fill="#d9ebf2" stroke="#137fa7" stroke-width="2"/>
+<text x="935" y="334" font-family="sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#137fa7">40 L</text>
+<rect x="1004" y="292" width="98" height="65" rx="9" fill="#d9ebf2" stroke="#137fa7" stroke-width="2"/>
+<text x="1053" y="334" font-family="sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#137fa7">40 L</text>
+<rect x="1122" y="292" width="98" height="65" rx="9" fill="#d9ebf2" stroke="#137fa7" stroke-width="2"/>
+<text x="1171" y="334" font-family="sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#137fa7">40 L</text>
+<text x="650" y="390" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">5 ideal full loads for one 200 L event</text>
+<text x="70" y="465" font-family="sans-serif" font-size="24" font-weight="normal" text-anchor="start" fill="#19343e">T100 reference: 100 L spray tank</text>
+<rect x="650" y="427" width="98" height="65" rx="9" fill="#d9ebf2" stroke="#137fa7" stroke-width="2"/>
+<text x="699" y="469" font-family="sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#137fa7">100 L</text>
+<rect x="768" y="427" width="98" height="65" rx="9" fill="#d9ebf2" stroke="#137fa7" stroke-width="2"/>
+<text x="817" y="469" font-family="sans-serif" font-size="21" font-weight="bold" text-anchor="middle" fill="#137fa7">100 L</text>
+<text x="650" y="525" font-family="sans-serif" font-size="22" font-weight="normal" text-anchor="start" fill="#19343e">2 ideal full loads for one 200 L event</text>
+<rect x="70" y="590" width="600" height="155" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="88" y="623" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#b77420">Scale to 1,000 plants at the same dose</text>
+<text x="88" y="652" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">5,000 L → at least 125 × 40 L loads</text>
+<text x="88" y="680" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">or 50 × 100 L loads.</text>
+<rect x="735" y="590" width="595" height="155" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="753" y="623" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#b77420">These are lower bounds</text>
+<text x="753" y="652" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">No flight reserve, residual water, missed basin, wind loss,</text>
+<text x="753" y="680" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">refill delay or battery service included.</text>
+<text x="70" y="785" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">At 1,000 L/ha, water depth is only 0.1 mm. Spray area throughput is not an irrigation-depth metric.</text>
+</svg>

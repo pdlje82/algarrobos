@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="850" viewBox="0 0 1400 850">
+<title>Visible control states and delivery verification</title>
+<rect width="1400" height="850" fill="#ffffff"/>
+<text x="55" y="58" font-family="sans-serif" font-size="34" font-weight="bold" text-anchor="start" fill="#19343e">09  Visible control states and delivery verification</text>
+<text x="55" y="99" font-family="sans-serif" font-size="21" font-weight="normal" text-anchor="start" fill="#19343e">Proposed policy: required invalid inputs stop automatic starts and raise an actionable fault.</text>
+<line x1="55" y1="124" x2="1345" y2="124" stroke="#b7cbc9" stroke-width="2"/>
+<text x="55" y="820" font-family="sans-serif" font-size="17" font-weight="normal" text-anchor="start" fill="#19343e">ALGARROBOS  /  LEARN-016  /  3 NOV 2026  /  CONCEPT ONLY - NOT TO SCALE</text>
+<rect x="75" y="180" width="325" height="105" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="93" y="213" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">VALIDATE</text>
+<text x="93" y="242" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Fresh probes, level, energy</text>
+<text x="93" y="270" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Configuration + sensor health</text>
+<rect x="535" y="180" width="325" height="105" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="553" y="213" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">WAIT / REQUEST</text>
+<text x="553" y="242" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Local threshold + agreed budget</text>
+<text x="553" y="270" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Queue within tank capacity</text>
+<rect x="995" y="180" width="325" height="105" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="1013" y="213" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">OPEN + VERIFY</text>
+<text x="1013" y="242" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Expected pressure and flow</text>
+<text x="1013" y="270" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">within configured timeout</text>
+<line x1="400" y1="230" x2="535" y2="230" stroke="#137fa7" stroke-width="3"/>
+<polygon points="535,230 523.2941876694152,235.654551943446 523.2941876694152,224.345448056554" fill="#137fa7"/>
+<line x1="860" y1="230" x2="995" y2="230" stroke="#137fa7" stroke-width="3"/>
+<polygon points="995,230 983.2941876694152,235.654551943446 983.2941876694152,224.345448056554" fill="#137fa7"/>
+<rect x="995" y="420" width="325" height="115" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="1013" y="453" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#137fa7">DOSE + CLOSE</text>
+<text x="1013" y="482" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Whichever limit comes first:</text>
+<text x="1013" y="510" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">volume cap or maximum runtime</text>
+<line x1="1155" y1="285" x2="1155" y2="420" stroke="#137fa7" stroke-width="3"/>
+<polygon points="1155,420 1149.345448056554,408.2941876694152 1160.654551943446,408.2941876694152" fill="#137fa7"/>
+<rect x="535" y="420" width="325" height="115" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="553" y="453" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">VERIFY STOP</text>
+<text x="553" y="482" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Flow returns to expected rest</text>
+<text x="553" y="510" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Log delivered / estimated litres</text>
+<line x1="995" y1="475" x2="860" y2="475" stroke="#137fa7" stroke-width="3"/>
+<polygon points="860,475 871.7058123305848,469.345448056554 871.7058123305848,480.654551943446" fill="#137fa7"/>
+<rect x="75" y="420" width="325" height="115" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="93" y="453" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#19343e">SOAK + REASSESS</text>
+<text x="93" y="482" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Minimum rest interval</text>
+<text x="93" y="510" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Observe soil + plant response</text>
+<line x1="535" y1="475" x2="400" y2="475" stroke="#137fa7" stroke-width="3"/>
+<polygon points="400,475 411.7058123305848,469.345448056554 411.7058123305848,480.654551943446" fill="#137fa7"/>
+<line x1="235" y1="420" x2="235" y2="285" stroke="#137fa7" stroke-width="3"/>
+<polygon points="235,285 240.654551943446,296.7058123305848 229.345448056554,296.7058123305848" fill="#137fa7"/>
+<rect x="350" y="655" width="700" height="100" rx="9" fill="#edf4f3" stroke="#91aaa6" stroke-width="2"/>
+<text x="368" y="688" font-family="sans-serif" font-size="24" font-weight="bold" text-anchor="start" fill="#a7443c">FAULT - isolate the affected branch or tank</text>
+<text x="368" y="717" font-family="sans-serif" font-size="19" font-weight="normal" text-anchor="start" fill="#19343e">Log the cause; show uncertainty; explicit repair and re-arm action.</text>
+<line x1="235" y1="535" x2="235" y2="610" stroke="#a7443c" stroke-width="3" stroke-dasharray="9 7"/>
+<polygon points="235,610 229.345448056554,598.2941876694152 240.654551943446,598.2941876694152" fill="#a7443c"/>
+<line x1="700" y1="535" x2="700" y2="610" stroke="#a7443c" stroke-width="3" stroke-dasharray="9 7"/>
+<polygon points="700,610 694.345448056554,598.2941876694152 705.654551943446,598.2941876694152" fill="#a7443c"/>
+<line x1="1155" y1="535" x2="1155" y2="610" stroke="#a7443c" stroke-width="3" stroke-dasharray="9 7"/>
+<polygon points="1155,610 1149.345448056554,598.2941876694152 1160.654551943446,598.2941876694152" fill="#a7443c"/>
+<line x1="235" y1="610" x2="1155" y2="610" stroke="#a7443c" stroke-width="2" stroke-dasharray="9 7"/>
+<line x1="700" y1="610" x2="700" y2="655" stroke="#a7443c" stroke-width="3" stroke-dasharray="9 7"/>
+<polygon points="700,655 694.345448056554,643.2941876694152 705.654551943446,643.2941876694152" fill="#a7443c"/>
+</svg>
