@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "dataset_id": "algarroba-connected-pilot-v1",
+  "consumers": {
+    "selection_guidance": {
+      "contexts": {
+        "route-34": {
+          "binding_id": "guide-34",
+          "claim_ids": [
+            "claim:al20-34-novel-demonstration",
+            "claim:al20-34-results-publication",
+            "claim:npl3-heritage-need"
+          ],
+          "entity_ids": [
+            "call:FUND-009",
+            "need:NPL3",
+            "programme:LEADER-AL20",
+            "route:LEADER-AL20-3.4"
+          ],
+          "relation_ids": [
+            "relation:al20-route-34",
+            "relation:call-al20-context"
+          ]
+        }
+      },
+      "context_order": [
+        "route-34"
+      ]
+    },
+    "project_concept": {
+      "contexts": {
+        "restoration-34": {
+          "binding_id": "concept-restoration",
+          "claim_ids": [
+            "claim:al20-34-novel-demonstration",
+            "claim:al20-34-results-publication",
+            "claim:npl3-heritage-need"
+          ],
+          "entity_ids": [
+            "approach:mr2",
+            "example_activity:carob-mr2-demonstrator",
+            "need:NPL3",
+            "route:LEADER-AL20-3.4",
+            "species:carob"
+          ],
+          "relation_ids": [
+            "relation:example-method",
+            "relation:example-species",
+            "relation:example-route",
+            "relation:example-need"
+          ]
+        }
+      },
+      "context_order": [
+        "restoration-34"
+      ]
+    },
+    "delivery_plan": {
+      "contexts": {
+        "novelty-34": {
+          "binding_id": "delivery-novelty",
+          "claim_ids": [
+            "claim:al20-34-novel-demonstration"
+          ],
+          "entity_ids": [
+            "route:LEADER-AL20-3.4"
+          ],
+          "relation_ids": []
+        },
+        "publication-34": {
+          "binding_id": "delivery-publication",
+          "claim_ids": [
+            "claim:al20-34-results-publication"
+          ],
+          "entity_ids": [
+            "route:LEADER-AL20-3.4"
+          ],
+          "relation_ids": []
+        }
+      },
+      "context_order": [
+        "novelty-34",
+        "publication-34"
+      ]
+    },
+    "designer": {
+      "contexts": {
+        "mr2": {
+          "binding_id": "approach-mr2",
+          "claim_ids": [
+            "claim:mr2-runoff-capture",
+            "claim:mr2-preparation-depth",
+            "claim:mr2-stone-mulch",
+            "claim:mr2-density-area-basis",
+            "claim:mr2-stock-narrative",
+            "claim:mr2-stock-table",
+            "claim:designer-mr2-layout-assumption",
+            "claim:mr2-establishment-water-gap"
+          ],
+          "entity_ids": [
+            "approach:mr2",
+            "palette:mr2_mix",
+            "rule:layout",
+            "species:carob",
+            "treatment:stone"
+          ],
+          "relation_ids": [
+            "relation:mr2-palette",
+            "relation:palette-carob",
+            "relation:mr2-stone"
+          ]
+        },
+        "carob": {
+          "binding_id": "plant-carob",
+          "claim_ids": [
+            "claim:mr2-runoff-capture",
+            "claim:mr2-preparation-depth",
+            "claim:mr2-density-area-basis",
+            "claim:mr2-stock-narrative",
+            "claim:mr2-stock-table",
+            "claim:designer-carob-density-assumption",
+            "claim:mr2-establishment-water-gap"
+          ],
+          "entity_ids": [
+            "approach:mr2",
+            "rule:density_scenarios",
+            "species:carob"
+          ],
+          "relation_ids": []
+        }
+      },
+      "context_order": [
+        "mr2",
+        "carob"
+      ]
+    }
+  }
+}

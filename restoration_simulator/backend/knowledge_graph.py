@@ -26,6 +26,14 @@ FEATURE_CONTEXTS = {
     "delivery_plan": {"novelty-34": "delivery-novelty", "publication-34": "delivery-publication"},
     "designer": {"mr2": "approach-mr2", "carob": "plant-carob"},
 }
+FEATURE_BINDINGS = {
+    "guide-34": ("route_guidance", "LEADER-AL20-3.4"),
+    "concept-restoration": ("concept_template", "restoration"),
+    "delivery-novelty": ("delivery_topic", "novelty"),
+    "delivery-publication": ("delivery_topic", "publication"),
+    "approach-mr2": ("restoration_approach", "mr2"),
+    "plant-carob": ("species", "carob"),
+}
 ENTITY_TYPES = {
     "programme": "programme", "funding_route": "route", "funding_call": "call",
     "species": "species", "restoration_approach": "approach", "planting_palette": "palette",
@@ -423,12 +431,16 @@ def validate_feature_consumers(value, ctx):
     _keys(value["consumers"], set(FEATURE_CONTEXTS), at + ".consumers")
     for consumer, expected in FEATURE_CONTEXTS.items():
         spec = value["consumers"][consumer]
-        _keys(spec, {"contexts"}, at + "." + consumer)
+        _keys(spec, {"contexts", "context_order"}, at + "." + consumer)
         _keys(spec["contexts"], set(expected), at + "." + consumer + ".contexts")
+        _refs(spec["context_order"], expected, at + "." + consumer + ".context_order")
+        _require(set(spec["context_order"]) == set(expected), at, "Context ordering must name every registered widget exactly once.")
         for ident, binding in expected.items():
             row = spec["contexts"][ident]; path = f"{at}.{consumer}.{ident}"
             _keys(row, {"binding_id", "claim_ids", "entity_ids", "relation_ids"}, path)
             _require(row["binding_id"] == binding and binding in ctx["bindings"], path, "Widget native binding disagrees with its registration.")
+            resolved = ctx["bindings"][binding]
+            _require((resolved["adapter"], resolved["native_id"]) == FEATURE_BINDINGS[binding], path, "Widget adapter/native identity disagrees with its registration.")
             for field, records in (("claim_ids", ctx["data"]["claims"]), ("entity_ids", ctx["entities"]), ("relation_ids", ctx["data"]["relations"])):
                 _refs(row[field], records, path + "." + field)
             _require(bool(row["claim_ids"]) and bool(row["entity_ids"]), path, "A widget needs explicitly selected claims and entities.")
@@ -453,7 +465,9 @@ def _feature_evidence(ctx, consumers, consumer_id):
     _text(consumer_id, "consumer_id")
     _require(consumer_id in FEATURE_CONTEXTS, "consumer_id", f"Unknown feature consumer {consumer_id!r}.")
     contexts = {}
-    for ident, row in consumers["consumers"][consumer_id]["contexts"].items():
+    spec = consumers["consumers"][consumer_id]
+    for ident in spec["context_order"]:
+        row = spec["contexts"][ident]
         selected = set(row["claim_ids"])
         entities = []
         for eid in row["entity_ids"]:
@@ -465,7 +479,7 @@ def _feature_evidence(ctx, consumers, consumer_id):
             "relations": [{"id": rid, **deepcopy(ctx["data"]["relations"][rid]), "evidence": _evidence(ctx, ctx["data"]["relations"][rid]["citation_ids"])} for rid in row["relation_ids"]],
             "issues": [{"id": iid, **deepcopy(issue)} for iid, issue in sorted(ctx["data"]["issues"].items()) if selected & set(issue["claim_ids"])],
         }
-    return _response(ctx, consumer_id=consumer_id, consumer_registry_hash=_digest(consumers), contexts=contexts)
+    return _response(ctx, consumer_id=consumer_id, consumer_registry_hash=_digest(consumers), context_order=deepcopy(spec["context_order"]), contexts=contexts)
 
 
 def feature_evidence(consumer_id):

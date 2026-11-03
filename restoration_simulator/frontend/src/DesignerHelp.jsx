@@ -1,6 +1,8 @@
 import React from "react";
 import { designerHelp } from "./designerHelp.js";
 import {DocumentLink} from "./DocumentLink.jsx";
+import {KnowledgeEvidence} from "./KnowledgeEvidence.jsx";
+import {retainedEvidenceDesign} from "./knowledgeEvidenceState.js";
 
 export function SourceLinks({refs,sources}) {
   return <p>{refs.map(ref=>{
@@ -46,6 +48,7 @@ export function DesignGuide({evaluation,showCrowns,onReference}) {
     <div className="designer-reference-links"><button type="button" onClick={()=>onReference("plant")}>Algarrobo Planting Explorer</button><button type="button" onClick={()=>onReference("models")}>Restoration Model Explorer</button></div>
     {evaluation.rules.filter(r=>r.id!=="density_scenarios").map(r=><details key={r.id}><summary>{designerHelp.rules[r.id]===undefined?r.title:designerHelp.rules[r.id].title}</summary>
       <RuleHelp id={r.id} evaluation={evaluation} showCrowns={showCrowns}/>
+      {r.id==="mr2"&&<KnowledgeEvidence consumer="designer" contextId="mr2" label="MR2" savedDesign={retainedEvidenceDesign(evaluation)}/>}
       <details className="designer-source-details"><summary>Sources and details</summary><p>{r.description}</p><p>{r.limitations}</p><SourceLinks refs={r.sources} sources={draft.bundle.sources}/>
         {r.id==="density"&&evaluation.rules.filter(rule=>rule.id==="density_scenarios").map(rule=><React.Fragment key={rule.id}><p>{rule.description}</p><p>{rule.limitations}</p><SourceLinks refs={rule.sources} sources={draft.bundle.sources}/></React.Fragment>)}
         {r.id==="autumn"&&<p>For container comparisons, the Níjar example and differences between specifications, open Buying plants and Establishment care in the Algarrobo Planting Explorer.</p>}

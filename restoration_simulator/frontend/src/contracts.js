@@ -1,4 +1,5 @@
 import {validateDeliveryLibrary,validateDeliveryPrepared,validateExecutionReview} from "./deliveryPlanState.js";
+import {validateKnowledgeEvidence} from "./knowledgeEvidenceState.js";
 import defaults from "../../scenarios/defaults.json" with { type: "json" };
 import {validateStatisticsResponse,validateLocationMetadata,validateLocationDecision} from "./fundingStatisticsState.js";
 import {validateEdlResponse} from "./fundingEdlState.js";
@@ -292,6 +293,7 @@ export function demonstratorContract(value) {
 }
 
 export function validateResponse(path, data) {
+  if(path.startsWith("knowledge/feature-evidence/"))return validateKnowledgeEvidence(data,path.slice("knowledge/feature-evidence/".length));
   if(path==="funding/delivery-plan-guide")return validateDeliveryLibrary(data);
   if(path==="funding/delivery-plan/prepare")return validateDeliveryPrepared(data);
   if(path==="demonstrator/delivery-plan-preview")return validateExecutionReview(data);

@@ -1,5 +1,13 @@
 # Browser checks
 
+Run `node tests/browser/knowledge-evidence.cjs` for the six Milestone 4 evidence
+placements and all twelve claims, collapsed/lazy loading, actual read-only GETs,
+source editions/pages and restored focus, unsaved notes/concepts/Designer inputs
+across errors and retry, stock tensions and assumption labels, and light/dark
+layouts at 1440/390/320 px. It seeds only the isolated API on 8013 and supports
+the production preview on 4174 with the configuration below. Run it sequentially
+with other mutation fixtures; screenshots/logs belong to `test-artifacts/knowledge-features/`.
+
 Run `node tests/browser/overview-edl.cjs` with the isolated settings below for
 complete selected reference text inside every overview subnode, all 50 needs,
 unscored references, collapse/keyboard controls, PDF-page focus, Markdown,

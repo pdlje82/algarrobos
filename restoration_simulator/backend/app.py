@@ -413,6 +413,11 @@ def create_app(save_path=None):
         from .funding_selection_guidance import describe
         return describe()
 
+    @app.get("/api/knowledge/feature-evidence/{consumer_id}")
+    def knowledge_feature_evidence(consumer_id: str):
+        from .knowledge_graph import feature_evidence
+        return feature_evidence(consumer_id)
+
     @app.get("/api/funding/project-concept-guide")
     def project_concept_guide():
         from .project_concepts import describe

@@ -1,6 +1,6 @@
 # Algarroba knowledge architecture implementation plan
 
-Created 3 November 2026. Status: Milestones 1–3 complete; Milestones 4–6 pending.
+Created 3 November 2026. Status: Milestones 1–4 complete; Milestones 5–6 pending.
 
 Algarroba needs a shared way to connect research evidence, ecological knowledge,
 funding requirements and project decisions as its content grows. Implement this
@@ -172,6 +172,19 @@ types and dangling references. Querying must not mutate project state or scores.
 **Outcome:** the existing funding and Designer experiences consume shared pilot
 knowledge while retaining their calculation and editing contracts.
 
+Completed 3 November 2026. The [Milestone 4 implementation record](KNOWLEDGE_MILESTONE_4.md)
+documents six read-only Current evidence sections across four consumers, the
+version-1 projection/API/CLI and version-2 impact paths. All twelve claims are
+accessible, with source context, assumptions and unresolved issues preserved.
+The targeted 44 tests, full 336 backend tests, 115 frontend tests, registry/pilot
+checks, four projections and production builds passed. Isolated browser checks
+covered all six placements in both themes at desktop/390/320 px, exact PDF pages,
+failure/retry, unfinished inputs and absence of evidence-triggered commands. The
+existing Designer interaction regression passed too. Funding libraries, rules,
+educational data, source documents and real saves retain their fingerprints.
+The existing bundle-size warning remains; older funding browser navigation
+scripts require separate maintenance and were not reported as passing.
+
 Switch the selected live editorial consumers to the shared records and deterministic
 projections. Retain frozen replay inputs and embedded project bundles. Keep current
 rule execution in its existing authorities and register its evidence dependencies.
@@ -255,16 +268,16 @@ decision cannot be resolved from the repository or authorised task scope.
 | 1 Knowledge ownership and compatibility baseline | Complete | [Audit, traces, compatibility review and passing baseline](KNOWLEDGE_OWNERSHIP_AUDIT.md) |
 | 2 Shared source and passage records | Complete | [Registry, compatibility checks and passing verification](KNOWLEDGE_MILESTONE_2_PLAN.md#implementation-results) |
 | 3 Connected knowledge pilot and queries | Complete | [Curated pilot, read-only queries and passing acceptance checks](KNOWLEDGE_MILESTONE_3.md) |
-| 4 Integration into existing features | Pending | To be recorded |
+| 4 Integration into existing features | Complete | [Six shared-evidence sections, compatible projections and passing acceptance](KNOWLEDGE_MILESTONE_4.md) |
 | 5 Focused knowledge explorer | Pending | To be recorded |
 | 6 Research intake and gradual expansion | Pending | To be recorded |
 
-**Next bounded task:** prepare the Milestone 4 implementation plan. Select a small
-set of existing editorial consumers and specify how they would adopt the pilot's
-shared claims/evidence through deterministic projections. State exact response,
-hash and saved-snapshot compatibility requirements, separating any deliberate
-content correction from rule execution. Milestones 4–6 remain pending; the graph
-explorer belongs to Milestone 5.
+**Next bounded task:** prepare the Milestone 5 implementation plan for a focused
+read-only knowledge explorer. Reuse the existing pilot identities, evidence,
+issue statuses and actual consumption paths; specify bounded graph navigation,
+readable detail/list alternatives and source viewing without project mutations.
+Milestones 5–6 remain pending. Broader content migration and research intake
+remain Milestone 6 work.
 
 **Open findings:** the viewer registers one edition per document ID; concept,
 delivery and EDL records require exact installed library hashes; 80 shared
@@ -273,6 +286,8 @@ guidance/concept citations, six concept-only EDL uses and the other evidence
 collections remain outside the new registry. General source-edition retrieval,
 retained guide editions and cross-domain dependency coverage remain open. The
 pilot's stock-format tension and bounded establishment-water gap remain unresolved;
-current call availability is not assessed. New claims do not yet feed existing
-features. The build reports large JavaScript chunks. These are separately scoped
-future work.
+current call availability is not assessed. Shared claims now feed the six current
+evidence sections, while retained help, reports, rules and standalone educational
+explorers keep their existing ownership. Older funding browser scripts refer to
+obsolete navigation labels. The build reports large JavaScript chunks. These
+are separately scoped future work.

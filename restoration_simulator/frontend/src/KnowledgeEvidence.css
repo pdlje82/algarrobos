@@ -1,0 +1,10 @@
+.knowledge-evidence { margin-block: .8rem; padding: .65rem .8rem; border: 1px solid var(--border); border-radius: .5rem; overflow-wrap: anywhere; }
+.knowledge-evidence > summary { cursor: pointer; font-weight: 600; }
+.knowledge-evidence [role="region"] { padding-top: .6rem; }
+.knowledge-evidence article { margin-block: .8rem; padding-block: .3rem; border-bottom: 1px solid var(--border); }
+.knowledge-evidence h4 { margin-block: .8rem .4rem; }
+.knowledge-evidence p { margin-block: .45rem; }
+.knowledge-limitations, .knowledge-evidence-sources { padding-inline-start: 1.3rem; }
+.knowledge-evidence small, .knowledge-context { font-size: .88em; }
+.knowledge-open-issues, .knowledge-assumption, .knowledge-saved-rules { padding: .65rem; border-inline-start: 3px solid currentColor; margin-block: .7rem; }
+.knowledge-evidence button { margin-block: .3rem; }

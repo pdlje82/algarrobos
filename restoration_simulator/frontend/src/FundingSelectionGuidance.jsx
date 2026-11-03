@@ -1,5 +1,6 @@
 import React,{createContext,useContext,useEffect,useRef,useState} from "react";
 import {DocumentLink} from "./DocumentLink.jsx";
+import {KnowledgeEvidence} from "./KnowledgeEvidence.jsx";
 import {SELECTION_GUIDANCE_ROUTES,selectionGuidanceFor,validateSelectionGuidanceResponse} from "./fundingSelectionGuidanceState.js";
 import "./FundingSelectionGuidance.css";
 
@@ -30,6 +31,7 @@ export function FundingSelectionRouteGuidance({route}){
   if(!supported)return null;
   const {value,error,retry}=state;
   return <section className="funding-selection-route-guidance" aria-label="Restoration route guidance">
+    {route==="LEADER-AL20-3.4"&&<KnowledgeEvidence consumer="selection_guidance" contextId="route-34" label="AL20 3.4"/>}
     {value===null?<Unavailable error={error} retry={retry}/>:<>
       <p className="funding-selection-guidance-date">Current reference guidance · reviewed {value.library.checked_on}. Points and answers use your saved assessment. Reading advice does not award points.</p>
       <details><summary>Official route conditions · {route}</summary><Block block={value.library.route_contexts[route].official}/><h4>Delivery and later commitments</h4><Block block={value.library.route_contexts[route].follow_up}/><Sources ids={[...value.library.route_contexts[route].official.sources,...value.library.route_contexts[route].follow_up.sources]} library={value.library}/></details>

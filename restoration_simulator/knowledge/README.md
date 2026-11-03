@@ -156,26 +156,29 @@ NFKC normalisation and case folding. It returns all matching candidates and an
 explicit ambiguity flag. A valid search with no matches returns an empty list;
 an unknown identity, invalid query or failed data load is an error.
 
-All outputs include response version 1, dataset ID/hash, review date and explicit
+Search, detail, issue, check and feature-evidence outputs use response version 1;
+impact outputs use version 2. All include dataset ID/hash, review date and explicit
 `registered-pilot-only` coverage with exclusions. The hash includes the dataset,
 validated citation registry and resolved authoritative bindings. Results are
 deterministic for the same inputs; a changed current binding changes the hash.
 All files are read afresh for each query. The resolver reuses validated source
 snapshots only within that single load, never after a later read fails.
 
-Impact output separates `citation_validation_dependency` from `review_required`.
-The former lists consumers that actually validate a passage's citation metadata.
-The latter follows a manually curated claim-to-feature binding and provides its
-explanation/path. Existing features do not consume these new claims automatically.
-No impact result selects rules, adopts evidence or updates a project.
+Impact output separates `citation_validation_dependency`,
+`shared_evidence_dependency` and `review_required`. These identify checked citation
+mirrors, actual evidence display contexts, and manually curated review targets for
+retained wording/rules/calculations. Paths through displayed call entities and
+relationships are included even when no claim cites their passage. Version 2 also
+includes the feature-consumer registry hash. No impact result selects rules,
+adopts evidence or updates a project.
 
 The pilot validates closed schema fields, reference identities, endpoint types,
 structural programme/palette memberships, configuration bindings, review states
 and coverage declarations. All unresolved claims require explicit issue records;
 unreferenced sources/bindings are rejected. The check additionally verifies original
 PDF bytes. Commands emit deterministic UTF-8 JSON only after success, use exit
-statuses 0/1/2 as above, and never write application or project state. Feature
-integration and graph visualisation remain Milestones 4 and 5.
+statuses 0/1/2 as above, and never write application or project state. The bounded
+feature integration is described below; graph visualisation remains Milestone 5.
 
 To curate this bounded pilot, first resolve an existing native identity and review
 the exact local source edition/passages. Update citation metadata and its explicit
@@ -185,7 +188,67 @@ Register any new adapter or relationship type in Python with validation and test
 data cannot invent an executable binding. Configuration assumptions continue to
 reference their owners. Review the declared feature targets, run both checks and
 the relevant regression tests, and inspect the diff before accepting the update.
-Changing a claim does not adopt it into a feature or a saved design.
+Changing a registered claim updates current evidence on its next successful fetch;
+it does not replace retained feature text or adopt rules into a saved design.
 
 The [Milestone 3 implementation record](../KNOWLEDGE_MILESTONE_3.md) contains the
 curated source contexts, verification results and remaining coverage gaps.
+
+## Evidence sections in existing features
+
+`feature-consumers-v1.json` registers four feature consumers and six widgets:
+`selection_guidance/route-34`, `project_concept/restoration-34`,
+`delivery_plan/novelty-34`, `delivery_plan/publication-34`, `designer/mr2` and
+`designer/carob`. The first two display the three funding/strategy claims; the
+delivery widgets display their individual requirement. The MR2 guide and carob
+inspector display their eight and seven explicitly registered claims. Together
+they cover all twelve claims, eleven entities and nine relationships.
+
+Schema 1 requires `version`, `dataset_id` and `consumers`. Each consumer contains
+`context_order` and `contexts`; each context has one `binding_id` and ordered
+`claim_ids`, `entity_ids` and `relation_ids`. Contexts/native adapters must match
+registered Python widgets. Subjects, relation endpoints and supporting claims must
+be included, and an unresolved issue cannot display only part of its claim group.
+Adding a claim to the corpus never silently registers it for feature adoption.
+
+The Python function `feature_evidence(consumer_id)`, HTTP endpoint
+`GET /api/knowledge/feature-evidence/{consumer_id}` and CLI operation below expose
+the same read-only projection. Supported IDs are the four consumer names above:
+
+```powershell
+python -m backend.knowledge_graph --feature-evidence selection_guidance
+python -m backend.knowledge_graph --feature-evidence project_concept
+python -m backend.knowledge_graph --feature-evidence delivery_plan
+python -m backend.knowledge_graph --feature-evidence designer
+```
+
+The version-1 response adds `consumer_id`, `consumer_registry_hash`,
+`context_order` and `contexts` to the dataset header. Contexts contain their native
+binding, ordered resolved claims/entities/relationships and complete issues. The
+separate registry hash covers widget membership and ordering; the original dataset
+hash definition is unchanged. Normal loads validate metadata; `--check` additionally
+validates the feature registry and original PDF bytes. No project is required.
+The new registry is required for feature and impact queries, not for independent
+search, detail or issue queries. Existing owner loaders never call the graph.
+
+Current evidence sections start collapsed and load lazily, sharing a successful
+projection per consumer within the mounted app session. Refresh checks the latest
+data. Failed refreshes clear evidence and show an actionable Retry; late abandoned
+responses cannot replace newer results. Surrounding drafts and controls are not
+reset. Existing help, reports and exports remain independently retained content.
+
+The UI distinguishes requirements, strategy, guidance, assumptions and gaps;
+shows limitations and checksum-qualified PDF pages; and keeps both stock contexts
+unresolved. The call is not assessed for current availability. The activity and
+its connections remain illustrative. Designer panels identify current reference
+values separately from retained rule IDs, saved starting assumptions and entered
+plant quantities. Historical missing defaults/geometry remain explicitly unknown.
+Island sketch width/length are not excavation or planting depth.
+
+For changes, edit the explicit registration and matching registered widget/tests
+in the same change, run the projection/check commands and inspect impact version 2.
+Keep the citation registry, feature libraries and rule bundles unchanged unless a
+separate change explicitly provides their compatibility/adoption contract. The
+[Milestone 4 implementation record](../KNOWLEDGE_MILESTONE_4.md) records validation
+and remaining duplication. Standalone educational explorers, other routes and
+unregistered research remain outside this integration.

@@ -39,8 +39,8 @@ class KnowledgeGraphTests(unittest.TestCase):
         with redirect_stdout(out), redirect_stderr(err): status = graph.main(args)
         return status, out.getvalue(), err.getvalue()
 
-    def assert_header(self, result):
-        self.assertEqual(result["version"], 1)
+    def assert_header(self, result, version=1):
+        self.assertEqual(result["version"], version)
         self.assertEqual(result["dataset_id"], "algarroba-connected-pilot-v1")
         self.assertEqual(len(result["dataset_hash"]), 64)
         self.assertEqual(result["coverage"]["mode"], "registered-pilot-only")
@@ -121,7 +121,7 @@ class KnowledgeGraphTests(unittest.TestCase):
 
     def test_impact_paths_separate_citation_dependencies_from_manual_review(self):
         cid = "claim:al20-34-novel-demonstration"
-        result = graph.impact("claim", cid); self.assert_header(result)
+        result = graph.impact("claim", cid); self.assert_header(result, version=2)
         self.assertEqual(result["validation_dependencies"], [])
         self.assertEqual({r["binding_id"] for r in result["review_targets"]}, {"guide-34", "delivery-novelty"})
         self.assertTrue(all(r["effect"] == "review_required" for r in result["review_targets"]))
@@ -255,7 +255,7 @@ class KnowledgeGraphTests(unittest.TestCase):
                      ["--impact-claim", DENSITY], ["--issues"], ["--issues", "--for-entity", CAROB]]:
             with self.subTest(args=args):
                 status, out, err = self.cli(args)
-                self.assertEqual((status, err), (0, "")); self.assert_header(json.loads(out))
+                self.assertEqual((status, err), (0, "")); self.assert_header(json.loads(out), version=2 if args[0].startswith("--impact-") else 1)
         result = subprocess.run([sys.executable, "-m", "backend.knowledge_graph", "--search", "Johannisbrotbaum"], cwd=graph.DIRECTORY, capture_output=True)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(json.loads(result.stdout.decode("utf-8"))["matches"][0]["id"], CAROB)

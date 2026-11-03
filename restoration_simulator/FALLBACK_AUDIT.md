@@ -1,5 +1,34 @@
 # Silent-fallback audit · 28 October 2026
 
+Shared feature evidence (3 November 2026): four consumers and six registered
+Current evidence sections use one required feature-consumer registry. The separate
+read-only projection/API/CLI resolves current claims and authoritative assumptions
+without opening project state. Unknown widgets, native-binding drift, missing or
+malformed data, incompatible editions and incomplete issue groups fail clearly.
+Current display dependencies are distinguished from citation mirrors and manual
+review of retained wording/rules/calculations; impact responses explicitly use v2.
+
+The frontend validates before accepting evidence, clears an old result on refresh
+failure, presents Retry and ignores abandoned responses. It preserves surrounding
+notes, concepts and Designer inputs. Current assumptions are separate from saved
+values; historical missing density/geometry remains explicitly unknown. Both stock
+contexts and the bounded water gap remain unresolved. There is no alternate owner,
+inline replacement, silent retry or successful-looking empty evidence response.
+Existing presentation/help contracts and historical replay adapters are retained;
+no broader audit of their unrelated paths is claimed.
+
+Acceptance passed: 44 targeted/336 full backend tests, 115 frontend tests, both
+knowledge checks, four projections and production builds. Isolated browser checks
+covered all six widgets, both themes, desktop/390/320 px, exact source pages/focus,
+failed refresh/contracts, retained drafts and no commands caused by reading.
+The existing Designer interaction regression also passed. Rules, source/feature
+libraries, educational data and eight real saves retain their fingerprints.
+The existing build warning and non-passing debug attempts are recorded in the
+[Milestone 4 implementation record](KNOWLEDGE_MILESTONE_4.md#verification-record).
+Other prose/dependencies, older source retrieval, call assessment and educational
+explorer adoption remain outside this scope. This is not a repository-wide
+fallback compliance claim.
+
 Connected knowledge pilot (3 November 2026): the required schema-1 dataset in
 `knowledge/connected-pilot-v1.json` adds curated claims, typed relationships,
 issues and registered native bindings. The existing citation registry now checks

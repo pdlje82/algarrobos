@@ -18,6 +18,8 @@ import { PlantSymbol, PlantSymbolLegend } from "./PlantSymbol.jsx";
 import { symbolForPlant } from "./plantSymbols.js";
 import {DocumentLink} from "./DocumentLink.jsx";
 import { DesignGuide, FeatureHelp, PocketHelp } from "./DesignerHelp.jsx";
+import {KnowledgeEvidence} from "./KnowledgeEvidence.jsx";
+import {retainedEvidenceDesign} from "./knowledgeEvidenceState.js";
 import { designerHelp } from "./designerHelp.js";
 import { createEditQueue, initialCrownEditor, sameCrownEditor, validCrownEditor } from "./dimensionEditor.js";
 import { locatedPlantCounts } from "./designerInteractions.js";
@@ -396,6 +398,7 @@ export function SiteDesigner({ data, request, onHandoff, beforeHandoff, active, 
             {modern&&<PlantDimensions key={selectedSpecies} id={selectedSpecies} draft={draft} overlays={evaluation.overlays[selectedSpecies]} command={command} disabled={!editable||busy||stale}/>}
             <details><summary>Why this plant is included</summary><p>{evaluation.reasons.find(row=>row.species===selectedSpecies).reasons.map(reason=>reason==="manual"?"Selected or kept by you":reason==="pocket"?"Example encina for the moisture pocket":bundle.vegetation_combinations.find(c=>"combination:"+c.id===reason).title).join("; ")}</p></details>
             {selectedSpecies==="carob"&&<button type="button" onClick={()=>setReference("plant")}>Planting information</button>}
+            {selectedSpecies==="carob"&&<KnowledgeEvidence consumer="designer" contextId="carob" label="Carob" savedDesign={retainedEvidenceDesign(evaluation)}/>}
             {selected!==undefined&&<details><summary>Advanced layout clearance</summary><NumberEdit label="Layout clearance radius (m, assumed)" value={selected.radius} min="0.01" onCommit={v=>command({kind:"radius",id:selectedSpecies,radius:v})}/><p>This older drawing size is separate from the root ball and crown. It does not control where new plants are placed.</p></details>}
           </>}
           {selectedSpecies===null&&selection!=="pocket"&&selection!=="zone"&&<p>Select a plant, the pocket or a zone edge to see its controls. The guides below explain the design choices.</p>}

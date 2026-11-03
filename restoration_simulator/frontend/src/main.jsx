@@ -5,6 +5,7 @@ import { BrandFooter, BrandLockup, LandscapeMotif } from "./Brand.jsx";
 import { DemonstratorEditor, DemonstratorRecord } from "./Demonstrator.jsx";
 import { SiteDesigner } from "./SiteDesigner.jsx";
 import {DocumentProvider} from "./DocumentLink.jsx";
+import {KnowledgeEvidenceProvider} from "./KnowledgeEvidence.jsx";
 import { Alert } from "./Alert.jsx";
 import {
   AccessTimeline,
@@ -1111,6 +1112,6 @@ class AppBoundary extends React.Component {
 }
 createRoot(document.getElementById("root")).render(
   <AppBoundary>
-    <DocumentProvider><App /></DocumentProvider>
+    <DocumentProvider><KnowledgeEvidenceProvider request={api}><App /></KnowledgeEvidenceProvider></DocumentProvider>
   </AppBoundary>,
 );
