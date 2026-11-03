@@ -1,6 +1,6 @@
 {
   "date": "2026-11-03",
-  "goal_scope": "Prospective activities and application score design, not completed trial or awarded funding",
+  "goal_scope": "Editorial revision for inviting participation: project vision first, unresolved matters at the end; numerical scenario and technical application preserved.",
   "proposed_score": 66.49,
   "programme_points": 54.49,
   "conditional_applicant_points": 12,
@@ -9,8 +9,8 @@
   "model_cases": 11,
   "valid_programme_combinations": 24,
   "dependency_exclusions": 8,
-  "local_html_targets_checked": 10,
-  "visual_review": "Desktop and mobile companion, application text and opening EPUB chapter inspected: readable, no clipping or missing text observed",
+  "local_html_targets_checked": 12,
+  "visual_review": "Desktop/mobile presentation, park vision, closing conditions and opening EPUB chapter inspected: readable, no clipping or missing text observed.",
   "external_links": "Source downloads re-used from same-day verified prior research; PDF source bytes rechecked. No new documents added.",
   "unresolved_essential_gaps": [
     "Eligible applicant identity and competence",
@@ -27,5 +27,19 @@
   "direct_elevenreader_playback_checked": false,
   "no_application_mutation": true,
   "no_messages_sent": true,
-  "no_association_chosen": true
+  "no_association_chosen": true,
+  "editorial_revision": {
+    "opening_chapters": 6,
+    "closing_chapters_with_open_matters": 2,
+    "words": 2868,
+    "minutes_at_130_to_160_wpm": [
+      17.9,
+      22.1
+    ],
+    "previous_review_zip_sha256": "245f2a15738e05db09262cdda6c912d276f2b6a766af5945f60a928e429b2ba3",
+    "model_application_baseline_unchanged_from_previous_zip": true,
+    "previous_editorial_version_archive": "Version anterior - Enfoque de puntuacion.zip",
+    "technical_annexes_collapsed_after_narration": true,
+    "chapter_source_map_updated": true
+  }
 }

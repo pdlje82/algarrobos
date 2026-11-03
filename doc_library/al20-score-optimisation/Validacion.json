@@ -1,14 +1,14 @@
 {
   "created_on": "2026-11-03",
   "epub": "Un aula viva antes del parque - Plan AL20.epub",
-  "epub_sha256": "e76d8d8208b5e0499dae8a2fbc83140ff70b21170f3795e48e1383dfcac3e249",
-  "narration_sha256": "a20c4a2514ed748643e92692a0e025049968cacaaf9b1d34addedf0cc784a3c1",
+  "epub_sha256": "259c763505824ddffbf029419bebcbf57a18f8827252c0cd98ffa036067685c0",
+  "narration_sha256": "8abc34bc46cb821827cdbc820b312279b2feb5d684fc41b55719b68f75001249",
   "language": "es",
   "chapters": 8,
-  "words": 2058,
+  "words": 2868,
   "estimated_minutes_at_130_to_160_wpm": [
-    12.9,
-    15.8
+    17.9,
+    22.1
   ],
   "checks": [
     "ZIP CRC",
@@ -67,5 +67,12 @@
   "epubcheck_note": "No claim of full EPUBCheck certification; structural checks are listed explicitly.",
   "baseline_save_sha256": "dd6350d816c47b55b22876cec2f3035cd80029c81369b2f4263aa0faae0a5739",
   "score_proposed": 66.49,
-  "accredited_score": null
+  "accredited_score": null,
+  "editorial_structure": {
+    "chapters_1_to_6": "Project invitation, park vision, demonstrator, activities and reasons to participate",
+    "chapters_7_to_8": "Open decisions, land/applicant/permissions/budget, conditional score and next steps",
+    "html_technical_annexes": "After the narrative; collapsed by default",
+    "earlier_version_preserved": "Version anterior - Enfoque de puntuacion.zip",
+    "scoring_model_changed": false
+  }
 }

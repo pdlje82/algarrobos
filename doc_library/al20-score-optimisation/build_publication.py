@@ -12,6 +12,8 @@ ROOT = HERE.parents[1]
 NARRATION = ROOT / 'doc_library/LEARN-014 - AL20 - Plan de actividades para superar sesenta puntos - 2026-11-03.txt'
 EPUB = HERE / 'Un aula viva antes del parque - Plan AL20.epub'
 text = NARRATION.read_text(encoding='utf-8')
+if text != (HERE / 'Presentacion del proyecto.txt').read_text(encoding='utf-8'):
+    raise ValueError('The public presentation and canonical narration differ.')
 application = (HERE / 'Apartado para la solicitud.txt').read_text(encoding='utf-8')
 notes = (HERE / 'Fuentes y condiciones de puntuacion.txt').read_text(encoding='utf-8')
 model = json.loads((HERE / 'Plan y calculos.json').read_text(encoding='utf-8'))
@@ -59,7 +61,7 @@ manifest = '<item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" p
 manifest += ''.join(f'<item id="c{n}" href="chapter-{n:02d}.xhtml" media-type="application/xhtml+xml"/>' for n in range(1, 9))
 spine = ''.join(f'<itemref idref="c{n}"/>' for n in range(1, 9))
 modified = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
-description = 'Programa propuesto para 66,49 puntos condicionados: 54,49 de actividades y 12 del perfil de integración de la solicitante. No acredita hechos ni concesión. Fuentes separadas.'
+description = 'Una invitación a participar en un aula viva del secano y un posible parque educativo en Alhama: visión y actividades primero; decisiones abiertas y condiciones de financiación en los dos capítulos finales. Propuesta con fuentes separadas.'
 files['EPUB/package.opf'] = f'<?xml version="1.0" encoding="utf-8"?><package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="pub-id" prefix="schema: http://schema.org/"><metadata xmlns:dc="http://purl.org/dc/elements/1.1/"><dc:identifier id="pub-id">{uid}</dc:identifier><dc:title>{escape(title)}</dc:title><dc:language>es</dc:language><dc:creator>OpenAI ChatGPT</dc:creator><dc:date>2026-11-03</dc:date><dc:description>{escape(description)}</dc:description><meta property="dcterms:modified">{modified}</meta><meta property="schema:accessMode">textual</meta><meta property="schema:accessibilityFeature">tableOfContents</meta><meta property="schema:accessibilityFeature">readingOrder</meta><meta property="schema:accessibilityHazard">none</meta></metadata><manifest>{manifest}</manifest><spine toc="ncx">{spine}</spine></package>'
 files['EPUB/style.css'] = css
 files['META-INF/container.xml'] = '<?xml version="1.0" encoding="utf-8"?><container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container"><rootfiles><rootfile full-path="EPUB/package.opf" media-type="application/oebps-package+xml"/></rootfiles></container>'
@@ -148,20 +150,28 @@ for key in ['FUND-004', 'FUND-008', 'FUND-009', 'FUND-010', 'FUND-013', 'FOREST-
     source_links.append('<li><a href="../' + escape(doc['filename'], quote=True) + '">' + escape(key + ' · ' + doc['title']) + '</a> · ya almacenado</li>')
     source_integrity.append({'id': key, 'filename': doc['filename'], 'sha256': digest, 'status': 'Matches registered local document'})
 
-html = '''<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AL20 · Programa propuesto de 66,49 puntos</title><style>
+html = '''<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Un aula viva antes del parque · Una invitación a participar</title><style>
 body{font:16px/1.65 system-ui,sans-serif;color:#20372c;background:#f4f4ed;margin:0}main{max-width:1120px;margin:auto;padding:36px 28px}h1,h2,h3{line-height:1.25;color:#28513f}h1{font-size:2.2rem}h2{margin-top:2.6rem}h3{font-size:1.05rem;margin-top:1.8rem}p{max-width:95ch;white-space:pre-wrap;overflow-wrap:anywhere}a{color:#17604e;overflow-wrap:anywhere}.status{padding:20px;background:#fff0ce;border-left:5px solid #aa742c}.total{font-size:3.2rem;font-weight:750;line-height:1.1;margin:24px 0 8px}.quiet{color:#56685d}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;background:white;font-size:.9rem;margin:20px 0}td,th{text-align:left;vertical-align:top;padding:12px;border-bottom:1px solid #dce3d7}th{background:#dce7d9}.links{display:flex;gap:20px;flex-wrap:wrap}details{padding:12px 0}summary{font-weight:650;cursor:pointer}nav{border-bottom:1px solid #c7d4c6;padding:16px 0}nav a{margin-right:18px}@media(max-width:600px){main{padding:24px 16px}h1{font-size:1.7rem}.total{font-size:2.6rem}}@media print{details{display:block}.scroll{overflow:visible}main{padding:0}table{font-size:9pt}tr{break-inside:avoid}}
-</style></head><body><main><p class="quiet">AL20 · 3 NOVIEMBRE 2026 · DOCUMENTO DE REVISIÓN</p><h1>Un aula viva antes del parque</h1>'''
-html += '<div class="total">66,49 puntos</div><p>Proyección: 54,49 del programa y 12 de integraciones acreditadas de la futura solicitante. Margen: 6,49.</p><p class="status"><strong>Condicionado, sin puntuación acreditada hoy.</strong> El plan utiliza la parcela vecina para el demostrador y el posible parque. No se elige asociación, pero las integraciones de la propia entidad son necesarias: sin esos doce puntos este programa queda en 54,49. No hay acceso al terreno, permisos, contratación ni ayuda concedidos por preparar este paquete.</p>'
-html += '<p class="links"><a href="Un%20aula%20viva%20antes%20del%20parque%20-%20Plan%20AL20.epub">EPUB para escuchar</a><a href="Apartado%20para%20la%20solicitud.txt">Texto de solicitud</a><a href="Fuentes%20y%20condiciones%20de%20puntuacion.txt">Fuentes y condiciones</a><a href="Plan%20y%20calculos.json">Cálculos y cambios</a></p>'
-html += '<nav><a href="#puntos">Puntuación</a><a href="#sensibilidad">Sensibilidades</a><a href="#solicitud">Apartado propuesto</a><a href="#fuentes">Fuentes y pruebas</a></nav>'
-html += '<h2 id="puntos">Cálculo con la edición guardada</h2>' + table(['Criterio', 'Objeto', 'Suma nominal', 'Con tope', 'Opciones propuestas'], score_rows)
+</style></head><body><main><p class="quiet">ALHAMA DE ALMERÍA · PROPUESTA DE PROYECTO · 3 NOVIEMBRE 2026</p><h1>Un aula viva antes del parque</h1>'''
+html += '<p style="font-size:1.2rem">' + escape(subtitle) + '</p>'
+html += '<p class="links"><a href="Un%20aula%20viva%20antes%20del%20parque%20-%20Plan%20AL20.epub">Escuchar el proyecto · EPUB</a><a href="Presentacion%20del%20proyecto.txt">Texto de la presentación</a><a href="Paquete%20de%20revision%20AL20.zip">Paquete completo</a></p>'
+html += '<nav><a href="#presentacion">El proyecto</a><a href="#chapter-2">Imaginar el parque</a><a href="#chapter-3">El demostrador</a><a href="#pasos">Al final: decisiones y próximos pasos</a></nav>'
+html += '<section id="presentacion">'
+for number, (label, paragraphs) in enumerate(chapters, 1):
+    if number == 7:
+        html += '</section><section id="pasos"><h2>Para hacerlo posible</h2>'
+    html += f'<section class="chapter" id="chapter-{number}"><h2>' + escape(label) + '</h2>'
+    html += ''.join('<p>' + escape(p) + '</p>' for p in paragraphs) + '</section>'
+html += '</section><section id="anexos"><h2>Anexos para revisar y preparar la solicitud</h2><p>La presentación anterior reúne las cuestiones abiertas en sus dos capítulos finales. Estos anexos conservan los cálculos, el apartado técnico de solicitud y las fuentes de consulta.</p>'
+html += '<details id="puntos"><summary>Puntuación propuesta: 66,49 y condiciones de acreditación</summary><div class="total">66,49 puntos</div><p>Proyección: 54,49 del programa y 12 de integraciones acreditadas de la futura solicitante. Margen: 6,49.</p><p class="status"><strong>Sin puntuación acreditada hoy.</strong> Sin esos doce puntos de integración este programa queda en 54,49. Terreno, equipo, permisos, presupuesto, entidad y valoración oficial deben concretarse como se explica en los capítulos finales. No hay una ayuda concedida por preparar estos documentos.</p>'
+html += '<h3>Cálculo con la edición guardada</h3>' + table(['Criterio', 'Objeto', 'Suma nominal', 'Con tope', 'Opciones propuestas'], score_rows)
 html += '<p>El cálculo está completo como escenario numérico y verificado de forma independiente. Su cumplimiento material y su valoración oficial siguen pendientes. Los doce puntos de PS.1 no son puntos de una actividad.</p>'
-html += '<h2 id="sensibilidad">Margen y dependencias</h2>' + table(['Escenario', 'Puntos', 'Alcanza 60'], sensitivities)
+html += '<h3 id="sensibilidad">Margen y dependencias</h3>' + table(['Escenario', 'Puntos', 'Alcanza 60'], sensitivities)
 html += '<p>Retirar realmente el servicio y su iniciativa residencial deja 59. El caso de 61,49 sin crédito SP.1 supone que se entrega el servicio y se acepta separadamente la temática innovadora. Las pérdidas simultáneas necesitan nuevo cálculo.</p>'
-html += '<details><summary>Cambios numéricos propuestos frente al guardado</summary>' + table(['Opción', 'Guardado', 'Modelo propuesto'], changes) + '<p>Los nulos se excluyen explícitamente solo para este modelo completo. No se ha adoptado ninguna respuesta; también deben revisarse referencias y compromisos descritos en el texto.</p></details>'
-html += '<h2 id="solicitud">Apartado de solicitud listo para revisar</h2>' + prose(application)
-html += '<h2 id="fuentes">Fuentes, condiciones y comprobaciones por capítulo</h2>' + prose(notes)
-html += '<h2>Originales ya almacenados en la biblioteca</h2><ul>' + ''.join(source_links) + '</ul><p>Los enlaces públicos de descarga y las fechas verificadas figuran en el anexo anterior. No se añaden duplicados de las fuentes.</p></main></body></html>'
+html += '<h3>Cambios numéricos propuestos frente al guardado</h3>' + table(['Opción', 'Guardado', 'Modelo propuesto'], changes) + '<p>Los nulos se excluyen explícitamente solo para este modelo completo. No se ha adoptado ninguna respuesta; también deben revisarse referencias y compromisos descritos en el texto.</p><p><a href="Plan%20y%20calculos.json">Cálculos completos y cambios propuestos</a></p></details>'
+html += '<details id="solicitud"><summary>Apartado técnico de solicitud, conservado para revisión</summary><p><a href="Apartado%20para%20la%20solicitud.txt">Abrir texto editable del apartado técnico</a></p>' + prose(application) + '</details>'
+html += '<details id="fuentes"><summary>Fuentes, condiciones y comprobaciones por capítulo y tema</summary><p><a href="Fuentes%20y%20condiciones%20de%20puntuacion.txt">Abrir notas de fuentes separadas</a></p>' + prose(notes)
+html += '<h3>Originales ya almacenados en la biblioteca</h3><ul>' + ''.join(source_links) + '</ul><p>Los enlaces públicos de descarga y las fechas verificadas figuran en el anexo anterior. No se añaden duplicados de las fuentes.</p></details></section></main></body></html>'
 (HERE / 'Revision y puntuacion.html').write_text(html, encoding='utf-8')
 (HERE / 'Baseline conservado.json').write_bytes(original_baseline.read_bytes())
 (HERE / 'Texto para escuchar.txt').write_text(text, encoding='utf-8')
@@ -177,5 +187,10 @@ validation = {'created_on': '2026-11-03', 'epub': EPUB.name, 'epub_sha256': hash
               'source_integrity': source_integrity, 'direct_elevenreader_playback_checked': False,
               'epubcheck_run': False, 'epubcheck_note': 'No claim of full EPUBCheck certification; structural checks are listed explicitly.',
               'baseline_save_sha256': baseline['save_sha256'], 'score_proposed': recommended['total'], 'accredited_score': None}
+validation['editorial_structure'] = {'chapters_1_to_6': 'Project invitation, park vision, demonstrator, activities and reasons to participate',
+                                   'chapters_7_to_8': 'Open decisions, land/applicant/permissions/budget, conditional score and next steps',
+                                   'html_technical_annexes': 'After the narrative; collapsed by default',
+                                   'earlier_version_preserved': 'Version anterior - Enfoque de puntuacion.zip',
+                                   'scoring_model_changed': False}
 (HERE / 'Validacion.json').write_text(json.dumps(validation, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 print(json.dumps({k: validation[k] for k in ['chapters', 'words', 'estimated_minutes_at_130_to_160_wpm', 'score_proposed', 'direct_elevenreader_playback_checked']}, ensure_ascii=False))

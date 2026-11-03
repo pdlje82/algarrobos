@@ -5,7 +5,10 @@
     "width": 1440,
     "scrollWidth": 1440,
     "tables": 3,
-    "headings": 5,
+    "headings": 10,
+    "narrativeChapters": 8,
+    "openingTitle": "Capítulo uno. Un lugar para aprender y cuidar Alhama",
+    "openDecisionsAfterSixChapters": true,
     "brokenLocalLinks": 0
   },
   "mobile": {
@@ -13,10 +16,10 @@
     "scrollWidth": 390
   },
   "chapter": {
-    "title": "Capítulo uno. Un proyecto diseñado para llegar",
+    "title": "Capítulo uno. Un lugar para aprender y cuidar Alhama",
     "language": "es",
-    "paragraphs": 5,
-    "text": 1424
+    "paragraphs": 6,
+    "text": 1743
   },
   "errors": [],
   "direct_elevenreader_playback_checked": false,

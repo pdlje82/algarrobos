@@ -9,7 +9,27 @@ Los objetivos de sesiones, horas, plazas y continuidad son supuestos de diseño 
 
 Las páginas de este anexo son páginas PDF contadas desde la primera hoja, no números internos del BOJA. La tabla firmada de AL20 tiene veinte páginas; las páginas dieciséis a veinte corresponden a la línea tres. La edición de puntuación dos de la aplicación y la versión dos de la guía son conceptos distintos: la primera controla la reproducción del cálculo guardado; la segunda es un documento administrativo.
 
-CAPÍTULO UNO · OBJETIVO, BASELINE Y MÉTODO DE OPTIMIZACIÓN
+CORRESPONDENCIA CON LA PRESENTACIÓN REESTRUCTURADA
+
+Revisión editorial a petición del usuario: los capítulos uno a seis presentan la visión, la experiencia propuesta, el demostrador, las actividades y los motivos para participar. Los capítulos siete y ocho reúnen decisiones abiertas, condiciones y siguientes pasos. Las escenas del parque son una visión de diseño, no instalaciones existentes, autorizadas o contratadas. No se han cambiado el escenario de puntuación, sus supuestos ni las fuentes. La versión anterior se conserva en «Version anterior - Enfoque de puntuacion.zip».
+
+Capítulo uno, «Un lugar para aprender y cuidar Alhama»: síntesis original de la propuesta y la instrucción del usuario. FUND-008, pp. 120–124, respalda la distinción entre demostrador autónomo y posible recuperación patrimonial posterior. La invitación a participar no representa un convenio ni una demanda demostrada.
+
+Capítulo dos, «Así imaginamos el parque»: parcela y visión original, fichas B y H; FUND-008, pp. 123–124. El dato catastral exacto y sus límites se explican en la ficha B. Recorrido, lugares de estancia y recursos educativos son elementos ilustrativos por desarrollar, sin nuevo plano aprobado.
+
+Capítulo tres, «Empezar con un demostrador completo»: fichas B, C y G; FUND-008, pp. 120–122, autonomía, demostración y difusión; FOREST-002, pp. 94–96 y 123–134, contexto técnico. Comparación, doce revisiones y calendario son propuestas, no resultados. Las condiciones de novedad y validez se conservan en el capítulo siete.
+
+Capítulo cuatro, «Un proyecto que hace participar al pueblo»: ficha D. FUND-013, pp. 187 y 276, demandas de mujeres y juventud; FUND-010, pp. 80–87, 92–94 y 99–102, justificación de actividades y accesibilidad. Sesiones, horas y plazas son objetivos propuestos. La prueba de mejoras por encima del mínimo se trata al final de la narración.
+
+Capítulo cinco, «Tradición, energía y un servicio cercano»: fichas C y E. FUND-013, p. 283, trabajos en piedra, y p. 398, temática de atracción residencial. FUND-010, p. 34, equipo renovable; pp. 104–105, patrimonio; pp. 108–110, concepto de servicio de proximidad. El encaje y las condiciones no resueltas permanecen en los capítulos finales.
+
+Capítulo seis, «Por qué merece la pena participar»: interpretación original del valor de la propuesta y de sus productos públicos; fichas B y H. No añade beneficios medidos, compromisos de terceros ni garantía de parque o financiación.
+
+Capítulo siete, «Las decisiones que nos quedan por concretar»: fichas B, C, D, E y G; acceso, ecología, diseño, novedad, permisos, responsables, servicio y necesidad del equipo. Conserva expresamente los límites de los supuestos de restauración y las exigencias del demostrador.
+
+Capítulo ocho, «Financiación, condiciones y siguientes pasos»: fichas A, F, G y H; FUND-004, pp. 16–20, y FUND-010, pp. 218–231, puntuación y combinaciones; FUND-008, artículos y páginas de la ficha G. El total y las sensibilidades se reproducen desde el mismo «Plan y calculos.json», sin modificarlo. Certificados de integración, puntuación condicional, presupuesto y evaluación separada de 3.5 siguen siendo condiciones visibles de la propuesta.
+
+FICHA A · OBJETIVO, BASELINE Y MÉTODO DE OPTIMIZACIÓN
 
 Base conservada: restoration_simulator/data/active-project.json, proyecto «My restoration journey», identificador a540f43a-08c4-4057-8e3a-1edefb1a8766, revisión 20; espacio de financiación versión 1, borrador «AL20 Alhama», esquema de borrador 4. Selección versión 2, cap_or_all_answers. Paquete de financiación conservado versión 3, comprobado el 31 de octubre de 2026. Huella del paquete: bba3aa291262eb72419d1247b44556a969b0423151239da8f43ec58dddbf943c. SHA-256 del guardado: dd6350d816c47b55b22876cec2f3035cd80029c81369b2f4263aa0faae0a5739.
 
@@ -23,7 +43,7 @@ En las simulaciones, las opciones no elegidas se establecen expresamente a falso
 
 Reglas y umbral: FUND-004, pp. 16–20; FUND-010, pp. 218–231 para caracteres excluyentes/acumulables y pp. específicas indicadas abajo. La página común oficial de promotores publica el mínimo de sesenta sobre cien. La convocatoria de abril y el plazo general del 23 de abril de 2026 al 31 de diciembre de 2028 constan en FUND-009 y la página oficial común. Antes de presentar, AL20 debe confirmar recepción local, dotación disponible, modificaciones de estrategia y fechas aplicables.
 
-CAPÍTULO DOS · PARCELA Y DIFERENCIA ENTRE 3.4 Y 3.5
+FICHA B · PARCELA Y DIFERENCIA ENTRE 3.4 Y 3.5
 
 La elección de 04011A012000190000JE como terreno común es una nueva instrucción del usuario. Uso anterior de parras, abandono, presencia abundante de «salsola» e incertidumbre sobre venta o usufructo son información del usuario, no inspección técnica ni acuerdo del vecino. La superficie pública de parcela es 3.056 m². Las respuestas originales de Catastro y geometría se conservan en ../al20-demonstrator-proposal/public-records/ y el registro de consultas en Site and partner evidence.json de esa carpeta. Catastro no acredita por sí solo titularidad de acceso, situación forestal, ausencia de hábitats protegidos o permiso de obra.
 
@@ -34,7 +54,7 @@ Normativa 3.4: FUND-008, anexo I, pp. 120–122, especialmente descripción de d
 
 Normativa 3.5: FUND-008, pp. 123–124: conservación, protección, recuperación y rehabilitación de patrimonio rural, incluido el natural, finalidad no productiva y difusión/uso público; requisitos de gestión forestal cuando procedan. El máximo de ayuda no se utiliza como presupuesto del parque. Un mismo emplazamiento puede informar ambas operaciones, pero no fusiona elegibilidad, solicitud, obligaciones, durabilidad de activos ni gastos.
 
-CAPÍTULO TRES · RESTAURACIÓN, NECESIDADES Y ENERGÍA
+FICHA C · RESTAURACIÓN, NECESIDADES Y ENERGÍA
 
 CO.1: FUND-004, p. 16, máximo 15; elegir una de las alternativas de una, dos o tres o más necesidades. FUND-010, p. 16 y p. 219. FUND-013, p. 395: NPL3 patrimonio rural, NPL4 suelos/erosión/aridez y NPL8 cambio climático. El vínculo propuesto es actividad y resultado de aprendizaje, no una afirmación de recuperación ecológica ya medida. No se cuentan tres veces puntos por cada necesidad: tres o más dan quince en total.
 
@@ -44,7 +64,7 @@ Reglas centrales: restoration_simulator/design_rules/README.md y paquete conserv
 
 CC.2: FUND-004, p. 16, cinco puntos. FUND-010, p. 34: requiere adquisición y puesta en marcha, memoria técnica en solicitud y factura/ficha o certificado en pago. Propuesta: equipo fotovoltaico autónomo desmontable para medición e interpretación, sujeto a necesidad, dimensionado, moderación de coste y elegibilidad. No se ha comprado ni cotizado. Si no se justifica, se elimina: el modelo conserva 61,49 si todos los demás módulos se aceptan.
 
-CAPÍTULO CUATRO · MUJERES, JUVENTUD Y ACCESIBILIDAD
+FICHA D · MUJERES, JUVENTUD Y ACCESIBILIDAD
 
 IG.8.2: FUND-004, p. 17, máximo dos; FUND-010, pp. 80–81 y p. 228. FUND-013, p. 187, visibilidad/cooperación y decisiones de mujeres; p. 276, igualdad/empoderamiento. Referencias de la aplicación W4, W7, W10. El ocio ambiental de codiseño debe demostrar ese contenido; la presencia de mujeres en un acto general no basta.
 
@@ -54,7 +74,7 @@ JR.3: FUND-004, pp. 18–19, máximo cuatro; FUND-010, pp. 99–102 y p. 230. Se
 
 DRI.3: FUND-004, p. 18; FUND-010, pp. 92–94 y p. 229. DRI.3.1, tres puntos, exige superar el mínimo legal: un informe debe identificar norma, mínimo, elemento mejorado y justificación. La guía cita Real Decreto 193/2023 y posteriores normas, y da ejemplos no constructivos como audiodescripción o apoyos cognitivos; no los declara automáticamente superiores al mínimo en cualquier caso. DRI.3.2, dos puntos, permite compromiso formativo identificado y después certificado para personal directamente relacionado con la operación. Máximo conjunto cuatro. Las ocho horas son una propuesta de programa, no un umbral oficial. Se excluye DRI.3.3 de este escenario por no caracterizarse aún una necesidad específica de exclusión y su grupo destinatario.
 
-CAPÍTULO CINCO · PATRIMONIO, SERVICIO E INNOVACIÓN
+FICHA E · PATRIMONIO, SERVICIO E INNOVACIÓN
 
 PT.1: FUND-004, p. 19; FUND-010, pp. 104–105 y p. 230. PT.1.1 trece puntos por patrimonio natural y su uso posterior; PT.1.2 siete por finalidad de promoción/difusión/conservación de oficio tradicional territorial recogido en estrategia. Suma veinte limitada a quince. FUND-013, p. 283, oportunidad O(3.12), cita expresamente carpintería, trabajos en piedra, panadería y bodegas; p. 372, DAFO_026, inicia la recomendación sobre relevo de oficios. La aplicación registra TR2. La propia guía pide memoria de programa e informe del instructor para el encaje EDLL; admite además publicaciones acreditativas. Las jornadas tradicionales son un compromiso nuevo; no se presume que cualquier piedra del ensayo acredite oficio ni que exista profesional contratado.
 
@@ -64,7 +84,7 @@ IN.1.2: FUND-004, p. 19, 2,49; FUND-010, pp. 103–104 y p. 230. FUND-013, p. 39
 
 Se retira IN.1.3 y la referencia guardada IN-A11 a agricultura de precisión. La estrategia, pp. 398–401, no designa sectores innovadores y enumera temas/aspectos específicos; un registrador de humedad no demuestra pertenencia a esos aspectos. No se añade certificación de huella inexistente, turismo temático, renta por carbono ni plan urbanístico supervisado no contratado.
 
-CAPÍTULO SEIS · PERFIL SOLICITANTE Y SENSIBILIDADES
+FICHA F · PERFIL SOLICITANTE Y SENSIBILIDADES
 
 Elegibilidad: FUND-008, pp. 120–124. Las rutas examinadas no incluyen a una persona física ordinaria como solicitante. Se plantea entidad no lucrativa competente, sin elegir identidad ni atribuirle estatutos, capacidad o compromiso existentes.
 
@@ -79,7 +99,7 @@ Sensibilidades verificadas: sin crédito de SP.1, 61,49; sin IN.1.2, 64; sin CC.
 
 Existe una combinación reducida de sesenta exactos: todas las actividades salvo la temática innovadora, integración territorial de ocho y sin integración transversal de cuatro. Se prefiere el programa con margen. No se afirma que todas las actividades sean obligatorias para puntuar sesenta en cualquier expediente AL20.
 
-CAPÍTULO SIETE · EJECUCIÓN, REVISIÓN Y PREGUNTAS AL INSTRUCTOR
+FICHA G · EJECUCIÓN, REVISIÓN Y PREGUNTAS AL INSTRUCTOR
 
 FUND-008, art. 10, pp. 20–24: comprobar límites de gasto; nuevos empleos temporales y determinados gastos periódicos tienen límites de seis meses. Art. 11, pp. 25–26, IVA recuperable y otros excluidos. Art. 16, p. 31, máximo de subcontratación del setenta y cinco por ciento con clasificación correcta; no se determina aquí su aplicación a futuros contratos. Art. 19, pp. 33–37, documentación; art. 25, pp. 40–41, no inicio; art. 26.5, p. 42, normalmente tres ofertas comparables antes del compromiso salvo excepción justificada. Art. 37, p. 54, anticipos condicionados hasta cincuenta por ciento y garantía por el cien por cien del anticipo. No se presupuesta una ayuda aprobada ni se afirma anticipo disponible.
 
@@ -97,7 +117,7 @@ Preguntas concretas para AL20, preparadas para una consulta del promotor, sin en
 9. ¿La convocatoria local sigue recibiendo solicitudes con esta edición, qué crédito existe y qué fechas de no inicio, ejecución y justificación rigen?
 10. ¿Cómo separar costes, activos, resultados y uso permanente de una posible 3.5 sin duplicar ayudas?
 
-CAPÍTULO OCHO · PASO CONDICIONADO A 3.5
+FICHA H · PASO CONDICIONADO A 3.5
 
 FUND-008, pp. 123–124, y perfil de línea tres de FUND-004, pp. 16–20. El perfil matemático conservado se comparte entre ambas rutas; eso no demuestra igual puntuación en operaciones diferentes. No se ha calculado ni presentado una solicitud 3.5 ficticia con los mismos hechos. Conocer supervivencia, agua y mantenimiento ayuda a decidir mezcla, tamaño y gestión, pero doce meses no prueban recuperación ecológica de largo plazo. El futuro parque necesita su evaluación, presupuesto, instrumento de terreno y revisión de reglas. Se preserva el valor del demostrador si el parque se descarta.
 

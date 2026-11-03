@@ -1,8 +1,8 @@
 PAQUETE DE REVISIÓN · AL20 · 3 DE NOVIEMBRE DE 2026
 
-Abrir primero «Revision y puntuacion.html» para consultar la puntuación, sensibilidades, apartado de solicitud y fuentes.
+Abrir primero «Revision y puntuacion.html»: comienza con la presentación positiva del proyecto y la visión del parque, sigue con el demostrador y las actividades y reúne las decisiones abiertas al final. Los anexos de puntuación, solicitud y fuentes se pueden desplegar después. «Presentacion del proyecto.txt» contiene el mismo texto narrativo para compartir o editar.
 
-Para escuchar: importar «Un aula viva antes del parque - Plan AL20.epub» en ElevenReader. Ocho capítulos, aproximadamente trece a dieciséis minutos. Contiene solo narración; las citas y enlaces están en el acompañante separado. No se ha comprobado reproducción directa en ElevenReader.
+Para escuchar: importar «Un aula viva antes del parque - Plan AL20.epub» en ElevenReader. Ocho capítulos, aproximadamente dieciocho a veintidós minutos. Los seis primeros presentan el proyecto para personas interesadas en participar; los dos últimos reúnen tareas abiertas, asociaciones, permisos y condiciones de financiación. Las citas y enlaces están en el acompañante separado. No se ha comprobado reproducción directa en ElevenReader.
 
 Para editar el apartado de solicitud: «Apartado para la solicitud.txt». Está redactado como propuesta revisable; no firmar compromisos que no puedan acreditarse.
 
@@ -13,3 +13,5 @@ Para verificar: «Plan y calculos.json», «Validacion.json», «Revision visual
 La proyección recomendada es 66,49, condicionada a actividades reales y al perfil acreditado de integración de la propia solicitante: 54,49 del programa y 12 del perfil. La entidad concreta no se elige aquí. Si faltan las integraciones, este programa no alcanza sesenta. No hay una puntuación acreditada hoy, ni ayuda, permisos o acceso al terreno concedidos por estos documentos.
 
 Los guiones de reproducción requieren este repositorio y su entorno de Python de la aplicación; no son una aplicación autónoma. No escriben en el guardado. La edición de reglas conservada permanece intacta.
+
+Esta revisión cambia el enfoque y el orden de presentación; conserva las actividades, los supuestos, el cálculo y el apartado técnico de solicitud. La versión anterior de narración, EPUB y acompañante queda archivada en «Version anterior - Enfoque de puntuacion.zip» dentro del repositorio, sin incluirse en el ZIP de entrega actualizado para evitar confundir versiones.

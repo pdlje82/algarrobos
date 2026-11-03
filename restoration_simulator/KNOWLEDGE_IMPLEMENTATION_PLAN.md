@@ -1,6 +1,6 @@
 # Algarroba knowledge architecture implementation plan
 
-Created 3 November 2026. Status: planning complete; implementation milestones pending.
+Created 3 November 2026. Status: Milestone 1 complete; Milestones 2–6 pending.
 
 Algarroba needs a shared way to connect research evidence, ecological knowledge,
 funding requirements and project decisions as its content grows. Implement this
@@ -82,9 +82,12 @@ remain compatible. App behaviour stays unchanged.
 duplication list, compatibility constraints and a concrete Milestone 2 change list.
 Keep these findings in this plan or directly linked repository documentation.
 
-The initial architecture review passed eight core catalogue/library validation
-entry points on 3 November 2026. The broader regression baseline belongs to this
-milestone; those eight checks do not establish full test-suite coverage.
+Completed 3 November 2026 in the [knowledge ownership audit](KNOWLEDGE_OWNERSHIP_AUDIT.md).
+It contains the authority matrix, research integration inventory, both pilot
+traces, citation comparison, compatibility findings and the bounded Milestone 2
+handoff. Baseline revision `9047aa81a830df90c6267de397bdb9963c937777` passed
+292 backend tests, 107 frontend tests and the production build. Exact commands,
+environment, times and the non-fatal bundle-size warning are recorded in the audit.
 
 ## Milestone 2 Shared source and passage records
 
@@ -92,8 +95,12 @@ milestone; those eight checks do not establish full test-suite coverage.
 source edition and passage.
 
 Implement a validated shared evidence contract, resolving the registry paths from
-Milestone 1. Reuse existing library IDs, checksums and PDF page mappings. Define an
-explicit representation for external web sources and unavailable local documents.
+Milestone 1. The audit's handoff fixes the first scope to five FUND-008 citation
+uses across selection guidance, project concepts and delivery planning. Keep the
+existing source objects as validated generated mirrors, preserving labels and
+resolved library hashes. Reuse existing library IDs, checksums and PDF page
+mappings. Broader representation of external web sources and unavailable local
+documents follows this first extraction.
 Use source-edition identity and passage location to detect duplicate candidates;
 retain distinct uses, interpretations and evidence roles where needed.
 
@@ -227,14 +234,21 @@ decision cannot be resolved from the repository or authorised task scope.
 
 | Milestone | Status | Completion evidence |
 | --- | --- | --- |
-| 1 Knowledge ownership and compatibility baseline | Pending | To be recorded |
+| 1 Knowledge ownership and compatibility baseline | Complete | [Audit, traces, compatibility review and passing baseline](KNOWLEDGE_OWNERSHIP_AUDIT.md) |
 | 2 Shared source and passage records | Pending | To be recorded |
 | 3 Connected knowledge pilot and queries | Pending | To be recorded |
 | 4 Integration into existing features | Pending | To be recorded |
 | 5 Focused knowledge explorer | Pending | To be recorded |
 | 6 Research intake and gradual expansion | Pending | To be recorded |
 
-**Next bounded task:** implement Milestone 1. Produce the authority matrix, trace
-AL20 3.4 and carob/MR2 through their current consumers, classify duplicate citations,
-establish the relevant regression baseline and specify the first shared-evidence
-change. Preserve application behaviour, existing project saves and document bytes.
+**Next bounded task:** implement the audit's Milestone 2 handoff: one canonical
+registry for five FUND-008 passage/citation uses, read-only projection/check
+commands and validation of the three existing consumer mirrors. Preserve feature
+schemas, source labels, library hashes, application behaviour, historical snapshots
+and document bytes. Milestones 2–6 remain pending.
+
+**Open findings:** the viewer registers one edition per document ID; concept,
+delivery and EDL records require exact installed library hashes; 80 shared
+guidance/concept citation labels have encoding drift; broader duplication and
+cross-domain dependency coverage remain. The build reports large JavaScript
+chunks. These are documented findings, not changes authorised by Milestone 1.
