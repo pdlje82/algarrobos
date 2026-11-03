@@ -77,4 +77,6 @@ def validate(data, catalogue):
 
 def describe():
     data = validate(read_json(LIBRARY), funding.catalogue())
+    from .knowledge_citations import validate_consumer_sources
+    validate_consumer_sources("selection_guidance", data["sources"])
     return {"version": 1, "library_hash": digest(data), "library": data}

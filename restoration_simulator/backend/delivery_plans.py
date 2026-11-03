@@ -52,7 +52,10 @@ def validate_library(data):
 
 
 def library():
-    return validate_library(read_json(LIBRARY))
+    data = validate_library(read_json(LIBRARY))
+    from .knowledge_citations import validate_consumer_sources
+    validate_consumer_sources("delivery_plan", data["sources"])
+    return data
 
 
 def describe():

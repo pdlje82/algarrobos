@@ -1,6 +1,6 @@
 # Algarroba knowledge architecture implementation plan
 
-Created 3 November 2026. Status: Milestone 1 complete; Milestones 2–6 pending.
+Created 3 November 2026. Status: Milestones 1–3 complete; Milestones 4–6 pending.
 
 Algarroba needs a shared way to connect research evidence, ecological knowledge,
 funding requirements and project decisions as its content grows. Implement this
@@ -94,6 +94,14 @@ environment, times and the non-fatal bundle-size warning are recorded in the aud
 **Outcome:** pilot citations have one authoring authority and resolve to an exact
 source edition and passage.
 
+Completed 3 November 2026. The [Milestone 2 implementation results](KNOWLEDGE_MILESTONE_2_PLAN.md#implementation-results)
+record the shared registry, three consumer checks, read-only commands and
+compatibility evidence. The [knowledge README](knowledge/README.md) defines
+ownership and the editing workflow. All 19 new citation tests passed; the full
+backend suite passed 311 tests, frontend tests passed 107, and the build succeeded
+with the existing bundle-size warning. The three feature JSON files, labels and
+library hashes are unchanged.
+
 Implement a validated shared evidence contract, resolving the registry paths from
 Milestone 1. The audit's handoff fixes the first scope to five FUND-008 citation
 uses across selection guidance, project concepts and delivery planning. Keep the
@@ -121,6 +129,16 @@ Any citation-label correction is a documented editorial change.
 ## Milestone 3 Connected knowledge pilot and queries
 
 **Outcome:** the pilot can answer useful questions through structured relationships.
+
+Completed 3 November 2026. The [Milestone 3 implementation record](KNOWLEDGE_MILESTONE_3.md)
+documents 12 claims, 11 typed entities, nine relationships, two unresolved issues,
+19 registered bindings and four read-only query capabilities. Its source review,
+explicit coverage boundary and distinction between citation dependencies and
+manual review targets are documented with the verification evidence. The targeted
+35 tests, full 327 backend tests, 107 frontend tests, both check commands and
+production build passed. The existing bundle-size warning remains. Original
+funding libraries, Designer rules, educational content, documents and saves retain
+their fingerprints. Feature adoption has not started.
 
 Model only the entity and relationship types required by AL20 3.4, carob, MR2 and
 their sources. Reference existing domain identities. Introduce explicit typed
@@ -235,20 +253,26 @@ decision cannot be resolved from the repository or authorised task scope.
 | Milestone | Status | Completion evidence |
 | --- | --- | --- |
 | 1 Knowledge ownership and compatibility baseline | Complete | [Audit, traces, compatibility review and passing baseline](KNOWLEDGE_OWNERSHIP_AUDIT.md) |
-| 2 Shared source and passage records | Pending | To be recorded |
-| 3 Connected knowledge pilot and queries | Pending | To be recorded |
+| 2 Shared source and passage records | Complete | [Registry, compatibility checks and passing verification](KNOWLEDGE_MILESTONE_2_PLAN.md#implementation-results) |
+| 3 Connected knowledge pilot and queries | Complete | [Curated pilot, read-only queries and passing acceptance checks](KNOWLEDGE_MILESTONE_3.md) |
 | 4 Integration into existing features | Pending | To be recorded |
 | 5 Focused knowledge explorer | Pending | To be recorded |
 | 6 Research intake and gradual expansion | Pending | To be recorded |
 
-**Next bounded task:** implement the audit's Milestone 2 handoff: one canonical
-registry for five FUND-008 passage/citation uses, read-only projection/check
-commands and validation of the three existing consumer mirrors. Preserve feature
-schemas, source labels, library hashes, application behaviour, historical snapshots
-and document bytes. Milestones 2–6 remain pending.
+**Next bounded task:** prepare the Milestone 4 implementation plan. Select a small
+set of existing editorial consumers and specify how they would adopt the pilot's
+shared claims/evidence through deterministic projections. State exact response,
+hash and saved-snapshot compatibility requirements, separating any deliberate
+content correction from rule execution. Milestones 4–6 remain pending; the graph
+explorer belongs to Milestone 5.
 
 **Open findings:** the viewer registers one edition per document ID; concept,
 delivery and EDL records require exact installed library hashes; 80 shared
-guidance/concept citation labels have encoding drift; broader duplication and
-cross-domain dependency coverage remain. The build reports large JavaScript
-chunks. These are documented findings, not changes authorised by Milestone 1.
+guidance/concept citation labels have encoding drift. Seventy-five other shared
+guidance/concept citations, six concept-only EDL uses and the other evidence
+collections remain outside the new registry. General source-edition retrieval,
+retained guide editions and cross-domain dependency coverage remain open. The
+pilot's stock-format tension and bounded establishment-water gap remain unresolved;
+current call availability is not assessed. New claims do not yet feed existing
+features. The build reports large JavaScript chunks. These are separately scoped
+future work.

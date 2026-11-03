@@ -70,7 +70,10 @@ def validate_guide(data):
 
 
 def guide():
-    return validate_guide(read_json(GUIDE))
+    data = validate_guide(read_json(GUIDE))
+    from .knowledge_citations import validate_consumer_sources
+    validate_consumer_sources("project_concept", data["sources"])
+    return data
 
 
 def describe():

@@ -8,9 +8,9 @@ The ingredients already exist. A defensible innovation opportunity is their adap
 
 ## Reading routes and visual index
 
-For the practical decision, read sections 1, 3, 5, 8 and 10. For technology development, add sections 4, 6 and 7. For a proposal, use sections 9–12 and the [source register and download list](irrigation-research/SOURCES.md).
+For drone monitoring, soil-moisture mapping and water delivery, read section 13. For the practical irrigation decision, read sections 1, 3, 5, 8 and 10. For technology development, add sections 4, 6 and 7. For a proposal, use sections 9–12 and the [source register and download list](irrigation-research/SOURCES.md).
 
-All 12 drawings below are original, code-drawn concepts. Each has a PNG for Markdown and an editable SVG in [the figure directory](irrigation-research/figures/). They show proposed arrangements, not a surveyed site, measured root system, validated circuit, bill of quantities or construction instruction. [Reproduction script](irrigation-research/build_diagrams.py).
+The first 12 drawings below are original, code-drawn concepts; section 13 adds eight drone figures and twelve sourced reference pictures. Each has a PNG for Markdown and an editable SVG in [the figure directory](irrigation-research/figures/). They show proposed arrangements, not a surveyed site, measured root system, validated circuit, bill of quantities or construction instruction. [Reproduction script](irrigation-research/build_diagrams.py).
 
 | Figure | What it helps decide |
 |---|---|
@@ -358,7 +358,7 @@ Those are unresolved engineering inputs. No plant moisture threshold, irrigation
 
 ## 12. Documents to download and library status
 
-**Stored now:** this LEARN-016 report, its Markdown source register and visual guide, the 12 original SVG/PNG pairs, and the reproduction script. The previous repository watering and funding documents remain existing local sources.
+**Stored now:** this LEARN-016 report, its Markdown source register and visual guide, the initial 12 SVG/PNG pairs, the illustrated listening companions and their reproduction assets. Section 13.10 lists the drone extension holdings. The previous repository watering and funding documents remain existing local sources.
 
 **Offered for addition:** the external originals below. Temporary research downloads and web citations do not make them permanent library holdings. Follow `CATALOG.md` naming and cataloguing when adding those originals later.
 
@@ -372,3 +372,192 @@ Those are unresolved engineering inputs. No plant moisture threshold, irrigation
 - [Überwachung und automatische Bewässerung von Stadtgrün — PlantCare, undated brochure checked 3 November 2026 — direct PDF](https://plant-care.ch/wp-content/uploads/2023/01/PlantCare-Urban-Green.pdf). 14 pages; urban-green monitoring and control.
 
 The [full source register](irrigation-research/SOURCES.md) includes dates, evidence roles, local holdings and retrieval limitations. In particular, an indexed Green Link final-report URL now redirects to a domain-sales page; it is not offered here as a working download.
+
+## 13. Drones: surveying, soil moisture and water delivery
+
+Added 3 November 2026. This extension includes **12 sourced reference pictures and eight original technical figures**, numbered 13–20. Photographs and manufacturer renders identify real equipment or experiments; the original schemes explain proposed arrangements. Neither is evidence of performance at the proposed park. [Drone source register, picture credits and retrieval record](irrigation-research/drones/README.md). The illustrated listening edition also contains this material, in chapters thirteen–sixteen.
+
+### 13.1. The practical answer
+
+**Use drones first for mapping and periodic inspection, alongside ground probes and tank-based irrigation.** Test whether multispectral or thermal observations improve decisions beyond an ordinary RGB survey. Treat microwave soil-moisture mapping, robotic probe insertion and airborne watering as distinct specialist experiments. This is an author recommendation from the evidence below, not a claim that a particular supplier has validated the complete system.
+
+| Question | What exists | Implication for dispersed native planting |
+|---|---|---|
+| Locate and monitor plants? | RGB photogrammetry, orthomosaics, canopy mapping and repeated surveys | Useful first demonstrator layer; small seedlings and obscured plants still need field checks |
+| Detect water stress? | Multispectral and thermal cameras; calibrated research workflows | Identify inspection candidates; do not automatically interpret a hot or low-index plant as needing water |
+| Measure soil moisture from the air? | Specialist radar and passive microwave radiometry, plus model-based optical estimates | Some approaches retrieve soil-water information; depth, footprint and calibration are instrument/site specific |
+| Measure with an inserted probe? | Landing-and-insertion research robots | Direct point measurements are possible, but not a simple flyover and not proven here for stony slopes |
+| Read existing soil sensors? | UAV radio data collection demonstrated in field studies | Useful where occasional data collection solves a real coverage problem; watering must operate between flights |
+| Carry watering water? | Agricultural spray drones, including verified 40 L and 100 L examples | Physically possible; basin-dose accuracy, operating cost and repeated loads need testing |
+| Supply water through a hose? | Orchard spraying prototypes with ground water/power supply | Avoids carrying the entire water supply, but introduces hose handling and flight-control burdens |
+
+![Figure 13. Roles of a drone in a restoration demonstrator: survey, specialist sensing and water transport](irrigation-research/drones/figures/13-drone-roles.png)
+
+### 13.2. Plant registers, survival and change monitoring
+
+A useful first deliverable is a georeferenced plant register: planted position, unique ID, species and planting date, followed by dated observations of canopy size, visible condition and confidence. Repeated RGB surveys can also document erosion, disturbed basins and vegetation-island development. For our demonstrator, combine this register with emitter/valve IDs and water records; that join is an engineering proposal, not an automatic feature of a camera.
+
+Field evidence cautions against assuming that automated counts equal survival. Forest Growers Research's **RGB ortho-plotting study** examined two recently planted radiata-pine stands. It reported accuracy/recall of 76%/85% for manual annotation and 41%/45% for its automated method. These are study-specific results, not expected Almería performance. Its companion comparison found high-resolution RGB more effective for seedling detection than the tested multispectral imagery, while spectral information showed potential for health assessment. More sensor bands do not necessarily resolve a smaller plant. [FGR, PSP-T014, 28 March 2024, pp. 1, 6–9](https://www.toolsforforesters.co.nz/__data/assets/pdf_file/0005/124925/UAV-Survival_RGB_ortho-plot.pdf); [Singleton, Hartley and Davidson, PSP-T018, 28 March 2024, pp. 6–9](https://fgr.nz/wp-content/uploads/2024/06/PSP-T018_UAVSurvival_Report_Multispectral_vs-RGB_final-1.pdf).
+
+![DJI Mavic 3 Multispectral aircraft](irrigation-research/elevenreader/photos/p42-mavic-aircraft.png)
+
+*Reference picture: DJI Mavic 3M, manufacturer's image. An example of an integrated survey aircraft, not a purchase selection. [Source](https://enterprise.dji.com/mavic-3-m).*
+
+For the park, record **alive, dead, missing and unknown/obscured separately**. Keep independent field observations of a representative sample, including difficult small plants. Report false detections and missed plants by species, size, shade and ground cover. A plant hidden by a shrub should not become an invented mortality observation.
+
+RTK improves the positioning of camera observations; it does not create image detail or botanical identification. Specify required ground sampling distance for the smallest target first, then assess flight height, lens, motion blur, terrain and survey time. Use independent check points to test the delivered map's accuracy. Demand the orthomosaic, acquisition date, coordinate reference system, plant table and confidence information, rather than only a colour screenshot.
+
+![DJI Mavic 3M RGB camera](irrigation-research/elevenreader/photos/p44-mavic-rgb.png)
+
+*Reference picture: the Mavic 3M RGB camera. DJI lists a 20 MP RGB sensor separately from its four 5 MP spectral cameras; their images have different spatial information. [Manufacturer specification](https://enterprise.dji.com/mavic-3-m).*
+
+### 13.3. Multispectral and thermal monitoring
+
+Multispectral systems measure reflected light in selected bands. The Mavic 3M example has green, red, red-edge and near-infrared cameras. Such data support vegetation indices and change detection; an index is not a direct reading of litres required, species identity or root-zone moisture. For this project, compare spectral changes within appropriate species/size groups and retain soil-background and seasonal explanations. [DJI Mavic 3M](https://enterprise.dji.com/mavic-3-m).
+
+![DJI Mavic 3M four-band multispectral camera array](irrigation-research/elevenreader/photos/p43-mavic-array.png)
+
+*Reference picture: the four-band array, from DJI. Spectral sensing and the RGB camera perform different jobs. [Source](https://enterprise.dji.com/mavic-3-m).*
+
+Thermal imaging measures surface radiation used to estimate temperature. It can reveal spatial differences associated with water stress, but interpretation needs canopy isolation and relevant weather observations. IFAPA's work with the University of Seville and Agrosap explicitly used controlled irrigation differences to investigate thermal assessment of irrigation uniformity. It is evidence of an Andalusian research workflow, not a ready universal water-stress threshold. [IFAPA, 8 June 2020](https://www.juntadeandalucia.es/agriculturaypesca/ifapa/web/noticias/el-dron-aliado-imprescindible-en-la-investigacion-andaluza).
+
+![MicaSense Altum-PT multispectral and thermal payload](irrigation-research/elevenreader/photos/p45-altum-pt.png)
+
+*Reference picture: EagleNXT/MicaSense Altum-PT, an example of a specialist combined payload. [Manufacturer page](https://eaglenxt.com/products/sensors/micasense-series/altum-pt/).*
+
+Resolution is a particular problem for tiny restoration plants. The Altum-PT manufacturer gives **17 cm thermal GSD at 60 m altitude**, alongside much finer pan-sharpened spectral imagery. An **illustrative 20 cm crown** would span only about **1.2 thermal pixels** at that setting, mixing leaves and background. This is arithmetic from a stated camera configuration, not the site's measured crown size or a proposed flight altitude. A thermal map that looks detailed when enlarged cannot recover a clean leaf temperature from such a mixed pixel. [Altum-PT specifications](https://eaglenxt.com/products/sensors/micasense-series/altum-pt/).
+
+![Figure 14. RGB and thermal pixels observe different surface information; a small crown can occupy one mixed thermal pixel](irrigation-research/drones/figures/14-drone-image-resolution.png)
+
+![MicaSense reflectance-calibration example](irrigation-research/elevenreader/photos/p46-reflectance-calibration.png)
+
+*Reference picture: MicaSense's calibration example. The manufacturer supplies a reflectance panel and light sensor for repeatable spectral acquisition; these do not replace local physiological validation. [Source](https://eaglenxt.com/products/sensors/micasense-series/altum-pt/).*
+
+For the proposed trial, fly comparable acquisition windows and log irradiance/cloud changes, wind, air temperature, recent rain and irrigation. Mask soil and shade where possible. Test thermal or spectral indicators against field-observed stress and moisture, including false alarms caused by small canopy, senescence, disease or different species. This is our proposed quality protocol; no single index cutoff is adopted.
+
+![DJI Matrice 4 series: compact enterprise aircraft examples](irrigation-research/elevenreader/photos/p53-matrice-series.png)
+
+*Reference picture: DJI's Matrice 4 family, including 4E and 4T variants. The thermal-equipped 4T is another commercial route; the family image does not imply that both variants have thermal cameras. [Manufacturer page](https://enterprise.dji.com/matrice-4-series); [official support specifications](https://www.dji.com/support/product/matrice-4-series).*
+
+### 13.4. Can a drone actually measure soil moisture?
+
+**Yes, with qualifications about the measurement method.** Five approaches should be kept distinct:
+
+| Method | What is measured or inferred | Depth / spatial support | Maturity and relevance |
+|---|---|---|---|
+| RGB, multispectral or thermal model | Reflectance or surface temperature mapped to an estimated moisture/stress variable | Visible surfaces; deeper soil status is inferred | Accessible imaging hardware; local model validation needed |
+| Passive L-band radiometer | Microwave brightness temperature inverted for soil water | Usually near-surface, with a footprint far larger than one small plant | Specialist research/precision-agriculture system |
+| Active radar / GPR | Electromagnetic response inverted for dielectric properties and water content | Depends on frequency, conductivity, layer model, vegetation and geometry | Demonstrated research; no universal root-depth specification |
+| Landing contact probe | A probe physically inserted into soil | A point sample at the actual inserted sensing depth | Research robotic payload; insertion and landing must succeed |
+| Radio collection from fixed probes | Digital readings already taken in the ground | The fixed probes' installed depths and sample volumes | Demonstrated communications approach; not remote soil sensing by the aircraft |
+
+![Figure 15. Airborne surface sensing, microwave retrieval, inserted probes and radio collection have different measurement depths](irrigation-research/drones/figures/15-drone-moisture-depth.png)
+
+**Passive microwave example.** Monash's SMART Irrigation project describes a UAV L-band radiometer producing top-5-cm moisture maps at 10 m resolution. Its roadmap separately proposes combining those maps with a water-balance model to predict moisture to 60 cm. The latter is a model prediction, not the camera/radiometer directly seeing to that depth. Treat these as project-described capabilities and development objectives. A 10 m cell also cannot distinguish neighbouring individual seedling basins. [Monash SMART Irrigation, ARC LP210301314, undated project page checked 3 November 2026](https://smart.eng.monash.edu/index.html).
+
+**GPR example with a useful limitation.** Henrion and colleagues mapped a Belgian peatland over 19 campaigns at 5 m map resolution. Their temporal correlation with ground sensors was 0.71, but spatial correlation was 0.23; they discuss microvariability and mismatch between sampling positions. The comparison involved a soil layer around 0–35 cm in that particular peat setting. This is evidence that deeper information is possible under a defined model, not proof of equivalent performance in Almería's mineral, rocky or saline soils. [Henrion et al., Science of Remote Sensing, 10 October 2025, pp. 1, 3–5](https://orbi.uliege.be/bitstream/2268/336849/1/_Henrion%20SRS%202025.pdf).
+
+![Research drone carrying the GPR antenna, Henrion and colleagues](irrigation-research/elevenreader/photos/p47-gpr-research.png)
+
+*Research photograph: unaltered photograph panel from Henrion et al., Figure 1(b), PDF p. 3. Specialist radar hardware is visible beneath the aircraft. Source article states CC BY-NC-ND 4.0; authors retain attribution and non-commercial/no-derivatives conditions. [Source PDF](https://orbi.uliege.be/bitstream/2268/336849/1/_Henrion%20SRS%202025.pdf).*
+
+**Emerging through-canopy radar.** The April 2026 GreenScatter preprint reports a physics-based UAV radar method tested in corn and soybean, with an average VWC error stated as 4.49%. That is a reported study result, not a validated Almería error bound. The arXiv record alone does not establish peer-reviewed publication. It is worth following as a research partnership topic; it does not justify replacing root-ball probes in this demonstrator. [Jacobs et al., submitted 10 April 2026](https://arxiv.org/abs/2604.09363).
+
+**Contact robotics.** The DAISY Lab authors' repository documents a UAV payload that lands, inserts a moisture probe, takes three nearby readings, retracts and proceeds. Code and field data are available; the associated publisher article was access-blocked in this research session. This is a real alternative to remote inference, but its transfer to hard, stony, sloping soil needs separate insertion, stability and representativeness tests. [Authors' repository, field trials including July/August 2023](https://github.com/thedaisylab/UAV-soil-moisture-robot); [publisher article landing page, access not verified](https://www.sciencedirect.com/science/article/abs/pii/S0168169924009098).
+
+### 13.5. A drone as a messenger for cheap ground sensors
+
+Singh and colleagues field-tested an aerial data ferry above a roughly 53 ha maize/soybean site, reading stationary soil-water and canopy-temperature stations in 2020–2021. Other work tested UAV collection from buried nodes. These demonstrate collection, not continuous connectivity everywhere. The Nebraska implementation used Campbell RF450 radios; the general idea should not be confused with a verified EU868 LoRa installation. [Singh et al., Sensors, 26 February 2022](https://pmc.ncbi.nlm.nih.gov/articles/PMC8914728/); [Data Collection from Buried Sensor Nodes by Means of an Unmanned Aerial Vehicle, Sensors 22(15), 2022](https://www.mdpi.com/1424-8220/22/15/5926).
+
+For our site, first test a fixed elevated gateway and local store-and-forward logging. Consider aerial collection only if terrain blocks radio coverage or a routine survey flight can cheaply collect otherwise inaccessible logs. Design the radio link, wake schedule, packet acknowledgements, EU radio parameters and missed-visit behaviour explicitly. A periodically visiting drone cannot provide immediate leak alarms when it is absent. Keep tank reserve, maximum dose and dry-run protection in the local station.
+
+![Figure 16. Periodic aerial observations join continuous ground records through an explicit reviewed action queue](irrigation-research/drones/figures/16-drone-ground-fusion.png)
+
+### 13.6. Watering: real aircraft, difficult delivery economics
+
+DJI's T50 manual specifies a **40 L spray tank**, and DJI's T100 product page specifies **100 L**. The latter's regional availability is explicitly limited; neither page establishes a quoted, compliant Spanish installation for this project. These are agricultural spraying examples, not proof of economical root irrigation. [DJI T50 manual, January 2025 edition, pp. 73–75](https://dl.djicdn.com/downloads/t50_t25/20250109/T50_T25_User_Manual_v1.0_EN.pdf); [DJI T100 product page](https://ag.dji.com/t100).
+
+![DJI Agras T50 spraying in an orchard](irrigation-research/elevenreader/photos/p48-agras-t50.png)
+
+*Manufacturer reference picture: T50 spraying an orchard. The visible spray plume is not a measured dose infiltrating a planting basin. [DJI source](https://ag.dji.com/t50).*
+
+![DJI Agras T100 agricultural spray aircraft](irrigation-research/elevenreader/photos/p49-agras-t100.png)
+
+*Manufacturer reference picture: the larger T100 spray platform. Payload growth reduces the number of loads but does not remove refill, charging or root-delivery requirements. [DJI source](https://ag.dji.com/t100).*
+
+Use the earlier report's **illustrative 5 L per plant**, without adopting it as a real dose:
+
+| Water task | Water required | Ideal 40 L loads | Ideal 100 L loads |
+|---|---:|---:|---:|
+| One 40-plant event | 200 L | 5 | 2 |
+| Move the example tank's 900 L usable volume | 900 L | 23 | 9 |
+| One 1,000-plant event | 5,000 L | 125 | 50 |
+
+These are rounded-up **payload lower bounds**, not sortie schedules. They exclude unusable residual water, operating reserve, terrain/payload derating, misses, wind losses, refill access, battery work and travel. A load need not equal exactly one safe flight. As a separate unit check, **1,000 L/ha is only 0.1 mm of water**. A large advertised spraying area per hour says little about delivering litres into individual root zones.
+
+![Figure 17. Watering example: payload limits imply repeated loads even before operational losses](irrigation-research/drones/figures/17-drone-water-loads.png)
+
+Small solar power for a tank controller should not be extrapolated to heavy-drone charging. The T50 manual lists **1,567 Wh nominal flight-battery energy**. Under the earlier illustrative three peak-sun-hours and 0.65 aggregate yield factor, replacing one such nominal energy amount in one day would require about **0.80 kWp** of PV. This is a sizing illustration, not measured consumption per flight or load; daily flights, charge losses, storage, inverter requirements and charging power need a real duty cycle. [DJI T50 manual, pp. 33 and 98](https://dl.djicdn.com/downloads/t50_t25/20250109/T50_T25_User_Manual_v1.0_EN.pdf).
+
+Our engineering assessment is that normal tank-and-pipe delivery deserves the first comparison position wherever routing is practical. An aircraft might still earn its place for a few inaccessible plants, urgent spot support or a temporary site before pipes are installed. Validate those niches against backpack watering, a vehicle with hose, and temporary lateral pipes. No cost advantage or energy ratio is established by this desk study.
+
+### 13.7. Hose-fed watering and targeted root delivery
+
+Miwa and colleagues field-tested a drone supplied with water and power from the ground in Japanese citrus orchards. Their 2024 paper describes reaction-force control and a ground vehicle assisting hose/cable transport. Results assessed **spray adhesion on water-sensitive paper**, not root-zone replenishment or seedling survival. This is credible evidence of hose-fed water spraying and its engineering burdens; it is not a validated restoration-irrigation system. [Miwa et al., 21 March 2024, pp. 32–35](https://medcraveonline.com/IRATJ/IRATJ-10-00280.pdf).
+
+![Miwa and colleagues: hose-fed water-spraying prototype](irrigation-research/elevenreader/photos/p50-hose-prototype.png)
+
+*Research photograph: Miwa et al., Figure 1. [Source article](https://medcraveonline.com/IRATJ/experiments-on-watering-citrus-fruits-with-a-wire-supplied-drone-using-rtk-gnss.html).*
+
+![Miwa and colleagues: citrus-orchard spraying field test](irrigation-research/elevenreader/photos/p51-hose-field.png)
+
+*Research photograph: Miwa et al., Figure 6. [Source article](https://medcraveonline.com/IRATJ/experiments-on-watering-citrus-fruits-with-a-wire-supplied-drone-using-rtk-gnss.html).*
+
+![Miwa and colleagues: ground support during spraying](irrigation-research/elevenreader/photos/p52-hose-ground-support.png)
+
+*Research photograph: Miwa et al., Figure 9. The PDF states a Creative Commons attribution/non-commercial condition; no commercial reuse permission is inferred. [Source PDF](https://medcraveonline.com/IRATJ/IRATJ-10-00280.pdf).*
+
+A **proposed** restoration-specific experiment could replace a foliar mist with a metered stream directed into a basin, perhaps using a short drop hose. Before flight, bench-test actual volume, stream breakup, basin interception, infiltration and runoff. Then assess downwash, lateral forces, hose snagging, obstacles and disturbance to mulch/young plants. A ground-fed system also needs a pump, water access and hose management; it does not eliminate the ground infrastructure. The reviewed sources did not establish an off-the-shelf package with validated per-seedling root doses and restoration outcomes for our conditions.
+
+![Figure 18. Carried spray versus ground-fed hose: neither leaf wetting nor sustained spray proves root watering](irrigation-research/drones/figures/18-drone-spray-versus-root.png)
+
+### 13.8. Almería, flight permissions and a realistic local route
+
+The strongest verified nearby precedent is **Andalusian agricultural sensing and irrigation evaluation**, rather than routine drone watering of restoration sites. IFAPA's primary account describes thermal work with Seville/Agrosap. MAPA hosts a presentation by Benito Salvatierra Bellido and Manuel López Rodríguez on satellite/drone methods, including thermography for sprinkler evaluation. UAL also offers geomatic drone training. These establish relevant regional skills; this search did not establish prevalence across Almería parks or a local root-watering drone service. [IFAPA](https://www.juntadeandalucia.es/agriculturaypesca/ifapa/web/noticias/el-dron-aliado-imprescindible-en-la-investigacion-andaluza); [MAPA-hosted presentation, pp. 20–33, publication date not established](https://www.mapa.gob.es/dam/mapa/contenido/desarrollo-rural/temas/gestion-sostenible-de-regadios/documentos/ponencia2.pdf); [UAL, 2025–26 course guide](https://www.ual.es/guia_academica/71261321/2025-26/CAS).
+
+Operationally, **surveying and discharging water need separate assessment**. EASA's open-category guidance includes VLOS, a general 120 m height limit and no dropping of material. The open framework also has mass/class and proximity-to-people conditions; a 40/100 L aircraft should not be treated as a small camera drone. For water-release operations, obtain the applicable AESA specific-category route and assessment from a qualified operator; do not assume an ordinary open-category registration authorises spraying. This is a planning boundary, not a site-specific legal clearance. [EASA open-category FAQ, updated 1 February 2024](https://www.easa.europa.eu/en/print/pdf/node/116450/215572); [current EASA open-category guidance](https://www.easa.europa.eu/en/domains/drones-air-mobility/operating-drone/open-category-low-risk-civil-drones).
+
+Check the actual coordinates and dates in **ENAIRE Drones**, plus applicable environmental/land-manager conditions, public access, protected habitats, aerodrome zones and privacy requirements. AESA's geographical-zones guide explains requirements additional to the operational category. A park may be much less straightforward than an isolated trial plot; a hose does not automatically exempt an aircraft. Nothing here authorises pesticide use or equates clean-water trials with aerial plant-protection treatment. [AESA geographical zones, Ed. 03](https://www.seguridadaerea.gob.es/sites/default/files/UAS-OPR-P01-DT16_Ed.03_UAS.geoghaphical.zones.pdf); [ENAIRE official access and map](https://aip.enaire.es/AIP/UAS-es.html).
+
+### 13.9. Demonstrator, novelty and local repair
+
+Propose a staged work package, with the following **author-designed tests**, rather than promise a fully autonomous watering fleet:
+
+1. **Establish the ground truth.** Add stable plant IDs and dated RGB observations to the existing 48-plant trial. Survey all blocks consistently, while retaining the original four independent irrigation units per treatment. Repeated photographs or multiple plants in a sector do not create extra independent irrigation replicates.
+2. **Test additional sensing.** Pair an RGB survey with thermal/multispectral capture and same-day field checks on selected dates. Keep some blocks/dates outside model training. Measure missed stressed plants, false alerts, unclassifiable plants, survey/processing time and useful faults found. Compare against RGB plus the ground sensors already installed.
+3. **Test water delivery only behind a clear gate.** Begin with metered basin-delivery bench tests. If a flight experiment is feasible and authorised, record ground-tank withdrawal, retained basin dose, runoff, operator minutes, refill/charging time and wall-energy input. Compare with practical ground watering. Keep this separate from a survival claim until an adequately replicated field trial exists.
+
+![Figure 19. Validation overlay on the replicated irrigation experiment](irrigation-research/drones/figures/19-drone-validation-trial.png)
+
+For funding, the promising research question is whether **periodic aerial evidence improves a serviceable native-plant establishment system**: locating failed delivery, prioritising human inspection, and documenting reduced support-water dependence. Radar under sparse native vegetation or a low-disturbance basin nozzle could become separate R&D questions. This landscape scan is not a patent search; none is claimed novel merely because it uses AI, LoRa or a drone.
+
+Local work could include replaceable sensor enclosures, mounts, wiring, test rigs, plant-ID/GIS tools and transparent decision software. Start by borrowing or contracting aircraft with an experienced operator; request actual quotes covering mobilisation, permissions, acquisition, processing, deliverables and repeat visits. Compare total lifecycle service costs before buying. For a small plot, mobilisation may matter more than area-based pricing; that is a budget hypothesis to test, not a quoted market price.
+
+Keep raw photos, calibrated products, coordinate/time metadata and open exports such as GeoTIFF, GeoPackage/CSV and compatible point clouds. Ask suppliers about battery health, spares, propellers, calibration access, firmware support and repair ownership. A locally assembled housing is feasible workshop work; an undocumented flight-critical modification is a different engineering responsibility. Essential irrigation must keep functioning when a drone is grounded, a survey is late or imagery fails quality checks.
+
+![Figure 20. Staged investment, repairable local work and a separate water-delivery gate](irrigation-research/drones/figures/20-drone-demonstrator-gates.png)
+
+### 13.10. Verified document downloads and library status
+
+**Stored now under LEARN-016:** this extension, eight SVG/PNG figure pairs, twelve source-picture copies with provenance/credits, acquisition/build scripts and the updated illustrated EPUB/Markdown/HTML companions. **External source PDFs are offered for addition; they have not been added as catalogued PDF holdings.** Temporary caches used to inspect them are not library additions. All links checked 3 November 2026:
+
+- [UAV Survival Assessments: RGB Ortho-plotting — Forest Growers Research, PSP-T014, 28 March 2024 — direct PDF](https://www.toolsforforesters.co.nz/__data/assets/pdf_file/0005/124925/UAV-Survival_RGB_ortho-plot.pdf). 10 pages; research browser opened the PDF, while the automated downloader received HTTP 403.
+- [Enhancing Survival Surveys: Multispectral vs. RGB UAV Imaging — Blake A. Singleton, Robin J. L. Hartley and Sam J. Davidson / Forest Growers Research, PSP-T018, 28 March 2024 — direct PDF](https://fgr.nz/wp-content/uploads/2024/06/PSP-T018_UAVSurvival_Report_Multispectral_vs-RGB_final-1.pdf). 11 pages; downloaded and parsed for research.
+- [Drone-borne ground-penetrating radar reveals spatiotemporal moisture dynamics in peatland root zones — Maud Henrion et al., Science of Remote Sensing, 10 October 2025 — repository PDF](https://orbi.uliege.be/bitstream/2268/336849/1/_Henrion%20SRS%202025.pdf). 17 pages; downloaded and parsed; research browser exceeded its size limit. Peatland-specific evidence, not Almería validation.
+- [GreenScatter: Through-Canopy Soil Moisture Sensing with UAV-Mounted Radar — Luke Jacobs et al., arXiv submission 10 April 2026 — direct preprint PDF](https://arxiv.org/pdf/2604.09363). 14 pages; downloaded and parsed. [Stable abstract/version page](https://arxiv.org/abs/2604.09363).
+- [Experiments on watering citrus fruits with a wire-supplied drone using RTK-GNSS — Masafumi Miwa, Satoshi Hishida, Keiichi Nishikawa and Masataka Shiromaru, 21 March 2024 — publisher PDF](https://medcraveonline.com/IRATJ/IRATJ-10-00280.pdf). Four pages, journal pp. 32–35; downloaded and parsed. Spray trial, not root-irrigation validation.
+- [AGRAS T50/T25 Unmanned Aircraft Flight Manual v1.0 — DJI, January 2025 edition — manufacturer PDF](https://dl.djicdn.com/downloads/t50_t25/20250109/T50_T25_User_Manual_v1.0_EN.pdf). 107 pages; downloaded and parsed. Cover date January 2025; body copyright 2024.
+- [Metodología del uso de drones e imágenes satélite para la mejora de la rentabilidad de los regadíos — Benito Salvatierra Bellido and Manuel López Rodríguez / Junta de Andalucía, hosted by MAPA, date not established — direct PDF](https://www.mapa.gob.es/dam/mapa/contenido/desarrollo-rural/temas/gestion-sostenible-de-regadios/documentos/ponencia2.pdf). 33 pages; research browser opened it; automated download failed certificate verification and was not retried with TLS checks disabled.
+- [Guide to UAS flight requirements and limitations depending on the place of operations — AESA, Ed. 03, publication date not established — direct PDF](https://www.seguridadaerea.gob.es/sites/default/files/UAS-OPR-P01-DT16_Ed.03_UAS.geoghaphical.zones.pdf). 36 pages; research browser opened it. Check the current official edition before planning flights.
+
+The associated contact-probe article is linked above as a **publisher landing page with access blocked**, not as a verified downloadable paper. The authors' public code/data repository was readable. A separate EASA FAQ print-PDF was indexed with its text/date but returned HTTP 429 on a subsequent direct open; it is not included among the confirmed PDF downloads above.

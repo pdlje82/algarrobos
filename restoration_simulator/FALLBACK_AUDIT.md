@@ -1,5 +1,55 @@
 # Silent-fallback audit · 28 October 2026
 
+Connected knowledge pilot (3 November 2026): the required schema-1 dataset in
+`knowledge/connected-pilot-v1.json` adds curated claims, typed relationships,
+issues and registered native bindings. The existing citation registry now checks
+14 uses across four consumers and 25 mirrors. Its original five uses, three
+funding memberships and feature-library hashes are unchanged. Current Designer
+density and drawing geometry are resolved from the validated rule bundle and
+remain labelled project assumptions; no competing numerical default is stored.
+
+Each query loads and validates its required data anew. Unsupported schemas,
+unknown identities/types, dangling citations, wrong endpoint types, incompatible
+editions, invalid native bindings and failed reads produce actionable errors.
+No automatic source repair, alternate owner, previous successful result or
+project mutation substitutes for failure. An explicit empty search result is
+valid; unknown IDs and out-of-pilot impact requests are errors. All results state
+`registered-pilot-only` coverage. Manually registered review targets are distinct
+from actual citation-validation dependencies; features do not yet consume claims.
+Both stock-size contexts and the bounded water gap retain unresolved issues.
+
+Sixteen new pilot tests plus the retained 19 citation tests passed, including
+failure/retry, source drift, projection, deterministic queries and nonmutation.
+The final backend suite passed 327 tests; frontend tests passed 107; both registry
+and pilot checks and the production build passed. The existing large-chunk
+warning remains. Original rules, educational content, documents, feature files
+and eight save/backup files retain their fingerprints. The failed direct-module
+test invocation and corrected passing discovery run are recorded in the
+[Milestone 3 implementation record](KNOWLEDGE_MILESTONE_3.md#verification).
+Unindexed prose/dependencies, older source retrieval, current call assessment,
+feature adoption and frozen replay contracts remain outside this change. This
+is not a repository-wide fallback compliance claim.
+
+Shared citation registry (3 November 2026): five FUND-008 citation uses now have
+one required schema-1 registry in `knowledge/citations-v1.json`. Selection
+guidance, project concepts and delivery planning check their 14 metadata mirrors
+on every load, after their existing full-library validation. Missing/corrupt
+registry data, invalid identities/pages/dates, unsupported versions/fields,
+unresolved dependencies and drift fail explicitly with file/ID/field context.
+No cache, inline citation, alternate file or generated success replaces failed
+shared data. Source labels and all three feature libraries remain unchanged.
+
+The read-only `--check` command additionally verifies original PDF bytes;
+`--project` is an explicit metadata preview retaining required feature labels,
+not a normal-execution recovery path. It does not rewrite files or make failed
+loads succeed. Nineteen new tests cover validation, I/O failures, checked mirrors,
+CLI errors/projections, read-only endpoint retry, save/transfer atomicity, draft
+retention and compatible import/export. The full backend suite passed 311 tests;
+107 frontend tests and the production build passed. Saved library hashes and
+formats are unchanged. Unmigrated inline citations retain their existing
+validators; frozen evaluator semantics and documented optional values are outside
+this change. This is not a repository-wide fallback compliance claim.
+
 Recovery Forecasting placeholder (3 November 2026): the UI imports the canonical
 LEARN-015 Markdown document at build time, so a missing file fails the build.
 Empty content produces a visible error with restore/rebuild instructions. Source
