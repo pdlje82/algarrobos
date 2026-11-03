@@ -1,0 +1,25 @@
+{
+  "created_on": "2026-11-03",
+  "epub": "Cortijo Conjuro - A Small Trial Before a Park.epub",
+  "epub_sha256": "969116092a6f5116842a9e94a7bb4a2d5214bcc7b1a9b48516dcb0f05cc2e379",
+  "narration_sha256": "cf4ae0b92fe3683492a036113227604e80945402f04da311eb72570d210fe615",
+  "chapters": 11,
+  "words": 3101,
+  "estimated_minutes_at_130_to_160_wpm": [
+    19.4,
+    23.9
+  ],
+  "checks": [
+    "ZIP integrity",
+    "EPUB mimetype position/compression",
+    "all XML parsed",
+    "manifest targets",
+    "reading order",
+    "EPUB3 navigation",
+    "NCX compatibility navigation",
+    "complete source-text readback",
+    "no narration links or citation clutter"
+  ],
+  "direct_elevenreader_playback_checked": false,
+  "baseline_save_sha256": "dd6350d816c47b55b22876cec2f3035cd80029c81369b2f4263aa0faae0a5739"
+}

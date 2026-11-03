@@ -1,0 +1,14 @@
+{
+  "date": "2026-11-03",
+  "renderer": "Installed Microsoft Edge, headless",
+  "chapter_previews_reviewed": [
+    "chapter one",
+    "chapter nine",
+    "chapter eleven"
+  ],
+  "desktop_width_px": 1040,
+  "mobile_width_px": 390,
+  "companion_horizontal_overflow": false,
+  "epub_reader_test": false,
+  "elevenreader_playback_test": false
+}

@@ -1,5 +1,15 @@
 # Silent-fallback audit · 28 October 2026
 
+Recovery Forecasting placeholder (3 November 2026): the UI imports the canonical
+LEARN-015 Markdown document at build time, so a missing file fails the build.
+Empty content produces a visible error with restore/rebuild instructions. Source
+tables and contents anchors are rendered; Windows file references remain visible
+as local paths, and unsupported links show an explicit reference error. Opening
+the workspace uses the existing funding/concept draft guards. No forecast,
+ecological parameter, save format or replacement document is introduced. Existing
+API error-message and legacy simulation-financing adapters in main.jsx remain
+outside this placeholder change; no broader fallback audit is claimed.
+
 Overview EDL selections (2 November 2026): per-subnode references require full
 titles, explanations and valid document/page/hash details at the response boundary.
 Missing or malformed content produces an explicit overview error and retry,

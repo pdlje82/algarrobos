@@ -1,0 +1,139 @@
+FUENTES, CÁLCULO Y CONDICIONES DE LA PROPUESTA
+Complemento independiente de la narración · 3 de noviembre de 2026
+
+LECTURA Y ESTADO
+
+Este anexo acompaña al EPUB «Un aula viva antes del parque» y al «Apartado para la solicitud.txt». Las cifras son proyecciones de compromisos futuros. No existe puntuación oficialmente concedida ni se acredita hoy el cumplimiento material. No se ha elegido asociación, contratado personal, adquirido equipo ni obtenido acceso a la finca por preparar estos documentos.
+
+Los objetivos de sesiones, horas, plazas y continuidad son supuestos de diseño del autor para revisión, no datos observados ni mínimos oficiales de puntuación. Tampoco son reglas nuevas del Site Designer. No se ha recalculado un diseño ecológico ni se han importado cambios en Algarroba. La prueba del programa ante AL20 precede a su adopción en la aplicación.
+
+Las páginas de este anexo son páginas PDF contadas desde la primera hoja, no números internos del BOJA. La tabla firmada de AL20 tiene veinte páginas; las páginas dieciséis a veinte corresponden a la línea tres. La edición de puntuación dos de la aplicación y la versión dos de la guía son conceptos distintos: la primera controla la reproducción del cálculo guardado; la segunda es un documento administrativo.
+
+CAPÍTULO UNO · OBJETIVO, BASELINE Y MÉTODO DE OPTIMIZACIÓN
+
+Base conservada: restoration_simulator/data/active-project.json, proyecto «My restoration journey», identificador a540f43a-08c4-4057-8e3a-1edefb1a8766, revisión 20; espacio de financiación versión 1, borrador «AL20 Alhama», esquema de borrador 4. Selección versión 2, cap_or_all_answers. Paquete de financiación conservado versión 3, comprobado el 31 de octubre de 2026. Huella del paquete: bba3aa291262eb72419d1247b44556a969b0423151239da8f43ec58dddbf943c. SHA-256 del guardado: dd6350d816c47b55b22876cec2f3035cd80029c81369b2f4263aa0faae0a5739.
+
+La captura íntegra ya existe en ../al20-demonstrator-proposal/Baseline and retained rules.json. El guion calculate_plan.py verifica que el guardado sigue correspondiendo a esa huella y llama al evaluador congelado a través de backend.funding_selection.calculate. Compara el resultado con una suma decimal independiente que aplica los topes. No usa una biblioteca actualizada para sustituir silenciosamente la edición guardada. No se ha escrito en el estado de la aplicación.
+
+El guardado produce subtotal 57,49 y total nulo por dos criterios no resueltos. La anterior revisión LEARN-013 evaluaba una propuesta menos desarrollada y obtenía subtotal 48. Este trabajo responde a la nueva instrucción: diseñar actividades y evidencias adicionales, en la parcela vecina común para ambas operaciones. No presenta aquel resultado como impedimento inalterable.
+
+Método de optimización: priorizar restauración y aprendizaje públicos coherentes; explotar topes sin contar la suma nominal por encima de ellos; evitar puntos geográficos no establecidos, compras de movilidad desproporcionadas y categorías innovadoras inadecuadas; y mantener margen frente a rechazo de un apartado. Se comparan combinaciones de cinco módulos opcionales sobre un núcleo de 42 puntos. Plan y calculos.json contiene las combinaciones, las dependencias, once escenarios de sensibilidad y cada respuesta numérica propuesta. Es una búsqueda finita de esta familia de programas, no una demostración de óptimo global, de mínimo coste ni de viabilidad ecológica.
+
+En las simulaciones, las opciones no elegidas se establecen expresamente a falso como exclusiones del escenario; los nulos del guardado no se reinterpretan como hechos. Se elimina explícitamente la antigua consulta municipal automatizada del escenario numérico, porque no se presenta una nueva evaluación geográfica de la parcela. Las referencias y notas de cada fila simulada se sustituyen explícitamente por referencias al programa propuesto; las originales permanecen en la captura de baseline. Los JSON son evidencia reproducible, no archivos preparados para importar en la aplicación.
+
+Reglas y umbral: FUND-004, pp. 16–20; FUND-010, pp. 218–231 para caracteres excluyentes/acumulables y pp. específicas indicadas abajo. La página común oficial de promotores publica el mínimo de sesenta sobre cien. La convocatoria de abril y el plazo general del 23 de abril de 2026 al 31 de diciembre de 2028 constan en FUND-009 y la página oficial común. Antes de presentar, AL20 debe confirmar recepción local, dotación disponible, modificaciones de estrategia y fechas aplicables.
+
+CAPÍTULO DOS · PARCELA Y DIFERENCIA ENTRE 3.4 Y 3.5
+
+La elección de 04011A012000190000JE como terreno común es una nueva instrucción del usuario. Uso anterior de parras, abandono, presencia abundante de «salsola» e incertidumbre sobre venta o usufructo son información del usuario, no inspección técnica ni acuerdo del vecino. La superficie pública de parcela es 3.056 m². Las respuestas originales de Catastro y geometría se conservan en ../al20-demonstrator-proposal/public-records/ y el registro de consultas en Site and partner evidence.json de esa carpeta. Catastro no acredita por sí solo titularidad de acceso, situación forestal, ausencia de hábitats protegidos o permiso de obra.
+
+Consulta oficial de geometría de parcela, efectuada el 3 de noviembre de 2026:
+https://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx?service=wfs&version=2.0.0&request=getfeature&STOREDQUERY_ID=GetParcel&REFCAT=04011A01200019&srsname=EPSG::25830
+
+Normativa 3.4: FUND-008, anexo I, pp. 120–122, especialmente descripción de demostración, resultados nuevos o desconocidos localmente, apertura objetiva, difusión desde el comienzo y al menos tres años desde el pago final. El apartado 3.d exige utilidad autónoma de la operación. Restricción de inversiones inmobiliarias a uso exclusivo demostrativo. La ayuda máxima de 28.000 euros y el porcentaje de hasta el cien por cien de gasto elegible no constituyen importe aprobado para este programa.
+
+Normativa 3.5: FUND-008, pp. 123–124: conservación, protección, recuperación y rehabilitación de patrimonio rural, incluido el natural, finalidad no productiva y difusión/uso público; requisitos de gestión forestal cuando procedan. El máximo de ayuda no se utiliza como presupuesto del parque. Un mismo emplazamiento puede informar ambas operaciones, pero no fusiona elegibilidad, solicitud, obligaciones, durabilidad de activos ni gastos.
+
+CAPÍTULO TRES · RESTAURACIÓN, NECESIDADES Y ENERGÍA
+
+CO.1: FUND-004, p. 16, máximo 15; elegir una de las alternativas de una, dos o tres o más necesidades. FUND-010, p. 16 y p. 219. FUND-013, p. 395: NPL3 patrimonio rural, NPL4 suelos/erosión/aridez y NPL8 cambio climático. El vínculo propuesto es actividad y resultado de aprendizaje, no una afirmación de recuperación ecológica ya medida. No se cuentan tres veces puntos por cada necesidad: tres o más dan quince en total.
+
+La comparación pétrea es una propuesta exploratoria: no se ha demostrado su novedad local ni fijado potencia estadística, superficie disponible, especies, cantidades o agua. FOREST-002, pp. 94–96 y 123–134, aporta contexto andaluz de cultivo/restauración del algarrobo, procedencias y ejemplos de manejo/acolchado; no valida parámetros para esta finca. La investigación previa en LEARN-013 identificó prácticas GEA/IFAPA, por lo que no se puede anunciar una técnica totalmente nueva sin una revisión territorial específica. Son cuestiones de elegibilidad del demostrador que siguen abiertas.
+
+Reglas centrales: restoration_simulator/design_rules/README.md y paquete conservado algarroba-designer-2026-10-29-v4, motor designer-v3. El acolchado pétreo tiene tipo y evidencia propios; no se sustituye por acolchado orgánico. Los 200 m² y veinte plantas guardados no son una densidad ecológica validada. Esta propuesta no cambia mezcla, procedencia, distribución o tamaños en la aplicación.
+
+CC.2: FUND-004, p. 16, cinco puntos. FUND-010, p. 34: requiere adquisición y puesta en marcha, memoria técnica en solicitud y factura/ficha o certificado en pago. Propuesta: equipo fotovoltaico autónomo desmontable para medición e interpretación, sujeto a necesidad, dimensionado, moderación de coste y elegibilidad. No se ha comprado ni cotizado. Si no se justifica, se elimina: el modelo conserva 61,49 si todos los demás módulos se aceptan.
+
+CAPÍTULO CUATRO · MUJERES, JUVENTUD Y ACCESIBILIDAD
+
+IG.8.2: FUND-004, p. 17, máximo dos; FUND-010, pp. 80–81 y p. 228. FUND-013, p. 187, visibilidad/cooperación y decisiones de mujeres; p. 276, igualdad/empoderamiento. Referencias de la aplicación W4, W7, W10. El ocio ambiental de codiseño debe demostrar ese contenido; la presencia de mujeres en un acto general no basta.
+
+IG.11: FUND-004, pp. 17–18; FUND-010, pp. 85–87 y p. 228. Se proponen IG.11.5, difusión de asociacionismo, un punto, e IG.11.7, encuentro sobre intereses de mujeres documentados en la estrategia, un punto. No se requiere inventar asociación de mujeres existente. Se reemplaza la opción guardada IG.11.6 porque no se acredita infrarrepresentación sectorial. La convocatoria, programa y evidencia de ejecución deben distinguir finalidad, destinatarias y productos, incluso si se comparten recursos con IG.8.
+
+JR.3: FUND-004, pp. 18–19, máximo cuatro; FUND-010, pp. 99–102 y p. 230. Se proponen JR.3.4, contribución juvenil, dos, acumulable, y JR.3.5, ocio, cuatro. Suma nominal seis, limitada a cuatro. JR.3.5 y JR.3.6 son alternativas excluyentes: no se selecciona la segunda, aunque la participación se mantiene como actividad. Seis sesiones y grupo juvenil deben existir realmente. FUND-013, p. 187, demandas de formación, espacios, guías del medio natural y voluntariado; p. 276, empleo/formación; p. 476, objetivos de juventud. No se solicitan puntos de prácticas oficiales ni empleo no concertados. Las edades aplicables y participación de menores se concretarán con las reglas y medidas de organización correspondientes.
+
+DRI.3: FUND-004, p. 18; FUND-010, pp. 92–94 y p. 229. DRI.3.1, tres puntos, exige superar el mínimo legal: un informe debe identificar norma, mínimo, elemento mejorado y justificación. La guía cita Real Decreto 193/2023 y posteriores normas, y da ejemplos no constructivos como audiodescripción o apoyos cognitivos; no los declara automáticamente superiores al mínimo en cualquier caso. DRI.3.2, dos puntos, permite compromiso formativo identificado y después certificado para personal directamente relacionado con la operación. Máximo conjunto cuatro. Las ocho horas son una propuesta de programa, no un umbral oficial. Se excluye DRI.3.3 de este escenario por no caracterizarse aún una necesidad específica de exclusión y su grupo destinatario.
+
+CAPÍTULO CINCO · PATRIMONIO, SERVICIO E INNOVACIÓN
+
+PT.1: FUND-004, p. 19; FUND-010, pp. 104–105 y p. 230. PT.1.1 trece puntos por patrimonio natural y su uso posterior; PT.1.2 siete por finalidad de promoción/difusión/conservación de oficio tradicional territorial recogido en estrategia. Suma veinte limitada a quince. FUND-013, p. 283, oportunidad O(3.12), cita expresamente carpintería, trabajos en piedra, panadería y bodegas; p. 372, DAFO_026, inicia la recomendación sobre relevo de oficios. La aplicación registra TR2. La propia guía pide memoria de programa e informe del instructor para el encaje EDLL; admite además publicaciones acreditativas. Las jornadas tradicionales son un compromiso nuevo; no se presume que cualquier piedra del ensayo acredite oficio ni que exista profesional contratado.
+
+SP.1.1: FUND-004, p. 20, cinco; FUND-010, pp. 108–110 y p. 231. La definición de servicio de proximidad se orienta a autonomía, independencia cotidiana e integración social y sus ejemplos se concentran en apoyos personales y domésticos. Por eso el encaje de un servicio ambiental acompañado es una inferencia de diseño pendiente de aceptación expresa del instructor, no un hecho normativo establecido. Se exige diagnóstico de oferta y necesidad, continuidad, recursos y público; para actividades/servicios, la guía pide alta CNAE/IAE cuando corresponda. No se cuenta simultáneamente SP.1.2 de mejora. Las aperturas quincenales y mensuales son compromisos propuestos, no demanda acreditada ni cobertura de dependencia.
+
+IN.1.2: FUND-004, p. 19, 2,49; FUND-010, pp. 103–104 y p. 230. FUND-013, p. 398, temática primera: iniciativa total o parcial de atracción residencial basada en valores municipales y servicios de proximidad. «Vivir Alhama» se diseña para esa finalidad expresa. No se confunde integración general de residentes con una campaña de atracción: harán falta públicos, productos, difusión y medición coherentes, más informe del instructor. No se usa la segunda temática, que exige municipio en riesgo de despoblación, condición no establecida aquí. Esta es una interpretación propuesta de encaje, no una certificación de innovación.
+
+Se retira IN.1.3 y la referencia guardada IN-A11 a agricultura de precisión. La estrategia, pp. 398–401, no designa sectores innovadores y enumera temas/aspectos específicos; un registrador de humedad no demuestra pertenencia a esos aspectos. No se añade certificación de huella inexistente, turismo temático, renta por carbono ni plan urbanístico supervisado no contratado.
+
+CAPÍTULO SEIS · PERFIL SOLICITANTE Y SENSIBILIDADES
+
+Elegibilidad: FUND-008, pp. 120–124. Las rutas examinadas no incluyen a una persona física ordinaria como solicitante. Se plantea entidad no lucrativa competente, sin elegir identidad ni atribuirle estatutos, capacidad o compromiso existentes.
+
+PS.1: FUND-004, p. 19, máximo DOCE, no quince. PS.1.2 cuatro y PS.1.3 ocho son acumulables según FUND-010, p. 231. FUND-010, pp. 105–106: integración de la propia solicitante acreditada como socio activo, estatutos de la estructura receptora e informe del instructor. Objetivos transversales en FUND-013, pp. 393, 472–479 y 527. La existencia de fines ambientales en los estatutos propios de la solicitante no sustituye su integración en una estructura. No se presume que los mismos documentos acrediten ambos subcriterios; AL20 deberá validar cada condición. No se requiere una cooperativa: PS.1.1 no se usa.
+
+PS.3: se asigna cero por prudencia de diseño. FUND-004, p. 20 y FUND-010, pp. 107–108: historial de ayudas de la persona solicitante, no del nuevo proyecto. Crear una operación nueva no acredita un nuevo beneficiario. No se supone historial de ninguna asociación.
+
+Matriz recomendada, con topes aplicados:
+AT.3 = 0; CO.1 = 15; RD.5 = 0; CC.2 = 5; CC.7 = 0; IG.8 = 2; IG.11 = 2; DRI.3 = 4; JR.3 = 4; IN.1 = 2,49; PT.1 = 15; PS.1 = 12; PS.3 = 0; SP.1 = 5. Total 66,49. Actividades sin PS.1: 54,49. No existe un cálculo acreditado actual equivalente: es un escenario contrafactual de ejecución completa.
+
+Sensibilidades verificadas: sin crédito de SP.1, 61,49; sin IN.1.2, 64; sin CC.2, 61,49; sin PS.1.2, 62,49; sin PS.1.3, 58,49; sin ambas integraciones, 54,49; sin SP.1 ni IN.1.2, 59; sin SP.1 ni CC.2, 56,49; sin PT.1.2, 64,49; sin DRI.3.1, 64,49. El caso sin crédito SP.1 conserva un servicio entregado y una iniciativa residencial aceptada separadamente. Retirar materialmente ambos lleva a 59, no a 61,49. Las pérdidas no son riesgos estadísticamente independientes ni el margen una garantía.
+
+Existe una combinación reducida de sesenta exactos: todas las actividades salvo la temática innovadora, integración territorial de ocho y sin integración transversal de cuatro. Se prefiere el programa con margen. No se afirma que todas las actividades sean obligatorias para puntuar sesenta en cualquier expediente AL20.
+
+CAPÍTULO SIETE · EJECUCIÓN, REVISIÓN Y PREGUNTAS AL INSTRUCTOR
+
+FUND-008, art. 10, pp. 20–24: comprobar límites de gasto; nuevos empleos temporales y determinados gastos periódicos tienen límites de seis meses. Art. 11, pp. 25–26, IVA recuperable y otros excluidos. Art. 16, p. 31, máximo de subcontratación del setenta y cinco por ciento con clasificación correcta; no se determina aquí su aplicación a futuros contratos. Art. 19, pp. 33–37, documentación; art. 25, pp. 40–41, no inicio; art. 26.5, p. 42, normalmente tres ofertas comparables antes del compromiso salvo excepción justificada. Art. 37, p. 54, anticipos condicionados hasta cincuenta por ciento y garantía por el cien por cien del anticipo. No se presupuesta una ayuda aprobada ni se afirma anticipo disponible.
+
+Antes de adoptar este escenario, revisar cambios uno a uno en Algarroba con superficie, titularidad de uso y solicitante correctas. El paquete Plan y calculos.json contiene el antes/después de las respuestas numéricas; los cambios de evidencias y finalidad están en los módulos y referencias de este anexo. La revisión debe incluir retirada de referencias incompatibles, permisos, costes y financiación real. No se han activado reglas nuevas ni se ha confirmado un demostrador en la aplicación.
+
+Preguntas concretas para AL20, preparadas para una consulta del promotor, sin envío realizado:
+1. ¿Se acepta el protocolo comparativo propuesto como demostración localmente nueva o de resultado desconocido y útil autónomamente? ¿Qué antecedentes y escala necesita justificar?
+2. ¿Qué instrumento de uso de la parcela vecina, duración y garantías de acceso público requiere cada operación? ¿Cómo afecta la permanencia de plantas y activos a la restricción demostrativa de 3.4?
+3. ¿El servicio ambiental acompañado propuesto se considera SP.1.1, con qué definición de población, alta, continuidad y prueba de necesidad? ¿Qué pasa si ya existe una oferta similar?
+4. ¿La iniciativa de atracción residencial cumple la primera temática innovadora y puede formar parte coherente de este demostrador? ¿Qué evidencia e informe se precisan?
+5. ¿Qué certificados, estatutos e informes permiten acreditar separadamente PS.1.2 y PS.1.3 de la futura solicitante? ¿Puede una misma estructura cumplir ambas condiciones si se prueba cada una?
+6. ¿Son suficientes los programas de mujeres, juventud y oficio en piedra para los subcriterios propuestos? ¿Qué informe EDLL debe emitirse antes de la evaluación?
+7. ¿Qué medidas concretas de accesibilidad superan el mínimo aplicable y qué profesional puede certificarlas? ¿Qué personal debe identificarse para el compromiso de formación?
+8. ¿Son elegibles y proporcionados el equipo fotovoltaico y los demás costes del programa? ¿Cómo encajan los doce meses de seguimiento/servicio con los límites de gasto y subcontratación?
+9. ¿La convocatoria local sigue recibiendo solicitudes con esta edición, qué crédito existe y qué fechas de no inicio, ejecución y justificación rigen?
+10. ¿Cómo separar costes, activos, resultados y uso permanente de una posible 3.5 sin duplicar ayudas?
+
+CAPÍTULO OCHO · PASO CONDICIONADO A 3.5
+
+FUND-008, pp. 123–124, y perfil de línea tres de FUND-004, pp. 16–20. El perfil matemático conservado se comparte entre ambas rutas; eso no demuestra igual puntuación en operaciones diferentes. No se ha calculado ni presentado una solicitud 3.5 ficticia con los mismos hechos. Conocer supervivencia, agua y mantenimiento ayuda a decidir mezcla, tamaño y gestión, pero doce meses no prueban recuperación ecológica de largo plazo. El futuro parque necesita su evaluación, presupuesto, instrumento de terreno y revisión de reglas. Se preserva el valor del demostrador si el parque se descarta.
+
+DOCUMENTOS ORIGINALES Y ENLACES DE DESCARGA
+
+Todos los documentos numerados siguientes YA ESTÁN ALMACENADOS en doc_library. Se reutilizan, no se añaden duplicados ni se modifica ningún PDF. En la investigación previa del mismo día se descargaron los cinco documentos de financiación/estrategia y se verificaron sus huellas contra el registro; Research verification.json de al20-demonstrator-proposal conserva el detalle. Para este nuevo trabajo se han releído pasajes específicos y revisado visualmente las páginas diecinueve y veinte de la tabla firmada. La fecha de verificación de enlaces es 3 de noviembre de 2026; la fecha de firma/publicación se indica separadamente.
+
+FUND-004 · Junta de Andalucía / AL20. Listado de criterios de selección de operaciones, firmado el 16 de febrero de 2026, veinte páginas. Fuente primaria, tabla local firmada. PDF directo verificado:
+https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/03/Listado%20criterios%20AL20.pdf
+
+FUND-008 · Junta de Andalucía. Orden de 3 de febrero de 2026, bases reguladoras; BOJA número veintinueve, publicado el 12 de febrero de 2026, ciento sesenta y tres páginas. Fuente primaria normativa. PDF directo verificado:
+https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf
+Publicación estable:
+https://www.juntadeandalucia.es/boja/2026/29/1
+
+FUND-009 · Junta de Andalucía. Resolución de 13 de abril de 2026, convocatoria; BOJA número setenta y seis, publicado el 22 de abril de 2026, sesenta y una páginas. Fuente primaria normativa. PDF directo verificado:
+https://www.juntadeandalucia.es/eboja/2026/76/BOJA26-076-00061-5258-01_00336495.pdf
+Publicación estable:
+https://www.juntadeandalucia.es/boja/2026/76/1
+
+FUND-010 · Junta de Andalucía. Guía de instrucciones específicas de verificabilidad y controlabilidad de criterios, versión dos, archivo público dos-cuatro, redactada el 11 de septiembre de 2026 y listada oficialmente el 25 de septiembre; doscientas treinta y una páginas. Fuente primaria de instrucciones de evaluación; no sustituye la selección de criterios de AL20. PDF directo verificado:
+https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/Guia-instrucciones-especificas-publicas_Criterios-seleccion-promotores_7119-2_LEADER_v2-4.pdf
+
+FUND-013 · Asociación de Desarrollo Rural Alpujarra-Sierra Nevada Almeriense. Estrategia de Desarrollo Local LEADER 2023–2027, versión uno de 19 de noviembre de 2024, quinientas cuarenta y cuatro páginas. Fuente primaria estratégica, versión enlazada por la Junta al verificar. Descarga PDF verificada desde el enlace oficial, alojada en Google Drive:
+https://drive.google.com/uc?export=download&id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK
+Página oficial de publicación y enlaces AL20:
+https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores-al-al20.html
+
+Página común oficial de convocatoria y guía, consultada el 3 de noviembre de 2026:
+https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores.html
+
+FOREST-002 · Rafael M.ª Navarro Cerrillo y Guillermo Palacios Rodríguez, editores; UCOPress / Universidad de Córdoba. «Soluciones innovadoras para consolidar el algarrobo como cultivo de alto valor en Andalucía», edición de 2026, ciento sesenta y ocho páginas. Fuente técnica contextual ya almacenada; no constituye estudio del terreno. Descarga editorial verificada el 3 de noviembre de 2026:
+https://www.uco.es/servicios/ucopress/omp/index.php/ucopress/catalog/download/69/83/1938?inline=1
+
+No se ofrece ninguna incorporación nueva a la biblioteca en este paquete. Los documentos de fuente primaria, sus nombres exactos y huellas se enlazan desde el índice HTML y constan en el registro documental de la aplicación. Los informes nuevos son producción original de revisión, catalogada como LEARN-014; no una resolución administrativa.
+
+VALIDACIÓN EDITORIAL
+
+El EPUB contiene exclusivamente narración española, ocho capítulos cortos, números expresados para escucha, navegación y orden de lectura. Este anexo y los cálculos están físicamente fuera del libro. La validación estructural y de texto queda registrada en Validacion.json. La visualización local se verifica por separado. No se ha probado reproducción directa en ElevenReader y no se ha importado el libro en una cuenta externa.

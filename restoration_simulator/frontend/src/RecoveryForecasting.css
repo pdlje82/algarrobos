@@ -1,0 +1,19 @@
+.workspace-nav { flex-wrap: wrap; }
+.workspace-nav button[data-workspace=forecasting] { --workspace-ink: var(--mixed); --workspace-surface: var(--mixed-bg); }
+.recovery-forecasting { max-width: 1120px; margin: auto; padding: 2rem 3%; }
+.forecasting-header { margin-bottom: 2rem; }
+.forecasting-header h1 { font: 2.6rem/1.2 var(--font-display); margin: .5rem 0 1.25rem; }
+.forecasting-document { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: clamp(1rem, 3vw, 2.5rem); overflow-wrap: anywhere; }
+.forecasting-document h1 { font: 2rem/1.25 var(--font-display); }
+.forecasting-document h2 { font: 1.65rem/1.3 var(--font-display); margin-top: 2.5rem; }
+.forecasting-document h3 { margin-top: 1.75rem; }
+.forecasting-document :is(h1, h2, h3, h4) { scroll-margin-top: 1rem; }
+.forecasting-document :is(ul, ol) { padding-left: 1.5rem; }
+.forecasting-document li { margin: .35rem 0; }
+.forecasting-document blockquote { border-left: 3px solid var(--accent); margin: 1.5rem 0; padding: .1rem 1rem; background: var(--inset); }
+.forecasting-document pre { background: var(--inset); padding: 1rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.forecasting-table-scroll { overflow-x: auto; margin: 1.5rem 0; }
+.forecasting-table-scroll table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.forecasting-table-scroll :is(th, td) { min-width: 130px; padding: .65rem; text-align: left; vertical-align: top; border: 1px solid var(--border); }
+.forecasting-table-scroll th { background: var(--inset); }
+.forecasting-local-reference { color: var(--muted); }

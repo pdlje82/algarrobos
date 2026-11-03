@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<consulta_dnp xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.catastro.meh.es/">
+  <control>
+    <cudnp>1</cudnp>
+    <cucul>1</cucul>
+  </control>
+  <bico>
+    <bi>
+      <idbi>
+        <cn>RU</cn>
+        <rc>
+          <pc1>04011A0</pc1>
+          <pc2>1200019</pc2>
+          <car>0000</car>
+          <cc1>J</cc1>
+          <cc2>E</cc2>
+        </rc>
+      </idbi>
+      <dt>
+        <loine>
+          <cp>04</cp>
+          <cm>11</cm>
+        </loine>
+        <cmc>11</cmc>
+        <np>ALMERÍA</np>
+        <nm>ALHAMA DE ALMERIA</nm>
+        <locs>
+          <lors>
+            <lorus>
+              <czc>0</czc>
+              <cpp>
+                <cpo>12</cpo>
+                <cpa>19</cpa>
+              </cpp>
+              <npa>CONJURO</npa>
+              <cpaj>44</cpaj>
+            </lorus>
+          </lors>
+        </locs>
+      </dt>
+      <ldt>Polígono 12 Parcela 19 CONJURO. ALHAMA DE ALMERIA (ALMERÍA)</ldt>
+      <debi>
+        <luso>Agrario</luso>
+        <sfc>0</sfc>
+      </debi>
+    </bi>
+    <lspr>
+      <spr>
+        <cspr>0</cspr>
+        <dspr>
+          <ccc>CR</ccc>
+          <dcc>LABOR -TIERRA ARABLE</dcc>
+          <ip>15</ip>
+          <ssp>3056</ssp>
+        </dspr>
+      </spr>
+    </lspr>
+  </bico>
+</consulta_dnp>

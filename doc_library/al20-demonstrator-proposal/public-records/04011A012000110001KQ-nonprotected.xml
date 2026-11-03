@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<consulta_dnp xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.catastro.meh.es/">
+  <control>
+    <cudnp>1</cudnp>
+    <cucons>1</cucons>
+    <cucul>0</cucul>
+  </control>
+  <bico>
+    <bi>
+      <idbi>
+        <cn>UR</cn>
+        <rc>
+          <pc1>04011A0</pc1>
+          <pc2>1200011</pc2>
+          <car>0001</car>
+          <cc1>K</cc1>
+          <cc2>Q</cc2>
+        </rc>
+      </idbi>
+      <dt>
+        <loine>
+          <cp>04</cp>
+          <cm>11</cm>
+        </loine>
+        <cmc>11</cmc>
+        <np>ALMERÍA</np>
+        <nm>ALHAMA DE ALMERIA</nm>
+        <locs>
+          <lous>
+            <lourb>
+              <dir>
+                <cv>NC</cv>
+                <tv>NC</tv>
+                <nv>NC</nv>
+              </dir>
+              <loint />
+            </lourb>
+            <lorus>
+              <czc>0</czc>
+              <cpp>
+                <cpo>12</cpo>
+                <cpa>11</cpa>
+              </cpp>
+              <npa>CONJURO</npa>
+              <cpaj>44</cpaj>
+            </lorus>
+          </lous>
+        </locs>
+      </dt>
+      <ldt>Polígono 12 Parcela 11 CONJURO. ALHAMA DE ALMERIA (ALMERÍA)</ldt>
+      <debi>
+        <luso>Residencial</luso>
+        <sfc>29</sfc>
+        <cpt>100,000000</cpt>
+        <ant>1997</ant>
+      </debi>
+    </bi>
+    <lcons>
+      <cons>
+        <lcd>VIVIENDA</lcd>
+        <dt>
+          <lourb>
+            <loint>
+              <es>1</es>
+              <pt>00</pt>
+              <pu>01</pu>
+            </loint>
+          </lourb>
+        </dt>
+        <dfcons>
+          <stl>29</stl>
+        </dfcons>
+      </cons>
+    </lcons>
+  </bico>
+</consulta_dnp>

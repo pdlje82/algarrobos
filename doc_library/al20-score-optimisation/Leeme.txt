@@ -1,0 +1,15 @@
+PAQUETE DE REVISIÓN · AL20 · 3 DE NOVIEMBRE DE 2026
+
+Abrir primero «Revision y puntuacion.html» para consultar la puntuación, sensibilidades, apartado de solicitud y fuentes.
+
+Para escuchar: importar «Un aula viva antes del parque - Plan AL20.epub» en ElevenReader. Ocho capítulos, aproximadamente trece a dieciséis minutos. Contiene solo narración; las citas y enlaces están en el acompañante separado. No se ha comprobado reproducción directa en ElevenReader.
+
+Para editar el apartado de solicitud: «Apartado para la solicitud.txt». Está redactado como propuesta revisable; no firmar compromisos que no puedan acreditarse.
+
+Para las fuentes: «Fuentes y condiciones de puntuacion.txt». Incluye páginas, estado de fuentes, fechas y descargas oficiales verificadas. Los PDF originales ya existen en la biblioteca del repositorio y no se duplican dentro de este ZIP. Los enlaces HTML a archivos locales originales funcionan desde el repositorio; fuera de él, utilizar los enlaces públicos de descarga que figuran en el anexo.
+
+Para verificar: «Plan y calculos.json», «Validacion.json», «Revision visual.json» y «Comprobacion final.json». «Baseline conservado.json» es una copia íntegra, byte por byte, de la captura de referencia anterior; no contiene cambios adoptados. Los archivos JSON no se presentan como importaciones listas para la aplicación.
+
+La proyección recomendada es 66,49, condicionada a actividades reales y al perfil acreditado de integración de la propia solicitante: 54,49 del programa y 12 del perfil. La entidad concreta no se elige aquí. Si faltan las integraciones, este programa no alcanza sesenta. No hay una puntuación acreditada hoy, ni ayuda, permisos o acceso al terreno concedidos por estos documentos.
+
+Los guiones de reproducción requieren este repositorio y su entorno de Python de la aplicación; no son una aplicación autónoma. No escriben en el guardado. La edición de reglas conservada permanece intacta.

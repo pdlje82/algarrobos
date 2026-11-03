@@ -1,0 +1,694 @@
+<?xml version='1.0' encoding="UTF-8" standalone="no" ?>
+<WMS_Capabilities version="1.3.0"  xmlns="http://www.opengis.net/wms"   xmlns:sld="http://www.opengis.net/sld"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xmlns:ms="http://mapserver.gis.umn.edu/mapserver"   xmlns:inspire_common="http://inspire.ec.europa.eu/schemas/common/1.0"   xmlns:inspire_vs="http://inspire.ec.europa.eu/schemas/inspire_vs/1.0"   xsi:schemaLocation="http://www.opengis.net/wms http://schemas.opengis.net/wms/1.3.0/capabilities_1_3_0.xsd  http://www.opengis.net/sld http://schemas.opengis.net/sld/1.1.0/sld_capabilities.xsd  http://inspire.ec.europa.eu/schemas/inspire_vs/1.0  http://inspire.ec.europa.eu/schemas/inspire_vs/1.0/inspire_vs.xsd http://mapserver.gis.umn.edu/mapserver https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;service=WMS&amp;version=1.3.0&amp;request=GetSchemaExtension">
+<Service>
+  <Name>WMS</Name>
+  <Title>REDIAM. WMS Mapa Red de Espacios Naturales Protegidos de Andalucía (RENPA)    </Title>
+  <Abstract>Servicio WMS correspondiente a la Delimitación de la Red de Espacios Naturales Protegidos de Andalucía (RENPA). Incluye información actualizada sobre EENNPP autonómicos -Parques Nacionales y Naturales, Parajes y Monumentos Naturales, Paisajes Protegidos, Parques Periurbanos, Reservas Naturales y sus zonas de protección, Reservas Naturales Concertadas- y figuras de protección europeas: Red Natura 2000 -LIC, ZEC, ZEPA y pLIC-, Geoparques, Reservas de la Biosfera, ZEPIM, Diploma Europeo, Patrimonio de la Humanidad y Humedales incluidos en la Lista Ramsar. Nodo de la Red de Información Ambiental de Andalucía. Junta de Andalucía. Integrado en la Infraestructura de Datos Espaciales de Andalucía, siguiendo las directrices del Sistema Cartográfico de Andalucía.      </Abstract>
+  <KeywordList>
+      <Keyword>WMS</Keyword>
+      <Keyword> REDIAM</Keyword>
+      <Keyword> Andalucía</Keyword>
+      <Keyword> espacios protegidos</Keyword>
+      <Keyword> protección de áreas naturales</Keyword>
+      <Keyword> IDEAndalucia</Keyword>
+      <Keyword vocabulary="GEMET INSPIRE themes">Lugares Protegidos</Keyword>
+  </KeywordList>
+  <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/rediam"/>
+  <ContactInformation>
+    <ContactPersonPrimary>
+      <ContactPerson>Servicio de Análisis de la Información Ambiental</ContactPerson>
+      <ContactOrganization>Consejería de Sostenibilidad y Medio Ambiente. Junta de Andalucía</ContactOrganization>
+    </ContactPersonPrimary>
+      <ContactPosition>author</ContactPosition>
+    <ContactAddress>
+        <AddressType>Dirección postal</AddressType>
+        <Address>Avda. Manuel Siurot,50</Address>
+        <City>Sevilla</City>
+        <StateOrProvince>Sevilla</StateOrProvince>
+        <PostCode>41071</PostCode>
+        <Country>Spain</Country>
+    </ContactAddress>
+      <ContactVoiceTelephone>+34955003400</ContactVoiceTelephone>
+      <ContactFacsimileTelephone>--</ContactFacsimileTelephone>
+  <ContactElectronicMailAddress>rediam.atiende.csma@juntadeandalucia.es</ContactElectronicMailAddress>
+  </ContactInformation>
+  <Fees>Gratuito</Fees>
+  <AccessConstraints>Este servicio se puede usar de modo libre y gratuito siempre que se mencione a los autores y propietarios de la información</AccessConstraints>
+  <MaxWidth>4096</MaxWidth>
+  <MaxHeight>4096</MaxHeight>
+</Service>
+
+<Capability>
+  <Request>
+    <GetCapabilities>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetCapabilities>
+    <GetMap>
+      <Format>image/png</Format>
+      <Format>image/jpeg</Format>
+      <Format>image/png; mode=8bit</Format>
+      <Format>image/vnd.jpeg-png</Format>
+      <Format>image/vnd.jpeg-png8</Format>
+      <Format>application/x-pdf</Format>
+      <Format>image/svg+xml</Format>
+      <Format>image/tiff</Format>
+      <Format>application/vnd.mapbox-vector-tile</Format>
+      <Format>application/x-protobuf</Format>
+      <Format>application/json</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetMap>
+    <GetFeatureInfo>
+      <Format>text/html</Format>
+      <Format>application/vnd.ogc.gml</Format>
+      <Format>text/plain</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </GetFeatureInfo>
+    <sld:DescribeLayer>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </sld:DescribeLayer>
+    <sld:GetLegendGraphic>
+      <Format>image/png</Format>
+      <Format>image/jpeg</Format>
+      <Format>image/png; mode=8bit</Format>
+      <Format>image/vnd.jpeg-png</Format>
+      <Format>image/vnd.jpeg-png8</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </sld:GetLegendGraphic>
+    <ms:GetStyles>
+      <Format>text/xml</Format>
+      <DCPType>
+        <HTTP>
+          <Get><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Get>
+          <Post><OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;"/></Post>
+        </HTTP>
+      </DCPType>
+    </ms:GetStyles>
+  </Request>
+  <Exception>
+    <Format>XML</Format>
+    <Format>INIMAGE</Format>
+    <Format>BLANK</Format>
+  </Exception>
+  <sld:UserDefinedSymbolization SupportSLD="1" UserLayer="0" UserStyle="1" RemoteWFS="0" InlineFeature="0" RemoteWCS="0"/>
+  <inspire_vs:ExtendedCapabilities>
+    <inspire_common:MetadataUrl xsi:type="inspire_common:resourceLocatorType">
+      <inspire_common:URL>https://portalrediam.cica.es/geonetwork/srv/spa/csw?service=CSW&amp;version=2.0.2&amp;request=GetRecordById&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;ElementSetName=full&amp;ID=e9d3c3f0-8913-4c8c-ad77-7b7ed7af2d7f</inspire_common:URL>
+      <inspire_common:MediaType>application/vnd.ogc.csw.capabilities.response_xml</inspire_common:MediaType>
+    </inspire_common:MetadataUrl>
+    <inspire_common:SupportedLanguages>
+      <inspire_common:DefaultLanguage><inspire_common:Language>spa</inspire_common:Language></inspire_common:DefaultLanguage>
+      <inspire_common:SupportedLanguage><inspire_common:Language>eng</inspire_common:Language></inspire_common:SupportedLanguage>
+    </inspire_common:SupportedLanguages>
+    <inspire_common:ResponseLanguage><inspire_common:Language>spa</inspire_common:Language></inspire_common:ResponseLanguage>
+  </inspire_vs:ExtendedCapabilities>
+  <Layer queryable="1">
+    <Name>REDIAM</Name>
+    <Title>REDIAM. WMS Mapa Red de Espacios Naturales Protegidos de Andalucía (RENPA)    </Title>
+    <Abstract>Servicio WMS correspondiente a la Delimitación de la Red de Espacios Naturales Protegidos de Andalucía (RENPA). Incluye información actualizada sobre EENNPP autonómicos -Parques Nacionales y Naturales, Parajes y Monumentos Naturales, Paisajes Protegidos, Parques Periurbanos, Reservas Naturales y sus zonas de protección, Reservas Naturales Concertadas- y figuras de protección europeas: Red Natura 2000 -LIC, ZEC, ZEPA y pLIC-, Geoparques, Reservas de la Biosfera, ZEPIM, Diploma Europeo, Patrimonio de la Humanidad y Humedales incluidos en la Lista Ramsar. Nodo de la Red de Información Ambiental de Andalucía. Junta de Andalucía. Integrado en la Infraestructura de Datos Espaciales de Andalucía, siguiendo las directrices del Sistema Cartográfico de Andalucía.      </Abstract>
+    <KeywordList>
+        <Keyword>WMS</Keyword>
+        <Keyword> REDIAM</Keyword>
+        <Keyword> Andalucía</Keyword>
+        <Keyword> espacios protegidos</Keyword>
+        <Keyword> protección de áreas naturales</Keyword>
+        <Keyword> IDEAndalucia</Keyword>
+        <Keyword vocabulary="GEMET INSPIRE themes">Lugares Protegidos</Keyword>
+    </KeywordList>
+    <CRS>EPSG:3042</CRS>
+    <CRS>EPSG:25830</CRS>
+    <CRS>EPSG:25829</CRS>
+    <CRS>EPSG:23030</CRS>
+    <CRS>EPSG:32629</CRS>
+    <CRS>EPSG:32630</CRS>
+    <CRS>EPSG:3785</CRS>
+    <CRS>EPSG:3857</CRS>
+    <CRS>EPSG:4230</CRS>
+    <CRS>EPSG:4258</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:900913</CRS>
+    <EX_GeographicBoundingBox>
+        <westBoundLongitude>-8.020348</westBoundLongitude>
+        <eastBoundLongitude>-1.160932</eastBoundLongitude>
+        <southBoundLatitude>34.513667</southBoundLatitude>
+        <northBoundLatitude>38.879132</northBoundLatitude>
+    </EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3042"
+                minx="3.82937e+06" miny="63761" maxx="4.30336e+06" maxy="659557" />
+    <BoundingBox CRS="EPSG:25830"
+                minx="63761" miny="3.82937e+06" maxx="659557" maxy="4.30336e+06" />
+    <BoundingBox CRS="EPSG:25829"
+                minx="585103" miny="3.81982e+06" maxx="1.21052e+06" maxy="4.33107e+06" />
+    <BoundingBox CRS="EPSG:23030"
+                minx="63741.6" miny="3.82943e+06" maxx="659671" maxy="4.30357e+06" />
+    <BoundingBox CRS="EPSG:32629"
+                minx="585103" miny="3.81982e+06" maxx="1.21052e+06" maxy="4.33107e+06" />
+    <BoundingBox CRS="EPSG:32630"
+                minx="63761" miny="3.82937e+06" maxx="659557" maxy="4.30336e+06" />
+    <BoundingBox CRS="EPSG:3785"
+                minx="-892821" miny="4.09799e+06" maxx="-129234" maxy="4.70437e+06" />
+    <BoundingBox CRS="EPSG:3857"
+                minx="-892821" miny="4.09799e+06" maxx="-129234" maxy="4.70437e+06" />
+    <BoundingBox CRS="EPSG:4230"
+                minx="34.513667" miny="-8.018968" maxx="38.880350" maxy="-1.159704" />
+    <BoundingBox CRS="EPSG:4258"
+                minx="34.513667" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+    <BoundingBox CRS="EPSG:4326"
+                minx="34.513667" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+    <BoundingBox CRS="CRS:84"
+                minx="-8.020348" miny="34.513667" maxx="-1.160932" maxy="38.879132" />
+    <BoundingBox CRS="EPSG:900913"
+                minx="-892821" miny="4.09799e+06" maxx="-129234" maxy="4.70437e+06" />
+    <AuthorityURL name="REDIAM">
+      <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://www.juntadeandalucia.es/medioambiente/rediam"/>
+    </AuthorityURL>
+<!-- WARNING: Some mandatory elements for 'MetadataURL' are missing in this context. -->
+    <Style>
+       <Name>default</Name>
+       <Title>default</Title>
+       <LegendURL width="352" height="580">
+          <Format>image/png</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=REDIAM&amp;format=image/png&amp;STYLE=default"/>
+       </LegendURL>
+    </Style>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>eennpp</Name>
+        <Title>Espacios Naturales Protegidos de Andalucía (EENNPP)</Title>
+        <Abstract>Capa de información vectorial correspondiente a los límites de los Espacios Naturales Protegidos de Andalucía con figura de protección establecida en la normativa estatal o autonómica (Parques Nacionales, Parques Naturales, Parajes Naturales, Parques Periurbanos, Monumentos Naturales, Reservas Naturales, Reservas Naturales Concertadas y Paisajes Protegidos): información actualizada. Además se recogen otras zonas asociadas bajo un régimen de protección (Zonas de Protección de las Reservas Naturales, de los Monumentos Naturales y del Parque Nacional de Doñana) y los territorios que se acogen a la figura de gestión Espacio Natural </Abstract>
+        <KeywordList>
+            <Keyword>espacios protegidos</Keyword>
+            <Keyword> protección de áreas naturales</Keyword>
+        </KeywordList>
+        <CRS>EPSG:3042</CRS>
+        <EX_GeographicBoundingBox>
+            <westBoundLongitude>-8.020348</westBoundLongitude>
+            <eastBoundLongitude>-1.160932</eastBoundLongitude>
+            <southBoundLatitude>35.564228</southBoundLatitude>
+            <northBoundLatitude>38.879132</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="EPSG:3042"
+                    minx="3.94629e+06" miny="63761" maxx="4.30336e+06" maxy="659557" />
+        <BoundingBox CRS="EPSG:25830"
+                    minx="63761" miny="3.94629e+06" maxx="659557" maxy="4.30336e+06" />
+        <BoundingBox CRS="EPSG:25829"
+                    minx="585103" miny="3.93627e+06" maxx="1.2034e+06" maxy="4.33107e+06" />
+        <BoundingBox CRS="EPSG:23030"
+                    minx="63741.6" miny="3.94635e+06" maxx="659671" maxy="4.30357e+06" />
+        <BoundingBox CRS="EPSG:32629"
+                    minx="585103" miny="3.93627e+06" maxx="1.2034e+06" maxy="4.33107e+06" />
+        <BoundingBox CRS="EPSG:32630"
+                    minx="63761" miny="3.94629e+06" maxx="659557" maxy="4.30336e+06" />
+        <BoundingBox CRS="EPSG:3785"
+                    minx="-892821" miny="4.24082e+06" maxx="-129234" maxy="4.70437e+06" />
+        <BoundingBox CRS="EPSG:3857"
+                    minx="-892821" miny="4.24082e+06" maxx="-129234" maxy="4.70437e+06" />
+        <BoundingBox CRS="EPSG:4230"
+                    minx="35.564228" miny="-8.018968" maxx="38.880350" maxy="-1.159704" />
+        <BoundingBox CRS="EPSG:4258"
+                    minx="35.564228" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+        <BoundingBox CRS="EPSG:4326"
+                    minx="35.564228" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+        <BoundingBox CRS="CRS:84"
+                    minx="-8.020348" miny="35.564228" maxx="-1.160932" maxy="38.879132" />
+        <BoundingBox CRS="EPSG:900913"
+                    minx="-892821" miny="4.24082e+06" maxx="-129234" maxy="4.70437e+06" />
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://portalrediam.cica.es/geonetwork/srv/spa/csw?service=CSW&amp;version=2.0.2&amp;request=GetRecordById&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;ElementSetName=full&amp;ID=39dfcda7-018c-4b71-83ad-a5abca4bf557"/>
+        </MetadataURL>
+        <Style>
+          <Name>default</Name>
+          <Title>default</Title>
+          <LegendURL width="293" height="305">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=eennpp&amp;format=image/png&amp;STYLE=default"/>
+          </LegendURL>
+        </Style>
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>humedales_ramsar</Name>
+        <Title>Humedales andaluces incluidos en la Lista de Ramsar, octubre 2025    </Title>
+        <Abstract>Recopilación de los Humedales de Andalucía incluidos en la Lista del Convenio de Ramsar. Octubre 2025  </Abstract>
+        <KeywordList>
+            <Keyword>cuencas</Keyword>
+            <Keyword> humedales</Keyword>
+            <Keyword> Andalucía</Keyword>
+        </KeywordList>
+        <CRS>EPSG:3042</CRS>
+        <EX_GeographicBoundingBox>
+            <westBoundLongitude>-8.020348</westBoundLongitude>
+            <eastBoundLongitude>-1.160932</eastBoundLongitude>
+            <southBoundLatitude>35.564228</southBoundLatitude>
+            <northBoundLatitude>38.879132</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="EPSG:3042"
+                    minx="3.94629e+06" miny="63761" maxx="4.30336e+06" maxy="659557" />
+        <BoundingBox CRS="EPSG:25830"
+                    minx="63761" miny="3.94629e+06" maxx="659557" maxy="4.30336e+06" />
+        <BoundingBox CRS="EPSG:25829"
+                    minx="585103" miny="3.93627e+06" maxx="1.2034e+06" maxy="4.33107e+06" />
+        <BoundingBox CRS="EPSG:23030"
+                    minx="63741.6" miny="3.94635e+06" maxx="659671" maxy="4.30357e+06" />
+        <BoundingBox CRS="EPSG:32629"
+                    minx="585103" miny="3.93627e+06" maxx="1.2034e+06" maxy="4.33107e+06" />
+        <BoundingBox CRS="EPSG:32630"
+                    minx="63761" miny="3.94629e+06" maxx="659557" maxy="4.30336e+06" />
+        <BoundingBox CRS="EPSG:3785"
+                    minx="-892821" miny="4.24082e+06" maxx="-129234" maxy="4.70437e+06" />
+        <BoundingBox CRS="EPSG:3857"
+                    minx="-892821" miny="4.24082e+06" maxx="-129234" maxy="4.70437e+06" />
+        <BoundingBox CRS="EPSG:4230"
+                    minx="35.564228" miny="-8.018968" maxx="38.880350" maxy="-1.159704" />
+        <BoundingBox CRS="EPSG:4258"
+                    minx="35.564228" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+        <BoundingBox CRS="EPSG:4326"
+                    minx="35.564228" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+        <BoundingBox CRS="CRS:84"
+                    minx="-8.020348" miny="35.564228" maxx="-1.160932" maxy="38.879132" />
+        <BoundingBox CRS="EPSG:900913"
+                    minx="-892821" miny="4.24082e+06" maxx="-129234" maxy="4.70437e+06" />
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://portalrediam.cica.es/geonetwork/srv/spa/csw?service=CSW&amp;version=2.0.2&amp;request=GetRecordById&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;ElementSetName=full&amp;ID=39dfcda7-018c-4b71-83ad-a5abca4bf557"/>
+        </MetadataURL>
+        <Style>
+          <Name>default</Name>
+          <Title>default</Title>
+          <LegendURL width="250" height="30">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=humedales_ramsar&amp;format=image/png&amp;STYLE=default"/>
+          </LegendURL>
+        </Style>
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>red_natura_2000</Name>
+        <Title>Red Natura 2000 (LIC, ZEC y ZEPA) en Andalucía     </Title>
+        <Abstract>Capa de información vectorial  correspondiente a los Límites de la Red Ecológica Europea Red Natura 2000 (LIC, ZEC y ZEPA) en Andalucía. Incluye los 3 tipos de Espacios Protegidos Red Natura 2000: los Lugares de Importancia Comunitaria (LIC), las Zonas de Especial Protección para las Aves (ZEPA) y las Zonas Especiales de Conservación (ZEC), competencia de la Junta de Andalucía. </Abstract>
+        <KeywordList>
+            <Keyword>Espacios protegidos </Keyword>
+            <Keyword> Áreas naturales</Keyword>
+            <Keyword> Conservación del medio ambiente</Keyword>
+            <Keyword> Ecosistemas de importancia internacional</Keyword>
+            <Keyword> Unión Europea</Keyword>
+        </KeywordList>
+        <CRS>EPSG:3042</CRS>
+        <EX_GeographicBoundingBox>
+            <westBoundLongitude>-8.020348</westBoundLongitude>
+            <eastBoundLongitude>-1.160932</eastBoundLongitude>
+            <southBoundLatitude>35.564228</southBoundLatitude>
+            <northBoundLatitude>38.879132</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="EPSG:3042"
+                    minx="3.94629e+06" miny="63761" maxx="4.30336e+06" maxy="659557" />
+        <BoundingBox CRS="EPSG:25830"
+                    minx="63761" miny="3.94629e+06" maxx="659557" maxy="4.30336e+06" />
+        <BoundingBox CRS="EPSG:25829"
+                    minx="585103" miny="3.93627e+06" maxx="1.2034e+06" maxy="4.33107e+06" />
+        <BoundingBox CRS="EPSG:23030"
+                    minx="63741.6" miny="3.94635e+06" maxx="659671" maxy="4.30357e+06" />
+        <BoundingBox CRS="EPSG:32629"
+                    minx="585103" miny="3.93627e+06" maxx="1.2034e+06" maxy="4.33107e+06" />
+        <BoundingBox CRS="EPSG:32630"
+                    minx="63761" miny="3.94629e+06" maxx="659557" maxy="4.30336e+06" />
+        <BoundingBox CRS="EPSG:3785"
+                    minx="-892821" miny="4.24082e+06" maxx="-129234" maxy="4.70437e+06" />
+        <BoundingBox CRS="EPSG:3857"
+                    minx="-892821" miny="4.24082e+06" maxx="-129234" maxy="4.70437e+06" />
+        <BoundingBox CRS="EPSG:4230"
+                    minx="35.564228" miny="-8.018968" maxx="38.880350" maxy="-1.159704" />
+        <BoundingBox CRS="EPSG:4258"
+                    minx="35.564228" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+        <BoundingBox CRS="EPSG:4326"
+                    minx="35.564228" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+        <BoundingBox CRS="CRS:84"
+                    minx="-8.020348" miny="35.564228" maxx="-1.160932" maxy="38.879132" />
+        <BoundingBox CRS="EPSG:900913"
+                    minx="-892821" miny="4.24082e+06" maxx="-129234" maxy="4.70437e+06" />
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://portalrediam.cica.es/geonetwork/srv/spa/csw?service=CSW&amp;version=2.0.2&amp;request=GetRecordById&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;ElementSetName=full&amp;ID=39dfcda7-018c-4b71-83ad-a5abca4bf557"/>
+        </MetadataURL>
+        <Style>
+          <Name>default</Name>
+          <Title>default</Title>
+          <LegendURL width="90" height="80">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=red_natura_2000&amp;format=image/png&amp;STYLE=default"/>
+          </LegendURL>
+        </Style>
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>reservas_biosfera</Name>
+        <Title>Reservas de la Biosfera de Andalucía, junio de 2017   </Title>
+        <Abstract>Capa de información vectorial correspondiente a las Reservas de la Biosfera de Andalucía. Incluye la Intercontinental del Mediterráneo (Andalucía-España-/ Marruecos). Procedente de la capa de reservas existentes en España. Están reconocidas internacionalmente, aunque permanecen bajo la soberanía española. Se seleccionan por su interés científico, basándose en una serie de criterios que determinan si un espacio se incluye en el programa.   </Abstract>
+        <KeywordList>
+            <Keyword>Reservas de la biosfera</Keyword>
+            <Keyword> medio Ambiente</Keyword>
+            <Keyword> Andalucía</Keyword>
+        </KeywordList>
+        <CRS>EPSG:3042</CRS>
+        <EX_GeographicBoundingBox>
+            <westBoundLongitude>-8.020348</westBoundLongitude>
+            <eastBoundLongitude>-1.160932</eastBoundLongitude>
+            <southBoundLatitude>34.513667</southBoundLatitude>
+            <northBoundLatitude>38.879132</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="EPSG:3042"
+                    minx="3.82937e+06" miny="63761" maxx="4.30336e+06" maxy="659557" />
+        <BoundingBox CRS="EPSG:25830"
+                    minx="63761" miny="3.82937e+06" maxx="659557" maxy="4.30336e+06" />
+        <BoundingBox CRS="EPSG:25829"
+                    minx="585103" miny="3.81982e+06" maxx="1.21052e+06" maxy="4.33107e+06" />
+        <BoundingBox CRS="EPSG:23030"
+                    minx="63741.6" miny="3.82943e+06" maxx="659671" maxy="4.30357e+06" />
+        <BoundingBox CRS="EPSG:32629"
+                    minx="585103" miny="3.81982e+06" maxx="1.21052e+06" maxy="4.33107e+06" />
+        <BoundingBox CRS="EPSG:32630"
+                    minx="63761" miny="3.82937e+06" maxx="659557" maxy="4.30336e+06" />
+        <BoundingBox CRS="EPSG:3785"
+                    minx="-892821" miny="4.09799e+06" maxx="-129234" maxy="4.70437e+06" />
+        <BoundingBox CRS="EPSG:3857"
+                    minx="-892821" miny="4.09799e+06" maxx="-129234" maxy="4.70437e+06" />
+        <BoundingBox CRS="EPSG:4230"
+                    minx="34.513667" miny="-8.018968" maxx="38.880350" maxy="-1.159704" />
+        <BoundingBox CRS="EPSG:4258"
+                    minx="34.513667" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+        <BoundingBox CRS="EPSG:4326"
+                    minx="34.513667" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+        <BoundingBox CRS="CRS:84"
+                    minx="-8.020348" miny="34.513667" maxx="-1.160932" maxy="38.879132" />
+        <BoundingBox CRS="EPSG:900913"
+                    minx="-892821" miny="4.09799e+06" maxx="-129234" maxy="4.70437e+06" />
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://portalrediam.cica.es/geonetwork/srv/spa/csw?service=CSW&amp;version=2.0.2&amp;request=GetRecordById&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;ElementSetName=full&amp;ID=28b5ecf228f450df4c346640e188bf351e35c255"/>
+        </MetadataURL>
+        <Style>
+          <Name>default</Name>
+          <Title>default</Title>
+          <LegendURL width="352" height="55">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=reservas_biosfera&amp;format=image/png&amp;STYLE=default"/>
+          </LegendURL>
+        </Style>
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>ZEPIM</Name>
+        <Title>Zonas Especialmente Protegidas de Importancia para el Mediterráneo (ZEPIM) de Andalucía, junio de 2019   </Title>
+        <Abstract>Capa de información vectorial correspondiente a las Zonas Especialmente Protegidas de Importancia para el Mediterráneo (ZEPIM) existentes en Andalucía. Integradas por las Áreas marinas y costeras únicas, que garantizan la supervivencia de los valores y recursos biológicos del Mediterráneo al incorporar los hábitats mediterráneos más representativos y las áreas mejor conservadas. Complementa el resto de los espacios naturales protegidos, centrándose en la protección de áreas de verdadera importancia regional mediterránea, por lo que se sitúan bajo tutela internacional.   </Abstract>
+        <KeywordList>
+            <Keyword>Área natural sensible</Keyword>
+            <Keyword>Protección de agua marina</Keyword>
+            <Keyword>Mar Mediterráneo</Keyword>
+            <Keyword>Protección del litoral</Keyword>
+            <Keyword>Zona marina protegida</Keyword>
+        </KeywordList>
+        <CRS>EPSG:3042</CRS>
+        <EX_GeographicBoundingBox>
+            <westBoundLongitude>-4.364506</westBoundLongitude>
+            <eastBoundLongitude>-1.107368</eastBoundLongitude>
+            <southBoundLatitude>35.713869</southBoundLatitude>
+            <northBoundLatitude>37.458579</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="EPSG:3042"
+                    minx="3.95379e+06" miny="379309" maxx="4.14575e+06" maxy="667424" />
+        <BoundingBox CRS="EPSG:25830"
+                    minx="379309" miny="3.95379e+06" maxx="667424" maxy="4.14575e+06" />
+        <BoundingBox CRS="EPSG:25829"
+                    minx="910118" miny="3.96302e+06" maxx="1.21084e+06" maxy="4.17343e+06" />
+        <BoundingBox CRS="EPSG:23030"
+                    minx="379421" miny="3.954e+06" maxx="667538" maxy="4.14595e+06" />
+        <BoundingBox CRS="EPSG:32629"
+                    minx="910118" miny="3.96302e+06" maxx="1.21084e+06" maxy="4.17343e+06" />
+        <BoundingBox CRS="EPSG:32630"
+                    minx="379309" miny="3.95379e+06" maxx="667424" maxy="4.14575e+06" />
+        <BoundingBox CRS="EPSG:3785"
+                    minx="-485855" miny="4.26132e+06" maxx="-123272" maxy="4.50322e+06" />
+        <BoundingBox CRS="EPSG:3857"
+                    minx="-485855" miny="4.26132e+06" maxx="-123272" maxy="4.50322e+06" />
+        <BoundingBox CRS="EPSG:4230"
+                    minx="35.715155" miny="-4.363207" maxx="37.459832" maxy="-1.106152" />
+        <BoundingBox CRS="EPSG:4258"
+                    minx="35.713869" miny="-4.364506" maxx="37.458579" maxy="-1.107368" />
+        <BoundingBox CRS="EPSG:4326"
+                    minx="35.713869" miny="-4.364506" maxx="37.458579" maxy="-1.107368" />
+        <BoundingBox CRS="CRS:84"
+                    minx="-4.364506" miny="35.713869" maxx="-1.107368" maxy="37.458579" />
+        <BoundingBox CRS="EPSG:900913"
+                    minx="-485855" miny="4.26132e+06" maxx="-123272" maxy="4.50322e+06" />
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://portalrediam.cica.es/geonetwork/srv/spa/csw?service=CSW&amp;version=2.0.2&amp;request=GetRecordById&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;ElementSetName=full&amp;ID=39dfcda7-018c-4b71-83ad-a5abca4bf557"/>
+        </MetadataURL>
+        <Style>
+          <Name>default</Name>
+          <Title>default</Title>
+          <LegendURL width="99" height="30">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=ZEPIM&amp;format=image/png&amp;STYLE=default"/>
+          </LegendURL>
+        </Style>
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>patrimonio_humanidad</Name>
+        <Title>Patrimonio de la Humanidad (bien natural) en Andalucía: Doñana, febrero de 2005   </Title>
+        <Abstract>Capa de información vectorial correspondiente a la figura de Patrimonio de la Humanidad (bien natural) declarado por la UNESCO en Andalucía en enero de 1994 y posteriormente ampliada en 2005 al igual que el Parque Nacional; se añadieron tres zonas: la finca Los Caracoles, la plana de inundación del arroyo del Partido y el triángulo oeste. Doñana es el único espacio protegido de Andalucía que está declarado Patrimonio de la Humanidad, World Heritage Property” </Abstract>
+        <KeywordList>
+            <Keyword>Europa</Keyword>
+            <Keyword> Espacios protegidos</Keyword>
+            <Keyword> Calidad ambiental</Keyword>
+            <Keyword> Gestión de recursos naturales</Keyword>
+        </KeywordList>
+        <CRS>EPSG:3042</CRS>
+        <EX_GeographicBoundingBox>
+            <westBoundLongitude>-6.691748</westBoundLongitude>
+            <eastBoundLongitude>-6.094865</eastBoundLongitude>
+            <southBoundLatitude>36.762693</southBoundLatitude>
+            <northBoundLatitude>37.238650</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="EPSG:3042"
+                    minx="4.07483e+06" miny="172419" maxx="4.12589e+06" maxy="223798" />
+        <BoundingBox CRS="EPSG:25830"
+                    minx="172419" miny="4.07483e+06" maxx="223798" maxy="4.12589e+06" />
+        <BoundingBox CRS="EPSG:25829"
+                    minx="704795" miny="4.07108e+06" maxx="759265" maxy="4.12525e+06" />
+        <BoundingBox CRS="EPSG:23030"
+                    minx="172530" miny="4.07504e+06" maxx="223910" maxy="4.1261e+06" />
+        <BoundingBox CRS="EPSG:32629"
+                    minx="704795" miny="4.07108e+06" maxx="759265" maxy="4.12525e+06" />
+        <BoundingBox CRS="EPSG:32630"
+                    minx="172419" miny="4.07483e+06" maxx="223798" maxy="4.12589e+06" />
+        <BoundingBox CRS="EPSG:3785"
+                    minx="-744922" miny="4.40608e+06" maxx="-678477" maxy="4.47242e+06" />
+        <BoundingBox CRS="EPSG:3857"
+                    minx="-744922" miny="4.40608e+06" maxx="-678477" maxy="4.47242e+06" />
+        <BoundingBox CRS="EPSG:4230"
+                    minx="36.763978" miny="-6.690394" maxx="37.239922" maxy="-6.093529" />
+        <BoundingBox CRS="EPSG:4258"
+                    minx="36.762693" miny="-6.691748" maxx="37.238650" maxy="-6.094865" />
+        <BoundingBox CRS="EPSG:4326"
+                    minx="36.762693" miny="-6.691748" maxx="37.238650" maxy="-6.094865" />
+        <BoundingBox CRS="CRS:84"
+                    minx="-6.691748" miny="36.762693" maxx="-6.094865" maxy="37.238650" />
+        <BoundingBox CRS="EPSG:900913"
+                    minx="-744922" miny="4.40608e+06" maxx="-678477" maxy="4.47242e+06" />
+        <MetadataURL type="ISO19115:2003">
+          <Format>text/xml</Format>
+          <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://portalrediam.cica.es/geonetwork/srv/spa/csw?service=CSW&amp;version=2.0.2&amp;request=GetRecordById&amp;outputSchema=http://www.isotc211.org/2005/gmd&amp;ElementSetName=full&amp;ID=39dfcda7-018c-4b71-83ad-a5abca4bf557"/>
+        </MetadataURL>
+        <Style>
+          <Name>default</Name>
+          <Title>default</Title>
+          <LegendURL width="194" height="30">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=patrimonio_humanidad&amp;format=image/png&amp;STYLE=default"/>
+          </LegendURL>
+        </Style>
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>geoparques</Name>
+        <Title>Geoparques de Andalucía, septiembre de 2011     </Title>
+        <Abstract>Capa de información vectorial correspondiente a la figura de Geoparque declarada por la UNESCO. Representa un territorio que posee una riqueza geológica particular y una estrategia de desarrollo territorial sostenible apoyada por un programa europeo para promocionar el desarrollo. Andalucía cuenta con tres Geoparques: Parque Natural Cabo de Gata-Níjar (junio 2001), Parque Natural de las Sierras Subbéticas (julio 2006) y Parque Natural Sierra Norte (septiembre 2011). Complementan el resto de la Red de Espacios Naturales Protegidos. </Abstract>
+        <KeywordList>
+            <Keyword>geoparques</Keyword>
+            <Keyword> área natural sensible</Keyword>
+            <Keyword> parques naturales</Keyword>
+            <Keyword>2011</Keyword>
+        </KeywordList>
+        <CRS>EPSG:3042</CRS>
+        <EX_GeographicBoundingBox>
+            <westBoundLongitude>-7.943414</westBoundLongitude>
+            <eastBoundLongitude>-1.283176</eastBoundLongitude>
+            <southBoundLatitude>35.162833</southBoundLatitude>
+            <northBoundLatitude>39.521701</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="EPSG:3042"
+                    minx="3.90111e+06" miny="74359" maxx="4.37467e+06" maxy="647596" />
+        <BoundingBox CRS="EPSG:25830"
+                    minx="74359" miny="3.90111e+06" maxx="647596" maxy="4.37467e+06" />
+        <BoundingBox CRS="EPSG:25829"
+                    minx="590954" miny="3.89191e+06" maxx="1.19417e+06" maxy="4.4018e+06" />
+        <BoundingBox CRS="EPSG:23030"
+                    minx="74340.1" miny="3.90117e+06" maxx="647710" maxy="4.37488e+06" />
+        <BoundingBox CRS="EPSG:32629"
+                    minx="590954" miny="3.89191e+06" maxx="1.19417e+06" maxy="4.4018e+06" />
+        <BoundingBox CRS="EPSG:32630"
+                    minx="74359" miny="3.90111e+06" maxx="647596" maxy="4.37467e+06" />
+        <BoundingBox CRS="EPSG:3785"
+                    minx="-884257" miny="4.18603e+06" maxx="-142843" maxy="4.79668e+06" />
+        <BoundingBox CRS="EPSG:3857"
+                    minx="-884257" miny="4.18603e+06" maxx="-142843" maxy="4.79668e+06" />
+        <BoundingBox CRS="EPSG:4230"
+                    minx="35.162833" miny="-7.942023" maxx="39.522902" maxy="-1.281941" />
+        <BoundingBox CRS="EPSG:4258"
+                    minx="35.162833" miny="-7.943414" maxx="39.521701" maxy="-1.283176" />
+        <BoundingBox CRS="EPSG:4326"
+                    minx="35.162833" miny="-7.943414" maxx="39.521701" maxy="-1.283176" />
+        <BoundingBox CRS="CRS:84"
+                    minx="-7.943414" miny="35.162833" maxx="-1.283176" maxy="39.521701" />
+        <BoundingBox CRS="EPSG:900913"
+                    minx="-884257" miny="4.18603e+06" maxx="-142843" maxy="4.79668e+06" />
+<!-- WARNING: Some mandatory elements for 'MetadataURL' are missing in this context. -->
+        <Style>
+          <Name>default</Name>
+          <Title>default</Title>
+          <LegendURL width="122" height="30">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=geoparques&amp;format=image/png&amp;STYLE=default"/>
+          </LegendURL>
+        </Style>
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>diploma_europeo</Name>
+        <Title>Diploma Europeo de Calidad de Espacios Protegidos en Andalucía   </Title>
+        <Abstract>Servicio WMS correspondiente al Diploma europeo de Áreas Protegidas en Andalucía. Esta figura de protección renovable cada 5 años reconoce la excelencia medioambiental a nivel europeo de varios espacios andaluces. Es uno de los máximos galardones que existen en el continente para reconocer el valor de un espacio natural y el esfuerzo realizado para su mantenimiento, y es concedido por el Consejo de Europa. Nodo de la Red de Información Ambiental de Andalucía. Junta de Andalucía. Integrado en la Infraestructura de Datos Espaciales de Andalucía, siguiendo las directrices del Sistema Cartográfico de Andalucía.  </Abstract>
+        <KeywordList>
+            <Keyword>Europa</Keyword>
+            <Keyword> Espacios protegidos</Keyword>
+            <Keyword> Calidad ambiental</Keyword>
+            <Keyword> Gestión de recursos naturales</Keyword>
+        </KeywordList>
+        <CRS>EPSG:3042</CRS>
+        <EX_GeographicBoundingBox>
+            <westBoundLongitude>-6.840168</westBoundLongitude>
+            <eastBoundLongitude>-2.491229</eastBoundLongitude>
+            <southBoundLatitude>36.624919</southBoundLatitude>
+            <northBoundLatitude>37.451854</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="EPSG:3042"
+                    minx="4.06e+06" miny="160000" maxx="4.145e+06" maxy="545000" />
+        <BoundingBox CRS="EPSG:25830"
+                    minx="160000" miny="4.06e+06" maxx="545000" maxy="4.145e+06" />
+        <BoundingBox CRS="EPSG:25829"
+                    minx="691201" miny="4.05551e+06" maxx="1.08141e+06" maxy="4.16482e+06" />
+        <BoundingBox CRS="EPSG:23030"
+                    minx="160111" miny="4.0602e+06" maxx="545113" maxy="4.14521e+06" />
+        <BoundingBox CRS="EPSG:32629"
+                    minx="691201" miny="4.05551e+06" maxx="1.08141e+06" maxy="4.16482e+06" />
+        <BoundingBox CRS="EPSG:32630"
+                    minx="160000" miny="4.06e+06" maxx="545000" maxy="4.145e+06" />
+        <BoundingBox CRS="EPSG:3785"
+                    minx="-761444" miny="4.38695e+06" maxx="-277322" maxy="4.50228e+06" />
+        <BoundingBox CRS="EPSG:3857"
+                    minx="-761444" miny="4.38695e+06" maxx="-277322" maxy="4.50228e+06" />
+        <BoundingBox CRS="EPSG:4230"
+                    minx="36.626208" miny="-6.838810" maxx="37.453107" maxy="-2.489977" />
+        <BoundingBox CRS="EPSG:4258"
+                    minx="36.624919" miny="-6.840168" maxx="37.451854" maxy="-2.491229" />
+        <BoundingBox CRS="EPSG:4326"
+                    minx="36.624919" miny="-6.840168" maxx="37.451854" maxy="-2.491229" />
+        <BoundingBox CRS="CRS:84"
+                    minx="-6.840168" miny="36.624919" maxx="-2.491229" maxy="37.451854" />
+        <BoundingBox CRS="EPSG:900913"
+                    minx="-761444" miny="4.38695e+06" maxx="-277322" maxy="4.50228e+06" />
+<!-- WARNING: Some mandatory elements for 'MetadataURL' are missing in this context. -->
+        <Style>
+          <Name>default</Name>
+          <Title>default</Title>
+          <LegendURL width="152" height="30">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=diploma_europeo&amp;format=image/png&amp;STYLE=default"/>
+          </LegendURL>
+        </Style>
+    </Layer>
+    <Layer queryable="1" opaque="0" cascaded="0">
+        <Name>Toponimos</Name>
+        <Title>Topónimos     </Title>
+        <Abstract>Topónimos de la RENPA </Abstract>
+        <KeywordList>
+            <Keyword>espacios protegidos</Keyword>
+            <Keyword> protección de áreas naturales</Keyword>
+        </KeywordList>
+        <CRS>EPSG:3042</CRS>
+        <EX_GeographicBoundingBox>
+            <westBoundLongitude>-8.020348</westBoundLongitude>
+            <eastBoundLongitude>-1.160932</eastBoundLongitude>
+            <southBoundLatitude>34.609163</southBoundLatitude>
+            <northBoundLatitude>38.879132</northBoundLatitude>
+        </EX_GeographicBoundingBox>
+        <BoundingBox CRS="EPSG:3042"
+                    minx="3.84e+06" miny="63761" maxx="4.30336e+06" maxy="659557" />
+        <BoundingBox CRS="EPSG:25830"
+                    minx="63761" miny="3.84e+06" maxx="659557" maxy="4.30336e+06" />
+        <BoundingBox CRS="EPSG:25829"
+                    minx="585103" miny="3.83041e+06" maxx="1.20988e+06" maxy="4.33107e+06" />
+        <BoundingBox CRS="EPSG:23030"
+                    minx="63741.6" miny="3.84006e+06" maxx="659671" maxy="4.30357e+06" />
+        <BoundingBox CRS="EPSG:32629"
+                    minx="585103" miny="3.83041e+06" maxx="1.20988e+06" maxy="4.33107e+06" />
+        <BoundingBox CRS="EPSG:32630"
+                    minx="63761" miny="3.84e+06" maxx="659557" maxy="4.30336e+06" />
+        <BoundingBox CRS="EPSG:3785"
+                    minx="-892821" miny="4.11089e+06" maxx="-129234" maxy="4.70437e+06" />
+        <BoundingBox CRS="EPSG:3857"
+                    minx="-892821" miny="4.11089e+06" maxx="-129234" maxy="4.70437e+06" />
+        <BoundingBox CRS="EPSG:4230"
+                    minx="34.609163" miny="-8.018968" maxx="38.880350" maxy="-1.159704" />
+        <BoundingBox CRS="EPSG:4258"
+                    minx="34.609163" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+        <BoundingBox CRS="EPSG:4326"
+                    minx="34.609163" miny="-8.020348" maxx="38.879132" maxy="-1.160932" />
+        <BoundingBox CRS="CRS:84"
+                    minx="-8.020348" miny="34.609163" maxx="-1.160932" maxy="38.879132" />
+        <BoundingBox CRS="EPSG:900913"
+                    minx="-892821" miny="4.11089e+06" maxx="-129234" maxy="4.70437e+06" />
+<!-- WARNING: Some mandatory elements for 'MetadataURL' are missing in this context. -->
+        <Style>
+          <Name>default</Name>
+          <Title>default</Title>
+          <LegendURL width="85" height="30">
+             <Format>image/png</Format>
+             <OnlineResource xmlns:xlink="http://www.w3.org/1999/xlink" xlink:type="simple" xlink:href="https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?language=spa&amp;version=1.3.0&amp;service=WMS&amp;request=GetLegendGraphic&amp;sld_version=1.1.0&amp;layer=Toponimos&amp;format=image/png&amp;STYLE=default"/>
+          </LegendURL>
+        </Style>
+    </Layer>
+  </Layer>
+</Capability>
+</WMS_Capabilities>

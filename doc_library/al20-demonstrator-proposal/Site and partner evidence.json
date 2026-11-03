@@ -1,0 +1,683 @@
+{
+  "verified_on": "2026-11-03",
+  "cadastre": [
+    {
+      "reference": "04011A012000110000JM",
+      "source": "Direccion General del Catastro, public non-protected data",
+      "verified_on": "2026-11-03",
+      "coordinates": {
+        "status": "retrieved",
+        "url": "https://ovc.catastro.meh.es/ovcservweb/ovcswlocalizacionrc/ovccoordenadas.asmx/Consulta_CPMRC?Provincia=&Municipio=&SRS=EPSG%3A4326&RC=04011A01200011",
+        "values": [
+          {
+            "tag": "cucoor",
+            "text": "1"
+          },
+          {
+            "tag": "cuerr",
+            "text": "0"
+          },
+          {
+            "tag": "pc1",
+            "text": "04011A0"
+          },
+          {
+            "tag": "pc2",
+            "text": "1200011"
+          },
+          {
+            "tag": "xcen",
+            "text": "-2.56258768359015"
+          },
+          {
+            "tag": "ycen",
+            "text": "36.9630588745528"
+          },
+          {
+            "tag": "srs",
+            "text": "EPSG:4326"
+          },
+          {
+            "tag": "ldt",
+            "text": "Polígono 12 Parcela 11 CONJURO. ALHAMA DE ALMERIA (ALMERÍA)"
+          }
+        ]
+      },
+      "nonprotected": {
+        "status": "retrieved",
+        "url": "https://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/Consulta_DNPRC?Provincia=&Municipio=&RC=04011A012000110000JM",
+        "values": [
+          {
+            "tag": "cudnp",
+            "text": "1"
+          },
+          {
+            "tag": "cucul",
+            "text": "1"
+          },
+          {
+            "tag": "cn",
+            "text": "RU"
+          },
+          {
+            "tag": "pc1",
+            "text": "04011A0"
+          },
+          {
+            "tag": "pc2",
+            "text": "1200011"
+          },
+          {
+            "tag": "car",
+            "text": "0000"
+          },
+          {
+            "tag": "cc1",
+            "text": "J"
+          },
+          {
+            "tag": "cc2",
+            "text": "M"
+          },
+          {
+            "tag": "cp",
+            "text": "04"
+          },
+          {
+            "tag": "cm",
+            "text": "11"
+          },
+          {
+            "tag": "cmc",
+            "text": "11"
+          },
+          {
+            "tag": "np",
+            "text": "ALMERÍA"
+          },
+          {
+            "tag": "nm",
+            "text": "ALHAMA DE ALMERIA"
+          },
+          {
+            "tag": "czc",
+            "text": "0"
+          },
+          {
+            "tag": "cpo",
+            "text": "12"
+          },
+          {
+            "tag": "cpa",
+            "text": "11"
+          },
+          {
+            "tag": "npa",
+            "text": "CONJURO"
+          },
+          {
+            "tag": "cpaj",
+            "text": "44"
+          },
+          {
+            "tag": "ldt",
+            "text": "Polígono 12 Parcela 11 CONJURO. ALHAMA DE ALMERIA (ALMERÍA)"
+          },
+          {
+            "tag": "luso",
+            "text": "Agrario"
+          },
+          {
+            "tag": "sfc",
+            "text": "0"
+          },
+          {
+            "tag": "cspr",
+            "text": "0"
+          },
+          {
+            "tag": "ccc",
+            "text": "CR"
+          },
+          {
+            "tag": "dcc",
+            "text": "LABOR -TIERRA ARABLE"
+          },
+          {
+            "tag": "ip",
+            "text": "16"
+          },
+          {
+            "tag": "ssp",
+            "text": "4450"
+          }
+        ]
+      }
+    },
+    {
+      "reference": "04011A012000110001KQ",
+      "source": "Direccion General del Catastro, public non-protected data",
+      "verified_on": "2026-11-03",
+      "coordinates": {
+        "status": "retrieved",
+        "url": "https://ovc.catastro.meh.es/ovcservweb/ovcswlocalizacionrc/ovccoordenadas.asmx/Consulta_CPMRC?Provincia=&Municipio=&SRS=EPSG%3A4326&RC=04011A01200011",
+        "values": [
+          {
+            "tag": "cucoor",
+            "text": "1"
+          },
+          {
+            "tag": "cuerr",
+            "text": "0"
+          },
+          {
+            "tag": "pc1",
+            "text": "04011A0"
+          },
+          {
+            "tag": "pc2",
+            "text": "1200011"
+          },
+          {
+            "tag": "xcen",
+            "text": "-2.56258768359015"
+          },
+          {
+            "tag": "ycen",
+            "text": "36.9630588745528"
+          },
+          {
+            "tag": "srs",
+            "text": "EPSG:4326"
+          },
+          {
+            "tag": "ldt",
+            "text": "Polígono 12 Parcela 11 CONJURO. ALHAMA DE ALMERIA (ALMERÍA)"
+          }
+        ]
+      },
+      "nonprotected": {
+        "status": "retrieved",
+        "url": "https://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/Consulta_DNPRC?Provincia=&Municipio=&RC=04011A012000110001KQ",
+        "values": [
+          {
+            "tag": "cudnp",
+            "text": "1"
+          },
+          {
+            "tag": "cucons",
+            "text": "1"
+          },
+          {
+            "tag": "cucul",
+            "text": "0"
+          },
+          {
+            "tag": "cn",
+            "text": "UR"
+          },
+          {
+            "tag": "pc1",
+            "text": "04011A0"
+          },
+          {
+            "tag": "pc2",
+            "text": "1200011"
+          },
+          {
+            "tag": "car",
+            "text": "0001"
+          },
+          {
+            "tag": "cc1",
+            "text": "K"
+          },
+          {
+            "tag": "cc2",
+            "text": "Q"
+          },
+          {
+            "tag": "cp",
+            "text": "04"
+          },
+          {
+            "tag": "cm",
+            "text": "11"
+          },
+          {
+            "tag": "cmc",
+            "text": "11"
+          },
+          {
+            "tag": "np",
+            "text": "ALMERÍA"
+          },
+          {
+            "tag": "nm",
+            "text": "ALHAMA DE ALMERIA"
+          },
+          {
+            "tag": "cv",
+            "text": "NC"
+          },
+          {
+            "tag": "tv",
+            "text": "NC"
+          },
+          {
+            "tag": "nv",
+            "text": "NC"
+          },
+          {
+            "tag": "czc",
+            "text": "0"
+          },
+          {
+            "tag": "cpo",
+            "text": "12"
+          },
+          {
+            "tag": "cpa",
+            "text": "11"
+          },
+          {
+            "tag": "npa",
+            "text": "CONJURO"
+          },
+          {
+            "tag": "cpaj",
+            "text": "44"
+          },
+          {
+            "tag": "ldt",
+            "text": "Polígono 12 Parcela 11 CONJURO. ALHAMA DE ALMERIA (ALMERÍA)"
+          },
+          {
+            "tag": "luso",
+            "text": "Residencial"
+          },
+          {
+            "tag": "sfc",
+            "text": "29"
+          },
+          {
+            "tag": "cpt",
+            "text": "100,000000"
+          },
+          {
+            "tag": "ant",
+            "text": "1997"
+          },
+          {
+            "tag": "lcd",
+            "text": "VIVIENDA"
+          },
+          {
+            "tag": "es",
+            "text": "1"
+          },
+          {
+            "tag": "pt",
+            "text": "00"
+          },
+          {
+            "tag": "pu",
+            "text": "01"
+          },
+          {
+            "tag": "stl",
+            "text": "29"
+          }
+        ]
+      }
+    },
+    {
+      "reference": "04011A012000190000JE",
+      "source": "Direccion General del Catastro, public non-protected data",
+      "verified_on": "2026-11-03",
+      "coordinates": {
+        "status": "retrieved",
+        "url": "https://ovc.catastro.meh.es/ovcservweb/ovcswlocalizacionrc/ovccoordenadas.asmx/Consulta_CPMRC?Provincia=&Municipio=&SRS=EPSG%3A4326&RC=04011A01200019",
+        "values": [
+          {
+            "tag": "cucoor",
+            "text": "1"
+          },
+          {
+            "tag": "cuerr",
+            "text": "0"
+          },
+          {
+            "tag": "pc1",
+            "text": "04011A0"
+          },
+          {
+            "tag": "pc2",
+            "text": "1200019"
+          },
+          {
+            "tag": "xcen",
+            "text": "-2.56312125797074"
+          },
+          {
+            "tag": "ycen",
+            "text": "36.9633956331649"
+          },
+          {
+            "tag": "srs",
+            "text": "EPSG:4326"
+          },
+          {
+            "tag": "ldt",
+            "text": "Polígono 12 Parcela 19 CONJURO. ALHAMA DE ALMERIA (ALMERÍA)"
+          }
+        ]
+      },
+      "nonprotected": {
+        "status": "retrieved",
+        "url": "https://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx/Consulta_DNPRC?Provincia=&Municipio=&RC=04011A012000190000JE",
+        "values": [
+          {
+            "tag": "cudnp",
+            "text": "1"
+          },
+          {
+            "tag": "cucul",
+            "text": "1"
+          },
+          {
+            "tag": "cn",
+            "text": "RU"
+          },
+          {
+            "tag": "pc1",
+            "text": "04011A0"
+          },
+          {
+            "tag": "pc2",
+            "text": "1200019"
+          },
+          {
+            "tag": "car",
+            "text": "0000"
+          },
+          {
+            "tag": "cc1",
+            "text": "J"
+          },
+          {
+            "tag": "cc2",
+            "text": "E"
+          },
+          {
+            "tag": "cp",
+            "text": "04"
+          },
+          {
+            "tag": "cm",
+            "text": "11"
+          },
+          {
+            "tag": "cmc",
+            "text": "11"
+          },
+          {
+            "tag": "np",
+            "text": "ALMERÍA"
+          },
+          {
+            "tag": "nm",
+            "text": "ALHAMA DE ALMERIA"
+          },
+          {
+            "tag": "czc",
+            "text": "0"
+          },
+          {
+            "tag": "cpo",
+            "text": "12"
+          },
+          {
+            "tag": "cpa",
+            "text": "19"
+          },
+          {
+            "tag": "npa",
+            "text": "CONJURO"
+          },
+          {
+            "tag": "cpaj",
+            "text": "44"
+          },
+          {
+            "tag": "ldt",
+            "text": "Polígono 12 Parcela 19 CONJURO. ALHAMA DE ALMERIA (ALMERÍA)"
+          },
+          {
+            "tag": "luso",
+            "text": "Agrario"
+          },
+          {
+            "tag": "sfc",
+            "text": "0"
+          },
+          {
+            "tag": "cspr",
+            "text": "0"
+          },
+          {
+            "tag": "ccc",
+            "text": "CR"
+          },
+          {
+            "tag": "dcc",
+            "text": "LABOR -TIERRA ARABLE"
+          },
+          {
+            "tag": "ip",
+            "text": "15"
+          },
+          {
+            "tag": "ssp",
+            "text": "3056"
+          }
+        ]
+      }
+    }
+  ],
+  "parcel_footprints": [
+    {
+      "reference": "04011A01200011",
+      "status": "retrieved",
+      "url": "https://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx?service=wfs&version=2.0.0&request=getfeature&STOREDQUERY_ID=GetParcel&REFCAT=04011A01200011&srsname=EPSG%3A%3A25830",
+      "fields": [
+        {
+          "tag": "areaValue",
+          "text": "4479",
+          "attrs": {
+            "uom": "m2"
+          }
+        },
+        {
+          "tag": "posList",
+          "text": "538930.22 4090821.51 538930.19 4090821.46 538929.97 4090821.26 538928.33 4090819.79 538928.14 4090819.62 538924.91 4090818.09 538923.49 4090817.86 538923.17 4090817.81 538922.59 4090818.28 538922.15 4090818.64 538921.43 4090819.98 538919.38 4090823.81 538917.57 4090826.95 538919.13 4090830.82 538922.61 4090836.71 538922.42 4090836.94 538919.67 4090840.26 538915.55 4090846.41 538915.51 4090846.33 538915.45 4090846.43 538920.61 4090855.81 538907.92 4090864.16 538903.39 4090867.2 538901.94 4090868.35 538900.09 4090870.16 538897.46 4090873.62 538898.49 4090874.34 538899.58 4090883.52 538899.96 4090886.64 538900.15 4090887.32 538901.62 4090893.57 538904.72 4090893.55 538913.99 4090894.15 538917.13 4090893.72 538919.33 4090893.45 538919.37 4090894.28 538921.67 4090907.63 538923.39 4090917.52 538923.1 4090917.8 538922.97 4090917.94 538921.4 4090919.51 538922.47 4090920.58 538921.86 4090921.19 538921.53 4090921.52 538923.43 4090923.41 538926.64 4090926.61 538927.59 4090925.66 538928.82 4090924.43 538929.85 4090925.46 538931.31 4090926.91 538934.9 4090926.25 538939.85 4090916.81 538940.88 4090914.86 538941.06 4090912.51 538941.19 4090910.82 538941.38 4090909.93 538942.31 4090907.59 538943.14 4090905.47 538943.39 4090904.83 538946.28 4090900.5 538949.45 4090895.84 538950.14 4090895.06 538953.37 4090891.41 538957.44 4090886.53 538966.3 4090876.39 538969.35 4090872.9 538972.57 4090870.2 538974.29 4090868.71 538978.28 4090866.59 538980.16 4090865.84 538980.56 4090858.41 538979.18 4090853.26 538977.48 4090850.21 538974.42 4090845.95 538973.68 4090844.92 538963.56 4090835.89 538962.64 4090837.67 538961.91 4090839.07 538960.04 4090838.53 538955.16 4090835.53 538951.87 4090834.81 538948.35 4090834.15 538941.63 4090832.59 538933.82 4090827.69 538933.54 4090827.51 538930.5 4090822.02 538930.22 4090821.51",
+          "attrs": {
+            "srsDimension": "2",
+            "count": "87"
+          }
+        },
+        {
+          "tag": "label",
+          "text": "00011",
+          "attrs": {}
+        },
+        {
+          "tag": "nationalCadastralReference",
+          "text": "04011A01200011",
+          "attrs": {}
+        },
+        {
+          "tag": "pos",
+          "text": "538938.13 4090863.76",
+          "attrs": {}
+        }
+      ]
+    },
+    {
+      "reference": "04011A01200019",
+      "status": "retrieved",
+      "url": "https://ovc.catastro.meh.es/INSPIRE/wfsCP.aspx?service=wfs&version=2.0.0&request=getfeature&STOREDQUERY_ID=GetParcel&REFCAT=04011A01200019&srsname=EPSG%3A%3A25830",
+      "fields": [
+        {
+          "tag": "areaValue",
+          "text": "3056",
+          "attrs": {
+            "uom": "m2"
+          }
+        },
+        {
+          "tag": "posList",
+          "text": "538921.4 4090919.51 538922.97 4090917.94 538923.1 4090917.8 538923.39 4090917.52 538923.37 4090917.46 538921.67 4090907.63 538919.37 4090894.28 538919.33 4090893.45 538917.13 4090893.72 538913.99 4090894.15 538904.72 4090893.55 538901.62 4090893.57 538900.15 4090887.32 538899.96 4090886.64 538899.58 4090883.52 538898.49 4090874.34 538897.46 4090873.62 538900.09 4090870.16 538896.42 4090864.23 538894.7 4090861.44 538887.18 4090868.03 538886.12 4090868.97 538880.3 4090874.1 538872.85 4090880.62 538867.57 4090885.24 538863.16 4090894.44 538861.17 4090899.83 538859.1 4090911.38 538859.66 4090916.34 538860.59 4090921.62 538861.14 4090928.67 538861.63 4090933.15 538864.21 4090930.57 538870.94 4090930.57 538876.56 4090931.13 538881.63 4090931.59 538886.12 4090932 538898.06 4090932.11 538903.71 4090931.81 538907.21 4090931.62 538908.37 4090931.56 538928.4 4090930.01 538933.66 4090926.97 538934.9 4090926.25 538931.31 4090926.91 538929.85 4090925.46 538928.82 4090924.43 538927.59 4090925.66 538926.64 4090926.61 538923.43 4090923.41 538921.53 4090921.52 538921.86 4090921.19 538922.47 4090920.58 538921.4 4090919.51",
+          "attrs": {
+            "srsDimension": "2",
+            "count": "54"
+          }
+        },
+        {
+          "tag": "label",
+          "text": "00019",
+          "attrs": {}
+        },
+        {
+          "tag": "nationalCadastralReference",
+          "text": "04011A01200019",
+          "attrs": {}
+        },
+        {
+          "tag": "pos",
+          "text": "538890.46 4090900.9",
+          "attrs": {}
+        }
+      ]
+    }
+  ],
+  "protected_screening_requests": [
+    {
+      "layer": "eennpp",
+      "status": "map_retrieved",
+      "url": "https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=eennpp&STYLES=&CRS=EPSG%3A25830&BBOX=538840%2C4090790%2C539000%2C4090950&WIDTH=800&HEIGHT=800&FORMAT=image%2Fpng&TRANSPARENT=TRUE",
+      "bbox_epsg25830": [
+        538840,
+        4090790,
+        539000,
+        4090950
+      ],
+      "nonzero_alpha_pixels": 0,
+      "interpretation": "Raster screen only. No legal, habitat or permit clearance is inferred."
+    },
+    {
+      "layer": "red_natura_2000",
+      "status": "map_retrieved",
+      "url": "https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=red_natura_2000&STYLES=&CRS=EPSG%3A25830&BBOX=538840%2C4090790%2C539000%2C4090950&WIDTH=800&HEIGHT=800&FORMAT=image%2Fpng&TRANSPARENT=TRUE",
+      "bbox_epsg25830": [
+        538840,
+        4090790,
+        539000,
+        4090950
+      ],
+      "nonzero_alpha_pixels": 0,
+      "interpretation": "Raster screen only. No legal, habitat or permit clearance is inferred."
+    }
+  ],
+  "protected_screening_sources": [
+    {
+      "source": "RENPA",
+      "status": "retrieved",
+      "url": "https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?service=WMS&request=GetCapabilities&version=1.3.0",
+      "layers": [
+        {
+          "name": "REDIAM",
+          "title": "REDIAM. WMS Mapa Red de Espacios Naturales Protegidos de Andalucía (RENPA)    ",
+          "queryable": "1"
+        },
+        {
+          "name": "eennpp",
+          "title": "Espacios Naturales Protegidos de Andalucía (EENNPP)",
+          "queryable": "1"
+        },
+        {
+          "name": "humedales_ramsar",
+          "title": "Humedales andaluces incluidos en la Lista de Ramsar, octubre 2025    ",
+          "queryable": "1"
+        },
+        {
+          "name": "red_natura_2000",
+          "title": "Red Natura 2000 (LIC, ZEC y ZEPA) en Andalucía     ",
+          "queryable": "1"
+        },
+        {
+          "name": "reservas_biosfera",
+          "title": "Reservas de la Biosfera de Andalucía, junio de 2017   ",
+          "queryable": "1"
+        },
+        {
+          "name": "ZEPIM",
+          "title": "Zonas Especialmente Protegidas de Importancia para el Mediterráneo (ZEPIM) de Andalucía, junio de 2019   ",
+          "queryable": "1"
+        },
+        {
+          "name": "patrimonio_humanidad",
+          "title": "Patrimonio de la Humanidad (bien natural) en Andalucía: Doñana, febrero de 2005   ",
+          "queryable": "1"
+        },
+        {
+          "name": "geoparques",
+          "title": "Geoparques de Andalucía, septiembre de 2011     ",
+          "queryable": "1"
+        },
+        {
+          "name": "diploma_europeo",
+          "title": "Diploma Europeo de Calidad de Espacios Protegidos en Andalucía   ",
+          "queryable": "1"
+        },
+        {
+          "name": "Toponimos",
+          "title": "Topónimos     ",
+          "queryable": "1"
+        }
+      ]
+    },
+    {
+      "source": "Natura2000",
+      "status": "failed",
+      "url": "https://geoserver.iepnb.es/geoserver/RN2000/wms?service=WMS&request=GetCapabilities",
+      "error": "HTTP Error 503: Service Unavailable"
+    }
+  ],
+  "partner_sources": [
+    {
+      "id": "gea-planting-2024",
+      "url": "https://barjali-gea.blogspot.com/2024/12/plantacion-de-bosque-autoctono.html",
+      "status": "retrieved",
+      "characters": 6525
+    },
+    {
+      "id": "gea-restoration-2023",
+      "url": "https://barjali-gea.blogspot.com/2023/02/reforestacion-en-sierra-de-gador-gatuna.html",
+      "status": "retrieved",
+      "characters": 9464
+    },
+    {
+      "id": "gea-membership",
+      "url": "https://barjali-gea.blogspot.com/2020/02/quieres-ser-sociao-de-la-sdm-barjali-gea.html",
+      "status": "retrieved",
+      "characters": 7484
+    },
+    {
+      "id": "kalima-provincial-source",
+      "url": "https://blog.dipalme.org/samba-desert-volvera-lograr-que-huecija-sienta-la-musica/",
+      "status": "retrieved",
+      "characters": 25103
+    }
+  ]
+}

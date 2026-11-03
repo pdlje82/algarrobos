@@ -1,0 +1,88 @@
+{
+  "funding_downloads": [
+    {
+      "id": "FUND-004",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/03/Listado%20criterios%20AL20.pdf",
+      "final_url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/03/Listado%20criterios%20AL20.pdf",
+      "status": "downloaded",
+      "sha256": "a85c896fa800970f7bb611ab26b215db745ed26513dc30b87e509cc9da11ec64",
+      "matches_registered": true,
+      "bytes": 4216426
+    },
+    {
+      "id": "FUND-008",
+      "url": "https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf",
+      "final_url": "https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf",
+      "status": "downloaded",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "matches_registered": true,
+      "bytes": 2579114
+    },
+    {
+      "id": "FUND-009",
+      "url": "https://www.juntadeandalucia.es/eboja/2026/76/BOJA26-076-00061-5258-01_00336495.pdf",
+      "final_url": "https://www.juntadeandalucia.es/eboja/2026/76/BOJA26-076-00061-5258-01_00336495.pdf",
+      "status": "downloaded",
+      "sha256": "ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e",
+      "matches_registered": true,
+      "bytes": 5340965
+    },
+    {
+      "id": "FUND-010",
+      "url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/Guia-instrucciones-especificas-publicas_Criterios-seleccion-promotores_7119-2_LEADER_v2-4.pdf",
+      "final_url": "https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/Guia-instrucciones-especificas-publicas_Criterios-seleccion-promotores_7119-2_LEADER_v2-4.pdf",
+      "status": "downloaded",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "matches_registered": true,
+      "bytes": 2327481
+    }
+  ],
+  "additional_sources": [
+    {
+      "id": "ifapa-aromatics",
+      "url": "https://www.juntadeandalucia.es/agriculturaypesca/ifapa/web/en/node/64443",
+      "final_url": "https://www.juntadeandalucia.es/agriculturaypesca/ifapa/web/en/node/64443",
+      "status": "retrieved",
+      "bytes": 130882,
+      "temporary_cache_at_verification": "tmp\\pdfs\\al20-proposal\\ifapa-aromatics.txt",
+      "temporary_cache_retained": false
+    },
+    {
+      "id": "ifapa-programme",
+      "url": "https://www.juntadeandalucia.es/agriculturaypesca/ifapa/web/node/64023",
+      "final_url": "https://www.juntadeandalucia.es/agriculturaypesca/ifapa/web/node/64023",
+      "status": "retrieved",
+      "bytes": 126213,
+      "temporary_cache_at_verification": "tmp\\pdfs\\al20-proposal\\ifapa-programme.txt",
+      "temporary_cache_retained": false
+    },
+    {
+      "id": "forest-authorisation",
+      "url": "https://www.juntadeandalucia.es/servicios/sede/tramites/procedimientos/detalle/769",
+      "final_url": "https://www.juntadeandalucia.es/servicios/sede/tramites/procedimientos/detalle/769",
+      "status": "retrieved",
+      "bytes": 1680,
+      "temporary_cache_at_verification": "tmp\\pdfs\\al20-proposal\\forest-authorisation.txt",
+      "temporary_cache_retained": false
+    },
+    {
+      "id": "uco-handbook",
+      "url": "https://www.uco.es/servicios/ucopress/omp/index.php/ucopress/catalog/download/69/83/1938?inline=1",
+      "final_url": "https://www.uco.es/servicios/ucopress/omp/index.php/ucopress/catalog/download/69/83/1938?inline=1",
+      "status": "retrieved",
+      "bytes": 44034674,
+      "temporary_cache_at_verification": "tmp\\pdfs\\al20-proposal\\uco-handbook.pdf",
+      "temporary_cache_retained": false
+    }
+  ],
+  "verification_date": "2026-11-03",
+  "edll_download": {
+    "id": "FUND-013",
+    "url": "https://drive.google.com/uc?export=download&id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK",
+    "final_url": "https://drive.usercontent.google.com/download?id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK&export=download",
+    "status": "downloaded",
+    "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+    "matches_registered": true,
+    "bytes": 31276275
+  }
+}

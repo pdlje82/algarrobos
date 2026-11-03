@@ -1,0 +1,74 @@
+FROM A DEMONSTRATOR TO AN EDUCATIONAL RESTORATION PARK
+Companion source and production notes
+Prepared 3 November 2026. Language: English.
+
+STATUS AND SCOPE
+
+This is a proposed goal and listening brief, not the researched funding proposal. No goal has been activated by generating these files. No saved project or funding selection has been modified. The intended saved project and funding version still need to be identified when the goal is activated. This brief does not certify eligibility, confirm a currently open call, select a site-specific planting scheme or report trial results.
+
+The user supplied the objectives: a Line 3.4 demonstrator that informs a later Line 3.5 educational restoration park; locally appropriate native plants and low water consumption; EPUB delivery for listening in ElevenReader without disruptive citations. Activity examples are proposed research directions, not externally validated prescriptions.
+
+CHAPTER ONE: THE GOAL
+
+Source: the user's instructions in this conversation on 3 November 2026. The goal wording in Goal.txt is the reusable task instruction. The seven EPUB chapters explain its scope, boundaries, deliverables and completion standard.
+
+CHAPTER TWO: PROJECT INPUTS AND APP CAPABILITIES
+
+Repository sources read on 3 November 2026:
+- AGENTS.md: mandatory handling of missing information, explicit recovery, versioned state, central design rules and reviewed adoption.
+- restoration_simulator/FUNDING_NAVIGATOR.md, sections Four areas, project overview and autosaved versions, and Activities and delivery: selected criteria and references, provisional scoring, retained editions, concept activities, monitoring/sharing plans and reviewed transfers.
+- restoration_simulator/backend/project_concepts.py, source_context and report: recorded baseline and scoring snapshots, linked claims and activities, missing-detail reporting and source references.
+- restoration_simulator/design_rules/README.md: the designer is hypothetical layout, not a suitability model; ecological evidence and drawing assumptions are distinct.
+
+No active user save was opened or assessed to create this brief.
+
+CHAPTER THREE: A COMPLETE DEMONSTRATOR
+
+Junta de Andalucia. Order of 3 February 2026, published BOJA number 29 on 12 February 2026. Annex I, category 3.4, especially section 1 on demonstration and local novelty, and section 3(d) on independently applicable or disseminable results. The official HTML was read on 3 November 2026 during this conversation.
+Official publication: https://www.juntadeandalucia.es/boja/2026/29/1
+Direct official PDF, already stored in doc_library as FUND-008: https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf
+Relevant PDF pages registered by the app: 120-122 for category 3.4. Cite exact subsections when conducting the full research.
+
+CHAPTER FOUR: RESTORATION RESEARCH REQUIREMENTS
+
+Source: the user's ecological and educational objectives, and the repository's design_rules/README.md. The brief asks for a later site-specific investigation. It does not assert that a particular species, tree density, watering schedule or treatment is appropriate. Monitoring variables and possible park activities are proposed subjects for that investigation.
+
+CHAPTER FIVE: FUNDING AND SCORING
+
+Junta de Andalucia. Order of 3 February 2026, Annex I, categories 3.4 and 3.5. Category 3.5 covers rural heritage including environmental heritage; section 3(b) requires dissemination and/or public use. Category 3.4 section 2 and category 3.5 section 2 describe reimbursement. Publication and direct PDF links are given under chapter three. Relevant app-registered PDF pages for category 3.5: 123-124.
+
+The following documents are already stored in doc_library. These links and edition details are transcribed from the app's source registration and catalog; source records report a byte-for-byte download check on 1 November 2026. This brief does not claim a fresh content review of all these PDFs or an exhaustive search for amendments. Reverification is part of the proposed goal.
+
+FUND-004. AL20 local LEADER selection criteria, 2026. Issuer: Junta de Andalucia, AL20 local selection table. Local catalogue: 20 pages. Official download is linked from the AL20 publication page, opened on 3 November 2026; an attempted web-tool PDF retrieval timed out, so no fresh PDF-content verification is claimed.
+Publication page: https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores-al-al20.html
+Recorded direct PDF: https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/03/Listado%20criterios%20AL20.pdf
+
+FUND-009. Junta de Andalucia. Resolution of 13 April 2026, published BOJA number 76 on 22 April 2026. LEADER call for applicants other than rural development groups. Local catalogue: 61 pages.
+Recorded direct PDF: https://www.juntadeandalucia.es/eboja/2026/76/BOJA26-076-00061-5258-01_00336495.pdf
+
+FUND-010. Junta de Andalucia. LEADER selection-criteria verification guide, version 2, public version 4. Drafted 11 September 2026; official listing dated 25 September 2026. Local catalogue: 231 pages. It complements the selected AL20 criteria; it does not establish which regional criteria AL20 selected.
+Recorded direct PDF: https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/Guia-instrucciones-especificas-publicas_Criterios-seleccion-promotores_7119-2_LEADER_v2-4.pdf
+
+FUND-013. ADR Alpujarra-Sierra Nevada Almeriense. EDLL 2023-2027, version 1, dated 19 November 2024 on the official Junta listing. Local catalogue: 544 pages.
+Official publication page: the AL20 page linked above.
+Recorded officially linked PDF download: https://drive.google.com/uc?export=download&id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK
+
+No additional external funding document was added to the library when this brief was produced. The new library item is this original goal/listening brief and its companions.
+
+CHAPTER SIX: ELEVENREADER AND LISTENING FORMAT
+
+ElevenLabs. How do I add content to ElevenReader? Publication date not stated; official page opened and read 3 November 2026. It lists EPUB among supported file imports.
+https://elevenlabs.io/docs/help-center/product/mobile-apps/elevenreader/how-do-i-add-content-to-elevenreader
+
+ElevenLabs. What do I need to look out for in the publishing editor? Publication date not stated; official page opened and read 3 November 2026. It recommends chapter headings, moving details that do not translate well into audio to the back, and removing page references and unwanted artifacts. This is publishing-editor guidance, not proof of private-import behaviour.
+https://elevenlabs.io/docs/help-center/product/distribution-publishing/elevenreader-publishing/what-do-i-need-to-look-out-for-in-the-publishing-editor
+
+The separate source-notes file is an editorial choice to avoid relying on a reader's treatment of links or footnotes. No assumption is made that ElevenReader skips references, EPUB footnotes or non-linear appendix items. The narration contains no source appendix and no external links. The navigation document is outside the normal reading spine.
+
+CHAPTER SEVEN: COMPLETION STANDARD
+
+Source: the proposed operating contract derived from the user instructions, repository requirements and the funding boundaries described above. The completion standard concerns the researched proposal and its evidence trail. Completing the proposal cannot create field observations, permissions or an award decision.
+
+PRODUCTION
+
+The deliverable is an EPUB 3 publication with seven chapter files, navigation, English language metadata and a plain-text narration companion. Goal.txt preserves the reusable goal wording separately. Package integrity, XML, manifest/spine references, chapter order, text completeness and absence of citation clutter are checked during generation. Direct playback in ElevenReader has not been tested.

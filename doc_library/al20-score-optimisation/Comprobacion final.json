@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-03",
+  "goal_scope": "Prospective activities and application score design, not completed trial or awarded funding",
+  "proposed_score": 66.49,
+  "programme_points": 54.49,
+  "conditional_applicant_points": 12,
+  "score_accredited_today": null,
+  "scenario_site": "04011A012000190000JE",
+  "model_cases": 11,
+  "valid_programme_combinations": 24,
+  "dependency_exclusions": 8,
+  "local_html_targets_checked": 10,
+  "visual_review": "Desktop and mobile companion, application text and opening EPUB chapter inspected: readable, no clipping or missing text observed",
+  "external_links": "Source downloads re-used from same-day verified prior research; PDF source bytes rechecked. No new documents added.",
+  "unresolved_essential_gaps": [
+    "Eligible applicant identity and competence",
+    "Active membership/statutes/GDR reports for both PS.1 claims",
+    "Owner agreement, public access and permits",
+    "Ecological suitability, local demonstration novelty and final protocol",
+    "Proportionate equipment needs and quotations",
+    "Beyond-minimum accessibility report and staff training commitments",
+    "Acceptance of SP.1 new service and IN.1 residential-attraction theme",
+    "Actual budget, financing, continuity and current local intake"
+  ],
+  "app_save_sha256": "dd6350d816c47b55b22876cec2f3035cd80029c81369b2f4263aa0faae0a5739",
+  "baseline_copy_sha256": "6b8060638b01e00330cc911f1ec879c9c4729b543318b658004354a902c7f74f",
+  "direct_elevenreader_playback_checked": false,
+  "no_application_mutation": true,
+  "no_messages_sent": true,
+  "no_association_chosen": true
+}

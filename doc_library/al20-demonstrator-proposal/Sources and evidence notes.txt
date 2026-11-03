@@ -1,0 +1,245 @@
+A SMALL TRIAL BEFORE A PARK
+Sources, evidence, scoring and production notes
+Research and proposal date: 3 November 2026. Narrative language: English.
+
+READ THIS WITH THE EPUB
+
+The EPUB is the listening version. Its main text deliberately has no inline citation markers, footnotes, raw URLs or source catalogue codes. This companion preserves the evidence trail by chapter. The proposal is a research and discussion package, not an application, certified score, site prescription or award. Field activities have not been performed. Partners have not been contacted or committed.
+
+Evidence classes used here: official rule; public administrative record; source-reported activity; user-reported fact; saved illustrative assumption; author-proposed scenario; unresolved condition. These classes are not interchangeable.
+
+CHAPTER ONE. RECOMMENDATION AND FUNDING CONCLUSION
+
+The proposed own-land trial, maximum 200 m2, 12 plants, 6 pairs, 600-litre supply-capacity model, 12-month observation period and 4 sessions are AUTHOR-PROPOSED SCENARIO inputs. They are not measurements, results, grant requirements or app defaults. They require user review and technical approval before implementation. Their complete assumptions and arithmetic are in Scenario and scoring.json.
+
+Funding category 3.4: FUND-008, Annex I, 3.4, PDF pp. 120-122. Funding category 3.5: the same document, PDF pp. 123-124. The 60-point selection minimum is confirmed by Article 22 and the current official common promoter page. Scoring is reproduced by the repository calculator using the saved selection-library edition, not a replacement current evaluator. The app and signed criteria distinguish criterion caps, exclusive alternatives and cumulative choices.
+
+Saved subtotal 57.49, completed total null, unresolved criteria 2. Proposed withdrawal of CC.2.1, IN.1.3 and PT.1.2 yields subtotal 48.00 and still no completed total. Full machine-readable calculations and explicitly hypothetical sensitivity cases are supplied separately. No score is certified by this report.
+
+CHAPTER TWO. BASELINE IDENTITY, RULE EDITION AND PRESERVATION
+
+Source: restoration_simulator/data/active-project.json, read on 3 November 2026 and compared against read-only GET http://127.0.0.1:8000/api/export. The project, funding, planning and designer components matched. No mutation API was called.
+
+Project: My restoration journey. Project ID: a540f43a-08c4-4057-8e3a-1edefb1a8766. Simulation revision: 20. Funding working draft: AL20 Alhama. Funding workspace format: version 1, containing one working draft, zero saved funding scenarios and zero adopted funding plans. There is no named-version UUID to invent for this old workspace format. Draft format: version 4.
+
+Original save SHA-256: dd6350d816c47b55b22876cec2f3035cd80029c81369b2f4263aa0faae0a5739.
+Retained funding bundle digest: bba3aa291262eb72419d1247b44556a969b0423151239da8f43ec58dddbf943c.
+Funding catalogue version: 3, checked_on 2026-10-31. Selection-library version: 2. Completion policy: cap_or_all_answers. The current repository also supports selected-items-only edition 3, but this assessment does not migrate the user draft or substitute that completion policy.
+Retained designer ruleset: algarroba-designer-2026-10-29-v4, engine designer-v3. The exact manifest and funding snapshot are retained in Baseline and retained rules.json.
+
+The saved plan's plant quantities, costs, unknowns and available simulated cash are factual statements about the save only. The EUR 747.50 is an illustrative simulator budget. The EUR 60000 cash figure is simulation state, not verified money available to the user or nonprofit. The legal applicant override is a nonprofit placeholder, while the underlying simulation plan still names an individual. This discrepancy is recorded rather than repaired.
+
+User clarification, 3 November 2026: Cortijo Conjuro is the user's home. Own-land versus neighbour-land trial location is undecided. The user reports ownership of the own-land option and willingness to allow public-entity access. The neighbouring parcel is reported to be unused former grape land, covered in Salsola. Its sale, usufruct or other access arrangement is not agreed. The park is one idea, not a fixed adopted project. Candidate nonprofits are suggestions only.
+
+Public cadastral checks, 3 November 2026: the non-protected property service and INSPIRE parcel service returned both supplied parcel identities in Alhama de Almeria, Polygon 12, Conjuro. Full results and request URLs are in Site and partner evidence.json and the retained GML/XML responses.
+- User land: 04011A012000110000JM. Cadastral parcel 04011A01200011: areaValue 4479 m2. Rural component: 4450 m2, recorded as LABOR -TIERRA ARABLE. Parcel centroid: longitude -2.56258768359015, latitude 36.9630588745528, EPSG:4326.
+- House: 04011A012000110001KQ, sharing the same cadastral parcel. Non-protected record describes a residential component and 29 m2 constructed area. This is not a field measurement or assessment of the house and it is excluded from the demonstration.
+- Neighbour: 04011A012000190000JE. Parcel 04011A01200019: areaValue 3056 m2; rural record LABOR -TIERRA ARABLE. Centroid: longitude -2.56312125797074, latitude 36.9633956331649.
+
+The 4479 m2 parcel value is 21 m2 below the app's 4500 m2 input. The rural-component 4450 m2 value is different again and must not be substituted for total parcel area. No app area has been corrected. Cadastral use is not current ecological cover, ownership certification, a boundary survey, planning permission or forestry classification. Ownership is user-reported and needs an appropriate legal document for a grant application.
+
+Public cadastral service documentation:
+https://ovc.catastro.meh.es/ovcservweb/ovcswlocalizacionrc/ovccoordenadas.asmx?op=Consulta_CPMRC
+https://ovc.catastro.meh.es/ovcservweb/OVCSWLocalizacionRC/OVCCallejero.asmx?op=Consulta_DNPRC
+https://www.catastro.hacienda.gob.es/webinspire/
+Technical manual, Direccion General del Catastro, version 1.0, July 2016; verified official PDF available, NOT added to the library:
+https://www.catastro.hacienda.gob.es/webinspire/documentos/inspire-cp-WFS.pdf
+
+CHAPTER THREE. APPLICANT AND LANDOWNER ARRANGEMENTS
+
+Official rule: FUND-008, Annex I 3.4 sections 3-5 and 3.5 sections 3-5, PDF pp. 121-124. Listed beneficiaries are public/private nonprofit legal persons, public-law bodies, and qualifying publicly participated companies. The general framework's references to natural persons or self-employment do not override these specific route restrictions. No individual-applicant exception supporting this proposal was identified.
+
+The nonprofit must have the relevant relationship or competence at application. The owner, operator and beneficiary can have different roles, but actual legal use of the land and a genuine public-interest operation must be evidenced. A nominee nonprofit does not establish eligibility. The proposed use agreement is an author-recommended instrument to discuss with AL20 and the parties; no legally executed instrument has been inspected. Do not fund domestic works, personal landscaping or acquisition of the neighbour parcel through this trial budget. Confirm the treatment of planted material, any retained improvement and any related-party payment with AL20 before costs are claimed.
+
+Partner screening, public sources retrieved 3 November 2026:
+1. S.D.M. Barjali-GEA's own activity report, published 9 December 2024 for a 14 December 2024 event, describes native planting and maintenance at Gatuna-El Chaparral, public land in Alhama. It names GEA, local government and contributing organisations. This is evidence of reported relevant activity, not consent to this project or registration verification.
+https://barjali-gea.blogspot.com/2024/12/plantacion-de-bosque-autoctono.html
+2. The group's February 2023 report describes a native woodland restoration campaign in the same municipality, including local-provenance planting and cooperation. The article's claims of restoration need concern its public mountain site and cannot be transferred to Cortijo Conjuro.
+https://barjali-gea.blogspot.com/2023/02/reforestacion-en-sierra-de-gador-gatuna.html
+3. The 2020 membership description calls Barjali a sports section linked to GEA and describes membership via GEA/Ecologistas en Accion. It does not prove the exact legal entity or active membership required for a particular applicant in 2026.
+https://barjali-gea.blogspot.com/2020/02/quieres-ser-sociao-de-la-sdm-barjali-gea.html
+4. Diputacion de Almeria's own report of the September 2026 Samba Desert programme identifies Asociacion Cultural Kalima du Samba as organiser in Huecija. This supports cultural/community experience, not ecological competence, current registration, AL20 membership points or applicant grant history. Publication date should be verified before quoting a precise day; the programme identifies 18-20 September 2026.
+https://blog.dipalme.org/samba-desert-volvera-lograr-que-huecija-sienta-la-musica/
+The Facebook link supplied by the user returned a temporary block in the browsing tool; it was not treated as registration evidence.
+https://www.facebook.com/kalimadusamba/
+
+Recommendation: screen an existing environmental nonprofit first, particularly an appropriate legal entity behind GEA's activities if willing. Kalima may be suitable for participation support if that role is relevant and agreed. A newly constituted entity requires separate review of legal status, statutes, competence, administrative capacity and financing. No contact messages have been sent.
+
+Required applicant documents: current register extract and statutes, NIF, authorised representative and board decision, evidence of relevant competence, tax/social-security and other required declarations, actual payroll/delivery capacity, bank/cash-flow arrangements, active-membership certificates where claimed, prior LEADER history and any GDR interpretations. Do not infer that the user being a member of an association proves that the association applying is itself a qualifying member of another body.
+
+CHAPTER FOUR. SITE SUITABILITY AND PERMISSIONS
+
+Sources: user account; public cadastral responses; retained designer library and its source limitations; FOREST-002 chapter 5; the official site-specific authorisation procedures, which require further case-specific confirmation. The cadastral classification is agricultural, but the current vegetation, habitat and forestry treatment still require field and authority review.
+
+Geographic screening sources: REDIAM RENPA WMS GetCapabilities was retrieved on 3 November 2026, including layers eennpp and red_natura_2000. GetMap responses covering both parcel footprints were retrieved in EPSG:25830 within bounding box 538840,4090790,539000,4090950. The requests and any image-screening observations are retained in Site and partner evidence.json. A WMS image is screening evidence only, not an official intersection certificate or permission clearance. It does not assess watercourses, public rights of way, local planning, individual protected plants or every environmental designation. The parallel MITECO Natura 2000 WMS capabilities request returned HTTP 503; that failed check is explicitly recorded and was not treated as a negative result.
+https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_RENPA?service=WMS&request=GetCapabilities&version=1.3.0
+https://geoserver.iepnb.es/geoserver/RN2000/wms?service=WMS&request=GetCapabilities
+
+Official forestry-use procedure located:
+https://www.juntadeandalucia.es/servicios/sede/tramites/procedimientos/detalle/769
+The returned page was a JavaScript challenge rather than substantive procedure content. Search indexing identifies the official procedure, but its applicability and current requirements have not been established. No forestry permission has been inferred from it. Ask the relevant territorial authority and municipality to determine the correct procedure from the actual operation and parcel classification.
+
+Before field work: confirm the exact trial footprint outside domestic use, owner/use documentation, agricultural-to-forest or other land-use implications, protected habitats/species, slope and runoff risks, soil profile and salinity, vegetation identification, safe access, water source/right, underground services, and any municipal/environmental/earthworks permissions. For later 3.5, confirm any required in-force forest management plan or equivalent. A very small trial is not assumed to be exempt.
+
+CHAPTER FIVE. NOVELTY AND EXISTING PRACTICE
+
+Official rule: FUND-008 Annex I 3.4 section 1 defines the experimental/test/evaluation purpose and local novelty; section 3(d) requires independently usable/disseminable results. Local innovation scoring is a different test: FUND-004 PDF p. 19 and FUND-010 PDF pp. 103-104, 230-231 require the designated EDLL theme/aspect and GDR justification. A method can be novel for the operation without qualifying for a designated innovation scoring item, and generic novelty cannot replace the legal local-novelty requirement.
+
+The GEA reports listed under chapter three demonstrate existing native planting and maintenance in Alhama. IFAPA official activity records also show existing educational work: Alpujarra Agroecologica II, programme PR.FES.FES2025.005, scheduled 15 February 2025 to 18 December 2026, and the 28 November 2025 aromatic-plant workshop with a visit to Control Plant in Alhama. Full official HTML was obtained through a direct request after the web browsing tool returned HTTP 403; the content and dates were read. The agricultural programme is a precedent for learning and plants, not the same nonproductive restoration protocol.
+https://www.juntadeandalucia.es/agriculturaypesca/ifapa/web/node/64023
+https://www.juntadeandalucia.es/agriculturaypesca/ifapa/web/en/node/64443
+
+FOREST-002 PDF p. 125 describes stone mulch as an existing practice; PDF pp. 131-134 discuss dryland/oasification models, not a novel invention of this project. Albox and Mojacar examples are regional technical context, not proof of a trial within AL20. The proposed six-pair water-accounted learning comparison is a candidate design. No exhaustive local inventory was completed, and novelty is UNRESOLVED until GDR/practitioner review. Proposed novelty evidence: a comparison matrix of local approaches, consulted reports, prior trials, what exactly is new, intended users, transferable output and a documented AL20 response.
+
+CHAPTER SIX. SPECIES, PROVENANCE AND COMPARISON DESIGN
+
+Retained evidence: restoration_simulator/design_rules/README.md, rules.json, sources.json, treatments.json and the saved designer bundle. The active material type is stone; it has not been relabelled as organic mulch. No designer rule, quantity generator, diameter or saved layout has been edited. The six-pair design is a proposed research protocol outside the app, requiring explicit review before adoption.
+
+FOREST-002: Navarro Cerrillo and Palacios Rodriguez, editors, 2026, Soluciones innovadoras para consolidar el algarrobo como cultivo de alto valor en Andalucia, UCOPress, 168 pages. Chapter 5, PDF pp. 94-96 and 123-134: nursery quality/provenance, context-dependent restoration models, establishment care, stone mulch and support watering. PDF pp. 125 and 134 were rendered and visually inspected on 3 November 2026. Fresh publisher download matches the registered SHA-256 75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8. Expert guidance and demonstration examples, not a controlled proof of site suitability or of the proposed dose/density.
+Verified publisher-hosted direct PDF, ALREADY in the library as FOREST-002:
+https://www.uco.es/servicios/ucopress/omp/index.php/ucopress/catalog/download/69/83/1938?inline=1
+Publication identifier, secondary to the available direct PDF:
+https://doi.org/10.21071/000069
+
+Proposed scientific identities: carob, Ceratonia siliqua; lentisk, Pistacia lentiscus; retama, provisionally Retama sphaerocarpa, with nursery and field identity confirmation. The retama entry or a common plant name alone does not verify a local taxon or seed provenance. Specify seed source/region, nursery batch, container/root quality, plant health and invoice/traceability information. Do not buy or collect wild material on the assumption that regional native status is sufficient.
+
+Additional biological context reviewed at abstract/index level: Padilla, Ortega, Sanchez and Pugnaire, 2009, Rethinking species selection for restoration of arid shrublands, Basic and Applied Ecology 10, 640-647, DOI 10.1016/j.baae.2009.03.003. Publisher indexing describes a 14-species SE Spain experiment and strong species/context differences. The publisher page returned HTTP 403 on direct opening; full methods were not obtained. This is cautionary support for site/trait-based selection, not a transferred survival forecast or a protocol source. No verified open full-PDF download was found; publisher landing page may require payment or institutional access:
+https://www.sciencedirect.com/science/article/pii/S1439179109000292
+
+MITECO, December 2008, Tecnicas de preparacion del suelo para repoblaciones forestales en ambientes aridos y semiaridos, 11-page technical factsheet. Official PDF opened; general soil-preparation context, not a prescription for this property. Historical guidance requires current ecological and permission review. OFFERED FOR ADDITION, NOT stored in doc_library by this task:
+https://www.miteco.gob.es/content/dam/miteco/es/biodiversidad/temas/desertificacion-restauracion/0904712280144d78_tcm30-152824.pdf
+
+The initial mix changes from the saved 20 plants to 12: carob 4 to 2, lentisk stays 4, retama 4 to 6; kermes oak 2, Rhamnus lycioides 2, holm oak 1 and thyme 3 are deferred from this experiment. This is a design recommendation, not a silent deletion or a conclusion that deferred taxa are unsuitable. Four other species would increase interpretation/identification demands in a tiny trial. One carob pair, two lentisk pairs and three retama pairs are pragmatic replication; there is no power calculation proving sufficiency. Treatment dimensions, safe spacing and actual nursery stock are deliberately left for technical confirmation. If they cannot fit safely in the selected footprint, review the design explicitly before implementation.
+
+Pair protocol: match microsite and stock within species, record pair IDs and all baseline differences, randomly assign added stone treatment after pairing, retain existing cover in both treatments, standardise preparation/guards/watering rules within pairs, and log every deviation. Avoid connecting runoff between treatments. No fertiliser, organic-mulch substitution, deep ripping or artificial nurse-canopy treatment is included. Undisturbed reference quadrats indicate background change only and are not equivalent experimental controls. Six pairs cannot demonstrate general species superiority, mature canopy outcomes or long-term drought resilience.
+
+CHAPTER SEVEN. MONITORING AND INTERPRETATION
+
+Author-proposed monitoring dataset: plant ID, pair ID, species/stock batch, assigned treatment, position, initial condition, planting/preparation/mulch specification, date, observer, alive/dead/uncertain state, consistent growth metric, condition, litres supplied, watering reason, maintenance minutes, rainfall observation source, photograph ID and deviations. Missing and uncertain states remain distinct; do not replace them with zero. Replacements get new identities and are excluded from original-plant survival. Record all original outcomes, including failures.
+
+One baseline plus 12 monthly visits gives 156 scheduled plant-date records for 12 original plants. At least 90% completeness means at least 141 of those 156 records, counting valid recorded dead/uncertain states rather than dropping them. Monitoring budgets include baseline in technical work and 12 subsequent visits separately. Extra drought-response visits require a named responsible person and resources; they are not assumed free.
+
+Proposed 600-litre first-year logistics capacity is 50 litres per plant on average; it is neither a biological dose nor guaranteed sufficiency. The EUR 60 allowance is an inherited cash assumption and does not prove that 600 litres can be supplied for EUR 60. Obtain actual supply/delivery costs, source/right and ecologist-set planting/rescue triggers before proceeding. No automatic mulch water saving is assumed. Meter volumes per plant and compare within species/pairs. Without a second water treatment, the trial does not causally estimate different watering regimes.
+
+Proposed management threshold of 10 of 12 original plants alive at 12 months is an explicit author decision target, not an expected 83.3% result, a regional standard or a legal funding criterion. Combine it with no unacceptable habitat damage, transparent water/maintenance records and an agreed technical review. Report paired observations and uncertainty; repeated monthly observations are not independent replicates. Scale only after reviewing evidence, limitations and a suitable larger design.
+
+CHAPTER EIGHT. PARTICIPATION AND DUTIES
+
+Funding references: FUND-008 Annex I 3.4 section 3(a), PDF p. 121, on nonproductive purpose, open/objective participation and public information from the beginning through at least three years after final payment. Membership of the beneficiary cannot be a prerequisite for access. For later 3.5, section 3(b), PDF p. 123, requires dissemination and/or public use, with an opening/use plan where enclosed.
+
+Proposed sessions: co-design and participation arrangements; planting/measurement; dry-season interpretation; final results and learner feedback. Target 12 places each, subject to access/safety and actual recruitment; 48 places are not 48 confirmed unique people. No school, municipality, association or facilitator has agreed to participate. The saved Marta/social-worker note is user context only, not a qualification certificate, employment relationship or appointment.
+
+Selected-claim evidence:
+- CO.1.3: focus on NPL3 (rural/natural heritage), NPL4 (soil/erosion/aridity), NPL8 (climate adaptation), EDLL PDF p. 395; selected additional needs are reviewed below. Three real need contributions still yield the same 15-point cap as twelve broad references. Programme activities and evidence must substantiate them.
+- IG.8.2: programme tied to precise women's consultation demand; EDLL pp. 186-187, 275-276, 332-333 as relevant, and FUND-010 pp. 81-82. W7/W4/W10 are plausible co-design/visibility references, not automatic points. Employment/mentoring promises need actual provision.
+- IG.11.5 and IG.11.6: programme about association/participation and evidence of the relevant underrepresented sector, with targeted delivery; FUND-010 pp. 85-87. Merely having women among participants is insufficient.
+- DRI.3.2 and DRI.3.3: trained staff/qualification evidence and specific inclusion needs/activity design; FUND-010 pp. 92-94. A social-worker title in a note is insufficient. DRI.3.1 requires measures beyond statutory minima and is not claimed here.
+- JR.3.4/JR.3.5: documented youth-oriented learning/leisure and delivery evidence; FUND-010 youth section, PDF pp. 94-99; local points and cap in FUND-004 pp. 18-19. These selected items total 6 nominal points but cap at 4.
+- PT.1.1: identify the heritage element and the intended later use, with the activity memorandum/evidence; FUND-010 pp. 104-105. Generic green activity is insufficient.
+- PS.1.3: active membership certificate, receiving body's statutes and GDR justification of rural/endogenous-development purpose; FUND-010 pp. 105-106. Applicant itself being nonprofit or a partner does not prove this 8-point membership claim.
+- PS.3.1: actual applicant's prior LEADER history, FUND-010 pp. 107-108. Newness of this project is not newness of the legal applicant.
+
+Review of all 12 saved CO.1.3 need references: retain NPL3/4/8 as the core proposed case. NPL19, NPL30, NPL37 and NPL50 can be connected only through real youth decision-making, inclusion, women's leadership and supported volunteering. NPL16 needs a real resident/depopulation strategy, not an assumed effect of planting. NPL24 is not supported without a renewable-energy initiative. NPL29 cannot be claimed as on-site protected-area work merely from a general environmental theme. NPL32 needs actual entrepreneurship role models and a compatible activity. NPL41 needs a genuine lasting stewardship/co-management arrangement. None is silently deleted from the save.
+
+CHAPTER NINE. COSTS, SCHEDULE AND LIQUIDITY
+
+Source rules: FUND-008 Article 10 on necessary/reasonable costs, personnel, periodic costs and investments, PDF pp. 20-24; Article 11 exclusions and recoverable VAT, PDF pp. 25-26; Article 16 subcontracting, PDF p. 31; Article 19 application evidence, PDF pp. 33-37; Article 25 non-start/non-completion verification, PDF pp. 40-41; Article 26 cost moderation/provisional-stage evidence, PDF pp. 41-43; Articles 28-32 on award/notification/changes, PDF pp. 44-47. Article 37, PDF p. 54 and the official HTML, describes advances up to 50% subject to conditions, with a guarantee generally covering 100% of the advance. Application-specific exceptions must be checked. Do not assume an advance or access to a guarantee.
+
+The working gross cash budget is EUR 8745. All non-stock professional rates are author allowances; stock and unit guard/water assumptions are unconfirmed saved planning prices. No quotations have been obtained. The detailed quantities, rates and sums are in Scenario and scoring.json and the rendered evidence companion. Actual eligible expenditure can be lower. Deduct recoverable VAT and reject excluded costs; do not conceal the difference through extra subsidy claims.
+
+Internal personnel: 80 attributable hours at EUR 35 = EUR 2800, conservatively modelled in the initial six-month period. This is a loaded-cost allowance, not a market invoice or proof of actual staff. Article 10.4 addresses new employment, including a six-month limit for temporary new jobs in temporary operations; Article 10.6 addresses objectively attributable own resources supported by probative documentation. Article 10.5's special GDR/line-4 provision must not be applied to this nonprofit 3.4 case. Confirm which provision applies to actual staff and record payroll, duties and hours. No employment-creation points are assumed. Later coordination reserve: 30 hours at EUR 35 = EUR 1050, privately financed in this conservative model; confirm capacity and funding after the initial period.
+
+Conservative subcontracting screen: even counting every other working-cost euro as external, EUR 5945 / EUR 8745 = 67.98%, below the 75% cap in Article 16. This is not a legal classification of every supplier or a final approval. If eligible own-personnel cost is reduced or the scope changes, recalculate the limit and the actual subcontracting classification. No contract splitting is proposed.
+
+Cost moderation, Article 26.5, PDF p. 42: generally obtain at least three comparable offers from different unrelated suppliers before committing to the work/service/supply, with a properly justified market-availability exception if fewer offers are possible. The rule is not presented here as applying only above a generic procurement monetary threshold. The EUR 8745 proposal does not have supplier offers and is not ready for contracting.
+
+Private reserves are EUR 874.50 contingency, EUR 1050 later coordination and EUR 675 later hosting. The hosting reserve models 45 extra months at EUR 15 after the first 6 months: 9 months to an illustrative month-15 final payment plus 36 months after it. Extend the reserve if payment is later. Actual hosting price, publication responsibility and private financing are unconfirmed. Recurring grant-cost caps mean these costs cannot simply all be charged to the grant.
+
+Without an advance, peak cash provision is EUR 11344.50, including those reserves. If every working-cost euro were accepted at 100%, reimbursement would be EUR 8745 and the model's private provision EUR 2599.50. A hypothetical 50% advance would be EUR 4372.50, but guarantee collateral/fees and timing could negate much of the liquidity benefit; these are unpriced and not presumed available. A grant reduction would add to the private burden. Saved simulation cash is not evidence of financing.
+
+Schedule proposal: resolve applicant/land/novelty/score before committing; application and any required non-start inspection; preparation/baseline and suitable planting window; 12 months monitoring; analysis/final session around months 13-14. Final payment at month 15 is only a cash-flow example, not a statutory processing promise. The award sets the execution/justification deadlines. Do not rely on retrospective eligibility for private planting already started. Separately identify any legally permitted pre-application preparatory cost instead of claiming all early expenditure.
+
+CHAPTER TEN. CRITERION-BY-CRITERION REVIEW AND SENSITIVITIES
+
+FUND-004 signed local selection criteria, PDF pp. 16-20, were rendered and visually reviewed. The local table specifies INE 2023 for population, while later guidance/statistical lookup refers to 2025. The baseline has automated municipality-proxy answers false for AT.3 and RD.5; these have not been overwritten. A parcel in scattered rural land is not by itself an INE population nucleus. Confirm the actual eligible settlement unit and reference year with AL20. Do not use household size as settlement population.
+
+Provisional reviewed subtotal by criterion:
+AT.3 population: 0. CO.1 needs: 15. RD.5 business geography: 0. CC.2 energy: 0. CC.7 mobility: 0. IG.8 women's leisure: 2. IG.11 women's participation: 2. DRI.3 inclusion: 3. JR.3 youth: 4. IN.1 designated innovation: 0. PT.1 heritage: 13. PS.1 promoter cooperation: 8, unresolved other answers. PS.3 applicant history: 1. SP.1 local services: 0, unresolved. Subtotal 48; completed total remains null under the retained completion policy. Every nonzero claim is conditional on evidence/accepted delivery, not independently certified.
+
+Proposed withdrawals, solely in the review model:
+- CC.2.1 removes 5: Annex-selected energy equipment must actually be acquired/commissioned; the native trial includes none. FUND-004 p. 16 and FUND-010 p. 34.
+- IN.1.3 removes 2.49: saved reference IN-A11 concerns precision agriculture with territorial conditions (EDLL p. 400), not generic ecological moisture observations. No replacement designated aspect is claimed. EDLL pp. 398-401 identify restrictive themes/aspects; no sector is designated. FUND-010 pp. 103-104 requires GDR justification.
+- PT.1.2 removes a nominal 7 but reduces the capped criterion by 2, from 15 to 13: the saved 20 nominal points were capped at 15; retained PT.1.1 alone gives 13. A stone-mulch trial does not establish an EDLL traditional craft. FUND-004 p. 19 and FUND-010 pp. 104-105.
+
+Sensitivity cases calculated by the same retained evaluator on explicitly hypothetical answer sets:
+48.00: all retained proposed claims accepted and other options explicitly excluded for this model.
+39.00: the same case without PS.1.3 and PS.3.1.
+57.00: the 48-point case plus an accepted new local service SP.1.1 (5) and second qualifying membership PS.1.2 (4, reaching PS.1 cap 12).
+65.00: the 57-point case plus a genuinely qualifying AT.3.2 settlement-population award (8).
+
+These are not observations or adopted app edits. The 65-point case is not recommended as a promised score or an instruction to change location, fabricate memberships or dress up one-off events as ongoing services. SP.1.1 requires a real new proximity service, target population and application/payment evidence; FUND-010 pp. 108-109 also calls for relevant activity registration where applicable. PS.1.2 and PS.1.3 require the applicant's real active membership and GDR acceptance of the combination and purposes. If the applicant has previous LEADER awards, PS.3.1 falls away. If any needed evidence fails, recalculate explicitly.
+
+CHAPTER ELEVEN. 3.5 ROADMAP AND QUESTIONS FOR AL20
+
+The later park is a separate operation and remains undecided. FUND-008 Annex I 3.5, PDF pp. 123-124: conservation/recovery of rural and environmental heritage, nonproductive conditions, public use/dissemination, relevant in-force management plan where required, eligible investment rules and exclusions. It is not blanket finance for a private orchard, leisure business or standalone educational event. The rule cap is EUR 200000 at up to 100% accepted eligible cost; it is not a proposed park budget, available allocation or funding commitment.
+
+Use trial results to decide which treatments to repeat, water capacity and maintenance to provide, where further ecological investigation is needed, and which educational activities have value. A 12-plant, one-year trial cannot set planting numbers for 3056 m2 or demonstrate long-term ecosystem recovery. Before a larger operation: agreement with the neighbour; mapped ecological/heritage baseline; design with retained existing vegetation; management/public-use plan; independent budget and permissions; reassessment of applicant, current call and scoring. Disclose earlier support and avoid claiming the same plants, works or invoices again.
+
+Questions requiring a documented AL20 response:
+1. Which proposed legal applicant qualifies and has adequate competence? What must a new association evidence at application?
+2. What own-land use instrument and duration are acceptable? How should retained planting and demonstration-only investment restrictions be handled without creating a privately subsidised garden?
+3. Does the specific six-pair, water-accounted learning protocol satisfy local novelty, given GEA/IFAPA precedents? What comparison evidence is required?
+4. Which settlement unit and statistical year apply at the two cadastral parcels? Are the later guide's population datasets compatible with the signed local 2023 table?
+5. Which proposed activities substantiate CO.1.3, IG.8, IG.11, DRI.3, JR.3 and PT.1.1? Which need GDR reports or qualifications before application?
+6. Do the actual applicant's memberships qualify for PS.1.2/PS.1.3, and how are previous grants checked?
+7. Could a genuinely maintained public learning/data service qualify for SP.1.1, with what activity registration and delivery obligations? What remaining defensible route to 60 exists if geography/membership claims fail?
+8. Are proposed staff, field services, plant material, metering/tool hire, insurance, water and hosting eligible? What period limits, quotes, VAT treatment and subcontracting classifications apply?
+9. What is the current local intake/EDLL modification status and remaining allocation? What start/non-start, execution and justification dates would apply? Are advances available for this operation, on what guarantee terms?
+10. What must remain separate in any later 3.5 operation, including land rights, retained assets, previous-beneficiary scoring and public-use duties?
+
+Finite decision outcome: the recommended trial concept is coherent, but a fundable 3.4 case is not currently demonstrated. The applicant, access instrument, ecological fit, local novelty, financing and sufficient evidence-based points remain gates. Review with a suitable environmental entity and AL20 before incurring grant-dependent costs. If those gates cannot be met, a deliberately smaller privately financed trial or another accurately matched funding route is a separate option for user review, not a hidden fallback.
+
+OFFICIAL DOCUMENT LINKS AND EDITION VERIFICATION
+
+All five FUND documents below are ALREADY STORED in doc_library. Fresh official downloads for FUND-004, FUND-008, FUND-009 and FUND-010, plus the officially linked FUND-013 strategy download, were obtained on 3 November 2026 and matched registered SHA-256 checksums byte for byte. The official EDLL listing still identifies V1 (19 November 2024). Relevant local PDF pages were read, and the complete strategy download independently matched the retained edition. No source copy was overwritten and no rules update was adopted.
+
+FUND-004. Junta de Andalucia / AL20. Signed local selection criteria, signed 16 February 2026, 20 pages. Direct official PDF:
+https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/03/Listado%20criterios%20AL20.pdf
+SHA-256 a85c896fa800970f7bb611ab26b215db745ed26513dc30b87e509cc9da11ec64
+
+FUND-008. Junta de Andalucia. Order of 3 February 2026, BOJA 29, published 12 February 2026, 163 pages. Direct official PDF:
+https://www.juntadeandalucia.es/eboja/2026/29/BOJA26-029-00163-1654-01_00332877.pdf
+Official HTML:
+https://www.juntadeandalucia.es/boja/2026/29/1
+SHA-256 48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399
+
+FUND-009. Junta de Andalucia. Resolution of 13 April 2026, BOJA 76, published 22 April 2026, 61 pages. Direct official PDF:
+https://www.juntadeandalucia.es/eboja/2026/76/BOJA26-076-00061-5258-01_00336495.pdf
+Official HTML:
+https://www.juntadeandalucia.es/boja/2026/76/1
+SHA-256 ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e
+
+FUND-010. Junta de Andalucia. Selection-criteria verification guide, version 2/public version 4, drafted 11 September 2026, officially listed 25 September 2026, 231 pages. Direct official PDF:
+https://www.juntadeandalucia.es/sites/default/files/inline-files/2026/10/Guia-instrucciones-especificas-publicas_Criterios-seleccion-promotores_7119-2_LEADER_v2-4.pdf
+SHA-256 1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326
+
+FUND-013. ADR Alpujarra-Sierra Nevada Almeriense. EDLL 2023-2027, V1, 19 November 2024, 544 pages. Officially linked PDF download:
+https://drive.google.com/uc?export=download&id=1OafTeCsmgjmGcOzNumeyZvvFyW6_pLpK
+SHA-256 1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796
+Stable official listing, opened 3 November 2026:
+https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores-al-al20.html
+
+The common promoter page, opened 3 November 2026, lists applications from 23 April 2026 through 31 December 2028, subject to possible local interruption during EDLL modifications; it continues to list the April call and v2-4 guide. Targeted official-domain searches did not identify an amending governing order in this review; that is not proof of no future/local change. Local intake, current allocation and any suspension require AL20 confirmation before filing.
+https://www.juntadeandalucia.es/organismos/agriculturapescaaguaydesarrollorural/areas/desarrollo-rural/tramitacion-ayudas-dr-2023-2027/paginas/ayudas-leader-intervencion-7119-2-promotores.html
+
+OTHER LOCAL DOCUMENTS REVIEWED
+
+FOREST-003 (kermes-oak ecology factsheet), FOREST-004 (holm-oak botanical factsheet), NIJAR-003 (native nursery-stock specification) were checksum-verified and text-screened. They are background for deferred candidates and nursery-quality questions, not a field suitability finding for either cadastral parcel. LEARN-007 and LEARN-008 were used to locate original technical sources, rather than to certify unverified parameters. Their original project examples and region-specific assumptions have not been copied into the field design as facts.
+
+PRODUCTION AND VERIFICATION
+
+The final package is an English EPUB with a separate companion evidence document. It contains no source appendix in the reading spine. Source-code files, data identifiers and raw links remain outside the narration. Package integrity, XML, manifest, reading order, chapter navigation, complete extracted text and absence of citation clutter are checked. Direct playback in ElevenReader has not been tested.
+
+ElevenLabs official guidance, opened and read 3 November 2026, confirms EPUB imports and recommends chapter organisation/removing unwanted audio artifacts. Publishing-editor guidance does not guarantee private-import behaviour, which is why the source notes are physically separate.
+https://elevenlabs.io/docs/help-center/product/mobile-apps/elevenreader/how-do-i-add-content-to-elevenreader
+https://elevenlabs.io/docs/help-center/product/distribution-publishing/elevenreader-publishing/what-do-i-need-to-look-out-for-in-the-publishing-editor

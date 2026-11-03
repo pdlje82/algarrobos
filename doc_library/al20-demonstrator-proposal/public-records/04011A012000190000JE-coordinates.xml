@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<consulta_coordenadas xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.catastro.meh.es/">
+  <control>
+    <cucoor>1</cucoor>
+    <cuerr>0</cuerr>
+  </control>
+  <coordenadas>
+    <coord>
+      <pc>
+        <pc1>04011A0</pc1>
+        <pc2>1200019</pc2>
+      </pc>
+      <geo>
+        <xcen>-2.56312125797074</xcen>
+        <ycen>36.9633956331649</ycen>
+        <srs>EPSG:4326</srs>
+      </geo>
+      <ldt>Polígono 12 Parcela 19 CONJURO. ALHAMA DE ALMERIA (ALMERÍA)</ldt>
+    </coord>
+  </coordenadas>
+</consulta_coordenadas>

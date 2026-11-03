@@ -1,0 +1,64 @@
+From a Demonstrator to an Educational Restoration Park
+A proposed goal for the Algarroba project
+
+Chapter one. The goal
+
+Develop a credible project proposal for the Alpujarra Sierra Nevada Almeriense territory under funding category three point four. Start with the user's saved inputs, selected funding criteria and supporting references in the Algarroba app. Develop a complete demonstrator that investigates restoration of locally appropriate native vegetation, low water use and educational participation. Explain how its findings could inform a later educational restoration park under category three point five.
+
+The immediate deliverable is a researched proposal ready for discussion with the local rural development group. It includes a demonstration protocol, activities, a budget, a provisional assessment against the selection criteria, an evidence checklist and a roadmap towards the larger park. The main publication should be an English EPUB written for listening in ElevenReader, with detailed citations and links in a separate companion document.
+
+This book presents the proposed goal. It does not report a completed investigation, a field experiment or a funding decision.
+
+Chapter two. Begin with the actual project
+
+Identify the intended saved project and funding version before beginning. Record the starting inputs and the edition of the rules used by that version. Read the selected criteria together with their notes, source references and linked activities. Read the relevant project documents and the app's central design rules.
+
+Separate facts about the site and applicant from preferences, proposed activities and claims that still need evidence. Keep missing information visible. If several saved versions could be the intended starting point, establish which one to use before making project-specific conclusions.
+
+Treat the selected criteria as the user's starting position. Investigate whether the proposal can substantiate them. Recommend additions, revisions or withdrawals with a reason, an implementation requirement and an estimated resource implication. Do not change the saved project or adopt revised rules without the required review.
+
+Chapter three. Make the demonstrator useful in its own right
+
+Define the practical questions the demonstrator should answer. Establish what would be new or unfamiliar in the local territory and how the findings could be used elsewhere under similar conditions. Research the novelty claim rather than assuming that a familiar restoration technique is locally innovative.
+
+Propose a feasible comparison between clearly described restoration approaches. Specify the baseline, observations, treatment areas, monitoring period, responsibilities and criteria for interpreting results. Explain limitations and identify decisions that require qualified ecological or technical advice.
+
+The demonstrator must produce usable and shareable findings even if the larger park never proceeds. The governing rules require this independent usefulness. Its activities, evaluation and public outputs therefore need a complete purpose of their own.
+
+Describe which later park decisions each finding would inform. These might include planting methods, establishment water, maintenance effort, educational activities and the practical costs of expanding the work. The roadmap should allow an approach to be revised or rejected when the evidence warrants it.
+
+Chapter four. Develop the restoration and education concept
+
+Investigate the site's existing vegetation, soil, terrain, water constraints, land rights and management context. Identify locally appropriate native species and suitable plant provenance using reliable evidence. Assess where trees, shrubs, ground vegetation or assisted natural regeneration could contribute to the intended restoration.
+
+Treat low water demand as a requirement to investigate and measure. Distinguish establishment watering from later maintenance needs. Explain the basis of any proposed quantities, planting densities, treatments or cost estimates. Label uncertain values and do not substitute app drawing assumptions for a site suitability assessment.
+
+Develop educational participation that supports the restoration purpose. Identify intended audiences, possible learning activities and ways to share results. Describe possible partner roles as proposals until their participation is confirmed. Keep the design focused on vegetation restoration, with any proposed paths, signs or other facilities justified by access, learning and conservation needs.
+
+Chapter five. Build a defensible funding case
+
+Verify the applicable call, governing rules, local selection criteria, assessment guidance and local development strategy. Record the date of the source review and explain material differences from the edition retained in the app. Check the applicant, location, site access, timing, public benefit and eligible expenditure before reaching a conclusion about the funding case.
+
+For each scoring claim, explain the activity or existing fact that supports it and the evidence required. Distinguish support already available from future commitments and unresolved interpretations. Use the app's applicable scoring rules, including caps and incompatible alternatives. Do not count a selected checkbox as certified evidence or describe a projected score as an award.
+
+Prepare a costed budget, an implementation schedule and a cash-flow assessment. Identify assumptions requiring supplier quotations or confirmation. Keep the demonstrator and future park scopes and expenditure distinct, checking restrictions on overlapping support and any proposed reuse of assets.
+
+Assess the later park separately against category three point five. Identify the rural or environmental heritage resource, the intended restoration benefit and the arrangements for public use or dissemination. Explain what the demonstrator can establish and what would remain for a future application. Do not assume that later funding will be available or approved.
+
+Chapter six. Write for listening
+
+Present the researched proposal as a chaptered EPUB with a working contents menu. Use connected prose, short paragraphs, clear transitions and brief chapter recaps. Explain unfamiliar terms and abbreviations when first introduced. Express important quantities, dates and funding category numbers in language that sounds natural when read aloud.
+
+Explain comparisons and budgets in sentences. The listening text should contain no raw web addresses, inline citation markers, footnote numbers, source catalogue codes or instructions to consult a table or image. Preserve substantive qualifications where they matter to a decision, while avoiding repeated administrative interruptions.
+
+Put the detailed evidence trail in a separate source-notes file, organised by chapter and topic. Include issuing organisations, document dates and editions, precise page or section references, verified publication and direct download links, and access limitations. Distinguish sources already in the project library from material newly added or offered for addition.
+
+Validate the EPUB package, chapter order, navigation and complete narration text. Check the listening text for citation clutter. If direct playback in ElevenReader is not checked, state that clearly in the delivery message.
+
+Chapter seven. Decide when the goal is complete
+
+Finish when there is one recommended demonstrator scenario, a reasoned assessment against the applicable rules, a traceable provisional score, a realistic delivery and financing plan, and a clear explanation of how the results would inform the future park. Include the essential questions for the local rural development group and the decisions that remain with the user.
+
+If essential facts or evidence are unavailable, report the resulting limits and the specific information needed. If the proposed operation cannot make a credible funding case, explain why and offer justified changes for consideration. Do not claim success by inventing evidence or reshaping the user's inputs without explanation.
+
+The final package consists of the listening EPUB and its companion source notes. Evidence supporting the proposal must be real. Field observations, permissions, partner commitments and grant decisions that have not happened remain future requirements.

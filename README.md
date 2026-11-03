@@ -10,6 +10,10 @@ The interface uses the Algarroba identity in the Carob & Clay palette: warm ivor
 
 Development follows the mandatory [repository coding rules](AGENTS.md). Silent fallbacks are prohibited: required configuration and data must be validated, failures must be visible, and compatibility changes must use explicit migrations. The [fallback audit](restoration_simulator/FALLBACK_AUDIT.md) records the changes and intentional optional/legacy cases.
 
+The [knowledge architecture implementation plan](restoration_simulator/KNOWLEDGE_IMPLEMENTATION_PLAN.md) sets out six milestones for shared evidence, connected knowledge and a visual explorer, beginning with a knowledge ownership map and compatibility baseline.
+
+**Recovery Forecasting** sits beside Project, Site Designer and Funding Navigator as a placeholder for future dryland recovery prediction tools. It displays the complete [research and forecasting roadmap](doc_library/LEARN-015%20-%20Dryland%20Recovery%20-%20Prediction%20Science%20and%20Forecasting%20Roadmap%20-%202026-11-03.md), with contents navigation, tables and a Markdown download. The app reads the library document directly at build time; edit that file and rebuild to update the displayed roadmap. Forecasting is not implemented yet, and reading the roadmap does not change project or simulation records.
+
 ## Install with Conda (Windows PowerShell)
 
 You need an installed Conda distribution (Miniforge, Miniconda or Anaconda), PowerShell, internet for initial installation, and a modern browser. Conda installs **Python 3.12, Node.js 22 (at least 22.13), FastAPI (0.120–0.x), Uvicorn (0.38–0.x) and HTTPX (0.28.x)** from conda-forge. No separate Python/Node installer, pip command, Docker, API key or account is required. npm installs React, Vite and the pinned PDF.js viewer from the committed frontend lockfile.

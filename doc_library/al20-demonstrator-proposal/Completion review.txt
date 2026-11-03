@@ -1,0 +1,30 @@
+RESEARCH PACKAGE COMPLETION REVIEW
+3 November 2026
+
+The deliverable being audited is the researched proposal and review package specified by the goal. It is not completion of a field trial, a grant application, a partner agreement or a funding award. The goal expressly allows a finding that a credible funding case cannot yet be established, provided blockers and justified alternatives are explained.
+
+1. Intended baseline and edition: established by a read-only live-export/save comparison and user clarification. Evidence: Baseline and retained rules.json, project ID, revision, working draft name, retained bundle and scoring policy. User's actual home, undecided neighbour option and cadastral references supersede the interpretation of fictional labels without changing the saved file.
+
+2. Preservation: the original save hash is recorded, and the active file is checked again at delivery. No mutation API or rule-adoption operation was called. No current/frozen evaluator or central rule-library file was edited. Proposal changes exist only as documented scenarios and counterfactual calculations.
+
+3. Applicable sources: five fresh official funding/strategy PDF downloads match the registered local editions byte for byte. The official common promoter page, call and AL20 listing were read. The EDLL V1 listing and relevant source content were reviewed. Technical handbook download matches its registered edition. Dates, direct links, checksums, access failures and remaining local-status questions are recorded in the companion notes and Research verification.json.
+
+4. Applicant and land: specific 3.4/3.5 beneficiary rules checked; an ordinary individual route is not established. Candidate environmental and cultural organisations were researched using their own or official provincial sources. Actual legal applicant, consent, competence and memberships remain explicitly unverified. Public non-protected cadastral and parcel records establish location and recorded areas; ownership is user-reported and legal use/access instruments are not invented.
+
+5. Site, permissions and vegetation: actual parcel identities located; existing agricultural records distinguished from ecological cover. REDIAM map screening and the failed MITECO request are retained without treating a failure as a negative result. Soil/habitat, water, exact trial footprint, forestry/municipal permissions and species identification require field/authority checks. The neighbour's Salsola and grape-growing history are user-reported. No site clearance or suitability certification is claimed.
+
+6. Local novelty: GEA's 2023/2024 native planting and IFAPA's 2025/2026 learning activities were reviewed. The specific proposed comparison is distinguished from familiar planting/mulching. Novelty remains a documented funding gate pending local inventory and AL20/practitioner review. No first-in-territory claim is made.
+
+7. Recommended scenario: one own-land, up-to-200 m2, 12-plant, six-pair stone-mulch comparison is specified, with a separately reviewed neighbour alternative. Species, provenance checks, changes from the saved list, sample limitations, random treatment allocation, retained cover, equal within-pair management, water-capacity assumptions and stop/review conditions are stated. Central design assumptions are not promoted to ecological measurements.
+
+8. Monitoring and public outputs: baseline plus 12 monthly visits, plant-level records, water/labour tracking, replacement identities and interpretation limits are specified. Proposed record-completeness and survival management targets are labelled author choices, not predictions or grant rules. Four sessions, open recruitment, role assignments, accessible results and publication duration are defined as future commitments needing consent/resources.
+
+9. Budget and cash: detailed quantities/rates recalculate to EUR 8745. All prices are unconfirmed saved assumptions or explicit author allowances. Eligibility, VAT, three-offer moderation, own-personnel, recurring-cost and subcontracting conditions are identified. Private reserves total EUR 2599.50; no-advance cash provision is EUR 11344.50. Advance/guarantee sensitivity is conditional. Saved simulation cash is not counted as real financing.
+
+10. Provisional score: the retained repository evaluator reproduces the baseline 57.49 subtotal with null total/two unresolved criteria, the reviewed 48 subtotal and 48/39/57/65 explicit hypothetical cases. Criterion caps and nominal versus capped effects are preserved. A completed hypothetical calculation is not represented as certified supporting evidence. Every selected criterion and the user's linked need references are reviewed. The present case is explicitly below the 60-point minimum.
+
+11. Later 3.5: the neighbour park remains optional, with separate land, heritage, public-use, management, permission, budget and scoring review. No 3.5 award or scale-up rate is assumed, and double financing is excluded. A list of substantive AL20 questions and alternative decisions is provided.
+
+12. Listening deliverable: English EPUB and matching narration text, eleven chapters, no inline citations/URLs/catalogue codes in spoken text; chapter/topic source notes are separate. ZIP/XML/manifest/spine/navigation/text-completeness checks pass, and chapter/companion layouts were inspected in a local browser. Direct ElevenReader playback is explicitly untested. Evidence: Publication validation.json and Layout review.json.
+
+Conclusion: the requested research-and-review package is complete. Funding eligibility, local novelty, sufficient evidenced points, actual finance, permissions and partner commitments remain unresolved real-world gates. Their existence is a finding of the completed research package, not a claim that the project is fundable or authorised to proceed.

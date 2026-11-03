@@ -15,7 +15,10 @@
   "dependencies": {
     "pdfjs-dist": "6.4.299",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "react-markdown": "10.1.0",
+    "rehype-slug": "6.0.0",
+    "remark-gfm": "4.0.1"
   },
   "devDependencies": {
     "vite": "7.3.7"

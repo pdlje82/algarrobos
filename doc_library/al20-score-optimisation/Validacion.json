@@ -1,0 +1,71 @@
+{
+  "created_on": "2026-11-03",
+  "epub": "Un aula viva antes del parque - Plan AL20.epub",
+  "epub_sha256": "e76d8d8208b5e0499dae8a2fbc83140ff70b21170f3795e48e1383dfcac3e249",
+  "narration_sha256": "a20c4a2514ed748643e92692a0e025049968cacaaf9b1d34addedf0cc784a3c1",
+  "language": "es",
+  "chapters": 8,
+  "words": 2058,
+  "estimated_minutes_at_130_to_160_wpm": [
+    12.9,
+    15.8
+  ],
+  "checks": [
+    "ZIP CRC",
+    "EPUB mimetype first and stored",
+    "XML parsing",
+    "manifest target/identity integrity",
+    "spine reading order",
+    "EPUB3 navigation links",
+    "NCX compatibility navigation",
+    "complete normalized narration readback",
+    "no narration links/citation codes/digit strings",
+    "retained app evaluator plus independent Decimal capped sum and exclusive-alternative validation",
+    "six registered source checksums",
+    "active save unchanged"
+  ],
+  "source_integrity": [
+    {
+      "id": "FUND-004",
+      "filename": "FUND-004 - Alpujarra Sierra Nevada Almeriense - LEADER AL20 Selection Criteria - 2026.pdf",
+      "sha256": "a85c896fa800970f7bb611ab26b215db745ed26513dc30b87e509cc9da11ec64",
+      "status": "Matches registered local document"
+    },
+    {
+      "id": "FUND-008",
+      "filename": "FUND-008 - Andalusia - LEADER Governing Rules - BOJA 29 - 2026-02-03.pdf",
+      "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+      "status": "Matches registered local document"
+    },
+    {
+      "id": "FUND-009",
+      "filename": "FUND-009 - Andalusia - LEADER Call for Non-GDR Applicants - 2026-04-13.pdf",
+      "sha256": "ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e",
+      "status": "Matches registered local document"
+    },
+    {
+      "id": "FUND-010",
+      "filename": "FUND-010 - Andalusia - LEADER Selection Criteria Verification Guide - v2-4 - 2026-09.pdf",
+      "sha256": "1d42e43cd509d13398431b431b91aeed154b601cc8279eabd405b4b9682fd326",
+      "status": "Matches registered local document"
+    },
+    {
+      "id": "FUND-013",
+      "filename": "FUND-013 - Alpujarra Sierra Nevada Almeriense - EDLL 2023-2027 - v1.pdf",
+      "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+      "status": "Matches registered local document"
+    },
+    {
+      "id": "FOREST-002",
+      "filename": "FOREST-002 - Andalusia - Carob Cultivation and Restoration Handbook - 2026.pdf",
+      "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "status": "Matches registered local document"
+    }
+  ],
+  "direct_elevenreader_playback_checked": false,
+  "epubcheck_run": false,
+  "epubcheck_note": "No claim of full EPUBCheck certification; structural checks are listed explicitly.",
+  "baseline_save_sha256": "dd6350d816c47b55b22876cec2f3035cd80029c81369b2f4263aa0faae0a5739",
+  "score_proposed": 66.49,
+  "accredited_score": null
+}

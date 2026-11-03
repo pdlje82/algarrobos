@@ -21,6 +21,7 @@ import {usePlanningDraft} from "./usePlanningDraft.js";
 import {DemonstratorReview} from "./DemonstratorReview.jsx";
 import {FundingNavigator} from "./FundingNavigator.jsx";
 import {DemonstratorConcepts} from "./ProjectConcept.jsx";
+import {RecoveryForecasting} from "./RecoveryForecasting.jsx";
 
 async function api(path, body) {
   let response;
@@ -177,6 +178,11 @@ function App() {
   const conceptGuard = useRef(null);
   const planning=usePlanningDraft(data,api);
   const [planReview,setPlanReview]=useState(null);
+  async function openForecasting() {
+    if(conceptGuard.current?.dirty&&!(await conceptGuard.current.flush()))return;
+    if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return;
+    setWorkspace("forecasting");
+  }
   async function openDesigner(options={}){if(conceptGuard.current?.dirty&&!(await conceptGuard.current.flush()))return;if(fundingGuard.current?.dirty && !(await fundingGuard.current.flush()))return;if(typeof options.designId==="string")setDesignerEntry({designId:options.designId,token:crypto.randomUUID()});setDesignerVisited(true);setWorkspace("designer");}
   async function openFunding(options = {}) {
     try {
@@ -430,8 +436,8 @@ function App() {
   const history = historyIndex === null ? null : project?.history[historyIndex];
   return (
     <>
-      <a className="skip" href="#main">
-        Skip to project
+      <a className="skip" href={workspace === "forecasting" ? "#forecasting-main" : "#main"}>
+        {workspace === "forecasting" ? "Skip to recovery forecasting" : "Skip to project"}
       </a>
       <header className="masthead">
         <BrandLockup />
@@ -459,7 +465,8 @@ function App() {
           )}
         </div>
       </header>
-      {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" data-workspace="project" aria-pressed={workspace==="project"} onClick={async()=>{if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return;setWorkspace("project");}}>Project</button><button type="button" data-workspace="designer" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button><button type="button" data-workspace="funding" aria-pressed={workspace==="funding"} onClick={()=>openFunding()}>Funding Navigator</button></nav>}
+      {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" data-workspace="project" aria-pressed={workspace==="project"} onClick={async()=>{if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return;setWorkspace("project");}}>Project</button><button type="button" data-workspace="designer" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button><button type="button" data-workspace="funding" aria-pressed={workspace==="funding"} onClick={()=>openFunding()}>Funding Navigator</button><button type="button" data-workspace="forecasting" aria-pressed={workspace==="forecasting"} onClick={openForecasting}>Recovery Forecasting</button></nav>}
+      {project!==null && workspace==="forecasting" && <RecoveryForecasting />}
       {project!==null && fundingEntry!==null && <div hidden={workspace!=="funding"}><FundingNavigator key={project.id} active={workspace==="funding"} entry={fundingEntry} data={data} request={api} onNavigate={fundingNavigate} onSaved={fundingSaved} onSimulationFinancing={useSimulationFinancing} guardRef={fundingGuard} beforeConceptTransfer={async()=>planning.value===null||await planning.flush()!==false}/></div>}
       {project!==null && designerVisited && <div className="designer-workspace-host" hidden={workspace!=="designer"}><SiteDesigner key={project.id} openRequest={designerEntry} active={workspace==="designer"} data={data} request={priceRequest} beforeHandoff={planning.flush} onHandoff={openPlanning} /></div>}
       <main id="main" className="project-workspace" hidden={workspace!=="project"}>
