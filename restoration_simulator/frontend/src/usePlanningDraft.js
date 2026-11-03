@@ -5,7 +5,8 @@ import {DESIGNER_FIELDS} from "./SiteDesigner.jsx";
 
 required(Object.keys(settings).sort().join(",")==="autosave_delay_ms,version"&&settings.version===1&&Number.isInteger(settings.autosave_delay_ms)&&settings.autosave_delay_ms>0,"Invalid planning autosave configuration.");
 
-export function usePlanningDraft(data,request){
+export function usePlanningDraft(data,request,gate){
+  required(gate!==undefined&&typeof gate.subscribe==="function","Planning needs its read-only exploration gate.");
   const [value,setValue]=useState(null),[saving,setSaving]=useState(false),[error,setError]=useState("");
   const server=useRef(null),inputs=useRef(null),flight=useRef(null),timer=useRef(null),context=useRef(data),attempt=useRef(null),epoch=useRef(0),identity=useRef(null);
   context.current=data;
@@ -22,8 +23,9 @@ export function usePlanningDraft(data,request){
       else adopt(data.planning);
     }
   },[data?.project?.id,data?.revision,data?.planning?.planning_revision,adopt]);
-  const flush=useCallback(async()=>{
+  const flush=useCallback(async(automatic=false)=>{
     clearTimeout(timer.current);
+    if(automatic===true&&gate.paused)return false;
     if(flight.current!==null)return flight.current;
     if(server.current===null)return false;
     if(!dirty()&&attempt.current===null)return server.current;
@@ -32,6 +34,7 @@ export function usePlanningDraft(data,request){
       setSaving(true);setError("");
       try{
         while(dirty()||attempt.current!==null){
+          if(automatic===true&&gate.paused)return false;
           if(attempt.current===null)attempt.current={revision:context.current.revision,planning_revision:server.current.planning_revision,request_id:crypto.randomUUID(),administration:Object.fromEntries(Object.entries(inputs.current).filter(([k])=>!DESIGNER_FIELDS.has(k)))};
           const result=await request("demonstrator/draft",attempt.current);
           if(token!==epoch.current)return false;
@@ -43,12 +46,17 @@ export function usePlanningDraft(data,request){
       finally{flight.current=null;if(token===epoch.current)setSaving(false);}
     };
     flight.current=run();return flight.current;
-  },[request]);
+  },[request,gate]);
+  const scheduleAuto=useCallback(()=>{
+    clearTimeout(timer.current);
+    if(!gate.paused)timer.current=setTimeout(()=>flush(true),settings.autosave_delay_ms);
+  },[flush,gate]);
+  useEffect(()=>gate.subscribe(()=>{clearTimeout(timer.current);if(!gate.paused&&dirty())scheduleAuto();}),[gate,scheduleAuto]);
   const edit=useCallback(next=>{
     required(server.current!==null,"Open a project before editing demonstrator planning.");
     inputs.current=next;setValue({...server.current,committed:false,draft:{...server.current.draft,inputs:next}});
-    clearTimeout(timer.current);timer.current=setTimeout(flush,settings.autosave_delay_ms);
-  },[flush]);
+    scheduleAuto();
+  },[scheduleAuto]);
   useEffect(()=>{
     const warn=e=>{if(dirty()||flight.current!==null||attempt.current!==null){e.preventDefault();e.returnValue="";}};
     window.addEventListener("beforeunload",warn);

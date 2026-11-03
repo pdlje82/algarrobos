@@ -20,6 +20,7 @@ import {DocumentLink} from "./DocumentLink.jsx";
 import { DesignGuide, FeatureHelp, PocketHelp } from "./DesignerHelp.jsx";
 import {KnowledgeEvidence} from "./KnowledgeEvidence.jsx";
 import {retainedEvidenceDesign} from "./knowledgeEvidenceState.js";
+import {useExplorerNavigation} from "./ExplorerNavigation.jsx";
 import { designerHelp } from "./designerHelp.js";
 import { createEditQueue, initialCrownEditor, sameCrownEditor, validCrownEditor } from "./dimensionEditor.js";
 import { locatedPlantCounts } from "./designerInteractions.js";
@@ -41,6 +42,7 @@ function NumberEdit({ label, value, onCommit, min = 0, max = 1000000, step = "an
 }
 
 export function SiteDesigner({ data, request, onHandoff, beforeHandoff, active, openRequest=null }) {
+  const {gate}=useExplorerNavigation();
   required(typeof active==="boolean","Site Designer needs its workspace visibility state.");
   const [workspace,setWorkspace] = useState(null), [evaluation,setEvaluation] = useState(null);
   const [error,setError] = useState(""), [operationBusy,setBusy] = useState(false), [message,setMessage] = useState("");
@@ -111,6 +113,7 @@ export function SiteDesigner({ data, request, onHandoff, beforeHandoff, active, 
     const token=epoch.current;
     setQueuedEdits(n=>n+1);
     return editQueue.current(async()=>{
+      while(gate.paused)await gate.wait();
       if(token!==epoch.current)return false; // Explicit workspace replacement cancelled this old edit.
       return executeCommand(cmd);
     }).finally(()=>setQueuedEdits(n=>n-1));

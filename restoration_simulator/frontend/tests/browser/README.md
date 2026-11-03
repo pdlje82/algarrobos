@@ -1,5 +1,34 @@
 # Browser checks
 
+Run `node tests/browser/knowledge-explorer.cjs` for Milestone 5 against a **fresh**
+isolated save on API 8013 and production assets on 4174. It first proves no-project
+entry/lazy loading, then seeds only that fixture. It covers both graph layouts,
+List, expansion/collapse/filters/history, keyboard/pan/zoom, PDF pages and focus,
+claim/passage usage, snapshot mismatch and explicit retry, all six contextual links,
+and unfinished funding/concept/planning/Designer inputs. Submitted saves settle;
+unsubmitted and follow-on work waits until return. Browser fetch instrumentation
+marks the actual entry/return clicks, separating editing requests that already
+started from requests started while exploring. Light/dark and 1440/390/320-pixel
+checks run sequentially. Logs/screenshots belong to `test-artifacts/knowledge-explorer/`.
+
+Build with `npm.cmd run build`, then use the existing browser configuration:
+
+```powershell
+npm exec vite -- preview --config tests/browser/vite.config.mjs --host 127.0.0.1 --port 4174 --strictPort
+$env:DESIGNER_TEST_API = 'http://127.0.0.1:8013/api/'
+$env:DESIGNER_APP_URL = 'http://127.0.0.1:4174/'
+node tests/browser/knowledge-explorer.cjs
+node tests/browser/knowledge-evidence.cjs
+node tests/browser/designer-interactions.cjs
+```
+
+Use the Python startup example below with a new fixture filename for the first
+check. Set `PLAYWRIGHT_MODULE` as documented below. All three workflows share the
+isolated save and must run **sequentially**. A Vite preview on 4174 serves production
+assets; the optional `DESIGNER_PRODUCTION_DIR` setting also lets the Designer
+regression explicitly record production-byte interception in its result.
+
+
 Run `node tests/browser/knowledge-evidence.cjs` for the six Milestone 4 evidence
 placements and all twelve claims, collapsed/lazy loading, actual read-only GETs,
 source editions/pages and restored focus, unsaved notes/concepts/Designer inputs

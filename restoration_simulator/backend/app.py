@@ -418,6 +418,26 @@ def create_app(save_path=None):
         from .knowledge_graph import feature_evidence
         return feature_evidence(consumer_id)
 
+    @app.get("/api/knowledge/explorer")
+    def knowledge_explorer(request: Request):
+        from .knowledge_graph import explorer_graph
+        require(not request.query_params, "Knowledge Explorer accepts no query parameters. Remove them and retry.")
+        return explorer_graph()
+
+    @app.get("/api/knowledge/search")
+    def knowledge_search(request: Request, text: str, entity_type: str | None = None):
+        from .knowledge_graph import find_entities
+        require(set(request.query_params) <= {"text", "entity_type"} and len(request.query_params.multi_items()) == len(request.query_params),
+                "Knowledge search accepts text and optional entity_type once each. Remove unknown or repeated parameters and retry.")
+        return find_entities(text, entity_type)
+
+    @app.get("/api/knowledge/impact")
+    def knowledge_impact(request: Request, target_kind: str, target_id: str):
+        from .knowledge_graph import impact
+        require(set(request.query_params) <= {"target_kind", "target_id"} and len(request.query_params.multi_items()) == len(request.query_params),
+                "Knowledge usage accepts target_kind and target_id once each. Remove unknown or repeated parameters and retry.")
+        return impact(target_kind, target_id)
+
     @app.get("/api/funding/project-concept-guide")
     def project_concept_guide():
         from .project_concepts import describe

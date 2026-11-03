@@ -1,6 +1,6 @@
 # Algarroba knowledge architecture implementation plan
 
-Created 3 November 2026. Status: Milestones 1–4 complete; Milestones 5–6 pending.
+Created 3 November 2026. Status: Milestones 1–5 complete; Milestone 6 pending.
 
 Algarroba needs a shared way to connect research evidence, ecological knowledge,
 funding requirements and project decisions as its content grows. Implement this
@@ -204,6 +204,21 @@ Perform browser checks against isolated saves following the
 
 **Outcome:** users can inspect the pilot's connections and the evidence behind them.
 
+Completed 3 November 2026. The [Milestone 5 implementation record](KNOWLEDGE_MILESTONE_5.md)
+documents the project-independent Knowledge Explorer, Lanes and Network layouts,
+List/detail alternative, 34-node/52-edge projection and read-only query endpoints.
+All six evidence links, precise sources, classified usage and unresolved contexts
+are accessible. Entry/return preserve mounted drafts and suspend unstarted editing
+work; submitted work settles and follow-on writes resume only after return.
+
+Acceptance passed: 51 targeted/343 full backend tests, 15 targeted/130 full frontend
+tests, both knowledge checks, all four original projections, new CLI and production
+build. Sequential production browser checks cover Explorer, Milestone 4 evidence
+and Designer regression, themes, phone widths, PDF focus, explicit failure/retry,
+editing suspension and successful resumption. Corpus/rule/library/save fingerprints
+and historical compatibility remain unchanged. The existing bundle warning and
+observed environment metadata discrepancy are recorded; no dependencies changed.
+
 Add a read-only explorer centred on a selected entity. Show a bounded neighbourhood
 with labelled relationships, filters and progressive expansion. Provide a readable
 list/detail alternative for keyboard and narrow-screen use. Reuse document viewing
@@ -269,15 +284,15 @@ decision cannot be resolved from the repository or authorised task scope.
 | 2 Shared source and passage records | Complete | [Registry, compatibility checks and passing verification](KNOWLEDGE_MILESTONE_2_PLAN.md#implementation-results) |
 | 3 Connected knowledge pilot and queries | Complete | [Curated pilot, read-only queries and passing acceptance checks](KNOWLEDGE_MILESTONE_3.md) |
 | 4 Integration into existing features | Complete | [Six shared-evidence sections, compatible projections and passing acceptance](KNOWLEDGE_MILESTONE_4.md) |
-| 5 Focused knowledge explorer | Pending | To be recorded |
+| 5 Focused knowledge explorer | Complete | [Two layouts, shared graph/query contracts, preserved drafts and passing acceptance](KNOWLEDGE_MILESTONE_5.md) |
 | 6 Research intake and gradual expansion | Pending | To be recorded |
 
-**Next bounded task:** prepare the Milestone 5 implementation plan for a focused
-read-only knowledge explorer. Reuse the existing pilot identities, evidence,
-issue statuses and actual consumption paths; specify bounded graph navigation,
-readable detail/list alternatives and source viewing without project mutations.
-Milestones 5–6 remain pending. Broader content migration and research intake
-remain Milestone 6 work.
+**Next bounded task:** prepare the Milestone 6 implementation plan for repeatable
+research intake and gradual expansion. Specify source registration, contextual
+claims/relationships, tension review, explicit feature adoption, validation and
+impact checks, then select two bounded expansion examples. Preserve current
+project snapshots and deliberate feature memberships. Milestone 6 remains pending;
+no additional research or content migration was performed in Milestone 5.
 
 **Open findings:** the viewer registers one edition per document ID; concept,
 delivery and EDL records require exact installed library hashes; 80 shared

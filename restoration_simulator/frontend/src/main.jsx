@@ -6,6 +6,9 @@ import { DemonstratorEditor, DemonstratorRecord } from "./Demonstrator.jsx";
 import { SiteDesigner } from "./SiteDesigner.jsx";
 import {DocumentProvider} from "./DocumentLink.jsx";
 import {KnowledgeEvidenceProvider} from "./KnowledgeEvidence.jsx";
+import {KnowledgeExplorer} from "./KnowledgeExplorer.jsx";
+import {ExplorerNavigation} from "./ExplorerNavigation.jsx";
+import {createExplorationGate} from "./explorerSession.js";
 import { Alert } from "./Alert.jsx";
 import {
   AccessTimeline,
@@ -171,13 +174,27 @@ function App() {
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
   const [selected, setSelected] = useState("");
-  const [workspace, setWorkspace] = useState("project");
+  const [workspace, writeWorkspace] = useState("project");
+  const [gate]=useState(createExplorationGate);
+  function setWorkspace(next){if(next!=="knowledge")gate.resume();writeWorkspace(next);}
+  const [explorerVisited,setExplorerVisited]=useState(false),[explorerEntry,setExplorerEntry]=useState({topicId:null,token:"initial"});
+  const explorerOrigin=useRef(null);
+  function openKnowledge(topicId=null,opener=document.activeElement){
+    if(workspace!=="knowledge")explorerOrigin.current={workspace,opener,scrollX:window.scrollX,scrollY:window.scrollY};
+    gate.pause();setExplorerVisited(true);setExplorerEntry({topicId,token:crypto.randomUUID()});writeWorkspace("knowledge");
+  }
+  function returnFromKnowledge(){
+    const origin=explorerOrigin.current;
+    if(origin===null)throw Error("The explorer return location is unavailable. Choose an application workspace explicitly.");
+    setWorkspace(origin.workspace);
+    requestAnimationFrame(()=>{window.scrollTo(origin.scrollX,origin.scrollY);if(origin.opener!==null&&origin.opener.isConnected){origin.opener.focus({preventScroll:true});origin.opener.scrollIntoView({block:"nearest"});}});
+  }
   const [designerVisited, setDesignerVisited] = useState(false);
   const [fundingEntry, setFundingEntry] = useState(null);
   const [designerEntry,setDesignerEntry]=useState(null);
   const fundingGuard = useRef(null);
   const conceptGuard = useRef(null);
-  const planning=usePlanningDraft(data,api);
+  const planning=usePlanningDraft(data,api,gate);
   const [planReview,setPlanReview]=useState(null);
   async function openForecasting() {
     if(conceptGuard.current?.dirty&&!(await conceptGuard.current.flush()))return;
@@ -207,9 +224,11 @@ function App() {
   async function fundingSaved() {
     try {setData(await api("project"));} catch(e) {setError(e.message);}
   }
-  async function beforeConceptSave(){
+  async function beforeConceptSave(automatic=false){
+    if(automatic===true&&gate.paused)return false;
     if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return false;
-    if(planning.value!==null&&!(await planning.flush()))return false;
+    if(automatic===true&&gate.paused)return false;
+    if(planning.value!==null&&!(await planning.flush(automatic===true)))return false;
     return true;
   }
   async function useSimulationFinancing(route, facts) {
@@ -267,7 +286,7 @@ function App() {
     if(action?.kind==="demo_plan"){planning.edit(next);setPlanReview(null);}
   }, [action?.kind,planning.edit]);
   const activeInputs=action?.kind==="demo_plan"&&planning.inputs!==null?planning.inputs:inputs;
-  const previewEligible = action?.available && project !== null && configReady && (action.kind!=="demo_plan"||(planning.value!==null&&planning.value.draft.source!==null)||project.demonstrator!==null);
+  const previewEligible = workspace!=="knowledge" && action?.available && project !== null && configReady && (action.kind!=="demo_plan"||(planning.value!==null&&planning.value.draft.source!==null)||project.demonstrator!==null);
   const { preview, previewBusy, previewError, previewCurrent, retryPreview } = usePreview(
     previewEligible
       ? { revision: data.revision, action_id: action.id, inputs:activeInputs }
@@ -436,9 +455,9 @@ function App() {
 
   const history = historyIndex === null ? null : project?.history[historyIndex];
   return (
-    <>
-      <a className="skip" href={workspace === "forecasting" ? "#forecasting-main" : "#main"}>
-        {workspace === "forecasting" ? "Skip to recovery forecasting" : "Skip to project"}
+    <ExplorerNavigation.Provider value={{gate,open:openKnowledge}}><>
+      <a className="skip" href={workspace==="knowledge"?"#knowledge-main":workspace === "forecasting" ? "#forecasting-main" : "#main"}>
+        {workspace==="knowledge"?"Skip to knowledge explorer":workspace === "forecasting" ? "Skip to recovery forecasting" : "Skip to project"}
       </a>
       <header className="masthead">
         <BrandLockup />
@@ -466,9 +485,10 @@ function App() {
           )}
         </div>
       </header>
-      {project!==null && <nav className="workspace-nav" aria-label="Application workspace"><button type="button" data-workspace="project" aria-pressed={workspace==="project"} onClick={async()=>{if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return;setWorkspace("project");}}>Project</button><button type="button" data-workspace="designer" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button><button type="button" data-workspace="funding" aria-pressed={workspace==="funding"} onClick={()=>openFunding()}>Funding Navigator</button><button type="button" data-workspace="forecasting" aria-pressed={workspace==="forecasting"} onClick={openForecasting}>Recovery Forecasting</button></nav>}
+      <nav className="workspace-nav" aria-label="Application workspace">{project!==null&&<><button type="button" data-workspace="project" aria-pressed={workspace==="project"} onClick={async()=>{if(fundingGuard.current?.dirty&&!(await fundingGuard.current.flush()))return;setWorkspace("project");}}>Project</button><button type="button" data-workspace="designer" aria-pressed={workspace==="designer"} onClick={openDesigner}>Site Designer</button><button type="button" data-workspace="funding" aria-pressed={workspace==="funding"} onClick={()=>openFunding()}>Funding Navigator</button><button type="button" data-workspace="forecasting" aria-pressed={workspace==="forecasting"} onClick={openForecasting}>Recovery Forecasting</button></>}<button type="button" data-workspace="knowledge" aria-pressed={workspace==="knowledge"} onClick={e=>openKnowledge(null,e.currentTarget)}>Knowledge Explorer</button></nav>
+      {explorerVisited&&<KnowledgeExplorer request={api} active={workspace==="knowledge"} entry={explorerEntry} onReturn={returnFromKnowledge}/>}
       {project!==null && workspace==="forecasting" && <RecoveryForecasting />}
-      {project!==null && fundingEntry!==null && <div hidden={workspace!=="funding"}><FundingNavigator key={project.id} active={workspace==="funding"} entry={fundingEntry} data={data} request={api} onNavigate={fundingNavigate} onSaved={fundingSaved} onSimulationFinancing={useSimulationFinancing} guardRef={fundingGuard} beforeConceptTransfer={async()=>planning.value===null||await planning.flush()!==false}/></div>}
+      {project!==null && fundingEntry!==null && <div hidden={workspace!=="funding"}><FundingNavigator key={project.id} exploring={workspace==="knowledge"} active={workspace==="funding"} entry={fundingEntry} data={data} request={api} onNavigate={fundingNavigate} onSaved={fundingSaved} onSimulationFinancing={useSimulationFinancing} guardRef={fundingGuard} beforeConceptTransfer={async()=>planning.value===null||await planning.flush()!==false}/></div>}
       {project!==null && designerVisited && <div className="designer-workspace-host" hidden={workspace!=="designer"}><SiteDesigner key={project.id} openRequest={designerEntry} active={workspace==="designer"} data={data} request={priceRequest} beforeHandoff={planning.flush} onHandoff={openPlanning} /></div>}
       <main id="main" className="project-workspace" hidden={workspace!=="project"}>
         <div className="hero">
@@ -1083,7 +1103,7 @@ function App() {
           </p>
         </footer>
       </main>
-    </>
+    </></ExplorerNavigation.Provider>
   );
 }
 

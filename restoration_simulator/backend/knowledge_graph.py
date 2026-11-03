@@ -347,6 +347,7 @@ def _build(data, registry):
     _refs(coverage["root_entities"], entities, at + ".coverage.root_entities"); _require(bool(coverage["root_entities"]), at, "Coverage needs explicit roots.")
     _strings(coverage["excluded"], at + ".coverage.excluded"); _require(bool(coverage["excluded"]), at, "Unindexed coverage must be disclosed.")
     return {"data": deepcopy(data), "registry": registry, "bindings": bindings, "entities": entities,
+            "documents": deepcopy(resolver.owner("documents")[0]["documents"]),
             "hash": _digest({"data": data, "registry": registry, "bindings": bindings})}
 
 
@@ -488,6 +489,65 @@ def feature_evidence(consumer_id):
     return _feature_evidence(ctx, _feature_consumers(ctx), consumer_id)
 
 
+RELATION_LABELS = {
+    "programme_contains_route": "contains route", "call_context_for": "call context for",
+    "approach_has_palette": "has planting palette", "palette_starter_species": "lists starter species",
+    "approach_treatment_guidance": "describes treatment", "example_uses_approach": "illustrates approach",
+    "example_mentions_species": "mentions species", "example_considers_route": "considers route",
+    "example_may_address_need": "may address need",
+}
+
+
+def _explorer_graph(ctx):
+    consumers = _feature_consumers(ctx)
+    nodes, edges = {}, {}
+    for eid, entity in sorted(ctx["entities"].items()):
+        details = _details(ctx, eid)
+        nodes[eid] = {"id": eid, "kind": "entity", "label": entity["label"], "details": {k: details[k] for k in ("entity", "authority", "evidence", "claims", "relations", "issues")}}
+    for cid, claim in sorted(ctx["data"]["claims"].items()):
+        nodes[cid] = {"id": cid, "kind": "claim", "label": claim["statement"], "details": _claim(ctx, cid)}
+    catalogue = {d["id"]: d for d in ctx["documents"]}
+    passage_uses = {}
+    for ref in _evidence(ctx, ctx["data"]["sources"]):
+        passage_uses.setdefault(ref["passage_id"], []).append(ref)
+    for pid, refs in sorted(passage_uses.items()):
+        first = refs[0]
+        doc = catalogue[first["document_id"]]
+        _require(doc["sha256"] == first["sha256"], "explorer", "Document edition changed while building the graph. Retry after checking registration.")
+        nodes[pid] = {"id": pid, "kind": "passage", "label": f"{first['document_id']} · PDF page {first['page']}",
+                      "details": {"document": deepcopy(doc), "passage_id": pid, "page": first["page"], "page_basis": "pdf", "citation_uses": refs}}
+    def derived(kind, source, target, refs):
+        ident = "edge:" + _digest([kind, source, target])
+        _require(ident not in edges, "explorer", "Duplicate derived connection.")
+        edges[ident] = {"id": ident, "kind": kind, "source": source, "target": target,
+                        "label": "about" if kind == "claim_subject" else "cites", "details": {"evidence": _evidence(ctx, refs)}}
+    for cid, claim in sorted(ctx["data"]["claims"].items()):
+        for eid in claim["subject_ids"]: derived("claim_subject", cid, eid, [])
+    for kind, records in (("claim_cites", ctx["data"]["claims"]), ("entity_cites", ctx["entities"])):
+        for ident, record in sorted(records.items()):
+            grouped = {}
+            for cid in record["citation_ids"]:
+                pid = ctx["registry"]["citations"][cid]["passage_id"]
+                grouped.setdefault(pid, []).append(cid)
+            for pid, refs in sorted(grouped.items()): derived(kind, ident, pid, refs)
+    for rid, relation in sorted(ctx["data"]["relations"].items()):
+        edges[rid] = {"id": rid, "kind": "relationship", "source": relation["source"], "target": relation["target"],
+                      "label": RELATION_LABELS[relation["type"]],
+                      "details": {"id": rid, **deepcopy(relation), "evidence": _evidence(ctx, relation["citation_ids"])}}
+    expected = {"claim_subject": ("claim", "entity"), "claim_cites": ("claim", "passage"), "entity_cites": ("entity", "passage"), "relationship": ("entity", "entity")}
+    for edge in edges.values():
+        _require(edge["source"] in nodes and edge["target"] in nodes, "explorer", "A connection has an unresolved endpoint.")
+        _require((nodes[edge["source"]]["kind"], nodes[edge["target"]]["kind"]) == expected[edge["kind"]], "explorer", "Connection endpoint kinds disagree.")
+    return _response(ctx, consumer_registry_hash=_digest(consumers), nodes=[nodes[k] for k in sorted(nodes)],
+                     edges=[edges[k] for k in sorted(edges)], issues=_issues(ctx, None)["issues"],
+                     entity_types=deepcopy(ENTITY_TYPES), relation_types=deepcopy(RELATION_LABELS))
+
+
+def explorer_graph():
+    """Deterministic, bounded corpus projection. Never reads project state."""
+    return _explorer_graph(load_library())
+
+
 def _impact(ctx, target_kind, target_id):
     _require(isinstance(target_kind, str) and target_kind in {"claim", "passage"}, "impact", "Target kind must be claim or passage.")
     _text(target_id, "impact.target_id")
@@ -547,6 +607,7 @@ def main(argv=None):
     operation.add_argument("--impact-passage")
     operation.add_argument("--issues", action="store_true")
     operation.add_argument("--feature-evidence", choices=tuple(FEATURE_CONTEXTS), metavar="CONSUMER_ID")
+    operation.add_argument("--explorer", action="store_true")
     parser.add_argument("--type", choices=tuple(ENTITY_TYPES))
     parser.add_argument("--for-entity")
     args = parser.parse_args(argv)
@@ -555,7 +616,7 @@ def main(argv=None):
     try:
         ctx = load_library()
         if args.check:
-            _feature_consumers(ctx)
+            _explorer_graph(ctx)
             for edition in ctx["registry"]["editions"].values(): documents.verified_file(edition["document_id"], expected_sha256=edition["sha256"])
             result = _response(ctx, validated={name: len(ctx["data"][name]) for name in ("entities", "claims", "relations", "issues", "bindings", "sources")})
         elif args.search is not None: result = _find(ctx, args.search, args.type)
@@ -563,6 +624,7 @@ def main(argv=None):
         elif args.impact_claim is not None: result = _impact(ctx, "claim", args.impact_claim)
         elif args.impact_passage is not None: result = _impact(ctx, "passage", args.impact_passage)
         elif args.feature_evidence is not None: result = _feature_evidence(ctx, _feature_consumers(ctx), args.feature_evidence)
+        elif args.explorer: result = _explorer_graph(ctx)
         else: result = _issues(ctx, args.for_entity)
         output = json.dumps(result, sort_keys=True, ensure_ascii=False, allow_nan=False, indent=2)
     except (Invalid, HTTPException) as exc:

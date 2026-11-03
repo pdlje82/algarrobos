@@ -1,5 +1,40 @@
 # Silent-fallback audit · 28 October 2026
 
+Knowledge Explorer (3 November 2026): a required, validated graph projection exposes
+34 pilot nodes and 52 explicit connections. The separate read-only graph/search/
+usage endpoints never open project state. Unsupported types/versions, dangling
+references, wrong editions, malformed registries, unknown/repeated query fields and
+failed reads produce actionable errors. No missing source, citation role or record
+is inferred. Citation links say cites; illustrative relationships, project
+assumptions, unresolved stock descriptions and the bounded water gap remain distinct.
+
+Frontend contracts are independent of rendering/central dispatch. Refresh removes
+unavailable graph/detail data; Retry retains the topic, selection, expansion, search,
+filters and layout. Abandoned responses are ignored. Search must match the snapshot
+identity/hash, and usage must also match its registration hash/requested target.
+Different editions are not combined; missing requested records need explicit reset
+or topic selection. An empty search is intentional; unknown identities are errors.
+
+Explorer entry/return bypass editing guards, preserve mounted components/drafts and
+restore focus. A synchronous in-memory gate pauses unsubmitted planning/concept saves,
+report previews and Designer commands. Submitted work settles, and queued follow-on
+writes wait until return. Existing funding inactivity policy and explicit editing
+review/adoption behavior remain authoritative. No saved preferences, project fields,
+source downloads, default substitutions or migration are introduced.
+
+Acceptance: 51 targeted/343 full backend tests, 15 targeted/130 full frontend tests,
+both existing knowledge checks, all four feature projections, Explorer CLI and
+production build passed. Sequential isolated browser runs on API 8013/production
+4174 passed for Explorer, all six evidence placements and Designer regression,
+including responsive themes, exact PDF pages/focus, failures/retry, queued/submitted
+work and unfinished drafts. Source/feature libraries, all three knowledge registries,
+frozen replay and eight real saves retain fingerprints. The existing bundle warning,
+observed environment-version metadata discrepancy and failed diagnostic attempts are
+recorded in the [Milestone 5 record](KNOWLEDGE_MILESTONE_5.md#verification-record).
+Milestone 6 research intake/expansion remains pending. This is a bounded audit,
+not a repository-wide compliance claim.
+
+
 Shared feature evidence (3 November 2026): four consumers and six registered
 Current evidence sections use one required feature-consumer registry. The separate
 read-only projection/API/CLI resolves current claims and authoritative assumptions

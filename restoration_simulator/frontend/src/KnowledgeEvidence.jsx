@@ -2,6 +2,8 @@ import React,{createContext,useContext,useEffect,useMemo,useState,useSyncExterna
 import {DocumentLink} from "./DocumentLink.jsx";
 import {createEvidenceStore} from "./knowledgeEvidenceState.js";
 import "./KnowledgeEvidence.css";
+import {useExplorerNavigation} from "./ExplorerNavigation.jsx";
+import {EVIDENCE_ENTRY_TOPICS} from "./knowledgeExplorerState.js";
 
 const Evidence=createContext(null);
 export function KnowledgeEvidenceProvider({request,children}){
@@ -38,6 +40,7 @@ function Content({value,context,savedDesign}){
   </>;
 }
 export function KnowledgeEvidence({consumer,contextId,label,savedDesign=null}){
+  const navigation=useExplorerNavigation();
   const store=useContext(Evidence),[open,setOpen]=useState(false);
   if(store===null)throw Error("Current evidence requires its provider.");
   const state=useSyncExternalStore(store.subscribe,()=>store.get(consumer));
@@ -45,7 +48,8 @@ export function KnowledgeEvidence({consumer,contextId,label,savedDesign=null}){
   const context=state.value===null?null:state.value.contexts[contextId];
   return <details className="knowledge-evidence" data-evidence-context={`${consumer}/${contextId}`} onToggle={e=>{if(e.target===e.currentTarget)setOpen(e.currentTarget.open);}}><summary>Current evidence · {label}</summary>
     {open&&<div role="region" aria-label={`Current evidence: ${label}`}>
-      {state.status==="error"?<div role="alert"><p>{state.error}</p><button type="button" onClick={()=>store.refresh(consumer)}>Retry current evidence</button></div>:state.status!=="ready"?<p role="status">Loading current evidence…</p>:context===undefined?<div role="alert"><p>Evidence context {contextId} is unavailable. Check the feature registration and reload the app.</p><button type="button" onClick={()=>store.refresh(consumer)}>Retry current evidence</button></div>:<><button type="button" onClick={()=>store.refresh(consumer)}>Refresh current evidence</button><Content value={state.value} context={context} savedDesign={savedDesign}/></>}
+      {state.status==="error"?<div role="alert"><p>{state.error}</p><button type="button" onClick={()=>store.refresh(consumer)}>Retry current evidence</button></div>:state.status!=="ready"?<p role="status">Loading current evidence…</p>:context===undefined?<div role="alert"><p>Evidence context {contextId} is unavailable. Check the feature registration and reload the app.</p><button type="button" onClick={()=>store.refresh(consumer)}>Retry current evidence</button></div>:<><button type="button" onClick={()=>store.refresh(consumer)}>Refresh current evidence</button><button type="button" onClick={e=>navigation.open(EVIDENCE_ENTRY_TOPICS[consumer][contextId],e.currentTarget)}>Explore connections</button><Content value={state.value} context={context} savedDesign={savedDesign}/></>}
     </div>}
   </details>;
 }
+export {Sources as KnowledgeSources,Limitations as KnowledgeLimitations,Assumption as KnowledgeAssumption};

@@ -2,7 +2,7 @@ import React,{useEffect,useLayoutEffect,useRef,useState} from "react";
 import {revealFundingColumn,constrainFundingEditor,placeFundingEditor,fundingEditorContextShift} from "./fundingLayout.js";
 
 // A modeless editor: the graph remains interactive, including while editing an answer.
-export function FundingQuestionEditor({question,anchor,positionLabel,onClose,children,title="Edit funding answer",focusTarget=null}){
+export function FundingQuestionEditor({question,anchor,positionLabel,onClose,children,title="Edit funding answer",focusTarget=null,suspended=false}){
   const root=useRef(null),drag=useRef(null),moved=useRef(false),currentAnchor=useRef(anchor),previousViewport=useRef({width:innerWidth,height:innerHeight});
   const [position,setPosition]=useState(null),[dragging,setDragging]=useState(false);
   const [wide,setWide]=useState(()=>matchMedia("(min-width:1001px)").matches);
@@ -46,6 +46,7 @@ export function FundingQuestionEditor({question,anchor,positionLabel,onClose,chi
     if(input!==null&&!input.disabled)input.focus({preventScroll:true});else root.current.focus({preventScroll:true});
   },[question.id,position!==null,anchor,focusTarget]);
   useEffect(()=>{
+    if(suspended)return;
     const resize=(reveal=false)=>{
       // Content changes and nested PDFs must not re-anchor to a graph that the
       // user has since scrolled away from. Only opening/resizing reveals it.
@@ -74,7 +75,7 @@ export function FundingQuestionEditor({question,anchor,positionLabel,onClose,chi
     };
     document.addEventListener("keydown",escape,true);
     return()=>{observer.disconnect();window.removeEventListener("resize",resized);document.removeEventListener("keydown",escape,true);};
-  },[onClose]);
+  },[onClose,suspended]);
   function start(e){
     if(e.button!==0||!matchMedia("(min-width:1001px)").matches)return;
     e.preventDefault();const bounds=root.current.getBoundingClientRect();

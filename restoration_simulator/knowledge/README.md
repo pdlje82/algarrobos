@@ -252,3 +252,64 @@ separate change explicitly provides their compatibility/adoption contract. The
 [Milestone 4 implementation record](../KNOWLEDGE_MILESTONE_4.md) records validation
 and remaining duplication. Standalone educational explorers, other routes and
 unregistered research remain outside this integration.
+
+## Knowledge Explorer
+
+The project-independent Knowledge Explorer reads the same pilot through
+`explorer_graph()` and `GET /api/knowledge/explorer`. The version-1 snapshot
+contains dataset identity/hash, review date, coverage, `consumer_registry_hash`,
+`entity_types`, `relation_types`, ordered `nodes`, ordered `edges` and complete
+`issues`. Source documents are taken from the validated load's native document
+authority; they are not separately maintained explorer metadata. The dataset hash
+still covers exactly the pilot, citation registry and resolved bindings.
+
+The current projection has 34 nodes (11 entities, 12 claims, 11 passages) and
+52 edges (9 native relationships, 22 subject links, 14 claim citations and 7 entity
+citations). Native IDs are retained. Derived IDs are `edge:` followed by the
+SHA-256 of Python's UTF-8 `json.dumps([kind, source, target], sort_keys=True,
+ensure_ascii=False, allow_nan=False)` output. Source links say **cites**, which
+does not establish proof. Relationship provenance remains in relationship details;
+it never creates an inferred entity-to-source connection.
+
+Passage nodes retain the complete registered document description, PDF page and
+all pilot citation uses for that passage, including their distinct roles, labels,
+verification dates and edition checksums. A passage and its citation uses remain
+different identities, even when several uses refer to the same page. No corpus
+records, feature memberships or source documents are created by this projection.
+
+```powershell
+python -m backend.knowledge_graph --explorer
+python -m backend.knowledge_graph --check
+```
+
+The check validates the graph in addition to the existing checks, retaining its
+original response fields. CLI status 0 means success, 1 configuration/document
+failure, and 2 invalid usage. Commands never write application data. HTTP also
+exposes existing search semantics at `GET /api/knowledge/search?text=MR2` (optional
+`entity_type`) and version-2 usage at
+`GET /api/knowledge/impact?target_kind=claim&target_id=claim:mr2-runoff-capture`.
+Unknown or repeated parameters, unsupported requests and unknown targets fail.
+These endpoints never open project state.
+
+The frontend owns only transient presentation: selected topic/record, explicit
+expansions, filters, topic history, layout and zoom. Lanes and Network share that
+state; List exposes the same records/actions and is the automatic default below
+900 px. Expansion uses actual registered adjacency; collapse retains records
+reachable through another expanded branch. Filters never create bypass edges.
+Selecting details does not recenter the topic; centering is explicit.
+
+Graph data loads only on entry. Refresh clears the unavailable snapshot, preserves
+the view inputs and offers Retry on failure. Search and lazy Where used responses
+must agree with the graph's dataset identity/hash; usage must also agree with its
+feature-registration hash. Mismatches require Refresh rather than mixing editions.
+Abandoned requests cannot replace newer results. Missing requested records require
+an explicit topic choice/reset. PDF viewing retains checksum/page verification
+and returns focus to its opening link.
+
+Entering/returning bypasses editing guards and keeps the editing components mounted.
+An in-memory gate suspends unsubmitted planning autosaves, demonstrator autosaves,
+concept reports and Designer commands. Funding keeps its existing inactive policy.
+Submitted operations settle; further queued writes wait. Returning restores the
+originating control and the existing editing policy. No preference, URL route,
+project field or persistence format is added. See the
+[Milestone 5 record](../KNOWLEDGE_MILESTONE_5.md) for acceptance and limitations.
