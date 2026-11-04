@@ -1,0 +1,285 @@
+{
+  "version": 1,
+  "prepared_on": "2026-11-04",
+  "visuals": [
+    {
+      "file": "growboxx-cutaway.webp",
+      "kind": "source_figure",
+      "document_id": "IRR-001",
+      "pdf_page": 2,
+      "source_sha256": "3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb",
+      "rectangle_ltrb": [
+        0.25,
+        0.07,
+        0.8,
+        0.35
+      ],
+      "caption": "Groasis manufacturer cutaway of a Growboxx; product illustration, not a drone installation.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "growboxx-field.webp",
+      "kind": "source_figure",
+      "document_id": "IRR-001",
+      "pdf_page": 3,
+      "source_sha256": "3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb",
+      "rectangle_ltrb": [
+        0.2,
+        0.07,
+        0.87,
+        0.45
+      ],
+      "caption": "Groasis field photograph: seedling and protected reservoir installation; no autonomous refill shown.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "waterboxx-cutaway.webp",
+      "kind": "source_figure",
+      "document_id": "IRR-002",
+      "pdf_page": 2,
+      "source_sha256": "3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762",
+      "rectangle_ltrb": [
+        0.28,
+        0.05,
+        0.77,
+        0.25
+      ],
+      "caption": "Groasis Waterboxx cutaway illustrations; reusable polypropylene comparator.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "cocoon-field.webp",
+      "kind": "source_figure",
+      "document_id": "IRR-003",
+      "pdf_page": 92,
+      "source_sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "rectangle_ltrb": [
+        0.16,
+        0.045,
+        0.93,
+        0.4
+      ],
+      "caption": "LIFE NIEBLAS photograph of a planted Cocoon; field installation, not a drone interface.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "cocoon-refill.webp",
+      "kind": "source_figure",
+      "document_id": "IRR-003",
+      "pdf_page": 120,
+      "source_sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "rectangle_ltrb": [
+        0.27,
+        0.3,
+        0.94,
+        0.86
+      ],
+      "caption": "LIFE NIEBLAS illustrated initial and subsequent watering sequence; ground watering, not autonomous insertion.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "reservoir-wear.webp",
+      "kind": "source_figure",
+      "document_id": "IRR-003",
+      "pdf_page": 93,
+      "source_sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "rectangle_ltrb": [
+        0.18,
+        0.19,
+        0.9,
+        0.4
+      ],
+      "caption": "LIFE NIEBLAS photographs of reservoir condition; not a quantified service-life guarantee.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "field-monitoring.webp",
+      "kind": "source_figure",
+      "document_id": "IRR-003",
+      "pdf_page": 143,
+      "source_sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "rectangle_ltrb": [
+        0.55,
+        0.48,
+        0.91,
+        0.92
+      ],
+      "caption": "LIFE NIEBLAS field photographs beside irrigation recommendations; context is the original trial.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "m350-airframe.webp",
+      "kind": "source_figure",
+      "document_id": "DRONE-001",
+      "pdf_page": 1,
+      "source_sha256": "6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5",
+      "rectangle_ltrb": [
+        0.16,
+        0.37,
+        0.88,
+        0.71
+      ],
+      "caption": "DJI Matrice 350 RTK manual-cover drawing; no watering kit is depicted or certified.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "dock4-system.webp",
+      "kind": "source_figure",
+      "document_id": "DRONE-002",
+      "pdf_page": 1,
+      "source_sha256": "1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d",
+      "rectangle_ltrb": [
+        0.29,
+        0.23,
+        0.76,
+        0.76
+      ],
+      "caption": "DJI Dock 4 manual-cover drawing of dock and aircraft; no water-refill system shown.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "t25-airframe.webp",
+      "kind": "source_figure",
+      "document_id": "DRONE-003",
+      "pdf_page": 11,
+      "source_sha256": "b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688",
+      "rectangle_ltrb": [
+        0.16,
+        0.08,
+        0.88,
+        0.41
+      ],
+      "caption": "DJI T25 aircraft overview, including annotated components; larger agricultural benchmark.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "hose-prototype.webp",
+      "kind": "source_figure",
+      "document_id": "DRONE-004",
+      "pdf_page": 2,
+      "source_sha256": "0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4",
+      "rectangle_ltrb": [
+        0.51,
+        0.19,
+        0.98,
+        0.43
+      ],
+      "caption": "Miwa et al. experimental hose-fed spraying setup; not a plant-reservoir hose insertion system.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "hose-field-trial.webp",
+      "kind": "source_figure",
+      "document_id": "DRONE-004",
+      "pdf_page": 3,
+      "source_sha256": "0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4",
+      "rectangle_ltrb": [
+        0.51,
+        0.7,
+        0.98,
+        0.9
+      ],
+      "caption": "Miwa et al. outdoor experimental photograph; spray trial, not proof of root-zone irrigation benefit.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "restoration-islands.webp",
+      "kind": "source_figure",
+      "document_id": "FOREST-002",
+      "pdf_page": 133,
+      "source_sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "rectangle_ltrb": [
+        0.11,
+        0.2,
+        0.94,
+        0.49
+      ],
+      "caption": "Junta de Andalucia handbook field photographs; restoration context, not a prescribed drone cluster layout.",
+      "rights": "Original publisher/figure authors retain rights; no new licence asserted."
+    },
+    {
+      "file": "system-overview.svg",
+      "kind": "author_schematic",
+      "caption": "Intelligence at the drone. Simplicity at each plant.. The proposed service cycle; component integration still requires development.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "app-map.svg",
+      "kind": "author_schematic",
+      "caption": "From a readable story to the exact evidence. Knowledge Explorer is the entry point; reading does not adopt rules.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "reservoir-section.svg",
+      "kind": "author_schematic",
+      "caption": "What the drone would actually have to refill. A passive capture guide is a proposal, not a reviewed commercial interface.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "lifecycle-cost.svg",
+      "kind": "author_schematic",
+      "caption": "Cheap to buy is only one part of the cost. Compare a common establishment period and equivalent service outcomes.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "plant-evidence.svg",
+      "kind": "author_schematic",
+      "caption": "Three separate questions for every plant. A species name alone answers none of these completely.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "water-balance.svg",
+      "kind": "author_schematic",
+      "caption": "A disappearing litre is not necessarily a useful litre. Release, plant need, losses and rainfall must be accounted for separately.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "cluster-plan.svg",
+      "kind": "author_schematic",
+      "caption": "Plant association and drone access share the same space. Candidate carob island; illustrative geometry without counts or spacing defaults.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "payload-budget.svg",
+      "kind": "author_schematic",
+      "caption": "Water competes for payload with its own delivery equipment. An airframe rating is not a useful water payload or loaded flight duration.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "hose-capture.svg",
+      "kind": "author_schematic",
+      "caption": "The inlet is part of the robotics problem. Illustrated funnel capture is a development option, not a proven product.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "base-integration.svg",
+      "kind": "author_schematic",
+      "caption": "A dock is only as autonomous as the whole refill cycle. Battery automation does not establish water-service automation.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "remote-base.svg",
+      "kind": "author_schematic",
+      "caption": "Remote does not mean resupply-free. Sketch the site support system before estimating unattended service capacity.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "operating-gates.svg",
+      "kind": "author_schematic",
+      "caption": "Technical feasibility and operating permission are separate. Planning checklist from the reviewed guidance; no site or flight is cleared.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "validation-gates.svg",
+      "kind": "author_schematic",
+      "caption": "Build confidence in four measured stages. Keep operational throughput separate from biological establishment outcomes.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    },
+    {
+      "file": "capacity-tradeoffs.svg",
+      "kind": "author_schematic",
+      "caption": "More visits are useful only if plants get enough water. No numerical capacity estimate is defensible until the inputs are explicit.",
+      "rights": "Repository-authored explanatory illustration; not evidence of field performance."
+    }
+  ]
+}

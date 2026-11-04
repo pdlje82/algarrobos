@@ -293,6 +293,13 @@ decision cannot be resolved from the repository or authorised task scope.
 
 ## Progress and next task
 
+Presentation follow-up, completed 4 November 2026:
+[four-layer Overview and readable topic details](KNOWLEDGE_EXPLORER_OVERVIEW.md).
+Map, hierarchical Outline and optional Advanced Network replace the flat topic-only
+entry. Registered knowledge and source/rule/project contracts remain unchanged;
+Projects is explicitly architecture context. Verification includes 146 frontend
+tests, 69 backend knowledge tests and isolated production browser regressions.
+
 | Milestone | Status | Completion evidence |
 | --- | --- | --- |
 | 1 Knowledge ownership and compatibility baseline | Complete | [Audit, traces, compatibility review and passing baseline](KNOWLEDGE_OWNERSHIP_AUDIT.md) |

@@ -299,12 +299,43 @@ exposes existing search semantics at `GET /api/knowledge/search?text=MR2` (optio
 Unknown or repeated parameters, unsupported requests and unknown targets fail.
 These endpoints never open project state.
 
-The frontend owns only transient presentation: selected topic/record, explicit
-expansions, filters, topic history, layout and zoom. Lanes and Network share that
-state; List exposes the same records/actions and is the automatic default below
-900 px. Expansion uses actual registered adjacency; collapse retains records
-reachable through another expanded branch. Filters never create bypass edges.
-Selecting details does not recenter the topic; centering is explicit.
+The frontend owns only transient presentation. First entry opens the four-layer
+Overview: Sources, Knowledge, Rules and Projects. Architecture connectors explain
+responsibilities; registered connection aggregates retain the original edge IDs.
+Projects is architecture context only and never loads saved project state. Rules
+shows selected registered references and owner-resolved assumptions, not a complete
+inventory of calculations/tests or automatic claim-to-rule adoption.
+
+Knowledge expands into Ecology, Funding, Research & systems, Prepared examples,
+Claims and Unresolved issues. Every supported entity type is explicitly classified.
+Sources groups document ID plus checksum, exact passages and distinct citation uses;
+existing supplementary web references retain their owner, checked date and context.
+Matching URLs do not establish equivalent reviewed evidence.
+
+Topic detail starts with collapsed claim categories and one Sources group. Selecting
+a claim highlights its exact subjects and references. Document groups expand to
+passages; citation roles/dates remain available in details. Configuration-only
+claims gain no inferred citations. Complete issue groups survive filtering. Expansion
+uses actual registered adjacency; collapse retains shared reachable neighbours.
+Filters never create bypass connections. Selecting details does not recenter a topic.
+
+Map routes through channels around visible cards; grouping replaces repeated boxed
+connection labels. Outline exposes the same groups, records and actions as a reading
+hierarchy. Advanced Network is an optional topic view, with lightweight selected-path
+labels and only in-scope nodes. Connection inspection remains keyboard accessible.
+Below 900 px the initial presentation is Outline until explicitly changed. Main
+navigation resumes the last view; evidence links open their registered topic.
+Overview/topic selections, filters, expansions, history and presentation choices
+remain in memory. No preferences or URL routes are saved.
+
+The graph occupies the full workspace width. Record details float over it in a
+closable panel: drag its heading or use the heading's arrow keys (Shift for larger
+steps). Movement stays within the graph area and leaves its controls accessible.
+The Record details button reopens the panel; closing restores the opening control's
+focus. On phones, details use a bottom panel. Maximize graph fills the window;
+Restore workspace or Escape returns to the normal layout. Nested PDF viewing keeps
+its own Escape/focus behaviour. Panel position, visibility and maximization are
+transient and do not alter registered knowledge, graph selection or project data.
 
 Graph data loads only on entry. Refresh clears the unavailable snapshot, preserves
 the view inputs and offers Retry on failure. Search and lazy Where used responses
@@ -320,7 +351,8 @@ concept reports and Designer commands. Funding keeps its existing inactive polic
 Submitted operations settle; further queued writes wait. Returning restores the
 originating control and the existing editing policy. No preference, URL route,
 project field or persistence format is added. See the
-[Milestone 5 record](../KNOWLEDGE_MILESTONE_5.md) for acceptance and limitations.
+[Milestone 5 record](../KNOWLEDGE_MILESTONE_5.md) for the original acceptance and
+[overview/readability record](../KNOWLEDGE_EXPLORER_OVERVIEW.md) for the new presentation.
 
 
 ## Research intake and reviewed expansion

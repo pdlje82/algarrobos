@@ -1,5 +1,21 @@
 # Silent-fallback audit · 28 October 2026
 
+Explorer overview/readability (4 November 2026): a separate display projection
+classifies every supported entity type and preserves canonical IDs, exact aggregate
+membership, edition/passage/use identities and supplementary web contexts. Unknown
+types/references and metadata conflicts fail explicitly. Display groups never become
+API identities. Project architecture loads no project records; current assumptions,
+manual review targets and actual dependencies remain distinct. Failed refreshes
+clear unavailable data and retain inputs for explicit Retry; no snapshot editions
+are combined. Existing source/rule/save owners remain authoritative.
+
+Acceptance: 146 frontend and 69 backend knowledge tests, both knowledge checks,
+production build and sequential Explorer/evidence/Designer/focused browser checks
+passed. All 213 protected file fingerprints are unchanged. This covers the changed
+presentation paths, not repository-wide fallback compliance. Details, diagnostic
+failures and the existing build warning are in the
+[completion record](KNOWLEDGE_EXPLORER_OVERVIEW.md).
+
 Research intake and expansion (3 November 2026): explicit candidate snapshots and
 required manifests are validated without changing runtime loader paths or opening
 project state. Baseline/candidate byte fingerprints, native record fingerprints,

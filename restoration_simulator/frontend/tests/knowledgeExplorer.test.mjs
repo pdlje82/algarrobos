@@ -10,7 +10,8 @@ import defaults from '../../design_rules/defaults.json' with {type:'json'};
 import manifest from '../../design_rules/manifest.json' with {type:'json'};
 import {validateResponse} from '../src/contracts.js';
 import {createExplorationGate} from '../src/explorerSession.js';
-import {validateExplorerGraph,validateExplorerSearch,validateExplorerImpact,assertSameSnapshot,initialExplorerView,visibleExplorerGraph,explorerLayout,explorerEdgeLabels,revealExplorerRecord,createExplorerResource,EVIDENCE_ENTRY_TOPICS,RELATION_TYPES} from '../src/knowledgeExplorerState.js';
+import {validateExplorerGraph,validateExplorerSearch,validateExplorerImpact,assertSameSnapshot,initialExplorerView,visibleExplorerGraph,explorerLayout,explorerEdgeLabels,revealExplorerRecord,createExplorerResource,EVIDENCE_ENTRY_TOPICS,RELATION_TYPES,EVIDENCE_KINDS} from '../src/knowledgeExplorerState.js';
+import {buildOverview,buildTopic,sourceGroups,layoutPresentation,TYPE_AREA,categoryGroupId,documentGroupId,SOURCE_GROUP} from '../src/knowledgeExplorerPresentation.js';
 
 // Source identities and memberships come from the real registries. Wire values
 // representing native adapters are isolated fixtures, not an application owner.
@@ -155,4 +156,79 @@ test('both new source naming contexts remain unresolved alongside retained stock
   assert(g.nodes.filter(n=>n.kind==='entity'&&['programme:EU-LIFE','route:EU-LIFE-NATURE'].includes(n.id)).every(n=>n.details.entity.availability==='not_assessed'));
   const broken=structuredClone(g);broken.issues.find(i=>i.id===issue.id).claims.pop();
   assert.throws(()=>validateExplorerGraph(broken),/complete issue claims/);
+});
+
+test('four-layer presentation accounts for every original record and connection without mutation',()=>{
+  const before=JSON.stringify(g),overview=buildOverview(g,initialExplorerView());
+  assert.deepEqual(overview.cards.map(c=>c.id),['view:sources','view:knowledge','view:rules','view:projects']);
+  assert.deepEqual(new Set(overview.cards.flatMap(c=>c.memberIds)),new Set(g.nodes.map(n=>n.id)));
+  const aggregateIds=overview.connections.filter(c=>c.kind==='registered').flatMap(c=>c.edgeIds);
+  assert.equal(aggregateIds.length,g.edges.length);assert.deepEqual(new Set(aggregateIds),new Set(g.edges.map(e=>e.id)));
+  assert.deepEqual(overview.cards.find(c=>c.id==='view:projects').memberIds,[]);
+  assert(overview.connections.filter(c=>[c.source,c.target].includes('view:projects')).every(c=>c.kind==='architecture'&&c.edgeIds.length===0));
+  assert.equal(JSON.stringify(g),before);assert.deepEqual(buildOverview(g,initialExplorerView()),overview);
+});
+test('presentation exhaustively classifies native types and rejects unknown types and missing references',()=>{
+  assert.deepEqual(Object.keys(TYPE_AREA).sort(),Object.keys(g.entity_types).sort());
+  const unknown=structuredClone(g);unknown.nodes.find(n=>n.kind==='entity').details.entity.type='new_unregistered_type';
+  assert.throws(()=>buildOverview(unknown,initialExplorerView()),/classification/);
+  const broken=structuredClone(g);const claim=broken.nodes.find(n=>n.kind==='claim'&&n.details.evidence.length>0);claim.details.evidence[0].passage_id='missing';
+  assert.throws(()=>buildOverview(broken,initialExplorerView()),/passage/);
+});
+test('sources retain editions, exact passages, distinct citation uses and supplementary web contexts',()=>{
+  const s=sourceGroups(g,g.nodes,g.edges);
+  assert.equal(s.counts.passages,g.nodes.filter(n=>n.kind==='passage').length);
+  assert.equal(s.counts.citationUses,Object.keys(pilot.sources).length);
+  assert(s.counts.webReferences>0);assert(s.documents.every(d=>d.key===d.document.id+'@'+d.document.sha256));
+  for(const d of s.documents)for(const p of d.passages)for(const use of p.uses){assert.equal(use.passage_id,p.node.id);assert.equal(use.sha256,d.document.sha256);assert.equal(use.page,p.node.details.page);assert(use.role&&use.verified_on);}
+  const duplicate=structuredClone(g),owner=duplicate.nodes.find(n=>n.kind==='entity'&&n.details.authority.value.web_sources?.length>0);
+  const reference=structuredClone(owner.details.authority.value.web_sources[0]);reference.finding='A different reviewed context at the same URL';owner.details.authority.value.web_sources.push(reference);
+  const after=sourceGroups(duplicate,duplicate.nodes,duplicate.edges);assert.equal(after.counts.webReferences,s.counts.webReferences+1);assert(after.web.some(w=>w.reference.finding===reference.finding));
+  owner.details.authority.value.web_sources.reverse();assert.deepEqual(sourceGroups(duplicate,duplicate.nodes,duplicate.edges).web,after.web,'Web identities retain their exact reviewed context across reordering');
+  const reordered=structuredClone(g);for(const n of reordered.nodes)if(n.kind!=='passage')n.details.evidence=n.details.evidence.map(r=>Object.fromEntries(Object.entries(r).reverse()));
+  assert.deepEqual(sourceGroups(reordered,reordered.nodes,reordered.edges).counts,s.counts);
+});
+test('topic starts with collapsed categories, one Sources group, complete issues and authoritative assumptions',()=>{
+  const before=JSON.stringify(g),p=buildTopic(g,view());
+  assert.equal(p.cards.filter(c=>c.id===SOURCE_GROUP).length,1);assert(p.categoryGroups.length>0);
+  assert.equal(p.cards.filter(c=>c.kind==='record'&&c.node.kind==='claim').length,0);
+  assert.deepEqual(new Set(p.categoryGroups.flatMap(c=>c.nodes.map(n=>n.id))),new Set(p.claims.map(n=>n.id)));
+  assert(p.assumptions.some(b=>b.adapter==='carob_density'&&b.value.value===defaults.density_defaults.carob));
+  const stock=p.issues.find(i=>i.id==='issue:mr2-stock-source-tension');assert(stock);assert.equal(stock.claims.length,2);assert(!Object.hasOwn(stock,'preferred'));
+  assert.equal(JSON.stringify(g),before);
+});
+test('category/document expansion exposes existing records and selection traces exact evidence only',()=>{
+  const id='claim:mr2-runoff-capture',node=g.nodes.find(n=>n.id===id),base=view('approach:mr2');
+  const expanded=[categoryGroupId(node.details.evidence_kind),SOURCE_GROUP,...node.details.evidence.map(r=>documentGroupId(r.document_id+'@'+r.sha256))];
+  const p=buildTopic(g,base,expanded,id);assert(p.cards.some(c=>c.id===id));
+  assert.deepEqual(new Set(p.highlight.passageIds),new Set(node.details.evidence.map(r=>r.passage_id)));
+  for(const edgeId of p.highlight.edgeIds){const edge=g.edges.find(e=>e.id===edgeId);assert(edge.source===id||edge.target===id);}
+  for(const card of p.cards.filter(c=>c.kind==='record'))assert(g.nodes.some(n=>n.id===card.id));
+  assert.equal(new Set(p.cards.map(c=>c.id)).size,p.cards.length);
+  const config=buildTopic(g,base,[], 'claim:designer-carob-density-assumption');assert.equal(config.sources.counts.citationUses>0,true);
+  const claim=g.nodes.find(n=>n.id==='claim:designer-carob-density-assumption');assert.equal(claim.details.evidence.length,0);
+  assert.equal(config.highlight.passageIds.length,0);
+});
+test('filtered claims and native relationships do not reappear in aggregates or produce bypass connections',()=>{
+  const v={...view('approach:mr2'),category:'guidance',status:'curated',relationTypes:[]},p=buildTopic(g,v);
+  const allowed=new Set(p.visible.edges.map(e=>e.id));
+  for(const c of p.connections.filter(c=>c.kind==='registered'))for(const id of c.edgeIds){const edge=g.edges.find(e=>e.id===id);assert(edge);assert(edge.kind!=='relationship');assert(edge.source===v.root||p.visible.nodes.some(n=>n.id===edge.source));if(edge.kind==='claim_subject')assert(allowed.has(id));}
+  assert(p.claims.every(n=>n.details.evidence_kind==='guidance'&&n.details.review_status==='curated'));
+  assert(p.issues.some(i=>i.claims.length===2),'Complete stock issue remains accessible beyond the claim filter');
+});
+function crossesInterior(a,b,r){
+  if(a[0]===b[0])return a[0]>r.x&&a[0]<r.x+r.width&&Math.max(Math.min(a[1],b[1]),r.y)<Math.min(Math.max(a[1],b[1]),r.y+r.height);
+  return a[1]>r.y&&a[1]<r.y+r.height&&Math.max(Math.min(a[0],b[0]),r.x)<Math.min(Math.max(a[0],b[0]),r.x+r.width);
+}
+test('deterministic map routes avoid unrelated card interiors and terminate at their declared ports',()=>{
+  const presentations=[buildOverview(g,initialExplorerView(),['view:knowledge','view:area:funding','view:sources']),...['species:carob','approach:mr2','route:LEADER-AL20-3.4','research_topic:R1','research_topic:R4'].map(id=>buildTopic(g,view(id),[...Object.keys(EVIDENCE_KINDS).map(categoryGroupId),SOURCE_GROUP]))];
+  for(const p of presentations){const layout=layoutPresentation(p);assert.deepEqual(layoutPresentation(p),layout);for(const edge of layout.paths){const source=layout.positions[edge.source],target=layout.positions[edge.target],first=edge.points[0],last=edge.points.at(-1);assert([source.x,source.x+source.width].includes(first[0]));assert.equal(first[1],source.y+source.height/2);assert([target.x,target.x+target.width].includes(last[0]));assert.equal(last[1],target.y+target.height/2);for(let i=1;i<edge.points.length;i++)for(const [id,box] of Object.entries(layout.positions))if(id!==edge.source&&id!==edge.target)assert(!crossesInterior(edge.points[i-1],edge.points[i],box),`${edge.id} crosses ${id}`);}}
+});
+
+test('keyboard focus does not move cards and selected claims retain their individual evidence paths',()=>{
+  const id='claim:mr2-runoff-capture',v=view('approach:mr2'),claim=g.nodes.find(n=>n.id===id),open=[categoryGroupId(claim.details.evidence_kind),SOURCE_GROUP,...claim.details.evidence.map(r=>documentGroupId(r.document_id+'@'+r.sha256))];
+  assert.deepEqual(layoutPresentation(buildTopic(g,v,open)).positions,layoutPresentation(buildTopic(g,v,open,id)).positions);
+  const selected=buildTopic(g,{...v,selected:id},open,id);
+  const refs=g.edges.filter(e=>e.source===id&&e.kind==='claim_cites');
+  for(const edge of refs)assert(selected.connections.some(c=>c.source===id&&c.target===edge.target&&c.edgeIds.includes(edge.id)));
 });

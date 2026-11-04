@@ -1,9 +1,11 @@
 # Browser checks
 
-Run `node tests/browser/knowledge-explorer.cjs` for Milestone 5 against a **fresh**
+Run `node tests/browser/knowledge-explorer.cjs` against a **fresh**
 isolated save on API 8013 and production assets on 4174. It first proves no-project
-entry/lazy loading, then seeds only that fixture. It covers both graph layouts,
-List, expansion/collapse/filters/history, keyboard/pan/zoom, PDF pages and focus,
+entry/lazy loading and the four-layer Overview, then seeds only that fixture. It
+covers grouped Map, hierarchical Outline and Advanced Network, exact aggregate
+membership, architecture/project independence, expansion/collapse/filters/history,
+keyboard/pan/zoom, PDF pages and focus,
 claim/passage usage, snapshot mismatch and explicit retry, all six contextual links,
 and unfinished funding/concept/planning/Designer inputs. Submitted saves settle;
 unsubmitted and follow-on work waits until return. Browser fetch instrumentation
@@ -11,7 +13,27 @@ marks the actual entry/return clicks, separating editing requests that already
 started from requests started while exploring. Light/dark and 1440/390/320-pixel
 checks run sequentially. It also covers the Milestone 6 LIFE/kermes topics, both
 new source PDFs, the complete naming tension and explicit non-adoption into current
-evidence. Logs/screenshots belong to `test-artifacts/knowledge-intake/browser-explorer/`.
+evidence. Layout checks cover full-width graphs, pointer/keyboard movement and
+viewport constraints for the floating details panel, close/reopen/focus, maximize/
+restore, nested PDFs and resize. Logs/screenshots belong to
+`test-artifacts/knowledge-overview/browser/`.
+
+The earlier layout baseline on 4 November 2026 passed: 138 frontend tests, the production
+build and this full browser workflow on isolated API 8013/preview 4174. The existing
+large-bundle warning remains. All 213 protected configuration/document/save files
+retained their fingerprints. Early browser diagnostics caught panel initialization
+timing and toolbar obstruction; both were corrected before the final passing run.
+Command logs and integrity evidence are in `test-artifacts/knowledge-layout/`.
+
+The four-layer Overview/readability follow-up passes 146 frontend tests and 69
+backend knowledge tests, both knowledge checks, production build and all browser
+regressions below. Run `node tests/browser/knowledge-overview-focus.cjs` last for
+supplementary web owner/context, maximized navigation focus, Advanced Network
+keyboard/pan/zoom, active-navigation contrast and responsive Overview checks in
+both themes. It is read-only and supports an existing isolated fixture. Current
+logs, screenshots and unchanged 213-file integrity evidence are in
+`test-artifacts/knowledge-overview/`; see
+[the completion record](../../../KNOWLEDGE_EXPLORER_OVERVIEW.md).
 
 Build with `npm.cmd run build`, then use the existing browser configuration:
 
@@ -22,6 +44,7 @@ $env:DESIGNER_APP_URL = 'http://127.0.0.1:4174/'
 node tests/browser/knowledge-explorer.cjs
 node tests/browser/knowledge-evidence.cjs
 node tests/browser/designer-interactions.cjs
+node tests/browser/knowledge-overview-focus.cjs
 ```
 
 Use the Python startup example below with a new fixture filename for the first
