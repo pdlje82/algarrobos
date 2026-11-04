@@ -9,7 +9,9 @@ and unfinished funding/concept/planning/Designer inputs. Submitted saves settle;
 unsubmitted and follow-on work waits until return. Browser fetch instrumentation
 marks the actual entry/return clicks, separating editing requests that already
 started from requests started while exploring. Light/dark and 1440/390/320-pixel
-checks run sequentially. Logs/screenshots belong to `test-artifacts/knowledge-explorer/`.
+checks run sequentially. It also covers the Milestone 6 LIFE/kermes topics, both
+new source PDFs, the complete naming tension and explicit non-adoption into current
+evidence. Logs/screenshots belong to `test-artifacts/knowledge-intake/browser-explorer/`.
 
 Build with `npm.cmd run build`, then use the existing browser configuration:
 

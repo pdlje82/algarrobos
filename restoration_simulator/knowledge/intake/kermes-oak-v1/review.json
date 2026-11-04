@@ -1,0 +1,1851 @@
+{
+  "adoption": "explorer_only",
+  "baseline": {
+    "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+    "dataset_hash": "586dba3b17e676d4222c37259006a895d4b38d6bfc74ef45e1fc21116c59b047",
+    "dataset_id": "algarroba-connected-pilot-v1",
+    "files": {
+      "design_rules/defaults.json": "2ee71888bd1dafa3d1b0fbd8daf2bba621b3911dd9c9547586999aca0bf8765e",
+      "design_rules/manifest.json": "57d74431ffdd2587ceba5d6cee8c35bb364ef8a4c3ba1f32f2c1589a66c96653",
+      "design_rules/plant_dimensions.json": "c18f475faf3fc298924b378584c30e0e81dae5419d4439d3fc0f7183ceda8262",
+      "design_rules/rules.json": "667608d9bd10c8250fb10504f8cbe8270bbe68222a513183c77f64a2ce59ad1d",
+      "design_rules/sources.json": "d438aba9e85b1a79eac5026ff68a1591ae61309ad65acd2f05db265528d0a8ab",
+      "design_rules/treatments.json": "79b7e093586cbd9411eed15ad75779ad35683644336fae389d09d28e6c4d17a1",
+      "design_rules/vegetation_combinations.json": "e4a86471a33d7bdf9b089f786e85f85e508635405c4c366def9f41b22f141dd1",
+      "frontend/src/carob-planting-guide.json": "5457a58537f3cf6cd00df8fb7c5a25c61f99ffdc26d7b2e2d393a5a6278d9ac0",
+      "frontend/src/designer-help.json": "e313dfacae48040d313bb7e3bbc383de6306a157130e2ea6a8ec4d905f64ff80",
+      "frontend/src/designer-interactions.json": "90a8509d17396c6f6ab86394bb5eb5c0f86dab16c083ce8bb687a026b002c202",
+      "frontend/src/designer-symbols.json": "8f3796ff31c3e3c6161eb6a037368272db43b826fbee49295cf91a2d624684f4",
+      "frontend/src/planning-ui.json": "a90e5f2eb72a30b996534f35c08374dc8994d1e58441fe504021c3ac530df7fb",
+      "frontend/src/plant-illustrations.json": "afe031872211c3e10ca622b9f1d94faf03191ae2b7bcfd4a3f14f854c552e8b2",
+      "frontend/src/restoration-models.json": "fc9da66ab40bf6b5c32c9de6e9d4bb1b351f48a12305f4fe86ee457587450380",
+      "knowledge/citations-v1.json": "a9acfbfa60420d9b4ec4ecd3379b786ba48cf68b1042cd876e60fc01f654ca54",
+      "knowledge/connected-pilot-v1.json": "db47a133d208fea03af56be275c2017308a7b757cab1cfbd1a98232ceb7efdba",
+      "knowledge/feature-consumers-v1.json": "91567dbf495388f40f54ec0b8fbd0d9e2a0096899a12a6c8fb54c7b43568701e",
+      "scenarios/default.json": "2aaa152e1efc42eeb56a22aa4916ebce778d1f812533fa6dc713a7c96411da82",
+      "scenarios/defaults.json": "31378fd571c86f0858cf03b0f928b22f17de7238c88e1914e3aa44326e383f50",
+      "scenarios/designer-library-defaults.json": "28b46e63c197bc38887aa9043b4f9be5d48221ca8237a826c18fc1110de0c30c",
+      "scenarios/documents.json": "e6488d67047d3a4b2ac3da9be479e1f0243d787aafbfa2c03498e04164ff6d15",
+      "scenarios/funding-al20-statistics-v1.json": "a7e6bcac27be9666a4ca50594a53f89446220bfd07828c1da170ad6ea4c0f1db",
+      "scenarios/funding-delivery-plan-v1.json": "5aa21fc397b11cbba5f33025285bee5f6abb2f8f2d86982a0f163937b0ad2683",
+      "scenarios/funding-edl-v1.json": "42f7fd5a7608d441410ece12f0ac1ef8a286b7db54b2ae80415c165b28d43470",
+      "scenarios/funding-guides-v1.json": "de06605ea8d9bca2062112b3be669888fb318a1063e0fc11e7825715c0da27d6",
+      "scenarios/funding-programmes-v1.json": "890879499354696787fb1a8cdfbaa93f57fabda722ff58aeb16573d318b715e2",
+      "scenarios/funding-project-concept-v1.json": "a3430e04e8c0eddf81ecd1fba632469af23e2572be2ccee5b2caf67c5d5e4b67",
+      "scenarios/funding-selection-guidance-v1.json": "f86f440fd357dbdd369057dec2b79b7a0b6f42eae724d496f6fddb8d2f3d41c0",
+      "scenarios/funding-v1.json": "ae054dd9e185f54c2f8ea11deeb1eeb95bfbf7f010fc9fc8f4d9d8fd5d387857",
+      "scenarios/funding-v2.json": "4922e57057acaa8ea3b7c061db6b51c3763b190ead43f7be15460d7b56e9a18e",
+      "scenarios/funding.json": "cf07ed2885e3cc86a58c55d6bfd0a21bb2d0757641bb09a215f6ed0e066cb878",
+      "scenarios/legacy-form-defaults-v1.json": "6c1b61ed9629ac880b642dfb42e388fa0d936c3d4e1724e44236cfbfd272722e",
+      "scenarios/legacy-v1.json": "f993fecb344be50a72b6e5ad1fe5b62b44cdf847803bf47c14f5e66a87e4692a",
+      "scenarios/legacy-v2.json": "3423d540c0364cfdd088d74301b4927a3302a04fbf4cef854fc5b1d536a97858",
+      "scenarios/legacy-v3.json": "fb4cbda1baf1dfa06ffa95931a7dbd02cedc4408f7ea2190dd69917b4ef64bad",
+      "scenarios/plant-names.json": "e45daec35ccec42e6e3ecb6a413ffe9f1a1f994b2da942de3bb65e1c469e9619",
+      "scenarios/plant-prices.json": "2fcb79912aa1efbcb08be0f6b286b032e99956b27827e8e1953e928b0fe17dd1",
+      "scenarios/planting-catalog-v1.json": "5553b805cb17480e6209e6aa52f1e65a07305bc5b67cde5640fdbc33519e74c9",
+      "scenarios/planting-catalog-v2.json": "9177350ebcf5487e6a31bbee9645280a64f6fbac35703961b18160426b629f66"
+    }
+  },
+  "batch_id": "kermes-oak-v1",
+  "candidate": {
+    "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+    "coverage": {
+      "excluded": [
+        "Unindexed research prose and other funding/ecological subjects",
+        "Unregistered feature dependencies and project activities",
+        "Current call availability and real grant eligibility",
+        "Saved-project rule editions and historical source retrieval"
+      ],
+      "mode": "registered-pilot-only",
+      "root_entities": [
+        "route:LEADER-AL20-3.4",
+        "species:carob",
+        "approach:mr2",
+        "programme:EU-LIFE",
+        "species:kermes_oak"
+      ]
+    },
+    "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+    "dataset_id": "algarroba-connected-pilot-v1",
+    "files": {
+      "citations-v1.json": "2e04406f8b956719b3184dece1f8ac483246fbf5e15706a6c6818582465c2851",
+      "connected-pilot-v1.json": "53493d29c397fe4b07acae03d91fc0dae405e98078b6eaf34a43584a139309f0"
+    }
+  },
+  "changes": [
+    {
+      "after": {
+        "document_id": "FOREST-003",
+        "label": "FOREST-003 - PDF page 1",
+        "page": 1,
+        "role": "Kermes oak ecology and vegetation context",
+        "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "sources",
+      "domain": "knowledge",
+      "id": "intake:FOREST-003:p1:kermes-context",
+      "key": "knowledge.sources/intake:FOREST-003:p1:kermes-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "document_id": "FOREST-003",
+        "label": "FOREST-003 - PDF page 2",
+        "page": 2,
+        "role": "Kermes oak ecology and vegetation context",
+        "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "sources",
+      "domain": "knowledge",
+      "id": "intake:FOREST-003:p2:kermes-context",
+      "key": "knowledge.sources/intake:FOREST-003:p2:kermes-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "document_id": "FOREST-003",
+        "label": "FOREST-003 - PDF page 3",
+        "page": 3,
+        "role": "Kermes oak ecology and vegetation context",
+        "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "sources",
+      "domain": "knowledge",
+      "id": "intake:FOREST-003:p3:kermes-context",
+      "key": "knowledge.sources/intake:FOREST-003:p3:kermes-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "aliases": [
+          "Rhamno-Querceto",
+          "Coscoja series"
+        ],
+        "availability": "not_applicable",
+        "binding_id": "series-coscoja",
+        "citation_ids": [
+          "intake:FOREST-003:p3:kermes-context"
+        ],
+        "limitations": [
+          "Vegetation-series reference, not a planting palette or automatic climatic classification of a parcel."
+        ],
+        "native_id": "coscoja_series",
+        "type": "vegetation_series"
+      },
+      "before": null,
+      "collection": "entities",
+      "domain": "knowledge",
+      "id": "series:coscoja_series",
+      "key": "knowledge.entities/series:coscoja_series",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "aliases": [
+          "Bupleuro-Pistacieto",
+          "Warm lentisco series"
+        ],
+        "availability": "not_applicable",
+        "binding_id": "series-lentisk",
+        "citation_ids": [
+          "intake:FOREST-003:p3:kermes-context"
+        ],
+        "limitations": [
+          "The displayed name is the retained Designer label and does not resolve the source vernacular/Latin naming tension."
+        ],
+        "native_id": "lentisk_series",
+        "type": "vegetation_series"
+      },
+      "before": null,
+      "collection": "entities",
+      "domain": "knowledge",
+      "id": "series:lentisk_series",
+      "key": "knowledge.entities/series:lentisk_series",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "aliases": [
+          "Kermes oak",
+          "Quercus coccifera",
+          "Coscoja"
+        ],
+        "availability": "not_applicable",
+        "binding_id": "plant-kermes-oak",
+        "citation_ids": [
+          "intake:FOREST-003:p1:kermes-context",
+          "intake:FOREST-003:p2:kermes-context"
+        ],
+        "limitations": [
+          "Natural occurrence and broad environmental context do not establish seedling survival or suitability on a particular parcel."
+        ],
+        "native_id": "kermes_oak",
+        "type": "species"
+      },
+      "before": null,
+      "collection": "entities",
+      "domain": "knowledge",
+      "id": "species:kermes_oak",
+      "key": "knowledge.entities/species:kermes_oak",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "intake:FOREST-003:p2:kermes-context"
+        ],
+        "configuration_ids": [],
+        "context": "FOREST-003 climate discussion on PDF page 2; natural occurrence and established vegetation, not an establishment trial.",
+        "evidence_kind": "guidance",
+        "limitations": [
+          "The rainfall figures are not a seedling-survival threshold, irrigation prescription or parcel-suitability rule.",
+          "Local soil, exposure, provenance and establishment conditions still require assessment."
+        ],
+        "review_status": "curated",
+        "review_targets": [
+          "plant-kermes-oak"
+        ],
+        "reviewed_on": "2026-11-03",
+        "statement": "The factsheet describes a broad climatic range for kermes oak, including occurrence around 200 mm annual rainfall at Cabo de Gata, while reporting 400-800 mm as its more favourable rainfall context.",
+        "subject_ids": [
+          "species:kermes_oak"
+        ]
+      },
+      "before": null,
+      "collection": "claims",
+      "domain": "knowledge",
+      "id": "claim:kermes-climate-context",
+      "key": "knowledge.claims/claim:kermes-climate-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "intake:FOREST-003:p2:kermes-context"
+        ],
+        "configuration_ids": [],
+        "context": "Vegetation discussion on FOREST-003 PDF page 2; descriptive community occurrence.",
+        "evidence_kind": "guidance",
+        "limitations": [
+          "Co-occurrence does not establish a mandatory planting mixture, planting distance or beneath-crown compatibility.",
+          "Existing Designer species choices and placement rules remain separately owned project assumptions."
+        ],
+        "review_status": "curated",
+        "review_targets": [
+          "rule-shrub-placement"
+        ],
+        "reviewed_on": "2026-11-03",
+        "statement": "The factsheet lists kermes oak with thermophilous vegetation including carob, lentisk, palmetto and wild olive, among other community contexts.",
+        "subject_ids": [
+          "species:kermes_oak",
+          "species:carob"
+        ]
+      },
+      "before": null,
+      "collection": "claims",
+      "domain": "knowledge",
+      "id": "claim:kermes-community-context",
+      "key": "knowledge.claims/claim:kermes-community-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "intake:FOREST-003:p3:kermes-context"
+        ],
+        "configuration_ids": [],
+        "context": "One vegetation-series entry on FOREST-003 PDF page 3, distinct from the warm-series naming tension.",
+        "evidence_kind": "guidance",
+        "limitations": [
+          "The source list is not a complete planting recipe. Its climatic terminology must not be used to classify a parcel automatically."
+        ],
+        "review_status": "curated",
+        "review_targets": [
+          "series-coscoja"
+        ],
+        "reviewed_on": "2026-11-03",
+        "statement": "The factsheet lists a semi-arid Quercus coccifera vegetation series under the Latin name Rhamno lycioidis-Querceto cocciferae sigmetum.",
+        "subject_ids": [
+          "species:kermes_oak",
+          "series:coscoja_series"
+        ]
+      },
+      "before": null,
+      "collection": "claims",
+      "domain": "knowledge",
+      "id": "claim:kermes-coscoja-series",
+      "key": "knowledge.claims/claim:kermes-coscoja-series",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "intake:FOREST-003:p1:kermes-context",
+          "intake:FOREST-003:p2:kermes-context"
+        ],
+        "configuration_ids": [],
+        "context": "Distribution and substrate descriptions on PDF pages 1-2.",
+        "evidence_kind": "guidance",
+        "limitations": [
+          "Broad occurrence does not demonstrate adequate rootable volume, water availability or performance at a proposed planting point."
+        ],
+        "review_status": "curated",
+        "review_targets": [
+          "plant-kermes-oak"
+        ],
+        "reviewed_on": "2026-11-03",
+        "statement": "The factsheet reports kermes oak on dry, stony ground, commonly calcareous, while also describing acidic substrates and a range of soil types.",
+        "subject_ids": [
+          "species:kermes_oak"
+        ]
+      },
+      "before": null,
+      "collection": "claims",
+      "domain": "knowledge",
+      "id": "claim:kermes-soil-context",
+      "key": "knowledge.claims/claim:kermes-soil-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "intake:FOREST-003:p3:kermes-context"
+        ],
+        "configuration_ids": [],
+        "context": "The two descriptions refer to the same warm-series entry on FOREST-003 PDF page 3; they remain unresolved together.",
+        "evidence_kind": "guidance",
+        "limitations": [
+          "The retained Designer display label is an existing interpretation, not a resolution of this source tension. Further vegetation-taxonomy review is required."
+        ],
+        "review_status": "unresolved",
+        "review_targets": [
+          "series-lentisk"
+        ],
+        "reviewed_on": "2026-11-03",
+        "statement": "That same warm-series entry gives the parenthesized Latin label Bupleuro gibraltarii-Pistacieto lentisci, naming lentisk rather than repeating the prose Quercus label.",
+        "subject_ids": [
+          "species:kermes_oak",
+          "series:lentisk_series"
+        ]
+      },
+      "before": null,
+      "collection": "claims",
+      "domain": "knowledge",
+      "id": "claim:kermes-warm-series-latin",
+      "key": "knowledge.claims/claim:kermes-warm-series-latin",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "intake:FOREST-003:p3:kermes-context"
+        ],
+        "configuration_ids": [],
+        "context": "The two descriptions refer to the same warm-series entry on FOREST-003 PDF page 3; they remain unresolved together.",
+        "evidence_kind": "guidance",
+        "limitations": [
+          "Retain the source description alongside its different Latin label. No corrected series identity is selected."
+        ],
+        "review_status": "unresolved",
+        "review_targets": [
+          "series-lentisk"
+        ],
+        "reviewed_on": "2026-11-03",
+        "statement": "The warm thermo-mesomediterranean series entry is described in the factsheet prose as a coscoja or Quercus coccifera series.",
+        "subject_ids": [
+          "species:kermes_oak",
+          "series:lentisk_series"
+        ]
+      },
+      "before": null,
+      "collection": "claims",
+      "domain": "knowledge",
+      "id": "claim:kermes-warm-series-vernacular",
+      "key": "knowledge.claims/claim:kermes-warm-series-vernacular",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "basis": "project_assumption",
+        "citation_ids": [],
+        "claim_ids": [],
+        "context": "Kermes oak is already an optional member of the native MR2 Designer palette. This relationship exposes that retained project association.",
+        "limitations": [
+          "Optional membership does not select a plant, prescribe a mixture or establish ecological or beneath-crown suitability."
+        ],
+        "source": "palette:mr2_mix",
+        "target": "species:kermes_oak",
+        "type": "palette_optional_species"
+      },
+      "before": null,
+      "collection": "relations",
+      "domain": "knowledge",
+      "id": "relation:mr2-optional-kermes",
+      "key": "knowledge.relations/relation:mr2-optional-kermes",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:kermes-warm-series-vernacular",
+          "claim:kermes-warm-series-latin"
+        ],
+        "explanation": "The warm-series line uses coscoja/Quercus coccifera in prose and Bupleuro-Pistacieto lentisci in its Latin label. Preserve both descriptions pending vegetation-series review; select neither as a corrected source identity.",
+        "limitations": [
+          "Bounded to the inspected line and existing research context. This does not invalidate every vegetation-series entry in the factsheet.",
+          "Retained Designer series labels and mixtures are unchanged."
+        ],
+        "status": "unresolved",
+        "type": "source_tension"
+      },
+      "before": null,
+      "collection": "issues",
+      "domain": "knowledge",
+      "id": "issue:kermes-warm-series-naming",
+      "key": "knowledge.issues/issue:kermes-warm-series-naming",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "adapter": "species",
+        "explanation": "Existing Quercus coccifera identity and presentation names; no plant-selection or price change.",
+        "native_id": "kermes_oak"
+      },
+      "before": null,
+      "collection": "bindings",
+      "domain": "knowledge",
+      "id": "plant-kermes-oak",
+      "key": "knowledge.bindings/plant-kermes-oak",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "adapter": "designer_rule",
+        "explanation": "Manual review target: reported community co-occurrence does not prove current beneath-crown placement compatibility.",
+        "native_id": "shrub_placement"
+      },
+      "before": null,
+      "collection": "bindings",
+      "domain": "knowledge",
+      "id": "rule-shrub-placement",
+      "key": "knowledge.bindings/rule-shrub-placement",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "adapter": "vegetation_series",
+        "explanation": "Retained vegetation-series reference. Starter/optional choices remain Designer project assumptions, not a complete phytosociological association.",
+        "native_id": "coscoja_series"
+      },
+      "before": null,
+      "collection": "bindings",
+      "domain": "knowledge",
+      "id": "series-coscoja",
+      "key": "knowledge.bindings/series-coscoja",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "adapter": "vegetation_series",
+        "explanation": "Retained Designer series label; does not resolve the source naming tension.",
+        "native_id": "lentisk_series"
+      },
+      "before": null,
+      "collection": "bindings",
+      "domain": "knowledge",
+      "id": "series-lentisk",
+      "key": "knowledge.bindings/series-lentisk",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "document_id": "FOREST-003",
+        "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81"
+      },
+      "before": null,
+      "collection": "editions",
+      "domain": "citations",
+      "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "key": "citations.editions/FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "edition_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+        "page": 1,
+        "page_basis": "pdf"
+      },
+      "before": null,
+      "collection": "passages",
+      "domain": "citations",
+      "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:1",
+      "key": "citations.passages/FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:1",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "edition_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+        "page": 2,
+        "page_basis": "pdf"
+      },
+      "before": null,
+      "collection": "passages",
+      "domain": "citations",
+      "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:2",
+      "key": "citations.passages/FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:2",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "edition_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+        "page": 3,
+        "page_basis": "pdf"
+      },
+      "before": null,
+      "collection": "passages",
+      "domain": "citations",
+      "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3",
+      "key": "citations.passages/FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "passage_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:1",
+        "role": "Kermes oak ecology and vegetation context",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "citations",
+      "domain": "citations",
+      "id": "intake:FOREST-003:p1:kermes-context",
+      "key": "citations.citations/intake:FOREST-003:p1:kermes-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "passage_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:2",
+        "role": "Kermes oak ecology and vegetation context",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "citations",
+      "domain": "citations",
+      "id": "intake:FOREST-003:p2:kermes-context",
+      "key": "citations.citations/intake:FOREST-003:p2:kermes-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "passage_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3",
+        "role": "Kermes oak ecology and vegetation context",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "citations",
+      "domain": "citations",
+      "id": "intake:FOREST-003:p3:kermes-context",
+      "key": "citations.citations/intake:FOREST-003:p3:kermes-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "pilot:FUND-009:p1:call-context",
+          "intake:FOREST-003:p1:kermes-context",
+          "intake:FOREST-003:p2:kermes-context",
+          "intake:FOREST-003:p3:kermes-context",
+          "intake:FUND-016:p8:nature-context",
+          "intake:FUND-016:p9:nature-context",
+          "intake:FUND-016:p20:sap-framework",
+          "intake:FUND-016:p21:sap-framework",
+          "FUND-008-p120-route-requirements",
+          "FUND-008-p121-route-requirements",
+          "pilot:FOREST-002:p131:mr2-guidance",
+          "pilot:FOREST-002:p132:mr2-guidance",
+          "pilot:FOREST-002:p133:mr2-guidance",
+          "pilot:FOREST-002:p134:mr2-guidance",
+          "pilot:FOREST-002:p135:mr2-guidance",
+          "pilot:FOREST-002:p136:mr2-guidance",
+          "pilot:FOREST-002:p137:mr2-guidance",
+          "pilot:FUND-013:p395:strategy-need"
+        ]
+      },
+      "before": {
+        "citation_ids": [
+          "pilot:FUND-009:p1:call-context",
+          "intake:FUND-016:p8:nature-context",
+          "intake:FUND-016:p9:nature-context",
+          "intake:FUND-016:p20:sap-framework",
+          "intake:FUND-016:p21:sap-framework",
+          "FUND-008-p120-route-requirements",
+          "FUND-008-p121-route-requirements",
+          "pilot:FOREST-002:p131:mr2-guidance",
+          "pilot:FOREST-002:p132:mr2-guidance",
+          "pilot:FOREST-002:p133:mr2-guidance",
+          "pilot:FOREST-002:p134:mr2-guidance",
+          "pilot:FOREST-002:p135:mr2-guidance",
+          "pilot:FOREST-002:p136:mr2-guidance",
+          "pilot:FOREST-002:p137:mr2-guidance",
+          "pilot:FUND-013:p395:strategy-need"
+        ]
+      },
+      "collection": "consumers",
+      "domain": "citations",
+      "id": "knowledge_pilot",
+      "key": "citations.consumers/knowledge_pilot",
+      "operation": "replace"
+    },
+    {
+      "after": {
+        "excluded": [
+          "Unindexed research prose and other funding/ecological subjects",
+          "Unregistered feature dependencies and project activities",
+          "Current call availability and real grant eligibility",
+          "Saved-project rule editions and historical source retrieval"
+        ],
+        "mode": "registered-pilot-only",
+        "root_entities": [
+          "route:LEADER-AL20-3.4",
+          "species:carob",
+          "approach:mr2",
+          "programme:EU-LIFE",
+          "species:kermes_oak"
+        ]
+      },
+      "before": {
+        "excluded": [
+          "Unindexed research prose and other funding/ecological subjects",
+          "Unregistered feature dependencies and project activities",
+          "Current call availability and real grant eligibility",
+          "Saved-project rule editions and historical source retrieval"
+        ],
+        "mode": "registered-pilot-only",
+        "root_entities": [
+          "route:LEADER-AL20-3.4",
+          "species:carob",
+          "approach:mr2",
+          "programme:EU-LIFE"
+        ]
+      },
+      "collection": "metadata",
+      "domain": "knowledge",
+      "id": "coverage",
+      "key": "knowledge.metadata/coverage",
+      "operation": "replace"
+    }
+  ],
+  "compatibility": {
+    "feature_contexts_unchanged": true,
+    "feature_registration_unchanged": true,
+    "publication": "explicit repository edit after fingerprint recheck"
+  },
+  "counts": {
+    "after": {
+      "bindings": 26,
+      "claims": 21,
+      "edges": 86,
+      "entities": 16,
+      "issues": 3,
+      "nodes": 55,
+      "relations": 11,
+      "sources": 18
+    },
+    "before": {
+      "bindings": 22,
+      "claims": 15,
+      "edges": 64,
+      "entities": 13,
+      "issues": 2,
+      "nodes": 43,
+      "relations": 10,
+      "sources": 15
+    }
+  },
+  "impact_scope": "Registered dependencies using affected claims/passages; review targets are not automatic feature changes.",
+  "impacts": [
+    {
+      "after": {
+        "claim_ids": [
+          "claim:kermes-climate-context"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE",
+            "species:kermes_oak"
+          ]
+        },
+        "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "plant-kermes-oak",
+            "claim_id": "claim:kermes-climate-context",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "claim:kermes-climate-context",
+                "kind": "claim"
+              },
+              {
+                "id": "plant-kermes-oak",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "species",
+              "aliases": [
+                "kermes_oak",
+                "Coscoja",
+                "Quercus coccifera",
+                "Kermes-Eiche"
+              ],
+              "authority": {
+                "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+                "record_hash": "a8745706d5195046294786a408eb5ab3d77bf3ed8037a1c1d9185b41a7ce7131"
+              },
+              "explanation": "Existing Quercus coccifera identity and presentation names; no plant-selection or price change.",
+              "id": "plant-kermes-oak",
+              "label": "Coscoja",
+              "native_id": "kermes_oak",
+              "value": {
+                "catalogue": {
+                  "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. ",
+                  "group": "shrub",
+                  "id": "kermes_oak",
+                  "label": "Kermes oak",
+                  "source": "/api/designer/sources/FOREST-003",
+                  "suggested_quantity": 1,
+                  "system": "woodland"
+                },
+                "names": {
+                  "german": "Kermes-Eiche",
+                  "german_status": "verified",
+                  "id": "kermes_oak",
+                  "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+                  "references": [
+                    "https://www.juntadeandalucia.es/medioambiente/BIO/DOC/BIO-DOC-6120-003.pdf",
+                    "https://gd.eppo.int/taxon/QUECC"
+                  ],
+                  "scientific": "Quercus coccifera",
+                  "spanish": "Coscoja",
+                  "spanish_aliases": []
+                }
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "claim:kermes-climate-context",
+          "kind": "claim"
+        },
+        "validation_dependencies": [],
+        "version": 2
+      },
+      "before": null,
+      "id": "claim:kermes-climate-context",
+      "kind": "claim"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:kermes-community-context"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE",
+            "species:kermes_oak"
+          ]
+        },
+        "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "rule-shrub-placement",
+            "claim_id": "claim:kermes-community-context",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "claim:kermes-community-context",
+                "kind": "claim"
+              },
+              {
+                "id": "rule-shrub-placement",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "designer_rule",
+              "aliases": [
+                "shrub_placement"
+              ],
+              "authority": {
+                "file": "design_rules/",
+                "record_hash": "6dc89455a34cd99a7306d062e03536c70fa4bfb1061c6596414d35c19513ee5c"
+              },
+              "explanation": "Manual review target: reported community co-occurrence does not prove current beneath-crown placement compatibility.",
+              "id": "rule-shrub-placement",
+              "label": "Simple deterministic tree–shrub layout",
+              "native_id": "shrub_placement",
+              "value": {
+                "condition": "always",
+                "description": "designer-v3.place_new implements defaults.placement: the eight registered woodland companions use all plotted planned tree crowns, balanced by association count and stable tree ID. Candidates are uniform by area, seed-stable and bounded, with 1 m centre clearance. Other shrubs/grasses use open ground; custom plants independent. Existing vegetation is an obstacle. New shrub density is 350/ha per species; existing quantities never reset.",
+                "effect": "advisory",
+                "evidence": "assumption",
+                "id": "shrub_placement",
+                "limitations": "Woodland co-occurrence does not prove beneath-crown compatibility with every tree. Clearance, grouping, seed and attempts are geometric project assumptions. Failed placements retain counts and costs. Only new instances are generated. Manual movement detaches shrubs; tree movement translates associated offsets. No sun, wind, soil or mycelial suitability model.",
+                "sources": [
+                  {
+                    "id": "FOREST-002",
+                    "pages": [
+                      124,
+                      125,
+                      135,
+                      137
+                    ]
+                  },
+                  {
+                    "id": "FOREST-003",
+                    "pages": [
+                      1,
+                      2
+                    ]
+                  }
+                ],
+                "title": "Simple deterministic tree–shrub layout"
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "claim:kermes-community-context",
+          "kind": "claim"
+        },
+        "validation_dependencies": [],
+        "version": 2
+      },
+      "before": null,
+      "id": "claim:kermes-community-context",
+      "kind": "claim"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:kermes-coscoja-series"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE",
+            "species:kermes_oak"
+          ]
+        },
+        "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "series-coscoja",
+            "claim_id": "claim:kermes-coscoja-series",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "claim:kermes-coscoja-series",
+                "kind": "claim"
+              },
+              {
+                "id": "series-coscoja",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "vegetation_series",
+              "aliases": [
+                "coscoja_series"
+              ],
+              "authority": {
+                "file": "design_rules/",
+                "record_hash": "890e7372730c66d2a7c7680c43d7e35c7f598061b40e902ffaa9c4d4c8f15377"
+              },
+              "explanation": "Retained vegetation-series reference. Starter/optional choices remain Designer project assumptions, not a complete phytosociological association.",
+              "id": "series-coscoja",
+              "label": "Semi-arid coscoja series · Rhamno–Querceto",
+              "native_id": "coscoja_series",
+              "value": {
+                "description": "Coscoja with espino negro; optional plants illustrate related stages rather than a required combined planting. Mesomediterranean and semi-arid are climatic categories, not an automatic parcel classification.",
+                "id": "coscoja_series",
+                "optional": [
+                  "ephedra_fragilis",
+                  "retama",
+                  "esparto"
+                ],
+                "rule": "layout",
+                "sources": [
+                  {
+                    "id": "FOREST-003",
+                    "pages": [
+                      3
+                    ]
+                  }
+                ],
+                "starter": [
+                  "kermes_oak",
+                  "rhamnus_lycioides"
+                ],
+                "title": "Semi-arid coscoja series · Rhamno–Querceto"
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "claim:kermes-coscoja-series",
+          "kind": "claim"
+        },
+        "validation_dependencies": [],
+        "version": 2
+      },
+      "before": null,
+      "id": "claim:kermes-coscoja-series",
+      "kind": "claim"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:kermes-soil-context"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE",
+            "species:kermes_oak"
+          ]
+        },
+        "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "plant-kermes-oak",
+            "claim_id": "claim:kermes-soil-context",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "claim:kermes-soil-context",
+                "kind": "claim"
+              },
+              {
+                "id": "plant-kermes-oak",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "species",
+              "aliases": [
+                "kermes_oak",
+                "Coscoja",
+                "Quercus coccifera",
+                "Kermes-Eiche"
+              ],
+              "authority": {
+                "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+                "record_hash": "a8745706d5195046294786a408eb5ab3d77bf3ed8037a1c1d9185b41a7ce7131"
+              },
+              "explanation": "Existing Quercus coccifera identity and presentation names; no plant-selection or price change.",
+              "id": "plant-kermes-oak",
+              "label": "Coscoja",
+              "native_id": "kermes_oak",
+              "value": {
+                "catalogue": {
+                  "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. ",
+                  "group": "shrub",
+                  "id": "kermes_oak",
+                  "label": "Kermes oak",
+                  "source": "/api/designer/sources/FOREST-003",
+                  "suggested_quantity": 1,
+                  "system": "woodland"
+                },
+                "names": {
+                  "german": "Kermes-Eiche",
+                  "german_status": "verified",
+                  "id": "kermes_oak",
+                  "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+                  "references": [
+                    "https://www.juntadeandalucia.es/medioambiente/BIO/DOC/BIO-DOC-6120-003.pdf",
+                    "https://gd.eppo.int/taxon/QUECC"
+                  ],
+                  "scientific": "Quercus coccifera",
+                  "spanish": "Coscoja",
+                  "spanish_aliases": []
+                }
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "claim:kermes-soil-context",
+          "kind": "claim"
+        },
+        "validation_dependencies": [],
+        "version": 2
+      },
+      "before": null,
+      "id": "claim:kermes-soil-context",
+      "kind": "claim"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:kermes-warm-series-latin"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE",
+            "species:kermes_oak"
+          ]
+        },
+        "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "series-lentisk",
+            "claim_id": "claim:kermes-warm-series-latin",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "claim:kermes-warm-series-latin",
+                "kind": "claim"
+              },
+              {
+                "id": "series-lentisk",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "vegetation_series",
+              "aliases": [
+                "lentisk_series"
+              ],
+              "authority": {
+                "file": "design_rules/",
+                "record_hash": "ccd31c43f33b9995d28f1f5ecd3f0e3fda7c988c2012f203af7533e22dffe865"
+              },
+              "explanation": "Retained Designer series label; does not resolve the source naming tension.",
+              "id": "series-lentisk",
+              "label": "Warm lentisco series · Bupleuro–Pistacieto",
+              "native_id": "lentisk_series",
+              "value": {
+                "description": "Vegetation-series reference, not a compulsory mixture. FOREST-003 calls it a coscoja series although the Latin name identifies lentisco: the source conflict is retained. Optional members are illustrative companions, not a complete association.",
+                "id": "lentisk_series",
+                "optional": [
+                  "wild_olive",
+                  "kermes_oak",
+                  "palmetto"
+                ],
+                "rule": "layout",
+                "sources": [
+                  {
+                    "id": "FOREST-003",
+                    "pages": [
+                      3
+                    ]
+                  }
+                ],
+                "starter": [
+                  "lentisk"
+                ],
+                "title": "Warm lentisco series · Bupleuro–Pistacieto"
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "claim:kermes-warm-series-latin",
+          "kind": "claim"
+        },
+        "validation_dependencies": [],
+        "version": 2
+      },
+      "before": null,
+      "id": "claim:kermes-warm-series-latin",
+      "kind": "claim"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:kermes-warm-series-vernacular"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE",
+            "species:kermes_oak"
+          ]
+        },
+        "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "series-lentisk",
+            "claim_id": "claim:kermes-warm-series-vernacular",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "claim:kermes-warm-series-vernacular",
+                "kind": "claim"
+              },
+              {
+                "id": "series-lentisk",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "vegetation_series",
+              "aliases": [
+                "lentisk_series"
+              ],
+              "authority": {
+                "file": "design_rules/",
+                "record_hash": "ccd31c43f33b9995d28f1f5ecd3f0e3fda7c988c2012f203af7533e22dffe865"
+              },
+              "explanation": "Retained Designer series label; does not resolve the source naming tension.",
+              "id": "series-lentisk",
+              "label": "Warm lentisco series · Bupleuro–Pistacieto",
+              "native_id": "lentisk_series",
+              "value": {
+                "description": "Vegetation-series reference, not a compulsory mixture. FOREST-003 calls it a coscoja series although the Latin name identifies lentisco: the source conflict is retained. Optional members are illustrative companions, not a complete association.",
+                "id": "lentisk_series",
+                "optional": [
+                  "wild_olive",
+                  "kermes_oak",
+                  "palmetto"
+                ],
+                "rule": "layout",
+                "sources": [
+                  {
+                    "id": "FOREST-003",
+                    "pages": [
+                      3
+                    ]
+                  }
+                ],
+                "starter": [
+                  "lentisk"
+                ],
+                "title": "Warm lentisco series · Bupleuro–Pistacieto"
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "claim:kermes-warm-series-vernacular",
+          "kind": "claim"
+        },
+        "validation_dependencies": [],
+        "version": 2
+      },
+      "before": null,
+      "id": "claim:kermes-warm-series-vernacular",
+      "kind": "claim"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:kermes-soil-context"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE",
+            "species:kermes_oak"
+          ]
+        },
+        "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [
+          "species:kermes_oak"
+        ],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "plant-kermes-oak",
+            "claim_id": "claim:kermes-soil-context",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:1",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:kermes-soil-context",
+                "kind": "claim"
+              },
+              {
+                "id": "plant-kermes-oak",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "species",
+              "aliases": [
+                "kermes_oak",
+                "Coscoja",
+                "Quercus coccifera",
+                "Kermes-Eiche"
+              ],
+              "authority": {
+                "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+                "record_hash": "a8745706d5195046294786a408eb5ab3d77bf3ed8037a1c1d9185b41a7ce7131"
+              },
+              "explanation": "Existing Quercus coccifera identity and presentation names; no plant-selection or price change.",
+              "id": "plant-kermes-oak",
+              "label": "Coscoja",
+              "native_id": "kermes_oak",
+              "value": {
+                "catalogue": {
+                  "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. ",
+                  "group": "shrub",
+                  "id": "kermes_oak",
+                  "label": "Kermes oak",
+                  "source": "/api/designer/sources/FOREST-003",
+                  "suggested_quantity": 1,
+                  "system": "woodland"
+                },
+                "names": {
+                  "german": "Kermes-Eiche",
+                  "german_status": "verified",
+                  "id": "kermes_oak",
+                  "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+                  "references": [
+                    "https://www.juntadeandalucia.es/medioambiente/BIO/DOC/BIO-DOC-6120-003.pdf",
+                    "https://gd.eppo.int/taxon/QUECC"
+                  ],
+                  "scientific": "Quercus coccifera",
+                  "spanish": "Coscoja",
+                  "spanish_aliases": []
+                }
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:1",
+          "kind": "passage"
+        },
+        "validation_dependencies": [
+          {
+            "citation_ids": [
+              "intake:FOREST-003:p1:kermes-context"
+            ],
+            "consumer_id": "knowledge_pilot",
+            "effect": "citation_validation_dependency",
+            "explanation": "This consumer validates these citation metadata mirrors; this does not update saved projects or adopt a changed claim.",
+            "file": "knowledge/connected-pilot-v1.json"
+          }
+        ],
+        "version": 2
+      },
+      "before": null,
+      "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:1",
+      "kind": "passage"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:kermes-climate-context",
+          "claim:kermes-community-context",
+          "claim:kermes-soil-context"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE",
+            "species:kermes_oak"
+          ]
+        },
+        "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [
+          "species:kermes_oak"
+        ],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "plant-kermes-oak",
+            "claim_id": "claim:kermes-climate-context",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:2",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:kermes-climate-context",
+                "kind": "claim"
+              },
+              {
+                "id": "plant-kermes-oak",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "species",
+              "aliases": [
+                "kermes_oak",
+                "Coscoja",
+                "Quercus coccifera",
+                "Kermes-Eiche"
+              ],
+              "authority": {
+                "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+                "record_hash": "a8745706d5195046294786a408eb5ab3d77bf3ed8037a1c1d9185b41a7ce7131"
+              },
+              "explanation": "Existing Quercus coccifera identity and presentation names; no plant-selection or price change.",
+              "id": "plant-kermes-oak",
+              "label": "Coscoja",
+              "native_id": "kermes_oak",
+              "value": {
+                "catalogue": {
+                  "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. ",
+                  "group": "shrub",
+                  "id": "kermes_oak",
+                  "label": "Kermes oak",
+                  "source": "/api/designer/sources/FOREST-003",
+                  "suggested_quantity": 1,
+                  "system": "woodland"
+                },
+                "names": {
+                  "german": "Kermes-Eiche",
+                  "german_status": "verified",
+                  "id": "kermes_oak",
+                  "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+                  "references": [
+                    "https://www.juntadeandalucia.es/medioambiente/BIO/DOC/BIO-DOC-6120-003.pdf",
+                    "https://gd.eppo.int/taxon/QUECC"
+                  ],
+                  "scientific": "Quercus coccifera",
+                  "spanish": "Coscoja",
+                  "spanish_aliases": []
+                }
+              }
+            }
+          },
+          {
+            "binding_id": "rule-shrub-placement",
+            "claim_id": "claim:kermes-community-context",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:2",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:kermes-community-context",
+                "kind": "claim"
+              },
+              {
+                "id": "rule-shrub-placement",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "designer_rule",
+              "aliases": [
+                "shrub_placement"
+              ],
+              "authority": {
+                "file": "design_rules/",
+                "record_hash": "6dc89455a34cd99a7306d062e03536c70fa4bfb1061c6596414d35c19513ee5c"
+              },
+              "explanation": "Manual review target: reported community co-occurrence does not prove current beneath-crown placement compatibility.",
+              "id": "rule-shrub-placement",
+              "label": "Simple deterministic tree–shrub layout",
+              "native_id": "shrub_placement",
+              "value": {
+                "condition": "always",
+                "description": "designer-v3.place_new implements defaults.placement: the eight registered woodland companions use all plotted planned tree crowns, balanced by association count and stable tree ID. Candidates are uniform by area, seed-stable and bounded, with 1 m centre clearance. Other shrubs/grasses use open ground; custom plants independent. Existing vegetation is an obstacle. New shrub density is 350/ha per species; existing quantities never reset.",
+                "effect": "advisory",
+                "evidence": "assumption",
+                "id": "shrub_placement",
+                "limitations": "Woodland co-occurrence does not prove beneath-crown compatibility with every tree. Clearance, grouping, seed and attempts are geometric project assumptions. Failed placements retain counts and costs. Only new instances are generated. Manual movement detaches shrubs; tree movement translates associated offsets. No sun, wind, soil or mycelial suitability model.",
+                "sources": [
+                  {
+                    "id": "FOREST-002",
+                    "pages": [
+                      124,
+                      125,
+                      135,
+                      137
+                    ]
+                  },
+                  {
+                    "id": "FOREST-003",
+                    "pages": [
+                      1,
+                      2
+                    ]
+                  }
+                ],
+                "title": "Simple deterministic tree–shrub layout"
+              }
+            }
+          },
+          {
+            "binding_id": "plant-kermes-oak",
+            "claim_id": "claim:kermes-soil-context",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:2",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:kermes-soil-context",
+                "kind": "claim"
+              },
+              {
+                "id": "plant-kermes-oak",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "species",
+              "aliases": [
+                "kermes_oak",
+                "Coscoja",
+                "Quercus coccifera",
+                "Kermes-Eiche"
+              ],
+              "authority": {
+                "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+                "record_hash": "a8745706d5195046294786a408eb5ab3d77bf3ed8037a1c1d9185b41a7ce7131"
+              },
+              "explanation": "Existing Quercus coccifera identity and presentation names; no plant-selection or price change.",
+              "id": "plant-kermes-oak",
+              "label": "Coscoja",
+              "native_id": "kermes_oak",
+              "value": {
+                "catalogue": {
+                  "detail": "Documented companion candidate, not a suitability recommendation. Review provenance, soil and water. ",
+                  "group": "shrub",
+                  "id": "kermes_oak",
+                  "label": "Kermes oak",
+                  "source": "/api/designer/sources/FOREST-003",
+                  "suggested_quantity": 1,
+                  "system": "woodland"
+                },
+                "names": {
+                  "german": "Kermes-Eiche",
+                  "german_status": "verified",
+                  "id": "kermes_oak",
+                  "note": "German common name verified in the cited institutional name reference; capitalization normalized for display.",
+                  "references": [
+                    "https://www.juntadeandalucia.es/medioambiente/BIO/DOC/BIO-DOC-6120-003.pdf",
+                    "https://gd.eppo.int/taxon/QUECC"
+                  ],
+                  "scientific": "Quercus coccifera",
+                  "spanish": "Coscoja",
+                  "spanish_aliases": []
+                }
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:2",
+          "kind": "passage"
+        },
+        "validation_dependencies": [
+          {
+            "citation_ids": [
+              "intake:FOREST-003:p2:kermes-context"
+            ],
+            "consumer_id": "knowledge_pilot",
+            "effect": "citation_validation_dependency",
+            "explanation": "This consumer validates these citation metadata mirrors; this does not update saved projects or adopt a changed claim.",
+            "file": "knowledge/connected-pilot-v1.json"
+          }
+        ],
+        "version": 2
+      },
+      "before": null,
+      "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:2",
+      "kind": "passage"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:kermes-coscoja-series",
+          "claim:kermes-warm-series-latin",
+          "claim:kermes-warm-series-vernacular"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE",
+            "species:kermes_oak"
+          ]
+        },
+        "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [
+          "series:coscoja_series",
+          "series:lentisk_series"
+        ],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "series-coscoja",
+            "claim_id": "claim:kermes-coscoja-series",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:kermes-coscoja-series",
+                "kind": "claim"
+              },
+              {
+                "id": "series-coscoja",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "vegetation_series",
+              "aliases": [
+                "coscoja_series"
+              ],
+              "authority": {
+                "file": "design_rules/",
+                "record_hash": "890e7372730c66d2a7c7680c43d7e35c7f598061b40e902ffaa9c4d4c8f15377"
+              },
+              "explanation": "Retained vegetation-series reference. Starter/optional choices remain Designer project assumptions, not a complete phytosociological association.",
+              "id": "series-coscoja",
+              "label": "Semi-arid coscoja series · Rhamno–Querceto",
+              "native_id": "coscoja_series",
+              "value": {
+                "description": "Coscoja with espino negro; optional plants illustrate related stages rather than a required combined planting. Mesomediterranean and semi-arid are climatic categories, not an automatic parcel classification.",
+                "id": "coscoja_series",
+                "optional": [
+                  "ephedra_fragilis",
+                  "retama",
+                  "esparto"
+                ],
+                "rule": "layout",
+                "sources": [
+                  {
+                    "id": "FOREST-003",
+                    "pages": [
+                      3
+                    ]
+                  }
+                ],
+                "starter": [
+                  "kermes_oak",
+                  "rhamnus_lycioides"
+                ],
+                "title": "Semi-arid coscoja series · Rhamno–Querceto"
+              }
+            }
+          },
+          {
+            "binding_id": "series-lentisk",
+            "claim_id": "claim:kermes-warm-series-latin",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:kermes-warm-series-latin",
+                "kind": "claim"
+              },
+              {
+                "id": "series-lentisk",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "vegetation_series",
+              "aliases": [
+                "lentisk_series"
+              ],
+              "authority": {
+                "file": "design_rules/",
+                "record_hash": "ccd31c43f33b9995d28f1f5ecd3f0e3fda7c988c2012f203af7533e22dffe865"
+              },
+              "explanation": "Retained Designer series label; does not resolve the source naming tension.",
+              "id": "series-lentisk",
+              "label": "Warm lentisco series · Bupleuro–Pistacieto",
+              "native_id": "lentisk_series",
+              "value": {
+                "description": "Vegetation-series reference, not a compulsory mixture. FOREST-003 calls it a coscoja series although the Latin name identifies lentisco: the source conflict is retained. Optional members are illustrative companions, not a complete association.",
+                "id": "lentisk_series",
+                "optional": [
+                  "wild_olive",
+                  "kermes_oak",
+                  "palmetto"
+                ],
+                "rule": "layout",
+                "sources": [
+                  {
+                    "id": "FOREST-003",
+                    "pages": [
+                      3
+                    ]
+                  }
+                ],
+                "starter": [
+                  "lentisk"
+                ],
+                "title": "Warm lentisco series · Bupleuro–Pistacieto"
+              }
+            }
+          },
+          {
+            "binding_id": "series-lentisk",
+            "claim_id": "claim:kermes-warm-series-vernacular",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:kermes-warm-series-vernacular",
+                "kind": "claim"
+              },
+              {
+                "id": "series-lentisk",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "vegetation_series",
+              "aliases": [
+                "lentisk_series"
+              ],
+              "authority": {
+                "file": "design_rules/",
+                "record_hash": "ccd31c43f33b9995d28f1f5ecd3f0e3fda7c988c2012f203af7533e22dffe865"
+              },
+              "explanation": "Retained Designer series label; does not resolve the source naming tension.",
+              "id": "series-lentisk",
+              "label": "Warm lentisco series · Bupleuro–Pistacieto",
+              "native_id": "lentisk_series",
+              "value": {
+                "description": "Vegetation-series reference, not a compulsory mixture. FOREST-003 calls it a coscoja series although the Latin name identifies lentisco: the source conflict is retained. Optional members are illustrative companions, not a complete association.",
+                "id": "lentisk_series",
+                "optional": [
+                  "wild_olive",
+                  "kermes_oak",
+                  "palmetto"
+                ],
+                "rule": "layout",
+                "sources": [
+                  {
+                    "id": "FOREST-003",
+                    "pages": [
+                      3
+                    ]
+                  }
+                ],
+                "starter": [
+                  "lentisk"
+                ],
+                "title": "Warm lentisco series · Bupleuro–Pistacieto"
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3",
+          "kind": "passage"
+        },
+        "validation_dependencies": [
+          {
+            "citation_ids": [
+              "intake:FOREST-003:p3:kermes-context"
+            ],
+            "consumer_id": "knowledge_pilot",
+            "effect": "citation_validation_dependency",
+            "explanation": "This consumer validates these citation metadata mirrors; this does not update saved projects or adopt a changed claim.",
+            "file": "knowledge/connected-pilot-v1.json"
+          }
+        ],
+        "version": 2
+      },
+      "before": null,
+      "id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3",
+      "kind": "passage"
+    }
+  ],
+  "operation": "review",
+  "reasons": {
+    "citations.consumers/knowledge_pilot": "Register only the new source uses for the connected-knowledge reader. Original funding memberships remain unchanged.",
+    "knowledge.metadata/coverage": "Append this reviewed topic after existing roots; coverage remains explicitly bounded."
+  },
+  "source_review": [
+    {
+      "document_id": "FOREST-003",
+      "pages": [
+        1,
+        2,
+        3
+      ],
+      "publication_context": "Junta de Andalucia, Quercus coccifera factsheet in Procedencias de las Especies Vegetales Autoctonas de Andalucia Utilizadas en Restauracion de la Cubierta Vegetal. Publication date unverified; no new date assigned. Existing unchanged four-page local PDF.",
+      "review_notes": "Inspected PDF pages 1-3, separating natural occurrence, climate/substrate and vegetation-series terminology. Page 4 is a region-of-use graphic and supplies no new curated claim. Low rainfall is not a survival guarantee. Both naming descriptions on page 3 remain unresolved; retained Designer labels and rules were not edited.",
+      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81"
+    }
+  ],
+  "verified_editions": [
+    "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+    "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+    "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+    "FUND-009@ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e",
+    "FUND-013@1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+    "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5"
+  ],
+  "version": 1
+}

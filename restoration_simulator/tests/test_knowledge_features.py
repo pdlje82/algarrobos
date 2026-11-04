@@ -46,7 +46,8 @@ class KnowledgeFeatureTests(unittest.TestCase):
                 self.assertEqual(context["binding"]["id"], row["binding_id"])
                 seen.update(row["claim_ids"])
         self.assertEqual(contexts, 6)
-        self.assertEqual(seen, set(self.ctx["data"]["claims"]))
+        self.assertEqual(len(seen),12)
+        self.assertEqual(set(self.ctx["data"]["claims"]) - seen, {cid for cid in self.ctx["data"]["claims"] if cid.startswith(("claim:life-","claim:kermes-"))})
         self.assertEqual(len(self.registration["consumers"]["designer"]["contexts"]["mr2"]["claim_ids"]), 8)
         self.assertEqual(len(self.registration["consumers"]["designer"]["contexts"]["carob"]["claim_ids"]), 7)
 

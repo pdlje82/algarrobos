@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "id": "kermes-oak-v1",
+  "title": "Kermes oak: ecological context, vegetation series and unresolved naming",
+  "reviewed_on": "2026-11-03",
+  "adoption": "explorer_only",
+  "baseline": {
+    "dataset_id": "algarroba-connected-pilot-v1",
+    "dataset_hash": "586dba3b17e676d4222c37259006a895d4b38d6bfc74ef45e1fc21116c59b047",
+    "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+    "files": {
+      "design_rules/defaults.json": "2ee71888bd1dafa3d1b0fbd8daf2bba621b3911dd9c9547586999aca0bf8765e",
+      "design_rules/manifest.json": "57d74431ffdd2587ceba5d6cee8c35bb364ef8a4c3ba1f32f2c1589a66c96653",
+      "design_rules/plant_dimensions.json": "c18f475faf3fc298924b378584c30e0e81dae5419d4439d3fc0f7183ceda8262",
+      "design_rules/rules.json": "667608d9bd10c8250fb10504f8cbe8270bbe68222a513183c77f64a2ce59ad1d",
+      "design_rules/sources.json": "d438aba9e85b1a79eac5026ff68a1591ae61309ad65acd2f05db265528d0a8ab",
+      "design_rules/treatments.json": "79b7e093586cbd9411eed15ad75779ad35683644336fae389d09d28e6c4d17a1",
+      "design_rules/vegetation_combinations.json": "e4a86471a33d7bdf9b089f786e85f85e508635405c4c366def9f41b22f141dd1",
+      "frontend/src/carob-planting-guide.json": "5457a58537f3cf6cd00df8fb7c5a25c61f99ffdc26d7b2e2d393a5a6278d9ac0",
+      "frontend/src/designer-help.json": "e313dfacae48040d313bb7e3bbc383de6306a157130e2ea6a8ec4d905f64ff80",
+      "frontend/src/designer-interactions.json": "90a8509d17396c6f6ab86394bb5eb5c0f86dab16c083ce8bb687a026b002c202",
+      "frontend/src/designer-symbols.json": "8f3796ff31c3e3c6161eb6a037368272db43b826fbee49295cf91a2d624684f4",
+      "frontend/src/planning-ui.json": "a90e5f2eb72a30b996534f35c08374dc8994d1e58441fe504021c3ac530df7fb",
+      "frontend/src/plant-illustrations.json": "afe031872211c3e10ca622b9f1d94faf03191ae2b7bcfd4a3f14f854c552e8b2",
+      "frontend/src/restoration-models.json": "fc9da66ab40bf6b5c32c9de6e9d4bb1b351f48a12305f4fe86ee457587450380",
+      "knowledge/citations-v1.json": "a9acfbfa60420d9b4ec4ecd3379b786ba48cf68b1042cd876e60fc01f654ca54",
+      "knowledge/connected-pilot-v1.json": "db47a133d208fea03af56be275c2017308a7b757cab1cfbd1a98232ceb7efdba",
+      "knowledge/feature-consumers-v1.json": "91567dbf495388f40f54ec0b8fbd0d9e2a0096899a12a6c8fb54c7b43568701e",
+      "scenarios/default.json": "2aaa152e1efc42eeb56a22aa4916ebce778d1f812533fa6dc713a7c96411da82",
+      "scenarios/defaults.json": "31378fd571c86f0858cf03b0f928b22f17de7238c88e1914e3aa44326e383f50",
+      "scenarios/designer-library-defaults.json": "28b46e63c197bc38887aa9043b4f9be5d48221ca8237a826c18fc1110de0c30c",
+      "scenarios/documents.json": "e6488d67047d3a4b2ac3da9be479e1f0243d787aafbfa2c03498e04164ff6d15",
+      "scenarios/funding-al20-statistics-v1.json": "a7e6bcac27be9666a4ca50594a53f89446220bfd07828c1da170ad6ea4c0f1db",
+      "scenarios/funding-delivery-plan-v1.json": "5aa21fc397b11cbba5f33025285bee5f6abb2f8f2d86982a0f163937b0ad2683",
+      "scenarios/funding-edl-v1.json": "42f7fd5a7608d441410ece12f0ac1ef8a286b7db54b2ae80415c165b28d43470",
+      "scenarios/funding-guides-v1.json": "de06605ea8d9bca2062112b3be669888fb318a1063e0fc11e7825715c0da27d6",
+      "scenarios/funding-programmes-v1.json": "890879499354696787fb1a8cdfbaa93f57fabda722ff58aeb16573d318b715e2",
+      "scenarios/funding-project-concept-v1.json": "a3430e04e8c0eddf81ecd1fba632469af23e2572be2ccee5b2caf67c5d5e4b67",
+      "scenarios/funding-selection-guidance-v1.json": "f86f440fd357dbdd369057dec2b79b7a0b6f42eae724d496f6fddb8d2f3d41c0",
+      "scenarios/funding-v1.json": "ae054dd9e185f54c2f8ea11deeb1eeb95bfbf7f010fc9fc8f4d9d8fd5d387857",
+      "scenarios/funding-v2.json": "4922e57057acaa8ea3b7c061db6b51c3763b190ead43f7be15460d7b56e9a18e",
+      "scenarios/funding.json": "cf07ed2885e3cc86a58c55d6bfd0a21bb2d0757641bb09a215f6ed0e066cb878",
+      "scenarios/legacy-form-defaults-v1.json": "6c1b61ed9629ac880b642dfb42e388fa0d936c3d4e1724e44236cfbfd272722e",
+      "scenarios/legacy-v1.json": "f993fecb344be50a72b6e5ad1fe5b62b44cdf847803bf47c14f5e66a87e4692a",
+      "scenarios/legacy-v2.json": "3423d540c0364cfdd088d74301b4927a3302a04fbf4cef854fc5b1d536a97858",
+      "scenarios/legacy-v3.json": "fb4cbda1baf1dfa06ffa95931a7dbd02cedc4408f7ea2190dd69917b4ef64bad",
+      "scenarios/plant-names.json": "e45daec35ccec42e6e3ecb6a413ffe9f1a1f994b2da942de3bb65e1c469e9619",
+      "scenarios/plant-prices.json": "2fcb79912aa1efbcb08be0f6b286b032e99956b27827e8e1953e928b0fe17dd1",
+      "scenarios/planting-catalog-v1.json": "5553b805cb17480e6209e6aa52f1e65a07305bc5b67cde5640fdbc33519e74c9",
+      "scenarios/planting-catalog-v2.json": "9177350ebcf5487e6a31bbee9645280a64f6fbac35703961b18160426b629f66"
+    }
+  },
+  "candidate_files": {
+    "citations-v1.json": "2e04406f8b956719b3184dece1f8ac483246fbf5e15706a6c6818582465c2851",
+    "connected-pilot-v1.json": "53493d29c397fe4b07acae03d91fc0dae405e98078b6eaf34a43584a139309f0"
+  },
+  "candidate_authorities": {
+    "programme-al20": {
+      "file": "scenarios/funding-programmes-v1.json",
+      "record_hash": "72a43de28d078a5bd9515f3da1b4664fa6d449e8c662b9bf509dad4855e88cb2"
+    },
+    "route-34": {
+      "file": "scenarios/funding.json",
+      "record_hash": "c76a7411ad3bef78b9d8c781d11d81a5ae04a5b02aff526009c9d1d751eb99d3"
+    },
+    "call-2026": {
+      "file": "scenarios/documents.json",
+      "record_hash": "9d2777fe84da2d03caa73a4e216c755644f4cb47102a214570cf99eab8dd34da"
+    },
+    "plant-carob": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "526c4940ec2832f867cd6001538953685e5d0606cd2ea5c2dac005c73401fe33"
+    },
+    "approach-mr2": {
+      "file": "design_rules/",
+      "record_hash": "b6aaf096adf9f74a237bf75e558044afc6244a0898324fc24ac545c44cd2496f"
+    },
+    "palette-mr2": {
+      "file": "design_rules/",
+      "record_hash": "e83bcdf70460ebe38e3d940c31a64485269e4fecdd6c64de98cc9c8a3790487a"
+    },
+    "stone": {
+      "file": "design_rules/",
+      "record_hash": "cc03b56f8bdeba556b7a59c09957703812714da51dbe4c6ea9367e2641cabe39"
+    },
+    "need-npl3": {
+      "file": "scenarios/funding-edl-v1.json",
+      "record_hash": "c99dce9ff6ea1e9e80fea489f4045c90482119ac6417ce021a61d304c27097ce"
+    },
+    "rule-density": {
+      "file": "design_rules/",
+      "record_hash": "5d46e8362d84145ad1b7788eb52211004d630e693c5a5636cd4eeabc67e287eb"
+    },
+    "rule-layout": {
+      "file": "design_rules/",
+      "record_hash": "4837f3f7604b2615d49722d2f940ffb7ffd66ba45cd88dd0a14f6ef5ba3c33d2"
+    },
+    "rule-stone": {
+      "file": "design_rules/",
+      "record_hash": "3d40e7dc91ab319f58b1c82032d4a98a76206470271fa7d6b6ec077678dda5e5"
+    },
+    "density-value": {
+      "file": "design_rules/",
+      "record_hash": "d215c4a272f4227a7a53aadf522c5861c8ab3ef82d2d495dddbc36d52685c0c0"
+    },
+    "geometry-value": {
+      "file": "design_rules/",
+      "record_hash": "9a1af379cd1eb4d399529d013b6c8406205f0f58b62078a6249d3d74ee94b0d5"
+    },
+    "model-mr2": {
+      "file": "frontend/src/restoration-models.json",
+      "record_hash": "253e417f68e52d6ead0f83262bfdbbdecfca0931b5e2b05c7152aa7a8a35b5bc"
+    },
+    "guide-34": {
+      "file": "scenarios/funding-selection-guidance-v1.json",
+      "record_hash": "126598d048fcc0b640b63e46df2228cf53723134a8e93820ed75f09c1b541471"
+    },
+    "delivery-novelty": {
+      "file": "scenarios/funding-delivery-plan-v1.json",
+      "record_hash": "45ee6f719944b0556d088701a849d8cb3e0230e4b5746f91be8b3a1b0ec7a5a0"
+    },
+    "delivery-publication": {
+      "file": "scenarios/funding-delivery-plan-v1.json",
+      "record_hash": "537fc808aa7b4bf82ff493e8c501aba6f02f8c217f4a45f4e1415db318f7acf3"
+    },
+    "concept-restoration": {
+      "file": "scenarios/funding-project-concept-v1.json",
+      "record_hash": "284cc2e0c073cc8d6e8314066908d7e04645546b0d196a35521e2a55613787e7"
+    },
+    "example-demo": {
+      "file": "knowledge/connected-pilot-v1.json",
+      "record_hash": "9a6021abd191cfdab35eeedc91e5c5a61909f232aac51d20588dd0726931c4d8"
+    },
+    "programme-life": {
+      "file": "scenarios/funding-programmes-v1.json",
+      "record_hash": "292291423b96f7a955b6c2bb76987408c017e010fdfa04a248555306e55ad106"
+    },
+    "route-life-nature": {
+      "file": "scenarios/funding.json",
+      "record_hash": "2ce76a7a00ea732d8bb58317541dd5c41fe39475e0c64be87a785287d013dae8"
+    },
+    "guide-life-nature": {
+      "file": "scenarios/funding-guides-v1.json",
+      "record_hash": "9bb265a777477791169392fb721bd5de2483125a4947681a4779ea71e5fc8222"
+    },
+    "plant-kermes-oak": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "a8745706d5195046294786a408eb5ab3d77bf3ed8037a1c1d9185b41a7ce7131"
+    },
+    "series-coscoja": {
+      "file": "design_rules/",
+      "record_hash": "890e7372730c66d2a7c7680c43d7e35c7f598061b40e902ffaa9c4d4c8f15377"
+    },
+    "series-lentisk": {
+      "file": "design_rules/",
+      "record_hash": "ccd31c43f33b9995d28f1f5ecd3f0e3fda7c988c2012f203af7533e22dffe865"
+    },
+    "rule-shrub-placement": {
+      "file": "design_rules/",
+      "record_hash": "6dc89455a34cd99a7306d062e03536c70fa4bfb1061c6596414d35c19513ee5c"
+    }
+  },
+  "source_review": [
+    {
+      "document_id": "FOREST-003",
+      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "pages": [
+        1,
+        2,
+        3
+      ],
+      "publication_context": "Junta de Andalucia, Quercus coccifera factsheet in Procedencias de las Especies Vegetales Autoctonas de Andalucia Utilizadas en Restauracion de la Cubierta Vegetal. Publication date unverified; no new date assigned. Existing unchanged four-page local PDF.",
+      "review_notes": "Inspected PDF pages 1-3, separating natural occurrence, climate/substrate and vegetation-series terminology. Page 4 is a region-of-use graphic and supplies no new curated claim. Low rainfall is not a survival guarantee. Both naming descriptions on page 3 remain unresolved; retained Designer labels and rules were not edited."
+    }
+  ],
+  "reasons": {
+    "citations.consumers/knowledge_pilot": "Register only the new source uses for the connected-knowledge reader. Original funding memberships remain unchanged.",
+    "knowledge.metadata/coverage": "Append this reviewed topic after existing roots; coverage remains explicitly bounded."
+  }
+}

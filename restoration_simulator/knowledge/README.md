@@ -1,11 +1,13 @@
 # Shared citation metadata
 
-`citations-v1.json` owns 14 citation uses across four registered document editions
+`citations-v1.json` owns 21 citation uses across six registered document editions
 and four consumers. The original five FUND-008 uses and their 14 checked mirrors
 in three funding libraries remain unchanged. The connected pilot reuses two of
 those uses and adds nine handbook, strategy and published-call uses, giving it
-11 source records. The registry now checks 25 mirrors in total. Other evidence
-retains its existing authority.
+11 source records. Milestone 6 adds four LIFE and three kermes oak uses, bringing
+the connected collection to 18 source records and the registry to 32 checked mirrors.
+The original 14 citation records remain unchanged. Other evidence retains its
+existing authority.
 
 The registry connects an exact document edition to a PDF passage, a citation use
 and its consumers. Edition IDs are `document_id@sha256`; passage IDs append
@@ -102,15 +104,16 @@ The other 75 shared guidance/concept citations, six concept-only EDL uses,
 publication metadata, guide/statistical sources, core funding citations, Designer
 evidence and research prose remain outside shared metadata ownership, apart from
 the explicitly registered pilot passage uses. General support for older
-source/guide editions and the visual graph explorer remain later work.
+source/guide editions remain separately scoped. Explorer and intake are documented below.
 See the [implementation plan](../KNOWLEDGE_MILESTONE_2_PLAN.md) and
 [ownership audit](../KNOWLEDGE_OWNERSHIP_AUDIT.md) for these boundaries.
 
 ## Connected knowledge pilot
 
-`connected-pilot-v1.json` contains 12 curated claims, 11 typed entities, nine
-explicit relationships, two unresolved issues and 19 registered source/feature
-bindings. It connects AL20 3.4, carob, MR2 and their evidence. Its claim categories
+`connected-pilot-v1.json` now contains 21 curated claims, 16 typed entities, 11
+explicit relationships, three unresolved issues and 26 registered source/feature
+bindings. It connects AL20 3.4, carob, MR2, LIFE Nature and kermes oak to their
+evidence. The original filename and dataset identity are retained. Its claim categories
 distinguish official requirements, strategy content, technical guidance, project
 assumptions and bounded research gaps. Each claim retains its applicability,
 review status/date and limitations.
@@ -202,7 +205,9 @@ curated source contexts, verification results and remaining coverage gaps.
 `designer/carob`. The first two display the three funding/strategy claims; the
 delivery widgets display their individual requirement. The MR2 guide and carob
 inspector display their eight and seven explicitly registered claims. Together
-they cover all twelve claims, eleven entities and nine relationships.
+they retain the original twelve claims, eleven entities and nine relationships.
+The nine additional LIFE/kermes claims are Explorer-only; adding them does not
+automatically change these memberships.
 
 Schema 1 requires `version`, `dataset_id` and `consumers`. Each consumer contains
 `context_order` and `contexts`; each context has one `binding_id` and ordered
@@ -263,9 +268,9 @@ contains dataset identity/hash, review date, coverage, `consumer_registry_hash`,
 authority; they are not separately maintained explorer metadata. The dataset hash
 still covers exactly the pilot, citation registry and resolved bindings.
 
-The current projection has 34 nodes (11 entities, 12 claims, 11 passages) and
-52 edges (9 native relationships, 22 subject links, 14 claim citations and 7 entity
-citations). Native IDs are retained. Derived IDs are `edge:` followed by the
+The current projection has 55 nodes (16 entities, 21 claims, 18 passages) and
+86 edges (11 native relationships, 36 subject links, 26 claim citations and 13 entity
+citations). The original 34-node/52-edge subset and curated records remain intact. Native IDs are retained. Derived IDs are `edge:` followed by the
 SHA-256 of Python's UTF-8 `json.dumps([kind, source, target], sort_keys=True,
 ensure_ascii=False, allow_nan=False)` output. Source links say **cites**, which
 does not establish proof. Relationship provenance remains in relationship details;
@@ -313,3 +318,46 @@ Submitted operations settle; further queued writes wait. Returning restores the
 originating control and the existing editing policy. No preference, URL route,
 project field or persistence format is added. See the
 [Milestone 5 record](../KNOWLEDGE_MILESTONE_5.md) for acceptance and limitations.
+
+
+## Research intake and reviewed expansion
+
+Use the [intake workflow](INTAKE_WORKFLOW.md) and [worksheet](INTAKE_TEMPLATE.md).
+Isolated candidates contain complete proposed citation/knowledge files and a
+manifest pinning the current baseline, exact candidate bytes, native authority
+records, source passages and explicit replacement/removal reasons. The read-only
+`backend.knowledge_intake` service provides `check_batch`, `review_batch`,
+`baseline_fingerprints`, `candidate_authorities` and `project_candidate_sources`.
+Neither CLI operation publishes, writes files, opens projects or changes loader
+paths:
+
+```powershell
+python -m backend.knowledge_intake --check BATCH_DIR
+python -m backend.knowledge_intake --review BATCH_DIR
+```
+
+Both validate the whole proposed snapshot and original PDF bytes. Review adds
+before/after record changes and explained citation/display/manual dependency paths.
+Stale inputs, missing labels, incompatible data and failed reads reject explicitly.
+Only `explorer_only` adoption is supported; all six feature-context contents/order
+must remain equal. A later feature-adoption change requires its own reviewed scope.
+Successful publication is an explicit, fingerprint-rechecked repository edit while
+the simulator is stopped. Accepted manifests/reports are historical receipts under
+`intake/`, never current runtime authorities or complete duplicate datasets.
+
+The [LIFE review](intake/life-nature-v1/review.md) adds programme `EU-LIFE`, route
+`EU-LIFE-NATURE` and three framework claims from FUND-016 PDF pages 8-9/20-21. The
+[kermes oak review](intake/kermes-oak-v1/review.md) adds `kermes_oak`, the two native
+vegetation series and six claims from FOREST-003 PDF pages 1-3. Both source editions
+were already registered. Current call availability remains unassessed; the warm
+series naming tension remains unresolved. Optional MR2 membership is a native
+project association, not a suitability claim. Native guides/species/series/placement
+records are manual review targets. Their retained text, calculations and rules are
+unchanged; the feature-registration hash remains unchanged.
+
+Explorer starts with the original three roots followed by LIFE and kermes oak.
+Dataset identity, schema/API versions and hash calculation are retained; content
+additions advance the dataset hash. The legacy `registered-pilot-only` coverage
+value still means bounded registered knowledge, not exhaustive research or project
+impact coverage. No database, automated research, new operational rule or saved
+project migration was added. See the [Milestone 6 record](../KNOWLEDGE_MILESTONE_6.md).

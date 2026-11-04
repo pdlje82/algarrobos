@@ -90,6 +90,62 @@
       "role": "prioritised strategy need; not grant points",
       "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
       "verified_on": "2026-11-03"
+    },
+    "intake:FUND-016:p8:nature-context": {
+      "document_id": "FUND-016",
+      "page": 8,
+      "label": "FUND-016 - PDF page 8",
+      "role": "Nature and Biodiversity programme context",
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FUND-016:p9:nature-context": {
+      "document_id": "FUND-016",
+      "page": 9,
+      "label": "FUND-016 - PDF page 9",
+      "role": "Nature and Biodiversity programme context",
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FUND-016:p20:sap-framework": {
+      "document_id": "FUND-016",
+      "page": 20,
+      "label": "FUND-016 - PDF page 20",
+      "role": "Standard Action Project framework; not an assessed call",
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FUND-016:p21:sap-framework": {
+      "document_id": "FUND-016",
+      "page": 21,
+      "label": "FUND-016 - PDF page 21",
+      "role": "Standard Action Project framework; not an assessed call",
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FOREST-003:p1:kermes-context": {
+      "document_id": "FOREST-003",
+      "page": 1,
+      "label": "FOREST-003 - PDF page 1",
+      "role": "Kermes oak ecology and vegetation context",
+      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FOREST-003:p2:kermes-context": {
+      "document_id": "FOREST-003",
+      "page": 2,
+      "label": "FOREST-003 - PDF page 2",
+      "role": "Kermes oak ecology and vegetation context",
+      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FOREST-003:p3:kermes-context": {
+      "document_id": "FOREST-003",
+      "page": 3,
+      "label": "FOREST-003 - PDF page 3",
+      "role": "Kermes oak ecology and vegetation context",
+      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "verified_on": "2026-11-03"
     }
   },
   "entities": {
@@ -228,6 +284,88 @@
       "citation_ids": [],
       "limitations": [
         "Illustration only; not a saved activity, hypothesis validation or funding assessment."
+      ]
+    },
+    "programme:EU-LIFE": {
+      "type": "programme",
+      "native_id": "EU-LIFE",
+      "binding_id": "programme-life",
+      "aliases": [
+        "LIFE programme"
+      ],
+      "availability": "not_assessed",
+      "citation_ids": [
+        "intake:FUND-016:p8:nature-context"
+      ],
+      "limitations": [
+        "Only the Nature and Biodiversity reference is connected here. Current calls, deadlines, budgets and eligibility are not assessed."
+      ]
+    },
+    "route:EU-LIFE-NATURE": {
+      "type": "funding_route",
+      "native_id": "EU-LIFE-NATURE",
+      "binding_id": "route-life-nature",
+      "aliases": [
+        "LIFE Nature",
+        "LIFE biodiversity",
+        "Nature and Biodiversity"
+      ],
+      "availability": "not_assessed",
+      "citation_ids": [
+        "intake:FUND-016:p8:nature-context"
+      ],
+      "limitations": [
+        "Guide-only catalogue reference. No current call or applicant qualification is established."
+      ]
+    },
+    "species:kermes_oak": {
+      "type": "species",
+      "native_id": "kermes_oak",
+      "binding_id": "plant-kermes-oak",
+      "aliases": [
+        "Kermes oak",
+        "Quercus coccifera",
+        "Coscoja"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "intake:FOREST-003:p1:kermes-context",
+        "intake:FOREST-003:p2:kermes-context"
+      ],
+      "limitations": [
+        "Natural occurrence and broad environmental context do not establish seedling survival or suitability on a particular parcel."
+      ]
+    },
+    "series:coscoja_series": {
+      "type": "vegetation_series",
+      "native_id": "coscoja_series",
+      "binding_id": "series-coscoja",
+      "aliases": [
+        "Rhamno-Querceto",
+        "Coscoja series"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "intake:FOREST-003:p3:kermes-context"
+      ],
+      "limitations": [
+        "Vegetation-series reference, not a planting palette or automatic climatic classification of a parcel."
+      ]
+    },
+    "series:lentisk_series": {
+      "type": "vegetation_series",
+      "native_id": "lentisk_series",
+      "binding_id": "series-lentisk",
+      "aliases": [
+        "Bupleuro-Pistacieto",
+        "Warm lentisco series"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "intake:FOREST-003:p3:kermes-context"
+      ],
+      "limitations": [
+        "The displayed name is the retained Designer label and does not resolve the source vernacular/Latin naming tension."
       ]
     }
   },
@@ -491,6 +629,197 @@
       "review_targets": [
         "model-mr2"
       ]
+    },
+    "claim:life-nature-objectives": {
+      "subject_ids": [
+        "programme:EU-LIFE",
+        "route:EU-LIFE-NATURE"
+      ],
+      "statement": "The LIFE Nature and Biodiversity sub-programme supports nature and biodiversity objectives through innovative approaches, best practices, governance and replication, including protection, maintenance and restoration of natural capital.",
+      "evidence_kind": "official_strategy",
+      "context": "The 2025-2027 work programme describes programme objectives and priority areas; it is not a project-specific eligibility decision.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "A restoration theme alone does not establish an eligible project, applicant or available call."
+      ],
+      "citation_ids": [
+        "intake:FUND-016:p8:nature-context",
+        "intake:FUND-016:p9:nature-context"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "guide-life-nature"
+      ]
+    },
+    "claim:life-sap-purpose": {
+      "subject_ids": [
+        "route:EU-LIFE-NATURE"
+      ],
+      "statement": "Standard Action Projects are a distinct LIFE grant format supporting innovative approaches, best practices, policy implementation and the wider deployment of successful solutions.",
+      "evidence_kind": "official_strategy",
+      "context": "Section 4.1.1 of the 2025-2027 work programme. Strategic projects, technical assistance and other actions are separate formats.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "This is a framework description, not a claim that every Nature project or catalogue route is a Standard Action Project."
+      ],
+      "citation_ids": [
+        "intake:FUND-016:p20:sap-framework"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "guide-life-nature"
+      ]
+    },
+    "claim:life-sap-cofinancing-framework": {
+      "subject_ids": [
+        "route:EU-LIFE-NATURE"
+      ],
+      "statement": "The 2025-2027 Standard Action Project framework generally limits cofinancing to 60% of eligible costs. Nature and Biodiversity projects may reach 75% only under its qualifying habitat/species conditions, exclusive targeting and proposal justification requirements.",
+      "evidence_kind": "official_requirement",
+      "context": "Section 4.1.1.1 spans PDF pages 20-21. Read the complete qualifying categories and requirement that all actions benefit the qualifying habitats or species.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "These are conditional framework ceilings, not an award rate, financing input or automatic qualification.",
+        "The exact applicable call, eligible costs, habitat/species status and supporting evidence require their own review. No current call is assessed."
+      ],
+      "citation_ids": [
+        "intake:FUND-016:p20:sap-framework",
+        "intake:FUND-016:p21:sap-framework"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "guide-life-nature"
+      ]
+    },
+    "claim:kermes-climate-context": {
+      "subject_ids": [
+        "species:kermes_oak"
+      ],
+      "statement": "The factsheet describes a broad climatic range for kermes oak, including occurrence around 200 mm annual rainfall at Cabo de Gata, while reporting 400-800 mm as its more favourable rainfall context.",
+      "evidence_kind": "guidance",
+      "context": "FOREST-003 climate discussion on PDF page 2; natural occurrence and established vegetation, not an establishment trial.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "The rainfall figures are not a seedling-survival threshold, irrigation prescription or parcel-suitability rule.",
+        "Local soil, exposure, provenance and establishment conditions still require assessment."
+      ],
+      "citation_ids": [
+        "intake:FOREST-003:p2:kermes-context"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "plant-kermes-oak"
+      ]
+    },
+    "claim:kermes-soil-context": {
+      "subject_ids": [
+        "species:kermes_oak"
+      ],
+      "statement": "The factsheet reports kermes oak on dry, stony ground, commonly calcareous, while also describing acidic substrates and a range of soil types.",
+      "evidence_kind": "guidance",
+      "context": "Distribution and substrate descriptions on PDF pages 1-2.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "Broad occurrence does not demonstrate adequate rootable volume, water availability or performance at a proposed planting point."
+      ],
+      "citation_ids": [
+        "intake:FOREST-003:p1:kermes-context",
+        "intake:FOREST-003:p2:kermes-context"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "plant-kermes-oak"
+      ]
+    },
+    "claim:kermes-community-context": {
+      "subject_ids": [
+        "species:kermes_oak",
+        "species:carob"
+      ],
+      "statement": "The factsheet lists kermes oak with thermophilous vegetation including carob, lentisk, palmetto and wild olive, among other community contexts.",
+      "evidence_kind": "guidance",
+      "context": "Vegetation discussion on FOREST-003 PDF page 2; descriptive community occurrence.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "Co-occurrence does not establish a mandatory planting mixture, planting distance or beneath-crown compatibility.",
+        "Existing Designer species choices and placement rules remain separately owned project assumptions."
+      ],
+      "citation_ids": [
+        "intake:FOREST-003:p2:kermes-context"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "rule-shrub-placement"
+      ]
+    },
+    "claim:kermes-coscoja-series": {
+      "subject_ids": [
+        "species:kermes_oak",
+        "series:coscoja_series"
+      ],
+      "statement": "The factsheet lists a semi-arid Quercus coccifera vegetation series under the Latin name Rhamno lycioidis-Querceto cocciferae sigmetum.",
+      "evidence_kind": "guidance",
+      "context": "One vegetation-series entry on FOREST-003 PDF page 3, distinct from the warm-series naming tension.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "The source list is not a complete planting recipe. Its climatic terminology must not be used to classify a parcel automatically."
+      ],
+      "citation_ids": [
+        "intake:FOREST-003:p3:kermes-context"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "series-coscoja"
+      ]
+    },
+    "claim:kermes-warm-series-vernacular": {
+      "subject_ids": [
+        "species:kermes_oak",
+        "series:lentisk_series"
+      ],
+      "statement": "The warm thermo-mesomediterranean series entry is described in the factsheet prose as a coscoja or Quercus coccifera series.",
+      "evidence_kind": "guidance",
+      "context": "The two descriptions refer to the same warm-series entry on FOREST-003 PDF page 3; they remain unresolved together.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "Retain the source description alongside its different Latin label. No corrected series identity is selected."
+      ],
+      "citation_ids": [
+        "intake:FOREST-003:p3:kermes-context"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "series-lentisk"
+      ]
+    },
+    "claim:kermes-warm-series-latin": {
+      "subject_ids": [
+        "species:kermes_oak",
+        "series:lentisk_series"
+      ],
+      "statement": "That same warm-series entry gives the parenthesized Latin label Bupleuro gibraltarii-Pistacieto lentisci, naming lentisk rather than repeating the prose Quercus label.",
+      "evidence_kind": "guidance",
+      "context": "The two descriptions refer to the same warm-series entry on FOREST-003 PDF page 3; they remain unresolved together.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-03",
+      "limitations": [
+        "The retained Designer display label is an existing interpretation, not a resolution of this source tension. Further vegetation-taxonomy review is required."
+      ],
+      "citation_ids": [
+        "intake:FOREST-003:p3:kermes-context"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "series-lentisk"
+      ]
     }
   },
   "relations": {
@@ -599,6 +928,30 @@
       "limitations": [
         "Not an actual project, site prescription, selected criterion or eligibility result."
       ]
+    },
+    "relation:life-nature-route": {
+      "type": "programme_contains_route",
+      "source": "programme:EU-LIFE",
+      "target": "route:EU-LIFE-NATURE",
+      "claim_ids": [],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Explicit membership already registered by the native funding-programme authority.",
+      "limitations": [
+        "Membership does not transfer another LIFE route or call condition to this reference."
+      ]
+    },
+    "relation:mr2-optional-kermes": {
+      "type": "palette_optional_species",
+      "source": "palette:mr2_mix",
+      "target": "species:kermes_oak",
+      "claim_ids": [],
+      "citation_ids": [],
+      "basis": "project_assumption",
+      "context": "Kermes oak is already an optional member of the native MR2 Designer palette. This relationship exposes that retained project association.",
+      "limitations": [
+        "Optional membership does not select a plant, prescribe a mixture or establish ecological or beneath-crown suitability."
+      ]
     }
   },
   "issues": {
@@ -623,6 +976,19 @@
       "explanation": "Original seedling establishment-water volumes are not documented in the selected case passages.",
       "limitations": [
         "Absence is bounded to the inspected passages and does not imply zero irrigation."
+      ]
+    },
+    "issue:kermes-warm-series-naming": {
+      "type": "source_tension",
+      "claim_ids": [
+        "claim:kermes-warm-series-vernacular",
+        "claim:kermes-warm-series-latin"
+      ],
+      "status": "unresolved",
+      "explanation": "The warm-series line uses coscoja/Quercus coccifera in prose and Bupleuro-Pistacieto lentisci in its Latin label. Preserve both descriptions pending vegetation-series review; select neither as a corrected source identity.",
+      "limitations": [
+        "Bounded to the inspected line and existing research context. This does not invalidate every vegetation-series entry in the factsheet.",
+        "Retained Designer series labels and mixtures are unchanged."
       ]
     }
   },
@@ -726,6 +1092,41 @@
         "MR2 comparison example"
       ],
       "description": "An illustrative comparison of site-assessed runoff-capture treatment and a reference treatment, with carob observations and public sharing. No site suitability, novelty or eligibility is established."
+    },
+    "programme-life": {
+      "adapter": "programme",
+      "native_id": "EU-LIFE",
+      "explanation": "Existing LIFE programme grouping. This batch represents only its Nature route; other routes remain outside this expansion."
+    },
+    "route-life-nature": {
+      "adapter": "funding_route",
+      "native_id": "EU-LIFE-NATURE",
+      "explanation": "Existing research-only catalogue reference, not a new eligibility calculation or a published-call identity."
+    },
+    "guide-life-nature": {
+      "adapter": "research_guide",
+      "native_id": "EU-LIFE-NATURE",
+      "explanation": "Manual review target for the retained LIFE Nature guide. The guide does not consume these claims."
+    },
+    "plant-kermes-oak": {
+      "adapter": "species",
+      "native_id": "kermes_oak",
+      "explanation": "Existing Quercus coccifera identity and presentation names; no plant-selection or price change."
+    },
+    "series-coscoja": {
+      "adapter": "vegetation_series",
+      "native_id": "coscoja_series",
+      "explanation": "Retained vegetation-series reference. Starter/optional choices remain Designer project assumptions, not a complete phytosociological association."
+    },
+    "series-lentisk": {
+      "adapter": "vegetation_series",
+      "native_id": "lentisk_series",
+      "explanation": "Retained Designer series label; does not resolve the source naming tension."
+    },
+    "rule-shrub-placement": {
+      "adapter": "designer_rule",
+      "native_id": "shrub_placement",
+      "explanation": "Manual review target: reported community co-occurrence does not prove current beneath-crown placement compatibility."
     }
   },
   "coverage": {
@@ -733,7 +1134,9 @@
     "root_entities": [
       "route:LEADER-AL20-3.4",
       "species:carob",
-      "approach:mr2"
+      "approach:mr2",
+      "programme:EU-LIFE",
+      "species:kermes_oak"
     ],
     "excluded": [
       "Unindexed research prose and other funding/ecological subjects",

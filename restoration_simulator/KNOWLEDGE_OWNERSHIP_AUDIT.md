@@ -425,3 +425,36 @@ Next task: implement the five-citation registry and validated projections exactl
 within the handoff scope. Milestones 2–6 remain pending. Edition-aware document
 retrieval, retained guide editions, source-label correction, remaining duplication,
 cross-domain dependencies and the graph explorer remain separately tracked work.
+
+
+## Milestone 6 ownership addendum · 3 November 2026
+
+The original audit/compatibility baseline above is retained as historical evidence.
+The current collection additionally registers LIFE Nature and kermes oak, with
+[source review receipts](knowledge/intake/life-nature-v1/review.md) and
+[ecological review receipts](knowledge/intake/kermes-oak-v1/review.md).
+
+| Category | Current ownership and update boundary |
+| --- | --- |
+| Source editions/passages/uses | Existing document registry still owns PDF bytes, identity, filenames, limits and mappings. Shared citation registry adds seven uses across existing FUND-016/FOREST-003 editions. Their original documents/registrations and the original 14 shared uses are unchanged. |
+| LIFE programme/route | Existing funding programme/catalogue IDs are projected; three contextual claims reference the stored work programme. The retained research guide is a manual review target. No current call or eligibility model is added. |
+| Kermes/vegetation series | Existing species and series identities/names remain native authorities. Six source claims and the complete unresolved naming issue are shared knowledge. Native optional MR2 membership remains an illustrative project association. |
+| Rules/configuration | Existing rule bundle, prices and scenario assumptions remain sole operational owners. Species/series/shrub-placement bindings are review targets; knowledge does not adopt or modify rules. |
+| Feature displays | The six existing contexts retain their exact claim/entity/relationship memberships and content. New claims are Explorer-only even when they mention carob. Funding-library hashes and feature registration are unchanged. |
+| Intake/review artifacts | Candidate copies are isolated proposals, never runtime data. Accepted manifests/reports under `knowledge/intake/` are deliberate historical receipts; they retain changed records/dependency paths, not full duplicate runtime datasets. |
+| Projects/history | Existing project/snapshot ownership, atomic saves and explicit rule review/adoption remain unchanged. Eight real saves/backups retain their fingerprints. |
+
+The [intake procedure](knowledge/INTAKE_WORKFLOW.md) defines discovery, source
+inspection, classification, conflict preservation, explicit dependency/adoption
+review, validation and publication. Its read-only commands validate one coherent
+candidate and reject stale inputs; only an explicit repository edit publishes it.
+The [Milestone 6 verification record](KNOWLEDGE_MILESTONE_6.md) records commands,
+versions, checks, authoring effort and indicative timings.
+
+The collection now has 21 claims/16 entities and a 55-node/86-edge Explorer, retaining
+the original subset and all original records. Remaining parallel guide/educational
+prose, publication metadata, unregistered dependencies and source-edition retrieval
+are not claimed as migrated. Both old issues and the new naming tension remain
+unresolved; call availability is not assessed. Future source revision requires
+retaining the old installed edition and an explicit compatibility review; matching
+labels alone still cannot establish equivalence.

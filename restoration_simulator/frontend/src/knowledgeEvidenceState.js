@@ -64,11 +64,11 @@ export function validateKnowledgeEvidence(value,consumer){
       }else need(c.evidence.length>0&&c.configuration_values.length===0,"source evidence");
       if(c.evidence_kind==="research_gap")need(c.review_status==="unresolved","gap status");
     }
-    const relationTypes={programme_contains_route:["programme","funding_route"],call_context_for:["funding_call","programme"],approach_has_palette:["restoration_approach","planting_palette"],palette_starter_species:["planting_palette","species"],approach_treatment_guidance:["restoration_approach","treatment"],example_uses_approach:["example_activity","restoration_approach"],example_mentions_species:["example_activity","species"],example_considers_route:["example_activity","funding_route"],example_may_address_need:["example_activity","strategy_need"]};
+    const relationTypes={programme_contains_route:["programme","funding_route"],call_context_for:["funding_call","programme"],approach_has_palette:["restoration_approach","planting_palette"],palette_starter_species:["planting_palette","species"],palette_optional_species:["planting_palette","species"],approach_treatment_guidance:["restoration_approach","treatment"],example_uses_approach:["example_activity","restoration_approach"],example_mentions_species:["example_activity","species"],example_considers_route:["example_activity","funding_route"],example_may_address_need:["example_activity","strategy_need"]};
     for(const r of context.relations){
       need(keys(r,["id","type","source","target","claim_ids","citation_ids","basis","context","limitations","evidence"])&&Object.hasOwn(relationTypes,r.type)&&entityIds.has(r.source)&&entityIds.has(r.target)&&strings(r.claim_ids)&&r.claim_ids.every(c=>claimIds.has(c))&&strings(r.citation_ids)&&text(r.context)&&strings(r.limitations),"relationship");
       need(same([context.entities.find(e=>e.id===r.source).type,context.entities.find(e=>e.id===r.target).type],relationTypes[r.type]),"relationship endpoint types");
-      need(r.basis===(r.type.startsWith("example_")||r.type==="palette_starter_species"?"project_assumption":"source_reference"),"relationship basis");evidence(r.evidence);
+      need(r.basis===(r.type.startsWith("example_")||["palette_starter_species","palette_optional_species"].includes(r.type)?"project_assumption":"source_reference"),"relationship basis");evidence(r.evidence);
       need(same(r.citation_ids.slice().sort(),r.evidence.map(e=>e.citation_id).sort()),"relationship citations");
     }
     need(Array.isArray(context.issues),"issues");

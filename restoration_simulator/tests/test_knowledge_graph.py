@@ -48,10 +48,10 @@ class KnowledgeGraphTests(unittest.TestCase):
 
     def test_seed_and_shared_references_are_complete_and_not_retyped(self):
         ctx = graph.load_library(); self.assertEqual(ctx["data"], self.original)
-        self.assertEqual((len(ctx["data"]["claims"]), len(ctx["entities"]), len(ctx["data"]["issues"])), (12, 11, 2))
+        self.assertEqual((len(ctx["data"]["claims"]), len(ctx["entities"]), len(ctx["data"]["issues"])), (21, 16, 3))
         registry = citations.load_registry()
         self.assertEqual(len(registry["consumers"]), 4)
-        self.assertEqual(len(registry["citations"]), 14)
+        self.assertEqual(len(registry["citations"]), 21)
         self.assertEqual(set(self.data["sources"]), set(registry["consumers"]["knowledge_pilot"]["citation_ids"]))
         self.assertEqual(ctx["entities"]["call:FUND-009"]["availability"], "not_assessed")
         self.assertEqual(ctx["entities"]["palette:mr2_mix"]["type"], "planting_palette")
@@ -85,7 +85,7 @@ class KnowledgeGraphTests(unittest.TestCase):
 
     def test_both_stock_contexts_survive_and_no_preferred_value_is_inferred(self):
         result = graph.issues(CAROB); self.assert_header(result)
-        tension = next(i for i in result["issues"] if i["type"] == "source_tension")
+        tension = next(i for i in result["issues"] if i["id"] == "issue:mr2-stock-source-tension")
         claims = {c["id"]: c for c in tension["claims"]}
         self.assertEqual(set(claims), {STOCK_NARRATIVE, STOCK_TABLE})
         self.assertIn("1000 cm3", claims[STOCK_NARRATIVE]["statement"])

@@ -40,7 +40,7 @@ const search=(ids=[])=>({version:1,dataset_id:g.dataset_id,dataset_hash:g.datase
 const impact=()=>({version:2,dataset_id:g.dataset_id,dataset_hash:g.dataset_hash,reviewed_on:g.reviewed_on,coverage:structuredClone(g.coverage),consumer_registry_hash:g.consumer_registry_hash,target:{kind:'claim',id:'claim:mr2-runoff-capture'},claim_ids:['claim:mr2-runoff-capture'],entity_ids:[],relation_ids:[],validation_dependencies:[],feature_dependencies:[],review_targets:[]});
 
 test('complete graph validates independently and through central contract, without mutation',()=>{
-  const before=structuredClone(g);assert.equal(validateExplorerGraph(g),g);assert.equal(validateResponse('knowledge/explorer',g),g);assert.deepEqual(g,before);assert.equal(g.nodes.length,34);assert.equal(g.edges.length,52);
+  const before=structuredClone(g);assert.equal(validateExplorerGraph(g),g);assert.equal(validateResponse('knowledge/explorer',g),g);assert.deepEqual(g,before);assert.equal(g.nodes.length,55);assert.equal(g.edges.length,86);
 });
 test('wrong versions, missing details, broken editions, endpoints, incomplete issues and inferred links fail',()=>{
   const changes=[v=>{v.version=2;},v=>{delete v.consumer_registry_hash;},v=>{v.extra=1;},v=>{v.nodes[0].kind='new';},v=>{v.nodes.push(v.nodes[0]);},v=>{v.edges[0].target='missing';},v=>{v.edges[0].details.type='unknown';},v=>{v.nodes.find(n=>n.kind==='passage').details.document.sha256='0'.repeat(64);},v=>{v.nodes.find(n=>n.kind==='passage').details.page=9999;},v=>{v.issues[0].claims.pop();},v=>{v.issues=[];},v=>{v.edges.pop();},v=>{const e=v.edges.find(e=>e.kind==='entity_cites');e.source='species:carob';},v=>{v.coverage.root_entities.push('missing');}];
@@ -56,7 +56,7 @@ test('initial topics do not depend on a project; the six contextual entries are 
   assert.equal(Object.values(EVIDENCE_ENTRY_TOPICS).reduce((n,c)=>n+Object.keys(c).length,0),6);assert.equal(EVIDENCE_ENTRY_TOPICS.project_concept['restoration-34'],'example_activity:carob-mr2-demonstrator');
 });
 test('expansion is one neighbourhood; collapse retains shared neighbours and never invents edges',()=>{
-  const root=view('approach:mr2'),first=visibleExplorerGraph(g,root);assert(first.nodes.length<34);
+  const root=view('approach:mr2'),first=visibleExplorerGraph(g,root);assert(first.nodes.length<55);
   const a='claim:mr2-stock-narrative',b='claim:mr2-stock-table';assert(first.nodes.some(n=>n.id===a));assert(first.nodes.some(n=>n.id===b));
   const both={...root,expanded:[a,b]},expanded=visibleExplorerGraph(g,both);assert(expanded.nodes.length>first.nodes.length);
   const collapsed=visibleExplorerGraph(g,{...both,expanded:[b]});assert(collapsed.nodes.some(n=>n.id==='species:carob'));
@@ -66,11 +66,11 @@ test('expansion is one neighbourhood; collapse retains shared neighbours and nev
 test('category/review/native relationship filters remove records and do not bridge hidden nodes',()=>{
   const v={...view('approach:mr2'),expanded:g.nodes.map(n=>n.id),category:'guidance',status:'curated',relationTypes:[]};const shown=visibleExplorerGraph(g,v);
   assert(shown.filtered>0);assert(shown.nodes.filter(n=>n.kind==='claim').every(n=>n.details.evidence_kind==='guidance'&&n.details.review_status==='curated'));
-  assert(shown.edges.every(e=>e.kind!=='relationship'));assert.equal(shown.nodes.length+shown.filtered+shown.hidden,34);
+  assert(shown.edges.every(e=>e.kind!=='relationship'));assert.equal(shown.nodes.length+shown.filtered+shown.hidden,55);
 });
 test('layouts preserve visible membership and provide stable collision-spaced nodes',()=>{
   const v={...view(),expanded:['claim:mr2-stock-table']},before=structuredClone(v),visible=visibleExplorerGraph(g,v);
-  for(const mode of ['lanes','network']){const layout=explorerLayout(g,v.root,mode);assert.deepEqual(layout,explorerLayout(g,v.root,mode));const points=Object.values(layout.positions);assert.equal(points.length,34);for(let i=0;i<points.length;i++)for(let j=0;j<i;j++)assert(Math.abs(points[i].x-points[j].x)>=220||Math.abs(points[i].y-points[j].y)>=104,'node collision');assert.deepEqual(visibleExplorerGraph(g,{...v,layout:mode,mode:'list'}),visible);}
+  for(const mode of ['lanes','network']){const layout=explorerLayout(g,v.root,mode);assert.deepEqual(layout,explorerLayout(g,v.root,mode));const points=Object.values(layout.positions);assert.equal(points.length,55);for(let i=0;i<points.length;i++)for(let j=0;j<i;j++)assert(Math.abs(points[i].x-points[j].x)>=220||Math.abs(points[i].y-points[j].y)>=104,'node collision');assert.deepEqual(visibleExplorerGraph(g,{...v,layout:mode,mode:'list'}),visible);}
   assert.deepEqual(v,before);
 });
 test('selection reveals registered paths without recentering; missing requested records are errors',()=>{
@@ -108,7 +108,7 @@ test('exploration gate retains queued work and identities; submitted work settle
 test('connection label controls do not overlap nodes or each other in either layout',()=>{
   for(const mode of ['lanes','network']){
     const layout=explorerLayout(g,'approach:mr2',mode),labels=explorerEdgeLabels(layout,g.edges);
-    assert.deepEqual(labels,explorerEdgeLabels(layout,g.edges));assert.equal(Object.keys(labels).length,52);
+    assert.deepEqual(labels,explorerEdgeLabels(layout,g.edges));assert.equal(Object.keys(labels).length,86);
     const rects=Object.values(labels).map(p=>({...p,w:126,h:34}));
     const overlaps=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
     for(let i=0;i<rects.length;i++){for(let j=0;j<i;j++)assert(!overlaps(rects[i],rects[j]));for(const p of Object.values(layout.positions))assert(!overlaps(rects[i],{...p,w:220,h:104}));}
@@ -122,4 +122,26 @@ test('expanding the centered topic reveals a further neighbourhood; immediate se
   const claim=initial.nodes.find(n=>n.kind==='claim');const selected=revealExplorerRecord(g,v,claim.id);
   assert.deepEqual(visibleExplorerGraph(g,selected),initial);assert.deepEqual(selected.expanded,[]);
   assert.deepEqual(visibleExplorerGraph(g,{...v,expanded:[]}),initial);
+});
+
+test('LIFE and kermes add bounded topics; optional palette membership remains illustrative',()=>{
+  assert.deepEqual(g.coverage.root_entities,['route:LEADER-AL20-3.4','species:carob','approach:mr2','programme:EU-LIFE','species:kermes_oak']);
+  assert.equal(g.nodes.filter(n=>n.kind==='claim'&&n.id.startsWith('claim:life-')).length,3);
+  assert.equal(g.nodes.filter(n=>n.kind==='claim'&&n.id.startsWith('claim:kermes-')).length,6);
+  const optional=g.edges.find(e=>e.id==='relation:mr2-optional-kermes');
+  assert.equal(optional.details.type,'palette_optional_species');assert.equal(optional.details.basis,'project_assumption');
+  assert.equal(optional.target,'species:kermes_oak');assert.deepEqual(optional.details.evidence,[]);
+  const selected=revealExplorerRecord(g,view('approach:mr2'),'species:kermes_oak');
+  assert(visibleExplorerGraph(g,selected).nodes.some(n=>n.id==='species:kermes_oak'));
+  const broken=structuredClone(g);broken.edges.find(e=>e.id===optional.id).details.basis='source_reference';
+  assert.throws(()=>validateExplorerGraph(broken),/relationship basis/);
+});
+
+test('both new source naming contexts remain unresolved alongside retained stock and water issues',()=>{
+  const issue=g.issues.find(i=>i.id==='issue:kermes-warm-series-naming');
+  assert.equal(issue.claims.length,2);assert(issue.claims.every(c=>c.review_status==='unresolved'&&c.evidence[0].document_id==='FOREST-003'&&c.evidence[0].page===3));
+  assert(!Object.hasOwn(issue,'preferred'));assert.equal(g.issues.length,3);
+  assert(g.nodes.filter(n=>n.kind==='entity'&&['programme:EU-LIFE','route:EU-LIFE-NATURE'].includes(n.id)).every(n=>n.details.entity.availability==='not_assessed'));
+  const broken=structuredClone(g);broken.issues.find(i=>i.id===issue.id).claims.pop();
+  assert.throws(()=>validateExplorerGraph(broken),/complete issue claims/);
 });

@@ -1,0 +1,1353 @@
+{
+  "adoption": "explorer_only",
+  "baseline": {
+    "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+    "dataset_hash": "2f1c65ace5d2c962e921a6f347f7c9decc8d0f0b0b3e0c2005b5186e71230f04",
+    "dataset_id": "algarroba-connected-pilot-v1",
+    "files": {
+      "design_rules/defaults.json": "2ee71888bd1dafa3d1b0fbd8daf2bba621b3911dd9c9547586999aca0bf8765e",
+      "design_rules/manifest.json": "57d74431ffdd2587ceba5d6cee8c35bb364ef8a4c3ba1f32f2c1589a66c96653",
+      "design_rules/plant_dimensions.json": "c18f475faf3fc298924b378584c30e0e81dae5419d4439d3fc0f7183ceda8262",
+      "design_rules/rules.json": "667608d9bd10c8250fb10504f8cbe8270bbe68222a513183c77f64a2ce59ad1d",
+      "design_rules/sources.json": "d438aba9e85b1a79eac5026ff68a1591ae61309ad65acd2f05db265528d0a8ab",
+      "design_rules/treatments.json": "79b7e093586cbd9411eed15ad75779ad35683644336fae389d09d28e6c4d17a1",
+      "design_rules/vegetation_combinations.json": "e4a86471a33d7bdf9b089f786e85f85e508635405c4c366def9f41b22f141dd1",
+      "frontend/src/carob-planting-guide.json": "5457a58537f3cf6cd00df8fb7c5a25c61f99ffdc26d7b2e2d393a5a6278d9ac0",
+      "frontend/src/designer-help.json": "e313dfacae48040d313bb7e3bbc383de6306a157130e2ea6a8ec4d905f64ff80",
+      "frontend/src/designer-interactions.json": "90a8509d17396c6f6ab86394bb5eb5c0f86dab16c083ce8bb687a026b002c202",
+      "frontend/src/designer-symbols.json": "8f3796ff31c3e3c6161eb6a037368272db43b826fbee49295cf91a2d624684f4",
+      "frontend/src/planning-ui.json": "a90e5f2eb72a30b996534f35c08374dc8994d1e58441fe504021c3ac530df7fb",
+      "frontend/src/plant-illustrations.json": "afe031872211c3e10ca622b9f1d94faf03191ae2b7bcfd4a3f14f854c552e8b2",
+      "frontend/src/restoration-models.json": "fc9da66ab40bf6b5c32c9de6e9d4bb1b351f48a12305f4fe86ee457587450380",
+      "knowledge/citations-v1.json": "4549c4689977d091dbe4a0d00b7069f16ca9452d74ad9c1b48dca6d755204d90",
+      "knowledge/connected-pilot-v1.json": "c8c5233b06adfe7db2c7dc85a0a190aac60fb019b97df145f26076f61b299cdb",
+      "knowledge/feature-consumers-v1.json": "91567dbf495388f40f54ec0b8fbd0d9e2a0096899a12a6c8fb54c7b43568701e",
+      "scenarios/default.json": "2aaa152e1efc42eeb56a22aa4916ebce778d1f812533fa6dc713a7c96411da82",
+      "scenarios/defaults.json": "31378fd571c86f0858cf03b0f928b22f17de7238c88e1914e3aa44326e383f50",
+      "scenarios/designer-library-defaults.json": "28b46e63c197bc38887aa9043b4f9be5d48221ca8237a826c18fc1110de0c30c",
+      "scenarios/documents.json": "e6488d67047d3a4b2ac3da9be479e1f0243d787aafbfa2c03498e04164ff6d15",
+      "scenarios/funding-al20-statistics-v1.json": "a7e6bcac27be9666a4ca50594a53f89446220bfd07828c1da170ad6ea4c0f1db",
+      "scenarios/funding-delivery-plan-v1.json": "5aa21fc397b11cbba5f33025285bee5f6abb2f8f2d86982a0f163937b0ad2683",
+      "scenarios/funding-edl-v1.json": "42f7fd5a7608d441410ece12f0ac1ef8a286b7db54b2ae80415c165b28d43470",
+      "scenarios/funding-guides-v1.json": "de06605ea8d9bca2062112b3be669888fb318a1063e0fc11e7825715c0da27d6",
+      "scenarios/funding-programmes-v1.json": "890879499354696787fb1a8cdfbaa93f57fabda722ff58aeb16573d318b715e2",
+      "scenarios/funding-project-concept-v1.json": "a3430e04e8c0eddf81ecd1fba632469af23e2572be2ccee5b2caf67c5d5e4b67",
+      "scenarios/funding-selection-guidance-v1.json": "f86f440fd357dbdd369057dec2b79b7a0b6f42eae724d496f6fddb8d2f3d41c0",
+      "scenarios/funding-v1.json": "ae054dd9e185f54c2f8ea11deeb1eeb95bfbf7f010fc9fc8f4d9d8fd5d387857",
+      "scenarios/funding-v2.json": "4922e57057acaa8ea3b7c061db6b51c3763b190ead43f7be15460d7b56e9a18e",
+      "scenarios/funding.json": "cf07ed2885e3cc86a58c55d6bfd0a21bb2d0757641bb09a215f6ed0e066cb878",
+      "scenarios/legacy-form-defaults-v1.json": "6c1b61ed9629ac880b642dfb42e388fa0d936c3d4e1724e44236cfbfd272722e",
+      "scenarios/legacy-v1.json": "f993fecb344be50a72b6e5ad1fe5b62b44cdf847803bf47c14f5e66a87e4692a",
+      "scenarios/legacy-v2.json": "3423d540c0364cfdd088d74301b4927a3302a04fbf4cef854fc5b1d536a97858",
+      "scenarios/legacy-v3.json": "fb4cbda1baf1dfa06ffa95931a7dbd02cedc4408f7ea2190dd69917b4ef64bad",
+      "scenarios/plant-names.json": "e45daec35ccec42e6e3ecb6a413ffe9f1a1f994b2da942de3bb65e1c469e9619",
+      "scenarios/plant-prices.json": "2fcb79912aa1efbcb08be0f6b286b032e99956b27827e8e1953e928b0fe17dd1",
+      "scenarios/planting-catalog-v1.json": "5553b805cb17480e6209e6aa52f1e65a07305bc5b67cde5640fdbc33519e74c9",
+      "scenarios/planting-catalog-v2.json": "9177350ebcf5487e6a31bbee9645280a64f6fbac35703961b18160426b629f66"
+    }
+  },
+  "batch_id": "life-nature-v1",
+  "candidate": {
+    "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+    "coverage": {
+      "excluded": [
+        "Unindexed research prose and other funding/ecological subjects",
+        "Unregistered feature dependencies and project activities",
+        "Current call availability and real grant eligibility",
+        "Saved-project rule editions and historical source retrieval"
+      ],
+      "mode": "registered-pilot-only",
+      "root_entities": [
+        "route:LEADER-AL20-3.4",
+        "species:carob",
+        "approach:mr2",
+        "programme:EU-LIFE"
+      ]
+    },
+    "dataset_hash": "586dba3b17e676d4222c37259006a895d4b38d6bfc74ef45e1fc21116c59b047",
+    "dataset_id": "algarroba-connected-pilot-v1",
+    "files": {
+      "citations-v1.json": "a9acfbfa60420d9b4ec4ecd3379b786ba48cf68b1042cd876e60fc01f654ca54",
+      "connected-pilot-v1.json": "db47a133d208fea03af56be275c2017308a7b757cab1cfbd1a98232ceb7efdba"
+    }
+  },
+  "changes": [
+    {
+      "after": {
+        "document_id": "FUND-016",
+        "label": "FUND-016 - PDF page 20",
+        "page": 20,
+        "role": "Standard Action Project framework; not an assessed call",
+        "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "sources",
+      "domain": "knowledge",
+      "id": "intake:FUND-016:p20:sap-framework",
+      "key": "knowledge.sources/intake:FUND-016:p20:sap-framework",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "document_id": "FUND-016",
+        "label": "FUND-016 - PDF page 21",
+        "page": 21,
+        "role": "Standard Action Project framework; not an assessed call",
+        "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "sources",
+      "domain": "knowledge",
+      "id": "intake:FUND-016:p21:sap-framework",
+      "key": "knowledge.sources/intake:FUND-016:p21:sap-framework",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "document_id": "FUND-016",
+        "label": "FUND-016 - PDF page 8",
+        "page": 8,
+        "role": "Nature and Biodiversity programme context",
+        "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "sources",
+      "domain": "knowledge",
+      "id": "intake:FUND-016:p8:nature-context",
+      "key": "knowledge.sources/intake:FUND-016:p8:nature-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "document_id": "FUND-016",
+        "label": "FUND-016 - PDF page 9",
+        "page": 9,
+        "role": "Nature and Biodiversity programme context",
+        "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "sources",
+      "domain": "knowledge",
+      "id": "intake:FUND-016:p9:nature-context",
+      "key": "knowledge.sources/intake:FUND-016:p9:nature-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "aliases": [
+          "LIFE programme"
+        ],
+        "availability": "not_assessed",
+        "binding_id": "programme-life",
+        "citation_ids": [
+          "intake:FUND-016:p8:nature-context"
+        ],
+        "limitations": [
+          "Only the Nature and Biodiversity reference is connected here. Current calls, deadlines, budgets and eligibility are not assessed."
+        ],
+        "native_id": "EU-LIFE",
+        "type": "programme"
+      },
+      "before": null,
+      "collection": "entities",
+      "domain": "knowledge",
+      "id": "programme:EU-LIFE",
+      "key": "knowledge.entities/programme:EU-LIFE",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "aliases": [
+          "LIFE Nature",
+          "LIFE biodiversity",
+          "Nature and Biodiversity"
+        ],
+        "availability": "not_assessed",
+        "binding_id": "route-life-nature",
+        "citation_ids": [
+          "intake:FUND-016:p8:nature-context"
+        ],
+        "limitations": [
+          "Guide-only catalogue reference. No current call or applicant qualification is established."
+        ],
+        "native_id": "EU-LIFE-NATURE",
+        "type": "funding_route"
+      },
+      "before": null,
+      "collection": "entities",
+      "domain": "knowledge",
+      "id": "route:EU-LIFE-NATURE",
+      "key": "knowledge.entities/route:EU-LIFE-NATURE",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "intake:FUND-016:p8:nature-context",
+          "intake:FUND-016:p9:nature-context"
+        ],
+        "configuration_ids": [],
+        "context": "The 2025-2027 work programme describes programme objectives and priority areas; it is not a project-specific eligibility decision.",
+        "evidence_kind": "official_strategy",
+        "limitations": [
+          "A restoration theme alone does not establish an eligible project, applicant or available call."
+        ],
+        "review_status": "curated",
+        "review_targets": [
+          "guide-life-nature"
+        ],
+        "reviewed_on": "2026-11-03",
+        "statement": "The LIFE Nature and Biodiversity sub-programme supports nature and biodiversity objectives through innovative approaches, best practices, governance and replication, including protection, maintenance and restoration of natural capital.",
+        "subject_ids": [
+          "programme:EU-LIFE",
+          "route:EU-LIFE-NATURE"
+        ]
+      },
+      "before": null,
+      "collection": "claims",
+      "domain": "knowledge",
+      "id": "claim:life-nature-objectives",
+      "key": "knowledge.claims/claim:life-nature-objectives",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "intake:FUND-016:p20:sap-framework",
+          "intake:FUND-016:p21:sap-framework"
+        ],
+        "configuration_ids": [],
+        "context": "Section 4.1.1.1 spans PDF pages 20-21. Read the complete qualifying categories and requirement that all actions benefit the qualifying habitats or species.",
+        "evidence_kind": "official_requirement",
+        "limitations": [
+          "These are conditional framework ceilings, not an award rate, financing input or automatic qualification.",
+          "The exact applicable call, eligible costs, habitat/species status and supporting evidence require their own review. No current call is assessed."
+        ],
+        "review_status": "curated",
+        "review_targets": [
+          "guide-life-nature"
+        ],
+        "reviewed_on": "2026-11-03",
+        "statement": "The 2025-2027 Standard Action Project framework generally limits cofinancing to 60% of eligible costs. Nature and Biodiversity projects may reach 75% only under its qualifying habitat/species conditions, exclusive targeting and proposal justification requirements.",
+        "subject_ids": [
+          "route:EU-LIFE-NATURE"
+        ]
+      },
+      "before": null,
+      "collection": "claims",
+      "domain": "knowledge",
+      "id": "claim:life-sap-cofinancing-framework",
+      "key": "knowledge.claims/claim:life-sap-cofinancing-framework",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "intake:FUND-016:p20:sap-framework"
+        ],
+        "configuration_ids": [],
+        "context": "Section 4.1.1 of the 2025-2027 work programme. Strategic projects, technical assistance and other actions are separate formats.",
+        "evidence_kind": "official_strategy",
+        "limitations": [
+          "This is a framework description, not a claim that every Nature project or catalogue route is a Standard Action Project."
+        ],
+        "review_status": "curated",
+        "review_targets": [
+          "guide-life-nature"
+        ],
+        "reviewed_on": "2026-11-03",
+        "statement": "Standard Action Projects are a distinct LIFE grant format supporting innovative approaches, best practices, policy implementation and the wider deployment of successful solutions.",
+        "subject_ids": [
+          "route:EU-LIFE-NATURE"
+        ]
+      },
+      "before": null,
+      "collection": "claims",
+      "domain": "knowledge",
+      "id": "claim:life-sap-purpose",
+      "key": "knowledge.claims/claim:life-sap-purpose",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "basis": "source_reference",
+        "citation_ids": [],
+        "claim_ids": [],
+        "context": "Explicit membership already registered by the native funding-programme authority.",
+        "limitations": [
+          "Membership does not transfer another LIFE route or call condition to this reference."
+        ],
+        "source": "programme:EU-LIFE",
+        "target": "route:EU-LIFE-NATURE",
+        "type": "programme_contains_route"
+      },
+      "before": null,
+      "collection": "relations",
+      "domain": "knowledge",
+      "id": "relation:life-nature-route",
+      "key": "knowledge.relations/relation:life-nature-route",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "adapter": "research_guide",
+        "explanation": "Manual review target for the retained LIFE Nature guide. The guide does not consume these claims.",
+        "native_id": "EU-LIFE-NATURE"
+      },
+      "before": null,
+      "collection": "bindings",
+      "domain": "knowledge",
+      "id": "guide-life-nature",
+      "key": "knowledge.bindings/guide-life-nature",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "adapter": "programme",
+        "explanation": "Existing LIFE programme grouping. This batch represents only its Nature route; other routes remain outside this expansion.",
+        "native_id": "EU-LIFE"
+      },
+      "before": null,
+      "collection": "bindings",
+      "domain": "knowledge",
+      "id": "programme-life",
+      "key": "knowledge.bindings/programme-life",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "adapter": "funding_route",
+        "explanation": "Existing research-only catalogue reference, not a new eligibility calculation or a published-call identity.",
+        "native_id": "EU-LIFE-NATURE"
+      },
+      "before": null,
+      "collection": "bindings",
+      "domain": "knowledge",
+      "id": "route-life-nature",
+      "key": "knowledge.bindings/route-life-nature",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "document_id": "FUND-016",
+        "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5"
+      },
+      "before": null,
+      "collection": "editions",
+      "domain": "citations",
+      "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "key": "citations.editions/FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "edition_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+        "page": 20,
+        "page_basis": "pdf"
+      },
+      "before": null,
+      "collection": "passages",
+      "domain": "citations",
+      "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:20",
+      "key": "citations.passages/FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:20",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "edition_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+        "page": 21,
+        "page_basis": "pdf"
+      },
+      "before": null,
+      "collection": "passages",
+      "domain": "citations",
+      "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:21",
+      "key": "citations.passages/FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:21",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "edition_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+        "page": 8,
+        "page_basis": "pdf"
+      },
+      "before": null,
+      "collection": "passages",
+      "domain": "citations",
+      "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:8",
+      "key": "citations.passages/FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:8",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "edition_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+        "page": 9,
+        "page_basis": "pdf"
+      },
+      "before": null,
+      "collection": "passages",
+      "domain": "citations",
+      "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:9",
+      "key": "citations.passages/FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:9",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "passage_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:20",
+        "role": "Standard Action Project framework; not an assessed call",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "citations",
+      "domain": "citations",
+      "id": "intake:FUND-016:p20:sap-framework",
+      "key": "citations.citations/intake:FUND-016:p20:sap-framework",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "passage_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:21",
+        "role": "Standard Action Project framework; not an assessed call",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "citations",
+      "domain": "citations",
+      "id": "intake:FUND-016:p21:sap-framework",
+      "key": "citations.citations/intake:FUND-016:p21:sap-framework",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "passage_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:8",
+        "role": "Nature and Biodiversity programme context",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "citations",
+      "domain": "citations",
+      "id": "intake:FUND-016:p8:nature-context",
+      "key": "citations.citations/intake:FUND-016:p8:nature-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "passage_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:9",
+        "role": "Nature and Biodiversity programme context",
+        "verified_on": "2026-11-03"
+      },
+      "before": null,
+      "collection": "citations",
+      "domain": "citations",
+      "id": "intake:FUND-016:p9:nature-context",
+      "key": "citations.citations/intake:FUND-016:p9:nature-context",
+      "operation": "add"
+    },
+    {
+      "after": {
+        "citation_ids": [
+          "pilot:FUND-009:p1:call-context",
+          "intake:FUND-016:p8:nature-context",
+          "intake:FUND-016:p9:nature-context",
+          "intake:FUND-016:p20:sap-framework",
+          "intake:FUND-016:p21:sap-framework",
+          "FUND-008-p120-route-requirements",
+          "FUND-008-p121-route-requirements",
+          "pilot:FOREST-002:p131:mr2-guidance",
+          "pilot:FOREST-002:p132:mr2-guidance",
+          "pilot:FOREST-002:p133:mr2-guidance",
+          "pilot:FOREST-002:p134:mr2-guidance",
+          "pilot:FOREST-002:p135:mr2-guidance",
+          "pilot:FOREST-002:p136:mr2-guidance",
+          "pilot:FOREST-002:p137:mr2-guidance",
+          "pilot:FUND-013:p395:strategy-need"
+        ]
+      },
+      "before": {
+        "citation_ids": [
+          "pilot:FUND-009:p1:call-context",
+          "FUND-008-p120-route-requirements",
+          "FUND-008-p121-route-requirements",
+          "pilot:FOREST-002:p131:mr2-guidance",
+          "pilot:FOREST-002:p132:mr2-guidance",
+          "pilot:FOREST-002:p133:mr2-guidance",
+          "pilot:FOREST-002:p134:mr2-guidance",
+          "pilot:FOREST-002:p135:mr2-guidance",
+          "pilot:FOREST-002:p136:mr2-guidance",
+          "pilot:FOREST-002:p137:mr2-guidance",
+          "pilot:FUND-013:p395:strategy-need"
+        ]
+      },
+      "collection": "consumers",
+      "domain": "citations",
+      "id": "knowledge_pilot",
+      "key": "citations.consumers/knowledge_pilot",
+      "operation": "replace"
+    },
+    {
+      "after": {
+        "excluded": [
+          "Unindexed research prose and other funding/ecological subjects",
+          "Unregistered feature dependencies and project activities",
+          "Current call availability and real grant eligibility",
+          "Saved-project rule editions and historical source retrieval"
+        ],
+        "mode": "registered-pilot-only",
+        "root_entities": [
+          "route:LEADER-AL20-3.4",
+          "species:carob",
+          "approach:mr2",
+          "programme:EU-LIFE"
+        ]
+      },
+      "before": {
+        "excluded": [
+          "Unindexed research prose and other funding/ecological subjects",
+          "Unregistered feature dependencies and project activities",
+          "Current call availability and real grant eligibility",
+          "Saved-project rule editions and historical source retrieval"
+        ],
+        "mode": "registered-pilot-only",
+        "root_entities": [
+          "route:LEADER-AL20-3.4",
+          "species:carob",
+          "approach:mr2"
+        ]
+      },
+      "collection": "metadata",
+      "domain": "knowledge",
+      "id": "coverage",
+      "key": "knowledge.metadata/coverage",
+      "operation": "replace"
+    }
+  ],
+  "compatibility": {
+    "feature_contexts_unchanged": true,
+    "feature_registration_unchanged": true,
+    "publication": "explicit repository edit after fingerprint recheck"
+  },
+  "counts": {
+    "after": {
+      "bindings": 22,
+      "claims": 15,
+      "edges": 64,
+      "entities": 13,
+      "issues": 2,
+      "nodes": 43,
+      "relations": 10,
+      "sources": 15
+    },
+    "before": {
+      "bindings": 19,
+      "claims": 12,
+      "edges": 52,
+      "entities": 11,
+      "issues": 2,
+      "nodes": 34,
+      "relations": 9,
+      "sources": 11
+    }
+  },
+  "impact_scope": "Registered dependencies using affected claims/passages; review targets are not automatic feature changes.",
+  "impacts": [
+    {
+      "after": {
+        "claim_ids": [
+          "claim:life-nature-objectives"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE"
+          ]
+        },
+        "dataset_hash": "586dba3b17e676d4222c37259006a895d4b38d6bfc74ef45e1fc21116c59b047",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "guide-life-nature",
+            "claim_id": "claim:life-nature-objectives",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "claim:life-nature-objectives",
+                "kind": "claim"
+              },
+              {
+                "id": "guide-life-nature",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "research_guide",
+              "aliases": [
+                "EU-LIFE-NATURE"
+              ],
+              "authority": {
+                "file": "scenarios/funding-guides-v1.json",
+                "record_hash": "9bb265a777477791169392fb721bd5de2483125a4947681a4779ea71e5fc8222"
+              },
+              "explanation": "Manual review target for the retained LIFE Nature guide. The guide does not consume these claims.",
+              "id": "guide-life-nature",
+              "label": "LIFE Nature and Biodiversity projects",
+              "native_id": "EU-LIFE-NATURE",
+              "value": {
+                "advantages": "LIFE can connect practical conservation with replication and policy delivery across a wider area. Established partners may bring ecological expertise and administrative capacity. Participation in a well-designed project could make the pilot’s evidence useful beyond its boundaries and support longer-term collaboration.",
+                "availability": "The listed 2026 Standard Action Project deadline was 22 September 2026 and has passed; later calls need checking.",
+                "checked_on": "2026-11-01",
+                "fit": "Illustrative fit: an experienced partnership develops a multi-site habitat-restoration programme with clear conservation targets and continuing management. Algarrobos could offer a suitable field site, observations or a practical delivery role. A small private parcel alone is unlikely to make a convincing full European project.",
+                "kind": "programme_family",
+                "limitations": "Application effort, cofinancing, land rights, staff capacity and post-project responsibilities can be substantial. Planting trees does not by itself demonstrate a conservation outcome. Rates and costs must come from the actual call. The expired 2026 deadline cannot be treated as an open opportunity.",
+                "next_steps": "Read the work-programme context and current CINEA call listing, then identify the precise topic. Discuss a realistic partner role with experienced organisations before drafting a large bid. Prepare baseline evidence, management responsibilities and a costed contribution; compare local support when the intended work remains a small standalone activity.",
+                "related": [
+                  "EU-LIFE-GOVERNANCE",
+                  "EU-LIFE-STRATEGIC",
+                  "LEADER-AL20-3.5"
+                ],
+                "source_ids": [
+                  "life-nature",
+                  "life-calls"
+                ],
+                "title": "LIFE Nature and Biodiversity projects",
+                "unresolved": [
+                  "Confirm a precise current instrument, applicant/partner role, territorial fit, costs and timetable before treating this as project funding."
+                ],
+                "what": "LIFE is the European Union’s environment and climate-action programme. Its Nature and Biodiversity strand supports eligible conservation and restoration projects through specific calls. A Standard Action Project is a defined grant format, with application, delivery and reporting conditions separate from local LEADER support."
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "claim:life-nature-objectives",
+          "kind": "claim"
+        },
+        "validation_dependencies": [],
+        "version": 2
+      },
+      "before": null,
+      "id": "claim:life-nature-objectives",
+      "kind": "claim"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:life-sap-cofinancing-framework"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE"
+          ]
+        },
+        "dataset_hash": "586dba3b17e676d4222c37259006a895d4b38d6bfc74ef45e1fc21116c59b047",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "guide-life-nature",
+            "claim_id": "claim:life-sap-cofinancing-framework",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "claim:life-sap-cofinancing-framework",
+                "kind": "claim"
+              },
+              {
+                "id": "guide-life-nature",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "research_guide",
+              "aliases": [
+                "EU-LIFE-NATURE"
+              ],
+              "authority": {
+                "file": "scenarios/funding-guides-v1.json",
+                "record_hash": "9bb265a777477791169392fb721bd5de2483125a4947681a4779ea71e5fc8222"
+              },
+              "explanation": "Manual review target for the retained LIFE Nature guide. The guide does not consume these claims.",
+              "id": "guide-life-nature",
+              "label": "LIFE Nature and Biodiversity projects",
+              "native_id": "EU-LIFE-NATURE",
+              "value": {
+                "advantages": "LIFE can connect practical conservation with replication and policy delivery across a wider area. Established partners may bring ecological expertise and administrative capacity. Participation in a well-designed project could make the pilot’s evidence useful beyond its boundaries and support longer-term collaboration.",
+                "availability": "The listed 2026 Standard Action Project deadline was 22 September 2026 and has passed; later calls need checking.",
+                "checked_on": "2026-11-01",
+                "fit": "Illustrative fit: an experienced partnership develops a multi-site habitat-restoration programme with clear conservation targets and continuing management. Algarrobos could offer a suitable field site, observations or a practical delivery role. A small private parcel alone is unlikely to make a convincing full European project.",
+                "kind": "programme_family",
+                "limitations": "Application effort, cofinancing, land rights, staff capacity and post-project responsibilities can be substantial. Planting trees does not by itself demonstrate a conservation outcome. Rates and costs must come from the actual call. The expired 2026 deadline cannot be treated as an open opportunity.",
+                "next_steps": "Read the work-programme context and current CINEA call listing, then identify the precise topic. Discuss a realistic partner role with experienced organisations before drafting a large bid. Prepare baseline evidence, management responsibilities and a costed contribution; compare local support when the intended work remains a small standalone activity.",
+                "related": [
+                  "EU-LIFE-GOVERNANCE",
+                  "EU-LIFE-STRATEGIC",
+                  "LEADER-AL20-3.5"
+                ],
+                "source_ids": [
+                  "life-nature",
+                  "life-calls"
+                ],
+                "title": "LIFE Nature and Biodiversity projects",
+                "unresolved": [
+                  "Confirm a precise current instrument, applicant/partner role, territorial fit, costs and timetable before treating this as project funding."
+                ],
+                "what": "LIFE is the European Union’s environment and climate-action programme. Its Nature and Biodiversity strand supports eligible conservation and restoration projects through specific calls. A Standard Action Project is a defined grant format, with application, delivery and reporting conditions separate from local LEADER support."
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "claim:life-sap-cofinancing-framework",
+          "kind": "claim"
+        },
+        "validation_dependencies": [],
+        "version": 2
+      },
+      "before": null,
+      "id": "claim:life-sap-cofinancing-framework",
+      "kind": "claim"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:life-sap-purpose"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE"
+          ]
+        },
+        "dataset_hash": "586dba3b17e676d4222c37259006a895d4b38d6bfc74ef45e1fc21116c59b047",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "guide-life-nature",
+            "claim_id": "claim:life-sap-purpose",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "claim:life-sap-purpose",
+                "kind": "claim"
+              },
+              {
+                "id": "guide-life-nature",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "research_guide",
+              "aliases": [
+                "EU-LIFE-NATURE"
+              ],
+              "authority": {
+                "file": "scenarios/funding-guides-v1.json",
+                "record_hash": "9bb265a777477791169392fb721bd5de2483125a4947681a4779ea71e5fc8222"
+              },
+              "explanation": "Manual review target for the retained LIFE Nature guide. The guide does not consume these claims.",
+              "id": "guide-life-nature",
+              "label": "LIFE Nature and Biodiversity projects",
+              "native_id": "EU-LIFE-NATURE",
+              "value": {
+                "advantages": "LIFE can connect practical conservation with replication and policy delivery across a wider area. Established partners may bring ecological expertise and administrative capacity. Participation in a well-designed project could make the pilot’s evidence useful beyond its boundaries and support longer-term collaboration.",
+                "availability": "The listed 2026 Standard Action Project deadline was 22 September 2026 and has passed; later calls need checking.",
+                "checked_on": "2026-11-01",
+                "fit": "Illustrative fit: an experienced partnership develops a multi-site habitat-restoration programme with clear conservation targets and continuing management. Algarrobos could offer a suitable field site, observations or a practical delivery role. A small private parcel alone is unlikely to make a convincing full European project.",
+                "kind": "programme_family",
+                "limitations": "Application effort, cofinancing, land rights, staff capacity and post-project responsibilities can be substantial. Planting trees does not by itself demonstrate a conservation outcome. Rates and costs must come from the actual call. The expired 2026 deadline cannot be treated as an open opportunity.",
+                "next_steps": "Read the work-programme context and current CINEA call listing, then identify the precise topic. Discuss a realistic partner role with experienced organisations before drafting a large bid. Prepare baseline evidence, management responsibilities and a costed contribution; compare local support when the intended work remains a small standalone activity.",
+                "related": [
+                  "EU-LIFE-GOVERNANCE",
+                  "EU-LIFE-STRATEGIC",
+                  "LEADER-AL20-3.5"
+                ],
+                "source_ids": [
+                  "life-nature",
+                  "life-calls"
+                ],
+                "title": "LIFE Nature and Biodiversity projects",
+                "unresolved": [
+                  "Confirm a precise current instrument, applicant/partner role, territorial fit, costs and timetable before treating this as project funding."
+                ],
+                "what": "LIFE is the European Union’s environment and climate-action programme. Its Nature and Biodiversity strand supports eligible conservation and restoration projects through specific calls. A Standard Action Project is a defined grant format, with application, delivery and reporting conditions separate from local LEADER support."
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "claim:life-sap-purpose",
+          "kind": "claim"
+        },
+        "validation_dependencies": [],
+        "version": 2
+      },
+      "before": null,
+      "id": "claim:life-sap-purpose",
+      "kind": "claim"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:life-sap-cofinancing-framework",
+          "claim:life-sap-purpose"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE"
+          ]
+        },
+        "dataset_hash": "586dba3b17e676d4222c37259006a895d4b38d6bfc74ef45e1fc21116c59b047",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "guide-life-nature",
+            "claim_id": "claim:life-sap-cofinancing-framework",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:20",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:life-sap-cofinancing-framework",
+                "kind": "claim"
+              },
+              {
+                "id": "guide-life-nature",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "research_guide",
+              "aliases": [
+                "EU-LIFE-NATURE"
+              ],
+              "authority": {
+                "file": "scenarios/funding-guides-v1.json",
+                "record_hash": "9bb265a777477791169392fb721bd5de2483125a4947681a4779ea71e5fc8222"
+              },
+              "explanation": "Manual review target for the retained LIFE Nature guide. The guide does not consume these claims.",
+              "id": "guide-life-nature",
+              "label": "LIFE Nature and Biodiversity projects",
+              "native_id": "EU-LIFE-NATURE",
+              "value": {
+                "advantages": "LIFE can connect practical conservation with replication and policy delivery across a wider area. Established partners may bring ecological expertise and administrative capacity. Participation in a well-designed project could make the pilot’s evidence useful beyond its boundaries and support longer-term collaboration.",
+                "availability": "The listed 2026 Standard Action Project deadline was 22 September 2026 and has passed; later calls need checking.",
+                "checked_on": "2026-11-01",
+                "fit": "Illustrative fit: an experienced partnership develops a multi-site habitat-restoration programme with clear conservation targets and continuing management. Algarrobos could offer a suitable field site, observations or a practical delivery role. A small private parcel alone is unlikely to make a convincing full European project.",
+                "kind": "programme_family",
+                "limitations": "Application effort, cofinancing, land rights, staff capacity and post-project responsibilities can be substantial. Planting trees does not by itself demonstrate a conservation outcome. Rates and costs must come from the actual call. The expired 2026 deadline cannot be treated as an open opportunity.",
+                "next_steps": "Read the work-programme context and current CINEA call listing, then identify the precise topic. Discuss a realistic partner role with experienced organisations before drafting a large bid. Prepare baseline evidence, management responsibilities and a costed contribution; compare local support when the intended work remains a small standalone activity.",
+                "related": [
+                  "EU-LIFE-GOVERNANCE",
+                  "EU-LIFE-STRATEGIC",
+                  "LEADER-AL20-3.5"
+                ],
+                "source_ids": [
+                  "life-nature",
+                  "life-calls"
+                ],
+                "title": "LIFE Nature and Biodiversity projects",
+                "unresolved": [
+                  "Confirm a precise current instrument, applicant/partner role, territorial fit, costs and timetable before treating this as project funding."
+                ],
+                "what": "LIFE is the European Union’s environment and climate-action programme. Its Nature and Biodiversity strand supports eligible conservation and restoration projects through specific calls. A Standard Action Project is a defined grant format, with application, delivery and reporting conditions separate from local LEADER support."
+              }
+            }
+          },
+          {
+            "binding_id": "guide-life-nature",
+            "claim_id": "claim:life-sap-purpose",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:20",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:life-sap-purpose",
+                "kind": "claim"
+              },
+              {
+                "id": "guide-life-nature",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "research_guide",
+              "aliases": [
+                "EU-LIFE-NATURE"
+              ],
+              "authority": {
+                "file": "scenarios/funding-guides-v1.json",
+                "record_hash": "9bb265a777477791169392fb721bd5de2483125a4947681a4779ea71e5fc8222"
+              },
+              "explanation": "Manual review target for the retained LIFE Nature guide. The guide does not consume these claims.",
+              "id": "guide-life-nature",
+              "label": "LIFE Nature and Biodiversity projects",
+              "native_id": "EU-LIFE-NATURE",
+              "value": {
+                "advantages": "LIFE can connect practical conservation with replication and policy delivery across a wider area. Established partners may bring ecological expertise and administrative capacity. Participation in a well-designed project could make the pilot’s evidence useful beyond its boundaries and support longer-term collaboration.",
+                "availability": "The listed 2026 Standard Action Project deadline was 22 September 2026 and has passed; later calls need checking.",
+                "checked_on": "2026-11-01",
+                "fit": "Illustrative fit: an experienced partnership develops a multi-site habitat-restoration programme with clear conservation targets and continuing management. Algarrobos could offer a suitable field site, observations or a practical delivery role. A small private parcel alone is unlikely to make a convincing full European project.",
+                "kind": "programme_family",
+                "limitations": "Application effort, cofinancing, land rights, staff capacity and post-project responsibilities can be substantial. Planting trees does not by itself demonstrate a conservation outcome. Rates and costs must come from the actual call. The expired 2026 deadline cannot be treated as an open opportunity.",
+                "next_steps": "Read the work-programme context and current CINEA call listing, then identify the precise topic. Discuss a realistic partner role with experienced organisations before drafting a large bid. Prepare baseline evidence, management responsibilities and a costed contribution; compare local support when the intended work remains a small standalone activity.",
+                "related": [
+                  "EU-LIFE-GOVERNANCE",
+                  "EU-LIFE-STRATEGIC",
+                  "LEADER-AL20-3.5"
+                ],
+                "source_ids": [
+                  "life-nature",
+                  "life-calls"
+                ],
+                "title": "LIFE Nature and Biodiversity projects",
+                "unresolved": [
+                  "Confirm a precise current instrument, applicant/partner role, territorial fit, costs and timetable before treating this as project funding."
+                ],
+                "what": "LIFE is the European Union’s environment and climate-action programme. Its Nature and Biodiversity strand supports eligible conservation and restoration projects through specific calls. A Standard Action Project is a defined grant format, with application, delivery and reporting conditions separate from local LEADER support."
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:20",
+          "kind": "passage"
+        },
+        "validation_dependencies": [
+          {
+            "citation_ids": [
+              "intake:FUND-016:p20:sap-framework"
+            ],
+            "consumer_id": "knowledge_pilot",
+            "effect": "citation_validation_dependency",
+            "explanation": "This consumer validates these citation metadata mirrors; this does not update saved projects or adopt a changed claim.",
+            "file": "knowledge/connected-pilot-v1.json"
+          }
+        ],
+        "version": 2
+      },
+      "before": null,
+      "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:20",
+      "kind": "passage"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:life-sap-cofinancing-framework"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE"
+          ]
+        },
+        "dataset_hash": "586dba3b17e676d4222c37259006a895d4b38d6bfc74ef45e1fc21116c59b047",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "guide-life-nature",
+            "claim_id": "claim:life-sap-cofinancing-framework",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:21",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:life-sap-cofinancing-framework",
+                "kind": "claim"
+              },
+              {
+                "id": "guide-life-nature",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "research_guide",
+              "aliases": [
+                "EU-LIFE-NATURE"
+              ],
+              "authority": {
+                "file": "scenarios/funding-guides-v1.json",
+                "record_hash": "9bb265a777477791169392fb721bd5de2483125a4947681a4779ea71e5fc8222"
+              },
+              "explanation": "Manual review target for the retained LIFE Nature guide. The guide does not consume these claims.",
+              "id": "guide-life-nature",
+              "label": "LIFE Nature and Biodiversity projects",
+              "native_id": "EU-LIFE-NATURE",
+              "value": {
+                "advantages": "LIFE can connect practical conservation with replication and policy delivery across a wider area. Established partners may bring ecological expertise and administrative capacity. Participation in a well-designed project could make the pilot’s evidence useful beyond its boundaries and support longer-term collaboration.",
+                "availability": "The listed 2026 Standard Action Project deadline was 22 September 2026 and has passed; later calls need checking.",
+                "checked_on": "2026-11-01",
+                "fit": "Illustrative fit: an experienced partnership develops a multi-site habitat-restoration programme with clear conservation targets and continuing management. Algarrobos could offer a suitable field site, observations or a practical delivery role. A small private parcel alone is unlikely to make a convincing full European project.",
+                "kind": "programme_family",
+                "limitations": "Application effort, cofinancing, land rights, staff capacity and post-project responsibilities can be substantial. Planting trees does not by itself demonstrate a conservation outcome. Rates and costs must come from the actual call. The expired 2026 deadline cannot be treated as an open opportunity.",
+                "next_steps": "Read the work-programme context and current CINEA call listing, then identify the precise topic. Discuss a realistic partner role with experienced organisations before drafting a large bid. Prepare baseline evidence, management responsibilities and a costed contribution; compare local support when the intended work remains a small standalone activity.",
+                "related": [
+                  "EU-LIFE-GOVERNANCE",
+                  "EU-LIFE-STRATEGIC",
+                  "LEADER-AL20-3.5"
+                ],
+                "source_ids": [
+                  "life-nature",
+                  "life-calls"
+                ],
+                "title": "LIFE Nature and Biodiversity projects",
+                "unresolved": [
+                  "Confirm a precise current instrument, applicant/partner role, territorial fit, costs and timetable before treating this as project funding."
+                ],
+                "what": "LIFE is the European Union’s environment and climate-action programme. Its Nature and Biodiversity strand supports eligible conservation and restoration projects through specific calls. A Standard Action Project is a defined grant format, with application, delivery and reporting conditions separate from local LEADER support."
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:21",
+          "kind": "passage"
+        },
+        "validation_dependencies": [
+          {
+            "citation_ids": [
+              "intake:FUND-016:p21:sap-framework"
+            ],
+            "consumer_id": "knowledge_pilot",
+            "effect": "citation_validation_dependency",
+            "explanation": "This consumer validates these citation metadata mirrors; this does not update saved projects or adopt a changed claim.",
+            "file": "knowledge/connected-pilot-v1.json"
+          }
+        ],
+        "version": 2
+      },
+      "before": null,
+      "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:21",
+      "kind": "passage"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:life-nature-objectives"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE"
+          ]
+        },
+        "dataset_hash": "586dba3b17e676d4222c37259006a895d4b38d6bfc74ef45e1fc21116c59b047",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [
+          "programme:EU-LIFE",
+          "route:EU-LIFE-NATURE"
+        ],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "guide-life-nature",
+            "claim_id": "claim:life-nature-objectives",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:8",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:life-nature-objectives",
+                "kind": "claim"
+              },
+              {
+                "id": "guide-life-nature",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "research_guide",
+              "aliases": [
+                "EU-LIFE-NATURE"
+              ],
+              "authority": {
+                "file": "scenarios/funding-guides-v1.json",
+                "record_hash": "9bb265a777477791169392fb721bd5de2483125a4947681a4779ea71e5fc8222"
+              },
+              "explanation": "Manual review target for the retained LIFE Nature guide. The guide does not consume these claims.",
+              "id": "guide-life-nature",
+              "label": "LIFE Nature and Biodiversity projects",
+              "native_id": "EU-LIFE-NATURE",
+              "value": {
+                "advantages": "LIFE can connect practical conservation with replication and policy delivery across a wider area. Established partners may bring ecological expertise and administrative capacity. Participation in a well-designed project could make the pilot’s evidence useful beyond its boundaries and support longer-term collaboration.",
+                "availability": "The listed 2026 Standard Action Project deadline was 22 September 2026 and has passed; later calls need checking.",
+                "checked_on": "2026-11-01",
+                "fit": "Illustrative fit: an experienced partnership develops a multi-site habitat-restoration programme with clear conservation targets and continuing management. Algarrobos could offer a suitable field site, observations or a practical delivery role. A small private parcel alone is unlikely to make a convincing full European project.",
+                "kind": "programme_family",
+                "limitations": "Application effort, cofinancing, land rights, staff capacity and post-project responsibilities can be substantial. Planting trees does not by itself demonstrate a conservation outcome. Rates and costs must come from the actual call. The expired 2026 deadline cannot be treated as an open opportunity.",
+                "next_steps": "Read the work-programme context and current CINEA call listing, then identify the precise topic. Discuss a realistic partner role with experienced organisations before drafting a large bid. Prepare baseline evidence, management responsibilities and a costed contribution; compare local support when the intended work remains a small standalone activity.",
+                "related": [
+                  "EU-LIFE-GOVERNANCE",
+                  "EU-LIFE-STRATEGIC",
+                  "LEADER-AL20-3.5"
+                ],
+                "source_ids": [
+                  "life-nature",
+                  "life-calls"
+                ],
+                "title": "LIFE Nature and Biodiversity projects",
+                "unresolved": [
+                  "Confirm a precise current instrument, applicant/partner role, territorial fit, costs and timetable before treating this as project funding."
+                ],
+                "what": "LIFE is the European Union’s environment and climate-action programme. Its Nature and Biodiversity strand supports eligible conservation and restoration projects through specific calls. A Standard Action Project is a defined grant format, with application, delivery and reporting conditions separate from local LEADER support."
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:8",
+          "kind": "passage"
+        },
+        "validation_dependencies": [
+          {
+            "citation_ids": [
+              "intake:FUND-016:p8:nature-context"
+            ],
+            "consumer_id": "knowledge_pilot",
+            "effect": "citation_validation_dependency",
+            "explanation": "This consumer validates these citation metadata mirrors; this does not update saved projects or adopt a changed claim.",
+            "file": "knowledge/connected-pilot-v1.json"
+          }
+        ],
+        "version": 2
+      },
+      "before": null,
+      "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:8",
+      "kind": "passage"
+    },
+    {
+      "after": {
+        "claim_ids": [
+          "claim:life-nature-objectives"
+        ],
+        "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+        "coverage": {
+          "excluded": [
+            "Unindexed research prose and other funding/ecological subjects",
+            "Unregistered feature dependencies and project activities",
+            "Current call availability and real grant eligibility",
+            "Saved-project rule editions and historical source retrieval"
+          ],
+          "mode": "registered-pilot-only",
+          "root_entities": [
+            "route:LEADER-AL20-3.4",
+            "species:carob",
+            "approach:mr2",
+            "programme:EU-LIFE"
+          ]
+        },
+        "dataset_hash": "586dba3b17e676d4222c37259006a895d4b38d6bfc74ef45e1fc21116c59b047",
+        "dataset_id": "algarroba-connected-pilot-v1",
+        "entity_ids": [],
+        "feature_dependencies": [],
+        "relation_ids": [],
+        "review_targets": [
+          {
+            "binding_id": "guide-life-nature",
+            "claim_id": "claim:life-nature-objectives",
+            "effect": "review_required",
+            "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path.",
+            "path": [
+              {
+                "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:9",
+                "kind": "passage"
+              },
+              {
+                "id": "claim:life-nature-objectives",
+                "kind": "claim"
+              },
+              {
+                "id": "guide-life-nature",
+                "kind": "review_target"
+              }
+            ],
+            "target": {
+              "adapter": "research_guide",
+              "aliases": [
+                "EU-LIFE-NATURE"
+              ],
+              "authority": {
+                "file": "scenarios/funding-guides-v1.json",
+                "record_hash": "9bb265a777477791169392fb721bd5de2483125a4947681a4779ea71e5fc8222"
+              },
+              "explanation": "Manual review target for the retained LIFE Nature guide. The guide does not consume these claims.",
+              "id": "guide-life-nature",
+              "label": "LIFE Nature and Biodiversity projects",
+              "native_id": "EU-LIFE-NATURE",
+              "value": {
+                "advantages": "LIFE can connect practical conservation with replication and policy delivery across a wider area. Established partners may bring ecological expertise and administrative capacity. Participation in a well-designed project could make the pilot’s evidence useful beyond its boundaries and support longer-term collaboration.",
+                "availability": "The listed 2026 Standard Action Project deadline was 22 September 2026 and has passed; later calls need checking.",
+                "checked_on": "2026-11-01",
+                "fit": "Illustrative fit: an experienced partnership develops a multi-site habitat-restoration programme with clear conservation targets and continuing management. Algarrobos could offer a suitable field site, observations or a practical delivery role. A small private parcel alone is unlikely to make a convincing full European project.",
+                "kind": "programme_family",
+                "limitations": "Application effort, cofinancing, land rights, staff capacity and post-project responsibilities can be substantial. Planting trees does not by itself demonstrate a conservation outcome. Rates and costs must come from the actual call. The expired 2026 deadline cannot be treated as an open opportunity.",
+                "next_steps": "Read the work-programme context and current CINEA call listing, then identify the precise topic. Discuss a realistic partner role with experienced organisations before drafting a large bid. Prepare baseline evidence, management responsibilities and a costed contribution; compare local support when the intended work remains a small standalone activity.",
+                "related": [
+                  "EU-LIFE-GOVERNANCE",
+                  "EU-LIFE-STRATEGIC",
+                  "LEADER-AL20-3.5"
+                ],
+                "source_ids": [
+                  "life-nature",
+                  "life-calls"
+                ],
+                "title": "LIFE Nature and Biodiversity projects",
+                "unresolved": [
+                  "Confirm a precise current instrument, applicant/partner role, territorial fit, costs and timetable before treating this as project funding."
+                ],
+                "what": "LIFE is the European Union’s environment and climate-action programme. Its Nature and Biodiversity strand supports eligible conservation and restoration projects through specific calls. A Standard Action Project is a defined grant format, with application, delivery and reporting conditions separate from local LEADER support."
+              }
+            }
+          }
+        ],
+        "reviewed_on": "2026-11-03",
+        "target": {
+          "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:9",
+          "kind": "passage"
+        },
+        "validation_dependencies": [
+          {
+            "citation_ids": [
+              "intake:FUND-016:p9:nature-context"
+            ],
+            "consumer_id": "knowledge_pilot",
+            "effect": "citation_validation_dependency",
+            "explanation": "This consumer validates these citation metadata mirrors; this does not update saved projects or adopt a changed claim.",
+            "file": "knowledge/connected-pilot-v1.json"
+          }
+        ],
+        "version": 2
+      },
+      "before": null,
+      "id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:9",
+      "kind": "passage"
+    }
+  ],
+  "operation": "review",
+  "reasons": {
+    "citations.consumers/knowledge_pilot": "Register only the new source uses for the connected-knowledge reader. Original funding memberships remain unchanged.",
+    "knowledge.metadata/coverage": "Append this reviewed topic after existing roots; coverage remains explicitly bounded."
+  },
+  "source_review": [
+    {
+      "document_id": "FUND-016",
+      "pages": [
+        8,
+        9,
+        20,
+        21
+      ],
+      "publication_context": "European Commission, LIFE Multiannual Work Programme 2025-2027, annex to C(2025) 955 final, 15 April 2025. Existing unchanged local 43-page PDF.",
+      "review_notes": "Inspected PDF pages 8-9 (printed 7-8) and 20-21 (printed 19-20). Reviewed the continued cofinancing condition list, exclusive targeting and justification. Source-only framework curation; no current-call web verification or eligibility calculation.",
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5"
+    }
+  ],
+  "verified_editions": [
+    "FOREST-002@75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+    "FUND-008@48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
+    "FUND-009@ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e",
+    "FUND-013@1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
+    "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5"
+  ],
+  "version": 1
+}

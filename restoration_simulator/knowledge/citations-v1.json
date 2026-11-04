@@ -16,6 +16,14 @@
     "FUND-013@1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796": {
       "document_id": "FUND-013",
       "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796"
+    },
+    "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5": {
+      "document_id": "FUND-016",
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5"
+    },
+    "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81": {
+      "document_id": "FOREST-003",
+      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81"
     }
   },
   "passages": {
@@ -88,6 +96,41 @@
       "edition_id": "FUND-013@1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
       "page_basis": "pdf",
       "page": 395
+    },
+    "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:8": {
+      "edition_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "page_basis": "pdf",
+      "page": 8
+    },
+    "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:9": {
+      "edition_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "page_basis": "pdf",
+      "page": 9
+    },
+    "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:20": {
+      "edition_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "page_basis": "pdf",
+      "page": 20
+    },
+    "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:21": {
+      "edition_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "page_basis": "pdf",
+      "page": 21
+    },
+    "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:1": {
+      "edition_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "page_basis": "pdf",
+      "page": 1
+    },
+    "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:2": {
+      "edition_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "page_basis": "pdf",
+      "page": 2
+    },
+    "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3": {
+      "edition_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "page_basis": "pdf",
+      "page": 3
     }
   },
   "citations": {
@@ -160,6 +203,41 @@
       "passage_id": "FUND-013@1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796:pdf:395",
       "role": "prioritised strategy need; not grant points",
       "verified_on": "2026-11-03"
+    },
+    "intake:FUND-016:p8:nature-context": {
+      "passage_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:8",
+      "role": "Nature and Biodiversity programme context",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FUND-016:p9:nature-context": {
+      "passage_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:9",
+      "role": "Nature and Biodiversity programme context",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FUND-016:p20:sap-framework": {
+      "passage_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:20",
+      "role": "Standard Action Project framework; not an assessed call",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FUND-016:p21:sap-framework": {
+      "passage_id": "FUND-016@1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5:pdf:21",
+      "role": "Standard Action Project framework; not an assessed call",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FOREST-003:p1:kermes-context": {
+      "passage_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:1",
+      "role": "Kermes oak ecology and vegetation context",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FOREST-003:p2:kermes-context": {
+      "passage_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:2",
+      "role": "Kermes oak ecology and vegetation context",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FOREST-003:p3:kermes-context": {
+      "passage_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3",
+      "role": "Kermes oak ecology and vegetation context",
+      "verified_on": "2026-11-03"
     }
   },
   "consumers": {
@@ -192,6 +270,13 @@
     "knowledge_pilot": {
       "citation_ids": [
         "pilot:FUND-009:p1:call-context",
+        "intake:FOREST-003:p1:kermes-context",
+        "intake:FOREST-003:p2:kermes-context",
+        "intake:FOREST-003:p3:kermes-context",
+        "intake:FUND-016:p8:nature-context",
+        "intake:FUND-016:p9:nature-context",
+        "intake:FUND-016:p20:sap-framework",
+        "intake:FUND-016:p21:sap-framework",
         "FUND-008-p120-route-requirements",
         "FUND-008-p121-route-requirements",
         "pilot:FOREST-002:p131:mr2-guidance",

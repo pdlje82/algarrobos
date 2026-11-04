@@ -1,5 +1,36 @@
 # Silent-fallback audit · 28 October 2026
 
+Research intake and expansion (3 November 2026): explicit candidate snapshots and
+required manifests are validated without changing runtime loader paths or opening
+project state. Baseline/candidate byte fingerprints, native record fingerprints,
+source-review ledgers and explicit replacement/removal reasons are required. Invalid
+schemas/fields, duplicate keys, nonfinite values, missing inputs/labels, wrong
+editions/pages, stale or mid-review changes and failed reads reject clearly. There
+is no automatic publication, source repair, alternate file or stale-success recovery.
+Read-only source projection generates checked metadata from a candidate registry
+while requiring explicit labels. Expected CLI failures have empty stdout and exit 1;
+invalid usage exits 2. Archived reports are historical receipts, not runtime owners.
+
+Explorer-only adoption checks that all six current feature-context contents and
+ordering remain equal. New claims about an old subject do not automatically become
+feature claims. Source/display/manual dependencies remain separate. LIFE and kermes
+oak were published as two independently checked/reviewed batches with the simulator
+stopped and rechecked fingerprints; the second baseline follows the first hash.
+Reusing either candidate now correctly rejects it as stale. No real project, rule,
+price, calculator or save migration was involved.
+
+Acceptance passed: 69 targeted/361 full backend tests, 132 frontend tests, both
+knowledge checks, four original feature projections, Explorer CLI and production
+build. Sequential isolated browser checks covered both new topics and layouts/List,
+PDF pages/focus, source tensions, hash mismatch/errors/retry, retained drafts, the
+six existing evidence sections and Designer regression. The original 34-node/52-edge
+subset, curated records, citation uses and six feature contexts retain fingerprints.
+All original feature libraries/rules/educational data/documents and eight real saves
+are unchanged. Existing build/version-metadata observations and failed early test
+expectations are recorded in the [Milestone 6 record](KNOWLEDGE_MILESTONE_6.md).
+The collection is bounded; no repository-wide fallback compliance is claimed.
+
+
 Knowledge Explorer (3 November 2026): a required, validated graph projection exposes
 34 pilot nodes and 52 explicit connections. The separate read-only graph/search/
 usage endpoints never open project state. Unsupported types/versions, dangling

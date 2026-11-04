@@ -1,6 +1,6 @@
 # Algarroba knowledge architecture implementation plan
 
-Created 3 November 2026. Status: Milestones 1–5 complete; Milestone 6 pending.
+Created 3 November 2026. Status: Milestones 1–6 complete.
 
 Algarroba needs a shared way to connect research evidence, ecological knowledge,
 funding requirements and project decisions as its content grows. Implement this
@@ -238,6 +238,21 @@ Show the pilot's coverage clearly so absence is not mistaken for lack of evidenc
 **Outcome:** future research can extend the model through a documented, testable
 procedure with limited changes to unrelated features.
 
+Completed 3 November 2026. The [Milestone 6 record](KNOWLEDGE_MILESTONE_6.md)
+documents the reusable intake worksheet, isolated candidate validation/change
+reports and two sequential publications. LIFE Nature and kermes oak add nine claims
+and five entities from existing documents. Explorer has 55 nodes/86 edges; original
+records, the 34-node/52-edge subset and all six existing feature contexts are retained.
+New claims remain Explorer-only, with manual review targets and explicit future
+adoption. The new naming tension is unresolved and current calls are unassessed.
+
+Acceptance passed: 69 targeted/361 full backend tests, 132 frontend tests, both
+knowledge checks, projections and production build. Sequential production browser
+checks cover expanded Explorer, evidence sections and Designer regression. Source,
+feature, rule, educational and real-save fingerprints are preserved. Candidate
+reuse correctly fails as stale; checked authoring effort and indicative query/payload
+measurements are recorded without introducing a database or automated extraction.
+
 Document and support this sequence: locate existing entities; register the source;
 propose contextual claims and relationships; identify conflicts and affected
 consumers; validate; review the diff; publish the knowledge/rule edition. Existing
@@ -285,14 +300,13 @@ decision cannot be resolved from the repository or authorised task scope.
 | 3 Connected knowledge pilot and queries | Complete | [Curated pilot, read-only queries and passing acceptance checks](KNOWLEDGE_MILESTONE_3.md) |
 | 4 Integration into existing features | Complete | [Six shared-evidence sections, compatible projections and passing acceptance](KNOWLEDGE_MILESTONE_4.md) |
 | 5 Focused knowledge explorer | Complete | [Two layouts, shared graph/query contracts, preserved drafts and passing acceptance](KNOWLEDGE_MILESTONE_5.md) |
-| 6 Research intake and gradual expansion | Pending | To be recorded |
+| 6 Research intake and gradual expansion | Complete | [Reviewed intake workflow, LIFE/kermes expansion and passing acceptance](KNOWLEDGE_MILESTONE_6.md) |
 
-**Next bounded task:** prepare the Milestone 6 implementation plan for repeatable
-research intake and gradual expansion. Specify source registration, contextual
-claims/relationships, tension review, explicit feature adoption, validation and
-impact checks, then select two bounded expansion examples. Preserve current
-project snapshots and deliberate feature memberships. Milestone 6 remains pending;
-no additional research or content migration was performed in Milestone 5.
+**Next bounded task:** choose a further bounded research batch using the reviewed
+intake workflow, or separately plan explicit adoption of LIFE/kermes claims into
+feature evidence sections. All six milestones are complete. No automatic feature
+adoption, wider migration or new research beyond the agreed local passages was
+performed in Milestone 6.
 
 **Open findings:** the viewer registers one edition per document ID; concept,
 delivery and EDL records require exact installed library hashes; 80 shared
@@ -300,7 +314,7 @@ guidance/concept citation labels have encoding drift. Seventy-five other shared
 guidance/concept citations, six concept-only EDL uses and the other evidence
 collections remain outside the new registry. General source-edition retrieval,
 retained guide editions and cross-domain dependency coverage remain open. The
-pilot's stock-format tension and bounded establishment-water gap remain unresolved;
+stock-format tension, bounded establishment-water gap and kermes naming tension remain unresolved;
 current call availability is not assessed. Shared claims now feed the six current
 evidence sections, while retained help, reports, rules and standalone educational
 explorers keep their existing ownership. Older funding browser scripts refer to

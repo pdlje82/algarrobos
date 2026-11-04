@@ -45,6 +45,7 @@ RELATION_TYPES = {
     "call_context_for": ("funding_call", "programme"),
     "approach_has_palette": ("restoration_approach", "planting_palette"),
     "palette_starter_species": ("planting_palette", "species"),
+    "palette_optional_species": ("planting_palette", "species"),
     "approach_treatment_guidance": ("restoration_approach", "treatment"),
     "example_uses_approach": ("example_activity", "restoration_approach"),
     "example_mentions_species": ("example_activity", "species"),
@@ -54,7 +55,7 @@ RELATION_TYPES = {
 EVIDENCE_KINDS = {"official_requirement", "official_strategy", "guidance", "project_assumption", "research_gap"}
 CONFIGURATION_ADAPTERS = {"carob_density", "mr2_geometry"}
 ADAPTERS = set(ENTITY_TYPES) - {"example_activity"} | CONFIGURATION_ADAPTERS | {
-    "illustration", "reference_model", "route_guidance", "delivery_topic", "concept_template",
+    "illustration", "reference_model", "route_guidance", "delivery_topic", "concept_template", "research_guide",
 }
 
 
@@ -146,6 +147,9 @@ class _Resolver:
             elif name == "guidance":
                 from .funding_selection_guidance import describe
                 value = describe()["library"]; path = "scenarios/funding-selection-guidance-v1.json"
+            elif name == "research_guides":
+                from .funding_guides import describe
+                value = describe()["library"]; path = "scenarios/funding-guides-v1.json"
             elif name == "delivery":
                 from .delivery_plans import library
                 value = library(); path = "scenarios/funding-delivery-plan-v1.json"
@@ -221,8 +225,8 @@ class _Resolver:
                 _require(native == "mr2", path, "Only the registered MR2 geometry binding is supported.")
                 value = {"value": {k: source["defaults"][k] for k in ("mr2_centres", "rainfall_capture")}, "unit": "configured fractions and metres", "basis": "project_assumption", "ruleset_id": source["manifest"]["ruleset_id"]}
                 label = "Current illustrative MR2 drawing geometry"
-        elif adapter in {"route_guidance", "delivery_topic", "concept_template"}:
-            owner, collection, label_key = {"route_guidance": ("guidance", "route_contexts", None), "delivery_topic": ("delivery", "topics", "label"), "concept_template": ("concepts", "templates", "title")}[adapter]
+        elif adapter in {"route_guidance", "delivery_topic", "concept_template", "research_guide"}:
+            owner, collection, label_key = {"route_guidance": ("guidance", "route_contexts", None), "delivery_topic": ("delivery", "topics", "label"), "concept_template": ("concepts", "templates", "title"), "research_guide": ("research_guides", "guides", "title")}[adapter]
             source, path = self.owner(owner)
             _require(native in source[collection], path, f"Native identity {native!r} is unavailable.")
             value = source[collection][native]
@@ -312,12 +316,13 @@ def _build(data, registry):
         _require((source["type"], target["type"]) == RELATION_TYPES[relation["type"]], context, "Relationship endpoint types disagree with the registered relation.")
         _refs(relation["claim_ids"], data["claims"], context + ".claim_ids"); _refs(relation["citation_ids"], data["sources"], context + ".citation_ids")
         _text(relation["context"], context + ".context"); _strings(relation["limitations"], context + ".limitations")
-        expected_basis = "project_assumption" if relation["type"].startswith("example_") or relation["type"] == "palette_starter_species" else "source_reference"
+        expected_basis = "project_assumption" if relation["type"].startswith("example_") or relation["type"] in {"palette_starter_species", "palette_optional_species"} else "source_reference"
         _require(relation["basis"] == expected_basis, context, "Relationship basis must distinguish project associations from source evidence.")
         sv, tv = bindings[source["binding_id"]]["value"], bindings[target["binding_id"]]["value"]
         if relation["type"] == "programme_contains_route": _require(target["native_id"] in sv["entry_ids"], context, "Programme membership disagrees with its authority.")
         if relation["type"] == "approach_has_palette": _require(tv["rule"] == source["native_id"], context, "Palette does not name this approach rule.")
         if relation["type"] == "palette_starter_species": _require(target["native_id"] in sv["starter"], context, "Species is not a starter in this project palette.")
+        if relation["type"] == "palette_optional_species": _require(target["native_id"] in sv["optional"], context, "Species is not optional in this project palette.")
         if relation["type"] == "call_context_for":
             _require(any(data["sources"][ref]["document_id"] == source["native_id"] for ref in relation["citation_ids"]), context, "Call context requires the bound call's cited passage.")
         if relation["type"] == "approach_treatment_guidance":
@@ -492,14 +497,17 @@ def feature_evidence(consumer_id):
 RELATION_LABELS = {
     "programme_contains_route": "contains route", "call_context_for": "call context for",
     "approach_has_palette": "has planting palette", "palette_starter_species": "lists starter species",
+    "palette_optional_species": "lists optional species",
     "approach_treatment_guidance": "describes treatment", "example_uses_approach": "illustrates approach",
     "example_mentions_species": "mentions species", "example_considers_route": "considers route",
     "example_may_address_need": "may address need",
 }
 
 
-def _explorer_graph(ctx):
-    consumers = _feature_consumers(ctx)
+def _explorer_graph(ctx, consumers=None):
+    # None explicitly selects the installed feature registry; intake supplies its
+    # already captured registry to avoid changing any process-global loader path.
+    consumers = _feature_consumers(ctx) if consumers is None else validate_feature_consumers(consumers, ctx)
     nodes, edges = {}, {}
     for eid, entity in sorted(ctx["entities"].items()):
         details = _details(ctx, eid)
@@ -548,7 +556,7 @@ def explorer_graph():
     return _explorer_graph(load_library())
 
 
-def _impact(ctx, target_kind, target_id):
+def _impact(ctx, target_kind, target_id, consumers=None):
     _require(isinstance(target_kind, str) and target_kind in {"claim", "passage"}, "impact", "Target kind must be claim or passage.")
     _text(target_id, "impact.target_id")
     data, registry = ctx["data"], ctx["registry"]
@@ -578,7 +586,7 @@ def _impact(ctx, target_kind, target_id):
             targets.append({"claim_id": cid, "binding_id": bid, "effect": "review_required", "path": path,
                             "target": deepcopy(ctx["bindings"][bid]),
                             "explanation": "Manually registered review target for retained wording, rules or calculations. Actual shared-evidence consumption is listed separately; no saved rules or project values are adopted by this path."})
-    consumers = _feature_consumers(ctx)
+    consumers = _feature_consumers(ctx) if consumers is None else validate_feature_consumers(consumers, ctx)
     feature_dependencies = []
     for consumer, spec in consumers["consumers"].items():
         for ident, row in spec["contexts"].items():
