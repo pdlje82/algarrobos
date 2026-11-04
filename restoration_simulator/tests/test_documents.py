@@ -14,7 +14,7 @@ from backend.engine import Invalid
 class DocumentTests(unittest.TestCase):
     def test_catalogue_and_registered_editions_are_valid(self):
         c=documents.catalogue()
-        self.assertEqual(len(c["documents"]),36)
+        self.assertEqual(len(c["documents"]),46)
         for d in c["documents"]:
             _,path=documents.verified_file(d["id"])
             self.assertTrue(path.is_file())

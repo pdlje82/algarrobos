@@ -3,12 +3,14 @@ import {DocumentLink} from "./DocumentLink.jsx";
 import {KnowledgeSources,KnowledgeLimitations,KnowledgeAssumption} from "./KnowledgeEvidence.jsx";
 import {ENTITY_TYPES,EVIDENCE_KINDS,RELATION_TYPES,initialExplorerView,visibleExplorerGraph,explorerLayout,explorerEdgeLabels,revealExplorerRecord,createExplorerResource,validateExplorerGraph,validateExplorerSearch,validateExplorerImpact} from "./knowledgeExplorerState.js";
 import "./KnowledgeExplorer.css";
+import {RESEARCH_ADAPTERS} from "./irrigationResearchState.js";
+import {IrrigationResearchRecord} from "./IrrigationResearchRecord.jsx";
 
 function useResource(request,validate){const resource=useMemo(()=>createExplorerResource(request,validate),[request,validate]);useEffect(()=>()=>resource.dispose(),[resource]);return [useSyncExternalStore(resource.subscribe,resource.get),resource];}
 function Claim({claim,onSelect}){
   return <article className="explorer-claim" data-explorer-claim={claim.id}><p><strong>{EVIDENCE_KINDS[claim.evidence_kind]}{claim.review_status==="unresolved"?" · Unresolved":""}</strong></p><p>{claim.statement}</p><p>{claim.context} · reviewed {claim.reviewed_on}</p><KnowledgeLimitations values={claim.limitations}/>{claim.configuration_values.map(b=><KnowledgeAssumption key={b.id} binding={b}/>)}<KnowledgeSources evidence={claim.evidence}/>{onSelect&&<p>{claim.evidence.map(r=><button type="button" key={r.citation_id} onClick={()=>onSelect(r.passage_id)}>Show {r.document_id} page {r.page} in graph</button>)}</p>}</article>;
 }
-function Issues({issues,onSelect}){return issues.length>0?<section className="explorer-issues" aria-label="Unresolved evidence"><h3>Unresolved evidence</h3>{issues.map(i=><details key={i.id} open><summary>{i.type==="source_tension"?"Source tension":"Evidence gap"}</summary><p>{i.explanation}</p><KnowledgeLimitations values={i.limitations}/>{i.claims.map(c=><Claim key={c.id} claim={c} onSelect={onSelect}/>)}</details>)}</section>:null;}
+function Issues({issues,onSelect}){return issues.length>0?<section className="explorer-issues" aria-label="Unresolved evidence"><h3>Unresolved evidence</h3>{issues.map(i=><details key={i.id} open={i.claims.length<=2}><summary>{i.type==="source_tension"?"Source tension":"Evidence gap"}{i.claims.length>2?` · ${i.claims.length} claims`:""}</summary><p>{i.explanation}</p><KnowledgeLimitations values={i.limitations}/>{i.claims.map(c=><Claim key={c.id} claim={c} onSelect={onSelect}/>)}</details>)}</section>:null;}
 const CONSUMER_NAMES={selection_guidance:"Selection guidance",project_concept:"Project concepts",delivery_plan:"Delivery planning",designer:"Designer evidence",knowledge_pilot:"Registered knowledge"};
 const CONTEXT_NAMES={"route-34":"AL20 3.4","restoration-34":"Restoration context","novelty-34":"Local novelty","publication-34":"Publication commitment",mr2:"MR2 guide",carob:"Carob inspector"};
 function WhereUsed({node,graph,request,onRefresh,active}){
@@ -29,7 +31,8 @@ function Inspector({selected,graph,request,onSelect,onCenter,onRefresh,active}){
   const d=node.details,related=graph.issues.filter(i=>i.claim_ids.includes(node.id)||(node.kind==="entity"&&i.claims.some(c=>c.subject_ids.includes(node.id)))||(node.kind==="passage"&&i.claims.some(c=>c.evidence.some(r=>r.passage_id===node.id))));
   return <><h2>{node.label}</h2>{node.kind==="entity"?<>
     <p>{ENTITY_TYPES[d.entity.type]}</p><button type="button" onClick={()=>onCenter(node.id)}>Center this topic</button>{d.entity.availability==="not_assessed"&&<p><strong>Current call availability: not assessed.</strong></p>}
-    {d.entity.type==="example_activity"&&<p><strong>Illustrative activity.</strong> {d.authority.value.description}</p>}<KnowledgeLimitations values={d.entity.limitations}/><KnowledgeSources evidence={d.evidence}/>
+    {d.entity.type==="example_activity"&&<p><strong>Illustrative activity.</strong> {d.authority.value.description}</p>}<KnowledgeLimitations values={d.entity.limitations}/>{!RESEARCH_ADAPTERS.has(d.authority.adapter)&&<KnowledgeSources evidence={d.evidence}/>}
+    {RESEARCH_ADAPTERS.has(d.authority.adapter)&&<><IrrigationResearchRecord adapter={d.authority.adapter} value={d.authority.value}/>{d.evidence.length>0&&<details><summary>Reviewed PDF passages ({d.evidence.length})</summary><KnowledgeSources evidence={d.evidence}/></details>}</>}
     <h3>Claims about this topic</h3>{d.claims.length===0?<p>No claim is registered for this topic in the registered collection.</p>:<ul>{d.claims.map(c=><li key={c.id}><button type="button" onClick={()=>onSelect(c.id)}>{c.statement}</button></li>)}</ul>}
     <h3>Registered topic relationships</h3><ul>{d.relations.map(r=><li key={r.id}><button onClick={()=>onSelect(r.id)}>{graph.relation_types[r.type]} · {graph.nodes.find(n=>n.id===(r.source===node.id?r.target:r.source)).label}</button></li>)}</ul>
   </>:node.kind==="claim"?<><Claim claim={d} onSelect={onSelect}/><h3>Subjects</h3><ul>{d.subject_ids.map(id=><li key={id}><button onClick={()=>onSelect(id)}>{graph.nodes.find(n=>n.id===id).label}</button></li>)}</ul></>:<>

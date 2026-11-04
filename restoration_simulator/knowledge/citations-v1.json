@@ -24,6 +24,46 @@
     "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81": {
       "document_id": "FOREST-003",
       "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81"
+    },
+    "DRONE-001@6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5": {
+      "document_id": "DRONE-001",
+      "sha256": "6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5"
+    },
+    "DRONE-002@1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d": {
+      "document_id": "DRONE-002",
+      "sha256": "1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d"
+    },
+    "DRONE-003@b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688": {
+      "document_id": "DRONE-003",
+      "sha256": "b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688"
+    },
+    "DRONE-004@0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4": {
+      "document_id": "DRONE-004",
+      "sha256": "0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4"
+    },
+    "IRR-001@3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb": {
+      "document_id": "IRR-001",
+      "sha256": "3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb"
+    },
+    "IRR-002@3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762": {
+      "document_id": "IRR-002",
+      "sha256": "3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762"
+    },
+    "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2": {
+      "document_id": "IRR-003",
+      "sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2"
+    },
+    "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39": {
+      "document_id": "IRR-005",
+      "sha256": "c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39"
+    },
+    "IRR-008@d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563": {
+      "document_id": "IRR-008",
+      "sha256": "d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563"
+    },
+    "POLICY-003@a1081d20b144db9cd233ba477ca79405ce0ec0a1eeecac57bd8052d78ee13cf3": {
+      "document_id": "POLICY-003",
+      "sha256": "a1081d20b144db9cd233ba477ca79405ce0ec0a1eeecac57bd8052d78ee13cf3"
     }
   },
   "passages": {
@@ -131,6 +171,146 @@
       "edition_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
       "page_basis": "pdf",
       "page": 3
+    },
+    "DRONE-001@6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5:pdf:113": {
+      "edition_id": "DRONE-001@6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5",
+      "page_basis": "pdf",
+      "page": 113
+    },
+    "DRONE-001@6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5:pdf:114": {
+      "edition_id": "DRONE-001@6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5",
+      "page_basis": "pdf",
+      "page": 114
+    },
+    "DRONE-002@1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d:pdf:69": {
+      "edition_id": "DRONE-002@1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d",
+      "page_basis": "pdf",
+      "page": 69
+    },
+    "DRONE-002@1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d:pdf:87": {
+      "edition_id": "DRONE-002@1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d",
+      "page_basis": "pdf",
+      "page": 87
+    },
+    "DRONE-002@1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d:pdf:9": {
+      "edition_id": "DRONE-002@1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d",
+      "page_basis": "pdf",
+      "page": 9
+    },
+    "DRONE-003@b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688:pdf:79": {
+      "edition_id": "DRONE-003@b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688",
+      "page_basis": "pdf",
+      "page": 79
+    },
+    "DRONE-003@b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688:pdf:80": {
+      "edition_id": "DRONE-003@b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688",
+      "page_basis": "pdf",
+      "page": 80
+    },
+    "DRONE-004@0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4:pdf:1": {
+      "edition_id": "DRONE-004@0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4",
+      "page_basis": "pdf",
+      "page": 1
+    },
+    "IRR-001@3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb:pdf:1": {
+      "edition_id": "IRR-001@3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb",
+      "page_basis": "pdf",
+      "page": 1
+    },
+    "IRR-001@3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb:pdf:5": {
+      "edition_id": "IRR-001@3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb",
+      "page_basis": "pdf",
+      "page": 5
+    },
+    "IRR-002@3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762:pdf:1": {
+      "edition_id": "IRR-002@3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762",
+      "page_basis": "pdf",
+      "page": 1
+    },
+    "IRR-002@3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762:pdf:2": {
+      "edition_id": "IRR-002@3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762",
+      "page_basis": "pdf",
+      "page": 2
+    },
+    "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:110": {
+      "edition_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "page_basis": "pdf",
+      "page": 110
+    },
+    "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:120": {
+      "edition_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "page_basis": "pdf",
+      "page": 120
+    },
+    "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:143": {
+      "edition_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "page_basis": "pdf",
+      "page": 143
+    },
+    "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:155": {
+      "edition_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "page_basis": "pdf",
+      "page": 155
+    },
+    "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:92": {
+      "edition_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "page_basis": "pdf",
+      "page": 92
+    },
+    "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:93": {
+      "edition_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "page_basis": "pdf",
+      "page": 93
+    },
+    "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:109": {
+      "edition_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "page_basis": "pdf",
+      "page": 109
+    },
+    "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:110": {
+      "edition_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "page_basis": "pdf",
+      "page": 110
+    },
+    "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:112": {
+      "edition_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "page_basis": "pdf",
+      "page": 112
+    },
+    "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:115": {
+      "edition_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "page_basis": "pdf",
+      "page": 115
+    },
+    "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:80": {
+      "edition_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "page_basis": "pdf",
+      "page": 80
+    },
+    "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:81": {
+      "edition_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "page_basis": "pdf",
+      "page": 81
+    },
+    "IRR-008@d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563:pdf:15": {
+      "edition_id": "IRR-008@d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563",
+      "page_basis": "pdf",
+      "page": 15
+    },
+    "IRR-008@d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563:pdf:61": {
+      "edition_id": "IRR-008@d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563",
+      "page_basis": "pdf",
+      "page": 61
+    },
+    "IRR-008@d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563:pdf:63": {
+      "edition_id": "IRR-008@d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563",
+      "page_basis": "pdf",
+      "page": 63
+    },
+    "POLICY-003@a1081d20b144db9cd233ba477ca79405ce0ec0a1eeecac57bd8052d78ee13cf3:pdf:1": {
+      "edition_id": "POLICY-003@a1081d20b144db9cd233ba477ca79405ce0ec0a1eeecac57bd8052d78ee13cf3",
+      "page_basis": "pdf",
+      "page": 1
     }
   },
   "citations": {
@@ -238,6 +418,146 @@
       "passage_id": "FOREST-003@23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81:pdf:3",
       "role": "Kermes oak ecology and vegetation context",
       "verified_on": "2026-11-03"
+    },
+    "irrigator:DRONE-001:p113": {
+      "passage_id": "DRONE-001@6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5:pdf:113",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-001:p114": {
+      "passage_id": "DRONE-001@6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5:pdf:114",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-002:p69": {
+      "passage_id": "DRONE-002@1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d:pdf:69",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-002:p87": {
+      "passage_id": "DRONE-002@1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d:pdf:87",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-002:p9": {
+      "passage_id": "DRONE-002@1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d:pdf:9",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-003:p79": {
+      "passage_id": "DRONE-003@b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688:pdf:79",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-003:p80": {
+      "passage_id": "DRONE-003@b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688:pdf:80",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-004:p1": {
+      "passage_id": "DRONE-004@0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4:pdf:1",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-001:p1": {
+      "passage_id": "IRR-001@3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb:pdf:1",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-001:p5": {
+      "passage_id": "IRR-001@3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb:pdf:5",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-002:p1": {
+      "passage_id": "IRR-002@3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762:pdf:1",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-002:p2": {
+      "passage_id": "IRR-002@3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762:pdf:2",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-003:p110": {
+      "passage_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:110",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-003:p120": {
+      "passage_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:120",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-003:p143": {
+      "passage_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:143",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-003:p155": {
+      "passage_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:155",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-003:p92": {
+      "passage_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:92",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-003:p93": {
+      "passage_id": "IRR-003@90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2:pdf:93",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p109": {
+      "passage_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:109",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p110": {
+      "passage_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:110",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p112": {
+      "passage_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:112",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p115": {
+      "passage_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:115",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p80": {
+      "passage_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:80",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p81": {
+      "passage_id": "IRR-005@c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39:pdf:81",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-008:p15": {
+      "passage_id": "IRR-008@d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563:pdf:15",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-008:p61": {
+      "passage_id": "IRR-008@d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563:pdf:61",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-008:p63": {
+      "passage_id": "IRR-008@d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563:pdf:63",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:POLICY-003:p1": {
+      "passage_id": "POLICY-003@a1081d20b144db9cd233ba477ca79405ce0ec0a1eeecac57bd8052d78ee13cf3:pdf:1",
+      "role": "Official open-category guidance; no site-specific flight clearance",
+      "verified_on": "2026-11-04"
     }
   },
   "consumers": {
@@ -271,13 +591,39 @@
       "citation_ids": [
         "pilot:FUND-009:p1:call-context",
         "intake:FOREST-003:p1:kermes-context",
+        "irrigator:DRONE-004:p1",
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-002:p1",
+        "irrigator:POLICY-003:p1",
         "intake:FOREST-003:p2:kermes-context",
+        "irrigator:IRR-002:p2",
         "intake:FOREST-003:p3:kermes-context",
+        "irrigator:IRR-001:p5",
         "intake:FUND-016:p8:nature-context",
         "intake:FUND-016:p9:nature-context",
+        "irrigator:DRONE-002:p9",
+        "irrigator:IRR-008:p15",
         "intake:FUND-016:p20:sap-framework",
         "intake:FUND-016:p21:sap-framework",
+        "irrigator:IRR-008:p61",
+        "irrigator:IRR-008:p63",
+        "irrigator:DRONE-002:p69",
+        "irrigator:DRONE-003:p79",
+        "irrigator:DRONE-003:p80",
+        "irrigator:IRR-005:p80",
+        "irrigator:IRR-005:p81",
+        "irrigator:DRONE-002:p87",
+        "irrigator:IRR-003:p92",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p109",
+        "irrigator:IRR-003:p110",
+        "irrigator:IRR-005:p110",
+        "irrigator:IRR-005:p112",
+        "irrigator:DRONE-001:p113",
+        "irrigator:DRONE-001:p114",
+        "irrigator:IRR-005:p115",
         "FUND-008-p120-route-requirements",
+        "irrigator:IRR-003:p120",
         "FUND-008-p121-route-requirements",
         "pilot:FOREST-002:p131:mr2-guidance",
         "pilot:FOREST-002:p132:mr2-guidance",
@@ -286,6 +632,8 @@
         "pilot:FOREST-002:p135:mr2-guidance",
         "pilot:FOREST-002:p136:mr2-guidance",
         "pilot:FOREST-002:p137:mr2-guidance",
+        "irrigator:IRR-003:p143",
+        "irrigator:IRR-003:p155",
         "pilot:FUND-013:p395:strategy-need"
       ]
     }

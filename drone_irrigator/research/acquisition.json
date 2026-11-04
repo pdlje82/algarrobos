@@ -1,0 +1,171 @@
+[
+  {
+    "id": "IRR-001",
+    "title": "Groasis - Growboxx Biodegradable Reservoir Datasheet - undated",
+    "url": "https://www.groasis.com/images/downloads/Datasheets/en/4%20Datasheet%20Groasis%20Growboxx%20plant%20cocoon%20-%20English.pdf",
+    "checked_on": "2026-11-04",
+    "retrieval": "Explicit --review-existing: inspect original bytes retained by the interrupted download/extraction run. No network request.",
+    "status": "downloaded",
+    "bytes": 1152857,
+    "sha256": "3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb",
+    "pages": 5
+  },
+  {
+    "id": "IRR-002",
+    "title": "Groasis - Waterboxx Reusable Reservoir Datasheet - Version 2",
+    "url": "https://www.groasis.com/images/downloads/Datasheets/en/3_Datasheet_Reusable_Groasis_Waterboxx_plant_cocoon_-_English.pdf",
+    "checked_on": "2026-11-04",
+    "retrieval": "Explicit --review-existing: inspect original bytes retained by the interrupted download/extraction run. No network request.",
+    "status": "downloaded",
+    "bytes": 924328,
+    "sha256": "3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762",
+    "pages": 3
+  },
+  {
+    "id": "IRR-003",
+    "title": "LIFE NIEBLAS - Technical Manual - 2025",
+    "url": "https://lifenieblas.com/sites/default/files/documentacion/2025/LIFE%20NIEBLAS-Technical%20Manual_2025_w.pdf",
+    "checked_on": "2026-11-04",
+    "retrieval": "Explicit --review-existing: inspect original bytes retained by the interrupted download/extraction run. No network request.",
+    "status": "downloaded",
+    "bytes": 29500446,
+    "sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+    "pages": 224
+  },
+  {
+    "id": "IRR-004",
+    "title": "Carabassa et al - Water Saving Techniques for Restoring Desertified Lands - 2022",
+    "url": "https://roderic.uv.es/bitstream/10550/82772/1/152903.pdf",
+    "checked_on": "2026-11-04",
+    "status": "failed",
+    "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\JanEngelke\\\\git_private\\\\algarrobos\\\\tmp\\\\drone-irrigator-research\\\\IRR-004.pdf'"
+  },
+  {
+    "id": "IRR-005",
+    "title": "MENAQUA - Cocoon Field Trial Final Report - Jordan",
+    "url": "https://menaquafoundation.org/wp-content/uploads/2022/03/Final-Report.pdf",
+    "checked_on": "2026-11-04",
+    "retrieval": "Explicit --review-existing: inspect original bytes retained by the interrupted download/extraction run. No network request.",
+    "status": "downloaded",
+    "bytes": 5874703,
+    "sha256": "c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+    "pages": 121
+  },
+  {
+    "id": "IRR-006",
+    "title": "CIHEAM - NUCIS Newsletter 14 - 2007",
+    "url": "https://networks.iamz.ciheam.org/nuts/pdfs/NUCIS%2014_2007.pdf",
+    "checked_on": "2026-11-04",
+    "status": "failed",
+    "error": "FileNotFoundError: [Errno 2] No such file or directory: 'C:\\\\Users\\\\JanEngelke\\\\git_private\\\\algarrobos\\\\tmp\\\\drone-irrigator-research\\\\IRR-006.pdf'"
+  },
+  {
+    "id": "DRONE-001",
+    "title": "DJI - Matrice 350 RTK User Manual - Version 1.2",
+    "url": "https://dl.djicdn.com/downloads/matrice_350_rtk/20250806UM/Matrice_350_RTK_User_Manual_v1.2_en4.pdf",
+    "checked_on": "2026-11-04",
+    "retrieval": "Explicit --review-existing: inspect original bytes retained by the interrupted download/extraction run. No network request.",
+    "status": "downloaded",
+    "bytes": 50476935,
+    "sha256": "6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5",
+    "pages": 134
+  },
+  {
+    "id": "DRONE-002",
+    "title": "DJI - Dock 4 and Matrice 5TD User Manual - Version 1.0 - 2026-10",
+    "url": "https://terra-1-g.djicdn.com/6189933d30024fc1b331bffe4fe41837/dock-4/20261014/UM/renew/DJI_DOCK_4_MATRICE_5TD_UM_EN_20261016_final.pdf",
+    "checked_on": "2026-11-04",
+    "retrieval": "Explicit --review-existing: inspect original bytes retained by the interrupted download/extraction run. No network request.",
+    "status": "downloaded",
+    "bytes": 21976627,
+    "sha256": "1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d",
+    "pages": 104
+  },
+  {
+    "id": "DRONE-003",
+    "title": "DJI - Agras T50 and T25 Flight Manual - Version 1.0 - 2025-01",
+    "url": "https://dl.djicdn.com/downloads/t50_t25/20250109/T50_T25_User_Manual_v1.0_EN.pdf",
+    "checked_on": "2026-11-04",
+    "retrieval": "Explicit --review-existing: inspect original bytes retained by the interrupted download/extraction run. No network request.",
+    "status": "downloaded",
+    "bytes": 57154670,
+    "sha256": "b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688",
+    "pages": 107
+  },
+  {
+    "id": "DRONE-004",
+    "title": "Miwa et al - Wire Supplied Drone Citrus Watering Experiment - 2024",
+    "url": "https://medcraveonline.com/IRATJ/IRATJ-10-00280.pdf",
+    "checked_on": "2026-11-04",
+    "retrieval": "Explicit --review-existing: inspect original bytes retained by the interrupted download/extraction run. No network request.",
+    "status": "downloaded",
+    "bytes": 979904,
+    "sha256": "0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4",
+    "pages": 4
+  },
+  {
+    "id": "POLICY-003",
+    "title": "EASA - Open Category Conditions - FAQ 116450",
+    "url": "https://www.easa.europa.eu/en/print/pdf/node/116450/215572",
+    "checked_on": "2026-11-04",
+    "retrieval": "Explicit --review-existing: inspect original bytes retained by the interrupted download/extraction run. No network request.",
+    "status": "downloaded",
+    "bytes": 32631,
+    "sha256": "a1081d20b144db9cd233ba477ca79405ce0ec0a1eeecac57bd8052d78ee13cf3",
+    "pages": 1
+  },
+  {
+    "id": "IRR-004",
+    "title": "Carabassa et al - Water Saving Techniques for Restoring Desertified Lands - 2022",
+    "url": "https://roderic.uv.es/bitstream/10550/82772/1/152903.pdf",
+    "checked_on": "2026-11-04",
+    "status": "failed",
+    "error": "HTTPError: HTTP Error 500: Internal Server Error"
+  },
+  {
+    "id": "IRR-006",
+    "title": "CIHEAM - NUCIS Newsletter 14 - 2007",
+    "url": "https://networks.iamz.ciheam.org/nuts/pdfs/NUCIS%2014_2007.pdf",
+    "checked_on": "2026-11-04",
+    "status": "failed",
+    "error": "HTTPError: HTTP Error 404: Not Found"
+  },
+  {
+    "id": "IRR-007",
+    "title": "Groasis - Retail Quantity Discount Price List - 2017-07-01",
+    "url": "https://www.groasis.com/images/Distributor_documents/20170701_pricelist/20170701_Groasis_Retail_Pricelist_-_End_user_Quantity_Discount_2017.pdf",
+    "checked_on": "2026-11-04",
+    "status": "failed",
+    "error": "HTTPError: HTTP Error 404: Not Found"
+  },
+  {
+    "id": "IRR-004",
+    "title": "Carabassa et al - Water Saving Techniques for Restoring Desertified Lands - 2022",
+    "url": "https://onlinelibrary.wiley.com/doi/pdf/10.1002/ldr.4134",
+    "checked_on": "2026-11-04",
+    "status": "failed",
+    "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  {
+    "id": "IRR-008",
+    "title": "LIFE NIEBLAS - D3 Reforestation Execution and Results Monitoring",
+    "url": "https://lifenieblas.com/sites/default/files/documentacion/2025/Monitoring%2520and%2520evaluation%2520of%2520the%2520reforestation%2520execution%2520and%2520results.pdf",
+    "checked_on": "2026-11-04",
+    "final_url": "https://lifenieblas.com/sites/default/files/documentacion/2025/Monitoring%2520and%2520evaluation%2520of%2520the%2520reforestation%2520execution%2520and%2520results.pdf",
+    "content_type": "application/pdf",
+    "status": "downloaded",
+    "bytes": 26298745,
+    "sha256": "d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563",
+    "pages": 191
+  },
+  {
+    "id": "IRR-009",
+    "title": "LIFE Green Link - C2 Planting Replication Records",
+    "url": "https://thegreenlink.eu/wp-content/uploads/2021/02/Annex-3-C2-Del-Replication-with-pics.pdf",
+    "checked_on": "2026-11-04",
+    "final_url": "https://nicsell.com/en/domain/thegreenlink.eu",
+    "content_type": "text/html",
+    "status": "failed",
+    "error": "ValueError: Intended source did not return PDF bytes"
+  }
+]

@@ -65,7 +65,7 @@ async function seed(){
     await noCommands(async()=>{await details().getByText('Where used',{exact:true}).click();await details().getByText('Displays shared evidence',{exact:true}).waitFor();assert.match(await details().innerText(),/Manual review targets/);assert.match(await details().innerText(),/Delivery planning/);});
     await noCommands(async()=>{await details().getByRole('button',{name:'Show FUND-008 page 120 in graph',exact:true}).first().click();assert.match(await details().innerText(),/Role: route requirements/);await details().getByText('Where used',{exact:true}).click();await details().getByText('Displays shared evidence',{exact:true}).waitFor();assert.match(await details().innerText(),/Checks citation metadata/);assert.match(await details().innerText(),/Selection guidance/);});
     console.log('Checking LIFE and kermes expansion, sources and explicit non-adoption');
-    assert.equal(snapshot.nodes.length,55);assert.equal(snapshot.edges.length,86);
+    assert.equal(snapshot.nodes.length,198);assert.equal(snapshot.edges.length,516);
     await noCommands(async()=>{
       await center('programme:EU-LIFE');assert.match(await details().innerText(),/not assessed/);
       await select('route:EU-LIFE-NATURE');await explorer().getByRole('button',{name:'Expand selected record',exact:true}).click();

@@ -601,6 +601,126 @@
       ],
       "printed_pages": {},
       "mapping_note": "Unchanged publisher PDF downloaded 31 October–1 November 2026. Cite PDF page positions; printed page labels are not mapped."
+    },
+    {
+      "id": "IRR-001",
+      "title": "IRR-001 - Groasis - Growboxx Biodegradable Reservoir Datasheet - undated",
+      "filename": "IRR-001 - Groasis - Growboxx Biodegradable Reservoir Datasheet - undated.pdf",
+      "pages": 5,
+      "sha256": "3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb",
+      "aliases": [
+        "https://www.groasis.com/images/downloads/Datasheets/en/4%20Datasheet%20Groasis%20Growboxx%20plant%20cocoon%20-%20English.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged source PDF acquired and selected passages reviewed 4 November 2026. PDF positions are authoritative; printed labels are not mapped. See Drone Irrigator source-review ledger for edition/date limitations."
+    },
+    {
+      "id": "IRR-002",
+      "title": "IRR-002 - Groasis - Waterboxx Reusable Reservoir Datasheet - Version 2",
+      "filename": "IRR-002 - Groasis - Waterboxx Reusable Reservoir Datasheet - Version 2.pdf",
+      "pages": 3,
+      "sha256": "3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762",
+      "aliases": [
+        "https://www.groasis.com/images/downloads/Datasheets/en/3_Datasheet_Reusable_Groasis_Waterboxx_plant_cocoon_-_English.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged source PDF acquired and selected passages reviewed 4 November 2026. PDF positions are authoritative; printed labels are not mapped. See Drone Irrigator source-review ledger for edition/date limitations."
+    },
+    {
+      "id": "IRR-003",
+      "title": "IRR-003 - LIFE NIEBLAS - Technical Manual - 2025",
+      "filename": "IRR-003 - LIFE NIEBLAS - Technical Manual - 2025.pdf",
+      "pages": 224,
+      "sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "aliases": [
+        "https://lifenieblas.com/sites/default/files/documentacion/2025/LIFE%20NIEBLAS-Technical%20Manual_2025_w.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged source PDF acquired and selected passages reviewed 4 November 2026. PDF positions are authoritative; printed labels are not mapped. See Drone Irrigator source-review ledger for edition/date limitations."
+    },
+    {
+      "id": "IRR-005",
+      "title": "IRR-005 - MENAQUA - Cocoon Assessment in Jordan and Lebanon - 2021-12",
+      "filename": "IRR-005 - MENAQUA - Cocoon Assessment in Jordan and Lebanon - 2021-12.pdf",
+      "pages": 121,
+      "sha256": "c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "aliases": [
+        "https://menaquafoundation.org/wp-content/uploads/2022/03/Final-Report.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged source PDF acquired and selected passages reviewed 4 November 2026. PDF positions are authoritative; printed labels are not mapped. See Drone Irrigator source-review ledger for edition/date limitations."
+    },
+    {
+      "id": "DRONE-001",
+      "title": "DRONE-001 - DJI - Matrice 350 RTK User Manual - Version 1.2 - 2024-08",
+      "filename": "DRONE-001 - DJI - Matrice 350 RTK User Manual - Version 1.2 - 2024-08.pdf",
+      "pages": 134,
+      "sha256": "6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5",
+      "aliases": [
+        "https://dl.djicdn.com/downloads/matrice_350_rtk/20250806UM/Matrice_350_RTK_User_Manual_v1.2_en4.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged source PDF acquired and selected passages reviewed 4 November 2026. PDF positions are authoritative; printed labels are not mapped. See Drone Irrigator source-review ledger for edition/date limitations."
+    },
+    {
+      "id": "DRONE-002",
+      "title": "DRONE-002 - DJI - Dock 4 and Matrice 5TD User Manual - Version 1.0 - 2026-10",
+      "filename": "DRONE-002 - DJI - Dock 4 and Matrice 5TD User Manual - Version 1.0 - 2026-10.pdf",
+      "pages": 104,
+      "sha256": "1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d",
+      "aliases": [
+        "https://terra-1-g.djicdn.com/6189933d30024fc1b331bffe4fe41837/dock-4/20261014/UM/renew/DJI_DOCK_4_MATRICE_5TD_UM_EN_20261016_final.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged source PDF acquired and selected passages reviewed 4 November 2026. PDF positions are authoritative; printed labels are not mapped. See Drone Irrigator source-review ledger for edition/date limitations."
+    },
+    {
+      "id": "DRONE-003",
+      "title": "DRONE-003 - DJI - Agras T50 and T25 Flight Manual - Version 1.0 - 2025-01",
+      "filename": "DRONE-003 - DJI - Agras T50 and T25 Flight Manual - Version 1.0 - 2025-01.pdf",
+      "pages": 107,
+      "sha256": "b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688",
+      "aliases": [
+        "https://dl.djicdn.com/downloads/t50_t25/20250109/T50_T25_User_Manual_v1.0_EN.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged source PDF acquired and selected passages reviewed 4 November 2026. PDF positions are authoritative; printed labels are not mapped. See Drone Irrigator source-review ledger for edition/date limitations."
+    },
+    {
+      "id": "DRONE-004",
+      "title": "DRONE-004 - Miwa et al - Wire Supplied Drone Citrus Watering Experiment - 2024",
+      "filename": "DRONE-004 - Miwa et al - Wire Supplied Drone Citrus Watering Experiment - 2024.pdf",
+      "pages": 4,
+      "sha256": "0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4",
+      "aliases": [
+        "https://medcraveonline.com/IRATJ/IRATJ-10-00280.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged source PDF acquired and selected passages reviewed 4 November 2026. PDF positions are authoritative; printed labels are not mapped. See Drone Irrigator source-review ledger for edition/date limitations."
+    },
+    {
+      "id": "POLICY-003",
+      "title": "POLICY-003 - EASA - Open Category Conditions - FAQ 116450",
+      "filename": "POLICY-003 - EASA - Open Category Conditions - FAQ 116450.pdf",
+      "pages": 1,
+      "sha256": "a1081d20b144db9cd233ba477ca79405ce0ec0a1eeecac57bd8052d78ee13cf3",
+      "aliases": [
+        "https://www.easa.europa.eu/en/print/pdf/node/116450/215572"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Unchanged source PDF acquired and selected passages reviewed 4 November 2026. PDF positions are authoritative; printed labels are not mapped. See Drone Irrigator source-review ledger for edition/date limitations."
+    },
+    {
+      "id": "IRR-008",
+      "title": "IRR-008 - LIFE NIEBLAS - D3 Reforestation Execution and Results Monitoring - 2025-03",
+      "filename": "IRR-008 - LIFE NIEBLAS - D3 Reforestation Execution and Results Monitoring - 2025-03.pdf",
+      "pages": 191,
+      "sha256": "d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563",
+      "aliases": [
+        "https://lifenieblas.com/sites/default/files/documentacion/2025/Monitoring%2520and%2520evaluation%2520of%2520the%2520reforestation%2520execution%2520and%2520results.pdf"
+      ],
+      "printed_pages": {},
+      "mapping_note": "Delivery date March 2025 on cover; observations through September 2024. PDF positions authoritative. Reviewed cork-oak trial tables and context, 4 November 2026."
     }
   ]
 }

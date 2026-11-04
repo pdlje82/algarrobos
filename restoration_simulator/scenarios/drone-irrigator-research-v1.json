@@ -1,0 +1,2083 @@
+{
+  "version": 1,
+  "id": "drone-irrigator-research-v1",
+  "reviewed_on": "2026-11-04",
+  "plant_profiles": {
+    "carob": {
+      "title": "Algarrobo — cocoon and water profile",
+      "summary": "Carob was planted with Cocoon at Maysara; the harsh late-spring trial performed poorly. Waterboxx manufacturer lists carob. Both are conditional research candidates, not validated local prescriptions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112",
+        "irrigator:IRR-005:p80",
+        "irrigator:IRR-005:p81",
+        "irrigator:IRR-005:p115",
+        "irrigator:IRR-002:p1"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {
+        "maysara_water_gift": {
+          "label": "Carob trial initial fill plus emergency refills",
+          "value": 75,
+          "unit": "L/plant over May 2019–May 2020",
+          "basis": "field_observation",
+          "context": "Applied trial water, not consumption or an optimum; inadequate performance and site constraints preclude adopting a daily rate.",
+          "citation_ids": [
+            "irrigator:IRR-005:p81"
+          ]
+        }
+      },
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Ceratonia siliqua at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "carob",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Ceratonia siliqua and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "conditional",
+          "reason": "Direct field use, but poor survival under late planting, hot summer and sandy soil; local stock, season, soil, water and reservoir fit need review.",
+          "citation_ids": [
+            "irrigator:IRR-005:p80",
+            "irrigator:IRR-005:p112"
+          ]
+        },
+        "waterboxx": {
+          "status": "conditional",
+          "reason": "Manufacturer lists carob; no independent local stock-specific validation or drone-compatible refill established.",
+          "citation_ids": [
+            "irrigator:IRR-002:p1"
+          ]
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "wild_olive": {
+      "title": "Acebuche — cocoon and water profile",
+      "summary": "Olea europaea var. sylvestris: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand.",
+        "Cultivated-olive results are not automatically evidence for Olea europaea var. sylvestris."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Olea europaea var. sylvestris at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [
+        {
+          "title": "Carabassa et al., Water-saving techniques for restoring desertified lands (online 24 October 2021; journal issue 2022)",
+          "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ldr.4134",
+          "checked_on": "2026-11-04",
+          "finding": "Six field sites; outcomes depend on species and site. Rosemary and holm oak are discussed in the original article.",
+          "limitation": "Publisher HTML reviewed; original PDF opened by research browser but automated acquisition denied. No PDF edition registered here; no source-specific daily dose established."
+        }
+      ],
+      "species_id": "wild_olive",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Olea europaea var. sylvestris and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Olea europaea var. sylvestris and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Olea europaea var. sylvestris and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "lentisk": {
+      "title": "Lentisco — cocoon and water profile",
+      "summary": "Pistacia lentiscus: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Pistacia lentiscus at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [
+        {
+          "title": "Carabassa et al., Water-saving techniques for restoring desertified lands (online 24 October 2021; journal issue 2022)",
+          "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ldr.4134",
+          "checked_on": "2026-11-04",
+          "finding": "Six field sites; outcomes depend on species and site. Rosemary and holm oak are discussed in the original article.",
+          "limitation": "Publisher HTML reviewed; original PDF opened by research browser but automated acquisition denied. No PDF edition registered here; no source-specific daily dose established."
+        }
+      ],
+      "species_id": "lentisk",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Pistacia lentiscus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Pistacia lentiscus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Pistacia lentiscus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "buckthorn": {
+      "title": "Aladierno — cocoon and water profile",
+      "summary": "Rhamnus alaternus: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Rhamnus alaternus at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "buckthorn",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Rhamnus alaternus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Rhamnus alaternus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Rhamnus alaternus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "palmetto": {
+      "title": "Palmito — cocoon and water profile",
+      "summary": "Chamaerops humilis: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Chamaerops humilis at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "palmetto",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Chamaerops humilis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Chamaerops humilis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Chamaerops humilis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "retama": {
+      "title": "Retama amarilla — cocoon and water profile",
+      "summary": "Retama sphaerocarpa: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Retama sphaerocarpa at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "retama",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Retama sphaerocarpa and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Retama sphaerocarpa and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Retama sphaerocarpa and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "esparto": {
+      "title": "Esparto — cocoon and water profile",
+      "summary": "Macrochloa tenacissima: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Macrochloa tenacissima at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "esparto",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Macrochloa tenacissima and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Macrochloa tenacissima and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Macrochloa tenacissima and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "thyme": {
+      "title": "Tomillo de invierno — cocoon and water profile",
+      "summary": "Thymus hyemalis: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Thymus hyemalis at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "thyme",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Thymus hyemalis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Thymus hyemalis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Thymus hyemalis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "rosemary": {
+      "title": "Romero — cocoon and water profile",
+      "summary": "Salvia rosmarinus: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Salvia rosmarinus at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [
+        {
+          "title": "Carabassa et al., Water-saving techniques for restoring desertified lands (online 24 October 2021; journal issue 2022)",
+          "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ldr.4134",
+          "checked_on": "2026-11-04",
+          "finding": "Six field sites; outcomes depend on species and site. Rosemary and holm oak are discussed in the original article.",
+          "limitation": "Publisher HTML reviewed; original PDF opened by research browser but automated acquisition denied. No PDF edition registered here; no source-specific daily dose established."
+        }
+      ],
+      "species_id": "rosemary",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Salvia rosmarinus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Salvia rosmarinus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Salvia rosmarinus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "rhamnus_lycioides": {
+      "title": "Espino negro — cocoon and water profile",
+      "summary": "Rhamnus lycioides: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Rhamnus lycioides at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "rhamnus_lycioides",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Rhamnus lycioides and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Rhamnus lycioides and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Rhamnus lycioides and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "ephedra_fragilis": {
+      "title": "Hierba de las coyunturas — cocoon and water profile",
+      "summary": "Ephedra fragilis: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Ephedra fragilis at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "ephedra_fragilis",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Ephedra fragilis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Ephedra fragilis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Ephedra fragilis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "ziziphus": {
+      "title": "Azufaifo — cocoon and water profile",
+      "summary": "Ziziphus lotus: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Ziziphus lotus at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "ziziphus",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Ziziphus lotus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Ziziphus lotus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Ziziphus lotus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "lycium": {
+      "title": "Cambrón — cocoon and water profile",
+      "summary": "Lycium intricatum: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Lycium intricatum at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "lycium",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Lycium intricatum and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Lycium intricatum and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Lycium intricatum and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "salsola": {
+      "title": "Mata conejera — cocoon and water profile",
+      "summary": "Salsola webbii: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Salsola webbii at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "salsola",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Salsola webbii and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Salsola webbii and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Salsola webbii and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "oleander": {
+      "title": "Adelfa — cocoon and water profile",
+      "summary": "Nerium oleander: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Nerium oleander at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "oleander",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Nerium oleander and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Nerium oleander and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Nerium oleander and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "tamarix": {
+      "title": "Taray — cocoon and water profile",
+      "summary": "Tamarix spp.: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand.",
+        "Catalogue identity is Tamarix spp.; identify the actual species before transferring Tamarix gallica results."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Tamarix spp. at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [
+        {
+          "title": "Carabassa et al., Water-saving techniques for restoring desertified lands (online 24 October 2021; journal issue 2022)",
+          "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ldr.4134",
+          "checked_on": "2026-11-04",
+          "finding": "Six field sites; outcomes depend on species and site. Rosemary and holm oak are discussed in the original article.",
+          "limitation": "Publisher HTML reviewed; original PDF opened by research browser but automated acquisition denied. No PDF edition registered here; no source-specific daily dose established."
+        }
+      ],
+      "species_id": "tamarix",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Tamarix spp. and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Tamarix spp. and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Tamarix spp. and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "kermes_oak": {
+      "title": "Coscoja — cocoon and water profile",
+      "summary": "Quercus coccifera: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Quercus coccifera at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "kermes_oak",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Quercus coccifera and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Quercus coccifera and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Quercus coccifera and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "holm_oak": {
+      "title": "Encina / Carrasca — cocoon and water profile",
+      "summary": "Quercus rotundifolia: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand.",
+        "Catalogue taxon is Quercus rotundifolia; resolve subspecies/taxonomic and provenance correspondence before transferring Quercus ilex results."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Quercus rotundifolia at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [
+        {
+          "title": "Carabassa et al., Water-saving techniques for restoring desertified lands (online 24 October 2021; journal issue 2022)",
+          "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ldr.4134",
+          "checked_on": "2026-11-04",
+          "finding": "Six field sites; outcomes depend on species and site. Rosemary and holm oak are discussed in the original article.",
+          "limitation": "Publisher HTML reviewed; original PDF opened by research browser but automated acquisition denied. No PDF edition registered here; no source-specific daily dose established."
+        }
+      ],
+      "species_id": "holm_oak",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Quercus rotundifolia and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Quercus rotundifolia and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Quercus rotundifolia and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "phillyrea_angustifolia": {
+      "title": "Labiérnago de hoja estrecha — cocoon and water profile",
+      "summary": "Phillyrea angustifolia: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Phillyrea angustifolia at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "phillyrea_angustifolia",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Phillyrea angustifolia and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Phillyrea angustifolia and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Phillyrea angustifolia and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "phillyrea_latifolia": {
+      "title": "Labiérnago de hoja ancha — cocoon and water profile",
+      "summary": "Phillyrea latifolia: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Phillyrea latifolia at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "phillyrea_latifolia",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Phillyrea latifolia and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Phillyrea latifolia and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Phillyrea latifolia and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "myrtle": {
+      "title": "Mirto — cocoon and water profile",
+      "summary": "Myrtus communis: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Myrtus communis at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [
+        {
+          "title": "Iakovoglou and Kokkinou, Response of Myrtus communis Seedlings under Irrigation Frequencies (2018)",
+          "url": "https://ojs.pphouse.org/index.php/IJBSM/article/view/3650",
+          "checked_on": "2026-11-04",
+          "finding": "Publisher abstract compares irrigation frequencies over two months; the response changes between the first and second month.",
+          "limitation": "Frequency alone does not supply a transferable litres-per-day dose or Cocoon compatibility; no such rate adopted."
+        }
+      ],
+      "species_id": "myrtle",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Myrtus communis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Myrtus communis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Myrtus communis and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "terebinth": {
+      "title": "Cornicabra — cocoon and water profile",
+      "summary": "Pistacia terebinthus: no validated site/stage-specific daily water requirement was established in this review. Reservoir fit and repeat refill remain separate questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Pistacia terebinthus at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [
+        {
+          "title": "El Chaparrillo public research centre: irrigation before and after grafting (29 November 2022)",
+          "url": "https://chaparrillo.castillalamancha.es/consultas/riego-antes-y-despues-del-injerto",
+          "checked_on": "2026-11-04",
+          "finding": "First-summer Pistacia terebinthus orchard rootstock guidance gives about 5–10 L/tree/week; later irrigation depends on roots, graft establishment and soil.",
+          "limitation": "Orchard rootstock/grafting context, not a native restoration cocoon trial or measured species consumption. Not adopted as a daily restoration-water profile."
+        }
+      ],
+      "species_id": "terebinth",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Pistacia terebinthus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Pistacia terebinthus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Pistacia terebinthus and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    },
+    "cork_oak": {
+      "title": "Alcornoque — cocoon and water profile",
+      "summary": "Quercus suber was planted in Cocoon trials in Vouzela, Portugal. This supports a conditional research candidate, with emergency irrigation, shelter effects and different site context retained.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112",
+        "irrigator:IRR-008:p15",
+        "irrigator:IRR-008:p61",
+        "irrigator:IRR-008:p63"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ],
+      "facts": {},
+      "open_questions": [
+        "What is the measured supplemental water requirement for newly planted Quercus suber at the intended site and season?",
+        "Which supplied nursery root plug and reservoir edition have verified fit and field performance?"
+      ],
+      "web_sources": [],
+      "species_id": "cork_oak",
+      "reservoir_assessments": {
+        "growboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Quercus suber and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        },
+        "cocoon": {
+          "status": "conditional",
+          "reason": "Direct species-specific field use documented in Portugal; shelters, emergency irrigation, stock and site conditions constrain transfer to Almeria.",
+          "citation_ids": [
+            "irrigator:IRR-008:p15",
+            "irrigator:IRR-008:p61",
+            "irrigator:IRR-008:p63"
+          ]
+        },
+        "waterboxx": {
+          "status": "not_assessed",
+          "reason": "No sufficient species-, stock- and site-specific suitability assessment for Quercus suber and this reservoir in the reviewed corpus. This is not an unsuitable verdict.",
+          "citation_ids": []
+        }
+      },
+      "water_demand": {
+        "status": "not_established",
+        "low_l_day": null,
+        "central_l_day": null,
+        "high_l_day": null,
+        "context": "No reviewed transferable daily establishment-demand range; a future exploratory run must require an explicit user assumption or further evidence.",
+        "citation_ids": [
+          "irrigator:IRR-001:p5",
+          "irrigator:IRR-005:p112"
+        ]
+      },
+      "nursery_fit": {
+        "status": "not_established",
+        "context": "Species identity alone cannot establish fit. Measure the supplied root plug and exact reservoir; the general Cocoon stock guidance is recorded on the reservoir, not applied as a species default."
+      }
+    }
+  },
+  "reservoirs": {
+    "growboxx": {
+      "title": "Growboxx — biodegradable refill candidate",
+      "summary": "Manufacturer documents a siphon refill and a capillary bottom. Drone access and repeated-fill durability remain development questions.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5"
+      ],
+      "limitations": [
+        "Historical undated manufacturer datasheet; performance is not validated for the intended site.",
+        "Reported release is not species water demand; nominal web capacity is not a reviewed usable-capacity preset."
+      ],
+      "facts": {
+        "release_low": {
+          "label": "Manufacturer release range, low",
+          "value": 0.1,
+          "unit": "L/day",
+          "basis": "manufacturer",
+          "context": "Product/soil-dependent release claim; not an establishment water requirement.",
+          "citation_ids": [
+            "irrigator:IRR-001:p5"
+          ]
+        },
+        "release_high": {
+          "label": "Manufacturer release range, high",
+          "value": 0.5,
+          "unit": "L/day",
+          "basis": "manufacturer",
+          "context": "Product/soil-dependent release claim; not an establishment water requirement.",
+          "citation_ids": [
+            "irrigator:IRR-001:p5"
+          ]
+        },
+        "box_degradation": {
+          "label": "Manufacturer box degradation horizon",
+          "value": 1,
+          "unit": "year",
+          "basis": "manufacturer",
+          "context": "States box degrades within a year; not a guaranteed water-retention service life.",
+          "citation_ids": [
+            "irrigator:IRR-001:p5"
+          ]
+        },
+        "cover_degradation": {
+          "label": "Manufacturer cover degradation horizon",
+          "value": 5,
+          "unit": "year",
+          "basis": "manufacturer",
+          "context": "Cover and water-holding box have different claimed lifetimes.",
+          "citation_ids": [
+            "irrigator:IRR-001:p5"
+          ]
+        }
+      },
+      "open_questions": [
+        "Current Spain/EU unit and bulk quote, availability and exact product edition?",
+        "Usable capacity, inlet dimensions/flow and retained strength after repeated fills?"
+      ],
+      "web_sources": [
+        {
+          "title": "Groasis manufacturer FAQ",
+          "url": "https://www.groasis.com/en/english/find-frequently-asked-questions-about-the-anti-desertification-technology-groasis",
+          "checked_on": "2026-11-04",
+          "finding": "Growboxx described as holding up to 16 L.",
+          "limitation": "Unversioned web statement; confirm current model and usable fill. Not installed as a capacity default."
+        }
+      ],
+      "material": "biodegradable_paper",
+      "refill_status": "manufacturer_documented",
+      "drone_interface_status": "development_required"
+    },
+    "cocoon": {
+      "title": "Land Life Cocoon — field refill evidence and edition uncertainty",
+      "summary": "Field guidance describes later irrigation and a refill-hole adaptation; capacities differ between reviewed editions.",
+      "citation_ids": [
+        "irrigator:IRR-003:p92",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-003:p120",
+        "irrigator:IRR-005:p109",
+        "irrigator:IRR-005:p112",
+        "irrigator:IRR-005:p115"
+      ],
+      "limitations": [
+        "20 L NIEBLAS and 25 L MENAQUA descriptions must not be silently interchanged.",
+        "Reports do not validate autonomous refill or a guaranteed number of repeat fills."
+      ],
+      "facts": {
+        "nieblas_fill": {
+          "label": "NIEBLAS described fill",
+          "value": 20,
+          "unit": "L",
+          "basis": "field_observation",
+          "context": "Manual describes 20 L and requires headspace; not a universal usable capacity.",
+          "citation_ids": [
+            "irrigator:IRR-003:p92",
+            "irrigator:IRR-003:p120"
+          ]
+        },
+        "historical_unit_cost": {
+          "label": "NIEBLAS reported purchase cost",
+          "value": 7.8,
+          "unit": "EUR/unit",
+          "basis": "historical_price",
+          "context": "Historical project cost, excludes a current delivered quote. Manual gives EUR 7–8 before shipping/handling.",
+          "citation_ids": [
+            "irrigator:IRR-003:p93"
+          ]
+        },
+        "container_max": {
+          "label": "MENAQUA guidance: stock container maximum",
+          "value": 4,
+          "unit": "L",
+          "basis": "field_observation",
+          "context": "General guide for the reviewed Cocoon edition, not verified fit for any actual nursery stock.",
+          "citation_ids": [
+            "irrigator:IRR-005:p112"
+          ]
+        },
+        "container_diameter": {
+          "label": "MENAQUA guidance: container diameter must be below",
+          "value": 15,
+          "unit": "cm",
+          "basis": "field_observation",
+          "context": "Strictly less than this diameter; nursery and reservoir measurements remain required.",
+          "citation_ids": [
+            "irrigator:IRR-005:p112"
+          ]
+        }
+      },
+      "open_questions": [
+        "Which currently supplied edition tolerates repeated filling?",
+        "What is the usable volume after headspace, degradation and slope?",
+        "Does a passive funnel/cover compromise water retention, animals or biodegradation?"
+      ],
+      "web_sources": [
+        {
+          "title": "Volterra Cocoon product description",
+          "url": "https://volterra.bio/en/cocoon/cocoon-150.html",
+          "checked_on": "2026-11-04",
+          "finding": "Describes filling once at planting; the page requests contacting Land Life for supply.",
+          "limitation": "Partner marketing conflicts with field refill practice; not an approval for repeated drone refilling or a stock quote."
+        }
+      ],
+      "material": "biodegradable_paper",
+      "refill_status": "field_reported_with_modification",
+      "drone_interface_status": "development_required"
+    },
+    "waterboxx": {
+      "title": "Waterboxx — reusable cost and refill comparator",
+      "summary": "Manufacturer describes a polypropylene reservoir and a capped refill port; use as a reusable benchmark.",
+      "citation_ids": [
+        "irrigator:IRR-002:p1",
+        "irrigator:IRR-002:p2"
+      ],
+      "limitations": [
+        "Not biodegradable. Datasheet v2 states validity through 31 December 2023.",
+        "Reuse claims require retrieval, cleaning, transport and measured service life."
+      ],
+      "facts": {
+        "nominal_capacity": {
+          "label": "Manufacturer nominal content",
+          "value": 15,
+          "unit": "L",
+          "basis": "manufacturer",
+          "context": "Approximate product content; usable fill must be checked with headspace and residual water.",
+          "citation_ids": [
+            "irrigator:IRR-002:p2"
+          ]
+        },
+        "average_release": {
+          "label": "Manufacturer average wick release",
+          "value": 0.05,
+          "unit": "L/day",
+          "basis": "manufacturer",
+          "context": "Soil-dependent historical product claim, not carob or other species demand.",
+          "citation_ids": [
+            "irrigator:IRR-002:p2"
+          ]
+        }
+      },
+      "open_questions": [
+        "Current delivered bulk quote?",
+        "Can the cap be operated passively without contamination or evaporation penalty?"
+      ],
+      "web_sources": [
+        {
+          "title": "Groasis Waterboxx 10-pack shop listing",
+          "url": "https://www.waterboxx.com/product/groasis-waterboxx-10-pack/?lang=en",
+          "checked_on": "2026-11-04",
+          "finding": "Listed at EUR 301.29 for 10 sets on review date (EUR 30.129/set by division).",
+          "limitation": "Retail display, not a delivered Spain quote; tax/shipping, availability and future price need confirmation. Reusable plastic comparator."
+        }
+      ],
+      "material": "reusable_polypropylene",
+      "refill_status": "manufacturer_documented",
+      "drone_interface_status": "development_required"
+    }
+  },
+  "aircraft": {
+    "matrice-350": {
+      "title": "Matrice 350 RTK — payload-platform comparison",
+      "summary": "An enterprise platform for evaluating a small carried-water integration, not a documented cocoon irrigator.",
+      "citation_ids": [
+        "irrigator:DRONE-001:p113",
+        "irrigator:DRONE-001:p114"
+      ],
+      "limitations": [
+        "Maximum unloaded flight time cannot be used as loaded hover endurance.",
+        "Mass allowance, gimbal-mount rating, centre of gravity and certified payload support are separate constraints."
+      ],
+      "facts": {
+        "mtom": {
+          "label": "Maximum take-off mass",
+          "value": 9.2,
+          "unit": "kg",
+          "basis": "manufacturer",
+          "context": "Manual specification; obey fitted configuration and flight conditions.",
+          "citation_ids": [
+            "irrigator:DRONE-001:p113"
+          ]
+        },
+        "reference_mass": {
+          "label": "Mass with batteries and single downward gimbal",
+          "value": 6.47,
+          "unit": "kg",
+          "basis": "manufacturer",
+          "context": "Reference fitted mass; do not allocate its difference from MTOM to water without payload engineering.",
+          "citation_ids": [
+            "irrigator:DRONE-001:p113"
+          ]
+        },
+        "gimbal_limit": {
+          "label": "Single gimbal damper payload limit",
+          "value": 0.96,
+          "unit": "kg",
+          "basis": "manufacturer",
+          "context": "Not the platform's total payload capability; verify actual mounting arrangement.",
+          "citation_ids": [
+            "irrigator:DRONE-001:p113"
+          ]
+        },
+        "unloaded_endurance": {
+          "label": "Maximum unloaded flight time",
+          "value": 55,
+          "unit": "min",
+          "basis": "manufacturer",
+          "context": "Approximately 8 m/s, no payload, no wind, battery to 0%; excludes return reserve.",
+          "citation_ids": [
+            "irrigator:DRONE-001:p114"
+          ]
+        }
+      },
+      "open_questions": [
+        "Certified water payload and all-up mass budget?",
+        "Loaded flight/hover/pump energy and service envelope?"
+      ],
+      "web_sources": [],
+      "integration_status": "component_only"
+    },
+    "agras-t25": {
+      "title": "AGRAS T25 — agricultural benchmark",
+      "summary": "Commercial spray tank and pumping provide a larger comparison, with no documented cocoon-insertion interface.",
+      "citation_ids": [
+        "irrigator:DRONE-003:p79",
+        "irrigator:DRONE-003:p80"
+      ],
+      "limitations": [
+        "52 kg spraying MTOM is outside this study's small-drone class.",
+        "Atomizing spray flow is not an approved reservoir-inlet flow."
+      ],
+      "facts": {
+        "tank": {
+          "label": "Spray-tank volume",
+          "value": 20,
+          "unit": "L",
+          "basis": "manufacturer",
+          "context": "Spraying configuration, not a cocoon servicing kit.",
+          "citation_ids": [
+            "irrigator:DRONE-003:p80"
+          ]
+        },
+        "mtom": {
+          "label": "Spraying MTOM at sea level",
+          "value": 52,
+          "unit": "kg",
+          "basis": "manufacturer",
+          "context": "Environmental payload derating applies.",
+          "citation_ids": [
+            "irrigator:DRONE-003:p79"
+          ]
+        },
+        "loaded_hover": {
+          "label": "Fully loaded hover time",
+          "value": 7,
+          "unit": "min",
+          "basis": "manufacturer",
+          "context": "52 kg, sea level, wind below 3 m/s, 25 C; laboratory reference, no reserve.",
+          "citation_ids": [
+            "irrigator:DRONE-003:p79"
+          ]
+        }
+      },
+      "open_questions": [
+        "Approved precision dispensing conversion and endurance with that payload?",
+        "Regional supply, operator cost and permissions?"
+      ],
+      "web_sources": [],
+      "integration_status": "component_only"
+    },
+    "matrice-5td": {
+      "title": "Matrice 5TD — dock-compatible light payload comparator",
+      "summary": "Dock 4's aircraft is documented, but its payload budget is poorly matched to multi-litre water service.",
+      "citation_ids": [
+        "irrigator:DRONE-002:p9",
+        "irrigator:DRONE-002:p87"
+      ],
+      "limitations": [
+        "Payload rating includes all added water hardware; no water payload or hose insertion is verified."
+      ],
+      "facts": {
+        "payload": {
+          "label": "Maximum additional payload mass",
+          "value": 0.45,
+          "unit": "kg",
+          "basis": "manufacturer",
+          "context": "All added equipment and water must fit this allowance and MTOM.",
+          "citation_ids": [
+            "irrigator:DRONE-002:p87"
+          ]
+        }
+      },
+      "open_questions": [
+        "Any approved liquid payload or compatibility with refill hardware?"
+      ],
+      "web_sources": [],
+      "integration_status": "component_only"
+    },
+    "hypothetical-small": {
+      "title": "Hypothetical small water drone — integration to develop",
+      "summary": "A study placeholder for a carried-water aircraft with a purpose-built hose and passive inlet. No commercial readiness is asserted.",
+      "citation_ids": [],
+      "limitations": [
+        "Usable payload, endurance, flight power and pump performance must be supplied before any future run."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Select/build and weigh hardware; measure loaded hover and full service cycle."
+      ],
+      "web_sources": [],
+      "integration_status": "hypothetical_integration"
+    }
+  },
+  "bases": {
+    "manual-water-power": {
+      "title": "Manual water-and-power service base",
+      "summary": "Explicit first prototype: operator loads water and services charged batteries at one base.",
+      "citation_ids": [],
+      "limitations": [
+        "Manual labour, battery inventory, water stock and charging downtime remain required inputs."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Measure water-loading, battery handling and charging resource sequence."
+      ],
+      "web_sources": [],
+      "integration_status": "manual_service"
+    },
+    "dock-4": {
+      "title": "DJI Dock 4 — automatic battery service, no verified water integration",
+      "summary": "Manual identifies Matrice 5TD, automatic battery service and charging. It does not document a compatible cocoon-water subsystem.",
+      "citation_ids": [
+        "irrigator:DRONE-002:p9",
+        "irrigator:DRONE-002:p69",
+        "irrigator:DRONE-002:p87"
+      ],
+      "limitations": [
+        "Do not combine this dock with Matrice 350 or AGRAS by assumption.",
+        "Fast swapping still requires available charged batteries and adequate charging power."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Water hardware, storage, wet/electrical separation and approved fitted aircraft?",
+        "Current Spanish/EU supply and full dock energy budget?"
+      ],
+      "web_sources": [],
+      "integration_status": "component_only"
+    },
+    "agri-refill": {
+      "title": "Agricultural liquid-refill station — partial automation lead",
+      "summary": "J150 vendor describes auto-refill during manual battery swapping. This is a lead for base design, not a small-drone turnkey system.",
+      "citation_ids": [],
+      "limitations": [
+        "Vendor web description only; no reviewed PDF integration or EU quotation."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Written compatibility, supply and unattended operation documentation?"
+      ],
+      "web_sources": [
+        {
+          "title": "Agri Spray Drones J150 Dock + Batch Control System",
+          "url": "https://shop.agrispraydrones.com/products/j150-drone-dock-material",
+          "checked_on": "2026-11-04",
+          "finding": "Vendor describes automatic liquid refill while the operator swaps batteries; displayed USD 7,500 and sold-out status.",
+          "limitation": "Partial automation on a different agricultural aircraft; no verified Spanish/EU supply, automatic battery swap or small-drone compatibility."
+        }
+      ],
+      "integration_status": "component_only"
+    }
+  },
+  "work_packages": {
+    "R1": {
+      "title": "R1 — Reservoir shortlist",
+      "summary": "Growboxx has a documented refill siphon; Cocoon has field refill guidance; Waterboxx is a reusable comparator. No candidate has validated drone insertion or repeat-refill service life for this application.",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p109",
+        "irrigator:IRR-002:p2"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Choose exact currently supplied edition and bench-test retained volume, inlet and wet strength."
+      ],
+      "web_sources": [],
+      "work_package": "R1",
+      "research_status": "reviewed_with_gaps"
+    },
+    "R2": {
+      "title": "R2 — Minimize cocoon cost",
+      "summary": "NIEBLAS reports EUR 7.8/unit historically. Current retail Waterboxx pricing is a reusable benchmark; biodegradable delivered bulk prices remain unquoted. Optimize installed lifecycle cost, visit burden and maintenance together.",
+      "citation_ids": [
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-003:p110"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Obtain delivered quotes at pilot and hectare-scale quantities; include tooling, coating, licensing, installation, inlet adaptation and replacements."
+      ],
+      "web_sources": [
+        {
+          "title": "Groasis Waterboxx 10-pack shop listing",
+          "url": "https://www.waterboxx.com/product/groasis-waterboxx-10-pack/?lang=en",
+          "checked_on": "2026-11-04",
+          "finding": "Listed at EUR 301.29 for 10 sets on review date (EUR 30.129/set by division).",
+          "limitation": "Retail display, not a delivered Spain quote; tax/shipping, availability and future price need confirmation. Reusable plastic comparator."
+        }
+      ],
+      "work_package": "R2",
+      "research_status": "reviewed_with_gaps"
+    },
+    "R3": {
+      "title": "R3 — Plant suitability",
+      "summary": "Carob has direct Cocoon field use with poor outcomes at a harsh Jordan site; Waterboxx lists carob among uses. Other catalogue taxa require stock/site assessment. Reported use is not a survival guarantee. Cork oak has direct Cocoon field-use evidence in Portugal, with emergency irrigation and shelter-related limitations.",
+      "citation_ids": [
+        "irrigator:IRR-005:p80",
+        "irrigator:IRR-005:p112",
+        "irrigator:IRR-002:p1",
+        "irrigator:IRR-008:p15",
+        "irrigator:IRR-008:p61",
+        "irrigator:IRR-008:p63"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Review species-specific stock, root form, actual reservoir fit, soil and planting season before adoption."
+      ],
+      "web_sources": [
+        {
+          "title": "Carabassa et al., Water-saving techniques for restoring desertified lands (online 24 October 2021; journal issue 2022)",
+          "url": "https://onlinelibrary.wiley.com/doi/full/10.1002/ldr.4134",
+          "checked_on": "2026-11-04",
+          "finding": "Six field sites; outcomes depend on species and site. Rosemary and holm oak are discussed in the original article.",
+          "limitation": "Publisher HTML reviewed; original PDF opened by research browser but automated acquisition denied. No PDF edition registered here; no source-specific daily dose established."
+        }
+      ],
+      "work_package": "R3",
+      "research_status": "reviewed_with_gaps"
+    },
+    "R4": {
+      "title": "R4 — Water demand and reservoir release",
+      "summary": "Carob field water gifts, product release claims and mixed-species project totals measure different things. None is a validated daily supplemental-demand profile for all 23 catalogue species.",
+      "citation_ids": [
+        "irrigator:IRR-005:p81",
+        "irrigator:IRR-005:p115",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-002:p2",
+        "irrigator:IRR-003:p143",
+        "irrigator:IRR-003:p155"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Measure retained reservoir volume and root-zone water; obtain nursery/site recommendations and derive stage/season ranges without dividing unrelated trial totals into a default."
+      ],
+      "web_sources": [],
+      "work_package": "R4",
+      "research_status": "reviewed_with_gaps"
+    },
+    "R5": {
+      "title": "R5 — Cluster rules and drone access",
+      "summary": "Reuse the existing MR2 palette and current central dimensions as references. Ecological association does not establish aerial hose access or reservoir compatibility.",
+      "citation_ids": [
+        "pilot:FOREST-002:p131:mr2-guidance",
+        "pilot:FOREST-002:p132:mr2-guidance",
+        "pilot:FOREST-002:p133:mr2-guidance",
+        "pilot:FOREST-002:p134:mr2-guidance",
+        "irrigator:IRR-003:p120"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Validate inlet exposure, growth, rotor and hose clearance, terrain and planting-density constraints; no universal spacing is adopted."
+      ],
+      "web_sources": [],
+      "work_package": "R5",
+      "research_status": "reviewed_with_gaps"
+    },
+    "R6": {
+      "title": "R6 — Drone candidates",
+      "summary": "Matrice 350 is a payload-platform comparison; AGRAS T25 is a larger spray benchmark; Matrice 5TD fits Dock 4 but has only a light payload allowance. None is a verified cocoon irrigator.",
+      "citation_ids": [
+        "irrigator:DRONE-001:p113",
+        "irrigator:DRONE-001:p114",
+        "irrigator:DRONE-003:p79",
+        "irrigator:DRONE-003:p80",
+        "irrigator:DRONE-002:p87"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Complete fitted mass, mounting, slosh, loaded energy and water transfer budgets; compare open-autopilot development only with explicit engineering costs."
+      ],
+      "web_sources": [],
+      "work_package": "R6",
+      "research_status": "reviewed_with_gaps"
+    },
+    "R7": {
+      "title": "R7 — Reliable hose placement",
+      "summary": "The reviewed spray experiment demonstrates hose-fed spraying, not insertion. RTK and precision landing are building blocks. A passive marker/funnel plus a compliant hose tip and onboard transfer confirmation is a proposed development concept.",
+      "citation_ids": [
+        "irrigator:DRONE-004:p1",
+        "irrigator:DRONE-001:p113",
+        "irrigator:IRR-005:p109"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Demonstrate targeting, cap/cover handling, capture tolerance, fill-stop, contamination resistance and safe disengagement; measure time and reliability."
+      ],
+      "web_sources": [
+        {
+          "title": "ArduPilot Copter Precision Landing and Loiter",
+          "url": "https://docs.ardupilot.org/copter/docs/precision-landing-and-loiter.html",
+          "checked_on": "2026-11-04",
+          "finding": "Documents external landing-target positioning and companion-computer integration.",
+          "limitation": "Position control building block; does not demonstrate hose insertion, cap removal, inlet acceptance or water transfer."
+        }
+      ],
+      "work_package": "R7",
+      "research_status": "reviewed_with_gaps"
+    },
+    "R8": {
+      "title": "R8 — Automated dock",
+      "summary": "Dock 4 documents battery swapping/charging for Matrice 5TD. Agricultural liquid auto-refill exists as a vendor lead with manual battery exchange. A combined small-water-drone system was not established by this bounded search.",
+      "citation_ids": [
+        "irrigator:DRONE-002:p9",
+        "irrigator:DRONE-002:p69",
+        "irrigator:DRONE-002:p87"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Verify the same aircraft across flight, power service and liquid loading; include finite stocks, power, interlocks, communications and human attendance."
+      ],
+      "web_sources": [
+        {
+          "title": "Agri Spray Drones J150 Dock + Batch Control System",
+          "url": "https://shop.agrispraydrones.com/products/j150-drone-dock-material",
+          "checked_on": "2026-11-04",
+          "finding": "Vendor describes automatic liquid refill while the operator swaps batteries; displayed USD 7,500 and sold-out status.",
+          "limitation": "Partial automation on a different agricultural aircraft; no verified Spanish/EU supply, automatic battery swap or small-drone compatibility."
+        }
+      ],
+      "work_package": "R8",
+      "research_status": "reviewed_with_gaps"
+    },
+    "R9": {
+      "title": "R9 — Remote conditions",
+      "summary": "Slope, wet-strength, soil infiltration and temperature can change reservoir performance. Flight limits and geozones also constrain service windows; remote water and energy resupply remain essential.",
+      "citation_ids": [
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p115",
+        "irrigator:DRONE-001:p114",
+        "irrigator:DRONE-003:p79"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Collect actual terrain, obstacles, local weather/soil and water/power logistics; no Almeria site coordinates or measured downtime are available."
+      ],
+      "web_sources": [],
+      "work_package": "R9",
+      "research_status": "reviewed_with_gaps"
+    },
+    "R10": {
+      "title": "R10 — Operational permissions",
+      "summary": "EASA open-category guidance excludes dropping material. Automatic versus autonomous operation and the exact hose-transfer concept need operational classification with AESA; a dock is not a permission.",
+      "citation_ids": [
+        "irrigator:POLICY-003:p1"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Assess actual water release, fitted aircraft, supervision/BVLOS, authorisation/declaration route, ENAIRE zones, land manager, environment and public access."
+      ],
+      "web_sources": [
+        {
+          "title": "AESA specific-category operations",
+          "url": "https://www.seguridadaerea.gob.es/es/ambitos/drones/operaciones-uas-drones/operaciones-con-uas-drones---categoria-especifica",
+          "checked_on": "2026-11-04",
+          "finding": "Explains operational authorisation, applicable standard-scenario declarations and LUC routes.",
+          "limitation": "No site/concept assessment performed; a suitable legal route must be determined for the actual operation."
+        },
+        {
+          "title": "EASA drones FAQ: automatic versus autonomous",
+          "url": "https://www.easa.europa.eu/en/the-agency/faqs/drones-uas",
+          "checked_on": "2026-11-04",
+          "finding": "Distinguishes predetermined automatic routes with pilot intervention from autonomous operations; autonomous operations are outside open category.",
+          "limitation": "A dock does not itself grant permission; pilot staffing and exact water-release operation remain to be assessed."
+        }
+      ],
+      "work_package": "R10",
+      "research_status": "reviewed_with_gaps"
+    },
+    "R11": {
+      "title": "R11 — Value and field validation",
+      "summary": "No measured cocoon-refill drone throughput is established. Compare equal plant service against manual and ground/tank irrigation; stage reservoir, interface and complete-cycle trials before claiming performance.",
+      "citation_ids": [
+        "irrigator:IRR-003:p110",
+        "irrigator:IRR-003:p155",
+        "irrigator:DRONE-004:p1",
+        "irrigator:IRR-005:p115"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Predeclare pass criteria, test days and matched controls; record useful water, timing, energy, interventions, cost and independent plant/soil response."
+      ],
+      "web_sources": [],
+      "work_package": "R11",
+      "research_status": "reviewed_with_gaps"
+    }
+  },
+  "scenarios": {
+    "dry-weather-study": {
+      "title": "Prepared dry-weather sensitivity study — not a runnable simulator",
+      "summary": "One hypothetical small drone, one manually serviced base and individual biodegradable reservoirs. These are author-selected study inputs, not ecological recommendations.",
+      "citation_ids": [],
+      "limitations": [
+        "No water-demand, payload-energy, handling-time, price or functional-lifetime default has been fabricated. This record cannot run a simulator."
+      ],
+      "facts": {
+        "minimum_area_ha": {
+          "label": "Minimum study area",
+          "value": 1,
+          "unit": "ha",
+          "basis": "project_assumption",
+          "context": "User-requested area bound.",
+          "citation_ids": []
+        },
+        "maximum_area_ha": {
+          "label": "Maximum study area",
+          "value": 10,
+          "unit": "ha",
+          "basis": "project_assumption",
+          "context": "User-requested area bound.",
+          "citation_ids": []
+        },
+        "drone_count": {
+          "label": "Aircraft count",
+          "value": 1,
+          "unit": "drone",
+          "basis": "project_assumption",
+          "context": "User-requested single-drone comparison.",
+          "citation_ids": []
+        },
+        "study_small_mtom_kg": {
+          "label": "Study definition of small aircraft upper mass",
+          "value": 10,
+          "unit": "kg",
+          "basis": "project_assumption",
+          "context": "Author definition for comparison; not a selected aircraft mass.",
+          "citation_ids": []
+        },
+        "insertion_success": {
+          "label": "Idealized insertion success",
+          "value": 1,
+          "unit": "fraction",
+          "basis": "project_assumption",
+          "context": "User-requested reliability assumption; still requires measured nonzero handling time.",
+          "citation_ids": []
+        },
+        "rain_excluded": {
+          "label": "Dry-weather study flag",
+          "value": 1,
+          "unit": "boolean encoded 0/1",
+          "basis": "project_assumption",
+          "context": "Explicit exclusion, not a measured rainfall value.",
+          "citation_ids": []
+        }
+      },
+      "open_questions": [
+        "Replace required inputs with reviewed measurements or explicit user assumptions before future simulation."
+      ],
+      "web_sources": [],
+      "adoption": "prepared_not_adopted",
+      "inputs": {
+        "minimum_area_ha": 1,
+        "maximum_area_ha": 10,
+        "drone_count": 1,
+        "study_small_mtom_kg": 10,
+        "insertion_success": 1,
+        "rain_excluded": 1
+      },
+      "required_inputs": [
+        "Per-species water demand and soil/site applicability",
+        "Exact usable reservoir capacity and repeat-refill service period",
+        "Initial fill, target, warning and critical reserve",
+        "Fitted water/hardware mass, tank residual and loaded energy model",
+        "Cruise/hover/approach/pump rates, handling times and return reserve",
+        "Base water stock/loading rate, battery inventory/charge resources and operating window",
+        "Terrain, obstacle and weather windows",
+        "Delivered cocoon cost, installation, interface, replacement and labour costs",
+        "Horizon covering multiple refill cycles and matched baseline service target"
+      ],
+      "cluster_ids": [
+        "carob-island",
+        "coscoja-reference",
+        "carob-control"
+      ],
+      "reservoir_id": "growboxx",
+      "aircraft_id": "hypothetical-small",
+      "base_id": "manual-water-power"
+    }
+  }
+}

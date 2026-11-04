@@ -39,6 +39,10 @@ ENTITY_TYPES = {
     "species": "species", "restoration_approach": "approach", "planting_palette": "palette",
     "vegetation_series": "series", "treatment": "treatment", "strategy_need": "need",
     "designer_rule": "rule", "example_activity": "example_activity",
+    "irrigation_profile": "irrigation_profile", "reservoir_system": "reservoir_system",
+    "drone_platform": "drone_platform", "drone_base": "drone_base",
+    "research_topic": "research_topic", "research_scenario": "research_scenario",
+    "cluster_template": "cluster_template",
 }
 RELATION_TYPES = {
     "programme_contains_route": ("programme", "funding_route"),
@@ -51,9 +55,10 @@ RELATION_TYPES = {
     "example_mentions_species": ("example_activity", "species"),
     "example_considers_route": ("example_activity", "funding_route"),
     "example_may_address_need": ("example_activity", "strategy_need"),
+    "irrigation_profile_for_species": ("irrigation_profile", "species"),
 }
 EVIDENCE_KINDS = {"official_requirement", "official_strategy", "guidance", "project_assumption", "research_gap"}
-CONFIGURATION_ADAPTERS = {"carob_density", "mr2_geometry"}
+CONFIGURATION_ADAPTERS = {"carob_density", "mr2_geometry", "research_scenario", "cluster_template"}
 ADAPTERS = set(ENTITY_TYPES) - {"example_activity"} | CONFIGURATION_ADAPTERS | {
     "illustration", "reference_model", "route_guidance", "delivery_topic", "concept_template", "research_guide",
 }
@@ -121,8 +126,9 @@ def _select(rows, native_id, at):
 class _Resolver:
     """One load's validated authority snapshots; never a cross-request recovery cache."""
 
-    def __init__(self):
+    def __init__(self, registry):
         self.owners = {}
+        self.registry = registry
 
     def owner(self, name):
         if name not in self.owners:
@@ -163,6 +169,9 @@ class _Resolver:
                 value = read_json(DIRECTORY / path)
                 _require(isinstance(value, dict) and "version" in value and type(value["version"]) is int and value["version"] == 1 and "models" in value,
                          path, "Unsupported reference-model source; restore its version-1 projection contract.")
+            elif name == "irrigation_research":
+                from .irrigation_research import load
+                value = load(self.registry); path = "scenarios/drone-irrigator-research-v1.json"
             else:
                 raise Invalid(f"Unsupported knowledge authority {name!r}; register its adapter explicitly.")
             self.owners[name] = (value, path)
@@ -174,6 +183,16 @@ class _Resolver:
         if adapter == "illustration":
             value = {k: deepcopy(binding[k]) for k in ("label", "aliases", "description")}
             label = binding["label"]; aliases += binding["aliases"]; path = "knowledge/connected-pilot-v1.json"
+        elif adapter in {"irrigation_profile", "reservoir_system", "drone_platform", "drone_base", "research_topic", "research_scenario", "cluster_template"}:
+            from .irrigation_research import COLLECTIONS
+            (research, rules), path = self.owner("irrigation_research")
+            if adapter == "cluster_template":
+                source = rules; path = "design_rules/drone_irrigator_v1.json"
+            else:
+                source = research
+            collection = source[COLLECTIONS[adapter]]
+            _require(native in collection, path, f"Missing registered research identity {native!r}.")
+            value = collection[native]; label = value["title"]
         elif adapter in {"programme", "funding_route", "species", "funding_call", "strategy_need", "reference_model"}:
             owner, collection, label_key = {
                 "programme": ("programmes", "programmes", "title"), "funding_route": ("funding", "entries", "title"),
@@ -204,7 +223,7 @@ class _Resolver:
             if adapter == "strategy_need":
                 _require(value["classification"] == "prioritised_need", path, "A strategy need must not be retyped from another EDL category.")
                 aliases.append(value["label_es"])
-        elif adapter in {"restoration_approach", "designer_rule", "planting_palette", "vegetation_series", "treatment"} | CONFIGURATION_ADAPTERS:
+        elif adapter in {"restoration_approach", "designer_rule", "planting_palette", "vegetation_series", "treatment", "carob_density", "mr2_geometry"}:
             source, path = self.owner("designer")
             if adapter in {"restoration_approach", "designer_rule"}:
                 value = _select(source["rules"], native, path); label = value["title"]
@@ -250,7 +269,7 @@ def _build(data, registry):
     citations._validate_sources(registry, "knowledge_pilot", data["sources"])
     _require(set(data["sources"]) == set(registry["consumers"]["knowledge_pilot"]["citation_ids"]), at, "All pilot sources must be explicitly registered shared citations.")
 
-    resolver, bindings = _Resolver(), {}
+    resolver, bindings = _Resolver(registry), {}
     for bid, binding in data["bindings"].items():
         context = f"{at}.bindings[{bid}]"
         _require(isinstance(binding, dict) and "adapter" in binding, context, "Missing explicit adapter.")
@@ -278,6 +297,8 @@ def _build(data, registry):
         _require(entity["availability"] == availability, context, "Availability must preserve the explicit unassessed/not-applicable contract.")
         _strings(entity["aliases"], context + ".aliases"); _strings(entity["limitations"], context + ".limitations")
         _refs(entity["citation_ids"], data["sources"], context + ".citation_ids")
+        if entity["type"] in {"irrigation_profile", "reservoir_system", "drone_platform", "drone_base", "research_topic", "research_scenario", "cluster_template"}:
+            _require(set(entity["citation_ids"]) == set(bound["value"]["citation_ids"]), context, "Research entity evidence disagrees with its native record.")
         if entity["type"] == "funding_call": _require(bool(entity["citation_ids"]), context, "A published call needs its source passage.")
         entities[eid] = {"id": eid, **deepcopy(entity), "label": bound["label"],
                          "aliases": sorted(set(entity["aliases"] + bound["aliases"] + [bound["label"]]))}
@@ -321,6 +342,7 @@ def _build(data, registry):
         sv, tv = bindings[source["binding_id"]]["value"], bindings[target["binding_id"]]["value"]
         if relation["type"] == "programme_contains_route": _require(target["native_id"] in sv["entry_ids"], context, "Programme membership disagrees with its authority.")
         if relation["type"] == "approach_has_palette": _require(tv["rule"] == source["native_id"], context, "Palette does not name this approach rule.")
+        if relation["type"] == "irrigation_profile_for_species": _require(sv["species_id"] == target["native_id"], context, "Irrigation profile linkage disagrees with its native species identity.")
         if relation["type"] == "palette_starter_species": _require(target["native_id"] in sv["starter"], context, "Species is not a starter in this project palette.")
         if relation["type"] == "palette_optional_species": _require(target["native_id"] in sv["optional"], context, "Species is not optional in this project palette.")
         if relation["type"] == "call_context_for":
@@ -501,6 +523,7 @@ RELATION_LABELS = {
     "approach_treatment_guidance": "describes treatment", "example_uses_approach": "illustrates approach",
     "example_mentions_species": "mentions species", "example_considers_route": "considers route",
     "example_may_address_need": "may address need",
+    "irrigation_profile_for_species": "records irrigation assessment for",
 }
 
 

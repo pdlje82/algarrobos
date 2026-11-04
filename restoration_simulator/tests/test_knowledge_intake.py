@@ -206,9 +206,9 @@ class KnowledgeIntakeTests(unittest.TestCase):
             self.assertEqual((status,out),(1,''));self.assertIn('Fixture source missing',err)
         with patch.object(documents,'verified_file') as verify:
             report=intake.check_batch(self.folder)
-            self.assertEqual(verify.call_count,6)
-            self.assertEqual(len(report['verified_editions']),6)
-            self.assertEqual(len({(c.args[0],c.kwargs['expected_sha256']) for c in verify.call_args_list}),6)
+            self.assertEqual(verify.call_count,16)
+            self.assertEqual(len(report['verified_editions']),16)
+            self.assertEqual(len({(c.args[0],c.kwargs['expected_sha256']) for c in verify.call_args_list}),16)
         self.assertEqual(intake.check_batch(self.folder)['version'],1)
 
     def test_files_changed_during_validation_do_not_return_partial_success(self):
@@ -261,8 +261,10 @@ class KnowledgeIntakeTests(unittest.TestCase):
         ctx=self.current['ctx'];base_claims=set(self.frozen['data']['claims'])
         new=set(ctx['data']['claims'])-base_claims
         self.assertEqual((sum(c.startswith('claim:life-') for c in new),sum(c.startswith('claim:kermes-') for c in new)),(3,6))
-        self.assertEqual(set(ctx['entities'])-set(self.frozen['data']['entities']),{'programme:EU-LIFE','route:EU-LIFE-NATURE','species:kermes_oak','series:coscoja_series','series:lentisk_series'})
-        self.assertEqual((len(self.current['graph']['nodes']),len(self.current['graph']['edges'])),(55,86))
+        expansion=set(ctx['entities'])-set(self.frozen['data']['entities'])
+        self.assertTrue({'programme:EU-LIFE','route:EU-LIFE-NATURE','species:kermes_oak','series:coscoja_series','series:lentisk_series'} <= expansion)
+        self.assertEqual(len(expansion),74)
+        self.assertEqual((len(self.current['graph']['nodes']),len(self.current['graph']['edges'])),(198,516))
         issue=next(i for i in self.current['graph']['issues'] if i['id']=='issue:kermes-warm-series-naming')
         self.assertEqual(len(issue['claims']),2);self.assertTrue(all(c['review_status']=='unresolved' for c in issue['claims']));self.assertNotIn('preferred',issue)
         self.assertTrue(all(ctx['entities'][e]['availability']=='not_assessed' for e in ['programme:EU-LIFE','route:EU-LIFE-NATURE']))
@@ -271,9 +273,10 @@ class KnowledgeIntakeTests(unittest.TestCase):
         optional=ctx['data']['relations']['relation:mr2-optional-kermes'];self.assertEqual(optional['basis'],'project_assumption')
         broken=deepcopy(ctx['data']);broken['relations']['relation:mr2-optional-kermes']['target']='species:carob'
         with self.assertRaisesRegex(Invalid,'not optional'):graph._build(broken,ctx['registry'])
-        reports=[json.loads((graph.DIRECTORY/'knowledge/intake'/i/'review.json').read_text(encoding='utf8')) for i in ('life-nature-v1','kermes-oak-v1')]
+        reports=[json.loads((graph.DIRECTORY/'knowledge/intake'/i/'review.json').read_text(encoding='utf8')) for i in ('life-nature-v1','kermes-oak-v1','drone-irrigator-v1')]
         self.assertEqual(reports[0]['candidate']['dataset_hash'],reports[1]['baseline']['dataset_hash'])
-        self.assertEqual(reports[1]['candidate']['dataset_hash'],ctx['hash'])
+        self.assertEqual(reports[1]['candidate']['dataset_hash'],reports[2]['baseline']['dataset_hash'])
+        self.assertEqual(reports[2]['candidate']['dataset_hash'],ctx['hash'])
         self.assertTrue(all(r['adoption']=='explorer_only' and r['compatibility']['feature_contexts_unchanged'] for r in reports))
 
 

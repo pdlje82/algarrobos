@@ -1,5 +1,15 @@
 # Rule changes
 
+## 2026-11-04 · drone-irrigator-clusters-2026-11-04-v1 · prepared research only
+
+- Add a separately validated research companion for MR2-based carob, coscoja-related
+  and single-species control cluster references. Stable species/palette IDs resolve
+  to existing central authorities; no numerical spacing or ecological compatibility
+  is invented. Sources, limitations and project-assumption claims are traceable.
+- Status is `prepared_not_adopted`. This companion is outside the active evaluator
+  manifest, whose ruleset ID and all v1/v2/v3 generation semantics remain unchanged.
+  No saved design or current feature evidence membership is updated.
+
 ## 2026-10-29 · algarroba-designer-2026-10-29-v5 · engine/draft v3
 
 - Register the explicit treeless-series placement policy for lentisco/coscoja

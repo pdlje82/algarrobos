@@ -1,0 +1,576 @@
+{
+  "version": 1,
+  "id": "drone-irrigator-v1",
+  "title": "Drone Irrigator R1–R11 reviewed evidence and prepared native profiles",
+  "reviewed_on": "2026-11-04",
+  "adoption": "explorer_only",
+  "baseline": {
+    "dataset_id": "algarroba-connected-pilot-v1",
+    "dataset_hash": "394b20974e2b4d37ae4506ff1f51d7ebafa216878e1bd365863f5558989915bf",
+    "consumer_registry_hash": "1da729fd96ecda53fe26cdde010b0b6f685b6dd7bd2cb39c527069990c20b0bc",
+    "files": {
+      "design_rules/defaults.json": "2ee71888bd1dafa3d1b0fbd8daf2bba621b3911dd9c9547586999aca0bf8765e",
+      "design_rules/drone_irrigator_v1.json": "b802b4c9cb4eba22554552193c2622eb4811a916ba004f9b648b0f20a61d1e1e",
+      "design_rules/manifest.json": "57d74431ffdd2587ceba5d6cee8c35bb364ef8a4c3ba1f32f2c1589a66c96653",
+      "design_rules/plant_dimensions.json": "c18f475faf3fc298924b378584c30e0e81dae5419d4439d3fc0f7183ceda8262",
+      "design_rules/rules.json": "667608d9bd10c8250fb10504f8cbe8270bbe68222a513183c77f64a2ce59ad1d",
+      "design_rules/sources.json": "d438aba9e85b1a79eac5026ff68a1591ae61309ad65acd2f05db265528d0a8ab",
+      "design_rules/treatments.json": "79b7e093586cbd9411eed15ad75779ad35683644336fae389d09d28e6c4d17a1",
+      "design_rules/vegetation_combinations.json": "e4a86471a33d7bdf9b089f786e85f85e508635405c4c366def9f41b22f141dd1",
+      "frontend/src/carob-planting-guide.json": "5457a58537f3cf6cd00df8fb7c5a25c61f99ffdc26d7b2e2d393a5a6278d9ac0",
+      "frontend/src/designer-help.json": "e313dfacae48040d313bb7e3bbc383de6306a157130e2ea6a8ec4d905f64ff80",
+      "frontend/src/designer-interactions.json": "90a8509d17396c6f6ab86394bb5eb5c0f86dab16c083ce8bb687a026b002c202",
+      "frontend/src/designer-symbols.json": "8f3796ff31c3e3c6161eb6a037368272db43b826fbee49295cf91a2d624684f4",
+      "frontend/src/planning-ui.json": "a90e5f2eb72a30b996534f35c08374dc8994d1e58441fe504021c3ac530df7fb",
+      "frontend/src/plant-illustrations.json": "afe031872211c3e10ca622b9f1d94faf03191ae2b7bcfd4a3f14f854c552e8b2",
+      "frontend/src/restoration-models.json": "fc9da66ab40bf6b5c32c9de6e9d4bb1b351f48a12305f4fe86ee457587450380",
+      "knowledge/citations-v1.json": "2e04406f8b956719b3184dece1f8ac483246fbf5e15706a6c6818582465c2851",
+      "knowledge/connected-pilot-v1.json": "53493d29c397fe4b07acae03d91fc0dae405e98078b6eaf34a43584a139309f0",
+      "knowledge/feature-consumers-v1.json": "91567dbf495388f40f54ec0b8fbd0d9e2a0096899a12a6c8fb54c7b43568701e",
+      "scenarios/default.json": "2aaa152e1efc42eeb56a22aa4916ebce778d1f812533fa6dc713a7c96411da82",
+      "scenarios/defaults.json": "31378fd571c86f0858cf03b0f928b22f17de7238c88e1914e3aa44326e383f50",
+      "scenarios/designer-library-defaults.json": "28b46e63c197bc38887aa9043b4f9be5d48221ca8237a826c18fc1110de0c30c",
+      "scenarios/documents.json": "657f916db3ddc0e3b85b1ec36f6d469bd1122072ff759c0e80c6651b4b358770",
+      "scenarios/drone-irrigator-research-v1.json": "5e79206d5df129f391f1986955b7eeaf770f10cb74b363f7b3423c636b3097f6",
+      "scenarios/funding-al20-statistics-v1.json": "a7e6bcac27be9666a4ca50594a53f89446220bfd07828c1da170ad6ea4c0f1db",
+      "scenarios/funding-delivery-plan-v1.json": "5aa21fc397b11cbba5f33025285bee5f6abb2f8f2d86982a0f163937b0ad2683",
+      "scenarios/funding-edl-v1.json": "42f7fd5a7608d441410ece12f0ac1ef8a286b7db54b2ae80415c165b28d43470",
+      "scenarios/funding-guides-v1.json": "de06605ea8d9bca2062112b3be669888fb318a1063e0fc11e7825715c0da27d6",
+      "scenarios/funding-programmes-v1.json": "890879499354696787fb1a8cdfbaa93f57fabda722ff58aeb16573d318b715e2",
+      "scenarios/funding-project-concept-v1.json": "a3430e04e8c0eddf81ecd1fba632469af23e2572be2ccee5b2caf67c5d5e4b67",
+      "scenarios/funding-selection-guidance-v1.json": "f86f440fd357dbdd369057dec2b79b7a0b6f42eae724d496f6fddb8d2f3d41c0",
+      "scenarios/funding-v1.json": "ae054dd9e185f54c2f8ea11deeb1eeb95bfbf7f010fc9fc8f4d9d8fd5d387857",
+      "scenarios/funding-v2.json": "4922e57057acaa8ea3b7c061db6b51c3763b190ead43f7be15460d7b56e9a18e",
+      "scenarios/funding.json": "cf07ed2885e3cc86a58c55d6bfd0a21bb2d0757641bb09a215f6ed0e066cb878",
+      "scenarios/legacy-form-defaults-v1.json": "6c1b61ed9629ac880b642dfb42e388fa0d936c3d4e1724e44236cfbfd272722e",
+      "scenarios/legacy-v1.json": "f993fecb344be50a72b6e5ad1fe5b62b44cdf847803bf47c14f5e66a87e4692a",
+      "scenarios/legacy-v2.json": "3423d540c0364cfdd088d74301b4927a3302a04fbf4cef854fc5b1d536a97858",
+      "scenarios/legacy-v3.json": "fb4cbda1baf1dfa06ffa95931a7dbd02cedc4408f7ea2190dd69917b4ef64bad",
+      "scenarios/plant-names.json": "e45daec35ccec42e6e3ecb6a413ffe9f1a1f994b2da942de3bb65e1c469e9619",
+      "scenarios/plant-prices.json": "2fcb79912aa1efbcb08be0f6b286b032e99956b27827e8e1953e928b0fe17dd1",
+      "scenarios/planting-catalog-v1.json": "5553b805cb17480e6209e6aa52f1e65a07305bc5b67cde5640fdbc33519e74c9",
+      "scenarios/planting-catalog-v2.json": "9177350ebcf5487e6a31bbee9645280a64f6fbac35703961b18160426b629f66"
+    }
+  },
+  "candidate_files": {
+    "citations-v1.json": "fcc8586a13f514cec23aac9d2ca954fa9caf43efaf1aca2c55e68617904fb0f2",
+    "connected-pilot-v1.json": "f7e9ef4804e28e759fe9430051e82b2d2f489dce5d5d6f0d6ac49c52eb4405be"
+  },
+  "candidate_authorities": {
+    "programme-al20": {
+      "file": "scenarios/funding-programmes-v1.json",
+      "record_hash": "72a43de28d078a5bd9515f3da1b4664fa6d449e8c662b9bf509dad4855e88cb2"
+    },
+    "route-34": {
+      "file": "scenarios/funding.json",
+      "record_hash": "c76a7411ad3bef78b9d8c781d11d81a5ae04a5b02aff526009c9d1d751eb99d3"
+    },
+    "call-2026": {
+      "file": "scenarios/documents.json",
+      "record_hash": "9d2777fe84da2d03caa73a4e216c755644f4cb47102a214570cf99eab8dd34da"
+    },
+    "plant-carob": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "526c4940ec2832f867cd6001538953685e5d0606cd2ea5c2dac005c73401fe33"
+    },
+    "approach-mr2": {
+      "file": "design_rules/",
+      "record_hash": "b6aaf096adf9f74a237bf75e558044afc6244a0898324fc24ac545c44cd2496f"
+    },
+    "palette-mr2": {
+      "file": "design_rules/",
+      "record_hash": "e83bcdf70460ebe38e3d940c31a64485269e4fecdd6c64de98cc9c8a3790487a"
+    },
+    "stone": {
+      "file": "design_rules/",
+      "record_hash": "cc03b56f8bdeba556b7a59c09957703812714da51dbe4c6ea9367e2641cabe39"
+    },
+    "need-npl3": {
+      "file": "scenarios/funding-edl-v1.json",
+      "record_hash": "c99dce9ff6ea1e9e80fea489f4045c90482119ac6417ce021a61d304c27097ce"
+    },
+    "rule-density": {
+      "file": "design_rules/",
+      "record_hash": "5d46e8362d84145ad1b7788eb52211004d630e693c5a5636cd4eeabc67e287eb"
+    },
+    "rule-layout": {
+      "file": "design_rules/",
+      "record_hash": "4837f3f7604b2615d49722d2f940ffb7ffd66ba45cd88dd0a14f6ef5ba3c33d2"
+    },
+    "rule-stone": {
+      "file": "design_rules/",
+      "record_hash": "3d40e7dc91ab319f58b1c82032d4a98a76206470271fa7d6b6ec077678dda5e5"
+    },
+    "density-value": {
+      "file": "design_rules/",
+      "record_hash": "d215c4a272f4227a7a53aadf522c5861c8ab3ef82d2d495dddbc36d52685c0c0"
+    },
+    "geometry-value": {
+      "file": "design_rules/",
+      "record_hash": "9a1af379cd1eb4d399529d013b6c8406205f0f58b62078a6249d3d74ee94b0d5"
+    },
+    "model-mr2": {
+      "file": "frontend/src/restoration-models.json",
+      "record_hash": "253e417f68e52d6ead0f83262bfdbbdecfca0931b5e2b05c7152aa7a8a35b5bc"
+    },
+    "guide-34": {
+      "file": "scenarios/funding-selection-guidance-v1.json",
+      "record_hash": "126598d048fcc0b640b63e46df2228cf53723134a8e93820ed75f09c1b541471"
+    },
+    "delivery-novelty": {
+      "file": "scenarios/funding-delivery-plan-v1.json",
+      "record_hash": "45ee6f719944b0556d088701a849d8cb3e0230e4b5746f91be8b3a1b0ec7a5a0"
+    },
+    "delivery-publication": {
+      "file": "scenarios/funding-delivery-plan-v1.json",
+      "record_hash": "537fc808aa7b4bf82ff493e8c501aba6f02f8c217f4a45f4e1415db318f7acf3"
+    },
+    "concept-restoration": {
+      "file": "scenarios/funding-project-concept-v1.json",
+      "record_hash": "284cc2e0c073cc8d6e8314066908d7e04645546b0d196a35521e2a55613787e7"
+    },
+    "example-demo": {
+      "file": "knowledge/connected-pilot-v1.json",
+      "record_hash": "9a6021abd191cfdab35eeedc91e5c5a61909f232aac51d20588dd0726931c4d8"
+    },
+    "programme-life": {
+      "file": "scenarios/funding-programmes-v1.json",
+      "record_hash": "292291423b96f7a955b6c2bb76987408c017e010fdfa04a248555306e55ad106"
+    },
+    "route-life-nature": {
+      "file": "scenarios/funding.json",
+      "record_hash": "2ce76a7a00ea732d8bb58317541dd5c41fe39475e0c64be87a785287d013dae8"
+    },
+    "guide-life-nature": {
+      "file": "scenarios/funding-guides-v1.json",
+      "record_hash": "9bb265a777477791169392fb721bd5de2483125a4947681a4779ea71e5fc8222"
+    },
+    "plant-kermes-oak": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "a8745706d5195046294786a408eb5ab3d77bf3ed8037a1c1d9185b41a7ce7131"
+    },
+    "series-coscoja": {
+      "file": "design_rules/",
+      "record_hash": "890e7372730c66d2a7c7680c43d7e35c7f598061b40e902ffaa9c4d4c8f15377"
+    },
+    "series-lentisk": {
+      "file": "design_rules/",
+      "record_hash": "ccd31c43f33b9995d28f1f5ecd3f0e3fda7c988c2012f203af7533e22dffe865"
+    },
+    "rule-shrub-placement": {
+      "file": "design_rules/",
+      "record_hash": "6dc89455a34cd99a7306d062e03536c70fa4bfb1061c6596414d35c19513ee5c"
+    },
+    "irrigator-species-wild_olive": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "b29ce085fc6fc77724f98eb35a2f67bb0e3dbc5523de43734202b9cff1c7e81f"
+    },
+    "irrigator-species-lentisk": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "4ee25c16c648743625a921762e59c0c8454e69814eb95daf96a31a6103d1b586"
+    },
+    "irrigator-species-buckthorn": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "4503ae5fa87791ed56a1eebec1bd31983dcc8b7930e37e508323ff9e42ecf3f8"
+    },
+    "irrigator-species-palmetto": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "a447ec0b41256f89cabb1c511917d302b490ed7922e2fa8f3fd1fc7baf9179fe"
+    },
+    "irrigator-species-retama": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "32957937b7aea1cfe538cc8379300716bd2b0ef22f87c211e1091a351f90c0b9"
+    },
+    "irrigator-species-esparto": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "bd2e1931e643121139d5d1601eca8d8c389c7c48e5f65b5b6891b58e74b9958b"
+    },
+    "irrigator-species-thyme": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "70c3806f551007736984a1240b1b8628ec37ac3b74049ee6ad64cd8392f92476"
+    },
+    "irrigator-species-rosemary": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "7bafcda7b542de7cc1e8c83d97a5e3edd5e135e24130a1bc6b4f1ba21d8eef19"
+    },
+    "irrigator-species-rhamnus_lycioides": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "6d605fc7b707970a49523060e83fd350ec3b64951bcb2890c90a38d230e144ec"
+    },
+    "irrigator-species-ephedra_fragilis": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "9d1df89a5b3c5539321bb0335607ed49a6995f2a9e2432e1b061805c686a85fb"
+    },
+    "irrigator-species-ziziphus": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "1cabd34320b711293f7e8fc4d75bd910ad5893706ac05eb69edb4c27612464f4"
+    },
+    "irrigator-species-lycium": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "1a53a5151a8c7e7eebfbe2cd502fc28fac5ad5cdade1c9847f42b8c505bb1271"
+    },
+    "irrigator-species-salsola": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "a043742c292b1552ab5afba46c4d5944458231ab349fbb4bf71ac89e39e1e213"
+    },
+    "irrigator-species-oleander": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "376a887ed58cef6de788916b17994b611330186a4538407e8f4932c641c445c8"
+    },
+    "irrigator-species-tamarix": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "b2ec40ea33384cb03ce263fb1e2a46c49d72a4208d2dd6cb5f965f7264d1482d"
+    },
+    "irrigator-species-holm_oak": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "4aa3962e50cb2b26bf9f9c84409f06fa1beeb605bf1a96a0dc322a025a1748b5"
+    },
+    "irrigator-species-phillyrea_angustifolia": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "dc9307f23a4ef0e2bbd37b046e81df718f6f392b041cc89d0e35c853dd2f5549"
+    },
+    "irrigator-species-phillyrea_latifolia": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "21bcb3ffe289e4e2adcaffb0dba63062576a1f708ce2b8227601673767bc6163"
+    },
+    "irrigator-species-myrtle": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "9b64a812ee210bb56c3eb8c7829f1f9b6fdeb02baee0d3825061fc6018200d8a"
+    },
+    "irrigator-species-terebinth": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "366966e614dbdea498726084e30323a7f075afbe6d51b90d627a17b940970457"
+    },
+    "irrigator-species-cork_oak": {
+      "file": "scenarios/planting-catalog-v2.json + scenarios/plant-names.json",
+      "record_hash": "09945374fe4c6eaf7d30cdcd1cc470b56a60344204c1553d28dec67621c5e778"
+    },
+    "irrigator-irrigation_profile-carob": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "b3a2cc0d6e99a949eab9b6fd249c4ecc43238f87eaa34ef9a4ef4595f2acefd5"
+    },
+    "irrigator-irrigation_profile-wild_olive": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "364f0ab5139db2897c8e6de52104c74beee8a314e47d4784841796394970ce25"
+    },
+    "irrigator-irrigation_profile-lentisk": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "e08e848e380b2cbc99e9f6fb0ee8b07f3db98f108c4802058be5dd0765127095"
+    },
+    "irrigator-irrigation_profile-buckthorn": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "774ef1cc43e3f535f493e61ca4089594234388a08e7279b9f11f1024a0f31634"
+    },
+    "irrigator-irrigation_profile-palmetto": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "cb5358cce161dde252f62f876f216949f6f6db1c4aca615d54ef92b9f71bc3b4"
+    },
+    "irrigator-irrigation_profile-retama": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "d7e3d8d23258918f3b8f8af2c43ed544718233fae0564af50028d8d889c0afe5"
+    },
+    "irrigator-irrigation_profile-esparto": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "7d6a83cf7187457115b38e03a7040bcfc5ecd59968346ea54a07678fe3d922ee"
+    },
+    "irrigator-irrigation_profile-thyme": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "5041700e33c6f6e13fd8a01c0c6518923627a15b3da78ef34b4d67056e1da87b"
+    },
+    "irrigator-irrigation_profile-rosemary": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "a03e0f5bb6408dc9072ff9a9ca0dd09679dad93f8629cbc42a78f0fbd952b77a"
+    },
+    "irrigator-irrigation_profile-rhamnus_lycioides": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "e8a5ca66a146930534dc065f783b4be1746f9f4d843887a975856102d74a565d"
+    },
+    "irrigator-irrigation_profile-ephedra_fragilis": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "9fec9b5a461e95153268a55f88c5f78ebdd49f6b40afd9717e54bf142066fb25"
+    },
+    "irrigator-irrigation_profile-ziziphus": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "4593c4e21b828fca98e15bbae8d436fc3e54564621bcbd96108a0e380f129fc4"
+    },
+    "irrigator-irrigation_profile-lycium": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "447258ebfac54302d939ddf9f2cfd6e43d1a70a7c7d23ac390346edb64cdf349"
+    },
+    "irrigator-irrigation_profile-salsola": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "95c2d168671021bc5f2fd7c346ebee97b69d69f985008830c1eaa65a7c9afc90"
+    },
+    "irrigator-irrigation_profile-oleander": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "8b6fbf4f4a4218ea140eec1b879feeb8f9553ee6614547c8478e7b87a98608be"
+    },
+    "irrigator-irrigation_profile-tamarix": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "4065908f9e6d2165724fc2fbfa81a32b5f2aa36abc1ddf69138158442b4695a0"
+    },
+    "irrigator-irrigation_profile-kermes_oak": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "d0cf6f48afa8c1211bf5be8463204ae0c5aac345d13742a9994a4e093d885b11"
+    },
+    "irrigator-irrigation_profile-holm_oak": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "96ce714256c80e982a04c7dc9bdc4150f598e4c6b9e12754e5a38d7be63578e7"
+    },
+    "irrigator-irrigation_profile-phillyrea_angustifolia": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "06908993d05e0dbe09b0d7288c96b2c60b95c974b47aa1e74b58d487cf107ed6"
+    },
+    "irrigator-irrigation_profile-phillyrea_latifolia": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "e086080b8837db27c0ed1a5d3ed5308dc344528e494e5be162da057e59f5689c"
+    },
+    "irrigator-irrigation_profile-myrtle": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "6c02c4cbf7f4a8a4791cc690166b7bdca9f9bd41a1a01be439edbaab90c25361"
+    },
+    "irrigator-irrigation_profile-terebinth": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "3787619bb0fc86c463b1638bc9733a1a7c8bbf80bf9e176e1976bb4045bc2a0b"
+    },
+    "irrigator-irrigation_profile-cork_oak": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "a95559f34690a37232c56de712e9b74df2c45ebd1a3ac2bdf8470e7a5c70ef93"
+    },
+    "irrigator-reservoir_system-growboxx": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "2306fdcb229ea52e784d7e605d331dbdbff54fb4d18f70cf07d6ee9e5a549cd2"
+    },
+    "irrigator-reservoir_system-cocoon": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "5d12f81bcad293982052f98604db05a6ae8127487b696aa24cb1e837c8a2aabe"
+    },
+    "irrigator-reservoir_system-waterboxx": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "72a7350974041b68258e87c9b557f0c701649e24fbb821cc543591c8e8b085a6"
+    },
+    "irrigator-drone_platform-matrice-350": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "e3b6fd94bd9211567268ecab23770ecb3149480fbae3842728306a267681a5a5"
+    },
+    "irrigator-drone_platform-agras-t25": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "ed2d2da738ef73f9db39c896b38691c5b55e4e9a185fc612ad2f5faa9f36b862"
+    },
+    "irrigator-drone_platform-matrice-5td": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "bbf7f6064e19ed80f6a55109f7c6079a668f0d7fe92c2a2285542c21f87288d7"
+    },
+    "irrigator-drone_platform-hypothetical-small": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "0f3be8d18a843b5ffa0a6da947ebb10306c11a7cc4b44dcdeb6079e782a68280"
+    },
+    "irrigator-drone_base-manual-water-power": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "7a6e887757cb4b6780b9e3bc00a0028221ae4022f4236dc9dc9a2d7b901bfdb6"
+    },
+    "irrigator-drone_base-dock-4": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "acf28733522a4a9ec2ff4ef450e2f26b3fc4a3e02486447a911ba22da780956a"
+    },
+    "irrigator-drone_base-agri-refill": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "60f3be7c00176fad526f697623f35d2094973d81ee9392a4675b357aef2a64fd"
+    },
+    "irrigator-research_topic-R1": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "ef4e59ec0fb808476b8d80237e8b0880525aa354bd4b67ab63f14f6a8f5684c5"
+    },
+    "irrigator-research_topic-R2": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "a84ae1eb8f6fb853f3d8be9bb98f7d69f471d5d081f40b8c0455d859a7a89319"
+    },
+    "irrigator-research_topic-R3": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "dedd18e5cc35472b74570e446513f2c511a5f637df5b23103ae5d388289cdb7d"
+    },
+    "irrigator-research_topic-R4": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "05941bdad1600eb030deaef36aed9cc519e749f800e7cc92d7fb69863c271e7c"
+    },
+    "irrigator-research_topic-R5": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "31c46de18b519e4f7b2110cb6ebf8eed808ae119b8e9ff7684bae13d98cf3edf"
+    },
+    "irrigator-research_topic-R6": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "16d1788a13230fb86fcaec16db92be1d25d3d6bc034a1a03c51728279c049f11"
+    },
+    "irrigator-research_topic-R7": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "f2f9f9e2f7629a83e442d967201f4ccf275cd3a2c48f8b120976b6e80e82ee64"
+    },
+    "irrigator-research_topic-R8": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "4bd966334a21e9bdb437f9c9929f562d1f6a54691828ff6284dab1db1f0e15ef"
+    },
+    "irrigator-research_topic-R9": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "102e372f2cb707d145efe898ad2849e7d1f0bafe76056032b225d94776ee0c20"
+    },
+    "irrigator-research_topic-R10": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "83dd17cae718908642dc205a0b6ef096ee5f3ba91adfc60d52843675a359b8b7"
+    },
+    "irrigator-research_topic-R11": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "b9016f8676502ad198d7faaec781fd5c11e328976ca0cfd14681c7a688701bdd"
+    },
+    "irrigator-research_scenario-dry-weather-study": {
+      "file": "scenarios/drone-irrigator-research-v1.json",
+      "record_hash": "62c274187d02fd4d97689a37163b196721d64a1f9f0db165a0d6817516b44341"
+    },
+    "irrigator-cluster_template-carob-island": {
+      "file": "design_rules/drone_irrigator_v1.json",
+      "record_hash": "3dbfbcc7433e21a266ab6c9b08dfb6310148958315e626f0393ff1755e88ed3d"
+    },
+    "irrigator-cluster_template-coscoja-reference": {
+      "file": "design_rules/drone_irrigator_v1.json",
+      "record_hash": "fef42b0571204a19810bb523d8e758652f41bc22a1ccbc19396225a86131bf5e"
+    },
+    "irrigator-cluster_template-carob-control": {
+      "file": "design_rules/drone_irrigator_v1.json",
+      "record_hash": "bcbe31372a06ef2b6ce6783684a37dcb328fe55910fb672abb24588e4c605251"
+    }
+  },
+  "source_review": [
+    {
+      "document_id": "DRONE-001",
+      "sha256": "6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5",
+      "pages": [
+        113,
+        114
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "DRONE-002",
+      "sha256": "1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d",
+      "pages": [
+        9,
+        69,
+        87
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "DRONE-003",
+      "sha256": "b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688",
+      "pages": [
+        79,
+        80
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "DRONE-004",
+      "sha256": "0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4",
+      "pages": [
+        1
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "FOREST-002",
+      "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
+      "pages": [
+        131,
+        132,
+        133,
+        134
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "FOREST-003",
+      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "pages": [
+        3
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "IRR-001",
+      "sha256": "3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb",
+      "pages": [
+        1,
+        5
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "IRR-002",
+      "sha256": "3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762",
+      "pages": [
+        1,
+        2
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "IRR-003",
+      "sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "pages": [
+        92,
+        93,
+        110,
+        120,
+        143,
+        155
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "IRR-005",
+      "sha256": "c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "pages": [
+        80,
+        81,
+        109,
+        110,
+        112,
+        115
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "IRR-008",
+      "sha256": "d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563",
+      "pages": [
+        15,
+        61,
+        63
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    },
+    {
+      "document_id": "POLICY-003",
+      "sha256": "a1081d20b144db9cd233ba477ca79405ce0ec0a1eeecac57bd8052d78ee13cf3",
+      "pages": [
+        1
+      ],
+      "publication_context": "Exact unchanged original edition registered in documents.json; bibliographic context, review scope and source limitations recorded in drone_irrigator/research/SOURCE_REVIEW.md.",
+      "review_notes": "Inspected the complete selected PDF passages and adjacent context on 4 November 2026; critical tables/installation/specification pages visually checked. No source implies universal species water demand or a ready autonomous watering system."
+    }
+  ],
+  "reasons": {
+    "citations.consumers/knowledge_pilot": "Add reviewed citation memberships in ascending PDF-page order; retain existing relative order and original funding consumer memberships.",
+    "knowledge.metadata/coverage": "Extend Explorer roots/coverage to the reviewed irrigation collection while retaining original records and all six current feature contexts."
+  }
+}

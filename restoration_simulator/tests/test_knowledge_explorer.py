@@ -29,8 +29,8 @@ class KnowledgeExplorerTests(unittest.TestCase):
 
     def test_exact_membership_and_native_identities(self):
         value = self.snapshot
-        self.assertEqual(Counter(n['kind'] for n in value['nodes']), {'entity':16,'claim':21,'passage':18})
-        self.assertEqual(Counter(e['kind'] for e in value['edges']), {'relationship':11,'claim_subject':36,'claim_cites':26,'entity_cites':13})
+        self.assertEqual(Counter(n['kind'] for n in value['nodes']), {'entity':85,'claim':67,'passage':46})
+        self.assertEqual(Counter(e['kind'] for e in value['edges']), {'relationship':34,'claim_subject':170,'claim_cites':128,'entity_cites':184})
         self.assertEqual({n['id'] for n in value['nodes'] if n['kind']=='entity'}, set(self.ctx['entities']))
         self.assertEqual({n['id'] for n in value['nodes'] if n['kind']=='claim'}, set(self.ctx['data']['claims']))
         self.assertEqual({e['id'] for e in value['edges'] if e['kind']=='relationship'}, set(self.ctx['data']['relations']))
@@ -80,7 +80,7 @@ class KnowledgeExplorerTests(unittest.TestCase):
         result=graph._explorer_graph(ctx)
         passage=next(n for n in result['nodes'] if n['id']==p120['id'])
         self.assertEqual({r['role'] for r in passage['details']['citation_uses']},{'route requirements','fixture interpretation'})
-        self.assertEqual((len(result['nodes']),len(result['edges'])),(55,86))
+        self.assertEqual((len(result['nodes']),len(result['edges'])),(198,516))
         tension=next(i for i in self.snapshot['issues'] if i['id']=='issue:mr2-stock-source-tension')
         self.assertEqual({r['page'] for c in tension['claims'] for r in c['evidence']},{133,134})
         self.assertEqual(len(tension['claims']),2);self.assertNotIn('preferred',tension)

@@ -1,4 +1,5 @@
 import React,{createContext,useContext,useEffect,useMemo,useState,useSyncExternalStore} from "react";
+import {IrrigationResearchRecord} from "./IrrigationResearchRecord.jsx";
 import {DocumentLink} from "./DocumentLink.jsx";
 import {createEvidenceStore} from "./knowledgeEvidenceState.js";
 import "./KnowledgeEvidence.css";
@@ -16,6 +17,8 @@ function Sources({evidence}){
 }
 function Limitations({values}){return values.length>0?<ul className="knowledge-limitations">{values.map(v=><li key={v}>{v}</li>)}</ul>:null;}
 function Assumption({binding}){
+  if(["research_scenario","cluster_template"].includes(binding.adapter))return <IrrigationResearchRecord adapter={binding.adapter} value={binding.value}/>;
+  if(!["carob_density","mr2_geometry"].includes(binding.adapter))throw Error(`Unsupported knowledge assumption adapter ${binding.adapter}. Refresh compatible evidence before retrying.`);
   const current=binding.value;
   return <div className="knowledge-assumption"><strong>Current reference assumption</strong>
     {binding.adapter==="carob_density"?<p>Illustrative carob starting density: <strong>{current.value} plants per hectare</strong>.</p>:<>

@@ -1,11 +1,13 @@
 # Shared citation metadata
 
-`citations-v1.json` owns 21 citation uses across six registered document editions
+`citations-v1.json` owns 49 citation uses across 16 registered document editions
 and four consumers. The original five FUND-008 uses and their 14 checked mirrors
 in three funding libraries remain unchanged. The connected pilot reuses two of
 those uses and adds nine handbook, strategy and published-call uses, giving it
 11 source records. Milestone 6 adds four LIFE and three kermes oak uses, bringing
 the connected collection to 18 source records and the registry to 32 checked mirrors.
+The Drone Irrigator intake adds 28 citation uses from ten new PDF editions;
+the connected collection now has 46 source records and the registry 60 checked mirrors.
 The original 14 citation records remain unchanged. Other evidence retains its
 existing authority.
 
@@ -110,9 +112,10 @@ See the [implementation plan](../KNOWLEDGE_MILESTONE_2_PLAN.md) and
 
 ## Connected knowledge pilot
 
-`connected-pilot-v1.json` now contains 21 curated claims, 16 typed entities, 11
-explicit relationships, three unresolved issues and 26 registered source/feature
-bindings. It connects AL20 3.4, carob, MR2, LIFE Nature and kermes oak to their
+`connected-pilot-v1.json` now contains 67 claims, 85 typed entities, 34
+explicit relationships, eight unresolved issues and 95 native bindings.
+The Drone Irrigator expansion includes deliberately unresolved species-water and
+engineering gaps; counts do not imply scientific completeness. It connects AL20 3.4, carob, MR2, LIFE Nature and kermes oak to their
 evidence. The original filename and dataset identity are retained. Its claim categories
 distinguish official requirements, strategy content, technical guidance, project
 assumptions and bounded research gaps. Each claim retains its applicability,
@@ -268,8 +271,8 @@ contains dataset identity/hash, review date, coverage, `consumer_registry_hash`,
 authority; they are not separately maintained explorer metadata. The dataset hash
 still covers exactly the pilot, citation registry and resolved bindings.
 
-The current projection has 55 nodes (16 entities, 21 claims, 18 passages) and
-86 edges (11 native relationships, 36 subject links, 26 claim citations and 13 entity
+The current projection has 198 nodes (85 entities, 67 claims, 46 passages) and
+516 edges (34 native relationships, 170 subject links, 128 claim citations and 184 entity
 citations). The original 34-node/52-edge subset and curated records remain intact. Native IDs are retained. Derived IDs are `edge:` followed by the
 SHA-256 of Python's UTF-8 `json.dumps([kind, source, target], sort_keys=True,
 ensure_ascii=False, allow_nan=False)` output. Source links say **cites**, which
@@ -361,3 +364,21 @@ additions advance the dataset hash. The legacy `registered-pilot-only` coverage
 value still means bounded registered knowledge, not exhaustive research or project
 impact coverage. No database, automated research, new operational rule or saved
 project migration was added. See the [Milestone 6 record](../KNOWLEDGE_MILESTONE_6.md).
+
+## Drone Irrigator research expansion — 4 November 2026
+
+The [research/adoption record](../DRONE_IRRIGATOR_RESEARCH.md) documents the R1–R11
+review, ten original PDF accessions, exact passage checks, owner-resolved profiles
+for all 23 catalogue species, and prepared-only cluster/scenario records. Native
+`irrigation_profile`, `reservoir_system`, `drone_platform`, `drone_base`,
+`research_topic`, `research_scenario` and `cluster_template` adapters are registered
+in code. `irrigation_profile_for_species` validates the native species identity.
+Species water demand remains explicitly unknown; product release claims and trial
+water gifts do not become defaults. Supplementary web observations are visible
+with review dates and limits, separate from registered PDF citations.
+
+The accepted `intake/drone-irrigator-v1/` receipt retains Explorer-only adoption.
+All original records and six feature contexts remain fingerprint-protected. No
+Designer generation rule, plant price, project/save format or simulator is adopted.
+The profile API is read-only: `/api/plants/irrigation-profiles`. Validate owner data
+and prepared central references with `python -m backend.irrigation_research --check`.

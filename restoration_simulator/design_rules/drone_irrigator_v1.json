@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "id": "drone-irrigator-clusters-2026-11-04-v1",
+  "adoption": "prepared_not_adopted",
+  "templates": {
+    "carob-island": {
+      "title": "Carob island — candidate geometry",
+      "summary": "Prepared template referencing the existing palette. Counts, numerical spacing and drone clearance require explicit reviewed choices.",
+      "citation_ids": [
+        "pilot:FOREST-002:p131:mr2-guidance",
+        "pilot:FOREST-002:p132:mr2-guidance",
+        "pilot:FOREST-002:p133:mr2-guidance",
+        "pilot:FOREST-002:p134:mr2-guidance"
+      ],
+      "limitations": [
+        "Illustrative association only; not a proven compatible planting recipe or adopted Designer operation."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Set counts and resolve central dimensions/density at adoption; validate reservoir footprint and aerial service access."
+      ],
+      "web_sources": [],
+      "adoption": "prepared_not_adopted",
+      "source_palette": "mr2_mix",
+      "species_ids": [
+        "carob",
+        "lentisk",
+        "wild_olive"
+      ],
+      "spacing_policy": "reference_current_designer_rules_then_review_access",
+      "placement_requirements": [
+        "Use stable species IDs and current central diameter/density/placement rule identities.",
+        "Retain distinct reservoir footprint, root spacing and mature crown assumptions.",
+        "Check reachable exposed inlet, rotor/hose clearance, terrain and growth.",
+        "Seed random cluster placement; reject or explain unplaced instances rather than omit them."
+      ]
+    },
+    "coscoja-reference": {
+      "title": "Coscoja-related cluster — candidate geometry",
+      "summary": "Prepared template referencing the existing palette. Counts, numerical spacing and drone clearance require explicit reviewed choices.",
+      "citation_ids": [
+        "intake:FOREST-003:p3:kermes-context"
+      ],
+      "limitations": [
+        "Illustrative association only; not a proven compatible planting recipe or adopted Designer operation."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Set counts and resolve central dimensions/density at adoption; validate reservoir footprint and aerial service access."
+      ],
+      "web_sources": [],
+      "adoption": "prepared_not_adopted",
+      "source_palette": "coscoja_series",
+      "species_ids": [
+        "kermes_oak",
+        "rhamnus_lycioides"
+      ],
+      "spacing_policy": "reference_current_designer_rules_then_review_access",
+      "placement_requirements": [
+        "Use stable species IDs and current central diameter/density/placement rule identities.",
+        "Retain distinct reservoir footprint, root spacing and mature crown assumptions.",
+        "Check reachable exposed inlet, rotor/hose clearance, terrain and growth.",
+        "Seed random cluster placement; reject or explain unplaced instances rather than omit them."
+      ]
+    },
+    "carob-control": {
+      "title": "Single-species carob control cluster",
+      "summary": "Prepared template referencing the existing palette. Counts, numerical spacing and drone clearance require explicit reviewed choices.",
+      "citation_ids": [
+        "pilot:FOREST-002:p131:mr2-guidance",
+        "pilot:FOREST-002:p132:mr2-guidance",
+        "pilot:FOREST-002:p133:mr2-guidance",
+        "pilot:FOREST-002:p134:mr2-guidance"
+      ],
+      "limitations": [
+        "Illustrative association only; not a proven compatible planting recipe or adopted Designer operation."
+      ],
+      "facts": {},
+      "open_questions": [
+        "Set counts and resolve central dimensions/density at adoption; validate reservoir footprint and aerial service access."
+      ],
+      "web_sources": [],
+      "adoption": "prepared_not_adopted",
+      "source_palette": "mr2_mix",
+      "species_ids": [
+        "carob"
+      ],
+      "spacing_policy": "reference_current_designer_rules_then_review_access",
+      "placement_requirements": [
+        "Use stable species IDs and current central diameter/density/placement rule identities.",
+        "Retain distinct reservoir footprint, root spacing and mature crown assumptions.",
+        "Check reachable exposed inlet, rotor/hose clearance, terrain and growth.",
+        "Seed random cluster placement; reject or explain unplaced instances rather than omit them."
+      ]
+    }
+  }
+}

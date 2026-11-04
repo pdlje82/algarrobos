@@ -1,7 +1,7 @@
 {
   "version": 1,
   "id": "algarroba-connected-pilot-v1",
-  "reviewed_on": "2026-11-03",
+  "reviewed_on": "2026-11-04",
   "sources": {
     "pilot:FUND-009:p1:call-context": {
       "document_id": "FUND-009",
@@ -11,6 +11,262 @@
       "sha256": "ea112609b74de7f24a7933541d2917dfa2b9f2ea61306f6c2dbc3e1099b1c11e",
       "verified_on": "2026-11-03"
     },
+    "intake:FOREST-003:p1:kermes-context": {
+      "document_id": "FOREST-003",
+      "page": 1,
+      "label": "FOREST-003 - PDF page 1",
+      "role": "Kermes oak ecology and vegetation context",
+      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "verified_on": "2026-11-03"
+    },
+    "irrigator:DRONE-004:p1": {
+      "document_id": "DRONE-004",
+      "page": 1,
+      "label": "DRONE-004 - Miwa et al - Wire Supplied Drone Citrus Watering Experiment - 2024 — PDF page 1",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "0fcab7afd8fa10cb4b2db1a614ab124e58f6d13a04cb9b0614172dbf83bd98e4",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-001:p1": {
+      "document_id": "IRR-001",
+      "page": 1,
+      "label": "IRR-001 - Groasis - Growboxx Biodegradable Reservoir Datasheet - undated — PDF page 1",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-002:p1": {
+      "document_id": "IRR-002",
+      "page": 1,
+      "label": "IRR-002 - Groasis - Waterboxx Reusable Reservoir Datasheet - Version 2 — PDF page 1",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:POLICY-003:p1": {
+      "document_id": "POLICY-003",
+      "page": 1,
+      "label": "POLICY-003 - EASA - Open Category Conditions - FAQ 116450 — PDF page 1",
+      "role": "Official open-category guidance; no site-specific flight clearance",
+      "sha256": "a1081d20b144db9cd233ba477ca79405ce0ec0a1eeecac57bd8052d78ee13cf3",
+      "verified_on": "2026-11-04"
+    },
+    "intake:FOREST-003:p2:kermes-context": {
+      "document_id": "FOREST-003",
+      "page": 2,
+      "label": "FOREST-003 - PDF page 2",
+      "role": "Kermes oak ecology and vegetation context",
+      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "verified_on": "2026-11-03"
+    },
+    "irrigator:IRR-002:p2": {
+      "document_id": "IRR-002",
+      "page": 2,
+      "label": "IRR-002 - Groasis - Waterboxx Reusable Reservoir Datasheet - Version 2 — PDF page 2",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "3fc0d3cc7ee4a715577c4130e9300e1bd68bfce8b4aae1caf76ba1240f552762",
+      "verified_on": "2026-11-04"
+    },
+    "intake:FOREST-003:p3:kermes-context": {
+      "document_id": "FOREST-003",
+      "page": 3,
+      "label": "FOREST-003 - PDF page 3",
+      "role": "Kermes oak ecology and vegetation context",
+      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
+      "verified_on": "2026-11-03"
+    },
+    "irrigator:IRR-001:p5": {
+      "document_id": "IRR-001",
+      "page": 5,
+      "label": "IRR-001 - Groasis - Growboxx Biodegradable Reservoir Datasheet - undated — PDF page 5",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "3d9a9ed2764ec1bf1023668aeb923e896b7ae76bbdecbb201e68d8043e4ad0fb",
+      "verified_on": "2026-11-04"
+    },
+    "intake:FUND-016:p8:nature-context": {
+      "document_id": "FUND-016",
+      "page": 8,
+      "label": "FUND-016 - PDF page 8",
+      "role": "Nature and Biodiversity programme context",
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FUND-016:p9:nature-context": {
+      "document_id": "FUND-016",
+      "page": 9,
+      "label": "FUND-016 - PDF page 9",
+      "role": "Nature and Biodiversity programme context",
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "verified_on": "2026-11-03"
+    },
+    "irrigator:DRONE-002:p9": {
+      "document_id": "DRONE-002",
+      "page": 9,
+      "label": "DRONE-002 - DJI - Dock 4 and Matrice 5TD User Manual - Version 1.0 - 2026-10 — PDF page 9",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-008:p15": {
+      "document_id": "IRR-008",
+      "page": 15,
+      "label": "IRR-008 - LIFE NIEBLAS - D3 Reforestation Execution and Results Monitoring - 2025-03 — PDF page 15",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563",
+      "verified_on": "2026-11-04"
+    },
+    "intake:FUND-016:p20:sap-framework": {
+      "document_id": "FUND-016",
+      "page": 20,
+      "label": "FUND-016 - PDF page 20",
+      "role": "Standard Action Project framework; not an assessed call",
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "verified_on": "2026-11-03"
+    },
+    "intake:FUND-016:p21:sap-framework": {
+      "document_id": "FUND-016",
+      "page": 21,
+      "label": "FUND-016 - PDF page 21",
+      "role": "Standard Action Project framework; not an assessed call",
+      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
+      "verified_on": "2026-11-03"
+    },
+    "irrigator:IRR-008:p61": {
+      "document_id": "IRR-008",
+      "page": 61,
+      "label": "IRR-008 - LIFE NIEBLAS - D3 Reforestation Execution and Results Monitoring - 2025-03 — PDF page 61",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-008:p63": {
+      "document_id": "IRR-008",
+      "page": 63,
+      "label": "IRR-008 - LIFE NIEBLAS - D3 Reforestation Execution and Results Monitoring - 2025-03 — PDF page 63",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "d886dd7c9aa87a59351c443a7bf79b3023b0996e8d932d9809f2b14366761563",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-002:p69": {
+      "document_id": "DRONE-002",
+      "page": 69,
+      "label": "DRONE-002 - DJI - Dock 4 and Matrice 5TD User Manual - Version 1.0 - 2026-10 — PDF page 69",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-003:p79": {
+      "document_id": "DRONE-003",
+      "page": 79,
+      "label": "DRONE-003 - DJI - Agras T50 and T25 Flight Manual - Version 1.0 - 2025-01 — PDF page 79",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-003:p80": {
+      "document_id": "DRONE-003",
+      "page": 80,
+      "label": "DRONE-003 - DJI - Agras T50 and T25 Flight Manual - Version 1.0 - 2025-01 — PDF page 80",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "b2edf94fa1af54f44f717fa1048f960aeee3ba6432f3bea4c41b9ccacea12688",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p80": {
+      "document_id": "IRR-005",
+      "page": 80,
+      "label": "IRR-005 - MENAQUA - Cocoon Assessment in Jordan and Lebanon - 2021-12 — PDF page 80",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p81": {
+      "document_id": "IRR-005",
+      "page": 81,
+      "label": "IRR-005 - MENAQUA - Cocoon Assessment in Jordan and Lebanon - 2021-12 — PDF page 81",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-002:p87": {
+      "document_id": "DRONE-002",
+      "page": 87,
+      "label": "DRONE-002 - DJI - Dock 4 and Matrice 5TD User Manual - Version 1.0 - 2026-10 — PDF page 87",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "1755b5201ecc4c2bfcc4bdfeb8c59ca819928ab464add461c986cd3aca27f92d",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-003:p92": {
+      "document_id": "IRR-003",
+      "page": 92,
+      "label": "IRR-003 - LIFE NIEBLAS - Technical Manual - 2025 — PDF page 92",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-003:p93": {
+      "document_id": "IRR-003",
+      "page": 93,
+      "label": "IRR-003 - LIFE NIEBLAS - Technical Manual - 2025 — PDF page 93",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p109": {
+      "document_id": "IRR-005",
+      "page": 109,
+      "label": "IRR-005 - MENAQUA - Cocoon Assessment in Jordan and Lebanon - 2021-12 — PDF page 109",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-003:p110": {
+      "document_id": "IRR-003",
+      "page": 110,
+      "label": "IRR-003 - LIFE NIEBLAS - Technical Manual - 2025 — PDF page 110",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p110": {
+      "document_id": "IRR-005",
+      "page": 110,
+      "label": "IRR-005 - MENAQUA - Cocoon Assessment in Jordan and Lebanon - 2021-12 — PDF page 110",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p112": {
+      "document_id": "IRR-005",
+      "page": 112,
+      "label": "IRR-005 - MENAQUA - Cocoon Assessment in Jordan and Lebanon - 2021-12 — PDF page 112",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-001:p113": {
+      "document_id": "DRONE-001",
+      "page": 113,
+      "label": "DRONE-001 - DJI - Matrice 350 RTK User Manual - Version 1.2 - 2024-08 — PDF page 113",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:DRONE-001:p114": {
+      "document_id": "DRONE-001",
+      "page": 114,
+      "label": "DRONE-001 - DJI - Matrice 350 RTK User Manual - Version 1.2 - 2024-08 — PDF page 114",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "6e1642a2a73185d7c1b379f27fda6221437c4b305f372e73782bc7d5340bcaa5",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-005:p115": {
+      "document_id": "IRR-005",
+      "page": 115,
+      "label": "IRR-005 - MENAQUA - Cocoon Assessment in Jordan and Lebanon - 2021-12 — PDF page 115",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "c2028b3ccb69ba59890ae476c6562c3ef6cb2de82f213ad17302ae592399fc39",
+      "verified_on": "2026-11-04"
+    },
     "FUND-008-p120-route-requirements": {
       "document_id": "FUND-008",
       "page": 120,
@@ -18,6 +274,14 @@
       "role": "route requirements",
       "sha256": "48c3cc653a5f38bae9480009873bfdb35f26133f513e8d2894d872216ccf6399",
       "verified_on": "2026-11-01"
+    },
+    "irrigator:IRR-003:p120": {
+      "document_id": "IRR-003",
+      "page": 120,
+      "label": "IRR-003 - LIFE NIEBLAS - Technical Manual - 2025 — PDF page 120",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "verified_on": "2026-11-04"
     },
     "FUND-008-p121-route-requirements": {
       "document_id": "FUND-008",
@@ -83,68 +347,28 @@
       "sha256": "75262e343d4d1e2f1d981b08c9e36a73c9a2c5e9130d14af951124d4cc5d84b8",
       "verified_on": "2026-11-03"
     },
+    "irrigator:IRR-003:p143": {
+      "document_id": "IRR-003",
+      "page": 143,
+      "label": "IRR-003 - LIFE NIEBLAS - Technical Manual - 2025 — PDF page 143",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "verified_on": "2026-11-04"
+    },
+    "irrigator:IRR-003:p155": {
+      "document_id": "IRR-003",
+      "page": 155,
+      "label": "IRR-003 - LIFE NIEBLAS - Technical Manual - 2025 — PDF page 155",
+      "role": "Reviewed product or field-study passage; context/limitations retained; no automatic operational adoption",
+      "sha256": "90e6fa5730d2f3d17cc59c2e0bf3a2949ebaf65494ddbd20ed4f214dfda42ec2",
+      "verified_on": "2026-11-04"
+    },
     "pilot:FUND-013:p395:strategy-need": {
       "document_id": "FUND-013",
       "page": 395,
       "label": "FUND-013 - PDF page 395",
       "role": "prioritised strategy need; not grant points",
       "sha256": "1c5b293d640dd3c8213aa314d6b791754ba8e82c3a0db32639236402adc4c796",
-      "verified_on": "2026-11-03"
-    },
-    "intake:FUND-016:p8:nature-context": {
-      "document_id": "FUND-016",
-      "page": 8,
-      "label": "FUND-016 - PDF page 8",
-      "role": "Nature and Biodiversity programme context",
-      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
-      "verified_on": "2026-11-03"
-    },
-    "intake:FUND-016:p9:nature-context": {
-      "document_id": "FUND-016",
-      "page": 9,
-      "label": "FUND-016 - PDF page 9",
-      "role": "Nature and Biodiversity programme context",
-      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
-      "verified_on": "2026-11-03"
-    },
-    "intake:FUND-016:p20:sap-framework": {
-      "document_id": "FUND-016",
-      "page": 20,
-      "label": "FUND-016 - PDF page 20",
-      "role": "Standard Action Project framework; not an assessed call",
-      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
-      "verified_on": "2026-11-03"
-    },
-    "intake:FUND-016:p21:sap-framework": {
-      "document_id": "FUND-016",
-      "page": 21,
-      "label": "FUND-016 - PDF page 21",
-      "role": "Standard Action Project framework; not an assessed call",
-      "sha256": "1fd344396d9a760c033e9ea6be17198020f984f687268fb2a09b8bbc88cfcde5",
-      "verified_on": "2026-11-03"
-    },
-    "intake:FOREST-003:p1:kermes-context": {
-      "document_id": "FOREST-003",
-      "page": 1,
-      "label": "FOREST-003 - PDF page 1",
-      "role": "Kermes oak ecology and vegetation context",
-      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
-      "verified_on": "2026-11-03"
-    },
-    "intake:FOREST-003:p2:kermes-context": {
-      "document_id": "FOREST-003",
-      "page": 2,
-      "label": "FOREST-003 - PDF page 2",
-      "role": "Kermes oak ecology and vegetation context",
-      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
-      "verified_on": "2026-11-03"
-    },
-    "intake:FOREST-003:p3:kermes-context": {
-      "document_id": "FOREST-003",
-      "page": 3,
-      "label": "FOREST-003 - PDF page 3",
-      "role": "Kermes oak ecology and vegetation context",
-      "sha256": "23c27119b7e701374383646e43069d0caa401f870833b5e4d6abea30c1da1f81",
       "verified_on": "2026-11-03"
     }
   },
@@ -366,6 +590,1239 @@
       ],
       "limitations": [
         "The displayed name is the retained Designer label and does not resolve the source vernacular/Latin naming tension."
+      ]
+    },
+    "species:wild_olive": {
+      "type": "species",
+      "native_id": "wild_olive",
+      "binding_id": "irrigator-species-wild_olive",
+      "aliases": [
+        "Wild olive",
+        "Olea europaea var. sylvestris"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:lentisk": {
+      "type": "species",
+      "native_id": "lentisk",
+      "binding_id": "irrigator-species-lentisk",
+      "aliases": [
+        "Lentisk",
+        "Pistacia lentiscus"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:buckthorn": {
+      "type": "species",
+      "native_id": "buckthorn",
+      "binding_id": "irrigator-species-buckthorn",
+      "aliases": [
+        "Buckthorn",
+        "Rhamnus alaternus"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:palmetto": {
+      "type": "species",
+      "native_id": "palmetto",
+      "binding_id": "irrigator-species-palmetto",
+      "aliases": [
+        "Palmetto",
+        "Chamaerops humilis"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:retama": {
+      "type": "species",
+      "native_id": "retama",
+      "binding_id": "irrigator-species-retama",
+      "aliases": [
+        "Retama",
+        "Retama sphaerocarpa"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:esparto": {
+      "type": "species",
+      "native_id": "esparto",
+      "binding_id": "irrigator-species-esparto",
+      "aliases": [
+        "Esparto",
+        "Macrochloa tenacissima"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:thyme": {
+      "type": "species",
+      "native_id": "thyme",
+      "binding_id": "irrigator-species-thyme",
+      "aliases": [
+        "Thyme",
+        "Thymus hyemalis"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:rosemary": {
+      "type": "species",
+      "native_id": "rosemary",
+      "binding_id": "irrigator-species-rosemary",
+      "aliases": [
+        "Rosemary",
+        "Salvia rosmarinus"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:rhamnus_lycioides": {
+      "type": "species",
+      "native_id": "rhamnus_lycioides",
+      "binding_id": "irrigator-species-rhamnus_lycioides",
+      "aliases": [
+        "Mediterranean buckthorn",
+        "Rhamnus lycioides"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:ephedra_fragilis": {
+      "type": "species",
+      "native_id": "ephedra_fragilis",
+      "binding_id": "irrigator-species-ephedra_fragilis",
+      "aliases": [
+        "Joint pine",
+        "Ephedra fragilis"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:ziziphus": {
+      "type": "species",
+      "native_id": "ziziphus",
+      "binding_id": "irrigator-species-ziziphus",
+      "aliases": [
+        "Ziziphus",
+        "Ziziphus lotus"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:lycium": {
+      "type": "species",
+      "native_id": "lycium",
+      "binding_id": "irrigator-species-lycium",
+      "aliases": [
+        "Lycium",
+        "Lycium intricatum"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:salsola": {
+      "type": "species",
+      "native_id": "salsola",
+      "binding_id": "irrigator-species-salsola",
+      "aliases": [
+        "Salsola",
+        "Salsola webbii"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:oleander": {
+      "type": "species",
+      "native_id": "oleander",
+      "binding_id": "irrigator-species-oleander",
+      "aliases": [
+        "Oleander",
+        "Nerium oleander"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:tamarix": {
+      "type": "species",
+      "native_id": "tamarix",
+      "binding_id": "irrigator-species-tamarix",
+      "aliases": [
+        "Tamarix (tree form)",
+        "Tamarix spp."
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:holm_oak": {
+      "type": "species",
+      "native_id": "holm_oak",
+      "binding_id": "irrigator-species-holm_oak",
+      "aliases": [
+        "Holm oak",
+        "Quercus rotundifolia"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:phillyrea_angustifolia": {
+      "type": "species",
+      "native_id": "phillyrea_angustifolia",
+      "binding_id": "irrigator-species-phillyrea_angustifolia",
+      "aliases": [
+        "Narrow-leaved mock privet",
+        "Phillyrea angustifolia"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:phillyrea_latifolia": {
+      "type": "species",
+      "native_id": "phillyrea_latifolia",
+      "binding_id": "irrigator-species-phillyrea_latifolia",
+      "aliases": [
+        "Broad-leaved mock privet",
+        "Phillyrea latifolia"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:myrtle": {
+      "type": "species",
+      "native_id": "myrtle",
+      "binding_id": "irrigator-species-myrtle",
+      "aliases": [
+        "Common myrtle",
+        "Myrtus communis"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:terebinth": {
+      "type": "species",
+      "native_id": "terebinth",
+      "binding_id": "irrigator-species-terebinth",
+      "aliases": [
+        "Terebinth",
+        "Pistacia terebinthus"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "species:cork_oak": {
+      "type": "species",
+      "native_id": "cork_oak",
+      "binding_id": "irrigator-species-cork_oak",
+      "aliases": [
+        "Cork oak",
+        "Quercus suber"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Identity alone does not establish reservoir or site suitability."
+      ]
+    },
+    "irrigation_profile:carob": {
+      "type": "irrigation_profile",
+      "native_id": "carob",
+      "binding_id": "irrigator-irrigation_profile-carob",
+      "aliases": [
+        "Drone Irrigator",
+        "carob",
+        "Ceratonia siliqua"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112",
+        "irrigator:IRR-005:p80",
+        "irrigator:IRR-005:p81",
+        "irrigator:IRR-005:p115",
+        "irrigator:IRR-002:p1"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:wild_olive": {
+      "type": "irrigation_profile",
+      "native_id": "wild_olive",
+      "binding_id": "irrigator-irrigation_profile-wild_olive",
+      "aliases": [
+        "Drone Irrigator",
+        "wild_olive",
+        "Olea europaea var. sylvestris"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand.",
+        "Cultivated-olive results are not automatically evidence for Olea europaea var. sylvestris."
+      ]
+    },
+    "irrigation_profile:lentisk": {
+      "type": "irrigation_profile",
+      "native_id": "lentisk",
+      "binding_id": "irrigator-irrigation_profile-lentisk",
+      "aliases": [
+        "Drone Irrigator",
+        "lentisk",
+        "Pistacia lentiscus"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:buckthorn": {
+      "type": "irrigation_profile",
+      "native_id": "buckthorn",
+      "binding_id": "irrigator-irrigation_profile-buckthorn",
+      "aliases": [
+        "Drone Irrigator",
+        "buckthorn",
+        "Rhamnus alaternus"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:palmetto": {
+      "type": "irrigation_profile",
+      "native_id": "palmetto",
+      "binding_id": "irrigator-irrigation_profile-palmetto",
+      "aliases": [
+        "Drone Irrigator",
+        "palmetto",
+        "Chamaerops humilis"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:retama": {
+      "type": "irrigation_profile",
+      "native_id": "retama",
+      "binding_id": "irrigator-irrigation_profile-retama",
+      "aliases": [
+        "Drone Irrigator",
+        "retama",
+        "Retama sphaerocarpa"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:esparto": {
+      "type": "irrigation_profile",
+      "native_id": "esparto",
+      "binding_id": "irrigator-irrigation_profile-esparto",
+      "aliases": [
+        "Drone Irrigator",
+        "esparto",
+        "Macrochloa tenacissima"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:thyme": {
+      "type": "irrigation_profile",
+      "native_id": "thyme",
+      "binding_id": "irrigator-irrigation_profile-thyme",
+      "aliases": [
+        "Drone Irrigator",
+        "thyme",
+        "Thymus hyemalis"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:rosemary": {
+      "type": "irrigation_profile",
+      "native_id": "rosemary",
+      "binding_id": "irrigator-irrigation_profile-rosemary",
+      "aliases": [
+        "Drone Irrigator",
+        "rosemary",
+        "Salvia rosmarinus"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:rhamnus_lycioides": {
+      "type": "irrigation_profile",
+      "native_id": "rhamnus_lycioides",
+      "binding_id": "irrigator-irrigation_profile-rhamnus_lycioides",
+      "aliases": [
+        "Drone Irrigator",
+        "rhamnus_lycioides",
+        "Rhamnus lycioides"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:ephedra_fragilis": {
+      "type": "irrigation_profile",
+      "native_id": "ephedra_fragilis",
+      "binding_id": "irrigator-irrigation_profile-ephedra_fragilis",
+      "aliases": [
+        "Drone Irrigator",
+        "ephedra_fragilis",
+        "Ephedra fragilis"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:ziziphus": {
+      "type": "irrigation_profile",
+      "native_id": "ziziphus",
+      "binding_id": "irrigator-irrigation_profile-ziziphus",
+      "aliases": [
+        "Drone Irrigator",
+        "ziziphus",
+        "Ziziphus lotus"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:lycium": {
+      "type": "irrigation_profile",
+      "native_id": "lycium",
+      "binding_id": "irrigator-irrigation_profile-lycium",
+      "aliases": [
+        "Drone Irrigator",
+        "lycium",
+        "Lycium intricatum"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:salsola": {
+      "type": "irrigation_profile",
+      "native_id": "salsola",
+      "binding_id": "irrigator-irrigation_profile-salsola",
+      "aliases": [
+        "Drone Irrigator",
+        "salsola",
+        "Salsola webbii"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:oleander": {
+      "type": "irrigation_profile",
+      "native_id": "oleander",
+      "binding_id": "irrigator-irrigation_profile-oleander",
+      "aliases": [
+        "Drone Irrigator",
+        "oleander",
+        "Nerium oleander"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:tamarix": {
+      "type": "irrigation_profile",
+      "native_id": "tamarix",
+      "binding_id": "irrigator-irrigation_profile-tamarix",
+      "aliases": [
+        "Drone Irrigator",
+        "tamarix",
+        "Tamarix spp."
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand.",
+        "Catalogue identity is Tamarix spp.; identify the actual species before transferring Tamarix gallica results."
+      ]
+    },
+    "irrigation_profile:kermes_oak": {
+      "type": "irrigation_profile",
+      "native_id": "kermes_oak",
+      "binding_id": "irrigator-irrigation_profile-kermes_oak",
+      "aliases": [
+        "Drone Irrigator",
+        "kermes_oak",
+        "Quercus coccifera"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:holm_oak": {
+      "type": "irrigation_profile",
+      "native_id": "holm_oak",
+      "binding_id": "irrigator-irrigation_profile-holm_oak",
+      "aliases": [
+        "Drone Irrigator",
+        "holm_oak",
+        "Quercus rotundifolia"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand.",
+        "Catalogue taxon is Quercus rotundifolia; resolve subspecies/taxonomic and provenance correspondence before transferring Quercus ilex results."
+      ]
+    },
+    "irrigation_profile:phillyrea_angustifolia": {
+      "type": "irrigation_profile",
+      "native_id": "phillyrea_angustifolia",
+      "binding_id": "irrigator-irrigation_profile-phillyrea_angustifolia",
+      "aliases": [
+        "Drone Irrigator",
+        "phillyrea_angustifolia",
+        "Phillyrea angustifolia"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:phillyrea_latifolia": {
+      "type": "irrigation_profile",
+      "native_id": "phillyrea_latifolia",
+      "binding_id": "irrigator-irrigation_profile-phillyrea_latifolia",
+      "aliases": [
+        "Drone Irrigator",
+        "phillyrea_latifolia",
+        "Phillyrea latifolia"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:myrtle": {
+      "type": "irrigation_profile",
+      "native_id": "myrtle",
+      "binding_id": "irrigator-irrigation_profile-myrtle",
+      "aliases": [
+        "Drone Irrigator",
+        "myrtle",
+        "Myrtus communis"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:terebinth": {
+      "type": "irrigation_profile",
+      "native_id": "terebinth",
+      "binding_id": "irrigator-irrigation_profile-terebinth",
+      "aliases": [
+        "Drone Irrigator",
+        "terebinth",
+        "Pistacia terebinthus"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "irrigation_profile:cork_oak": {
+      "type": "irrigation_profile",
+      "native_id": "cork_oak",
+      "binding_id": "irrigator-irrigation_profile-cork_oak",
+      "aliases": [
+        "Drone Irrigator",
+        "cork_oak",
+        "Quercus suber"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p112",
+        "irrigator:IRR-008:p15",
+        "irrigator:IRR-008:p61",
+        "irrigator:IRR-008:p63"
+      ],
+      "limitations": [
+        "Screened catalogue identity, existing local evidence and the bounded reviewed corpus; not an exhaustive species literature review.",
+        "Unknown rates remain null, not zero; product release and trial irrigation doses are not species demand."
+      ]
+    },
+    "reservoir_system:growboxx": {
+      "type": "reservoir_system",
+      "native_id": "growboxx",
+      "binding_id": "irrigator-reservoir_system-growboxx",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5"
+      ],
+      "limitations": [
+        "Historical undated manufacturer datasheet; performance is not validated for the intended site.",
+        "Reported release is not species water demand; nominal web capacity is not a reviewed usable-capacity preset."
+      ]
+    },
+    "reservoir_system:cocoon": {
+      "type": "reservoir_system",
+      "native_id": "cocoon",
+      "binding_id": "irrigator-reservoir_system-cocoon",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-003:p92",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-003:p120",
+        "irrigator:IRR-005:p109",
+        "irrigator:IRR-005:p112",
+        "irrigator:IRR-005:p115"
+      ],
+      "limitations": [
+        "20 L NIEBLAS and 25 L MENAQUA descriptions must not be silently interchanged.",
+        "Reports do not validate autonomous refill or a guaranteed number of repeat fills."
+      ]
+    },
+    "reservoir_system:waterboxx": {
+      "type": "reservoir_system",
+      "native_id": "waterboxx",
+      "binding_id": "irrigator-reservoir_system-waterboxx",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-002:p1",
+        "irrigator:IRR-002:p2"
+      ],
+      "limitations": [
+        "Not biodegradable. Datasheet v2 states validity through 31 December 2023.",
+        "Reuse claims require retrieval, cleaning, transport and measured service life."
+      ]
+    },
+    "drone_platform:matrice-350": {
+      "type": "drone_platform",
+      "native_id": "matrice-350",
+      "binding_id": "irrigator-drone_platform-matrice-350",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:DRONE-001:p113",
+        "irrigator:DRONE-001:p114"
+      ],
+      "limitations": [
+        "Maximum unloaded flight time cannot be used as loaded hover endurance.",
+        "Mass allowance, gimbal-mount rating, centre of gravity and certified payload support are separate constraints."
+      ]
+    },
+    "drone_platform:agras-t25": {
+      "type": "drone_platform",
+      "native_id": "agras-t25",
+      "binding_id": "irrigator-drone_platform-agras-t25",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:DRONE-003:p79",
+        "irrigator:DRONE-003:p80"
+      ],
+      "limitations": [
+        "52 kg spraying MTOM is outside this study's small-drone class.",
+        "Atomizing spray flow is not an approved reservoir-inlet flow."
+      ]
+    },
+    "drone_platform:matrice-5td": {
+      "type": "drone_platform",
+      "native_id": "matrice-5td",
+      "binding_id": "irrigator-drone_platform-matrice-5td",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:DRONE-002:p9",
+        "irrigator:DRONE-002:p87"
+      ],
+      "limitations": [
+        "Payload rating includes all added water hardware; no water payload or hose insertion is verified."
+      ]
+    },
+    "drone_platform:hypothetical-small": {
+      "type": "drone_platform",
+      "native_id": "hypothetical-small",
+      "binding_id": "irrigator-drone_platform-hypothetical-small",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Usable payload, endurance, flight power and pump performance must be supplied before any future run."
+      ]
+    },
+    "drone_base:manual-water-power": {
+      "type": "drone_base",
+      "native_id": "manual-water-power",
+      "binding_id": "irrigator-drone_base-manual-water-power",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Manual labour, battery inventory, water stock and charging downtime remain required inputs."
+      ]
+    },
+    "drone_base:dock-4": {
+      "type": "drone_base",
+      "native_id": "dock-4",
+      "binding_id": "irrigator-drone_base-dock-4",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:DRONE-002:p9",
+        "irrigator:DRONE-002:p69",
+        "irrigator:DRONE-002:p87"
+      ],
+      "limitations": [
+        "Do not combine this dock with Matrice 350 or AGRAS by assumption.",
+        "Fast swapping still requires available charged batteries and adequate charging power."
+      ]
+    },
+    "drone_base:agri-refill": {
+      "type": "drone_base",
+      "native_id": "agri-refill",
+      "binding_id": "irrigator-drone_base-agri-refill",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "Vendor web description only; no reviewed PDF integration or EU quotation."
+      ]
+    },
+    "research_topic:R1": {
+      "type": "research_topic",
+      "native_id": "R1",
+      "binding_id": "irrigator-research_topic-R1",
+      "aliases": [
+        "Drone Irrigator",
+        "R1",
+        "Drone Irrigator R1"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p109",
+        "irrigator:IRR-002:p2"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_topic:R2": {
+      "type": "research_topic",
+      "native_id": "R2",
+      "binding_id": "irrigator-research_topic-R2",
+      "aliases": [
+        "Drone Irrigator",
+        "R2",
+        "Drone Irrigator R2"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-003:p110"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_topic:R3": {
+      "type": "research_topic",
+      "native_id": "R3",
+      "binding_id": "irrigator-research_topic-R3",
+      "aliases": [
+        "Drone Irrigator",
+        "R3",
+        "Drone Irrigator R3"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-005:p80",
+        "irrigator:IRR-005:p112",
+        "irrigator:IRR-002:p1",
+        "irrigator:IRR-008:p15",
+        "irrigator:IRR-008:p61",
+        "irrigator:IRR-008:p63"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_topic:R4": {
+      "type": "research_topic",
+      "native_id": "R4",
+      "binding_id": "irrigator-research_topic-R4",
+      "aliases": [
+        "Drone Irrigator",
+        "R4",
+        "Drone Irrigator R4"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-005:p81",
+        "irrigator:IRR-005:p115",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-002:p2",
+        "irrigator:IRR-003:p143",
+        "irrigator:IRR-003:p155"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_topic:R5": {
+      "type": "research_topic",
+      "native_id": "R5",
+      "binding_id": "irrigator-research_topic-R5",
+      "aliases": [
+        "Drone Irrigator",
+        "R5",
+        "Drone Irrigator R5"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "pilot:FOREST-002:p131:mr2-guidance",
+        "pilot:FOREST-002:p132:mr2-guidance",
+        "pilot:FOREST-002:p133:mr2-guidance",
+        "pilot:FOREST-002:p134:mr2-guidance",
+        "irrigator:IRR-003:p120"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_topic:R6": {
+      "type": "research_topic",
+      "native_id": "R6",
+      "binding_id": "irrigator-research_topic-R6",
+      "aliases": [
+        "Drone Irrigator",
+        "R6",
+        "Drone Irrigator R6"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:DRONE-001:p113",
+        "irrigator:DRONE-001:p114",
+        "irrigator:DRONE-003:p79",
+        "irrigator:DRONE-003:p80",
+        "irrigator:DRONE-002:p87"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_topic:R7": {
+      "type": "research_topic",
+      "native_id": "R7",
+      "binding_id": "irrigator-research_topic-R7",
+      "aliases": [
+        "Drone Irrigator",
+        "R7",
+        "Drone Irrigator R7"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:DRONE-004:p1",
+        "irrigator:DRONE-001:p113",
+        "irrigator:IRR-005:p109"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_topic:R8": {
+      "type": "research_topic",
+      "native_id": "R8",
+      "binding_id": "irrigator-research_topic-R8",
+      "aliases": [
+        "Drone Irrigator",
+        "R8",
+        "Drone Irrigator R8"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:DRONE-002:p9",
+        "irrigator:DRONE-002:p69",
+        "irrigator:DRONE-002:p87"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_topic:R9": {
+      "type": "research_topic",
+      "native_id": "R9",
+      "binding_id": "irrigator-research_topic-R9",
+      "aliases": [
+        "Drone Irrigator",
+        "R9",
+        "Drone Irrigator R9"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p115",
+        "irrigator:DRONE-001:p114",
+        "irrigator:DRONE-003:p79"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_topic:R10": {
+      "type": "research_topic",
+      "native_id": "R10",
+      "binding_id": "irrigator-research_topic-R10",
+      "aliases": [
+        "Drone Irrigator",
+        "R10",
+        "Drone Irrigator R10"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:POLICY-003:p1"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_topic:R11": {
+      "type": "research_topic",
+      "native_id": "R11",
+      "binding_id": "irrigator-research_topic-R11",
+      "aliases": [
+        "Drone Irrigator",
+        "R11",
+        "Drone Irrigator R11"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "irrigator:IRR-003:p110",
+        "irrigator:IRR-003:p155",
+        "irrigator:DRONE-004:p1",
+        "irrigator:IRR-005:p115"
+      ],
+      "limitations": [
+        "Bounded review completed 4 November 2026; unresolved evidence and engineering inputs remain visible. No simulator or field deployment is implemented."
+      ]
+    },
+    "research_scenario:dry-weather-study": {
+      "type": "research_scenario",
+      "native_id": "dry-weather-study",
+      "binding_id": "irrigator-research_scenario-dry-weather-study",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [],
+      "limitations": [
+        "No water-demand, payload-energy, handling-time, price or functional-lifetime default has been fabricated. This record cannot run a simulator."
+      ]
+    },
+    "cluster_template:carob-island": {
+      "type": "cluster_template",
+      "native_id": "carob-island",
+      "binding_id": "irrigator-cluster_template-carob-island",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "pilot:FOREST-002:p131:mr2-guidance",
+        "pilot:FOREST-002:p132:mr2-guidance",
+        "pilot:FOREST-002:p133:mr2-guidance",
+        "pilot:FOREST-002:p134:mr2-guidance"
+      ],
+      "limitations": [
+        "Illustrative association only; not a proven compatible planting recipe or adopted Designer operation."
+      ]
+    },
+    "cluster_template:coscoja-reference": {
+      "type": "cluster_template",
+      "native_id": "coscoja-reference",
+      "binding_id": "irrigator-cluster_template-coscoja-reference",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "intake:FOREST-003:p3:kermes-context"
+      ],
+      "limitations": [
+        "Illustrative association only; not a proven compatible planting recipe or adopted Designer operation."
+      ]
+    },
+    "cluster_template:carob-control": {
+      "type": "cluster_template",
+      "native_id": "carob-control",
+      "binding_id": "irrigator-cluster_template-carob-control",
+      "aliases": [
+        "Drone Irrigator"
+      ],
+      "availability": "not_applicable",
+      "citation_ids": [
+        "pilot:FOREST-002:p131:mr2-guidance",
+        "pilot:FOREST-002:p132:mr2-guidance",
+        "pilot:FOREST-002:p133:mr2-guidance",
+        "pilot:FOREST-002:p134:mr2-guidance"
+      ],
+      "limitations": [
+        "Illustrative association only; not a proven compatible planting recipe or adopted Designer operation."
       ]
     }
   },
@@ -820,6 +2277,1055 @@
       "review_targets": [
         "series-lentisk"
       ]
+    },
+    "claim:drone-irrigator-R1": {
+      "subject_ids": [
+        "research_topic:R1",
+        "reservoir_system:growboxx",
+        "reservoir_system:cocoon",
+        "reservoir_system:waterboxx"
+      ],
+      "statement": "Growboxx and Waterboxx datasheets document refill access; Cocoon field guidance describes subsequent watering and a possible refill-hole adaptation. These are different products and materials.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p1",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p109",
+        "irrigator:IRR-002:p2"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-R2": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R2"
+      ],
+      "statement": "The NIEBLAS manual records a historical EUR 7.8 Cocoon purchase cost, not a current delivered bulk quote. Current biodegradable reservoir procurement and installed lifecycle cost remain unresolved in this reviewed evidence.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-003:p110"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-R3": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R3",
+        "irrigation_profile:carob",
+        "irrigation_profile:cork_oak"
+      ],
+      "statement": "Carob has Cocoon field-use evidence with poor performance at a harsh late-spring Jordan site; cork oak has Cocoon field-use evidence in Portugal. Neither establishes local suitability or a universal water requirement.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-005:p80",
+        "irrigator:IRR-005:p112",
+        "irrigator:IRR-002:p1",
+        "irrigator:IRR-008:p15",
+        "irrigator:IRR-008:p61",
+        "irrigator:IRR-008:p63"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-R4": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R4"
+      ],
+      "statement": "Reviewed reservoir release claims, trial applied water and mixed-species water-use totals do not establish daily supplemental-demand profiles for the app catalogue at the intended site and establishment stage.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-005:p81",
+        "irrigator:IRR-005:p115",
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-002:p2",
+        "irrigator:IRR-003:p143",
+        "irrigator:IRR-003:p155"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-R5": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R5"
+      ],
+      "statement": "The existing MR2 handbook passages and Cocoon installation guidance are context for preparing cluster choices. They do not validate drone rotor/hose clearance or an automatically suitable mixture.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "pilot:FOREST-002:p131:mr2-guidance",
+        "pilot:FOREST-002:p132:mr2-guidance",
+        "pilot:FOREST-002:p133:mr2-guidance",
+        "pilot:FOREST-002:p134:mr2-guidance",
+        "irrigator:IRR-003:p120"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-R6": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R6",
+        "drone_platform:matrice-350",
+        "drone_platform:agras-t25",
+        "drone_platform:matrice-5td"
+      ],
+      "statement": "The reviewed M350, T25 and Matrice 5TD documentation provides component specifications; it does not establish a complete compatible cocoon-refill water payload with validated loaded endurance.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "irrigator:DRONE-001:p113",
+        "irrigator:DRONE-001:p114",
+        "irrigator:DRONE-003:p79",
+        "irrigator:DRONE-003:p80",
+        "irrigator:DRONE-002:p87"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-R7": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R7"
+      ],
+      "statement": "The reviewed wire-supplied citrus experiment reports spraying. Together with aircraft positioning specifications and Cocoon refill guidance, it does not demonstrate autonomous hose insertion into a plant reservoir.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "irrigator:DRONE-004:p1",
+        "irrigator:DRONE-001:p113",
+        "irrigator:IRR-005:p109"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-R8": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R8",
+        "drone_base:dock-4"
+      ],
+      "statement": "Dock 4 documentation describes battery service for Matrice 5TD. A compatible small-drone water-loading and cocoon-service integration is not established by these reviewed passages.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "irrigator:DRONE-002:p9",
+        "irrigator:DRONE-002:p69",
+        "irrigator:DRONE-002:p87"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-R9": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R9"
+      ],
+      "statement": "Reservoir field guidance identifies slope, degradation and water-loss concerns; aircraft manuals provide test-conditioned limits. Actual site terrain, soil, weather downtime and resupply logistics remain unmeasured for this proposal.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-003:p93",
+        "irrigator:IRR-005:p115",
+        "irrigator:DRONE-001:p114",
+        "irrigator:DRONE-003:p79"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-R10": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R10"
+      ],
+      "statement": "EASA FAQ 116450 includes a condition that open-category operations do not drop material. The exact water-transfer operation requires its own classification; this guidance is not flight clearance.",
+      "evidence_kind": "official_requirement",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "irrigator:POLICY-003:p1"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-R11": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R11",
+        "research_scenario:dry-weather-study"
+      ],
+      "statement": "The reviewed ground-irrigation timings, reservoir observations and spraying experiment are comparison inputs. They do not establish useful litres/hour, plants/day or lifecycle cost for a cocoon-refill drone.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-003:p110",
+        "irrigator:IRR-003:p155",
+        "irrigator:DRONE-004:p1",
+        "irrigator:IRR-005:p115"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-water-carob": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:carob",
+        "species:carob"
+      ],
+      "statement": "For Ceratonia siliqua, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-carob"
+      ]
+    },
+    "claim:drone-irrigator-water-wild_olive": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:wild_olive",
+        "species:wild_olive"
+      ],
+      "statement": "For Olea europaea var. sylvestris, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-wild_olive"
+      ]
+    },
+    "claim:drone-irrigator-water-lentisk": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:lentisk",
+        "species:lentisk"
+      ],
+      "statement": "For Pistacia lentiscus, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-lentisk"
+      ]
+    },
+    "claim:drone-irrigator-water-buckthorn": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:buckthorn",
+        "species:buckthorn"
+      ],
+      "statement": "For Rhamnus alaternus, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-buckthorn"
+      ]
+    },
+    "claim:drone-irrigator-water-palmetto": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:palmetto",
+        "species:palmetto"
+      ],
+      "statement": "For Chamaerops humilis, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-palmetto"
+      ]
+    },
+    "claim:drone-irrigator-water-retama": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:retama",
+        "species:retama"
+      ],
+      "statement": "For Retama sphaerocarpa, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-retama"
+      ]
+    },
+    "claim:drone-irrigator-water-esparto": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:esparto",
+        "species:esparto"
+      ],
+      "statement": "For Macrochloa tenacissima, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-esparto"
+      ]
+    },
+    "claim:drone-irrigator-water-thyme": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:thyme",
+        "species:thyme"
+      ],
+      "statement": "For Thymus hyemalis, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-thyme"
+      ]
+    },
+    "claim:drone-irrigator-water-rosemary": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:rosemary",
+        "species:rosemary"
+      ],
+      "statement": "For Salvia rosmarinus, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-rosemary"
+      ]
+    },
+    "claim:drone-irrigator-water-rhamnus_lycioides": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:rhamnus_lycioides",
+        "species:rhamnus_lycioides"
+      ],
+      "statement": "For Rhamnus lycioides, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-rhamnus_lycioides"
+      ]
+    },
+    "claim:drone-irrigator-water-ephedra_fragilis": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:ephedra_fragilis",
+        "species:ephedra_fragilis"
+      ],
+      "statement": "For Ephedra fragilis, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-ephedra_fragilis"
+      ]
+    },
+    "claim:drone-irrigator-water-ziziphus": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:ziziphus",
+        "species:ziziphus"
+      ],
+      "statement": "For Ziziphus lotus, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-ziziphus"
+      ]
+    },
+    "claim:drone-irrigator-water-lycium": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:lycium",
+        "species:lycium"
+      ],
+      "statement": "For Lycium intricatum, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-lycium"
+      ]
+    },
+    "claim:drone-irrigator-water-salsola": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:salsola",
+        "species:salsola"
+      ],
+      "statement": "For Salsola webbii, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-salsola"
+      ]
+    },
+    "claim:drone-irrigator-water-oleander": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:oleander",
+        "species:oleander"
+      ],
+      "statement": "For Nerium oleander, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-oleander"
+      ]
+    },
+    "claim:drone-irrigator-water-tamarix": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:tamarix",
+        "species:tamarix"
+      ],
+      "statement": "For Tamarix spp., this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-tamarix"
+      ]
+    },
+    "claim:drone-irrigator-water-kermes_oak": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:kermes_oak",
+        "species:kermes_oak"
+      ],
+      "statement": "For Quercus coccifera, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-kermes_oak"
+      ]
+    },
+    "claim:drone-irrigator-water-holm_oak": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:holm_oak",
+        "species:holm_oak"
+      ],
+      "statement": "For Quercus rotundifolia, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-holm_oak"
+      ]
+    },
+    "claim:drone-irrigator-water-phillyrea_angustifolia": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:phillyrea_angustifolia",
+        "species:phillyrea_angustifolia"
+      ],
+      "statement": "For Phillyrea angustifolia, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-phillyrea_angustifolia"
+      ]
+    },
+    "claim:drone-irrigator-water-phillyrea_latifolia": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:phillyrea_latifolia",
+        "species:phillyrea_latifolia"
+      ],
+      "statement": "For Phillyrea latifolia, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-phillyrea_latifolia"
+      ]
+    },
+    "claim:drone-irrigator-water-myrtle": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:myrtle",
+        "species:myrtle"
+      ],
+      "statement": "For Myrtus communis, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-myrtle"
+      ]
+    },
+    "claim:drone-irrigator-water-terebinth": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:terebinth",
+        "species:terebinth"
+      ],
+      "statement": "For Pistacia terebinthus, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-terebinth"
+      ]
+    },
+    "claim:drone-irrigator-water-cork_oak": {
+      "subject_ids": [
+        "research_topic:R4",
+        "irrigation_profile:cork_oak",
+        "species:cork_oak"
+      ],
+      "statement": "For Quercus suber, this bounded review has not established a transferable daily supplemental establishment-water range. Unknown demand is not zero.",
+      "evidence_kind": "research_gap",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Claim is restricted to this source review and target context; it is not a literature-wide absence claim.",
+        "Do not substitute reservoir release, another taxon, orchard advice or a whole-trial water total."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-001:p5",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-cork_oak"
+      ]
+    },
+    "claim:drone-irrigator-suitability-carob": {
+      "subject_ids": [
+        "research_topic:R3",
+        "irrigation_profile:carob",
+        "species:carob",
+        "reservoir_system:cocoon"
+      ],
+      "statement": "Carob was planted with Cocoon at Maysara; the harsh late-spring trial performed poorly. Waterboxx manufacturer lists carob. Both are conditional research candidates, not validated local prescriptions.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Reported field use is a conditional research candidate; actual stock, soil, season, shelter, irrigation and local performance still need assessment."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-005:p80",
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-carob"
+      ]
+    },
+    "claim:drone-irrigator-suitability-cork_oak": {
+      "subject_ids": [
+        "research_topic:R3",
+        "irrigation_profile:cork_oak",
+        "species:cork_oak",
+        "reservoir_system:cocoon"
+      ],
+      "statement": "Quercus suber was planted in Cocoon trials in Vouzela, Portugal. This supports a conditional research candidate, with emergency irrigation, shelter effects and different site context retained.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Reported field use is a conditional research candidate; actual stock, soil, season, shelter, irrigation and local performance still need assessment."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-008:p15",
+        "irrigator:IRR-008:p61",
+        "irrigator:IRR-008:p63"
+      ],
+      "configuration_ids": [],
+      "review_targets": [
+        "irrigator-irrigation_profile-cork_oak"
+      ]
+    },
+    "claim:drone-irrigator-scenario-dry-weather-study": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_scenario:dry-weather-study"
+      ],
+      "statement": "The prepared study uses explicit scenario-owned illustrative inputs and a list of unresolved required inputs. It is not a runnable simulator or a field specification.",
+      "evidence_kind": "project_assumption",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [],
+      "configuration_ids": [
+        "irrigator-research_scenario-dry-weather-study"
+      ],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-cluster-carob-island": {
+      "subject_ids": [
+        "research_topic:R5",
+        "cluster_template:carob-island"
+      ],
+      "statement": "This candidate cluster references an existing palette and central geometry policy. Counts, numerical spacing and servicing clearances require review before adoption.",
+      "evidence_kind": "project_assumption",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [],
+      "configuration_ids": [
+        "irrigator-cluster_template-carob-island"
+      ],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-cluster-coscoja-reference": {
+      "subject_ids": [
+        "research_topic:R5",
+        "cluster_template:coscoja-reference"
+      ],
+      "statement": "This candidate cluster references an existing palette and central geometry policy. Counts, numerical spacing and servicing clearances require review before adoption.",
+      "evidence_kind": "project_assumption",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [],
+      "configuration_ids": [
+        "irrigator-cluster_template-coscoja-reference"
+      ],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-cluster-carob-control": {
+      "subject_ids": [
+        "research_topic:R5",
+        "cluster_template:carob-control"
+      ],
+      "statement": "This candidate cluster references an existing palette and central geometry policy. Counts, numerical spacing and servicing clearances require review before adoption.",
+      "evidence_kind": "project_assumption",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "curated",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Not an operational preset, universal species prescription or verified autonomous watering product."
+      ],
+      "citation_ids": [],
+      "configuration_ids": [
+        "irrigator-cluster_template-carob-control"
+      ],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-capacity-20": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R3",
+        "reservoir_system:cocoon"
+      ],
+      "statement": "The reviewed NIEBLAS edition describes a 20 L Cocoon fill and headspace.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Edition and installation context must be resolved explicitly; no averaged capacity or planting-depth prescription is adopted."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-003:p92",
+        "irrigator:IRR-003:p120"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-capacity-25": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R3",
+        "reservoir_system:cocoon"
+      ],
+      "statement": "The reviewed MENAQUA technical annex describes an approximately 25 L initial Cocoon fill.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Edition and installation context must be resolved explicitly; no averaged capacity or planting-depth prescription is adopted."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-005:p110"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-single-fill": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R3",
+        "reservoir_system:cocoon"
+      ],
+      "statement": "The MENAQUA technical annex describes a one-off initial fill.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Edition and installation context must be resolved explicitly; no averaged capacity or planting-depth prescription is adopted."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-005:p110"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-later-refill": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R3",
+        "reservoir_system:cocoon"
+      ],
+      "statement": "The same report recommends summer refilling when needed and a possible removable-cover refill hole.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Edition and installation context must be resolved explicitly; no averaged capacity or planting-depth prescription is adopted."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-005:p109"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-depth-guide": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R3",
+        "reservoir_system:cocoon"
+      ],
+      "statement": "The MENAQUA annex contains root-collar placement wording that needs nursery/site interpretation before any adoption.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Edition and installation context must be resolved explicitly; no averaged capacity or planting-depth prescription is adopted."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-005:p112"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
+    },
+    "claim:drone-irrigator-depth-nieblas": {
+      "subject_ids": [
+        "research_topic:R1",
+        "research_topic:R3",
+        "reservoir_system:cocoon"
+      ],
+      "statement": "NIEBLAS installation guidance says to cover roots and keep soil off the stem.",
+      "evidence_kind": "guidance",
+      "context": "Bounded Drone Irrigator review, 4 November 2026. Source findings, author assumptions and integration readiness remain distinct.",
+      "review_status": "unresolved",
+      "reviewed_on": "2026-11-04",
+      "limitations": [
+        "Edition and installation context must be resolved explicitly; no averaged capacity or planting-depth prescription is adopted."
+      ],
+      "citation_ids": [
+        "irrigator:IRR-003:p120"
+      ],
+      "configuration_ids": [],
+      "review_targets": []
     }
   },
   "relations": {
@@ -952,6 +3458,328 @@
       "limitations": [
         "Optional membership does not select a plant, prescribe a mixture or establish ecological or beneath-crown suitability."
       ]
+    },
+    "relation:irrigator-profile-carob": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:carob",
+      "target": "species:carob",
+      "claim_ids": [
+        "claim:drone-irrigator-water-carob"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-wild_olive": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:wild_olive",
+      "target": "species:wild_olive",
+      "claim_ids": [
+        "claim:drone-irrigator-water-wild_olive"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-lentisk": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:lentisk",
+      "target": "species:lentisk",
+      "claim_ids": [
+        "claim:drone-irrigator-water-lentisk"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-buckthorn": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:buckthorn",
+      "target": "species:buckthorn",
+      "claim_ids": [
+        "claim:drone-irrigator-water-buckthorn"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-palmetto": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:palmetto",
+      "target": "species:palmetto",
+      "claim_ids": [
+        "claim:drone-irrigator-water-palmetto"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-retama": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:retama",
+      "target": "species:retama",
+      "claim_ids": [
+        "claim:drone-irrigator-water-retama"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-esparto": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:esparto",
+      "target": "species:esparto",
+      "claim_ids": [
+        "claim:drone-irrigator-water-esparto"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-thyme": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:thyme",
+      "target": "species:thyme",
+      "claim_ids": [
+        "claim:drone-irrigator-water-thyme"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-rosemary": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:rosemary",
+      "target": "species:rosemary",
+      "claim_ids": [
+        "claim:drone-irrigator-water-rosemary"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-rhamnus_lycioides": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:rhamnus_lycioides",
+      "target": "species:rhamnus_lycioides",
+      "claim_ids": [
+        "claim:drone-irrigator-water-rhamnus_lycioides"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-ephedra_fragilis": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:ephedra_fragilis",
+      "target": "species:ephedra_fragilis",
+      "claim_ids": [
+        "claim:drone-irrigator-water-ephedra_fragilis"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-ziziphus": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:ziziphus",
+      "target": "species:ziziphus",
+      "claim_ids": [
+        "claim:drone-irrigator-water-ziziphus"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-lycium": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:lycium",
+      "target": "species:lycium",
+      "claim_ids": [
+        "claim:drone-irrigator-water-lycium"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-salsola": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:salsola",
+      "target": "species:salsola",
+      "claim_ids": [
+        "claim:drone-irrigator-water-salsola"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-oleander": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:oleander",
+      "target": "species:oleander",
+      "claim_ids": [
+        "claim:drone-irrigator-water-oleander"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-tamarix": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:tamarix",
+      "target": "species:tamarix",
+      "claim_ids": [
+        "claim:drone-irrigator-water-tamarix"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-kermes_oak": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:kermes_oak",
+      "target": "species:kermes_oak",
+      "claim_ids": [
+        "claim:drone-irrigator-water-kermes_oak"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-holm_oak": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:holm_oak",
+      "target": "species:holm_oak",
+      "claim_ids": [
+        "claim:drone-irrigator-water-holm_oak"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-phillyrea_angustifolia": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:phillyrea_angustifolia",
+      "target": "species:phillyrea_angustifolia",
+      "claim_ids": [
+        "claim:drone-irrigator-water-phillyrea_angustifolia"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-phillyrea_latifolia": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:phillyrea_latifolia",
+      "target": "species:phillyrea_latifolia",
+      "claim_ids": [
+        "claim:drone-irrigator-water-phillyrea_latifolia"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-myrtle": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:myrtle",
+      "target": "species:myrtle",
+      "claim_ids": [
+        "claim:drone-irrigator-water-myrtle"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-terebinth": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:terebinth",
+      "target": "species:terebinth",
+      "claim_ids": [
+        "claim:drone-irrigator-water-terebinth"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
+    },
+    "relation:irrigator-profile-cork_oak": {
+      "type": "irrigation_profile_for_species",
+      "source": "irrigation_profile:cork_oak",
+      "target": "species:cork_oak",
+      "claim_ids": [
+        "claim:drone-irrigator-water-cork_oak"
+      ],
+      "citation_ids": [],
+      "basis": "source_reference",
+      "context": "Native identity linkage to the shared plant catalogue; does not assert reservoir suitability.",
+      "limitations": [
+        "Irrigation profile explicitly preserves unassessed products and unknown numerical demand."
+      ]
     }
   },
   "issues": {
@@ -989,6 +3817,92 @@
       "limitations": [
         "Bounded to the inspected line and existing research context. This does not invalidate every vegetation-series entry in the factsheet.",
         "Retained Designer series labels and mixtures are unchanged."
+      ]
+    },
+    "issue:drone-irrigator-capacities": {
+      "type": "source_tension",
+      "claim_ids": [
+        "claim:drone-irrigator-capacity-20",
+        "claim:drone-irrigator-capacity-25"
+      ],
+      "status": "unresolved",
+      "explanation": "Different reviewed editions describe 20 L and approximately 25 L. Select the actual supplied product and measure usable fill; do not average or silently select.",
+      "limitations": [
+        "No operational value or rule is selected by publishing this issue."
+      ]
+    },
+    "issue:drone-irrigator-refill-regimes": {
+      "type": "source_tension",
+      "claim_ids": [
+        "claim:drone-irrigator-single-fill",
+        "claim:drone-irrigator-later-refill"
+      ],
+      "status": "unresolved",
+      "explanation": "Initial single-fill concept and supplemental summer-refill practice coexist. This is a regimen/engineering tension, not proof that all Cocoons are refillable or unsuitable.",
+      "limitations": [
+        "No operational value or rule is selected by publishing this issue."
+      ]
+    },
+    "issue:drone-irrigator-planting-depth": {
+      "type": "source_tension",
+      "claim_ids": [
+        "claim:drone-irrigator-depth-guide",
+        "claim:drone-irrigator-depth-nieblas"
+      ],
+      "status": "unresolved",
+      "explanation": "Installation wording differs in context. Retain both passages for nursery/site review; do not encode a root-collar-depth rule from this research.",
+      "limitations": [
+        "No operational value or rule is selected by publishing this issue."
+      ]
+    },
+    "issue:drone-irrigator-engineering-gaps": {
+      "type": "evidence_gap",
+      "claim_ids": [
+        "claim:drone-irrigator-R2",
+        "claim:drone-irrigator-R4",
+        "claim:drone-irrigator-R6",
+        "claim:drone-irrigator-R7",
+        "claim:drone-irrigator-R8",
+        "claim:drone-irrigator-R9",
+        "claim:drone-irrigator-R11"
+      ],
+      "status": "unresolved",
+      "explanation": "Reviewed work packages retain missing local/engineering/procurement inputs. Supplementary web observations are displayed separately from registered PDF claims.",
+      "limitations": [
+        "Bounded search, not proof of market-wide absence."
+      ]
+    },
+    "issue:drone-irrigator-species-water-gaps": {
+      "type": "evidence_gap",
+      "claim_ids": [
+        "claim:drone-irrigator-water-carob",
+        "claim:drone-irrigator-water-wild_olive",
+        "claim:drone-irrigator-water-lentisk",
+        "claim:drone-irrigator-water-buckthorn",
+        "claim:drone-irrigator-water-palmetto",
+        "claim:drone-irrigator-water-retama",
+        "claim:drone-irrigator-water-esparto",
+        "claim:drone-irrigator-water-thyme",
+        "claim:drone-irrigator-water-rosemary",
+        "claim:drone-irrigator-water-rhamnus_lycioides",
+        "claim:drone-irrigator-water-ephedra_fragilis",
+        "claim:drone-irrigator-water-ziziphus",
+        "claim:drone-irrigator-water-lycium",
+        "claim:drone-irrigator-water-salsola",
+        "claim:drone-irrigator-water-oleander",
+        "claim:drone-irrigator-water-tamarix",
+        "claim:drone-irrigator-water-kermes_oak",
+        "claim:drone-irrigator-water-holm_oak",
+        "claim:drone-irrigator-water-phillyrea_angustifolia",
+        "claim:drone-irrigator-water-phillyrea_latifolia",
+        "claim:drone-irrigator-water-myrtle",
+        "claim:drone-irrigator-water-terebinth",
+        "claim:drone-irrigator-water-cork_oak"
+      ],
+      "status": "unresolved",
+      "explanation": "All 23 catalogue species have structured profiles; transferable daily establishment-water ranges remain unestablished in this batch. Explicit user assumptions or further field/nursery evidence are required.",
+      "limitations": [
+        "No default dose is manufactured from a product release claim or unrelated study."
       ]
     }
   },
@@ -1127,6 +4041,351 @@
       "adapter": "designer_rule",
       "native_id": "shrub_placement",
       "explanation": "Manual review target: reported community co-occurrence does not prove current beneath-crown placement compatibility."
+    },
+    "irrigator-species-wild_olive": {
+      "adapter": "species",
+      "native_id": "wild_olive",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-lentisk": {
+      "adapter": "species",
+      "native_id": "lentisk",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-buckthorn": {
+      "adapter": "species",
+      "native_id": "buckthorn",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-palmetto": {
+      "adapter": "species",
+      "native_id": "palmetto",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-retama": {
+      "adapter": "species",
+      "native_id": "retama",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-esparto": {
+      "adapter": "species",
+      "native_id": "esparto",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-thyme": {
+      "adapter": "species",
+      "native_id": "thyme",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-rosemary": {
+      "adapter": "species",
+      "native_id": "rosemary",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-rhamnus_lycioides": {
+      "adapter": "species",
+      "native_id": "rhamnus_lycioides",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-ephedra_fragilis": {
+      "adapter": "species",
+      "native_id": "ephedra_fragilis",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-ziziphus": {
+      "adapter": "species",
+      "native_id": "ziziphus",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-lycium": {
+      "adapter": "species",
+      "native_id": "lycium",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-salsola": {
+      "adapter": "species",
+      "native_id": "salsola",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-oleander": {
+      "adapter": "species",
+      "native_id": "oleander",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-tamarix": {
+      "adapter": "species",
+      "native_id": "tamarix",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-holm_oak": {
+      "adapter": "species",
+      "native_id": "holm_oak",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-phillyrea_angustifolia": {
+      "adapter": "species",
+      "native_id": "phillyrea_angustifolia",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-phillyrea_latifolia": {
+      "adapter": "species",
+      "native_id": "phillyrea_latifolia",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-myrtle": {
+      "adapter": "species",
+      "native_id": "myrtle",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-terebinth": {
+      "adapter": "species",
+      "native_id": "terebinth",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-species-cork_oak": {
+      "adapter": "species",
+      "native_id": "cork_oak",
+      "explanation": "Existing shared catalogue/name identity; no new species record or automatic ecological suitability."
+    },
+    "irrigator-irrigation_profile-carob": {
+      "adapter": "irrigation_profile",
+      "native_id": "carob",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-wild_olive": {
+      "adapter": "irrigation_profile",
+      "native_id": "wild_olive",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-lentisk": {
+      "adapter": "irrigation_profile",
+      "native_id": "lentisk",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-buckthorn": {
+      "adapter": "irrigation_profile",
+      "native_id": "buckthorn",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-palmetto": {
+      "adapter": "irrigation_profile",
+      "native_id": "palmetto",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-retama": {
+      "adapter": "irrigation_profile",
+      "native_id": "retama",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-esparto": {
+      "adapter": "irrigation_profile",
+      "native_id": "esparto",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-thyme": {
+      "adapter": "irrigation_profile",
+      "native_id": "thyme",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-rosemary": {
+      "adapter": "irrigation_profile",
+      "native_id": "rosemary",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-rhamnus_lycioides": {
+      "adapter": "irrigation_profile",
+      "native_id": "rhamnus_lycioides",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-ephedra_fragilis": {
+      "adapter": "irrigation_profile",
+      "native_id": "ephedra_fragilis",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-ziziphus": {
+      "adapter": "irrigation_profile",
+      "native_id": "ziziphus",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-lycium": {
+      "adapter": "irrigation_profile",
+      "native_id": "lycium",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-salsola": {
+      "adapter": "irrigation_profile",
+      "native_id": "salsola",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-oleander": {
+      "adapter": "irrigation_profile",
+      "native_id": "oleander",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-tamarix": {
+      "adapter": "irrigation_profile",
+      "native_id": "tamarix",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-kermes_oak": {
+      "adapter": "irrigation_profile",
+      "native_id": "kermes_oak",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-holm_oak": {
+      "adapter": "irrigation_profile",
+      "native_id": "holm_oak",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-phillyrea_angustifolia": {
+      "adapter": "irrigation_profile",
+      "native_id": "phillyrea_angustifolia",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-phillyrea_latifolia": {
+      "adapter": "irrigation_profile",
+      "native_id": "phillyrea_latifolia",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-myrtle": {
+      "adapter": "irrigation_profile",
+      "native_id": "myrtle",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-terebinth": {
+      "adapter": "irrigation_profile",
+      "native_id": "terebinth",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-irrigation_profile-cork_oak": {
+      "adapter": "irrigation_profile",
+      "native_id": "cork_oak",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-reservoir_system-growboxx": {
+      "adapter": "reservoir_system",
+      "native_id": "growboxx",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-reservoir_system-cocoon": {
+      "adapter": "reservoir_system",
+      "native_id": "cocoon",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-reservoir_system-waterboxx": {
+      "adapter": "reservoir_system",
+      "native_id": "waterboxx",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-drone_platform-matrice-350": {
+      "adapter": "drone_platform",
+      "native_id": "matrice-350",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-drone_platform-agras-t25": {
+      "adapter": "drone_platform",
+      "native_id": "agras-t25",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-drone_platform-matrice-5td": {
+      "adapter": "drone_platform",
+      "native_id": "matrice-5td",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-drone_platform-hypothetical-small": {
+      "adapter": "drone_platform",
+      "native_id": "hypothetical-small",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-drone_base-manual-water-power": {
+      "adapter": "drone_base",
+      "native_id": "manual-water-power",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-drone_base-dock-4": {
+      "adapter": "drone_base",
+      "native_id": "dock-4",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-drone_base-agri-refill": {
+      "adapter": "drone_base",
+      "native_id": "agri-refill",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R1": {
+      "adapter": "research_topic",
+      "native_id": "R1",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R2": {
+      "adapter": "research_topic",
+      "native_id": "R2",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R3": {
+      "adapter": "research_topic",
+      "native_id": "R3",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R4": {
+      "adapter": "research_topic",
+      "native_id": "R4",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R5": {
+      "adapter": "research_topic",
+      "native_id": "R5",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R6": {
+      "adapter": "research_topic",
+      "native_id": "R6",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R7": {
+      "adapter": "research_topic",
+      "native_id": "R7",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R8": {
+      "adapter": "research_topic",
+      "native_id": "R8",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R9": {
+      "adapter": "research_topic",
+      "native_id": "R9",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R10": {
+      "adapter": "research_topic",
+      "native_id": "R10",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_topic-R11": {
+      "adapter": "research_topic",
+      "native_id": "R11",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-research_scenario-dry-weather-study": {
+      "adapter": "research_scenario",
+      "native_id": "dry-weather-study",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-cluster_template-carob-island": {
+      "adapter": "cluster_template",
+      "native_id": "carob-island",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-cluster_template-coscoja-reference": {
+      "adapter": "cluster_template",
+      "native_id": "coscoja-reference",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
+    },
+    "irrigator-cluster_template-carob-control": {
+      "adapter": "cluster_template",
+      "native_id": "carob-control",
+      "explanation": "Owner-resolved reviewed research record; explicit unknowns and supplementary web evidence retained. Reading never activates a simulator or changes a saved design."
     }
   },
   "coverage": {
@@ -1136,13 +4395,17 @@
       "species:carob",
       "approach:mr2",
       "programme:EU-LIFE",
-      "species:kermes_oak"
+      "species:kermes_oak",
+      "research_topic:R1",
+      "research_topic:R2",
+      "research_topic:R4"
     ],
     "excluded": [
       "Unindexed research prose and other funding/ecological subjects",
       "Unregistered feature dependencies and project activities",
       "Current call availability and real grant eligibility",
-      "Saved-project rule editions and historical source retrieval"
+      "Saved-project rule editions and historical source retrieval",
+      "Drone Irrigator simulation, site permissions, exhaustive species literature coverage and automatic adoption of prepared scenario/cluster inputs"
     ]
   }
 }

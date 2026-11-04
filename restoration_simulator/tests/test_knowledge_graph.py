@@ -48,10 +48,10 @@ class KnowledgeGraphTests(unittest.TestCase):
 
     def test_seed_and_shared_references_are_complete_and_not_retyped(self):
         ctx = graph.load_library(); self.assertEqual(ctx["data"], self.original)
-        self.assertEqual((len(ctx["data"]["claims"]), len(ctx["entities"]), len(ctx["data"]["issues"])), (21, 16, 3))
+        self.assertEqual((len(ctx["data"]["claims"]), len(ctx["entities"]), len(ctx["data"]["issues"])), (67, 85, 8))
         registry = citations.load_registry()
         self.assertEqual(len(registry["consumers"]), 4)
-        self.assertEqual(len(registry["citations"]), 21)
+        self.assertEqual(len(registry["citations"]), 49)
         self.assertEqual(set(self.data["sources"]), set(registry["consumers"]["knowledge_pilot"]["citation_ids"]))
         self.assertEqual(ctx["entities"]["call:FUND-009"]["availability"], "not_assessed")
         self.assertEqual(ctx["entities"]["palette:mr2_mix"]["type"], "planting_palette")
@@ -161,7 +161,7 @@ class KnowledgeGraphTests(unittest.TestCase):
             lambda d: d["claims"][DENSITY].update(subject_ids=["missing"]),
             lambda d: d["claims"][DENSITY].update(review_targets=["missing"]),
             lambda d: d["claims"][DENSITY].update(reviewed_on="2026-02-30"),
-            lambda d: d["claims"][DENSITY].update(reviewed_on="2026-11-04"),
+            lambda d: d["claims"][DENSITY].update(reviewed_on="2026-11-05"),
             lambda d: d["claims"][STOCK_TABLE].update(citation_ids=["missing"]),
             lambda d: d["sources"].pop("pilot:FOREST-002:p134:mr2-guidance"),
             lambda d: d["sources"]["pilot:FOREST-002:p134:mr2-guidance"].update(sha256="0"*64),
@@ -207,7 +207,7 @@ class KnowledgeGraphTests(unittest.TestCase):
         palette = next(p for p in bundle["vegetation_combinations"] if p["id"] == "mr2_mix")
         palette["starter"] = ["wild_olive"]
         with patch.object(designer, "load_bundle", return_value=bundle):
-            with self.assertRaisesRegex(Invalid, "Species is not a starter"):
+            with self.assertRaisesRegex(Invalid, "Species is not a starter|species disagree with the referenced palette"):
                 graph.validate_library(self.data)
 
     def test_issues_cannot_silently_choose_a_value_or_lose_their_claims(self):

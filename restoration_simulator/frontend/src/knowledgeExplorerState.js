@@ -1,10 +1,11 @@
+import {RESEARCH_ADAPTERS,validateResearchRecord} from "./irrigationResearchState.js";
 import documents from "../../scenarios/documents.json" with {type:"json"};
 
-export const ENTITY_TYPES={programme:"Programme",funding_route:"Funding route",funding_call:"Published call",species:"Species",restoration_approach:"Restoration approach",planting_palette:"Planting palette",vegetation_series:"Vegetation series",treatment:"Treatment",strategy_need:"Strategy need",designer_rule:"Designer rule",example_activity:"Illustrative activity"};
+export const ENTITY_TYPES={programme:"Programme",funding_route:"Funding route",funding_call:"Published call",species:"Species",restoration_approach:"Restoration approach",planting_palette:"Planting palette",vegetation_series:"Vegetation series",treatment:"Treatment",strategy_need:"Strategy need",designer_rule:"Designer rule",example_activity:"Illustrative activity",irrigation_profile:"Plant irrigation profile",reservoir_system:"Reservoir system",drone_platform:"Drone platform",drone_base:"Water/power base",research_topic:"Research work package",research_scenario:"Prepared research scenario",cluster_template:"Prepared cluster template"};
 export const EVIDENCE_KINDS={official_requirement:"Official requirement",official_strategy:"Strategy context",guidance:"Source guidance",project_assumption:"Project assumption",research_gap:"Evidence gap"};
-export const RELATION_TYPES={programme_contains_route:["programme","funding_route"],call_context_for:["funding_call","programme"],approach_has_palette:["restoration_approach","planting_palette"],palette_starter_species:["planting_palette","species"],palette_optional_species:["planting_palette","species"],approach_treatment_guidance:["restoration_approach","treatment"],example_uses_approach:["example_activity","restoration_approach"],example_mentions_species:["example_activity","species"],example_considers_route:["example_activity","funding_route"],example_may_address_need:["example_activity","strategy_need"]};
+export const RELATION_TYPES={programme_contains_route:["programme","funding_route"],call_context_for:["funding_call","programme"],approach_has_palette:["restoration_approach","planting_palette"],palette_starter_species:["planting_palette","species"],palette_optional_species:["planting_palette","species"],approach_treatment_guidance:["restoration_approach","treatment"],example_uses_approach:["example_activity","restoration_approach"],example_mentions_species:["example_activity","species"],example_considers_route:["example_activity","funding_route"],example_may_address_need:["example_activity","strategy_need"],irrigation_profile_for_species:["irrigation_profile","species"]};
 export const EVIDENCE_ENTRY_TOPICS={selection_guidance:{"route-34":"route:LEADER-AL20-3.4"},project_concept:{"restoration-34":"example_activity:carob-mr2-demonstrator"},delivery_plan:{"novelty-34":"route:LEADER-AL20-3.4","publication-34":"route:LEADER-AL20-3.4"},designer:{mr2:"approach:mr2",carob:"species:carob"}};
-const TYPE_PREFIX={programme:"programme",funding_route:"route",funding_call:"call",species:"species",restoration_approach:"approach",planting_palette:"palette",vegetation_series:"series",treatment:"treatment",strategy_need:"need",designer_rule:"rule",example_activity:"example_activity"};
+const TYPE_PREFIX={programme:"programme",funding_route:"route",funding_call:"call",species:"species",restoration_approach:"approach",planting_palette:"palette",vegetation_series:"series",treatment:"treatment",strategy_need:"need",designer_rule:"rule",example_activity:"example_activity",irrigation_profile:"irrigation_profile",reservoir_system:"reservoir_system",drone_platform:"drone_platform",drone_base:"drone_base",research_topic:"research_topic",research_scenario:"research_scenario",cluster_template:"cluster_template"};
 const fail=path=>{throw Error(`Knowledge Explorer is incompatible at ${path}. Check the registered knowledge, restart Python and reload the app, then retry. Your editing drafts are retained.`);};
 const need=(ok,path)=>{if(!ok)fail(path);};
 const object=v=>v!==null&&typeof v==="object"&&!Array.isArray(v);
@@ -27,7 +28,7 @@ function sources(refs){
   need(new Set(refs.map(r=>r.citation_id)).size===refs.length,"duplicate citation use");
 }
 const ADAPTERS=new Set([...Object.keys(ENTITY_TYPES).filter(t=>t!=="example_activity"),"carob_density","mr2_geometry","illustration","reference_model","route_guidance","delivery_topic","concept_template","research_guide"]);
-function binding(b){need(keys(b,["id","adapter","native_id","label","aliases","value","authority","explanation"])&&[b.id,b.adapter,b.native_id,b.label,b.explanation].every(text)&&ADAPTERS.has(b.adapter)&&strings(b.aliases)&&object(b.value)&&keys(b.authority,["file","record_hash"])&&text(b.authority.file)&&hash(b.authority.record_hash),"native binding");}
+function binding(b){need(keys(b,["id","adapter","native_id","label","aliases","value","authority","explanation"])&&[b.id,b.adapter,b.native_id,b.label,b.explanation].every(text)&&ADAPTERS.has(b.adapter)&&strings(b.aliases)&&object(b.value)&&keys(b.authority,["file","record_hash"])&&text(b.authority.file)&&hash(b.authority.record_hash),"native binding");if(RESEARCH_ADAPTERS.has(b.adapter))validateResearchRecord(b.adapter,b.value);}
 function claim(c){
   need(keys(c,["id","subject_ids","statement","evidence_kind","context","review_status","reviewed_on","limitations","citation_ids","configuration_ids","review_targets","evidence","configuration_values"]),"claim fields");
   need(text(c.id)&&c.id.startsWith("claim:")&&strings(c.subject_ids)&&c.subject_ids.length>0&&text(c.statement)&&text(c.context)&&Object.hasOwn(EVIDENCE_KINDS,c.evidence_kind)&&["curated","unresolved"].includes(c.review_status)&&date(c.reviewed_on)&&strings(c.limitations)&&strings(c.citation_ids)&&strings(c.configuration_ids)&&strings(c.review_targets),"claim context/status");
@@ -36,7 +37,7 @@ function claim(c){
   if(c.evidence_kind==="project_assumption"){
     need(c.evidence.length===0&&c.configuration_values.length>0,"assumption source");
     for(const b of c.configuration_values){
-      binding(b);need(b.value.basis==="project_assumption"&&text(b.value.ruleset_id)&&text(b.value.unit),"assumption provenance");
+      binding(b);if(["research_scenario","cluster_template"].includes(b.adapter)){need(b.value.adoption==="prepared_not_adopted","research assumption adoption");continue;}need(b.value.basis==="project_assumption"&&text(b.value.ruleset_id)&&text(b.value.unit),"assumption provenance");
       if(b.adapter==="carob_density")need(Number.isFinite(b.value.value)&&b.value.value>0&&b.value.unit==="plants_per_hectare","density reference");
       else if(b.adapter==="mr2_geometry"){
         const v=b.value.value;need(object(v)&&object(v.rainfall_capture)&&[v.rainfall_capture.island_width,v.rainfall_capture.island_depth].every(n=>Number.isFinite(n)&&n>0)&&Array.isArray(v.mr2_centres)&&v.mr2_centres.length>0&&v.mr2_centres.every(pair=>Array.isArray(pair)&&pair.length===2&&pair.every(n=>Number.isFinite(n)&&n>=0&&n<=1)),"geometry reference");
@@ -191,10 +192,20 @@ export function explorerEdgeLabels(layout,edges){
     const a=layout.positions[e.source],b=layout.positions[e.target],mid={x:(a.x+b.x)/2+47,y:(a.y+b.y)/2+35};let chosen=null;
     const xs=new Set([mid.x,0,layout.width-126]),ys=new Set([mid.y,0,layout.height-34]);
     for(const p of occupied){xs.add(p.x-130);xs.add(p.x+p.w+4);ys.add(p.y-38);ys.add(p.y+p.h+4);}
-    const candidates=[];
-    for(const x of xs)for(const y of ys)if(x>=0&&y>=0&&x+126<=layout.width&&y+34<=layout.height)candidates.push({x,y,w:126,h:34});
-    candidates.sort((a,b)=>Math.abs(a.x-mid.x)+Math.abs(a.y-mid.y)-Math.abs(b.x-mid.x)-Math.abs(b.y-mid.y)||a.x-b.x||a.y-b.y);
-    chosen=candidates.find(box=>!occupied.some(p=>overlaps(box,p)));
+    // Each fixed-x row has the same sorted y order. Merge those rows by the
+    // original distance/x/y ordering instead of materialising and sorting the
+    // entire Cartesian grid (which grows with every placed label).
+    const orderedY=[...ys].filter(y=>y>=0&&y+34<=layout.height).sort((a,b)=>Math.abs(a-mid.y)-Math.abs(b-mid.y)||a-b),heap=[];
+    const compare=(a,b)=>a.cost-b.cost||a.x-b.x||orderedY[a.index]-orderedY[b.index];
+    function push(entry){let i=heap.length;heap.push(entry);while(i>0){const parent=(i-1)>>1;if(compare(heap[parent],entry)<=0)break;heap[i]=heap[parent];i=parent;}heap[i]=entry;}
+    function pop(){const first=heap[0],last=heap.pop();if(heap.length>0){let i=0;while(2*i+1<heap.length){let child=2*i+1;if(child+1<heap.length&&compare(heap[child+1],heap[child])<0)child++;if(compare(last,heap[child])<=0)break;heap[i]=heap[child];i=child;}heap[i]=last;}return first;}
+    if(orderedY.length>0)for(const x of xs)if(x>=0&&x+126<=layout.width)push({x,index:0,cost:Math.abs(x-mid.x)+Math.abs(orderedY[0]-mid.y)});
+    chosen=undefined;
+    while(heap.length>0){
+      const entry=pop(),y=orderedY[entry.index],box={x:entry.x,y,w:126,h:34};
+      if(!occupied.some(p=>overlaps(box,p))){chosen=box;break;}
+      const index=entry.index+1;if(index<orderedY.length)push({x:entry.x,index,cost:Math.abs(entry.x-mid.x)+Math.abs(orderedY[index]-mid.y)});
+    }
     need(chosen!==undefined,'connection label layout');labels[e.id]={x:chosen.x,y:chosen.y};occupied.push(chosen);
   }
   return labels;

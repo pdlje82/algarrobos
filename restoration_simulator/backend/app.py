@@ -413,6 +413,12 @@ def create_app(save_path=None):
         from .funding_selection_guidance import describe
         return describe()
 
+    @app.get("/api/plants/irrigation-profiles")
+    def plant_irrigation_profiles(request: Request):
+        from .irrigation_research import profiles
+        require(not request.query_params, "Irrigation profiles accept no query parameters. Remove them and retry.")
+        return profiles()
+
     @app.get("/api/knowledge/feature-evidence/{consumer_id}")
     def knowledge_feature_evidence(consumer_id: str):
         from .knowledge_graph import feature_evidence

@@ -35,3 +35,6 @@
 
 .knowledge-explorer .explorer-node, .knowledge-explorer .explorer-edge-label { margin:0; }
 .explorer-edge-label { width:126px; height:34px; overflow:hidden; line-height:1.1; }
+.irrigation-research-record table{display:block;max-width:100%;overflow-x:auto;border-collapse:collapse;margin:1rem 0}
+.irrigation-research-record th,.irrigation-research-record td{padding:.5rem;text-align:left;vertical-align:top;border-bottom:1px solid var(--border);overflow-wrap:anywhere}
+.irrigation-research-record article{margin:1rem 0;padding:.5rem 0;border-top:1px solid var(--border)}

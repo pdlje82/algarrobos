@@ -8,3 +8,5 @@ __pycache__/
 restoration_simulator/data/
 restoration_simulator/test-artifacts/
 restoration_simulator/frontend/test-artifacts/
+tmp/drone-irrigator-research/
+tmp/prepare_drone_*.py

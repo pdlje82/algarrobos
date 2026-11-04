@@ -1,5 +1,14 @@
 # Site Designer rule library
 
+The separately validated `drone_irrigator_v1.json` companion contains three
+**prepared, unadopted** Drone Irrigator cluster references. It resolves existing
+palette/species identities and requires review of current central dimensions,
+density, counts and aerial access before use. It is not in the active Designer
+bundle and does not change generation or historical replay. Validate it with
+`python -m backend.irrigation_research --check`; see the research/adoption record
+in `../DRONE_IRRIGATOR_RESEARCH.md`. Adopting a generation rule later requires a
+separate ruleset change and saved-design review.
+
 This directory is the authoritative index for generated planting decisions. The
 Python facade is `backend/designer.py`; current editing is in
 `backend/designer_v3.py`. React renders evaluations and collects commands. The designer is a hypothetical layout, not a suitability model.
