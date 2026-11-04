@@ -24,6 +24,32 @@ in any research report produced for the task.
 - When documents are actually added, follow the naming and cataloguing workflow
   in `doc_library/CATALOG.md`.
 
+## Registered knowledge: reviewed intake required
+
+When adding, changing or removing registered knowledge or shared citations, follow
+[the intake workflow](restoration_simulator/knowledge/INTAKE_WORKFLOW.md) and
+complete [the intake worksheet](restoration_simulator/knowledge/INTAKE_TEMPLATE.md).
+Research prompts and chat answers are inputs, not evidence.
+
+- Check existing identities and possible duplicates; inspect exact source editions
+  and PDF passages, recording checksums, context, limitations and actual review dates.
+- Prepare an isolated candidate batch and manifest with baseline/candidate
+  fingerprints and explicit reasons for replacements or removals.
+- From `restoration_simulator/` in the existing Conda environment, run both
+  `python -m backend.knowledge_intake --check BATCH_DIR` and
+  `python -m backend.knowledge_intake --review BATCH_DIR`. Review the changes and
+  distinguish citation validation, actual evidence displays and manual review targets.
+- Before publication, stop the simulator and recheck the reviewed fingerprints and
+  complete report. Apply matching registry updates together, preserve unrelated work,
+  validate canonical files and compatibility checks, then restart.
+- Archive the accepted manifest, change report and review notes under
+  `restoration_simulator/knowledge/intake/`; do not retain complete duplicate
+  runtime datasets there.
+
+The current intake supports `explorer_only` adoption. Changes to feature evidence
+memberships or operational rules require a separately reviewed adoption change;
+publishing knowledge does not update saved projects or adopted rule snapshots.
+
 ## Strictly avoid silent fallbacks
 
 Missing, invalid, incompatible or unexpected data must produce a clear,
