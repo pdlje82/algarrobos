@@ -11,7 +11,7 @@ import manifest from '../../design_rules/manifest.json' with {type:'json'};
 import {validateResponse} from '../src/contracts.js';
 import {createExplorationGate} from '../src/explorerSession.js';
 import {validateExplorerGraph,validateExplorerSearch,validateExplorerImpact,assertSameSnapshot,initialExplorerView,visibleExplorerGraph,explorerLayout,explorerEdgeLabels,revealExplorerRecord,createExplorerResource,EVIDENCE_ENTRY_TOPICS,RELATION_TYPES,EVIDENCE_KINDS} from '../src/knowledgeExplorerState.js';
-import {buildOverview,buildTopic,sourceGroups,layoutPresentation,TYPE_AREA,categoryGroupId,documentGroupId,SOURCE_GROUP} from '../src/knowledgeExplorerPresentation.js';
+import {buildOverview,buildTopic,sourceGroups,layoutPresentation,presentationHierarchy,canExpandRecord,TYPE_AREA,categoryGroupId,documentGroupId,SOURCE_GROUP} from '../src/knowledgeExplorerPresentation.js';
 
 // Source identities and memberships come from the real registries. Wire values
 // representing native adapters are isolated fixtures, not an application owner.
@@ -231,4 +231,19 @@ test('keyboard focus does not move cards and selected claims retain their indivi
   const selected=buildTopic(g,{...v,selected:id},open,id);
   const refs=g.edges.filter(e=>e.source===id&&e.kind==='claim_cites');
   for(const edge of refs)assert(selected.connections.some(c=>c.source===id&&c.target===edge.target&&c.edgeIds.includes(edge.id)));
+});
+
+test('display children have explicit parents, indentation and nonsemantic branch lines',()=>{
+  const p=buildOverview(g,initialExplorerView(),['view:knowledge','view:area:claims',categoryGroupId('guidance'),SOURCE_GROUP,...sourceGroups(g,g.nodes,g.edges).documents.map(d=>d.id)]),layout=layoutPresentation(p);
+  const category=p.cards.find(c=>c.id===categoryGroupId('guidance')),claim=p.cards.find(c=>c.kind==='record'&&c.node.kind==='claim');
+  assert.equal(category.parentId,'view:area:claims');assert.equal(claim.parentId,category.id);assert.equal(layout.positions[claim.id].depth,3);
+  for(const branch of layout.branches){const parent=layout.positions[branch.parentId],child=layout.positions[branch.childId];assert(child.x>parent.x);assert.equal(child.depth,parent.depth+1);assert.equal(child.x+child.width,parent.x+parent.width);assert.deepEqual(branch.points.at(-1),[child.x,child.y+child.height/2]);for(let i=1;i<branch.points.length;i++)for(const [id,box] of Object.entries(layout.positions))if(id!==branch.parentId&&id!==branch.childId)assert(!crossesInterior(branch.points[i-1],branch.points[i],box),`branch crosses ${id}`);}
+  assert(layout.branches.length>0);assert.equal(layout.paths.some(e=>e.kind==='organization'),false,'Containment uses neutral branch lines, not knowledge arrows');
+  assert.throws(()=>presentationHierarchy([{id:'a',column:0,parentId:'missing'}]),/parent/);
+  assert.throws(()=>presentationHierarchy([{id:'a',column:0,parentId:'b'},{id:'b',column:0,parentId:'a'}]),/cyclic/);
+});
+test('connected records can expand on-card while exact source passages remain leaves',()=>{
+  assert(canExpandRecord(g,'species:carob'));assert(canExpandRecord(g,'claim:mr2-runoff-capture'));
+  assert.equal(canExpandRecord(g,g.nodes.find(n=>n.kind==='passage').id),false);
+  assert.throws(()=>canExpandRecord(g,'not-registered'),/unavailable/);
 });
