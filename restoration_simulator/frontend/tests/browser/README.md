@@ -2,7 +2,7 @@
 
 Run `node tests/browser/knowledge-explorer.cjs` against a **fresh**
 isolated save on API 8013 and production assets on 4174. It first proves no-project
-entry/lazy loading and the four-layer Overview, then seeds only that fixture. It
+entry/lazy loading and the four-layer structure, then seeds only that fixture. It
 covers grouped Map, hierarchical Outline and Advanced Network, exact aggregate
 membership, architecture/project independence, expansion/collapse/filters/history,
 keyboard/pan/zoom, PDF pages and focus,
@@ -16,7 +16,7 @@ new source PDFs, the complete naming tension and explicit non-adoption into curr
 evidence. Layout checks cover full-width graphs, pointer/keyboard movement and
 viewport constraints for the floating details panel, close/reopen/focus, maximize/
 restore, nested PDFs and resize. Logs/screenshots belong to
-`test-artifacts/knowledge-overview/browser/`.
+`test-artifacts/knowledge-unified/browser-regression/`.
 
 The earlier layout baseline on 4 November 2026 passed: 138 frontend tests, the production
 build and this full browser workflow on isolated API 8013/preview 4174. The existing
@@ -35,7 +35,25 @@ logs, screenshots and unchanged 213-file integrity evidence are in
 `test-artifacts/knowledge-overview/`; see
 [the completion record](../../../KNOWLEDGE_EXPLORER_OVERVIEW.md).
 
+The unified Explorer follow-up groups area contents by explicit record type and
+expands topics in the same tree. There are no Overview/Topic detail navigation
+buttons. The current scripts assert inline MR2/carob branches, independent shared
+record occurrences, exact counts, retained four-layer context and the same native
+records in Map/Outline/Advanced Network. Current results and screenshots are under
+`test-artifacts/knowledge-unified/`; see
+[the unified Explorer record](../../../KNOWLEDGE_EXPLORER_UNIFIED.md).
+
 Build with `npm.cmd run build`, then use the existing browser configuration:
+
+The 5 November interaction follow-up adds whole-card padding/border activation,
+indented Map/Outline branches and desktop bottom-edge popup resizing. Run
+`node tests/browser/knowledge-node-interactions.cjs` against the same isolated API
+and production preview, sequentially with other browser workflows. It is read-only
+and supports a fresh or existing fixture. It covers mouse/keyboard resizing,
+viewport limits, close/reopen, PDF focus, failed-refresh retry and both phone widths
+in both themes. The current whole-Explorer regression also uses on-card
+neighbourhood toggles. Artifacts are under `test-artifacts/knowledge-interactions/`;
+see [the interaction record](../../../KNOWLEDGE_EXPLORER_INTERACTIONS.md).
 
 ```powershell
 npm exec vite -- preview --config tests/browser/vite.config.mjs --host 127.0.0.1 --port 4174 --strictPort
@@ -45,6 +63,7 @@ node tests/browser/knowledge-explorer.cjs
 node tests/browser/knowledge-evidence.cjs
 node tests/browser/designer-interactions.cjs
 node tests/browser/knowledge-overview-focus.cjs
+node tests/browser/knowledge-node-interactions.cjs
 ```
 
 Use the Python startup example below with a new fixture filename for the first

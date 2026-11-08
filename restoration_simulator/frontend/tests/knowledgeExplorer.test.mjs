@@ -11,7 +11,7 @@ import manifest from '../../design_rules/manifest.json' with {type:'json'};
 import {validateResponse} from '../src/contracts.js';
 import {createExplorationGate} from '../src/explorerSession.js';
 import {validateExplorerGraph,validateExplorerSearch,validateExplorerImpact,assertSameSnapshot,initialExplorerView,visibleExplorerGraph,explorerLayout,explorerEdgeLabels,revealExplorerRecord,createExplorerResource,EVIDENCE_ENTRY_TOPICS,RELATION_TYPES,EVIDENCE_KINDS} from '../src/knowledgeExplorerState.js';
-import {buildOverview,buildTopic,sourceGroups,layoutPresentation,presentationHierarchy,canExpandRecord,TYPE_AREA,categoryGroupId,documentGroupId,SOURCE_GROUP} from '../src/knowledgeExplorerPresentation.js';
+import {buildOverview,buildTopic,buildExplorer,revealInExplorer,sourceGroups,layoutPresentation,presentationHierarchy,canExpandRecord,TYPE_AREA,TYPE_GROUPS,typeGroupId,branchGroupId,categoryGroupId,documentGroupId,SOURCE_GROUP} from '../src/knowledgeExplorerPresentation.js';
 
 // Source identities and memberships come from the real registries. Wire values
 // representing native adapters are isolated fixtures, not an application owner.
@@ -246,4 +246,73 @@ test('connected records can expand on-card while exact source passages remain le
   assert(canExpandRecord(g,'species:carob'));assert(canExpandRecord(g,'claim:mr2-runoff-capture'));
   assert.equal(canExpandRecord(g,g.nodes.find(n=>n.kind==='passage').id),false);
   assert.throws(()=>canExpandRecord(g,'not-registered'),/unavailable/);
+});
+
+
+test('area children are exhaustive record-type groups with exact, non-overlapping membership',()=>{
+  assert.deepEqual(Object.keys(TYPE_GROUPS).sort(),Object.keys(g.entity_types).sort());
+  for(const area of ['ecology','funding','research','examples']){
+    const p=buildExplorer(g,initialExplorerView(),['view:knowledge',`view:area:${area}`]);
+    const groups=p.cards.filter(c=>c.parentId===`view:area:${area}`);
+    assert(groups.every(c=>c.kind==='group'));assert(groups.length>0);
+    const ids=groups.flatMap(c=>c.memberIds);assert.equal(new Set(ids).size,ids.length);
+    assert.deepEqual(new Set(ids),new Set(g.nodes.filter(n=>n.kind==='entity'&&TYPE_AREA[n.details.entity.type]===area).map(n=>n.id)));
+    for(const group of groups){const types=new Set(group.memberIds.map(id=>g.nodes.find(n=>n.id===id).details.entity.type));assert.equal(types.size,1);assert.equal(group.id,typeGroupId([...types][0]));}
+  }
+});
+
+function inlineTopic(id){return revealInExplorer(g,initialExplorerView(),[],id,{expand:true});}
+function inlineClaim(state,owner,claimId){const node=g.nodes.find(n=>n.id===claimId),group=branchGroupId(owner,categoryGroupId(node.details.evidence_kind));return {...state,groups:[...state.groups,group]};}
+
+test('MR2 expands beneath its record in the four-layer tree without replacing categories or other branches',()=>{
+  const state=inlineTopic('approach:mr2'),p=buildExplorer(g,state.view,state.groups),root=p.cards.find(c=>c.id==='approach:mr2');
+  assert.equal(root.parentId,typeGroupId('restoration_approach'));assert.equal(p.cards.find(c=>c.id===root.parentId).parentId,'view:area:ecology');
+  assert(p.cards.filter(c=>c.parentId===root.id).some(c=>c.id===branchGroupId(root.id,SOURCE_GROUP)));
+  assert(p.cards.some(c=>c.id==='view:projects'));assert(p.cards.some(c=>c.id===typeGroupId('species')));
+  assert.equal(p.cards.filter(c=>c.kind==='record'&&c.node.kind==='claim').length,0,'Claims start collapsed');
+  const shared=revealInExplorer(g,state.view,state.groups,'species:carob',{expand:true}),both=buildExplorer(g,shared.view,shared.groups);
+  assert(both.cards.some(c=>c.parentId==='approach:mr2'));assert(both.cards.some(c=>c.parentId==='species:carob'));
+  const collapsed=buildExplorer(g,{...shared.view,expanded:shared.view.expanded.filter(id=>id!=='approach:mr2')},shared.groups);
+  assert(!collapsed.cards.some(c=>c.parentId==='approach:mr2'));assert(collapsed.cards.some(c=>c.parentId==='species:carob'));
+});
+
+test('inline repeated records retain native identities and independent expansion without cycles',()=>{
+  let state=inlineTopic('approach:mr2');state=inlineClaim(state,'approach:mr2','claim:mr2-runoff-capture');
+  state=revealInExplorer(g,state.view,state.groups,'species:carob',{expand:true});state=inlineClaim(state,'species:carob','claim:mr2-runoff-capture');
+  let p=buildExplorer(g,state.view,state.groups),copies=p.cards.filter(c=>c.kind==='record'&&c.node.id==='claim:mr2-runoff-capture');
+  assert.equal(copies.length,2);assert.notEqual(copies[0].id,copies[1].id);assert(copies.every(c=>c.node===g.nodes.find(n=>n.id==='claim:mr2-runoff-capture')));
+  const first=copies[0].id;state.view={...state.view,expanded:[...state.view.expanded,first]};p=buildExplorer(g,state.view,state.groups);
+  assert(p.cards.some(c=>c.parentId===first));assert(!p.cards.some(c=>c.parentId===copies[1].id));
+  assert.equal(new Set(p.cards.map(c=>c.id)).size,p.cards.length);presentationHierarchy(p.cards);
+  assert.equal(p.counts.visibleRecords,new Set(p.cards.filter(c=>c.kind==='record').map(c=>c.node.id)).size);
+  const subjects=branchGroupId(first,'subjects');state.groups.push(subjects);p=buildExplorer(g,state.view,state.groups);
+  const back=p.cards.find(c=>c.parentId===subjects&&c.node.id==='approach:mr2');assert(back);
+  p=buildExplorer(g,{...state.view,expanded:[...state.view.expanded,back.id]},state.groups);
+  assert(p.cards.some(c=>c.parentId===back.id));assert.equal(new Set(p.cards.map(c=>c.id)).size,p.cards.length);
+  assert.throws(()=>buildExplorer(g,{...state.view,expanded:['missing']},state.groups),/unavailable/);
+  assert.throws(()=>buildExplorer(g,{...state.view,expanded:['view:branch:x:%ZZ']},state.groups),/encoding/);
+});
+
+test('inline sources keep edition/page/use identities, configuration-only claims and complete issues',()=>{
+  let state=inlineTopic('species:carob');state=inlineClaim(state,'species:carob','claim:designer-carob-density-assumption');
+  const p=buildExplorer(g,state.view,state.groups),config=p.cards.find(c=>c.kind==='record'&&c.node.id==='claim:designer-carob-density-assumption');
+  state.view={...state.view,expanded:[...state.view.expanded,config.id]};
+  const configProjection=buildExplorer(g,state.view,state.groups),sources=configProjection.cards.find(c=>c.parentId===config.id&&c.title==='Sources & citations');assert.deepEqual(sources.memberIds,[]);
+  assert(configProjection.cards.some(c=>c.parentId===config.id&&c.title==='Current reference assumptions'));
+  const issueGroup=branchGroupId('species:carob','issues');state.groups.push(issueGroup);const issues=buildExplorer(g,{...state.view,category:'project_assumption'},state.groups);
+  const tension=issues.cards.find(c=>c.issue?.id==='issue:mr2-stock-source-tension');assert.equal(tension.issue.claims.length,2);
+  const rootSources=branchGroupId('species:carob',SOURCE_GROUP),source=sourceGroups(g,g.nodes,g.edges).documents.find(d=>d.document.id==='FOREST-002');
+  state.groups.push(rootSources,branchGroupId('species:carob',source.id));const resolved=buildExplorer(g,state.view,state.groups);
+  assert(resolved.cards.some(c=>c.kind==='record'&&c.node.kind==='passage'&&c.node.details.document.id==='FOREST-002'&&c.node.details.page===134));
+});
+
+test('unified tree preserves original edge membership, filters, deterministic routes and nonmutation',()=>{
+  const before=JSON.stringify(g);let state=inlineTopic('research_topic:R1');state=revealInExplorer(g,state.view,state.groups,'approach:mr2',{expand:true});state=inlineClaim(state,'approach:mr2','claim:mr2-runoff-capture');
+  for(const category of ['all','guidance']){
+    const p=buildExplorer(g,{...state.view,category,relationTypes:[]},state.groups,'claim:mr2-runoff-capture'),ids=p.connections.filter(c=>c.kind==='registered').flatMap(c=>c.edgeIds);
+    assert.equal(ids.length,p.collection.edges.length);assert.deepEqual(new Set(ids),new Set(p.collection.edges.map(e=>e.id)));assert(p.collection.edges.every(e=>e.kind!=='relationship'));
+    const layout=layoutPresentation(p);assert.deepEqual(layout,layoutPresentation(p));assert(Object.values(layout.positions).every(r=>r.width>=220));
+    for(const edge of layout.paths)for(let i=1;i<edge.points.length;i++)for(const [id,box] of Object.entries(layout.positions))if(id!==edge.source&&id!==edge.target)assert(!crossesInterior(edge.points[i-1],edge.points[i],box));
+  }
+  assert.equal(JSON.stringify(g),before);assert.throws(()=>revealInExplorer(g,state.view,state.groups,'missing'),/unavailable/);assert.throws(()=>buildExplorer(g,{...state.view,selected:'missing'},state.groups),/unavailable/);
 });

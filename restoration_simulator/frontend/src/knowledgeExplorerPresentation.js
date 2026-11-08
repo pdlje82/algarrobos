@@ -4,6 +4,7 @@ import {RESEARCH_ADAPTERS} from './irrigationResearchState.js';
 
 export const AREAS={ecology:'Ecology',funding:'Funding',research:'Research & systems',examples:'Prepared examples',claims:'Claims',issues:'Unresolved issues'};
 export const TYPE_AREA={species:'ecology',vegetation_series:'ecology',restoration_approach:'ecology',planting_palette:'ecology',treatment:'ecology',irrigation_profile:'ecology',programme:'funding',funding_route:'funding',funding_call:'funding',strategy_need:'funding',research_topic:'research',reservoir_system:'research',drone_platform:'research',drone_base:'research',example_activity:'examples',research_scenario:'examples',cluster_template:'examples',designer_rule:'rules'};
+export const TYPE_GROUPS={species:'Species',irrigation_profile:'Plant irrigation profiles',restoration_approach:'Restoration approaches',vegetation_series:'Vegetation series',planting_palette:'Planting palettes',treatment:'Treatments',programme:'Programmes',funding_route:'Funding routes',funding_call:'Published calls',strategy_need:'Strategy needs',research_topic:'Research topics',reservoir_system:'Reservoir systems',drone_platform:'Aircraft',drone_base:'Water/power bases',example_activity:'Illustrative activities',research_scenario:'Prepared scenarios',cluster_template:'Cluster templates',designer_rule:'Registered rules'};
 export const LAYERS={sources:{title:'Sources',description:'Original documents and web references, editions, checksums, metadata and exact passages.',coverage:'Registered references'},knowledge:{title:'Knowledge',description:'Species, communities, methods, programmes, claims, relationships, uncertainties and research gaps.',coverage:'Registered knowledge only'},rules:{title:'Rules',description:'Explicit calculations and decision procedures with versions, tests and supporting evidence.',coverage:'Selected references, not a complete rule inventory'},projects:{title:'Projects',description:'User choices, assumptions, observations, drafts and adopted rule snapshots.',coverage:'Architecture context · outside Explorer coverage'}};
 const fail=message=>{throw Error(`Knowledge presentation is incompatible: ${message}. Restore a compatible Explorer and refresh. No records were substituted.`);};
 const need=(condition,message)=>{if(!condition)fail(message);};
@@ -13,6 +14,8 @@ const viewId=(...parts)=>'view:'+parts.map(encodeURIComponent).join(':');
 export const documentGroupId=key=>viewId('document',key);
 export const categoryGroupId=kind=>viewId('category',kind);
 export const relationGroupId=kind=>viewId('relation',kind);
+export const typeGroupId=type=>viewId('type',type);
+export const branchGroupId=(owner,group)=>viewId('branch',owner,group);
 export const SOURCE_GROUP='view:sources';
 export function canExpandRecord(graph,id){
   const node=graph.nodes.find(n=>n.id===id);need(node!==undefined,'the requested record is unavailable');
@@ -94,7 +97,11 @@ export function buildOverview(graph,view,expanded=[]){
       else if(id==='claims')for(const [kind,title] of Object.entries(EVIDENCE_KINDS)){
         const claims=areas.claims.filter(n=>n.details.evidence_kind===kind);if(claims.length===0)continue;const cid=categoryGroupId(kind);
         cards.push(groupCard(cid,title,`${claims.length} claims`,claims.map(n=>n.id),1,{parentId:gid}));if(open.has(cid))for(const claim of claims)cards.push(recordCard(claim,1,cid));
-      }else for(const node of areas[id])cards.push(recordCard(node,1,gid));
+      }else for(const [type,title] of Object.entries(TYPE_GROUPS)){
+        const members=areas[id].filter(n=>n.details.entity.type===type);if(members.length===0)continue;
+        const tid=typeGroupId(type);cards.push(groupCard(tid,title,`${members.length} records`,members.map(n=>n.id),1,{parentId:gid}));
+        if(open.has(tid))for(const node of members)cards.push(recordCard(node,1,tid));
+      }
     }
   }
   sourceCards(sources,open,0,cards,connections);
@@ -142,6 +149,85 @@ export function buildTopic(graph,view,expanded=[],focusId=null){
   }
   return {kind:'topic',root,cards,connections,sources,claims,categoryGroups,relations,issues,assumptions:references,visible,highlight:{nodeIds:[...highlightNodes],edgeIds:[...highlightEdges],passageIds:[...highlightPassages]},counts:{records:visible.nodes.length,totalRecords:graph.nodes.length,connections:visible.edges.length,totalConnections:graph.edges.length,filtered:visible.filtered,hidden:visible.hidden,...sources.counts}};
 }
+// Reveal the record's registered location without replacing the surrounding tree.
+// Display occurrences are separate from the native IDs used by record APIs.
+export function revealInExplorer(graph,view,expanded,id,{expand=false}={}){
+  const node=graph.nodes.find(n=>n.id===id),edge=graph.edges.find(e=>e.id===id);
+  need(node!==undefined||edge!==undefined,'the requested record is unavailable; reset the view');
+  const open=new Set(expanded);
+  const reveal=node=>{
+    const area=areaOf(node);
+    if(area==='sources'){open.add(SOURCE_GROUP);open.add(documentGroupId(node.details.document.id+'@'+node.details.document.sha256));}
+    else if(area==='rules')open.add('view:rules');
+    else {open.add('view:knowledge');open.add(viewId('area',area));open.add(node.kind==='claim'?categoryGroupId(node.details.evidence_kind):typeGroupId(node.details.entity.type));}
+  };
+  if(node!==undefined)reveal(node);else for(const endpoint of [edge.source,edge.target])reveal(graph.nodes.find(n=>n.id===endpoint));
+  return {view:{...view,root:node?.kind==='entity'?id:view.root,selected:id,expanded:expand&&node!==undefined&&canExpandRecord(graph,id)?unique([...view.expanded,id]):view.expanded},groups:[...open]};
+}
+
+export function buildExplorer(graph,view,expanded=[],focusId=null){
+  need(Object.keys(TYPE_GROUPS).length===Object.keys(ENTITY_TYPES).length&&Object.keys(ENTITY_TYPES).every(t=>Object.hasOwn(TYPE_GROUPS,t)),'record-type groups need updating');
+  if(view.selected!==null)need(graph.nodes.some(n=>n.id===view.selected)||graph.edges.some(e=>e.id===view.selected),'the requested record is unavailable; reset the view');
+  const base=buildOverview(graph,view,expanded),open=new Set(expanded),records=new Set(view.expanded),all=new Map(graph.nodes.map(n=>[n.id,n]));
+  for(const id of records){
+    let nativeId=id;
+    if(id.startsWith('view:branch:')){const parts=id.split(':');need(parts.length===4,'an expanded occurrence is malformed');try{nativeId=decodeURIComponent(parts[3]);}catch{fail('an expanded occurrence has invalid encoding');}}
+    need(all.has(nativeId),'an expanded record is unavailable; reset the view');
+  }
+  const allowed=new Set(base.collection.nodes.map(n=>n.id)),edges=base.collection.edges,cards=[];
+  function children(card){
+    const node=card.node;
+    if(node.kind==='passage'||!records.has(card.id))return;
+    const claims=node.kind==='entity'?base.collection.nodes.filter(n=>n.kind==='claim'&&n.details.subject_ids.includes(node.id)):[node];
+    const relations=node.kind==='entity'?edges.filter(e=>e.kind==='relationship'&&(e.source===node.id||e.target===node.id)):[];
+    const local=(id)=>branchGroupId(card.id,id),column=card.column;
+    function group(id,title,subtitle,members){const gid=local(id);cards.push(groupCard(gid,title,subtitle,members,column,{parentId:card.id}));return gid;}
+    function reference(nativeId,parent){const child={...recordCard(all.get(nativeId),column,parent),id:branchGroupId(parent,nativeId)};cards.push(child);children(child);}
+    for(const type of view.relationTypes){
+      const matching=relations.filter(e=>e.details.type===type);if(!matching.length)continue;
+      const members=unique(matching.map(e=>e.source===node.id?e.target:e.source));
+      const gid=group(relationGroupId(type),graph.relation_types[type],`${members.length} related records${matching.some(e=>e.details.basis==='project_assumption')?' · illustrative association':''}`,members);
+      if(open.has(gid))for(const id of members)reference(id,gid);
+    }
+    if(node.kind==='claim'){
+      const members=node.details.subject_ids.filter(id=>allowed.has(id)),gid=group('subjects','Registered subjects',`${members.length} records explicitly named by this claim`,members);
+      if(open.has(gid))for(const id of members)reference(id,gid);
+    }else for(const [kind,title] of Object.entries(EVIDENCE_KINDS)){
+      const members=claims.filter(c=>c.details.evidence_kind===kind);if(!members.length)continue;
+      const gid=group(categoryGroupId(kind),title,`${members.length} claims`,members.map(n=>n.id));
+      if(open.has(gid))for(const n of members)reference(n.id,gid);
+    }
+    const values=assumptions(claims);
+    if(values.length){const gid=group('assumptions','Current reference assumptions',`${values.length} owner-resolved references · not adopted project values`,[]);
+      if(open.has(gid))for(const binding of values)cards.push({id:local(binding.id),kind:'assumption',column,parentId:gid,height:124,title:binding.label,subtitle:'Current reference assumption',memberIds:[],binding});}
+    const sources=sourceGroups(graph,[node,...claims.filter(c=>c.id!==node.id)],relations),sid=group(SOURCE_GROUP,'Sources & citations',`${sources.counts.documents} documents · ${sources.counts.passages} passages · ${sources.counts.citationUses} uses · ${sources.counts.webReferences} web references`,sources.passageIds);
+    if(open.has(sid)){
+      for(const document of sources.documents){
+        const did=local(document.id);cards.push(groupCard(did,document.document.title,`${document.passages.length} passages · ${document.citationIds.length} citation uses`,document.passages.map(p=>p.node.id),column,{parentId:sid,document}));
+        if(open.has(did))for(const p of document.passages){const child={...recordCard(p.node,column,did),id:branchGroupId(did,p.node.id),subtitle:`PDF page ${p.node.details.page} · ${p.uses.length} citation uses`};cards.push(child);}
+      }
+      for(const web of sources.web)cards.push({id:local(web.id),kind:'web',column,parentId:sid,height:124,title:web.reference.title,subtitle:`Supplementary web reference · checked ${web.reference.checked_on}`,memberIds:[],web});
+    }
+    const issues=graph.issues.filter(i=>i.claim_ids.includes(node.id)||node.kind==='entity'&&i.claims.some(c=>c.subject_ids.includes(node.id)));
+    if(issues.length){const gid=group('issues','Unresolved issues',`${issues.length} complete issues · all affected claims retained`,issues.flatMap(i=>i.claim_ids));
+      if(open.has(gid))for(const issue of issues)cards.push({id:local(issue.id),kind:'issue',column,parentId:gid,height:124,title:issue.explanation,subtitle:issue.type==='source_tension'?'Unresolved source tension':'Bounded evidence gap',memberIds:issue.claim_ids,issue});}
+  }
+  for(const card of base.cards){cards.push(card);if(card.kind==='record')children(card);}
+  // Assign every original edge exactly once to visible endpoints or their
+  // collapsed display groups. Hidden/filtered records never create bypasses.
+  const endpoint=new Map(base.collection.nodes.map(n=>[n.id,'view:'+layerOf(n)]));
+  for(const card of cards)if(card.kind==='group'&&card.issue===undefined&&!card.id.endsWith(':issues'))for(const id of card.memberIds)if(allowed.has(id))endpoint.set(id,card.id);
+  for(const card of cards)if(card.kind==='record')endpoint.set(card.node.id,card.id);
+  const connections=aggregate(edges,e=>[endpoint.get(e.source),endpoint.get(e.target),e.kind==='claim_subject'?'Claims about registered subjects':e.kind==='relationship'?graph.relation_types[e.details.type]:'Cited passages']);
+  connections.push(...base.connections.filter(c=>c.kind==='architecture'));
+  const highlightNodes=new Set(),highlightEdges=new Set(),highlightPassages=new Set(),focus=all.get(focusId);
+  if(focus!==undefined){highlightNodes.add(focus.id);if(focus.kind==='claim'){focus.details.subject_ids.forEach(id=>highlightNodes.add(id));focus.details.evidence.forEach(r=>highlightPassages.add(r.passage_id));}else if(focus.kind==='passage')highlightPassages.add(focus.id);
+    for(const e of edges)if(e.source===focus.id||e.target===focus.id){highlightEdges.add(e.id);highlightNodes.add(e.source);highlightNodes.add(e.target);}}
+  const visibleIds=new Set(cards.filter(c=>c.kind==='record').map(c=>c.node.id));
+  const visible={nodes:base.collection.nodes.filter(n=>visibleIds.has(n.id)),edges:edges.filter(e=>visibleIds.has(e.source)&&visibleIds.has(e.target))};
+  return {...base,kind:'explorer',cards,connections,visible,highlight:{nodeIds:[...highlightNodes],edgeIds:[...highlightEdges],passageIds:[...highlightPassages]},counts:{...base.counts,visibleRecords:visibleIds.size}};
+}
+
 export function presentationHierarchy(cards){
   const byId=new Map(cards.map(c=>[c.id,c])),depths={};
   need(byId.size===cards.length,'duplicate display identities');
@@ -157,19 +243,21 @@ export function presentationHierarchy(cards){
 }
 export function layoutPresentation(presentation){
   const visibleConnections=presentation.connections.filter(e=>!e.internal&&e.kind!=='organization'),width=280,gap=80,step=14,indent=20;
+  const depths=presentationHierarchy(presentation.cards),columnCount=presentation.kind==='topic'?3:4;
+  const columnWidths=Array.from({length:columnCount},(_,column)=>Math.max(width,...presentation.cards.filter(c=>c.column===column).map(c=>220+depths[c.id]*indent)));
+  const starts=columnWidths.map((_,column)=>24+columnWidths.slice(0,column).reduce((sum,w)=>sum+w+gap,0));
   const columns=new Map(presentation.cards.map(c=>[c.id,c.column]));
   const overhead=visibleConnections.filter(e=>e.kind==='architecture'||Math.abs(columns.get(e.source)-columns.get(e.target))>1),top=54+overhead.length*step,positions={},rows=new Map();
-  const depths=presentationHierarchy(presentation.cards);
-  for(const card of presentation.cards){const y=rows.has(card.column)?rows.get(card.column):top,depth=depths[card.id];positions[card.id]={x:24+card.column*(width+gap)+depth*indent,y,width:width-depth*indent,height:card.height,depth};rows.set(card.column,y+card.height+20);}
+  for(const card of presentation.cards){const y=rows.has(card.column)?rows.get(card.column):top,depth=depths[card.id];positions[card.id]={x:starts[card.column]+depth*indent,y,width:columnWidths[card.column]-depth*indent,height:card.height,depth};rows.set(card.column,y+card.height+20);}
   const paths=visibleConnections.map((edge,index)=>{
     need(Object.hasOwn(positions,edge.source)&&Object.hasOwn(positions,edge.target),'a displayed connection has no endpoint');
     const a=positions[edge.source],b=positions[edge.target],ac=columns.get(edge.source),bc=columns.get(edge.target),same=ac===bc,forward=ac<=bc;
     const ax=forward?a.x+a.width:a.x,bx=same?b.x+b.width:forward?b.x:b.x+b.width,ay=a.y+a.height/2,by=b.y+b.height/2;
-    const out=forward?24+ac*(width+gap)+width+22:24+ac*(width+gap)-22,entry=same?out:forward?24+bc*(width+gap)-22:24+bc*(width+gap)+width+22;
-    const above=edge.kind==='architecture'||Math.abs(ac-bc)>1,upperLane=24+overhead.indexOf(edge)*step,channel=forward?24+ac*(width+gap)+width+gap/2:24+bc*(width+gap)+width+gap/2;
+    const out=forward?starts[ac]+columnWidths[ac]+22:starts[ac]-22,entry=same?out:forward?starts[bc]-22:starts[bc]+columnWidths[bc]+22;
+    const above=edge.kind==='architecture'||Math.abs(ac-bc)>1,upperLane=24+overhead.indexOf(edge)*step,channel=starts[Math.min(ac,bc)]+columnWidths[Math.min(ac,bc)]+gap/2;
     const points=same?[[ax,ay],[out,ay],[out,by],[bx,by]]:above?[[ax,ay],[out,ay],[out,upperLane],[entry,upperLane],[entry,by],[bx,by]]:[[ax,ay],[channel,ay],[channel,by],[bx,by]];
     return {...edge,points,path:points.map(([x,y],i)=>(i?'L':'M')+x+','+y).join(' '),labelPosition:{x:above?(out+entry)/2:channel,y:above?upperLane-3:(ay+by)/2-3}};
   });
   const branches=presentation.cards.filter(c=>c.parentId!==null&&columns.get(c.parentId)===c.column).map(card=>{const p=positions[card.parentId],child=positions[card.id],x=child.x-indent/2,points=[[x,p.y+p.height],[x,child.y+child.height/2],[child.x,child.y+child.height/2]];return {parentId:card.parentId,childId:card.id,points,path:points.map(([x,y],i)=>(i?'L':'M')+x+','+y).join(' ')};});
-  return {positions,paths,branches,width:(presentation.kind==='overview'?4:3)*(width+gap)-gap+48,height:Math.max(240,...rows.values())+16};
+  return {positions,paths,branches,width:columnWidths.reduce((sum,w)=>sum+w,0)+(columnCount-1)*gap+48,height:Math.max(240,...rows.values())+16};
 }

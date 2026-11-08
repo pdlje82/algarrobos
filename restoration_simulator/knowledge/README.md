@@ -300,32 +300,52 @@ Unknown or repeated parameters, unsupported requests and unknown targets fail.
 These endpoints never open project state.
 
 The frontend owns only transient presentation. First entry opens the four-layer
-Overview: Sources, Knowledge, Rules and Projects. Architecture connectors explain
+map: Sources, Knowledge, Rules and Projects. Architecture connectors explain
 responsibilities; registered connection aggregates retain the original edge IDs.
 Projects is architecture context only and never loads saved project state. Rules
 shows selected registered references and owner-resolved assumptions, not a complete
 inventory of calculations/tests or automatic claim-to-rule adoption.
 
 Knowledge expands into Ecology, Funding, Research & systems, Prepared examples,
-Claims and Unresolved issues. Every supported entity type is explicitly classified.
+Claims and Unresolved issues. Every supported entity type is explicitly classified. Areas expand to record-type
+groups: Ecology contains Species, Plant irrigation profiles, Restoration approaches,
+Vegetation series, Planting palettes and Treatments. Funding, Research & systems
+and Prepared examples use their own explicit type groups with exact record counts.
 Sources groups document ID plus checksum, exact passages and distinct citation uses;
 existing supplementary web references retain their owner, checked date and context.
 Matching URLs do not establish equivalent reviewed evidence.
 
-Topic detail starts with collapsed claim categories and one Sources group. Selecting
+There is one continuous tree, without an Overview/Topic detail screen switch.
+Clicking a topic expands its registered relationship groups, collapsed claim
+categories, current reference assumptions, Sources group and unresolved issues
+beneath that record. Other open branches and the four architecture layers remain
+in place. Starting topics, search and evidence links reveal that same registered
+path. Selecting
 a claim highlights its exact subjects and references. Document groups expand to
 passages; citation roles/dates remain available in details. Configuration-only
 claims gain no inferred citations. Complete issue groups survive filtering. Expansion
-uses actual registered adjacency; collapse retains shared reachable neighbours.
+uses explicit registered subjects, relationships and references. Each display
+occurrence has independent expansion state; closing one branch leaves other
+occurrences of shared records available. Native record identities remain intact.
 Filters never create bypass connections. Selecting details does not recenter a topic.
+
+Click anywhere on a group/layer card to open or close its children; no separate
+expand/collapse button is needed. Record cards open details from their entire
+surface. Connected records toggle their inline children; exact PDF passages
+remain leaves. Native title buttons provide
+the same actions with Enter/Space. Embedded area shortcuts act independently.
+Subnodes are indented in Map and Outline, with neutral parent/child branch lines.
+Those branches describe display grouping rather than new knowledge relationships.
+See [the unified hierarchy record](../KNOWLEDGE_EXPLORER_UNIFIED.md) for the
+record-type grouping and inline-expansion follow-up.
 
 Map routes through channels around visible cards; grouping replaces repeated boxed
 connection labels. Outline exposes the same groups, records and actions as a reading
-hierarchy. Advanced Network is an optional topic view, with lightweight selected-path
+hierarchy. Advanced Network is an optional presentation of revealed records, with lightweight selected-path
 labels and only in-scope nodes. Connection inspection remains keyboard accessible.
 Below 900 px the initial presentation is Outline until explicitly changed. Main
 navigation resumes the last view; evidence links open their registered topic.
-Overview/topic selections, filters, expansions, history and presentation choices
+Selections, filters, expansions, history and presentation choices
 remain in memory. No preferences or URL routes are saved.
 
 The graph occupies the full workspace width. Record details float over it in a
@@ -336,6 +356,11 @@ focus. On phones, details use a bottom panel. Maximize graph fills the window;
 Restore workspace or Escape returns to the normal layout. Nested PDF viewing keeps
 its own Escape/focus behaviour. Panel position, visibility and maximization are
 transient and do not alter registered knowledge, graph selection or project data.
+On desktop, drag the popup's bottom edge to change its height, or focus the edge
+and use Up/Down (Shift for larger steps), Home or End. Height is constrained to
+the available workspace and retained through close/reopen and refresh/retry.
+Phones retain their bottom-panel sizing. See the
+[interaction follow-up](../KNOWLEDGE_EXPLORER_INTERACTIONS.md) for verification.
 
 Graph data loads only on entry. Refresh clears the unavailable snapshot, preserves
 the view inputs and offers Retry on failure. Search and lazy Where used responses

@@ -124,3 +124,7 @@
 .explorer-connection-outline button { display:block; text-align:left; }
 .explorer-reset-selection { font-size:.75rem; }
 @media(max-width:899px){ .explorer-stage { height:max(600px,78dvh); }.explorer-stage-actions { align-items:start; }.explorer-window-tools { gap:.1rem; }.explorer-reading-bar { font-size:.85rem; }.explorer-outline { padding:.6rem; } }
+@media(max-width:899px){
+  .explorer-outline-tree .explorer-outline-tree { margin-inline-start:.3rem; padding-inline-start:.65rem; }
+  .explorer-outline-tree .explorer-outline-tree > li::before { left:-.65rem; width:.65rem; }
+}

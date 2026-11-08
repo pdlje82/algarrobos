@@ -2,10 +2,11 @@
 const assert=require('node:assert/strict'),fs=require('node:fs/promises');
 for(const key of ['PLAYWRIGHT_MODULE','DESIGNER_TEST_API','DESIGNER_APP_URL'])assert(process.env[key],`Set ${key}`);
 assert.equal(new URL(process.env.DESIGNER_TEST_API).port,'8013');assert.equal(new URL(process.env.DESIGNER_APP_URL).port,'4174');
-const {chromium}=require(process.env.PLAYWRIGHT_MODULE),folder='../test-artifacts/knowledge-interactions/browser';
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE),folder='../test-artifacts/knowledge-unified/browser';
 (async()=>{
   await fs.mkdir(folder,{recursive:true});const browser=await chromium.launch({channel:'msedge',headless:true});const errors=[],mutations=[];let failurePage=null;
   try{
+    const {branchGroupId,categoryGroupId,typeGroupId,SOURCE_GROUP}=await import('../../src/knowledgeExplorerPresentation.js');
     for(const theme of ['light','dark']){
       const page=await browser.newPage({viewport:{width:1440,height:1050}});failurePage=page;page.setDefaultTimeout(16000);let exploring=false,fail=false;
       page.on('pageerror',error=>errors.push(error.message));page.on('request',r=>{if(exploring&&new URL(r.url()).pathname.startsWith('/api/')&&r.method()!=='GET')mutations.push(r.url());});
@@ -25,11 +26,15 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE),folder='../test-artifact
       await padding(documentId);assert.equal(await card(passageId).count(),0);await padding('view:sources');assert.equal(await card(documentId).count(),0);
       // Nested area shortcuts must activate once without toggling the layer twice.
       await root.getByRole('button',{name:/^Ecology\s/}).click();assert.equal(await root.locator('[data-display-group="view:knowledge"]').getAttribute('aria-expanded'),'true');
+      assert.equal(await card('species:carob').count(),0);await padding(typeGroupId('species'));
+      assert.equal(await card('species:carob').count(),1);assert.equal(await card(typeGroupId('irrigation_profile')).count(),1);assert.equal(await root.getByRole('button',{name:'Topic detail',exact:true}).count(),0);
       await padding('species:carob');await panel.waitFor();assert.match(await panel.innerText(),/Species/);await close();
       assert.equal(await root.getByRole('button',{name:'Collapse selected record',exact:true}).count(),0);
       const scope=root.getByRole('status',{name:'Visible knowledge records'}),initial=await scope.innerText();
       await padding('species:carob');assert.notEqual(await scope.innerText(),initial);await close();await padding('species:carob');assert.equal(await scope.innerText(),initial);await close();
-      const group='view:category:guidance';await padding(group);const claim='claim:mr2-stock-table';assert((await card(claim).boundingBox()).x>(await card(group).boundingBox()).x);assert.equal(await root.locator(`[data-tree-child="${claim}"]`).count(),1);
+      await padding(typeGroupId('restoration_approach'));await padding('approach:mr2');await close();assert.equal(await card('species:carob').count(),1);assert.equal(await card('view:projects').count(),1);
+      const mr2Sources=branchGroupId('approach:mr2',SOURCE_GROUP);assert.equal(await card(mr2Sources).count(),1);
+      const group=branchGroupId('species:carob',categoryGroupId('guidance'));await padding(group);const claim=branchGroupId(group,'claim:mr2-stock-table');assert((await card(claim).boundingBox()).x>(await card(group).boundingBox()).x);assert.equal(await root.locator(`[data-tree-child="${claim}"]`).count(),1);
       await padding(group);assert.equal(await card(claim).count(),0);await root.locator(`[data-display-group="${group}"]`).focus();await page.keyboard.press('Space');await padding(claim);await panel.waitFor();assert.match(await panel.innerText(),/1000 cm3/);assert.match(await panel.innerText(),/200-300 cm3/);
       const start=await panel.boundingBox(),scroll=await root.locator('.explorer-canvas').evaluate(n=>n.scrollTop);await dragResize(100);let resized=await panel.boundingBox();assert(resized.height>start.height+60);assert.equal(resized.y,start.y);assert.equal(await root.locator('.explorer-canvas').evaluate(n=>n.scrollTop),scroll);
       await dragResize(-140);assert((await panel.boundingBox()).height<resized.height-100);
@@ -41,6 +46,6 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE),folder='../test-artifact
       await close();for(const width of [390,320]){await page.setViewportSize({width,height:1000});await root.getByRole('button',{name:'Outline',exact:true}).click();const child=card(claim),parent=card(group);assert((await child.boundingBox()).x>(await parent.boundingBox()).x);await padding(claim);assert.equal(await panel.getByRole('button',{name:'Resize record details',exact:true}).count(),0);assert.match(await panel.innerText(),/200-300 cm3/);await close();assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:`${folder}/outline-${theme}-${width}.png`});}
       await page.close();
     }
-    assert.deepEqual(errors,[]);assert.deepEqual(mutations,[]);const summary={passed:true,errors,mutations,themes:['light','dark'],widths:[1440,390,320],checks:['padding clicks toggle layers, groups and record neighbourhoods','whole records open details','indented map and outline branches','bottom-edge mouse and keyboard resizing','bounds, close/reopen, PDF focus and failed-refresh retry','phone panel and read-only requests']};await fs.writeFile(`${folder}/summary.json`,JSON.stringify(summary,null,2));console.log(JSON.stringify(summary));
+    assert.deepEqual(errors,[]);assert.deepEqual(mutations,[]);const summary={passed:true,errors,mutations,themes:['light','dark'],widths:[1440,390,320],checks:['whole-card toggles; exact type groups; topics expand inline with surrounding hierarchy retained','whole records open details','indented map and outline branches','bottom-edge mouse and keyboard resizing','bounds, close/reopen, PDF focus and failed-refresh retry','phone panel and read-only requests']};await fs.writeFile(`${folder}/summary.json`,JSON.stringify(summary,null,2));console.log(JSON.stringify(summary));
   }catch(error){if(failurePage!==null&&!failurePage.isClosed())await failurePage.screenshot({path:`${folder}/failure.png`});throw error;}finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
