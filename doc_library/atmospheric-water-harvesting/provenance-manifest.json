@@ -1,0 +1,27 @@
+{
+  "review_date": "2026-11-16",
+  "original_epub_path": "C:\\Users\\JanEngelke\\git_private\\algarroba_db\\ebooks\\Wasser_aus_der_Luft_Almeria-1.epub",
+  "conversation_id": "6af9b0d7-00c4-83ed-a2ea-d5a79f6e44d2",
+  "recovered_turns": 5,
+  "older_chat_has_more": false,
+  "epub_all_12_chapters_and_4_diagrams_reviewed": true,
+  "files": [
+    {
+      "file": "Wasser_aus_der_Luft_Almeria-1.epub",
+      "bytes": 420770,
+      "sha256": "1ad6a8be42c6ada9cc6fea23918a0c12fa2d1b8c65ed268a404869bbd37717f9"
+    },
+    {
+      "file": "source-chat-excerpt.json",
+      "bytes": 37000,
+      "sha256": "cfb63fddfd63451d94019c826da4aa6a91bc99d0d9226c7f0a311db95db25650"
+    },
+    {
+      "file": "epub-text-and-links.txt",
+      "bytes": 31634,
+      "sha256": "fc3481bf919df7e451b2e83d4fa10b36e6a7d3e34ae686aa8d4584e97faf1dd2"
+    }
+  ],
+  "epub_zip_integrity_ok": true,
+  "epub_spine_items_verified": 13
+}

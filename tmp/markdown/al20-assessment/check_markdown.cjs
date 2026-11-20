@@ -1,0 +1,43 @@
+const fs = require('fs');
+const path = require('path');
+const { pathToFileURL } = require('url');
+const assert = require('assert');
+
+(async () => {
+  const root = process.cwd();
+  const packages = 'C:/Program Files/WindowsApps/OpenAI.CodexPrimaryRuntime.v26-1112-611-0_26.1112.611.0_x64__3k8sg7r9htsxt/dependencies/node/node_modules';
+  const { marked } = await import(pathToFileURL(require.resolve('marked', {paths: [packages]})).href);
+  const { chromium } = require(require.resolve('playwright', {paths: [packages]}));
+  const source = fs.readFileSync(path.join(root, 'output/markdown/AL20-3.4-and-3.5-Complete-Selection-Assessment.md'), 'utf8');
+  const html = marked.parse(source, {gfm:true});
+  const temp = path.join(root,'tmp/markdown/al20-assessment');
+  const style = `body{margin:40px auto;padding:0 48px 64px;max-width:1120px;background:#fcfbf7;color:#233b31;font:17px/1.55 'Segoe UI',sans-serif}h1{font-size:38px;line-height:1.15}h2{font-size:26px;border-bottom:1px solid #d7dfd4;padding-bottom:10px;margin-top:44px}h3{font-size:23px;margin-top:32px}h4{font-size:19px}a{color:#236d60;overflow-wrap:anywhere}p{margin:14px 0}li{margin:6px 0}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}th,td{text-align:left;padding:11px 13px;border:1px solid #d7dfd4}th{background:#edf1e8}blockquote{border-left:4px solid #9b713e;padding:5px 18px;margin:24px 0;background:#f4ebdb}details{background:#f0f3ec;padding:14px 20px;margin:10px 0 24px;border-radius:5px}summary{cursor:pointer;font-weight:600}code{font-size:14px;overflow-wrap:anywhere}input[type=checkbox]{margin-right:8px}hr{border:0;border-top:1px solid #d7dfd4;margin:32px 0}`;
+  fs.writeFileSync(path.join(temp,'review.html'),`<!doctype html><html lang="en"><meta charset="utf-8"><title>AL20 Markdown layout review</title><style>${style}</style><body>${html}</body></html>`);
+  const browser = await chromium.launch({headless:true,channel:'msedge'});
+  const page=await browser.newPage({viewport:{width:1440,height:1500},deviceScaleFactor:1});
+  await page.setContent(`<!doctype html><html lang="en"><meta charset="utf-8"><style>${style}</style><body>${html}</body></html>`);
+  const checks=await page.evaluate(()=>{
+    const anchors=[...document.querySelectorAll('[id]')].map(n=>n.id);
+    const missing=[...document.querySelectorAll('a[href^="#"]')].map(a=>a.getAttribute('href').slice(1)).filter(id=>!document.getElementById(id));
+    const claims=[...document.querySelectorAll('li')].filter(li=>/^Claim [A-Z]+\.\d+\.\d+/.test(li.textContent.trim()));
+    const scoringHeadings=[...document.querySelectorAll('h3')].filter(h=>/^[A-Z]+\.\d+ — /.test(h.textContent));
+    const details=[...document.querySelectorAll('details')];
+    return {duplicateAnchors:anchors.filter((id,i)=>anchors.indexOf(id)!==i),missing,claims:claims.length,scoringHeadings:scoringHeadings.length,details:details.length,checked:document.querySelectorAll('input:checked').length,detailsWithoutEvidence:details.filter(d=>!d.textContent.includes('Application-stage evidence:')||!d.textContent.includes('Payment-stage evidence:')).length,overflow:document.documentElement.scrollWidth>innerWidth};
+  });
+  assert.deepStrictEqual(checks.duplicateAnchors,[]);
+  assert.deepStrictEqual(checks.missing,[]);
+  assert.strictEqual(checks.claims,45);
+  assert.strictEqual(checks.scoringHeadings,14);
+  assert.strictEqual(checks.details,45);
+  assert.strictEqual(checks.checked,0);
+  assert.strictEqual(checks.detailsWithoutEvidence,0);
+  assert.strictEqual(checks.overflow,false);
+  await page.screenshot({path:path.join(temp,'review-top.png')});
+  await page.locator('#criterion-co-1').scrollIntoViewIfNeeded();
+  await page.screenshot({path:path.join(temp,'review-co1.png')});
+  await page.locator('#criterion-in-1').scrollIntoViewIfNeeded();
+  await page.screenshot({path:path.join(temp,'review-innovation.png')});
+  await browser.close();
+  console.log(JSON.stringify(checks));
+  console.log('Markdown rendered: all navigation targets resolve, 14 criterion headings and 45 evidence foldouts, all task choices blank.');
+})().catch(e=>{console.error(e);process.exitCode=1});

@@ -1,0 +1,74 @@
+Use case: infographic-diagram / scientific-educational.
+Create ONE finished illustrated educational funding poster, portrait EXACT 9:16, ideally 2160 x 3840 pixels. This is plate 01 of a ten-poster AL20 funding reference series. It should resemble the disciplined composition of a beautiful natural-history field-guide plate: a central illustration, small numbered detail studies, hairline leader lines, and readable descriptions surrounding the illustration in two columns. The subject is funding for rural projects, not a botanical specimen. Make the entire poster a flat full-bleed artwork, not a photographed wall poster or mockup.
+
+Visual language: warm ivory paper, very subtle paper grain, precise dark forest-green ink, restrained ochre and sage watercolor washes. Refined old-style serif title and headings, exceptionally crisp readable supporting type, bold clear numeric point values. Generous outer margins, fine horizontal rules, ordered two-column reading flow. No giant UI cards, no glossy gradients, no cartoonish styling, no logos.
+
+Central illustration: a detailed pen-and-watercolor, slightly elevated/isometric landscape vignette of the Alpujarra countryside: dry Mediterranean hills, a small white village and terraced landscape. On one side, a small demonstration trial with tagged plant comparison plots and an observer recording results. On the other, a protected/recovered native habitat with a low traditional stone wall, a discreet interpretation sign and a few visitors. The drawing occupies about one third of the poster and gives a visual explanation of the two routes. Add restrained numbered leader lines 1 and 2 connecting these features to the route descriptions in the two reading columns. These are conceptual examples, not promises of eligibility. The image must not contain extra words, map names or invented numeric data.
+
+Layout: top running header and title; main illustrated plate and the two route descriptions around it; central 60/100 scoring annotation; lower half a very legible two-column catalogue of all fourteen category maxima; final compact explanatory notes. Prefer short well-spaced captions. Maintain enough density that this is a useful large-format reference plate, not a sparse title slide.
+
+Render the following copy accurately, verbatim, without extra claims or invented text. Preserve every number, decimal, code and euro amount. All 14 category entries must appear exactly once. The catalogue uses two seven-row columns.
+
+RUNNING HEADER:
+AL20 / LEADER
+PLATE 01 / 10
+
+TITLE:
+The funding landscape
+Routes 3.4 and 3.5
+
+LEFT ROUTE DESCRIPTION, leader number 1:
+3.4 / TEST & DEMONSTRATE
+Test a method new or unknown in AL20.
+Evaluate it and share transferable results.
+Aid ceiling: €28,000
+
+RIGHT ROUTE DESCRIPTION, leader number 2:
+3.5 / CONSERVE & RESTORE
+Protect rural or environmental heritage.
+Include public use and/or dissemination.
+Aid ceiling: €200,000
+
+SMALL SHARED ROUTE NOTE:
+Both routes: nonproductive operations.
+Up to 100% of accepted eligible costs; reimbursement.
+
+CENTRAL SCORING ANNOTATION:
+60 / 100
+Minimum score / published maximum
+14 scoring categories
+
+CATALOGUE HEADING:
+WHERE THE POINTS COME FROM
+Category maxima
+
+LEFT SEVEN ROWS:
+AT.3   Settlement population   10
+CO.1   EDLL prioritised needs   15
+RD.5   Territorial balance   15
+CC.2   Energy equipment   5
+CC.7   Sustainable mobility   5
+IG.8   Women's leisure   2
+IG.11   Women's participation   2
+
+RIGHT SEVEN ROWS:
+DRI.3   Inclusion   4
+JR.3   Rural youth   4
+IN.1   EDLL innovation   5*
+PT.1   Rural heritage   15
+PS.1   Applicant memberships   12
+PS.3   No previous LEADER support   1
+SP.1   Quality local services   5
+
+EXPLANATORY NOTES:
+Add permitted selections, then apply each category cap.
+Heritage example: 13 + 7 = 20 raw points → 15 counted.
+Mutually exclusive options cannot be combined.
+EDLL references support claims; they add no extra points.
+*Innovation: theme + aspect = 4.98. The 0.02 sector claim needs GDR clarification.
+Applicant, activity and cost eligibility are checked separately.
+
+BOTTOM LINE:
+A route map for an open assessment
+
+No citations, URLs, bibliography, source filenames, watermarks or footnote source numbers. No checked project selections. Use your best editorial poster design, keep text visibly large and clear, and ensure the 9:16 composition is elegant and balanced.

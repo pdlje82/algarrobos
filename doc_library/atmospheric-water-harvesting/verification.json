@@ -1,0 +1,18 @@
+{
+  "review_date": "2026-11-16",
+  "report_file": "LEARN-018 - Almeria - Atmospheric Water Harvesting Research and Engineering - 2026-11-16.md",
+  "report_words": 11884,
+  "report_sha256": "2fdf4ff7d20567879530d20e85b57843d0ffc4facb2818a28f2f23a13a2a1510",
+  "references": 36,
+  "markdown_tables_checked": 20,
+  "historical_citation_identifiers_preserved": 26,
+  "source_companion_hashes_verified": true,
+  "original_epub_unchanged": true,
+  "validation": "local paths, references, table widths, code fences, source hashes and original bibliography checked; arithmetic independently reviewed",
+  "not_performed": [
+    "field experiment",
+    "parcel PVGIS production simulation",
+    "water quality testing",
+    "complete older chat retrieval"
+  ]
+}

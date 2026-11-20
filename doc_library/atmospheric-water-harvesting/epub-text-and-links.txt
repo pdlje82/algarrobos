@@ -1,0 +1,242 @@
+
+
+### FILE OEBPS/chapter-01.xhtml
+Einleitung
+Kapitel 1
+Einleitung
+Warum Wassergewinnung aus der Luft interessant ist
+Eine Wüste muss nicht völlig frei von Wasser sein. Selbst wenn die Landschaft trocken wirkt und über Monate kaum Regen fällt, enthält die Atmosphäre Wasserdampf. Die entscheidende Frage ist, wie dieser Wasserdampf mit möglichst wenig Energie in flüssiges Wasser verwandelt werden kann.
+In dieser Untersuchung geht es um vier besonders wichtige Gruppen von Verfahren: Nebelfänger und Taukollektoren, erdgekühlte Kondensatoren, elektrisch betriebene Kühlgeräte und Sorptionssysteme, die Wasser zunächst in einem Material speichern. Im Mittelpunkt stehen die klimatischen Bedingungen im Raum Alhama de Almería, der Energiebedarf, der mögliche Wasserertrag und die Frage, ob sich daraus eine kleine, solarautarke Anlage bauen lässt.
+Die wichtigste Unterscheidung lautet: Nebel lässt sich mechanisch auffangen, Wasserdampf dagegen nicht. Um Wasserdampf zu gewinnen, muss man ihn entweder an einer hinreichend kalten Oberfläche kondensieren lassen oder zunächst in einem geeigneten Material binden und anschließend wieder freisetzen.
+Für einen Selbstbau sind passive Taukollektoren besonders unkompliziert. Ein Erdkanal ist mechanisch gut vorstellbar, aber nur bei passenden Temperaturbedingungen wirksam. Solarthermische Sorption könnte für trockene Regionen langfristig besonders vielversprechend sein. Kompressorgeräte schließlich funktionieren vergleichsweise zuverlässig, benötigen aber erheblich mehr Strom.
+LINKS []
+
+
+### FILE OEBPS/chapter-02.xhtml
+Die Physik des Taupunkts
+Kapitel 2
+Die Physik des Taupunkts
+Warum Luftfeuchtigkeit allein nicht ausreicht
+Die relative Luftfeuchtigkeit beschreibt, wie nahe die Luft bei ihrer momentanen Temperatur an der Sättigung ist. Bei hundert Prozent relativer Feuchtigkeit ist die Luft gesättigt. Kühlt man gesättigte Luft weiter ab, muss ein Teil des Wasserdampfs kondensieren, sofern geeignete Oberflächen oder Kondensationskeime vorhanden sind.
+Warme Luft kann bei gleichem Volumen deutlich mehr Wasserdampf enthalten als kalte. Deshalb können dreißig Grad warme Luft mit dreißig Prozent relativer Feuchtigkeit mehr Wasserdampf enthalten als zehn Grad kalte Luft mit achtzig Prozent.
+Drei Beispielzustände verdeutlichen den Unterschied zwischen relativer Feuchtigkeit, tatsächlichem Wassergehalt und Taupunkt.
+Eigene vereinfachte Darstellung.
+Bei dreißig Grad und dreißig Prozent relativer Feuchtigkeit enthält ein Kubikmeter Luft rund neun Gramm Wasser. Der Taupunkt liegt bei etwa elf Grad. Bei dreißig Grad und sechzig Prozent Feuchtigkeit sind es rund achtzehn Gramm; der Taupunkt liegt dann bei ungefähr einundzwanzig Grad. Zehn Grad kalte Luft mit achtzig Prozent relativer Feuchtigkeit enthält nur etwa siebeneinhalb Gramm Wasser pro Kubikmeter, bei einem Taupunkt von ungefähr sieben Grad.
+Ein erdgekühlter Kondensator kann daher bei dreißig Grad und sechzig Prozent relativer Feuchtigkeit erfolgreich sein, wenn sein Wärmetauscher auf neunzehn Grad abkühlt. Bei derselben Lufttemperatur und nur dreißig Prozent Feuchtigkeit wird bei neunzehn Grad dagegen überhaupt kein Wasser abgeschieden.
+Diese Grenze ist physikalisch hart: Liegt die kälteste erreichbare Oberfläche über dem Taupunkt, gibt es keine Kondensation. Ein Ventilator kann daran nichts ändern. Er kann mehr Luft bewegen, aber kein Wasser freisetzen, das wegen der Temperatur nicht kondensieren würde.
+LINKS []
+
+
+### FILE OEBPS/chapter-03.xhtml
+Nebelfänger und passive Taukollektoren
+Kapitel 3
+Nebelfänger und passive Taukollektoren
+Zwei stromlose Ideen mit unterschiedlichen Voraussetzungen
+Nebel auffangen: Das Netz
+Ein Nebelfänger besteht aus einer senkrecht aufgespannten Netzfläche, an der Nebel vorbeiströmt. Der Nebel enthält winzige, bereits flüssige Wassertröpfchen. Ein Teil dieser Tröpfchen prallt gegen die Fasern, bleibt hängen, vereinigt sich zu größeren Tropfen und fließt in eine Rinne. Der Prozess benötigt keinen Kompressor, keinen Kältekreislauf und üblicherweise auch keinen Ventilator.
+Links werden bereits flüssige Nebeltröpfchen aufgefangen. Rechts entsteht Tau erst durch Abkühlung einer Oberfläche.
+Eigene vereinfachte Darstellung.
+In geeigneten Nebelregionen sind Erträge von einigen Litern pro Quadratmeter Netzfläche und Tag möglich. In Projekten in Marokko wurden ungefähr eineinhalb bis sechs Liter pro Quadratmeter und Tag als Größenordnung berichtet; unter besonders günstigen Bedingungen ist mehr möglich. Doch diese Werte setzen regelmäßig durchziehenden Nebel und passende Windverhältnisse voraus.
+Für das Andarax-Tal ist der Nebelfänger nur dort eine ernsthafte Option, wo Nebel oder tiefe Wolken tatsächlich häufig durch das Netz ziehen. Hohe relative Feuchtigkeit ohne Nebel reicht nicht aus. Eine einfache Nebelhäufigkeitsmessung am Standort ist daher wichtiger als jede Optimierung des Netzes.
+Tau gewinnen: nachts zum Himmel abstrahlen
+Ein Taukollektor nutzt die natürliche Wärmeabstrahlung zum klaren Nachthimmel. Eine geeignete, nach oben orientierte Platte kann einige Grad kälter werden als die umgebende Luft. Sobald die Oberfläche unter den Taupunkt fällt, kondensiert Wasserdampf. Die Tropfen laufen über die geneigte Fläche in eine Sammelrinne.
+Dieses Verfahren kommt praktisch ohne elektrische Energie aus. Die erreichbaren Wassermengen bleiben allerdings oft klein: Unter geeigneten Bedingungen kann ein Kollektor einige Zehntelliter pro Quadratmeter und Nacht gewinnen. Das sind günstige Betriebswerte, keine ganzjährigen Ertragsgarantien.
+Für die Provinz Almería ist eine Untersuchung aus dem Gebiet Cabo de Gata besonders aufschlussreich. Dort wurde für ein Untersuchungsjahr eine gesamte Tauablagerung von rund dreißig Litern pro Quadratmeter ermittelt, entsprechend im Jahresmittel etwa achtzig Millilitern pro Quadratmeter und Tag. Diese ökologische Messgröße ist nicht identisch mit dem nutzbaren Wasserertrag eines Kollektors. Sie illustriert aber die lokale Größenordnung.
+Ein einfacher Eigenbau benötigt eine wärmeabstrahlende Oberfläche, eine wärmedämmende Rückseite, eine leichte Neigung und einen möglichst sauberen Kondensatablauf. Während der Nacht sollte die Platte freie Sicht zum Himmel haben. Im Sommer ist die Leistung vieler passiver Taukollektoren gerade an trockenen Standorten begrenzt.
+LINKS []
+
+
+### FILE OEBPS/chapter-04.xhtml
+Die Idee des unterirdischen Luftkanals
+Kapitel 4
+Die Idee des unterirdischen Luftkanals
+Wassergewinnung mit dem Boden als Wärmesenke
+Das von deinem Freund beschriebene Konzept ist physikalisch gut begründet. Außenluft wird durch einen unterirdischen Kanal geführt. Der Kanal tauscht Wärme mit dem umgebenden Boden aus. Ist der Boden ausreichend kühl, sinkt die Temperatur der strömenden Luft. Unterschreitet sie dabei den Taupunkt, entsteht Kondenswasser an den Wänden. Ein Gefälle transportiert dieses Wasser zu einem Sammelbehälter.
+Die Erdoberfläche und der Wärmetauscher sind vereinfacht und nicht maßstäblich gezeigt. Das Wasser entsteht nur bei Wandtemperaturen unterhalb des Taupunkts.
+Eigene vereinfachte Darstellung.
+Der elektrische Aufwand kann auf den Ventilator und die Steuerung beschränkt sein. Allerdings ist das Erdreich kein unerschöpflicher Kältespeicher. Während des Betriebs erwärmt es sich. Das System braucht dann Zeit, bis die Wärme in eine größere Erdmasse abfließt oder sich der Boden wieder abkühlt. Ein leistungsfähiger Entwurf muss daher sowohl Luftfeuchtigkeit als auch Wärmetransport im Boden berücksichtigen.
+Was ein Feldexperiment gezeigt hat
+Jianan Yao und Kollegen veröffentlichten 2021 eine experimentelle Untersuchung eines derartigen Systems unter dem Titel „Experimental Investigation of a Novel Extracting Water System from Air by Soil Cold Source“. Die Außenluft lag während der Versuche zwischen etwa dreißig und fünfundvierzig Grad, bei ungefähr zwanzig bis fünfzig Prozent relativer Feuchtigkeit. Als anfängliche Bodentemperatur wurden ungefähr neunzehn Grad angegeben.
+Bei einer Luftförderung von etwa vierundfünfzig Kubikmetern pro Stunde und ungefähr 2,4 Quadratmetern Wärmeübertragungsfläche wurden in rund zwanzig Stunden etwa 2,2 Liter Wasser gewonnen. Die Bodenregion erwärmte sich während des Versuchs um etwa 2,4 Grad. In etwa einem Tag näherte sich ihre Temperatur wieder dem Ausgangswert.
+Das sind experimentelle Erträge eines konkreten Aufbaus. Eine ausreichend vollständige elektrische Energiebilanz, aus der sich eine verlässliche Kilowattstundenzahl pro Liter für diesen Feldversuch ableiten ließe, liegt in der zuvor ausgewerteten Darstellung nicht vor. Man sollte daher keine präzise elektrische Effizienz behaupten, ohne die Ventilatorkennlinie und den Strömungswiderstand zu kennen.
+Der kritische Punkt: Bodentemperatur gegenüber Taupunkt
+Ein warmer Sommertag mit dreißig Grad und sechzig Prozent Feuchtigkeit hat einen Taupunkt von ungefähr einundzwanzig Grad. Ein Wärmetauscher mit neunzehn Grad kann dann Wasser abscheiden. Bei dreißig Grad und nur dreißig Prozent Feuchtigkeit liegt der Taupunkt ungefähr bei elf Grad; ein neunzehn Grad warmer Wärmetauscher bleibt dann vollständig trocken.
+Im Winter ist das Problem häufig noch ausgeprägter. Beispielsweise hat Luft mit zehn Grad und achtzig Prozent Feuchtigkeit einen Taupunkt von rund sieben Grad. Bei fünfzehn Grad Bodentemperatur würde der Kanal die Luft sogar erwärmen, statt sie so weit zu kühlen, dass Wasser entsteht.
+Auch ein Ventilator, der nachts läuft, ist nicht automatisch besser. Nachts steigt die relative Feuchtigkeit oft, weil die Lufttemperatur fällt. Ihr tatsächlicher Wassergehalt kann gleichzeitig relativ gering sein. Entscheidend ist deshalb, wie groß der Abstand zwischen Taupunkt und Rohrwandtemperatur ist und wie viel Luftmasse mit vertretbarem Energieeinsatz bewegt werden kann.
+LINKS []
+
+
+### FILE OEBPS/chapter-05.xhtml
+Aktive Kondensation mit Strom
+Kapitel 5
+Aktive Kondensation mit Strom
+Kompressorgeräte und Peltier-Elemente
+Kompressorkühlung
+Ein Kondensationsgerät mit Kompressor funktioniert im Kern wie eine Klimaanlage oder ein Luftentfeuchter. Ein Kältemittel transportiert Wärme von einem kalten Verdampfer zu einem wärmeren Kondensator. Die Außenluft strömt über den Verdampfer. Wenn dieser kälter als der Taupunkt ist, scheidet sich Wasser ab.
+Der Vorteil ist die regelbare Kälte. Das Gerät kann auch arbeiten, wenn der Boden oder die Nacht nicht kalt genug sind. Der Nachteil ist der Energiebedarf: Man muss sowohl die Luft abkühlen als auch die beim Kondensieren freiwerdende Wärme abführen. Bei trockener Luft sind niedrige Verdampfertemperaturen nötig, während die Wassermenge pro durchgesetztem Luftvolumen klein wird.
+Eine sinnvolle Größenordnung für moderne, geeignete Kompressorsysteme unter warmen und ausreichend feuchten Bedingungen liegt bei ungefähr einer halben bis zwei Kilowattstunden elektrische Energie pro Liter gewonnenem Wasser. Einzelne Versuche berichten etwa 0,8 bis eine Kilowattstunde pro Liter. Unter ungünstigen, trockenen oder kalten Bedingungen können die Verbräuche deutlich höher liegen.
+Für eine Photovoltaikanlage mit sehr kleiner Batterie kann das eine harte Grenze sein. Bei einer täglich verfügbaren Kilowattstunde und einem tatsächlichen Verbrauch von einer Kilowattstunde pro Liter entsteht ein Liter. Steigt der Verbrauch auf drei Kilowattstunden pro Liter, bleiben nur etwa dreihundert Milliliter.
+Peltier-Elemente
+Ein Peltier-Modul ist ein Halbleiterbauteil, das bei Stromfluss auf einer Seite Wärme aufnimmt und auf der anderen Wärme abgibt. Man kann damit sehr kompakte Kühlgeräte ohne Kompressor bauen. Für Experimente ist das attraktiv, weil kleine Module, Kühlkörper und Ventilatoren leicht erhältlich sind und mit Gleichstrom betrieben werden können.
+Für die ernsthafte Wasserproduktion schneiden Peltier-Geräte häufig ungünstiger ab als gute Kompressorsysteme. Die warme Seite muss sowohl die der Luft entzogene Wärme als auch die elektrische Verlustleistung abgeben. Bei einem großen Temperaturunterschied verschlechtert sich die Effizienz besonders stark. Einzelne kleine Versuchsgeräte benötigten Größenordnungen von zwanzig Kilowattstunden oder mehr je Liter, was jedoch nicht als universeller Wert für jede mögliche Konstruktion verstanden werden darf.
+Die praktische Empfehlung lautet deshalb: Peltier ist für einen Demonstrator gut geeignet, aber nicht meine erste Wahl für einen autonom betriebenen Wasserproduzenten, dessen Ertrag pro Batteriewattstunde möglichst hoch sein soll.
+LINKS []
+
+
+### FILE OEBPS/chapter-06.xhtml
+Wasser speichern statt die gesamte Luft kühlen
+Kapitel 6
+Wasser speichern statt die gesamte Luft kühlen
+Silikagel, Salze und moderne Sorbentien
+Sorptionsverfahren nutzen Materialien, die Wasserdampf aus der Luft aufnehmen können. Das Wasser befindet sich dann im oder am Sorbens. In einem zweiten Schritt wird das Material durch Wärme regeneriert: Der gebundene Wasserdampf wird wieder ausgetrieben und in einer getrennten Kammer kondensiert.
+Beim zyklischen Verfahren nehmen Sorptionsmaterialien häufig nachts Feuchtigkeit auf; tagsüber kann Sonnenwärme das Material regenerieren.
+Eigene vereinfachte Darstellung.
+Diese Trennung ist ein entscheidender Vorteil. Ein Sorber kann nachts bei relativ hoher Luftfeuchtigkeit Wasser aufnehmen. Tagsüber liefert die Sonne die Wärme zur Regeneration. Der elektrische Bedarf kann deshalb sehr gering sein, obwohl erhebliche thermische Energie benötigt wird. Die Sonnenstrahlung ist der eigentliche Energieinput.
+Welche Materialien infrage kommen
+Silikagel ist verfügbar, langlebig und für einen ersten experimentellen Aufbau vergleichsweise gut zu handhaben. Seine Wasseraufnahme bei besonders niedriger Luftfeuchtigkeit ist allerdings begrenzt.
+Calciumchlorid ist günstig und sehr hygroskopisch. Bei ausreichender Feuchtigkeit kann es eine konzentrierte Salzlösung bilden. Das erhöht die Anforderungen an Gehäuse, Korrosionsschutz und Trennung vom Produktwasser.
+Lithiumchlorid kann ebenfalls sehr effektiv Wasser binden. Es spielt deshalb in Forschungsprototypen eine wichtige Rolle. Doch auch hier darf die Salzlösung keinesfalls in das gewonnene Wasser gelangen. Moderne metallorganische Gerüstverbindungen, kurz MOFs, und Hydrogele eröffnen zusätzliche Möglichkeiten, sind für den Eigenbau aber wesentlich anspruchsvoller.
+Was experimentelle Studien zeigen
+Eine vielbeachtete Arbeit in der Fachzeitschrift Science demonstrierte bereits 2017 ein MOF-basiertes Verfahren bei rund zwanzig Prozent relativer Luftfeuchtigkeit. Für das untersuchte Material wurde ein erhebliches theoretisches Wassergewinnungspotenzial beschrieben. Solche Materialkennzahlen dürfen nicht direkt mit dauerhaft erreichbaren Erträgen einer kompletten Feldanlage verwechselt werden.
+Eine solarthermische Silikagel-Anlage erreichte in einer 2022 veröffentlichten Untersuchung unter bestimmten Versuchsbedingungen etwa 1,5 bis 3,3 Liter pro Tag und Quadratmeter Solarkollektorfläche. Als thermischer Energiebedarf wurden ungefähr eine bis drei Kilowattstunden pro Liter angegeben. Die Regenerationstemperatur lag bei höchstens etwa siebenundfünfzig Grad.
+Eine 2024 veröffentlichte Arbeit aus Saudi-Arabien beschrieb einen vollständig passiven Wassergewinner mit Lithiumchlorid und Kapillarstrukturen. Im Feldversuch wurden, auf die Gerätefläche bezogen, im Sommer ungefähr zwei bis drei Liter pro Quadratmeter und Tag erreicht. Die Versuchsgeräte selbst waren aber klein; ihre absoluten Tageserträge lagen eher im Bereich von einigen Dutzend Millilitern pro Einzelmodul.
+Das zeigt das Potenzial ebenso wie die Grenzen der heutigen Forschung. Ein hoher Ertrag je kleiner aktiver Fläche bedeutet noch nicht, dass eine beliebig große Anlage ohne weitere Verluste skaliert werden kann. Dazu müssen Sonnenwärme, Sorbensmasse, Luftkontakt, Kondensator und Wassersammlung gemeinsam ausgelegt werden.
+Für einen mechanisch orientierten Selbstbau wäre ein solarbeheizter Silikagel-Sorber mit gut isolierter Regenerationskammer und separater Kondensationsfläche mein bevorzugter Einstieg. Ein Metallfertiger könnte besonders bei Gehäusen, Rippen, Wärmeleitflächen und austauschbaren Sorberkassetten helfen.
+LINKS []
+
+
+### FILE OEBPS/chapter-07.xhtml
+Die Jahreszeiten in Almería
+Kapitel 7
+Die Jahreszeiten in Almería
+Warum Sommer, Winter und Tageszeit andere Anforderungen stellen
+Almería verbindet intensive Sonnenstrahlung, sehr geringe Jahresniederschläge und stark wechselnde Luftfeuchte. Für die Küste liegen ältere Klimamittel der Luftfeuchtigkeit im Sommer ungefähr bei sechzig Prozent und im Winter etwas höher. Das Hinterland von Alhama de Almería kann davon deutlich abweichen: Höhe, nächtliche Abkühlung, Hanglage und Luftströmungen verändern den lokalen Taupunkt.
+Im Sommer können feuchte Luftmassen vom Mittelmeer hohe Taupunkte erzeugen. Dann sind Erdkondensation oder Kompressorkühlung vergleichsweise interessant. Bei trockenen Luftströmungen fällt der Taupunkt dagegen stark, obwohl die Temperaturen hoch bleiben. Ein erdgekühlter Kanal wird dann unter Umständen völlig trocken bleiben.
+Die intensive Sommersonne ist zugleich ein Argument für solarthermische Sorption. Wenn das Sorbens genügend Wasserdampf aufgenommen hat, kann die Regeneration mit einfacher Solarwärme attraktiv sein. Im Winter gibt es weniger Wasserdampf pro Kubikmeter Luft, selbst wenn die relative Feuchtigkeit hoch erscheint. Dafür kann passive Taugewinnung bei klaren Nächten stattfinden, und die Stromversorgung per Photovoltaik fällt saisonal geringer aus.
+Eine universell beste Tageszeit gibt es nicht. Nebelnetze arbeiten, wenn Nebel durchzieht. Taukollektoren arbeiten vor allem nachts. Sorbentien nehmen häufig nachts auf und werden tagsüber regeneriert. Erdkondensatoren sollten nur bei einer günstigen Differenz zwischen Taupunkt und Rohrtemperatur laufen. Kompressorkondensatoren sollten die erwartete Wassermenge pro eingesetzter Wattstunde optimieren; das kann am späten Abend, morgens oder bei feuchter Tagesluft sein.
+Für eine Anlage im Hinterland wäre deshalb eine lokale Messreihe unverzichtbar. Wetterdaten des Flughafens Almería sind ein guter Ausgangspunkt, aber kein Ersatz für Messungen auf dem Grundstück.
+LINKS []
+
+
+### FILE OEBPS/chapter-08.xhtml
+Zwei kleine autarke Modellanlagen
+Kapitel 8
+Zwei kleine autarke Modellanlagen
+Eine Größenordnung für Wasser und elektrische Energie
+Erdgekühlter Luftkanal
+Nehmen wir einen Luftdurchsatz von hundert Kubikmetern pro Stunde an. Die Außenluft hat dreißig Grad und sechzig Prozent relative Luftfeuchtigkeit; im Kanal wird sie bis auf neunzehn Grad abgekühlt. Nach einer idealisierten Feuchtebilanz sind ungefähr ein Viertelliter Kondenswasser pro Stunde möglich.
+Über sechs Stunden ergäbe das theoretisch etwa eineinhalb Liter. Ein kleiner Ventilator, der im Arbeitspunkt fünfzehn Watt benötigt, verbrauchte in dieser Zeit nur neunzig Wattstunden. Diese Zahlen illustrieren die Möglichkeit, aber sie sind keine realistische Garantiebilanz: Entscheidend ist, ob der Boden dauerhaft genug Wärme aufnehmen kann, ob die gesamte Luft wirklich auf neunzehn Grad kommt und wie groß der tatsächliche Druckverlust ist.
+Ein gut gedämmter Luftkanal ist nicht das Ziel, sondern ein besonders gut wärmeleitender. Wärmetauscheroberfläche, Kontakt zum Boden, Strömungsführung und Kondensatablauf sind wichtiger als die reine Rohrlänge. Ein stark verschmutzter oder schlecht entwässerter Kanal würde zudem hygienische Probleme verursachen.
+Kompressorgerät mit kleinem Photovoltaikmodul
+Ein Solarmodul mit dreihundert Watt Spitzenleistung könnte in der Region Almería über das Jahr gemittelt grob 1,4 Kilowattstunden elektrische Energie pro Tag erzeugen, bei guter Ausrichtung und abhängig vom Standort. Nach Verlusten in Batterie und Elektronik bleibt etwas weniger nutzbar.
+Bei einem tatsächlichen Kondensationsaufwand von einer Kilowattstunde pro Liter ließe sich damit eine Wassermenge in der Größenordnung eines Liters pro durchschnittlichem Tag erreichen. Bei drei Kilowattstunden pro Liter reduziert sich die Wassermenge auf deutlich weniger als einen halben Liter. Die tatsächliche saisonale Schwankung kann groß sein.
+Der scheinbar kleine Strombedarf der Erdkondensation darf deshalb nicht mit einer nahezu kostenlosen Wassererzeugung verwechselt werden. Das Erdreich übernimmt die Kältebereitstellung, kann aber nur begrenzt Wärme aufnehmen. Umgekehrt muss man bei einem Solar-Sorber die eingestrahlte Wärme berücksichtigen, auch wenn praktisch kein elektrischer Strom benötigt wird.
+LINKS []
+
+
+### FILE OEBPS/chapter-09.xhtml
+Ein sinnvoller Entwicklungsplan
+Kapitel 9
+Ein sinnvoller Entwicklungsplan
+Vom Messen über den Prototyp bis zum Feldbetrieb
+Erste Stufe: Feuchte und Bodentemperatur messen
+Die wertvollste erste Investition wäre eine kleine Wetterstation mit Lufttemperatur, relativer Feuchtigkeit und Datenspeicherung. Zusätzlich sollten Temperatursensoren in etwa einem und zwei Metern Bodentiefe eingebaut werden. Messintervalle von fünf bis zehn Minuten reichen für eine erste Analyse meist aus.
+Aus der Lufttemperatur und relativen Feuchtigkeit lässt sich der Taupunkt berechnen. Für jede Stunde des Jahres kann man feststellen, ob der Boden kälter als der Taupunkt ist und welche Kondensationsmenge theoretisch erreichbar wäre. Eine Simulation sollte außerdem die Aufheizung des Erdreichs und die Wärmeübertragung im Rohr grob modellieren.
+Zweite Stufe: Zwei einfache passive Prototypen
+Ein Taukollektor mit einigen Quadratmetern Fläche ist günstig, schnell aufgebaut und benötigt keinen Strom. Er liefert gleichzeitig eine nützliche Referenz dafür, wie viel nächtliche Feuchtigkeit sich unter den lokalen Bedingungen tatsächlich gewinnen lässt.
+Parallel könnte man einen kurzen, gut zugänglichen Erdwärmetauscher mit ungefähr fünfzig bis hundertfünfzig Kubikmetern Luftförderung pro Stunde erproben. Wichtig wären ein Reinigungszugang, durchgehendes Gefälle, Kondensatsammlung, ein niedriger Strömungswiderstand und temperaturbeständige, korrosionsarme Oberflächen. Ein gefräster metallischer Wärmetauscher kann eine interessante Versuchsoption sein, muss aber so konzipiert werden, dass er nicht nur gut Wärme überträgt, sondern sich auch dauerhaft reinigen lässt.
+Gemessen werden sollten Wasserertrag, Stromaufnahme des Ventilators, Lufttemperatur und Feuchte vor und nach dem Rohr sowie die Bodentemperatur. Daraus lässt sich ein echter Wirkungsgrad für das konkrete Gerät berechnen, statt auf theoretische Literaturzahlen angewiesen zu sein.
+Dritte Stufe: Sorptionsgerät mit Sonnenwärme
+Ein Sorber mit Silikagel könnte in einer modularen Kammer getestet werden. Die Aufnahme findet in feuchter Umgebungsluft statt. Zur Regeneration wird die Kammer durch einen Solarabsorber erwärmt; der austretende Wasserdampf gelangt an eine separate, möglichst kühle Kondensationsfläche.
+Die Herausforderung ist die thermische Kopplung: Das Sorbens soll tagsüber warm werden, der Kondensator gleichzeitig kühl bleiben. Kleine Anlagen verlieren bei ungünstigem Gehäusedesign einen großen Teil ihres Potenzials. Hier können dünne Metallbleche, Kühlrippen, Isolierung, Dichtungen und sauber getrennte Flüssigkeitswege den Unterschied machen.
+Die Steuerung könnte auf einem einfachen Mikrocontroller laufen. Sensoren erfassen Temperatur, relative Feuchte, Boden- und Wärmetauschertemperatur, Solareinstrahlung und Batteriestand. Die Software aktiviert Ventilator oder Regeneration nur, wenn die erwartete Wassergewinnung den Energieaufwand rechtfertigt.
+Wasserqualität und Wartung
+Wasser aus der Luft ist nicht automatisch trinkbar. Nebel und Tau können Staub und Luftschadstoffe enthalten. In feuchten Erdrohren können Biofilme entstehen. Hygroskopische Salze dürfen nicht in den Wasserbehälter gelangen. Für Trinkwasser sind geeignete Analysen, Aufbereitung und die Einhaltung lokaler Vorschriften notwendig. Für Bewässerungsversuche gelten andere Anforderungen, doch auch hier sollten Salzverschleppung und mikrobiologische Verunreinigungen beachtet werden.
+LINKS []
+
+
+### FILE OEBPS/chapter-10.xhtml
+Was ich für Alhama empfehlen würde
+Kapitel 10
+Was ich für Alhama empfehlen würde
+Entscheidungen nach Ertrag, Aufwand und Standort
+Für eine mechanisch einfach aufgebaute Versuchsanlage spricht viel für den Erdkanal. Der elektrische Energiebedarf kann gering sein, sofern der Boden tatsächlich kalt genug bleibt. Seine Schwäche ist die Saisonalität: Wo der Taupunkt nicht über die Rohrtemperatur steigt, wird kein Wasser gewonnen.
+Für besonders trockene Bedingungen ist die solarthermische Sorption die spannendere Forschungsrichtung. Sie kann Feuchtigkeit zunächst im Material konzentrieren und die Regeneration mit Sonnenwärme betreiben. Die dafür nötige Material- und Wärmetechnik ist jedoch deutlich anspruchsvoller.
+Ein Kompressorkondensator eignet sich, wenn ein reproduzierbarer Wasserertrag wichtiger ist als die extrem niedrige elektrische Leistungsaufnahme. Ein Peltiergerät würde ich vor allem als Lehr- oder Testobjekt einsetzen. Nebelnetze setzen nachgewiesene Nebelereignisse voraus, während ein Taukollektor als günstiger, stromloser Vergleichsversuch sehr sinnvoll sein kann.
+Für die Versorgung von Jungpflanzen sollte man außerdem den Vergleich mit Regenwassersammlung nicht vergessen. Bei zweihundert Millimetern Jahresniederschlag kann eine zehn Quadratmeter große Sammelfläche theoretisch zweitausend Liter Niederschlag pro Jahr auffangen, bevor Speicher- und Verdunstungsverluste berücksichtigt werden. Das ist eine andere Größenordnung als die passive Taugewinnung an vielen trockenen Standorten.
+Meine wichtigste Schlussfolgerung lautet deshalb: Erst messen, dann bauen. Ein einfaches lokales Feuchte- und Temperaturprofil kann zeigen, wie oft der Erdkanal überhaupt kondensieren würde. Erst danach lohnt es sich, Rohrlänge, Wärmetauscherfläche, Ventilatorgröße, Batterie und Solarmodule auszulegen. Langfristig könnte auch ein Hybridsystem interessant sein, das Sorption bei trockenen Bedingungen und Erdkondensation bei hohen Taupunkten kombiniert. Ob es wirklich wirtschaftlicher ist, bleibt eine offene experimentelle Frage.
+LINKS []
+
+
+### FILE OEBPS/chapter-11.xhtml
+Literatur und weiterführende Quellen
+Kapitel 11
+Literatur und weiterführende Quellen
+Auswahl aus der zugrunde liegenden Recherche
+Die folgenden Arbeiten sind Anknüpfungspunkte für eine vertiefte technische Auslegung. Bei einzelnen Kennzahlen handelt es sich um Werte aus spezifischen Versuchsanordnungen; die Ergebnisse sollten vor einer Konstruktion im jeweiligen Originalkontext geprüft werden.
+Yao, J. und Kollegen (2021).
+Experimental Investigation of a Novel Extracting Water System from Air by Soil Cold Source
+. Wichtigster direkter Versuch zur erdgekühlten Wassergewinnung.
+Rao und Kollegen (2022).
+Thermodynamic limits of atmospheric water harvesting
+. Grundlegende Betrachtung physikalischer Grenzen.
+Liter-scale atmospheric water harvesting for dry climates driven by low temperature solar heat
+(2022). Solarthermische Silikagel-Technologie.
+Yang und Kollegen (2024).
+A solar-driven atmospheric water extractor for off-grid freshwater generation and irrigation
+. Passiver Salz-Sorber für dezentrale Wassergewinnung.
+Atmospheric water harvesting: A comprehensive review of techniques, innovations, systems, and future prospects
+(2026). Überblick über Verfahren und Forschungsstand.
+Methodischer Hinweis: Die Diagramme in diesem EPUB sind neue, vereinfachte Darstellungen und keine aus den Originalpublikationen entnommenen wissenschaftlichen Abbildungen. Klimawerte und Modellrechnungen sind als Größenordnungen beschrieben, nicht als standortspezifische Prognosen.
+LINKS [{"text": "Experimental Investigation of a Novel Extracting Water System from Air by Soil Cold Source", "href": "https://doi.org/10.1155/2021/2740081"}, {"text": "Thermodynamic limits of atmospheric water harvesting", "href": "https://doi.org/10.1039/D2EE01071B"}, {"text": "Liter-scale atmospheric water harvesting for dry climates driven by low temperature solar heat", "href": "https://www.sciencedirect.com/science/article/pii/S0360544222011987"}, {"text": "A solar-driven atmospheric water extractor for off-grid freshwater generation and irrigation", "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11269568/"}, {"text": "Atmospheric water harvesting: A comprehensive review of techniques, innovations, systems, and future prospects", "href": "https://doi.org/10.1016/j.nxener.2026.100731"}]
+
+
+### FILE OEBPS/chapter-12.xhtml
+Begriffe zum Nachschlagen
+Kapitel 12
+Begriffe zum Nachschlagen
+Ein kurzes Glossar
+Absolute Luftfeuchtigkeit
+Masse des Wasserdampfs in einem gegebenen Luftvolumen, meist Gramm pro Kubikmeter.
+Relative Luftfeuchtigkeit
+Verhältnis des tatsächlichen Wasserdampfgehalts zum Sättigungszustand bei der jeweiligen Temperatur.
+Taupunkt
+Temperatur, unterhalb derer Wasserdampf bei Abkühlung kondensieren kann.
+Kondensation
+Übergang von Wasserdampf in flüssiges Wasser unter Freisetzung von Wärme.
+Sorption
+Aufnahme eines Stoffes an der Oberfläche oder im Volumen eines anderen Materials.
+Regeneration
+Erwärmen oder anderweitiges Behandeln eines beladenen Sorbens, um das gespeicherte Wasser wieder freizusetzen.
+Spezifischer Energieverbrauch
+Benötigte elektrische oder thermische Energie pro gewonnenem Liter Wasser; die Energieart muss ausdrücklich angegeben werden.
+Wärmesenke
+Umgebung oder Systemteil, das Wärme aufnimmt, etwa kalter Boden oder ein Luftkühler.
+LINKS []
+
+
+### FILE OEBPS/nav.xhtml
+Inhaltsverzeichnis
+Inhaltsverzeichnis
+Einleitung
+Die Physik des Taupunkts
+Nebelfänger und passive Taukollektoren
+Die Idee des unterirdischen Luftkanals
+Aktive Kondensation mit Strom
+Wasser speichern statt die gesamte Luft kühlen
+Die Jahreszeiten in Almería
+Zwei kleine autarke Modellanlagen
+Ein sinnvoller Entwicklungsplan
+Was ich für Alhama empfehlen würde
+Literatur und weiterführende Quellen
+Begriffe zum Nachschlagen
+LINKS [{"text": "Einleitung", "href": "chapter-01.xhtml"}, {"text": "Die Physik des Taupunkts", "href": "chapter-02.xhtml"}, {"text": "Nebelfänger und passive Taukollektoren", "href": "chapter-03.xhtml"}, {"text": "Die Idee des unterirdischen Luftkanals", "href": "chapter-04.xhtml"}, {"text": "Aktive Kondensation mit Strom", "href": "chapter-05.xhtml"}, {"text": "Wasser speichern statt die gesamte Luft kühlen", "href": "chapter-06.xhtml"}, {"text": "Die Jahreszeiten in Almería", "href": "chapter-07.xhtml"}, {"text": "Zwei kleine autarke Modellanlagen", "href": "chapter-08.xhtml"}, {"text": "Ein sinnvoller Entwicklungsplan", "href": "chapter-09.xhtml"}, {"text": "Was ich für Alhama empfehlen würde", "href": "chapter-10.xhtml"}, {"text": "Literatur und weiterführende Quellen", "href": "chapter-11.xhtml"}, {"text": "Begriffe zum Nachschlagen", "href": "chapter-12.xhtml"}]
+
+
+### FILE OEBPS/title.xhtml
+Titelseite
+Wissenschaftlicher Überblick
+Wasser aus der Luft
+Technologien, Physik und Effizienz für solarautarke Anlagen in Almería
+Bearbeitete EPUB-Fassung der vorausgehenden Recherche · November 2026
+LINKS []

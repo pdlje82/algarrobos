@@ -1,0 +1,277 @@
+{
+  "reference_year": 2025,
+  "population_basis": "Explicit municipality-total proxy, not a verified actual-settlement count",
+  "RD_basis": "Conditional on operation actually supporting the municipality",
+  "benchmarks": {
+    "AT_AL20_median": 539,
+    "AT_Andalusia_median": 2256,
+    "RD_AL20_mean": 60
+  },
+  "unresolved": [
+    "Applicable 2023 versus 2025 reference year",
+    "Andalusia median discrepancy 2256 versus 2497"
+  ],
+  "routes": [
+    "3.4",
+    "3.5"
+  ],
+  "verified_with": "Read-only app lookup and scoring evaluator for all 32 rows and both routes",
+  "rows": [
+    {
+      "municipality": "Abla",
+      "population": 1267,
+      "businesses": 54,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 15,
+      "conditional_total": 23
+    },
+    {
+      "municipality": "Abrucena",
+      "population": 1235,
+      "businesses": 53,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 15,
+      "conditional_total": 23
+    },
+    {
+      "municipality": "Alboloduy",
+      "population": 578,
+      "businesses": 21,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 15,
+      "conditional_total": 23
+    },
+    {
+      "municipality": "Alcolea",
+      "population": 831,
+      "businesses": 38,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 15,
+      "conditional_total": 23
+    },
+    {
+      "municipality": "Alhabia",
+      "population": 750,
+      "businesses": 41,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 15,
+      "conditional_total": 23
+    },
+    {
+      "municipality": "Alhama de Almería",
+      "population": 4016,
+      "businesses": 284,
+      "AT_proxy_points": 0,
+      "RD_conditional_points": 0,
+      "conditional_total": 0
+    },
+    {
+      "municipality": "Alicún",
+      "population": 203,
+      "businesses": 9,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Almócita",
+      "population": 215,
+      "businesses": 15,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Alsodux",
+      "population": 125,
+      "businesses": 1,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Bayárcal",
+      "population": 294,
+      "businesses": 11,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Beires",
+      "population": 140,
+      "businesses": 4,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Bentarique",
+      "population": 226,
+      "businesses": 11,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Berja",
+      "population": 12997,
+      "businesses": 653,
+      "AT_proxy_points": 0,
+      "RD_conditional_points": 0,
+      "conditional_total": 0
+    },
+    {
+      "municipality": "Canjáyar",
+      "population": 1143,
+      "businesses": 58,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 15,
+      "conditional_total": 23
+    },
+    {
+      "municipality": "Dalías",
+      "population": 4184,
+      "businesses": 172,
+      "AT_proxy_points": 0,
+      "RD_conditional_points": 0,
+      "conditional_total": 0
+    },
+    {
+      "municipality": "Enix",
+      "population": 624,
+      "businesses": 29,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 15,
+      "conditional_total": 23
+    },
+    {
+      "municipality": "Felix",
+      "population": 772,
+      "businesses": 37,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 15,
+      "conditional_total": 23
+    },
+    {
+      "municipality": "Fiñana",
+      "population": 1991,
+      "businesses": 78,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 0,
+      "conditional_total": 8
+    },
+    {
+      "municipality": "Fondón",
+      "population": 1151,
+      "businesses": 60,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 0,
+      "conditional_total": 8
+    },
+    {
+      "municipality": "Huécija",
+      "population": 527,
+      "businesses": 21,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Íllar",
+      "population": 484,
+      "businesses": 14,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Instinción",
+      "population": 507,
+      "businesses": 24,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Las Tres Villas",
+      "population": 551,
+      "businesses": 7,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 15,
+      "conditional_total": 23
+    },
+    {
+      "municipality": "Laujar de Andarax",
+      "population": 1670,
+      "businesses": 117,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 0,
+      "conditional_total": 8
+    },
+    {
+      "municipality": "Nacimiento",
+      "population": 485,
+      "businesses": 19,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Ohanes",
+      "population": 553,
+      "businesses": 25,
+      "AT_proxy_points": 8,
+      "RD_conditional_points": 15,
+      "conditional_total": 23
+    },
+    {
+      "municipality": "Padules",
+      "population": 435,
+      "businesses": 18,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Paterna del Río",
+      "population": 399,
+      "businesses": 11,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Rágol",
+      "population": 294,
+      "businesses": 9,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Santa Cruz de Marchena",
+      "population": 236,
+      "businesses": 1,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Santa Fe de Mondújar",
+      "population": 523,
+      "businesses": 22,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    },
+    {
+      "municipality": "Terque",
+      "population": 389,
+      "businesses": 17,
+      "AT_proxy_points": 10,
+      "RD_conditional_points": 15,
+      "conditional_total": 25
+    }
+  ]
+}

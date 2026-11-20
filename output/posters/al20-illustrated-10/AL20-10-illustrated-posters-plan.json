@@ -1,0 +1,607 @@
+{
+  "poster_count": 10,
+  "aspect_ratio": "9:16",
+  "style": "Illustrated natural-history reference plates adapted to funding, with numbered callouts and two reading columns",
+  "coverage": {
+    "scoring_options": 45,
+    "distinct_edll_references": 109,
+    "municipalities": 32,
+    "prior_topics_consolidated": 46
+  },
+  "editorial_contract": [
+    "Preserve every scoring option and its exact value",
+    "Show each category maximum and all exclusive/cumulative relationships",
+    "Preserve all EDLL choices and material restrictions",
+    "Condense repeated and long evidence prose into proof checklists",
+    "No saved project selections or assigned project scores",
+    "No source citations on poster faces",
+    "Keep provisional-data labels, reference years and unresolved substantive conditions",
+    "Design dense sheets for large-format print; resolution is not a substitute for physical size"
+  ],
+  "posters": [
+    {
+      "number": 1,
+      "title": "The funding landscape",
+      "previous_sheets_consolidated": [
+        1,
+        2,
+        5,
+        6
+      ],
+      "description": "A central rural landscape illustrates demonstration and heritage recovery. Surround it with the route comparison, 60/100 explanation, all 14 category weights and a cap example.",
+      "scoring_options": [],
+      "edll_references": [],
+      "municipalities": [],
+      "conditions_preserved": [
+        "Published maximum versus selection minimum",
+        "Scoring does not establish route/applicant/cost eligibility",
+        "No saved-project selections",
+        "Nonproductive operation",
+        "3.4 demonstration and transferability",
+        "3.5 heritage conservation and public value",
+        "100% concerns eligible costs, not selection points",
+        "At most one in an exclusive group",
+        "Cap cannot legitimise invalid selections",
+        "Exact decimals: 4.98 does not round to 5",
+        "Each option scores once"
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Place and territory",
+      "previous_sheets_consolidated": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "description": "All 32 municipalities in two 16-row tables, with population and business figures. AT.3 and RD.5 options, benchmarks and unresolved reference-year/median issues stay visible. A village vignette anchors the tables.",
+      "scoring_options": [
+        "AT.3.1",
+        "AT.3.2",
+        "RD.5.1"
+      ],
+      "edll_references": [],
+      "municipalities": [
+        "Abla",
+        "Abrucena",
+        "Alboloduy",
+        "Alcolea",
+        "Alhabia",
+        "Alhama de Almería",
+        "Alicún",
+        "Almócita",
+        "Alsodux",
+        "Bayárcal",
+        "Beires",
+        "Bentarique",
+        "Berja",
+        "Canjáyar",
+        "Dalías",
+        "Enix",
+        "Felix",
+        "Fiñana",
+        "Fondón",
+        "Huécija",
+        "Íllar",
+        "Instinción",
+        "Las Tres Villas",
+        "Laujar de Andarax",
+        "Nacimiento",
+        "Ohanes",
+        "Padules",
+        "Paterna del Río",
+        "Rágol",
+        "Santa Cruz de Marchena",
+        "Santa Fe de Mondújar",
+        "Terque"
+      ],
+      "conditions_preserved": [
+        "INE 2023 wording versus 2025 tables",
+        "539 is provisional",
+        "2256 versus 2497 discrepancy",
+        "Settlement is not municipality",
+        "Strictly below, not equal",
+        "Application/payment location consistency",
+        "Mean 60, not median 21.5",
+        "Applicable reference year",
+        "No automatic award based only on a location name",
+        "Municipality totals are not settlement counts",
+        "No rows or project locations preselected",
+        "Year and applicable scoring benchmark require confirmation",
+        "Municipality totals are not settlement counts",
+        "No rows or project locations preselected",
+        "Year and applicable scoring benchmark require confirmation",
+        "Municipality totals are not settlement counts",
+        "No rows or project locations preselected",
+        "Year and applicable scoring benchmark require confirmation",
+        "Municipality totals are not settlement counts",
+        "No rows or project locations preselected",
+        "Year and applicable scoring benchmark require confirmation"
+      ]
+    },
+    {
+      "number": 3,
+      "title": "The 50 EDLL needs",
+      "previous_sheets_consolidated": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "description": "All three CO.1 score levels, all 50 needs in two 25-entry columns, and a compact need-to-activity illustration. Keep reference codes; no ranking values become grant points.",
+      "scoring_options": [
+        "CO.1.1",
+        "CO.1.2",
+        "CO.1.3"
+      ],
+      "edll_references": [
+        "NPL1",
+        "NPL10",
+        "NPL11",
+        "NPL12",
+        "NPL13",
+        "NPL14",
+        "NPL15",
+        "NPL16",
+        "NPL17",
+        "NPL18",
+        "NPL19",
+        "NPL2",
+        "NPL20",
+        "NPL21",
+        "NPL22",
+        "NPL23",
+        "NPL24",
+        "NPL25",
+        "NPL26",
+        "NPL27",
+        "NPL28",
+        "NPL29",
+        "NPL3",
+        "NPL30",
+        "NPL31",
+        "NPL32",
+        "NPL33",
+        "NPL34",
+        "NPL35",
+        "NPL36",
+        "NPL37",
+        "NPL38",
+        "NPL39",
+        "NPL4",
+        "NPL40",
+        "NPL41",
+        "NPL42",
+        "NPL43",
+        "NPL44",
+        "NPL45",
+        "NPL46",
+        "NPL47",
+        "NPL48",
+        "NPL49",
+        "NPL5",
+        "NPL50",
+        "NPL6",
+        "NPL7",
+        "NPL8",
+        "NPL9"
+      ],
+      "municipalities": [],
+      "conditions_preserved": [
+        "1 need = 10; 2 = 12; 3+ = 15",
+        "Distinct needs, not number of activities",
+        "NPL versus non-LEADER-addressable needs",
+        "Needs ranking values are not grant points",
+        "Supporting references award no extra points",
+        "Supporting references award no extra points",
+        "Supporting references award no extra points",
+        "Supporting references award no extra points",
+        "Supporting references award no extra points"
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Energy, mobility and innovation",
+      "previous_sheets_consolidated": [
+        19,
+        20,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "description": "All CC.2, CC.7 and IN.1 options, five innovative themes and twelve innovative aspects. Equipment details become small illustrated specimens; certification, income and territorial conditions remain in captions.",
+      "scoring_options": [
+        "CC.2.1",
+        "CC.7.1",
+        "CC.7.2",
+        "CC.7.3",
+        "IN.1.1",
+        "IN.1.2",
+        "IN.1.3"
+      ],
+      "edll_references": [
+        "IN-A1",
+        "IN-A10",
+        "IN-A11",
+        "IN-A12",
+        "IN-A2",
+        "IN-A3",
+        "IN-A4",
+        "IN-A5",
+        "IN-A6",
+        "IN-A7",
+        "IN-A8",
+        "IN-A9",
+        "IN-T1",
+        "IN-T2",
+        "IN-T3",
+        "IN-T4",
+        "IN-T5"
+      ],
+      "municipalities": [],
+      "conditions_preserved": [
+        "Printed equipment examples retained",
+        "Actual route-compatible equipment need",
+        "Technical sheets, eligible acquisition and commissioning evidence",
+        "Qualifying green collective transport",
+        "Charging installation",
+        "Municipal measures backed by the relevant sustainable mobility plan",
+        "4+4 counts as 5",
+        "0.02 sector option needs written clarification",
+        "2.49 theme + 2.49 aspect = 4.98",
+        "Repeated themes do not multiply points",
+        "3.4 local novelty is a separate test",
+        "Published cap 5; 99.98 arithmetic ceiling without sector award",
+        "ROC application, not generic regenerative branding",
+        "Relocation affects more than one resident worker",
+        "Footprint must be certified and communicated",
+        "Preserve Dalías/Berja geographic restrictions",
+        "Low-agricultural-production municipality conditions"
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Women’s participation",
+      "previous_sheets_consolidated": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "description": "All eleven IG.8/IG.11 scoring options and fourteen women’s interests. A participation illustration sits between scoring choices and the matching EDLL interests. Show both two-point caps and the exclusive groups.",
+      "scoring_options": [
+        "IG.8.1",
+        "IG.8.2",
+        "IG.8.3",
+        "IG.8.4",
+        "IG.11.1",
+        "IG.11.2",
+        "IG.11.3",
+        "IG.11.4",
+        "IG.11.5",
+        "IG.11.6",
+        "IG.11.7"
+      ],
+      "edll_references": [
+        "W1",
+        "W10",
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "W2",
+        "W3",
+        "W4",
+        "W5",
+        "W6",
+        "W7",
+        "W8",
+        "W9"
+      ],
+      "municipalities": [],
+      "conditions_preserved": [
+        "One exclusive choice, maximum 2",
+        "IG.8.2 requires a documented EDLL demand",
+        "Activity plan and delivery evidence",
+        "Founding/registration versus informal collaboration",
+        "Creation, maintenance/equipment, activities or networks",
+        "Entire IG.11 category maximum remains 2",
+        "Association awareness",
+        "Underrepresented sectors",
+        "EDLL-based meetings/workshops",
+        "1+1+1 counts as 2",
+        "Entire IG.11 category maximum remains 2"
+      ]
+    },
+    {
+      "number": 6,
+      "title": "Youth and inclusion",
+      "previous_sheets_consolidated": [
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "description": "All eight youth options, three inclusion options, ten youth priorities and five inclusion references. Two reading columns, one for youth and one for inclusion, with clear four-point caps and beneficiary/evidence conditions.",
+      "scoring_options": [
+        "DRI.3.1",
+        "DRI.3.2",
+        "DRI.3.3",
+        "JR.3.1",
+        "JR.3.2",
+        "JR.3.5",
+        "JR.3.6",
+        "JR.3.7",
+        "JR.3.3",
+        "JR.3.4",
+        "JR.3.8"
+      ],
+      "edll_references": [
+        "NPL14",
+        "NPL17",
+        "NPL23",
+        "NPL30",
+        "NPL9",
+        "Y1",
+        "Y10",
+        "Y2",
+        "Y3",
+        "Y4",
+        "Y5",
+        "Y6",
+        "Y7",
+        "Y8",
+        "Y9"
+      ],
+      "municipalities": [],
+      "conditions_preserved": [
+        "Disability adaptation must exceed statutory minimums",
+        "Training for relevant staff",
+        "Specific at-risk population and need",
+        "3+2 counts as 4",
+        "Broad social benefit alone is insufficient",
+        "Use with DRI.3.3",
+        "Training/placements",
+        "Leisure",
+        "Participation",
+        "Business/service option must fit nonproductive route",
+        "Whole JR.3 cap = 4",
+        "Return within 12 months of qualification",
+        "Youth definition requires confirmation",
+        "Local-development contribution",
+        "Explicit EDLL youth need",
+        "Proof of delivery"
+      ]
+    },
+    {
+      "number": 7,
+      "title": "Rural and environmental heritage",
+      "previous_sheets_consolidated": [
+        37,
+        38,
+        39,
+        40
+      ],
+      "description": "All three PT.1 options, four traditional-trade examples and all thirteen heritage references. A heritage landscape plate has numbered details for natural heritage, stone work, landscapes and interpretation. Category cap 15.",
+      "scoring_options": [
+        "PT.1.1",
+        "PT.1.2",
+        "PT.1.3"
+      ],
+      "edll_references": [
+        "H1",
+        "H10",
+        "H11",
+        "H2",
+        "H3",
+        "H4",
+        "H5",
+        "H6",
+        "H7",
+        "H8",
+        "H9",
+        "NPL18",
+        "NPL3",
+        "TR1",
+        "TR2",
+        "TR3",
+        "TR4"
+      ],
+      "municipalities": [],
+      "conditions_preserved": [
+        "Works versus activities evidence",
+        "Subsequent use",
+        "13+7 counts as 15",
+        "A site name does not establish conservation action",
+        "Examples are not an exhaustive approved list",
+        "No named traditional-dish list in the app",
+        "Generic restoration is not automatically a traditional craft"
+      ]
+    },
+    {
+      "number": 8,
+      "title": "The applicant and cooperation",
+      "previous_sheets_consolidated": [
+        41,
+        42,
+        43
+      ],
+      "description": "All three PS.1 membership options, PS.3 funding-history option and all three cross-cutting objectives. A small organisational network depicts actual membership; certificates, statutes and applicant competence are stated.",
+      "scoring_options": [
+        "PS.1.1",
+        "PS.1.2",
+        "PS.1.3",
+        "PS.3.1"
+      ],
+      "edll_references": [
+        "OT-C",
+        "OT-G",
+        "OT-Y"
+      ],
+      "municipalities": [],
+      "conditions_preserved": [
+        "Cooperative territorial scope",
+        "Informal cooperation is not membership",
+        "Organisation purposes must match",
+        "4+4+8 counts as 12",
+        "Actual applicant membership still required",
+        "Multiple objectives do not multiply the four-point option",
+        "Programme financial targets are not selection points",
+        "New project does not reset applicant history",
+        "Declaration and official checks",
+        "No separate payment document specified does not remove general duties"
+      ]
+    },
+    {
+      "number": 9,
+      "title": "Public benefit, services and route duties",
+      "previous_sheets_consolidated": [
+        3,
+        4,
+        44
+      ],
+      "description": "All three SP.1 choices plus full condensed 3.4/3.5 route checklists: public access, publication, finality, forest plans, exclusions and maintenance. An accessible rural service/interpretation scene explains public benefit.",
+      "scoring_options": [
+        "SP.1.1",
+        "SP.1.2",
+        "SP.1.3"
+      ],
+      "edll_references": [],
+      "municipalities": [],
+      "conditions_preserved": [
+        "Open/objective participant access",
+        "Online information from start",
+        "Results as they emerge",
+        "Publication retained three years after final payment",
+        "Demonstration-only property investment",
+        "No unfinished dependent phase",
+        "Repeated events need justified added value",
+        "Forest plan valid at application where required",
+        "No standalone studies/events",
+        "Agricultural/forestry production exclusions",
+        "No buying the heritage asset",
+        "Maintenance and nonproductive competition/concession conditions",
+        "New and improvement alternatives are exclusive",
+        "4+1 counts as 5; 5+1 remains 5",
+        "Person-oriented proximity service, not any trail or workshop",
+        "Application baseline and delivery/equipment/activity proof"
+      ]
+    },
+    {
+      "number": 10,
+      "title": "From claim to application",
+      "previous_sheets_consolidated": [
+        45,
+        46
+      ],
+      "description": "An evidence workflow, application/payment proof checklists, unresolved-question log, 14-category score worksheet and final completion checks. Retain all materially distinct evidence conditions; source references stay in the Markdown.",
+      "scoring_options": [],
+      "edll_references": [],
+      "municipalities": [],
+      "conditions_preserved": [
+        "Option + EDLL reference + activity/fact + intended result + proof + owner",
+        "Mark confirmed versus unresolved",
+        "General record retention and investment/public-use duties",
+        "No specific later-control evidence is named for the individual options",
+        "Claim-specific evidence also appears on every scoring sheet",
+        "No preselected claims",
+        "No automatic score from EDLL references",
+        "Check exclusive groups and decimals",
+        "Scoring result remains separate from grant award"
+      ]
+    }
+  ],
+  "print_layout_target": {
+    "aspect_ratio": "9:16",
+    "pixels": [
+      5400,
+      9600
+    ],
+    "dpi": 300,
+    "size_cm": [
+      45.72,
+      81.28
+    ],
+    "status": "proposed print-master specification; not the current generated preview",
+    "text_method": "Typeset text and tables for crisp print; generated artwork is an illustration asset, not proof of print resolution"
+  },
+  "style_preview": {
+    "filename": "AL20-Poster-01-The-funding-landscape-native-plants-v2.png",
+    "actual_pixels": [
+      941,
+      1672
+    ],
+    "generator": "built-in image_gen",
+    "status": "botanical revision using actual app reference portraits",
+    "prompt_file": "AL20-Poster-01-botanical-edit-prompt.txt"
+  },
+  "current_rendered_assets": [
+    {
+      "plate": 1,
+      "filename": "AL20-Poster-01-The-funding-landscape-native-plants-v2.png",
+      "pixels": [
+        941,
+        1672
+      ],
+      "sha256": "f58dc7eb7fea7219ecff7ad46987bf750e92cf02dc231d7793d03715c0599c90",
+      "prompt_file": "AL20-Poster-01-botanical-edit-prompt.txt",
+      "status": "illustrated preview; not a 300-DPI print master"
+    },
+    {
+      "plate": 2,
+      "filename": "AL20-Poster-02-Place-and-territory-native-plants.png",
+      "pixels": [
+        941,
+        1672
+      ],
+      "sha256": "645c1a8d9ac2c488d7df0988e306b868dfb6a7f386072346b11b9ab2bd60e8e8",
+      "prompt_file": "AL20-Poster-02-generation-prompt.txt",
+      "status": "illustrated preview; not a 300-DPI print master"
+    }
+  ],
+  "botanical_palette": [
+    {
+      "id": "carob",
+      "scientific_name": "Ceratonia siliqua",
+      "common_name": "Algarrobo / carob"
+    },
+    {
+      "id": "lentisk",
+      "scientific_name": "Pistacia lentiscus",
+      "common_name": "Lentisco / lentisk"
+    },
+    {
+      "id": "palmetto",
+      "scientific_name": "Chamaerops humilis",
+      "common_name": "Palmito"
+    },
+    {
+      "id": "esparto",
+      "scientific_name": "Macrochloa tenacissima",
+      "common_name": "Esparto"
+    }
+  ],
+  "botanical_reference_files": [
+    "C:\\Users\\JanEngelke\\git_private\\algarrobos\\restoration_simulator\\frontend\\public\\plants\\whole\\carob.png",
+    "C:\\Users\\JanEngelke\\git_private\\algarrobos\\restoration_simulator\\frontend\\public\\plants\\whole\\lentisk.png",
+    "C:\\Users\\JanEngelke\\git_private\\algarrobos\\restoration_simulator\\frontend\\public\\plants\\whole\\palmetto.png",
+    "C:\\Users\\JanEngelke\\git_private\\algarrobos\\restoration_simulator\\frontend\\public\\plants\\whole\\esparto.png"
+  ],
+  "botanical_context": "Species forms drawn from the app portraits and woodland-shrub palette; illustrative depictions, not a prescribed planting mixture.",
+  "plate_02_review": {
+    "municipality_rows": 32,
+    "population_and_business_cells": 64,
+    "review": "All names, all 64 numeric table values, option weights, means/medians and provisional-data qualifications visually checked against funding-al20-statistics-v1.json.",
+    "provisional_reference_year": 2025
+  }
+}

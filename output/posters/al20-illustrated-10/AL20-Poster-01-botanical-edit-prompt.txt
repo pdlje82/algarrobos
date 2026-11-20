@@ -1,0 +1,15 @@
+Use case: precise-object-edit / botanical scientific illustration.
+Image 1 is the EXISTING FUNDING POSTER TO EDIT. Images 2-5 are botanical reference images from the user's Algarrobos app, not edit targets: image 2 carob (Ceratonia siliqua / algarrobo), image 3 lentisk (Pistacia lentiscus / lentisco), image 4 dwarf fan palm (Chamaerops humilis / palmito), image 5 esparto (Macrochloa tenacissima).
+
+Edit ONLY THE VEGETATION AND BOTANICAL DECORATIONS of image 1. Preserve every word, number, code, table value, annotation, leader-line number, heading, column, margin, paper color, visual hierarchy and overall layout EXACTLY. The user approved the existing poster and wants its plants to come from the app. Do not remove, reword, add or duplicate any funding information. Keep the same portrait 9:16 framing and pen-and-watercolor natural-history plate style. Preserve the village, dry-stone wall, field observer, labelled comparison plots, visitors and interpretive sign.
+
+Vegetation changes:
+- Replace the prominent generic olive-like trees with clearly identifiable CAROB trees from reference 2: broad dense rounded evergreen crown, short sturdy grey-brown trunk, stout spreading branches, broad paired rounded leathery leaflets and a few long flattened dark-brown carob pods. Carob is the main tree identity.
+- Add prominent LENTISK shrub masses around the carobs, field edges and stone wall, matching reference 3: dense low multistem evergreen shrub, small paired oval leathery leaflets, subtle red/dark fruit clusters, foliage reaching near the base.
+- Use a few modest PALMITO clumps from reference 4: several short stems and low fan-shaped leaves, never tall tropical palms.
+- Replace the generic purple lavender and yellow daisy-like ornamental corner plants with ESPARTO tussocks from reference 5 and lentisk details. Esparto has dense basal clumps of long slender rolled arching leaves and straw-colored old bases.
+- Trial plots should show small young carob/lentisk plants rather than rows of generic showy garden flowers.
+- Change the upper and lower decorative sprigs from olive twigs to carob foliage/pod and lentisk foliage/berry sprigs, still restrained and botanically recognizable.
+- Keep the scene a naturally varied dryland woodland-shrub mosaic with open stony soil, not a dense irrigated plantation.
+The reference images' transparent backgrounds must not be copied as black rectangles. Reinterpret their species forms in the existing illustration style.
+Critical invariant: ALL POSTER TEXT, fourteen table rows, euro amounts, 60/100 and explanatory scoring notes must remain unchanged and perfectly legible. No sources or citations added. Produce a high-quality edited poster.

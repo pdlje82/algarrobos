@@ -1,0 +1,98 @@
+Use case: scientific-educational infographic.
+Create a NEW finished portrait 9:16 poster, PLATE 02 / 10 of the AL20 funding series. Highest available genuine resolution, ideally 2160 x 3840; sharp readable type and every numeric table cell accurate.
+Input image 1 is a STYLE REFERENCE, not an edit target. Match its warm ivory paper, forest-green ink, restrained ochre/sage watercolor, serif headings, ruled tables, natural-history plate composition and illustrated Alpujarra setting.
+Images 2-5 are BOTANICAL REFERENCES FROM THE USER'S APP: carob (Ceratonia siliqua / algarrobo), lentisk (Pistacia lentiscus / lentisco), palmito (Chamaerops humilis), esparto (Macrochloa tenacissima). Use these species in all vegetation and decorative details. Main trees must be recognizable broad-crowned carobs with paired rounded leaflets and a few brown pods; understorey must include dense low lentisco, a few short fan palms and esparto tussocks. No generic purple lavender/daisy gardens or substitute olive-only orchard. Do not copy transparent reference backgrounds as black rectangles.
+
+This poster is DATA FIRST. Give the two 16-row municipality tables most of the space. Include ONE compact beautiful rural-village/landscape vignette between the scoring definitions and the table area, with carob-lentisco dryland vegetation and a discreet low stone wall. The vignette is conceptual, not a claimed map of particular municipalities. Small carob and lentisk sprigs can flank the title/footer. Keep all text outside busy artwork, readable, cleanly aligned, and with sufficient margins. No imagined borders/maps or extra populations.
+
+Composition:
+1. Running header and title.
+2. Two compact side-by-side criterion explanations.
+3. A compact landscape vignette, around 15% of poster height.
+4. A clear reference-data heading.
+5. TWO TABLES side by side, EXACTLY 16 municipality rows in each plus the header. Each table has three columns: Municipality, Population, Businesses. Both tables must contain all supplied values, with no missing/duplicated rows and no numbers moved to the wrong municipality.
+6. A concise clearly readable limitations block. Do not omit the provisional year and settlement/municipality distinctions to fit the decoration. Reduce decorative artwork before reducing text.
+
+EXACT TEXT (do not invent, silently correct or omit any value):
+
+RUNNING HEADER:
+AL20 / LEADER
+PLATE 02 / 10
+
+TITLE:
+Place and territory
+Population and business-count criteria
+
+LEFT CRITERION:
+AT.3 / SETTLEMENT POPULATION
+Maximum: 10 points
+AT.3.1 — 10 points: settlement below the AL20 median.
+AT.3.2 — 8 points: settlement below the Andalusia median.
+Choose one alternative; do not add them.
+
+RIGHT CRITERION:
+RD.5 / TERRITORIAL BALANCE
+Maximum: 15 points
+RD.5.1 — 15 points: support a municipality with fewer businesses than the AL20 mean.
+Compare with the mean of 60, not the median of 21.5.
+
+REFERENCE DATA HEADING:
+MUNICIPALITY FIGURES
+2025 reference data / provisional
+Population totals below are for municipalities, not individual settlements.
+
+LEFT TABLE HEADER:
+Municipality | Population | Businesses
+LEFT TABLE ROWS:
+Abla | 1,267 | 54
+Abrucena | 1,235 | 53
+Alboloduy | 578 | 21
+Alcolea | 831 | 38
+Alhabia | 750 | 41
+Alhama de Almería | 4,016 | 284
+Alicún | 203 | 9
+Almócita | 215 | 15
+Alsodux | 125 | 1
+Bayárcal | 294 | 11
+Beires | 140 | 4
+Bentarique | 226 | 11
+Berja | 12,997 | 653
+Canjáyar | 1,143 | 58
+Dalías | 4,184 | 172
+Enix | 624 | 29
+
+RIGHT TABLE HEADER:
+Municipality | Population | Businesses
+RIGHT TABLE ROWS:
+Felix | 772 | 37
+Fiñana | 1,991 | 78
+Fondón | 1,151 | 60
+Huécija | 527 | 21
+Íllar | 484 | 14
+Instinción | 507 | 24
+Las Tres Villas | 551 | 7
+Laujar de Andarax | 1,670 | 117
+Nacimiento | 485 | 19
+Ohanes | 553 | 25
+Padules | 435 | 18
+Paterna del Río | 399 | 11
+Rágol | 294 | 9
+Santa Cruz de Marchena | 236 | 1
+Santa Fe de Mondújar | 523 | 22
+Terque | 389 | 17
+
+LIMITATIONS HEADING:
+CHECK THE APPLICABLE COMPARISON
+
+LIMITATION TEXT:
+AT.3 requires the actual settlement (núcleo) population; municipality totals do not establish it.
+2025 reference population medians: AL20 539; Andalusia 2,256.
+The local criterion says INE 2023; these tables use 2025. Confirm the applicable year with AL20.
+The guidance also prints 2,497 for Andalusia elsewhere. This discrepancy remains unresolved.
+“Below” means strictly smaller; equality does not qualify.
+Location alone does not award points; RD.5 also requires actual municipal support.
+
+BOTTOM LINE:
+All locations remain open for assessment
+
+These are unselected reference choices, not an assessment of the user's saved project. No row highlighting that implies eligibility, no checked boxes, no source citations, URLs, bibliography or PDF page numbers. Preserve Spanish diacritics, all 32 municipality names, all 64 numeric values, and all scoring weights exactly. Final artwork is a flat complete poster, not a photograph or wall mockup.
